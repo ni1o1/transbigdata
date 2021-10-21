@@ -1,4 +1,4 @@
-# TransBigData 交通时空大数据处理
+# TransBigData 针对交通时空大数据处理的Python包
 
 TransBigData工具针对时空大数据处理而开发，目前有下面几个功能：
 1. 添加地图底图：请看[这个示例](https://github.com/ni1o1/transbigdata/blob/master/example/example-grid.ipynb)
