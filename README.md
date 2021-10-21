@@ -15,4 +15,4 @@ TransBigData工具针对时空大数据处理而开发，集成了交通时空�
 
 ## 安装
 
-    pip install transbigdata
+    pip install -U transbigdata

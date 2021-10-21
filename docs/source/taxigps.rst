@@ -5,11 +5,13 @@
 出租车GPS数据处理
 ******************************
 
-出租车OD提取算法
-=============================
+.. function:: taxigps_to_od(data,col = ['VehicleNum','Stime','Lng','Lat','OpenStatus'])
 
-输入出租车GPS数据,提取OD::
+出租车OD提取算法，输入出租车GPS数据,提取OD
 
-    taxigps_to_od(data,col = ['VehicleNum','Stime','Lng','Lat','OpenStatus'])
-    data - 出租车GPS数据（清洗好的）
-    col - 数据中各列列名，需要按顺序[车辆id，时间，经度，纬度，载客状态]
+=========== ===========
+参数         描述                                                         
+=========== ===========
+data        出租车GPS数据（清洗好的）
+col         数据中各列列名，需要按顺序[车辆id，时间，经度，纬度，载客状态]
+=========== ===========  

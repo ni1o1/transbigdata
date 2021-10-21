@@ -10,5 +10,11 @@
 
 在命令提示符中运行下面代码::
 
-  pip install transbigdata
+  pip install -U transbigdata
 
+依赖包
+=============================
+TransBigData依赖如下包
+
+* geopandas
+* matplotlib
