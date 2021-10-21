@@ -5,7 +5,7 @@
 出租车GPS数据处理
 ******************************
 
-.. function:: taxigps_to_od(data,col = ['VehicleNum','Stime','Lng','Lat','OpenStatus'])
+.. function:: transbigdata.taxigps_to_od(data,col = ['VehicleNum','Stime','Lng','Lat','OpenStatus'])
 
 出租车OD提取算法，输入出租车GPS数据,提取OD
 
