@@ -2,6 +2,8 @@
 
 <img src="docs/source/_static/logo-wordmark-dark.png" style="width:550px">
 
+[![Documentation Status](https://readthedocs.org/projects/transbigdata/badge/?version=latest)](https://transbigdata.readthedocs.io/en/latest/?badge=latest)  
+
 TransBigData工具针对时空大数据处理而开发，集成了交通时空大数据处理过程中常用的方法。，例如：
 
 * 栅格渔网划分，请看[这个示例](https://github.com/ni1o1/transbigdata/blob/master/example/example-grid.ipynb)
