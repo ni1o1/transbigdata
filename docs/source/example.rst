@@ -30,7 +30,7 @@ GPS数据的栅格化
 以栅格形式表达数据分布是最基本的表达方法。GPS数据经过栅格化后，每个数据点都含有对应的栅格信息，采用栅格表达数据的分布时，其表示的分布情况与真实情况接近。如果要使用TransBigData工具进行栅格首先需要确定栅格化的参数，参数可以帮助我们快速进行栅格化::
 
 	#导入TransBigData包
-	import transbigdata    
+	import transbigdata as tbd   
 	#定义范围
 	bounds = [113.7, 22.42, 114.3, 22.8]
 	#获取栅格化参数，通过accuracy控制栅格大小（米）
