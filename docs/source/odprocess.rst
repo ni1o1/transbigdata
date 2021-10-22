@@ -2,9 +2,36 @@
 
 
 ***************
-OD处理
+数据与OD集计
 ***************
 
+数据集计
+==========
+
+.. function:: transbigdata.dataagg(data,shape,col = ['Lng','Lat','count'],accuracy=500)
+
+数据集计至小区
+
+输入
+
+data : DataFrame
+    数据
+shape : GeoDataFrame
+	小区
+col : List
+    可传入经纬度两列，如['Lng','Lat']，此时每一列权重为1。也可以传入经纬度和计数列三列，如['Lng','Lat','count']
+accuracy : number
+    计算原理是先栅格化后集计，这里定义栅格大小，越小精度越高
+
+输出
+
+aggresult : GeoDataFrame
+    小区，其中count列为统计结果
+data1 : DataFrame
+    数据，对应上了小区
+
+OD集计
+==========
 
 .. function:: transbigdata.odagg_grid(oddata,params,col = ['slon','slat','elon','elat'],arrow = False,**kwargs)
 
