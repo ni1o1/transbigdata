@@ -23,8 +23,8 @@ author = 'Qing Yu'
 
 # The full version, including alpha/beta/rc tags
 release = '0.1.0'
-
-
+version = '0.1.0'
+html_logo = "_static/logo-wordmark-light.png"
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
@@ -63,6 +63,10 @@ html_sidebars = {
        'sourcelink.html',
       ] 
      } 
+html_theme_options = {
+    'logo_only': True,
+    'display_version': True,
+}
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
