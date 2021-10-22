@@ -1,5 +1,7 @@
 # TransBigData 针对交通时空大数据处理的Python包
 
+<img src="docs/source/_static/logo-wordmark-dark.png" style="width:750px">
+
 TransBigData工具针对时空大数据处理而开发，集成了交通时空大数据处理过程中常用的方法。，例如：
 
 * 栅格渔网划分，请看[这个示例](https://github.com/ni1o1/transbigdata/blob/master/example/example-grid.ipynb)
