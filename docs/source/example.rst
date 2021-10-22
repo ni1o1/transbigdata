@@ -34,12 +34,12 @@ GPS数据的栅格化
 	#定义范围
 	bounds = [113.7, 22.42, 114.3, 22.8]
 	#获取栅格化参数，通过accuracy控制栅格大小（米）
-	params = transbigdata.grid_params(bounds,accuracy = 500)
+	params = tbd.grid_params(bounds,accuracy = 500)
 
 取得栅格化参数后，将GPS对应至栅格，由LONCOL与LATCOL两列共同指定一个栅格::
 
 	#将GPS栅格化
-	data['LONCOL'],data['LATCOL'] = transbigdata.GPS_to_grids(data['Lng'],data['Lat'],params)
+	data['LONCOL'],data['LATCOL'] = tbd.GPS_to_grids(data['Lng'],data['Lat'],params)
 	data = data[(data['LONCOL']>0)&(data['LATCOL']>0)]
 
 统计每个栅格的数据量::
@@ -50,7 +50,7 @@ GPS数据的栅格化
 生成栅格的地理图形，并将它转化为GeoDataFrame::
 
 	#生成栅格地理图形
-	datatest['geometry'] = transbigdata.gridid_to_polygon(datatest['LONCOL'],datatest['LATCOL'],params)
+	datatest['geometry'] = tbd.gridid_to_polygon(datatest['LONCOL'],datatest['LATCOL'],params)
 	#转为GeoDataFrame
 	import geopandas as gpd
 	datatest = gpd.GeoDataFrame(datatest)
@@ -72,7 +72,7 @@ GPS数据的栅格化
 	ax =plt.subplot(111)
 	plt.sca(ax)
 	#添加地图底图
-	transbigdata.plot_map(plt,bounds,zoom = 12,style = 4)
+	tbd.plot_map(plt,bounds,zoom = 12,style = 4)
 	#绘制colorbar
 	cax = plt.axes([0.05, 0.33, 0.02, 0.3])
 	plt.title('count')
@@ -80,7 +80,7 @@ GPS数据的栅格化
 	#绘制栅格
 	datatest.plot(ax = ax,column = 'VehicleNum',cax = cax,legend = True)
 	#添加比例尺和指北针
-	transbigdata.plotscale(ax,bounds = bounds,textsize = 10,compasssize = 1,accuracy = 2000,rect = [0.06,0.03])
+	tbd.plotscale(ax,bounds = bounds,textsize = 10,compasssize = 1,accuracy = 2000,rect = [0.06,0.03])
 	plt.axis('off')
 	plt.xlim(bounds[0],bounds[2])
 	plt.ylim(bounds[1],bounds[3])
@@ -92,10 +92,10 @@ GPS数据的栅格化
 提取出行OD
 ------------------
 
-使用transbigdata.taxigps_to_od方法，传入对应的列名，即可提取出行OD::
+使用tbd.taxigps_to_od方法，传入对应的列名，即可提取出行OD::
 
     #从GPS数据提取OD
-    oddata = transbigdata.taxigps_to_od(data,col = ['VehicleNum','time','slon','slat','OpenStatus'])
+    oddata = tbd.taxigps_to_od(data,col = ['VehicleNum','time','slon','slat','OpenStatus'])
     oddata
 
 .. image:: _static/WX20211021-190104@2x.png
@@ -109,9 +109,9 @@ OD栅格集计
     #定义研究范围
    bounds = [113.6,22.4,114.8,22.9]
    #输入研究范围边界bounds与栅格宽度accuracy，获取栅格化参数
-   params = transbigdata.grid_params(bounds = bounds,accuracy = 1500)
+   params = tbd.grid_params(bounds = bounds,accuracy = 1500)
    #栅格化OD并集计
-   od_gdf = transbigdata.odagg_grid(oddata,params)
+   od_gdf = tbd.odagg_grid(oddata,params)
    od_gdf.plot(column = 'count')
 
 .. image:: _static/WX20211021-190524@2x.png
@@ -128,7 +128,7 @@ OD栅格集计
 	ax =plt.subplot(111)
 	plt.sca(ax)
 	#添加地图底图
-	transbigdata.plot_map(plt,bounds,zoom = 12,style = 4)
+	tbd.plot_map(plt,bounds,zoom = 12,style = 4)
 	#绘制colorbar
 	cax = plt.axes([0.05, 0.33, 0.02, 0.3])
 	plt.title('count')
@@ -136,7 +136,7 @@ OD栅格集计
 	#绘制OD
 	od_gdf.plot(ax = ax,column = 'count',cax = cax,legend = True)
 	#添加比例尺和指北针
-	transbigdata.plotscale(ax,bounds = bounds,textsize = 10,compasssize = 1,accuracy = 2000,rect = [0.06,0.03],zorder = 10)
+	tbd.plotscale(ax,bounds = bounds,textsize = 10,compasssize = 1,accuracy = 2000,rect = [0.06,0.03],zorder = 10)
 	plt.axis('off')
 	plt.xlim(bounds[0],bounds[2])
 	plt.ylim(bounds[1],bounds[3])
@@ -162,7 +162,7 @@ TransBigData工具也支持对OD进行小区范围的集计，首先读取区域
 集计到小区（不传入栅格化参数时，直接用经纬度匹配）::
 
 	#OD集计到小区（在不传入栅格化参数时，直接用经纬度匹配）
-	od_gdf = transbigdata.odagg_shape(oddata,sz,round_accuracy=6)
+	od_gdf = tbd.odagg_shape(oddata,sz,round_accuracy=6)
 	od_gdf.plot(column = 'count')
 
 .. image:: _static/WX20211021-234304.png
@@ -171,7 +171,7 @@ TransBigData工具也支持对OD进行小区范围的集计，首先读取区域
 传入栅格化参数时，会先栅格化后匹配，可加快匹配速度，数据量大时建议使用::
 
 	#OD集计到小区（传入栅格化参数时，先栅格化后匹配，可加快匹配速度，数据量大时建议使用）
-	od_gdf = transbigdata.odagg_shape(oddata,sz,params = params)
+	od_gdf = tbd.odagg_shape(oddata,sz,params = params)
 	od_gdf.plot(column = 'count')
 
 .. image:: _static/WX20211021-234304.png
@@ -185,7 +185,7 @@ TransBigData工具也支持对OD进行小区范围的集计，首先读取区域
 	ax =plt.subplot(111)
 	plt.sca(ax)
 	#添加地图底图
-	transbigdata.plot_map(plt,bounds,zoom = 12,style = 4)
+	tbd.plot_map(plt,bounds,zoom = 12,style = 4)
 	#绘制colorbar
 	cax = plt.axes([0.05, 0.33, 0.02, 0.3])
 	plt.title('count')
@@ -195,7 +195,7 @@ TransBigData工具也支持对OD进行小区范围的集计，首先读取区域
 	#绘制小区底图
 	sz.plot(ax = ax,edgecolor = (0,0,0,1),facecolor = (0,0,0,0.2),linewidths=0.5)
 	#添加比例尺和指北针
-	transbigdata.plotscale(ax,bounds = bounds,textsize = 10,compasssize = 1,accuracy = 2000,rect = [0.06,0.03],zorder = 10)
+	tbd.plotscale(ax,bounds = bounds,textsize = 10,compasssize = 1,accuracy = 2000,rect = [0.06,0.03],zorder = 10)
 	plt.axis('off')
 	plt.xlim(bounds[0],bounds[2])
 	plt.ylim(bounds[1],bounds[3])

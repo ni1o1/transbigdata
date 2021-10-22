@@ -12,6 +12,10 @@
 
   pip install -U transbigdata
 
+在Python中运行下面代码::
+
+  import transbigdata as tbd
+
 依赖包
 =============================
 TransBigData依赖如下包

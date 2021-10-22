@@ -14,7 +14,7 @@
 
     #设定范围
     bounds = [lon1,lat1,lon2,lat2]
-    grid,params = transbigdata.rect_grids(bounds,accuracy = 500)
+    grid,params = tbd.rect_grids(bounds,accuracy = 500)
 
 
 输入参数
@@ -41,26 +41,26 @@ params          栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅
 输入经纬度范围bounds，输出栅格参数::
 
     bounds = [113.75194,22.447837,114.624187,22.864748]
-    transbigdata.grid_params(bounds,accuracy = 500)
+    tbd.grid_params(bounds,accuracy = 500)
 
 .. function:: transbigdata.GPS_to_grids(lon,lat,params)
 
 GPS数据对应栅格编号
 输入数据的经纬度列与栅格参数，输出对应的栅格编号::
 
-    data['LONCOL'],data['LATCOL'] = transbigdata.GPS_to_grids(data['Lng'],data['Lat'],params)
+    data['LONCOL'],data['LATCOL'] = tbd.GPS_to_grids(data['Lng'],data['Lat'],params)
 
 .. function:: transbigdata.grids_centre(loncol,latcol,params)
 
 栅格编号对应栅格中心点经纬度。输入数据的栅格编号与栅格参数，输出对应的栅格中心点::
 
-    data['HBLON'],data['HBLAT'] = transbigdata.grids_centre(data['LONCOL'],data['LATCOL'],params)
+    data['HBLON'],data['HBLAT'] = tbd.grids_centre(data['LONCOL'],data['LATCOL'],params)
 
 .. function:: transbigdata.gridid_to_polygon(loncol,latcol,params)
 
 栅格编号生成栅格的地理信息列。输入数据的栅格编号与栅格参数，输出对应的地理信息列::
 
-    data['geometry'] = transbigdata.gridid_to_polygon(data['LONCOL'],data['LATCOL'],params)
+    data['geometry'] = tbd.gridid_to_polygon(data['LONCOL'],data['LATCOL'],params)
 
 六边形渔网生成
 =============================
@@ -72,7 +72,7 @@ GPS数据对应栅格编号
     
     #设定范围
     bounds = [113.6,22.4,114.8,22.9]
-    hexagon = transbigdata.hexagon_grids(bounds,accuracy = 5000)
+    hexagon = tbd.hexagon_grids(bounds,accuracy = 5000)
     hexagon.plot()
 
 .. image:: _static/WX20211021-201747@2x.png

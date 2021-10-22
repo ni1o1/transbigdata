@@ -24,7 +24,7 @@ TransBigData工具针对时空大数据处理而开发，集成了交通时空�
 下面例子展示如何使用TransBigData工具快速地从出租车GPS数据中提取出行OD::
 
     #导入TransBigData包
-    import transbigdata
+    import transbigdata as tbd
     #读取数据    
     import pandas as pd
     data = pd.read_csv('TaxiData-Sample.csv',header = None) 
@@ -34,10 +34,10 @@ TransBigData工具针对时空大数据处理而开发，集成了交通时空�
 .. image:: _static/WX20211021-192131@2x.png
    :height: 300
 
-使用transbigdata.taxigps_to_od方法，传入对应的列名，即可提取出行OD::
+使用tbd.taxigps_to_od方法，传入对应的列名，即可提取出行OD::
 
     #从GPS数据提取OD
-    oddata = transbigdata.taxigps_to_od(data,col = ['VehicleNum','time','slon','slat','OpenStatus'])
+    oddata = tbd.taxigps_to_od(data,col = ['VehicleNum','time','slon','slat','OpenStatus'])
     oddata
 
 .. image:: _static/WX20211021-190104@2x.png
@@ -48,9 +48,9 @@ TransBigData工具针对时空大数据处理而开发，集成了交通时空�
     #定义研究范围
    bounds = [113.6,22.4,114.8,22.9]
    #输入研究范围边界bounds与栅格宽度accuracy，获取栅格化参数
-   params = transbigdata.grid_params(bounds = bounds,accuracy = 1500)
+   params = tbd.grid_params(bounds = bounds,accuracy = 1500)
    #栅格化OD并集计
-   od_gdf = transbigdata.odagg_grid(oddata,params)
+   od_gdf = tbd.odagg_grid(oddata,params)
    od_gdf.plot(column = 'count')
 
 .. image:: _static/WX20211021-190524@2x.png
@@ -76,7 +76,7 @@ TransBigData工具针对时空大数据处理而开发，集成了交通时空�
    example.rst
 
 .. toctree::
-   :caption: 方法
+   :caption: 通用方法
    :maxdepth: 2
    
    grids.rst
@@ -84,6 +84,11 @@ TransBigData工具针对时空大数据处理而开发，集成了交通时空�
    ckdnearest.rst
    plot_map.rst
    CoordinatesConverter.rst
+
+.. toctree::
+   :caption: 各类数据处理方法
+   :maxdepth: 2
+
    taxigps.rst
 
 

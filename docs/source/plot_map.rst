@@ -24,10 +24,9 @@ printlog     是否显示日志
 
 ::
 
-    import transbigdata
     #设定显示范围
     bounds = [lon1,lat1,lon2,lat2]  
-    transbigdata.plot_map(plt,bounds,zoom = 12,style = 4)  
+    tbd.plot_map(plt,bounds,zoom = 12,style = 4)  
 
 指北针和比例尺
 =============================
@@ -52,4 +51,4 @@ rect         比例尺在图中的大致位置，如[0.9,0.9]则在右上角
 
 ::
 
-    transbigdata.plotscale(ax,bounds = bounds,textsize = 10,compasssize = 1,accuracy = 2000,rect = [0.06,0.03])  
+    tbd.plotscale(ax,bounds = bounds,textsize = 10,compasssize = 1,accuracy = 2000,rect = [0.06,0.03])  

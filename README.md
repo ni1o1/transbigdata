@@ -1,6 +1,6 @@
 # TransBigData 针对交通时空大数据处理的Python包
 
-<img src="docs/source/_static/logo-wordmark-dark.png" style="width:750px">
+<img src="docs/source/_static/logo-wordmark-dark.png" style="width:550px">
 
 TransBigData工具针对时空大数据处理而开发，集成了交通时空大数据处理过程中常用的方法。，例如：
 
