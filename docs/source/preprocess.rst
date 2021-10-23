@@ -5,9 +5,28 @@
 数据预处理
 ******************************
 
-.. function:: transbigdata.clean_outofbounds(data,shape,col = ['Lng','Lat'],accuracy=500)
+.. function:: transbigdata.clean_outofbounds(data,bounds,col = ['Lng','Lat'])
 
-剔除超出研究范围的数据
+输入研究范围的左下右上经纬度坐标，剔除超出研究范围的数据
+
+输入
+
+data : DataFrame
+    数据
+bounds : List    
+    研究范围的左下右上经纬度坐标，顺序为[lon1,lat1,lon2,lat2]
+col : List
+    经纬度列名
+
+输出
+
+data1 : DataFrame
+    研究范围内的数据
+
+
+.. function:: transbigdata.clean_outofshape(data,shape,col = ['Lng','Lat'],accuracy=500)
+
+输入研究范围的GeoDataFrame，剔除超出研究区域的数据
 
 输入
 
