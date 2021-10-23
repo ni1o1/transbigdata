@@ -1,6 +1,6 @@
 # TransBigData 针对交通时空大数据处理的Python包
 
-<img src="docs/source/_static/logo-wordmark-dark.png" style="width:550px">
+<img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/logo-wordmark-dark.png" style="width:550px">
 
 [![Build Status](https://app.travis-ci.com/ni1o1/transbigdata.svg?branch=main)](https://app.travis-ci.com/ni1o1/transbigdata) [![Documentation Status](https://readthedocs.org/projects/transbigdata/badge/?version=latest)](https://transbigdata.readthedocs.io/en/latest/?badge=latest) ![PyPI](https://img.shields.io/pypi/v/transbigdata) [![bilibili](https://img.shields.io/badge/bilibili-%E5%90%8C%E6%B5%8E%E5%B0%8F%E6%97%AD%E5%AD%A6%E9%95%BF-green.svg)](https://space.bilibili.com/3051484)  
 
@@ -33,7 +33,7 @@ TransBigData工具针对时空大数据处理而开发，集成了交通时空�
     data.columns = ['VehicleNum','time','slon','slat','OpenStatus','Speed'] 
     data
 
-<img src="docs/source/_static/WX20211021-192131@2x.png" style="height:300px">
+<img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/WX20211021-192131@2x.png" style="height:300px">
 
 使用transbigdata.taxigps_to_od方法，传入对应的列名，即可提取出行OD:
 
@@ -41,7 +41,7 @@ TransBigData工具针对时空大数据处理而开发，集成了交通时空�
     oddata = tbd.taxigps_to_od(data,col = ['VehicleNum','time','slon','slat','OpenStatus'])
     oddata
 
-<img src="docs/source/_static/WX20211021-190104@2x.png" style="height:300px">
+<img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/WX20211021-190104@2x.png" style="height:300px">
 
 对提取出的OD进行OD的栅格集计:
 
@@ -53,4 +53,4 @@ TransBigData工具针对时空大数据处理而开发，集成了交通时空�
     od_gdf = tbd.odagg_grid(oddata,params)
     od_gdf.plot(column = 'count')
 
-<img src="docs/source/_static/WX20211021-190524@2x.png" style="height:300px">
+<img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/WX20211021-190524@2x.png" style="height:300px">
