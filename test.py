@@ -1,1 +1,0 @@
-import transbigdata as tbd

@@ -1,0 +1,2 @@
+geopandas==0.8.2
+pandas==1.1.3
