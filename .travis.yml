@@ -3,5 +3,4 @@ python:
     - 3.6
 install:
     - pip install transbigdata
-script: 
-    - test
+script: python test.py
