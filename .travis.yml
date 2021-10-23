@@ -4,4 +4,4 @@ python:
 install:
     - pip install -U transbigdata
 script: 
-	- pytest
+	- python test_transbigdata.py
