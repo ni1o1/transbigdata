@@ -2,8 +2,47 @@
 
 
 ******************************
-数据预处理
+预处理
 ******************************
+
+
+各类数据通用的预处理
+============================
+
+.. function:: transbigdata.clean_same(data,col = ['VehicleNum','Time','Lng','Lat'])
+
+删除信息与前后数据相同的数据以减少数据量
+如：某个体连续n条数据除了时间以外其他信息都相同，则可以只保留首末两条数据
+
+输入
+
+data : DataFrame
+    数据
+col : List
+    列名，按[个体ID,时间,经度,纬度]的顺序，可以传入更多列。会以时间排序，再判断除了时间以外其他列的信息
+
+输出
+
+data1 : DataFrame
+    清洗后的数据
+
+.. function:: transbigdata.clean_drift(data,col = ['VehicleNum','Time','Lng','Lat'],speedlimit = 80)
+
+删除漂移数据。条件是，此数据与前后的速度都大于speedlimit，但前后数据之间的速度却小于speedlimit。
+传入的数据中时间列如果为datetime格式则计算效率更快
+
+输入
+
+data : DataFrame
+    数据
+col : List
+    列名，按[个体ID,时间,经度,纬度]的顺序
+
+输出
+
+data1 : DataFrame
+    研究范围内的数据
+
 
 .. function:: transbigdata.clean_outofbounds(data,bounds,col = ['Lng','Lat'])
 
@@ -58,8 +97,32 @@ new : bool
     False，相同ID的新编号相同；True，依据表中的顺序，ID再次出现则编号不同
 suffix : str
     新编号列名的后缀，设置为False时替代原有列名
+sample : int
+    传入数值，对重新编号的个体进行抽样，只在new参数为False时有效
 
 输出
 
 data1 : DataFrame
     重新编号的数据
+
+出租车数据的预处理
+==================
+
+.. function:: transbigdata.clean_taxi_status(data,col = ['VehicleNum','Time','OpenStatus'],timelimit = None)
+
+删除出租车数据中载客状态瞬间变化的记录，这些记录的存在会影响出行订单判断。
+判断条件为:如果对同一辆车，上一条记录与下一条记录的载客状态都与本条记录不同，则本条记录应该删去
+
+输入
+
+data : DataFrame
+    数据
+col : List
+    列名，按[车辆ID,时间,载客状态]的顺序
+timelimit : number
+    可选，单位为秒，上一条记录与下一条记录的时间小于该时间阈值才予以删除
+
+输出
+
+data1 : DataFrame
+    清洗后的数据

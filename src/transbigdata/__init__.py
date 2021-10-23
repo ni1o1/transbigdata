@@ -5,4 +5,5 @@ from .ckdnearest import *
 from .odprocess import *
 from .preprocess import *
 from .bikedata import *
-__version__ = '0.1.2'
+from .taxigps import *
+__version__ = '0.1.3'

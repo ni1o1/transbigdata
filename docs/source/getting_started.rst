@@ -28,9 +28,14 @@ TransBigData依赖如下包
 版本更新
 =============================
 
+0.1.3 (2021-10-23)
+------------------------
+增加预处理的clean_same,clean_drift,clean_taxi_status方法
+为预处理的id_reindex方法加入sample参数
+
 0.1.2 (2021-10-23)
 ------------------------
-加入数据预处理的clean_outofshape方法
+更新数据预处理的clean_outofshape方法
 增加共享单车数据处理功能，bikedata_to_od提取骑行订单数据与停车数据
 
 0.1.1 (2021-10-22)

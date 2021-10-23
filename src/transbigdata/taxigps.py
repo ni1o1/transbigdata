@@ -4,34 +4,44 @@ from shapely.geometry import Polygon,Point
 from .grids import GPS_to_grids,grids_centre
 import math 
 import numpy as np
-def odagg(oddata,params,col = ['slon','slat','elon','elat'],arrow = False,**kwargs):
+
+def clean_taxi_status(data,col = ['VehicleNum','Time','OpenStatus'],timelimit = None):
     '''
-    输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame
-    oddata - 出租车OD数据（清洗好的）
-    col - 起终点列名
-    params - 栅格化参数
-    arrow - 生成的OD地理线型是否包含箭头
+    删除出租车数据中载客状态瞬间变化的记录，这些记录的存在会影响出行订单判断。
+    判断条件为:如果对同一辆车，上一条记录与下一条记录的载客状态都与本条记录不同，则本条记录应该删去
+    
+    输入
+    -------
+    data : DataFrame
+        数据
+    col : List
+        列名，按[车辆ID,时间,载客状态]的顺序
+    timelimit : number
+        可选，单位为秒，上一条记录与下一条记录的时间小于该时间阈值才予以删除
+    
+    输出
+    -------
+    data1 : DataFrame
+        清洗后的数据
     '''
-    #将起终点栅格化
-    [slon,slat,elon,elat]=col
-    oddata['SLONCOL'],oddata['SLATCOL'] = GPS_to_grids(oddata[slon],oddata[slat],params)
-    oddata['ELONCOL'],oddata['ELATCOL'] = GPS_to_grids(oddata[elon],oddata[elat],params)
-    oddata['count'] = 1
-    oddata_agg = oddata.groupby(['SLONCOL','SLATCOL','ELONCOL','ELATCOL'])['count'].count().reset_index()
-    #生成起终点栅格中心点位置
-    oddata_agg['SHBLON'],oddata_agg['SHBLAT'] = grids_centre(oddata_agg['SLONCOL'],oddata_agg['SLATCOL'],params)
-    oddata_agg['EHBLON'],oddata_agg['EHBLAT'] = grids_centre(oddata_agg['ELONCOL'],oddata_agg['ELATCOL'],params)
-    from shapely.geometry import LineString    
-    #遍历生成OD的LineString对象，并赋值给geometry列  
-    if arrow:
-        oddata_agg['geometry'] = oddata_agg.apply(lambda r:tolinewitharrow(r['SHBLON'],r['SHBLAT'],r['EHBLON'],r['EHBLAT'],**kwargs),axis = 1)    
+    data1 = data.copy()
+    [VehicleNum,Time,OpenStatus] = col
+    if timelimit:
+        data1[Time] = pd.to_datetime(data1[Time])
+        data1 = data1[-((data1[OpenStatus].shift(-1) == data1[OpenStatus].shift())&\
+                        (data1[OpenStatus] != data1[OpenStatus].shift())&\
+                        (data1[VehicleNum].shift(-1) == data1[VehicleNum].shift())&\
+                        (data1[VehicleNum] == data1[VehicleNum].shift())&\
+                       ((data1[Time].shift(-1) - data1[Time].shift()).dt.total_seconds()<=timelimit)
+                       )]
     else:
-        oddata_agg['geometry'] = oddata_agg.apply(lambda r:LineString([[r['SHBLON'],r['SHBLAT']],[r['EHBLON'],r['EHBLAT']]]),axis = 1)    
-    #转换为GeoDataFrame  
-    oddata_agg = gpd.GeoDataFrame(oddata_agg)    
-    oddata_agg = oddata_agg.sort_values(by = 'count')
-    #绘制看看是否能够识别图形信息  
-    return oddata_agg
+        data1 = data1[-((data1[OpenStatus].shift(-1) == data1[OpenStatus].shift())&\
+                    (data1[OpenStatus] != data1[OpenStatus].shift())&\
+                    (data1[VehicleNum].shift(-1) == data1[VehicleNum].shift())&\
+                    (data1[VehicleNum] == data1[VehicleNum].shift()))]
+    return data1
+
+
 
 
 def taxigps_to_od(data,col = ['VehicleNum','Stime','Lng','Lat','OpenStatus']):
@@ -65,29 +75,4 @@ def taxigps_to_od(data,col = ['VehicleNum','Stime','Lng','Lat','OpenStatus']):
     return oddata   
 
 
-# 定义带箭头的LineString函数
-def tolinewitharrow(x1,y1,x2,y2,theta = 20,length = 0.1,pos = 0.8):
-    '''
-    输入起终点坐标，输出带箭头的LineString
-    x1,y1,x2,y2  - 起终点坐标
-    theta        - 箭头旋转角度
-    length       - 箭头相比于原始线的长度比例，例如原始线的长度为1，length设置为0.3，则箭头大小为0.3
-    pos          - 箭头位置，0则在起点，1则在终点
-    '''
-    import numpy as np
-    from shapely.geometry import MultiLineString
-    #主线
-    l_main = [[x1,y1],[x2,y2]]
-    #箭头标记位置
-    p1,p2 = (1-pos)*x1+pos*x2,(1-pos)*y1+pos*y2
-    #箭头一半
-    R = np.array([[np.cos(np.radians(theta)),-np.sin(np.radians(theta))],
-                  [np.sin(np.radians(theta)),np.cos(np.radians(theta))]])
-    l1 = np.dot(R,np.array([[x1-x2,y1-y2]]).T).T[0]*length+np.array([p1,p2]).T
-    l1 = [list(l1),[p1,p2]]
-    #箭头另一半
-    R = np.array([[np.cos(np.radians(-theta)),-np.sin(np.radians(-theta))],
-                  [np.sin(np.radians(-theta)),np.cos(np.radians(-theta))]])
-    l2 = np.dot(R,np.array([[x1-x2,y1-y2]]).T).T[0]*length+np.array([p1,p2]).T
-    l2 = [list(l2),[p1,p2]]
-    return MultiLineString([l_main,l1,l2])
+
