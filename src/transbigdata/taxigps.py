@@ -109,7 +109,7 @@ def taxigps_traj_point(data,oddata,col=['Vehicleid', 'Time', 'Lng', 'Lat', 'Open
     data1 = pd.concat([data,odata,ddata])
     data1 = data1.sort_values(by = [VehicleNum,Time,OpenStatus])
     data1['flag'] = data1['flag'].fillna(0)
-    data1['flag'] = data1.groupby('Vehicleid')['flag'].cumsum()
+    data1['flag'] = data1.groupby(VehicleNum)['flag'].cumsum()
     data1['ID'] = data1['ID'].ffill()
     data_deliver = data1[(data1['flag']==1)&(-data1['ID'].isnull())&(data1[OpenStatus]!=-1)]
     data_idle = data1[(data1['flag']==0)&(-data1['ID'].isnull())&(data1[OpenStatus]!=-1)]
