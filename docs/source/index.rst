@@ -80,7 +80,7 @@ TransBigData工具针对时空大数据处理而开发，集成了交通时空�
    :caption: 使用手册
    :maxdepth: 2
    
-   example.rst
+   example-taxi/example-taxi.rst
    example-ckdnearest.rst
 
 .. toctree::
