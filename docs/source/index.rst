@@ -70,16 +70,12 @@ TransBigData工具针对时空大数据处理而开发，集成了交通时空�
 文档目录
 ==================
 
-.. toctree::
-   :caption: 简介
-   :maxdepth: 2
-
-   getting_started.rst
 
 .. toctree::
    :caption: 使用手册
    :maxdepth: 2
-   
+
+   getting_started.rst
    example-taxi/example-taxi.rst
    example-ckdnearest.rst
 

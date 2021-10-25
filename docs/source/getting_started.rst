@@ -2,13 +2,14 @@
 
 
 ***************
-快速开始
+安装与依赖
 ***************
 
 安装
 =============================
 
-在命令提示符中运行下面代码::
+这个包依赖geopandas：https://geopandas.org/index.html
+如果你已经安装了geopandas，则直接在命令提示符中运行下面代码即可安装::
 
   pip install -U transbigdata
 
