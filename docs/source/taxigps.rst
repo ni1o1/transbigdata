@@ -16,7 +16,7 @@ data : DataFrame
 col : List            
 	数据中各列列名，需要按顺序[车辆id，时间，经度，纬度，载客状态]
 
-.. function:: transbigdata.axigps_traj_point(data,oddata,col=['Vehicleid', 'Time', 'Lng', 'Lat', 'OpenStatus'])
+.. function:: transbigdata.taxigps_traj_point(data,oddata,col=['Vehicleid', 'Time', 'Lng', 'Lat', 'OpenStatus'])
 
 输入出租车数据与OD数据，提取载客与空载的行驶路径点
 
