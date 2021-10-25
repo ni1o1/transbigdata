@@ -75,7 +75,13 @@ TransBigData工具针对时空大数据处理而开发，集成了交通时空�
    :maxdepth: 2
 
    getting_started.rst
+
+.. toctree::
+   :caption: 使用手册
+   :maxdepth: 2
+   
    example.rst
+   example-ckdnearest.rst
 
 .. toctree::
    :caption: 通用方法
@@ -84,6 +90,7 @@ TransBigData工具针对时空大数据处理而开发，集成了交通时空�
    grids.rst
    preprocess.rst
    odprocess.rst
+   traj.rst
    ckdnearest.rst
    plot_map.rst
    CoordinatesConverter.rst

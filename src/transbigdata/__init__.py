@@ -6,4 +6,5 @@ from .odprocess import *
 from .preprocess import *
 from .bikedata import *
 from .taxigps import *
-__version__ = '0.1.4'
+from .traj import *
+__version__ = '0.1.5'

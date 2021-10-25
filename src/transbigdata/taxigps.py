@@ -72,7 +72,45 @@ def taxigps_to_od(data,col = ['VehicleNum','Stime','Lng','Lat','OpenStatus']):
                       (oddata[VehicleNum] == oddata[VehicleNum].shift(-1))]  
     #去掉StatusChange列
     oddata = oddata.drop('StatusChange',axis = 1)  
+    oddata['ID'] = range(len(oddata))
     return oddata   
 
 
+def taxigps_traj_point(data,oddata,col=['Vehicleid', 'Time', 'Lng', 'Lat', 'OpenStatus']):
+    '''
+    输入出租车数据与OD数据，提取载客与空载的行驶路径点
+    
+    输入
+    -------
+    data : DataFrame
+        出租车GPS数据，字段名由col变量指定
+    oddata : DataFrame
+        出租车OD数据
+    col : List
+        列名，按[车辆ID,时间,经度,纬度,载客状态]的顺序
 
+    输出
+    -------
+    data_deliver : DataFrame
+        载客轨迹点
+    data_idle : DataFrame
+        空载轨迹点
+    '''
+    VehicleNum, Time, Lng, Lat, OpenStatus = col
+    oddata1 = oddata.copy()
+    odata = oddata1[[VehicleNum,'stime','slon','slat','ID']].copy()
+    odata.columns = [VehicleNum,Time, Lng, Lat,'ID']
+    odata.loc[:,'flag'] = 1
+    odata.loc[:,OpenStatus] = -1
+    ddata = oddata1[[VehicleNum,'etime','elon','elat','ID']].copy()
+    ddata.columns = [VehicleNum,Time, Lng, Lat,'ID']
+    ddata.loc[:,'flag'] = -1
+    ddata.loc[:,OpenStatus] = -1
+    data1 = pd.concat([data,odata,ddata])
+    data1 = data1.sort_values(by = [VehicleNum,Time,OpenStatus])
+    data1['flag'] = data1['flag'].fillna(0)
+    data1['flag'] = data1.groupby('Vehicleid')['flag'].cumsum()
+    data1['ID'] = data1['ID'].ffill()
+    data_deliver = data1[(data1['flag']==1)&(-data1['ID'].isnull())&(data1[OpenStatus]!=-1)]
+    data_idle = data1[(data1['flag']==0)&(-data1['ID'].isnull())&(data1[OpenStatus]!=-1)]
+    return data_deliver,data_idle
