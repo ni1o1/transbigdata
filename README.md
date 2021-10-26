@@ -46,6 +46,12 @@ TransBigData工具针对时空大数据处理而开发，依托于GeoPandas，�
 
 <img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/WX20211021-190524@2x.png" style="height:300px">
 
+## 相关链接
+
+* 小旭学长的b站： https://space.bilibili.com/3051484
+* 小旭学长的交通时空大数据分析课程： https://www.lifangshuju.com/#/introduce/154  
+* 本项目的github页面： https://github.com/ni1o1/transbigdata/  
+* 有bug请在这个页面提交： https://github.com/ni1o1/transbigdata/issues
 
 ## 引用
 
