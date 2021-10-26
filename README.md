@@ -16,21 +16,6 @@ TransBigData工具针对时空大数据处理而开发，依托于GeoPandas，�
     pip install -U transbigdata
 
 
-## 引用
-
-而如果你想要引用这个 GitHub 仓库，可以使用如下的 bibtex：
-
-```
-@misc{transbigdata,
-  author = {Qing Yu},
-  title = {TransBigData},
-  year = {2021},
-  publisher = {GitHub},
-  journal = {GitHub Repository},
-  howpublished = {\url{https://github.com/ni1o1/transbigdata}},
-}
-```
-
 ## 使用
 
 下面例子展示如何使用TransBigData工具快速地从出租车GPS数据中提取出行OD:
@@ -64,3 +49,19 @@ TransBigData工具针对时空大数据处理而开发，依托于GeoPandas，�
     od_gdf.plot(column = 'count')
 
 <img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/WX20211021-190524@2x.png" style="height:300px">
+
+
+## 引用
+
+而如果你想要引用这个 GitHub 仓库，可以使用如下的 bibtex：
+
+```
+@misc{transbigdata,
+  author = {Qing Yu},
+  title = {TransBigData},
+  year = {2021},
+  publisher = {GitHub},
+  journal = {GitHub Repository},
+  howpublished = {\url{https://github.com/ni1o1/transbigdata}},
+}
+```
