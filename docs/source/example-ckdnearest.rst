@@ -3,13 +3,13 @@
 
 导入transbigdata包
 
-.. code:: ipython3
+::
 
     import transbigdata as tbd
 
 生成两个GeoDataFrame表，但它们只有经纬度列
 
-.. code:: ipython3
+::
 
     import pandas as pd
     import geopandas as gpd
@@ -24,7 +24,7 @@
 
 使用tbd.ckdnearest进行点与点匹配，如果是DataFrame与DataFrame匹配（不含有地理信息），则需要指定前后两个表的经纬度列
 
-.. code:: ipython3
+::
 
     tbd.ckdnearest(dfA,dfB,Aname=['lon1','lat1'],Bname=['lon','lat'])
     #此时计算出的距离为经纬度换算实际距离
@@ -135,14 +135,14 @@
 
 将A表B表变为含有点信息的GeoDataFrame
 
-.. code:: ipython3
+::
 
     dfA['geometry'] = gpd.points_from_xy(dfA['lon1'],dfA['lat1'])
     dfB['geometry'] = gpd.points_from_xy(dfB['lon'],dfB['lat'])
 
 使用tbd.ckdnearest_point进行点与点匹配
 
-.. code:: ipython3
+::
 
     tbd.ckdnearest_point(dfA,dfB)
     #此时计算出的距离为经纬度距离
@@ -269,7 +269,7 @@
 
 将A表变为地理点，B表为线
 
-.. code:: ipython3
+::
 
     dfA['geometry'] = gpd.points_from_xy(dfA['lon1'],dfA['lat1'])
     dfB['geometry'] = [LineString([[1,1],[1.5,2.5],[3.2,4]]),
@@ -280,9 +280,7 @@
 
 
 
-.. parsed-literal::
 
-    <AxesSubplot:>
 
 
 
@@ -292,7 +290,7 @@
 
 用tbd.ckdnearest_line可以实现点匹配线，其原理是将线中的折点提取，然后使用点匹配点。
 
-.. code:: ipython3
+::
 
     tbd.ckdnearest_line(dfA,dfB)
     #此时计算出的距离为经纬度距离
