@@ -19,7 +19,7 @@ bounds : List
 zoom : number
     底图的放大等级，越大越精细，加载的时间也就越久，一般单个城市大小的范围，这个参数选取12到16之间 
 style : number
-    地图底图的样式，可选1-7，1-6为openstreetmap，7是mapbox       
+    地图底图的样式，可选1-5，或'light','dark'，style为4时为light，style为5时为dark      
 imgsavepath : str
     瓦片地图储存路径，设置路径后，会把地图下载到本地的文件夹下，使用时也会优先搜索是否有已经下载的瓦片，默认的存放路径是...小旭学长自己电脑的路径！
 printlog : bool

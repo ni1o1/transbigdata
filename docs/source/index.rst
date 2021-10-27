@@ -78,6 +78,7 @@ TransBigData工具针对时空大数据处理而开发，依托于GeoPandas，�
    :maxdepth: 2
    
    grids.rst
+   quality.rst
    preprocess.rst
    odprocess.rst
    traj.rst

@@ -7,4 +7,5 @@ from .preprocess import *
 from .bikedata import *
 from .taxigps import *
 from .traj import *
-__version__ = '0.1.6'
+from .quality import *
+__version__ = '0.1.7'
