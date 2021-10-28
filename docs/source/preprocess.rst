@@ -83,7 +83,7 @@ accuracy : number
 data1 : DataFrame
     研究范围内的数据
 
-.. function:: transbigdata.id_reindex(data,col,new = False,suffix = '_new')
+.. function:: transbigdata.id_reindex(data,col,new = False,timegap = None,timecol = None,suffix = '_new',sample = None)
 
 对数据的ID列重新编号
 
@@ -95,11 +95,15 @@ col : str
     要重新编号的ID列名
 new : bool
     False，相同ID的新编号相同；True，依据表中的顺序，ID再次出现则编号不同
+timegap : number
+    如果个体在一段时间内没出现（timegap为时间阈值），则编号为新的个体。此参数与timecol同时设定才有效果。
+timecol : str
+    时间字段名称，此参数与timegap同时设定才有效果。
 suffix : str
     新编号列名的后缀，设置为False时替代原有列名
 sample : int
-    传入数值，对重新编号的个体进行抽样，只在new参数为False时有效
-
+    传入数值，对重新编号的个体进行抽样
+    
 **输出**
 
 data1 : DataFrame

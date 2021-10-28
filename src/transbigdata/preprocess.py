@@ -182,7 +182,7 @@ def dataagg(data,shape,col = ['Lng','Lat','count'],accuracy=500):
     data1 = data1.drop('index',axis = 1)
     return aggresult,data1
 
-def id_reindex(data,col,new = False,suffix = '_new',sample = None):
+def id_reindex(data,col,new = False,timegap = None,timecol = None,suffix = '_new',sample = None):
     '''
     对数据的ID列重新编号
 
@@ -194,11 +194,15 @@ def id_reindex(data,col,new = False,suffix = '_new',sample = None):
         要重新编号的ID列名
     new : bool
         False，相同ID的新编号相同；True，依据表中的顺序，ID再次出现则编号不同
+    timegap : number
+        如果个体在一段时间内没出现（timegap为时间阈值），则编号为新的个体。此参数与timecol同时设定才有效果。
+    timecol : str
+        时间字段名称，此参数与timegap同时设定才有效果。
     suffix : str
         新编号列名的后缀，设置为False时替代原有列名
     sample : int
-        传入数值，对重新编号的个体进行抽样，只在new参数为False时有效
-
+        传入数值，对重新编号的个体进行抽样
+        
     输出
     -------
     data1 : DataFrame
@@ -217,13 +221,20 @@ def id_reindex(data,col,new = False,suffix = '_new',sample = None):
         tmp=data1[[col]].drop_duplicates()
         #定义新的编号
         tmp[col+'_']=range(len(tmp))
-        if sample:
-            tmp = tmp.sample(sample)
         #表连接
         data1=pd.merge(data1,tmp,on=col)
         data1[col+suffix] = data1[col+'_']
         if suffix != '_':
             data1 = data1.drop(col+'_',axis = 1)
+    if (timegap is not None)&(timecol is not None):
+        data1[timecol] = pd.to_datetime(data1[timecol])
+        data1 = data1.sort_values(by = [col+suffix,timecol])
+        #此时两个条件：时间间隔大于30分钟或者本来这一条记录就是新车
+        data1[col+suffix] = ((data1[col+suffix].shift()!=data1[col+suffix])|
+                        ((data1[timecol]-data1[timecol].shift()).dt.total_seconds()>timegap)).astype(int).cumsum()-1
+    if sample:
+        tmp = data1[col+suffix].drop_duplicates().sample(sample)
+        data1 = pd.merge(data1,tmp)
     return data1
 
 def odagg(oddata,params,col = ['slon','slat','elon','elat'],arrow = False,**kwargs):
