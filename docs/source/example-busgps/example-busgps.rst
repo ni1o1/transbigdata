@@ -53,8 +53,6 @@
           <th>VehicleId</th>
           <th>VehicleNo</th>
           <th>unknow</th>
-          <th>lon</th>
-          <th>lat</th>
         </tr>
       </thead>
       <tbody>
@@ -70,8 +68,6 @@
           <td>沪D-R7103</td>
           <td>Z5A-0021</td>
           <td>1</td>
-          <td>121.330858</td>
-          <td>31.175129</td>
         </tr>
         <tr>
           <th>1</th>
@@ -85,8 +81,6 @@
           <td>沪D-R1273</td>
           <td>Z5A-0002</td>
           <td>1</td>
-          <td>121.330063</td>
-          <td>31.174214</td>
         </tr>
         <tr>
           <th>2</th>
@@ -100,8 +94,6 @@
           <td>沪D-R5257</td>
           <td>Z5A-0020</td>
           <td>1</td>
-          <td>121.335390</td>
-          <td>31.174958</td>
         </tr>
         <tr>
           <th>3</th>
@@ -115,8 +107,6 @@
           <td>沪D-R5192</td>
           <td>Z5A-0013</td>
           <td>1</td>
-          <td>121.404843</td>
-          <td>31.206179</td>
         </tr>
         <tr>
           <th>4</th>
@@ -130,8 +120,6 @@
           <td>沪D-T0951</td>
           <td>Z5A-0022</td>
           <td>1</td>
-          <td>121.393966</td>
-          <td>31.202103</td>
         </tr>
       </tbody>
     </table>
