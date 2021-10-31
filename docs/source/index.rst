@@ -71,6 +71,7 @@ TransBigData工具针对时空大数据处理而开发，依托于GeoPandas，�
 
    getting_started.rst
    example-taxi/example-taxi.rst
+   example-busgps/example-busgps.rst
    example-ckdnearest.rst
 
 .. toctree::
@@ -92,5 +93,7 @@ TransBigData工具针对时空大数据处理而开发，依托于GeoPandas，�
 
    taxigps.rst
    bikedata.rst
+   busgps.rst
+
 
 

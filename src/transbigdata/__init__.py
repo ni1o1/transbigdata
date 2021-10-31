@@ -8,4 +8,5 @@ from .bikedata import *
 from .taxigps import *
 from .traj import *
 from .quality import *
-__version__ = '0.1.9'
+from .busgps import *
+__version__ = '0.1.10'
