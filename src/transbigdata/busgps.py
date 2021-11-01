@@ -7,7 +7,7 @@ import numpy as np
 from .preprocess import *
 
 def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat','stopname'],
-                      stopbuffer = 200,mintime = 300,project_epsg = 2416,timegap = 1800):
+                      stopbuffer = 200,mintime = 300,project_epsg = 2416,timegap = 1800,method = 'project',projectoutput = False):
     '''
     输入公交GPS数据、公交线路与站点的GeoDataFrame，该方法能够识别公交的到离站信息
     输入
@@ -28,7 +28,13 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
         匹配时会将数据转换为投影坐标系以计算距离，这里需要给定投影坐标系的epsg代号
     timegap : number
         秒，清洗数据用，多长时间车辆不出现，就视为新的车辆
-    
+    method : str
+        公交运行图匹配方法，可选'project'或'dislimit'；
+        project为直接匹配线路上最近点，匹配速度快；
+        dislimit则需要考虑前面点位置，加上距离限制，匹配速度慢。
+    projectoutput : bool
+        是否输出投影后的数据
+
     输出
     -------
     arrive_info : DataFrame
@@ -40,16 +46,16 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
     line.set_crs(crs='epsg:4326',allow_override=True,inplace=True)
     line = line.to_crs(epsg = project_epsg)
     line_buffer = line.copy()
-    line_buffer['geometry'] = line_buffer.buffer(stopbuffer)
+    line_buffer['geometry'] = line_buffer.buffer(200)
     line_buffer = line_buffer.to_crs(epsg = 4326)
     print('.',end = '')
     data = clean_same(data,col=[VehicleId,GPSDateTime,lon,lat])
     print('.',end = '')
-    data = clean_outofshape(data,line_buffer,col = [lon,lat],accuracy = stopbuffer)
+    data = clean_outofshape(data,line_buffer,col = [lon,lat],accuracy = 500)
     print('.')
-    data = id_reindex(data,VehicleId,timegap = timegap,timecol = GPSDateTime)
+    data = id_reindex(data,VehicleId,timegap = timegap,timecol = GPSDateTime,suffix='')
 
-    print('数据投影中',end = '')
+    print('运行位置匹配中',end = '')
     #利用project方法，将数据点投影至公交线路上
     lineshp = line['geometry'].iloc[0]
     print('.',end = '')
@@ -59,7 +65,37 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
     print('.',end = '')
     data = data.to_crs(epsg = project_epsg)
     print('.',end = '')
-    data['project'] = data['geometry'].apply(lambda r:lineshp.project(r))
+    if method == 'project':
+        data['project'] = data['geometry'].apply(lambda r:lineshp.project(r))
+    elif method == 'dislimit':
+        tmps = []
+        #改进的匹配方法
+        for vid in data[VehicleId].drop_duplicates():
+            print('.',end = '')
+            tmp = data[data[VehicleId]==vid].copy()
+            gap = 30
+            i = 0
+            tmp = tmp.sort_values(by = [VehicleId,GPSDateTime]).reset_index(drop=True)
+            tmp['project'] = 0
+            from shapely.geometry import LineString
+            for i in range(len(tmp)-1):
+                if i == 0:
+                    proj = lineshp.project(tmp.iloc[i]['geometry'])
+                    tmp.loc[i,'project'] = proj
+                else:
+                    proj = tmp['project'].iloc[i]
+                dis = tmp.iloc[i+1]['geometry'].distance(tmp.iloc[i]['geometry'])
+                if dis == 0:
+                    proj1 = proj
+                else:
+                    proj2 = lineshp.project(tmp.iloc[i+1]['geometry'])
+                    if abs(proj2-proj)>dis:
+                        proj1 = np.sign(proj2-proj)*dis+proj
+                    else:
+                        proj1 = proj2
+                tmp.loc[i+1,'project'] = proj1
+            tmps.append(tmp)
+        data = pd.concat(tmps)
     print('.',end = '')
     #公交站点也进行project
     stop = stop.to_crs(epsg = project_epsg)
@@ -130,4 +166,74 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
     arrive_info = pd.concat(ls)
     arrive_info['arrivetime'] = starttime+arrive_info['arrivetime'].apply(lambda r:pd.Timedelta(int(r),unit = 's'))
     arrive_info['leavetime'] = starttime+arrive_info['leavetime'].apply(lambda r:pd.Timedelta(int(r),unit = 's'))
-    return arrive_info
+    if projectoutput:
+        return arrive_info,data
+    else:
+        return arrive_info
+
+
+def busgps_onewaytime(arrive_info,stop,start,end,col = ['VehicleId','stopname']):
+    '''
+    输入到离站信息表arrive_info与站点信息表stop，计算单程耗时
+    输入
+    -------
+    arrive_info : DataFrame
+        公交到离站数据
+    stop : GeoDataFrame
+        公交站点的GeoDataFrame数据
+    start : Str
+        起点站名字
+    end : Str
+        终点站名字
+    col : List
+        字段列名[车辆ID,站点名称]
+
+    
+    输出
+    -------
+    onewaytime : DataFrame
+        公交单程耗时
+    '''
+    #上行
+    #将起终点的信息提取后合并到一起
+    #终点站的到达时间
+    [VehicleId,stopname] = col
+    a = arrive_info[arrive_info[stopname] == end][['arrivetime',stopname,VehicleId]]
+    #起点站的离开时间
+    b = arrive_info[arrive_info[stopname] == start][['leavetime',stopname,VehicleId]]
+    a.columns = ['time',stopname,VehicleId]
+    b.columns = ['time',stopname,VehicleId]
+    #合并信息
+    c = pd.concat([a,b])
+    #排序后提取每一单程的出行时间
+    c = c.sort_values(by = [VehicleId,'time'])
+    for i in c.columns:
+        c[i+'1'] = c[i].shift(-1)
+    #提取以申昆路枢纽站为起点，延安东路外滩为终点的趟次
+    c = c[(c[VehicleId] == c[VehicleId+'1'])&
+          (c[stopname]==start)&
+          (c[stopname+'1']==end)]
+    #计算该趟出行的持续时间
+    c['duration'] = (c['time1'] - c['time']).dt.total_seconds()
+    #标识该趟出行的时间中点在哪一个小时
+    c['shour'] = c['time'].dt.hour
+    c['方向'] = start+'-'+end
+    #储存为c1变量
+    c1 = c.copy()
+    #下行
+    a = arrive_info[arrive_info[stopname] == start][['arrivetime',stopname,VehicleId]]
+    b = arrive_info[arrive_info[stopname] == end][['leavetime',stopname,VehicleId]]
+    a.columns = ['time',stopname,VehicleId]
+    b.columns = ['time',stopname,VehicleId]
+    c = pd.concat([a,b])
+    c = c.sort_values(by = [VehicleId,'time'])
+    for i in c.columns:
+        c[i+'1'] = c[i].shift(-1)
+    c = c[(c[VehicleId] == c[VehicleId+'1'])&(c[stopname]==end)&(c[stopname+'1']==start)]
+    c['duration'] = (c['time1'] - c['time']).dt.total_seconds()
+    c['shour'] = c['time'].dt.hour
+    c['方向'] = end+'-'+start
+    c2 = c.copy()
+    onewaytime = pd.concat([c1,c2])
+    return onewaytime
+
