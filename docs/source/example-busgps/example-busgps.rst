@@ -379,7 +379,7 @@
 
 
 
-.. image:: output_18_1.svg
+.. image:: output_18_1.png
 
 
 
