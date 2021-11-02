@@ -86,6 +86,7 @@ TransBigData工具针对时空大数据处理而开发，依托于GeoPandas，�
    ckdnearest.rst
    plot_map.rst
    CoordinatesConverter.rst
+   getbusdata.rst
 
 .. toctree::
    :caption: 各类数据处理方法
