@@ -3,7 +3,7 @@
 爬虫
 ******************************
 
-.. function:: transbigdatagetbusdata(city,keywords)
+.. function:: transbigdata.getbusdata(city,keywords)
 
 通过输入城市与关键词，获取公交线路的线型与站点
 

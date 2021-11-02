@@ -17,7 +17,7 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/ni1o1/transbigdata/issues",
     },
     install_requires=[
-        "geopandas","matplotlib","plot_map >= 0.3.1","CoordinatesConverter"
+        "geopandas","matplotlib","plot_map >= 0.3.1","CoordinatesConverter>0.1.3"
         ],
     classifiers=[
         "Environment :: Web Environment",
