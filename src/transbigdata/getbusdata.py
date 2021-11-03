@@ -116,4 +116,60 @@ def coodconvert(coo):
     return list(coo[0].astype(str)+','+coo[1].astype(str))
 
 
+def getline(r2,line_geometry):
+    #生成空的list用以存放轨道断面的节点
+    ls = []
+    #对大部分情况，线段的起点的位置在终点前，在起终点之间生成10个点
+    if r2['o_project']<r2['d_project']:
+        #numpy的linespace线性插值生成10个点距离线段起点的距离
+        tmp1 = np.linspace(r2['o_project'],r2['d_project'],10)
+    #对四号线环线，最后一个站点与第一个站点之间的轨道断面需要特殊处理
+    if r2['o_project']>r2['d_project']:
+        tmp1 = np.linspace(r2['o_project']-line_geometry.length,r2['d_project'],10)
+        tmp1[tmp1<0] = tmp1[tmp1<0]+line_geometry.length
+    #tmp1存储的是点距离线段起点的距离，将每个距离转换为点要素，并添加到ls中
+    for j in tmp1:
+        ls.append(line_geometry.interpolate(j))
+    #最后，把点序列转换为线型输出
+    return LineString(ls)
+
+def split_subwayline(line,stop):
+    '''
+    用公交/地铁站点对公交/地铁线进行切分，得到断面
+    输入
+    -------
+    line : GeoDataFrame
+        公交/地铁线路
+    stop : GeoDataFrame
+        公交/地铁站点
+
+    输出
+    -------
+    metro_line_splited : GeoDataFrame
+        生成的断面线型
+    '''
+    lss = []
+    #遍历每条轨道线
+    for k in range(len(line)):
+        r = line.iloc[k]
+        #获取轨道线的线型
+        line_geometry = r['geometry']
+        #提取相应的站点
+        tmp = stop[stop['linename'] == r['linename']].copy()
+        #生成轨道段
+        for i in tmp.columns:
+            tmp[i+'1'] = tmp[i].shift(-1)
+        tmp = tmp.iloc[:-1]
+        tmp = tmp[['stationnames','stationnames1','geometry','geometry1','linename']]
+        #提取轨道段起终点在线路上对应的位置
+        tmp['o_project'] = tmp['geometry'].apply(lambda r1:r['geometry'].project(r1))
+        tmp['d_project'] = tmp['geometry1'].apply(lambda r1:r['geometry'].project(r1))
+        #遍历提取轨道段
+        tmp['geometry'] = tmp.apply(lambda r2:getline(r2,line_geometry),axis = 1)
+        #提取的轨道段放进list中
+        lss.append(tmp)
+    #遍历完后，合并list里的表，得到轨道断面信息表
+    metro_line_splited = pd.concat(lss).drop('geometry1',axis = 1)
+    #绘制轨道断面
+    return metro_line_splited
 
