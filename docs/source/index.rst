@@ -64,12 +64,16 @@ TransBigData工具针对时空大数据处理而开发，依托于GeoPandas，�
 文档目录
 ==================
 
+.. toctree::
+   :caption: 开始
+   :maxdepth: 2
+   
+   getting_started.rst
 
 .. toctree::
-   :caption: 使用手册
+   :caption: 使用示例
    :maxdepth: 2
 
-   getting_started.rst
    example-taxi/example-taxi.rst
    example-busgps/example-busgps.rst
    metromodel/metromodel.rst
