@@ -172,15 +172,13 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
         return arrive_info
 
 
-def busgps_onewaytime(arrive_info,stop,start,end,col = ['VehicleId','stopname']):
+def busgps_onewaytime(arrive_info,start,end,col = ['VehicleId','stopname']):
     '''
-    输入到离站信息表arrive_info与站点信息表stop，计算单程耗时
+    输入到离站信息表arrive_info与起终点名称，计算单程耗时
     输入
     -------
     arrive_info : DataFrame
         公交到离站数据
-    stop : GeoDataFrame
-        公交站点的GeoDataFrame数据
     start : Str
         起点站名字
     end : Str

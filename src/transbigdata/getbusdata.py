@@ -58,6 +58,8 @@ def getbusdata(city,keywords):
     stop['geometry'] = gpd.points_from_xy(stop['lon'],stop['lat'])
     stop = stop.drop('geo',axis = 1)
     stop = gpd.GeoDataFrame(stop)
+    data['line'] = data['linename'].str.split('(').apply(lambda r:r[0])
+    stop['line'] = stop['linename'].str.split('(').apply(lambda r:r[0])
     return data,stop
 
 
@@ -172,4 +174,74 @@ def split_subwayline(line,stop):
     metro_line_splited = pd.concat(lss).drop('geometry1',axis = 1)
     #绘制轨道断面
     return metro_line_splited
+
+
+def metro_network(stop,traveltime = 3,transfertime = 5,nxgraph = True):
+    '''
+    输入站点信息，输出网络信息
+    输入
+    -------
+    stop : GeoDataFrame
+        公交站点
+    traveltime : number
+        每个轨道断面的出行时长
+    transfertime : number
+        每个轨道换乘的时长
+    nxgraph : bool
+        默认True，如果True则直接输出由networkx构建的网络G，如果为False，则输出网络的边edge1,edge2,和节点node
+        
+    输出
+    -------
+    G : networkx.classes.graph.Graph
+        networkx构建的网络G，nxgraph参数为True时只输出这个
+    edge1 : DataFrame
+        轨道断面的边，nxgraph参数为False时输出这个
+    edge2 : DataFrame
+        轨道换乘的边，nxgraph参数为False时输出这个
+    node : List
+        网络节点，nxgraph参数为False时输出这个
+    '''
+    linestop = stop.copy()
+    #提取相邻站点够成的轨道段
+    for i in linestop.columns:
+        linestop[i+'1'] = linestop[i].shift(-1)
+    linestop = linestop[linestop['linename'] == linestop['linename1']].copy()
+    #重命名列名
+    linestop = linestop.rename(columns = {'stationnames':'ostop','stationnames1':'dstop'})
+    #构建站点名称，使得不同线路不同站点能够区分
+    linestop['ostation'] = linestop['line']+linestop['ostop']
+    linestop['dstation'] = linestop['line']+linestop['dstop']
+    #构建网络边的第一部分：即轨道段形成的边
+    edge1 = linestop[['ostation','dstation']].copy()
+    #假定地铁搭一个站点耗时3分钟
+    edge1['duration'] = traveltime
+    #读取轨道站点数据
+    linestop = stop.copy()
+    linestop['station'] = linestop['line'] + linestop['stationnames']
+    #提取出换乘站
+    tmp = linestop.groupby(['stationnames'])['linename'].count().rename('count').reset_index()
+    tmp = pd.merge(linestop,tmp[tmp['count']>2]['stationnames'],on = 'stationnames')
+    #为换乘站构建边
+    tmp = tmp[['stationnames','line','station']].drop_duplicates()
+    tmp = pd.merge(tmp,tmp,on ='stationnames')
+    #提取换乘边，假定换乘耗时为5分钟
+    edge2 =tmp[tmp['line_x'] != tmp['line_y']][['station_x','station_y']]
+    edge2['duration'] = transfertime
+    edge2.columns = edge1.columns
+    #将两类边合体
+    edge = edge1.append(edge2)
+    #提取其中的节点
+    node = list(edge['ostation'].drop_duplicates())
+    if nxgraph:
+        #构建轨道网络
+        import networkx as nx
+        #先创建一个空网络
+        G = nx.Graph()
+        #添加节点
+        G.add_nodes_from(node)
+        #添加含有权重的无向边
+        G.add_weighted_edges_from(edge.values)
+        return G
+    else:
+        return edge1,edge2,node
 
