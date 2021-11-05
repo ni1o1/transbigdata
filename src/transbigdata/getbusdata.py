@@ -5,6 +5,108 @@ from shapely.geometry import Point,Polygon,shape,LineString
 import urllib.request
 import json
 import CoordinatesConverter
+from urllib import parse
+from urllib import request
+
+def getadmin(keyword,ak,subdistricts = False):
+    '''
+    输入关键词与高德ak，抓取行政区划gis
+    输入
+    -------
+    keywords : str
+        关键词，可以是名称，如"深圳市"，或行政区划编号，如440500
+    ak : str
+        高德ak
+    subdistricts : bool
+        是否输出子行政区划的信息
+    输出
+    -------
+    admin : GeoDataFrame
+        行政区划信息
+    districts : DataFrame
+        子行政区划的信息，利用这个可以进一步抓下一级的行政区划
+    '''
+    
+    #查询的接口地址
+    url = 'https://restapi.amap.com/v3/config/district?'
+    #查询的条件
+    dict1 = {
+    'subdistrict':'3',
+        'showbiz':'false',
+        'extensions':'all',
+        'key':ak,#这个是我的开发者key，告诉高德这个数据是我抓的，每天会有限额，你们可以注册成为开发者，这样就有自己的key拉
+        's':'rsv3',
+        'output':'json',
+        'level':'district',
+        'keywords':keyword,
+        'platform':'JS',
+        'logversion':'2.0',
+        'sdkversion':'1.4.10'
+    }
+    #把查询条件组合成网页地址
+    url_data = parse.urlencode(dict1)
+    url = url+url_data
+    #创建一个访问器
+    request = urllib.request.Request(url)
+    #访问网页
+    response = urllib.request.urlopen(request)
+    #读取网页内容
+    webpage = response.read()
+    #将内容用json解析
+    result = json.loads(webpage.decode('utf8','ignore'))
+    #读取整理数据
+    datas = []
+    k = 0
+    polyline = result['districts'][k]['polyline']
+    polyline1 = polyline.split('|')
+    res = []
+    for polyline2 in polyline1:
+        polyline2 = polyline2.split(';')
+        p = []
+        for i in polyline2:
+            a,b = i.split(',')
+            p.append([float(a),float(b)])
+        x = pd.DataFrame(p)
+        x[0],x[1] = CoordinatesConverter.gcj02towgs84(x[0],x[1])
+        p = x.values
+        res.append(Polygon(p))
+    data = pd.DataFrame()
+    data1 = pd.DataFrame()
+    data1['geometry'] = res
+    data1 = gpd.GeoDataFrame(data1)
+    poly = data1.unary_union
+    data['geometry'] = [poly]
+    try:
+        data['citycode'] = result['districts'][k]['citycode']
+    except:
+        pass
+    try:
+        data['adcode'] = result['districts'][k]['adcode']
+    except:
+        pass
+    try:
+        data['name'] = result['districts'][k]['name']
+    except:
+        pass
+    try:
+        data['level'] = result['districts'][k]['level']
+    except:
+        pass
+    try:
+        data['center'] = result['districts'][k]['center']
+    except:
+        pass
+    datas.append(data)
+    datas = pd.concat(datas)
+    admin = gpd.GeoDataFrame(datas)
+    if subdistricts:
+        districts = result['districts'][k]['districts']
+        districts = pd.DataFrame(districts)
+        return admin,districts
+    else:
+        return admin
+
+
 
 def getbusdata(city,keywords):
     '''
