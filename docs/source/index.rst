@@ -99,7 +99,7 @@ TransBigData简介
    preprocess.rst
    odprocess.rst
    traj.rst
-   ckdnearest.rst
+   gisprocess.rst
    plot_map.rst
    CoordinatesConverter.rst
    getbusdata.rst
