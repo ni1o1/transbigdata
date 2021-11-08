@@ -1,7 +1,8 @@
 点与点、点与线匹配实例
 ======================
 
-导入transbigdata包
+| 下面的案例展示如何用TransBigData包进行点与点、点与线的近邻匹配。该方法使用的是KDTree算法，可查看wiki：https://en.wikipedia.org/wiki/K-d_tree
+| 导入TransBigData包
 
 ::
 
