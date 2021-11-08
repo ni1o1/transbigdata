@@ -65,7 +65,7 @@ TransBigData简介
 * 本项目的github页面： https://github.com/ni1o1/transbigdata/  
 * 有bug请在这个页面提交： https://github.com/ni1o1/transbigdata/issues
 
-快速开始
+安装、依赖与更新日志
 =========================
 
 .. toctree::
