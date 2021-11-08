@@ -22,7 +22,7 @@ metro_line_splited : GeoDataFrame
 
 .. function:: transbigdata.metro_network(stop,traveltime = 3,transfertime = 5,nxgraph = True)
 
-输入站点信息，输出网络信息
+输入站点信息，输出网络信息，该方法依赖于NetworkX
 
 **输入**
 
@@ -33,7 +33,7 @@ traveltime : number
 transfertime : number
     每个轨道换乘的时长
 nxgraph : bool
-    默认True，如果True则直接输出由networkx构建的网络G，如果为False，则输出网络的边edge1,edge2,和节点node
+    默认True，如果True则直接输出由NetworkX构建的网络G，如果为False，则输出网络的边edge1,edge2,和节点node
     
 **输出**
 
