@@ -208,7 +208,7 @@ geohash : Series
 
 .. function:: transbigdata.geohash_togrid(geohash)
 
-输入经纬度与精度，输出geohash编码
+输入geohash编码，输出geohash网格的地理信息图形Series列
 
 **输入**
 
