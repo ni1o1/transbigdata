@@ -285,3 +285,4 @@ def gridid_sjoin_shape(data,shape,params,col = ['LONCOL','LATCOL']):
     data1['geometry'] = gridid_to_polygon(data1[LONCOL],data1[LATCOL],params)
     data1 = gpd.sjoin(data1,shape)
     return data1
+
