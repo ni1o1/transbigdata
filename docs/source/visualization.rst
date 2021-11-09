@@ -9,6 +9,8 @@
 
     pip install keplergl
 
+轨迹可视化
+-------------------
 
 .. function:: transbigdata.visualization_trip(trajdata,col = ['Lng','Lat','ID','Time'],zoom = 10,height=500)
 
@@ -29,3 +31,16 @@ height : number
 
 traj : keplergl.keplergl.KeplerGl
     keplergl提供的可视化
+
+使用方法
+
+::
+    import transbigdata as tbd
+    import pandas as pd
+    #读取数据    
+    data = pd.read_csv('TaxiData-Sample.csv',header = None) 
+    data.columns = ['VehicleNum','Time','Lng','Lat','OpenStatus','Speed']  
+    #轨迹数据可视化
+    tbd.visualization_trip(data,col = ['Lng', 'Lat', 'VehicleNum', 'Time'])
+
+.. image:: example-taxi/kepler-traj.png
