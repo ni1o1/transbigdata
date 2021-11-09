@@ -2,7 +2,7 @@
 
 
 ******************************
-轨迹
+轨迹处理
 ******************************
 
 .. function:: transbigdata.points_to_traj(traj_points,col = ['Lng','Lat','ID'],timecol = None)

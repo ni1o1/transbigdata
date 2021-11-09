@@ -105,13 +105,13 @@ TransBigData简介
    grids.rst
    quality.rst
    preprocess.rst
+   visualization.rst
    odprocess.rst
    traj.rst
    gisprocess.rst
    plot_map.rst
    CoordinatesConverter.rst
    getbusdata.rst
-   visualization.rst
 
 各类数据处理方法
 =========================
