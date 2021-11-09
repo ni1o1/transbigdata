@@ -11,4 +11,5 @@ from .traj import *
 from .quality import *
 from .busgps import *
 from .getbusdata import *
-__version__ = '0.1.18'
+from CoordinatesConverter import *
+__version__ = '0.1.19'

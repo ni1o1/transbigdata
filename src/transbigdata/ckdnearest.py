@@ -2,7 +2,6 @@
 #定义函数，用cKDTree匹配点与点
 import numpy as np
 import pandas as pd
-from CoordinatesConverter import gcj02tobd09,bd09togcj02,wgs84togcj02,gcj02towgs84,wgs84tobd09,bd09towgs84,getdistance
 from scipy.spatial import cKDTree
 import itertools
 from operator import itemgetter

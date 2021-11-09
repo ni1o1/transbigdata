@@ -8,7 +8,10 @@
 火星坐标系互转
 =============================
 
-GCJ02,BD09,WGS94坐标系互转
+坐标互转方法
+--------------------------
+
+TransBigData包提供了GCJ02,BD09,BD09mc,WGS94坐标系互转。
 
 .. function:: transbigdata.gcj02tobd09(lng, lat)
 
@@ -22,6 +25,7 @@ GCJ02,BD09,WGS94坐标系互转
 
 .. function:: transbigdata.bd09towgs84(lon,lat)
 
+.. function:: transbigdata.bd09mctobd09(lon,lat)
 
 坐标互转，基于numpy列运算::
 
@@ -31,6 +35,48 @@ GCJ02,BD09,WGS94坐标系互转
   data['Lng'],data['Lat'] = tbd.gcj02towgs84(data['Lng'],data['Lat'])  
   data['Lng'],data['Lat'] = tbd.bd09togcj02(data['Lng'],data['Lat'])  
   data['Lng'],data['Lat'] = tbd.bd09towgs84(data['Lng'],data['Lat'])  
+  data['Lng'],data['Lat'] = tbd.bd09mctobd09(data['Lng'],data['Lat']) 
+
+对地理要素转换坐标
+--------------------------
+
+.. function:: transbigdata.transform_shape(gdf,method)
+
+输入地理要素的GeoDataFrame，对整体做坐标转换
+
+**输入**
+
+gdf : GeoDataFrame
+    地理要素
+method : function
+    坐标转换函数
+
+**输出**
+
+gdf : GeoDataFrame
+    转换后结果
+
+
+::
+
+    #读取线要素
+    import geopandas as gpd
+    Centerline = gpd.read_file(r'test_lines.json')
+    Centerline.plot()
+
+
+.. image:: transform_shape/output_0_1.png
+
+
+::
+
+    #整体进行坐标转换
+    import transbigdata as tbd
+    Centerline_transformed = tbd.transform_shape(Centerline,tbd.bd09towgs84)
+    Centerline_transformed.plot()
+
+.. image:: transform_shape/output_1_1.png
+
 
 经纬度计算距离
 =============================
