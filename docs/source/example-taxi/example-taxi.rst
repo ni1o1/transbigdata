@@ -451,8 +451,8 @@ TransBigData包也提供了将OD直接集计到小区的方法
 .. image:: output_26_1.png
 
 
-可视化
-------
+基于matplotlib的地图绘制
+------------------------------
 
 tbd中提供了地图底图加载和比例尺指北针的功能。使用plot_map方法添加地图底图，plotscale添加比例尺和指北针:
 
@@ -893,13 +893,23 @@ tbd中提供了地图底图加载和比例尺指北针的功能。使用plot_map
     traj_idle = tbd.points_to_traj(data_idle)
     traj_idle.plot()
 
-
-
-
-
-
-
-
-
 .. image:: output_37_1.png
 
+轨迹可视化
+------------------
+
+| TransBigData包也依托于kepler.gl提供的可视化插件提供了一键数据整理与可视化的方法
+| 使用此功能请先安装python的keplergl包
+
+
+::
+
+    pip install keplergl
+
+将轨迹数据进行可视化：
+
+::
+
+    tbd.visualization_trip(data_deliver)
+
+.. image:: kepler-traj.png

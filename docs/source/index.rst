@@ -69,7 +69,7 @@ TransBigData简介
 =========================
 
 .. toctree::
-   :caption: 快速开始
+   :caption: 安装、依赖与更新日志
    :maxdepth: 2
    
    getting_started.rst
@@ -102,6 +102,7 @@ TransBigData简介
    plot_map.rst
    CoordinatesConverter.rst
    getbusdata.rst
+   visualization.rst
 
 各类数据处理方法
 =========================

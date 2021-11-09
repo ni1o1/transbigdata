@@ -21,13 +21,22 @@ TransBigData依赖geopandas：https://geopandas.org/index.html
 =============================
 TransBigData依赖如下包
 
-* scipy
 * pandas
 * geopandas
+* scipy
 * matplotlib
+
+可选依赖：
+
+* networkx
+* keplergl
 
 版本更新
 =============================
+
+0.1.20 (2021-11-09)
+------------------------
+添加visualization_trip方法,添加对keplergl的支持
 
 0.1.19 (2021-11-09)
 ------------------------
