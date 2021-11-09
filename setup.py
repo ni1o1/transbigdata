@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
  
 setuptools.setup(
     name="transbigdata",
-    version="0.1.20",
+    version="0.1.21",
     author="Qing Yu",
     author_email="qingyu0815@foxmail.com",
     description="A tool for transportation big data",

@@ -27,6 +27,8 @@ def visualization_trip(trajdata,col = ['Lng','Lat','ID','Time'],zoom = 10,height
         raise Exception('请安装keplergl，在终端或命令提示符中运行pip install keplergl，然后重启Python') 
     print('整理轨迹数据...')
     [Lng,Lat,ID,timecol] = col
+    trajdata[timecol] = pd.to_datetime(trajdata[timecol])
+    trajdata = trajdata.sort_values(by = [ID,timecol])
     traj = points_to_traj(trajdata,col = [Lng,Lat,ID],timecol = timecol)
     #获取基本参数
     ls = []
