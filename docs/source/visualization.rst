@@ -36,6 +36,7 @@ traj : keplergl.keplergl.KeplerGl
 使用方法
 
 ::
+
     import transbigdata as tbd
     import pandas as pd
     #读取数据    
