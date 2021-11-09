@@ -4,7 +4,6 @@
 
 [![Build Status](https://app.travis-ci.com/ni1o1/transbigdata.svg?branch=main)](https://app.travis-ci.com/ni1o1/transbigdata) [![Documentation Status](https://readthedocs.org/projects/transbigdata/badge/?version=latest)](https://transbigdata.readthedocs.io/en/latest/?badge=latest) ![PyPI](https://img.shields.io/pypi/v/transbigdata) [![bilibili](https://img.shields.io/badge/bilibili-%E5%90%8C%E6%B5%8E%E5%B0%8F%E6%97%AD%E5%AD%A6%E9%95%BF-green.svg)](https://space.bilibili.com/3051484)  
 
-**主要功能**
 
 TransBigData工具针对时空大数据处理而开发，依托于GeoPandas。  
 TransBigData集成了交通时空大数据处理过程中常用的方法。包括栅格化、数据质量分析、数据预处理、数据集计、轨迹分析、GIS处理、地图底图加载、坐标与距离计算、数据可视化等通用方法。  
