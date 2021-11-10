@@ -10,6 +10,10 @@
 
     pip install keplergl
 
+如果要在jupyter notebook中显示可视化，则需要勾选jupyter-js-widgets（可能需要另外安装）和keplergl-jupyter两个插件
+
+.. image:: _static/jupytersettings.png
+
 轨迹可视化
 -------------------
 
