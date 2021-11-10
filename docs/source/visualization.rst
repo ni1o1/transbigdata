@@ -37,7 +37,7 @@ height : number
 
 **输出**
 
-traj : keplergl.keplergl.KeplerGl
+vmap : keplergl.keplergl.KeplerGl
     keplergl提供的可视化
 
 使用方法
@@ -53,3 +53,43 @@ traj : keplergl.keplergl.KeplerGl
     tbd.visualization_trip(data,col = ['Lng', 'Lat', 'VehicleNum', 'Time'])
 
 .. image:: example-taxi/kepler-traj.png
+
+OD可视化
+--------------------
+
+.. function:: transbigdata.visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',height=500)
+
+输入od数据与列名，生成kepler的可视化
+
+**输入**
+
+oddata : DataFrame
+    od数据
+col : List
+    列名，可输入不带权重的OD，按[起点经度，起点纬度，终点经度，终点纬度]的顺序，此时会自动集计。
+    也可输入带权重的OD，按[起点经度，起点纬度，终点经度，终点纬度，数量]的顺序。
+zoom : number
+    地图缩放等级,默认'auto'自动选择
+height : number
+    地图图框高度
+
+**输出**
+
+vmap : keplergl.keplergl.KeplerGl
+    keplergl提供的可视化
+
+使用方法
+
+::
+
+    import transbigdata as tbd
+    import pandas as pd
+    #读取数据    
+    data = pd.read_csv('TaxiData-Sample.csv',header = None) 
+    data.columns = ['VehicleNum','Time','Lng','Lat','OpenStatus','Speed']
+    #提取OD
+    oddata = tbd.taxigps_to_od(data,col = ['VehicleNum','Time','Lng','Lat','OpenStatus'])
+    #OD可视化
+    tbd.visualization_od(oddata)
+
+.. image:: example-taxi/odvisualization.png
