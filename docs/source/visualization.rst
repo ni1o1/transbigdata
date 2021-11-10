@@ -52,7 +52,7 @@ vmap : keplergl.keplergl.KeplerGl
     data = pd.read_csv('TaxiData-Sample.csv',header = None) 
     data.columns = ['VehicleNum','Time','Lng','Lat','OpenStatus','Speed']
     #可视化数据点分布
-    visualization_data(data,col = ['Lng','Lat'],accuracy=300)
+    tbd.visualization_data(data,col = ['Lng','Lat'],accuracy=300)
 
 .. image:: example-taxi/datavis.png
 
