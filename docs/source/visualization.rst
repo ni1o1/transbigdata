@@ -1,6 +1,6 @@
 
 ******************************
-可视化
+数据可视化
 ******************************
 
 在jupyter中显示可视化的设置
@@ -57,7 +57,7 @@ vmap : keplergl.keplergl.KeplerGl
 OD可视化
 --------------------
 
-.. function:: transbigdata.visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',height=500)
+.. function:: transbigdata.visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',height=500,accuracy = 500,mincount = 0)
 
 输入od数据与列名，生成kepler的可视化
 
@@ -72,6 +72,10 @@ zoom : number
     地图缩放等级,默认'auto'自动选择
 height : number
     地图图框高度
+accuracy : number
+    集计的栅格大小
+mincount : number
+    最小的od数，少于这个的od就不显示了
 
 **输出**
 
