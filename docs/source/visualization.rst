@@ -54,7 +54,7 @@ vmap : keplergl.keplergl.KeplerGl
     #可视化数据点分布
     visualization_data(data,col = ['Lng','Lat'],accuracy=300)
 
-.. image:: _static/datavis.png
+.. image:: example-taxi/datavis.png
 
 轨迹可视化
 -------------------
