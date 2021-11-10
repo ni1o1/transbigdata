@@ -89,7 +89,7 @@ def visualization_trip(trajdata,col = ['Lng','Lat','ID','Time'],zoom = 'auto',he
     return vmap
 
 
-def visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',height=500):
+def visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',height=500,accuracy = 500,mincount = 0):
     '''
     输入od数据与列名，生成kepler的可视化
     
@@ -104,6 +104,10 @@ def visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',he
         地图缩放等级,默认'auto'自动选择
     height : number
         地图图框高度
+    accuracy : number
+        集计的栅格大小
+    mincount : number
+        最小的od数，少于这个的od就不显示了
 
     输出
     -------
@@ -124,7 +128,7 @@ def visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',he
         #定义研究范围
         bounds = [lon1,lat1,lon2,lat2]
         #获取栅格化参数
-        params = grid_params(bounds = bounds,accuracy = 1500)
+        params = grid_params(bounds = bounds,accuracy = accuracy)
         #栅格化OD并集计
         od_gdf = odagg_grid(oddata,params,col = col)
         if zoom == 'auto':
@@ -142,8 +146,8 @@ def visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',he
             zoom = 8.5-np.log(lon2-lon1)/np.log(2)
         od_gdf = oddata
         lon1,lat1,lon2,lat2,count=col
+    od_gdf = od_gdf[od_gdf[count]>=mincount]
     height = 500
-    from keplergl import KeplerGl
 
     vmap = KeplerGl(config = {
         'version': 'v1',
@@ -307,4 +311,168 @@ def visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',he
             }
         }
     },data = {'od':od_gdf},height=height)
+    return vmap
+
+
+def visualization_data(data,col =  ['lon','lat'],accuracy = 500,height = 500,maptype = 'point',zoom = 'auto'):
+    '''
+    输入数据点，集计并可视化
+    
+    输入
+    -------
+    data : DataFrame
+        数据点分布
+    col : List
+        列名，按[经度，纬度]的顺序
+    zoom : number
+        地图缩放等级,默认'auto'自动选择
+    height : number
+        地图图框高度
+    accuracy : number
+        集计的栅格大小
+    maptype : str
+        出图类型，'point'或者'heatmap'
+
+    输出
+    -------
+    vmap : keplergl.keplergl.KeplerGl
+        keplergl提供的可视化
+    '''
+    
+    lon,lat = col[0],col[1]
+    try:
+        from keplergl import KeplerGl
+    except:
+        raise Exception('请安装keplergl，在终端或命令提示符中运行pip install keplergl，然后重启Python') 
+
+
+    lon1 = data[lon].quantile(0.01)
+    lon2 = data[lon].quantile(0.99)
+    lat1 = data[lat].quantile(0.01)
+    lat2 = data[lat].quantile(0.99)
+    #定义研究范围
+    bounds = [lon1,lat1,lon2,lat2]
+
+    lon_center,lat_center = (lon2+lon1)/2,(lat2+lat1)/2
+    if zoom == 'auto':
+        zoom = 8.5-np.log(lon2-lon1)/np.log(2)
+
+    #获取栅格化参数
+    params = grid_params(bounds = bounds,accuracy = accuracy)
+
+    tmp = data.copy()
+    tmp['LONCOL'],tmp['LATCOL'] = GPS_to_grids(data[lon], data[lat], params)
+
+    tmp[lon],tmp[lat] = grids_centre(tmp['LONCOL'],tmp['LATCOL'], params)
+    tmp = tmp.groupby(col)['LONCOL'].count().rename('count').reset_index()
+
+    if maptype == 'heatmap':
+        vmap = KeplerGl(config = {'version': 'v1',
+         'config': {'visState': {'filters': [],
+           'layers': [{'id': 'vpefba0o',
+             'type': 'heatmap',
+             'config': {'dataId': 'data',
+              'label': 'Point',
+              'color': [18, 147, 154],
+              'highlightColor': [252, 242, 26, 255],
+              'columns': {'lat': lat, 'lng': lon},
+              'isVisible': True,
+              'visConfig': {'opacity': 0.8,
+               'colorRange': {'name': 'Global Warming',
+                'type': 'sequential',
+                'category': 'Uber',
+                'colors': ['#5A1846',
+                 '#900C3F',
+                 '#C70039',
+                 '#E3611C',
+                 '#F1920E',
+                 '#FFC300']},
+               'radius': 23},
+              'hidden': False,
+              'textLabel': [{'field': None,
+                'color': [255, 255, 255],
+                'size': 18,
+                'offset': [0, 0],
+                'anchor': 'start',
+                'alignment': 'center'}]},
+             'visualChannels': {'weightField': {'name': 'count', 'type': 'integer'},
+              'weightScale': 'linear'}}],
+           'interactionConfig': {'tooltip': {'fieldsToShow': {'data': [{'name': 'count',
+                'format': None}]},
+             'compareMode': False,
+             'compareType': 'absolute',
+             'enabled': True},
+            'brush': {'size': 0.5, 'enabled': False},
+            'geocoder': {'enabled': False},
+            'coordinate': {'enabled': False}},
+           'layerBlending': 'normal',
+           'splitMaps': [],
+           'animationConfig': {'currentTime': None, 'speed': 1}},
+                    'mapState':
+                    {
+                        'bearing': 0,
+                        'dragRotate': True,
+                        'latitude': lat_center,
+                        'longitude': lon_center,
+                        'pitch': 0,
+                        'zoom': zoom,
+                        'isSplit': False
+                    },
+                    'mapStyle':
+                    {
+                        'styleType': 'dark',
+                        'topLayerGroups':
+                        {},
+                        'visibleLayerGroups':
+                        {
+                            'label': True,
+                            'road': True,
+                            'border': False,
+                            'building': True,
+                            'water': True,
+                            'land': True,
+                            '3d building': False
+                        },
+                        'threeDBuildingColor': [9.665468314072013,
+                            17.18305478057247,
+                            31.1442867897876
+                        ],
+                        'mapStyles':
+                        {}
+                    }}},data = {'data':tmp},height=height)
+    else:
+        vmap = KeplerGl(config = {'version': 'v1',
+         'config': {
+                    'mapState':
+                    {
+                        'bearing': 0,
+                        'dragRotate': True,
+                        'latitude': lat_center,
+                        'longitude': lon_center,
+                        'pitch': 0,
+                        'zoom': zoom,
+                        'isSplit': False
+                    },
+                    'mapStyle':
+                    {
+                        'styleType': 'dark',
+                        'topLayerGroups':
+                        {},
+                        'visibleLayerGroups':
+                        {
+                            'label': True,
+                            'road': True,
+                            'border': False,
+                            'building': True,
+                            'water': True,
+                            'land': True,
+                            '3d building': False
+                        },
+                        'threeDBuildingColor': [9.665468314072013,
+                            17.18305478057247,
+                            31.1442867897876
+                        ],
+                        'mapStyles':
+                        {}
+                    }}},data = {'data':tmp},height=height)
     return vmap

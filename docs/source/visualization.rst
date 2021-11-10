@@ -17,6 +17,45 @@
 
 .. image:: _static/jupytersettings.png
 
+数据点分布可视化
+-------------------
+
+.. function:: transbigdata.visualization_data(data,col =  ['lon','lat'],accuracy = 500,height = 500,maptype = 'point',zoom = 'auto')
+
+输入数据点，集计并可视化
+
+**输入**
+
+data : DataFrame
+    数据点分布
+col : List
+    列名，按[经度，纬度]的顺序
+zoom : number
+    地图缩放等级,默认'auto'自动选择
+height : number
+    地图图框高度
+accuracy : number
+    集计的栅格大小
+maptype : str
+    出图类型，'point'或者'heatmap'
+
+**输出**
+
+vmap : keplergl.keplergl.KeplerGl
+    keplergl提供的可视化
+
+使用方法::
+
+    import transbigdata as tbd
+    import pandas as pd
+    #读取数据    
+    data = pd.read_csv('TaxiData-Sample.csv',header = None) 
+    data.columns = ['VehicleNum','Time','Lng','Lat','OpenStatus','Speed']
+    #可视化数据点分布
+    visualization_data(data,col = ['Lng','Lat'],accuracy=300)
+
+.. image:: _static/datavis.png
+
 轨迹可视化
 -------------------
 
