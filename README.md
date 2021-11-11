@@ -14,7 +14,7 @@ TransBigData也针对出租车GPS数据、共享单车数据、公交GPS数据�
 面向交通时空大数据分析不同阶段的处理需求提供不同处理功能，可通过软件内置方法实现数据的处理。  
 代码简洁、高效、灵活、易用，通过简短的代码即可实现复杂的数据任务。  
 
-更多细节请查看：[TransBigData的说明文档](https://transbigdata.readthedocs.io/en/latest/)
+更多细节请查看：[TransBigData的说明文档](https://transbigdata.readthedocs.io/)
 
 
 ## 安装
