@@ -35,7 +35,7 @@ def clean_same(data,col = ['VehicleNum','Time','Lng','Lat']):
     data1 = data1.drop('issame',axis = 1)
     return data1
 
-def clean_drift(data,col = ['VehicleNum','Time','Lng','Lat'],speedlimit = 80):
+def clean_drift(data,col = ['VehicleNum','Time','Lng','Lat'],speedlimit = 80,dislimit = 1000):
     '''
     删除漂移数据。条件是，此数据与前后的速度都大于speedlimit，但前后数据之间的速度却小于speedlimit。
     传入的数据中时间列如果为datetime格式则计算效率更快
@@ -46,6 +46,8 @@ def clean_drift(data,col = ['VehicleNum','Time','Lng','Lat'],speedlimit = 80):
         数据
     col : List
         列名，按[个体ID,时间,经度,纬度]的顺序
+    speedlimit : number
+        速度阈值
     
     输出
     -------
@@ -69,10 +71,15 @@ def clean_drift(data,col = ['VehicleNum','Time','Lng','Lat'],speedlimit = 80):
     data1['speed_pre'] = data1['dis_pre']/data1['timegap_pre'].dt.total_seconds()*3.6
     data1['speed_next'] = data1['dis_next']/data1['timegap_next'].dt.total_seconds()*3.6
     data1['speed_prenext'] = data1['dis_prenext']/data1['timegap_prenext'].dt.total_seconds()*3.6
-
-    #条件是，此数据与前后的速度都大于limit，但前后数据之间的速度却小于limit
-    data1 = data1[-((data1[VehicleNum+'_pre'] == data1[VehicleNum])&(data1[VehicleNum+'_next'] == data1[VehicleNum])&\
-    (data1['speed_pre']>speedlimit)&(data1['speed_next']>speedlimit)&(data1['speed_prenext']<speedlimit))][data.columns]
+    if speedlimit:
+        #条件是，此数据与前后的速度都大于speedlimit，但前后数据之间的速度却小于speedlimit
+        data1 = data1[-((data1[VehicleNum+'_pre'] == data1[VehicleNum])&(data1[VehicleNum+'_next'] == data1[VehicleNum])&\
+        (data1['speed_pre']>speedlimit)&(data1['speed_next']>speedlimit)&(data1['speed_prenext']<speedlimit))]
+    if dislimit:
+        #条件是，此数据与前后的距离都大于dislimit，但前后数据之间的距离却小于dislimit
+        data1 = data1[-((data1[VehicleNum+'_pre'] == data1[VehicleNum])&(data1[VehicleNum+'_next'] == data1[VehicleNum])&\
+        (data1['dis_pre']>dislimit)&(data1['dis_next']>dislimit)&(data1['dis_prenext']<dislimit))]
+    data1 = data1[data.columns]
     return data1
 
 def clean_outofbounds(data,bounds,col = ['Lng','Lat']):
@@ -133,6 +140,64 @@ def clean_outofshape(data,shape,col = ['Lng','Lat'],accuracy=500):
     data1 = pd.merge(data1,data1_gdf[['LONCOL','LATCOL']]).drop(['LONCOL','LATCOL'],axis = 1)
     return data1
 
+def clean_traj(data,col = ['uid','str_time','lon','lat'],tripgap = 1800,disgap = 50000,speedlimit = 80):
+    '''
+    轨迹数据清洗组合拳
+    输入
+    -------
+    data : DataFrame
+        轨迹数据
+    col : List
+        列名，以[个体id,时间,经度,纬度]排列
+    tripgap : number
+        多长的时间视为新的出行
+    disgap : number
+        多长距离视为新的出行
+    speedlimit : number
+        车速限制
+    
+    输出
+    -------
+    data1 : DataFrame
+        清洗后的数据
+    '''
+    uid,timecol,lon,lat = col
+    data[timecol] = pd.to_datetime(data[timecol])
+    #出行识别
+    data = data.sort_values(by = [uid,timecol])
+    cols = []
+    for i in data.columns:
+        if i not in [uid,timecol,lon,lat]:
+            cols.append(i)
+    #清洗
+    data = clean_same(data,col = [uid,timecol,lon,lat]+cols)
+    #简单清洗漂移数据
+    data = clean_drift(data,col = [uid, timecol, lon, lat],
+        speedlimit=speedlimit)
+    #出行识别
+    data = id_reindex(data,uid,timecol = timecol,timegap = tripgap)
+    data = data.rename(columns = {uid+'_new':'tripid'})
+    #距离太大就编号为新的出行
+    data = id_reindex_disgap(data,col = ['tripid',lon,lat],disgap=disgap,suffix='')
+    #距离太短的出行剔除
+    data1 = data.copy()
+    data1['lon1'] = data1[lon].shift(-1)
+    data1['lat1'] = data1[lat].shift(-1)
+    data1['tripid1'] = data1['tripid'].shift(-1)
+    data1 = data1[data1['tripid']==data1['tripid1']]
+    data1['dis'] = getdistance(data1[lon],data1[lat],data1['lon1'],data1['lat1'])
+    a = data1.groupby(['tripid'])['dis'].sum()
+    a = a[-(a<50)].reset_index()['tripid']
+    data = pd.merge(data,a)
+    #再重新编号
+    data = data.drop('tripid',axis = 1)
+    data = id_reindex(data,uid,timecol = timecol,timegap = tripgap)
+    data = data.rename(columns = {uid+'_new':'tripid'})
+    #大距离筛选出行
+    data = id_reindex_disgap(data,col = ['tripid',lon,lat],disgap=disgap,suffix='')
+    return data
+
+
 def dataagg(data,shape,col = ['Lng','Lat','count'],accuracy=500):
     '''
     数据集计至小区
@@ -181,6 +246,34 @@ def dataagg(data,shape,col = ['Lng','Lat','count'],accuracy=500):
         data1 = data1.drop('_',axis = 1)
     data1 = data1.drop('index',axis = 1)
     return aggresult,data1
+
+def id_reindex_disgap(data,col = ['uid','lon','lat'],disgap=1000,suffix = '_new'):
+    '''
+    对数据的ID列重新编号，如果相邻两条记录超过距离，则编号为新id
+    
+    输入
+    -------
+    data : DataFrame
+        数据 
+    col : str
+        要重新编号的ID列名
+    disgap : number
+        如果个体轨迹超过一定距离，则编号为新的个体。
+    suffix : str
+        新编号列名的后缀
+        
+    输出
+    -------
+    data1 : DataFrame
+        重新编号的数据
+    '''
+    uid,lon,lat = col
+    data1 = data.copy()
+    data1[uid+suffix] = ((data1[uid].shift()!=data1[uid])|
+                    (getdistance(data1[lon],data1[lat],data1[lon].shift(),data1[lat].shift())>disgap)).astype(int).cumsum()-1
+    a = data1.groupby([uid+suffix])[lon].count()
+    data1 = pd.merge(data1,a[a>1].reset_index()[[uid+suffix]])
+    return data1
 
 def id_reindex(data,col,new = False,timegap = None,timecol = None,suffix = '_new',sample = None):
     '''
@@ -232,6 +325,7 @@ def id_reindex(data,col,new = False,timegap = None,timecol = None,suffix = '_new
         #此时两个条件：时间间隔大于30分钟或者本来这一条记录就是新车
         data1[col+suffix] = ((data1[col+suffix].shift()!=data1[col+suffix])|
                         ((data1[timecol]-data1[timecol].shift()).dt.total_seconds()>timegap)).astype(int).cumsum()-1
+
     if sample:
         tmp = data1[col+suffix].drop_duplicates().sample(sample)
         data1 = pd.merge(data1,tmp)

@@ -109,6 +109,26 @@ sample : int
 data1 : DataFrame
     重新编号的数据
 
+.. function:: transbigdata.id_reindex_disgap(data,col = ['uid','lon','lat'],disgap=1000,suffix = '_new')
+
+对数据的ID列重新编号，如果相邻两条记录超过距离，则编号为新id
+
+**输入**
+
+data : DataFrame
+    数据 
+col : str
+    要重新编号的ID列名
+disgap : number
+    如果个体轨迹超过一定距离，则编号为新的个体。
+suffix : str
+    新编号列名的后缀
+    
+**输出**
+
+data1 : DataFrame
+    重新编号的数据
+
 出租车数据的预处理
 ==================
 
