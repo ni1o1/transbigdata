@@ -6,7 +6,7 @@
 ******************************
 
 轨迹线型生成
-----------------------------
+==================
 
 .. function:: transbigdata.points_to_traj(traj_points,col = ['Lng','Lat','ID'],timecol = None)
 
@@ -39,7 +39,7 @@ path : str
 
 
 轨迹增密
-----------------------------
+==================
 
 .. function:: transbigdata.traj_densify(data,col = ['Vehicleid','Time','Lng','Lat'],timegap = 15)
 
@@ -124,26 +124,3 @@ data1 : DataFrame
     中位数 : 11.0 秒
     下四分位 : 6.0 秒
 
-轨迹清洗
-----------------------
-.. function:: transbigdata.clean_traj(data,col = ['uid','str_time','lon','lat'],tripgap = 1800,disgap = 50000,speedlimit = 80)
-
-轨迹数据清洗组合拳
-
-**输入**
-
-data : DataFrame
-    轨迹数据
-col : List
-    列名，以[个体id,时间,经度,纬度]排列
-tripgap : number
-    多长的时间视为新的出行
-disgap : number
-    多长距离视为新的出行
-speedlimit : number
-    车速限制
-
-**输出**
-
-data1 : DataFrame
-    清洗后的数据

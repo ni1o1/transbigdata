@@ -129,6 +129,31 @@ suffix : str
 data1 : DataFrame
     重新编号的数据
 
+轨迹清洗
+==================
+.. function:: transbigdata.clean_traj(data,col = ['uid','str_time','lon','lat'],tripgap = 1800,disgap = 50000,speedlimit = 80)
+
+轨迹数据清洗组合拳
+
+**输入**
+
+data : DataFrame
+    轨迹数据
+col : List
+    列名，以[个体id,时间,经度,纬度]排列
+tripgap : number
+    多长的时间视为新的出行
+disgap : number
+    多长距离视为新的出行
+speedlimit : number
+    车速限制
+
+**输出**
+
+data1 : DataFrame
+    清洗后的数据
+
+
 出租车数据的预处理
 ==================
 
