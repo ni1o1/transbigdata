@@ -25,6 +25,7 @@ author = 'Qing Yu'
 release = '0.1.24'
 version = '0.1.24'
 html_logo = "_static/logo-wordmark-light.png"
+html_favicon = '_static/logo2.ico'
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
@@ -66,6 +67,7 @@ html_theme_options = {
     'logo_only': True,
     'display_version': True,
 }
+latex_logo = '_static/logo-wordmark-dark.png'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
