@@ -168,7 +168,7 @@
 .. image:: output_3_1.png
 
 
-对数据进行预处理
+数据预处理
 ----------------
 
 TransBigData包也集成了数据预处理的常用方法。其中，tbd.clean_outofshape方法输入数据和研究范围区域信息，筛选剔除研究范围外的数据。而tbd.clean_taxi_status方法则可以剔除的载客状态瞬间变化的记录。在使用预处理的方法时，需要传入相应的列，代码如下：
@@ -181,7 +181,7 @@ TransBigData包也集成了数据预处理的常用方法。其中，tbd.clean_o
     #剔除出租车数据中载客状态瞬间变化的记录
     data = tbd.clean_taxi_status(data, col=['VehicleNum', 'Time', 'OpenStatus'])
 
-栅格化
+数据栅格化
 ------
 
 以栅格形式表达数据分布是最基本的表达方法。GPS数据经过栅格化后，每个数据点都含有对应的栅格信息，采用栅格表达数据的分布时，其表示的分布情况与真实情况接近。如果要使用TransBigData工具进行栅格划分，首先需要确定栅格化的参数（可以理解为定义了一个栅格坐标系），参数可以帮助我们快速进行栅格化:
@@ -235,7 +235,7 @@ TransBigData包也集成了数据预处理的常用方法。其中，tbd.clean_o
 .. image:: output_17_1.png
 
 
-出租车出行OD提取与集计
+出行OD提取与集计
 ----------------------
 
 使用tbd.taxigps_to_od方法，传入对应的列名，即可提取出行OD:
@@ -421,7 +421,7 @@ TransBigData包也集成了数据预处理的常用方法。其中，tbd.clean_o
 .. image:: output_22_1.png
 
 
-OD小区集计
+出行OD小区集计
 ----------
 
 TransBigData包也提供了将OD直接集计到小区的方法
