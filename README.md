@@ -59,9 +59,11 @@ TransBigData也针对出租车GPS数据、共享单车数据、公交GPS数据�
 ## 相关链接
 
 * 小旭学长的b站： https://space.bilibili.com/3051484
+* 小旭学长的七天入门交通时空大数据分析课程（零基础免费课）： https://www.lifangshuju.com/#/introduce/166  
 * 小旭学长的交通时空大数据分析课程： https://www.lifangshuju.com/#/introduce/154  
+* 小旭学长的数据可视化课程： https://www.lifangshuju.com/#/introduce/165  
 * 本项目的github页面： https://github.com/ni1o1/transbigdata/  
-* 有bug请在这个页面提交： https://github.com/ni1o1/transbigdata/issues
+* 有bug请在这个页面提交： https://github.com/ni1o1/transbigdata/issues  
 
 ## 引用
 

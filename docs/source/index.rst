@@ -10,14 +10,12 @@ TransBigData 为交通时空大数据而生
 
 **主要功能**
 
-| TransBigData工具针对时空大数据处理而开发，依托于GeoPandas。
-| TransBigData集成了交通时空大数据处理过程中常用的方法。包括栅格化、数据质量分析、数据预处理、数据集计、轨迹分析、GIS处理、地图底图加载、坐标与距离计算、数据可视化等通用方法。
-| TransBigData也针对出租车GPS数据、共享单车数据、公交GPS数据等多种常见交通时空大数据提供了快速简洁的处理方法。
+TransBigData工具针对时空大数据处理而开发，依托于GeoPandas。TransBigData集成了交通时空大数据处理过程中常用的方法。包括栅格化、数据质量分析、数据预处理、数据集计、轨迹分析、GIS处理、地图底图加载、坐标与距离计算、数据可视化等通用方法。TransBigData也针对出租车GPS数据、共享单车数据、公交GPS数据等多种常见交通时空大数据提供了快速简洁的处理方法。
 
 **技术特点**
 
-| 面向交通时空大数据分析不同阶段的处理需求提供不同处理功能，可通过软件内置方法实现数据的处理。
-| 代码简洁、高效、灵活、易用，通过简短的代码即可实现复杂的数据任务。
+* 面向交通时空大数据分析不同阶段的处理需求提供不同处理功能，可通过软件内置方法实现数据的处理。
+* 代码简洁、高效、灵活、易用，通过简短的代码即可实现复杂的数据任务。
 
 
 TransBigData简介
@@ -26,7 +24,7 @@ TransBigData简介
 快速入门
 ---------------
 
-| TransBigData依赖于geopandas：https://geopandas.org/index.html，在安装TransBigData之前，请确保已经安装了可用的geopandas包
+| 在安装TransBigData之前，请确保已经安装了可用的geopandas包：https://geopandas.org/index.html
 | 如果你已经安装了geopandas，则直接在命令提示符中运行下面代码即可安装
 
 ::
@@ -73,7 +71,9 @@ TransBigData简介
 ---------------
 
 * 小旭学长的b站： https://space.bilibili.com/3051484
+* 小旭学长的七天入门交通时空大数据分析课程（零基础免费课）： https://www.lifangshuju.com/#/introduce/166  
 * 小旭学长的交通时空大数据分析课程： https://www.lifangshuju.com/#/introduce/154  
+* 小旭学长的数据可视化课程： https://www.lifangshuju.com/#/introduce/165  
 * 本项目的github页面： https://github.com/ni1o1/transbigdata/  
 * 有bug请在这个页面提交： https://github.com/ni1o1/transbigdata/issues
 
