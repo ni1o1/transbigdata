@@ -28,6 +28,7 @@ TransBigData简介
 
 | TransBigData依赖于geopandas：https://geopandas.org/index.html，在安装TransBigData之前，请确保已经安装了可用的geopandas包
 | 如果你已经安装了geopandas，则直接在命令提示符中运行下面代码即可安装
+
 ::
 
     pip install -U transbigdata
