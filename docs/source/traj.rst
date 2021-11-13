@@ -124,3 +124,6 @@ data1 : DataFrame
     中位数 : 11.0 秒
     下四分位 : 6.0 秒
 
+增密后的效果
+
+.. image:: example-taxi/densify.png
