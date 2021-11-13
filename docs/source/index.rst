@@ -27,9 +27,10 @@ TransBigData简介
 ---------------
 
 | TransBigData依赖于geopandas：https://geopandas.org/index.html，在安装TransBigData之前，请确保已经安装了可用的geopandas包
-| 如果你已经安装了geopandas，则直接在命令提示符中运行下面代码即可安装::
+| 如果你已经安装了geopandas，则直接在命令提示符中运行下面代码即可安装
+::
 
-   pip install -U transbigdata
+    pip install -U transbigdata
 
 下面例子展示如何使用TransBigData工具快速地从出租车GPS数据中提取出行OD::
 
@@ -106,8 +107,8 @@ TransBigData简介
    quality.rst
    preprocess.rst
    grids.rst
-   visualization.rst
    odprocess.rst
+   visualization.rst
    traj.rst
    gisprocess.rst
    plot_map.rst

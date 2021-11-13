@@ -2,7 +2,7 @@
 
 
 ******************************
-数据质量
+数据质量分析
 ******************************
 
 
@@ -20,6 +20,41 @@ col : List
 show_sample_duration : bool
     是否输出个体采样间隔信息
 
+使用方法
+
+::
+
+    import transbigdata as tbd
+    import pandas as pd
+    #读取数据    
+    data = pd.read_csv('TaxiData-Sample.csv',header = None) 
+    data.columns = ['Vehicleid','Time','Lng','Lat','OpenStatus','Speed']      
+    data['Time'] = pd.to_datetime(data['Time'])
+    #轨迹增密前的采样间隔
+    tbd.data_summary(data,col = ['Vehicleid','Time','Lng','Lat'],show_sample_duration=True)
+
+::
+
+    数据量
+    -----------------
+    数据总量 : 544999 条
+    个体总量 : 180 个
+    个体数据量均值 : 3027.77 条
+    个体数据量上四分位 : 4056.25 条
+    个体数据量中位数 : 2600.5 条
+    个体数据量下四分位 : 1595.75 条
+
+    数据时间段
+    -----------------
+    开始时间 : 2021-11-12 00:00:00
+    结束时间 : 2021-11-12 23:59:59
+
+    个体采样间隔
+    -----------------
+    均值 : 28.0 秒
+    上四分位 : 30.0 秒
+    中位数 : 20.0 秒
+    下四分位 : 15.0 秒
 
 .. function:: transbigdata.sample_duration(data,col = ['Vehicleid','Time']):
 
