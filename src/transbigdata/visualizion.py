@@ -148,7 +148,6 @@ def visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',he
         lon1,lat1,lon2,lat2,count=col
     od_gdf = od_gdf[od_gdf[count]>=mincount]
     height = 500
-
     vmap = KeplerGl(config = {
         'version': 'v1',
         'config':

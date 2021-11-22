@@ -830,4 +830,21 @@ splitedline : GeoDataFrame
     </table>
     </div>
 
+面合并
+========================
 
+.. function:: transbigdata.merge_polygon(data,col)
+
+输入多边形GeoDataFrame数据，以及分组列名col，对不同组别进行分组的多边形进行合并
+
+**输入**
+
+data : GeoDataFrame
+    多边形数据
+col : str
+    分组列名
+
+**输出**
+
+data1 : GeoDataFrame
+    合并后的面

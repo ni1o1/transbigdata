@@ -157,3 +157,29 @@ def splitline_with_length(Centerline,maxlength = 100):
     lsss['length'] = lsss.length
     splitedline = lsss
     return splitedline
+
+def merge_polygon(data,col):
+    '''
+    输入多边形GeoDataFrame数据，以及分组列名col，对不同组别进行分组的多边形进行合并
+    
+    输入
+    -------
+    data : GeoDataFrame
+        多边形数据
+    col : str
+        分组列名
+
+    输出
+    -------
+    data1 : GeoDataFrame
+        合并后的面
+    '''
+    groupnames = []
+    geometries = []
+    for i in data[col].drop_duplicates():
+        groupnames.append(i)
+        geometries.append(data[data[col]==i].unary_union)
+    data1 = gpd.GeoDataFrame()
+    data1['geometry'] = geometries
+    data1[col] = groupnames
+    return data1

@@ -42,7 +42,7 @@ def data_summary(data,col = ['Vehicleid','Time'],show_sample_duration = False):
         轨迹点数据
     col : List
         列名，按[个体ID，时间]的顺序
-    sample_duration : bool
+    show_sample_duration : bool
         是否输出个体采样间隔信息
     '''
     [Vehicleid,Time] = col

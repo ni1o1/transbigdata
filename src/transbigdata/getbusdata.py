@@ -224,7 +224,7 @@ def getline(r2,line_geometry):
     #生成空的list用以存放轨道断面的节点
     ls = []
     #对大部分情况，线段的起点的位置在终点前，在起终点之间生成10个点
-    if r2['o_project']<r2['d_project']:
+    if r2['o_project']<=r2['d_project']:
         #numpy的linespace线性插值生成10个点距离线段起点的距离
         tmp1 = np.linspace(r2['o_project'],r2['d_project'],10)
     #对四号线环线，最后一个站点与第一个站点之间的轨道断面需要特殊处理
