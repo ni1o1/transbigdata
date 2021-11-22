@@ -854,7 +854,7 @@ data1 : GeoDataFrame
 ================================================
 
 
-.. function:: transbigdata.polyon_exterior(data)
+.. function:: transbigdata.polyon_exterior(data,minarea = 0)
 
 输入多边形GeoDataFrame数据，对多边形取外边界构成新多边形
 
@@ -862,6 +862,8 @@ data1 : GeoDataFrame
 
 data : GeoDataFrame
     多边形数据
+minarea : number
+    最小面积，小于这个面积的面全部剔除
     
 **输出**
 

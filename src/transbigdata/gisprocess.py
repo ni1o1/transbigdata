@@ -192,6 +192,8 @@ def polyon_exterior(data,minarea = 0):
     -------
     data : GeoDataFrame
         多边形数据
+    minarea : number
+        最小面积，小于这个面积的面全部剔除
         
     输出
     -------
@@ -214,4 +216,5 @@ def polyon_exterior(data,minarea = 0):
         if type(p)==Polygon:
             return Polygon(p.exterior)
     data1['geometry'] = data1['geometry'].apply(lambda r:polyexterior(r))
+    data1 = data1[-data1['geometry'].is_empty]
     return data1
