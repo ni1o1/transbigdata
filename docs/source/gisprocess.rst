@@ -848,3 +848,22 @@ col : str
 
 data1 : GeoDataFrame
     合并后的面
+
+
+对面取外边界构成新多边形
+================================================
+
+
+.. function:: transbigdata.polyon_exterior(data)
+
+输入多边形GeoDataFrame数据，对多边形取外边界构成新多边形
+
+**输入**
+
+data : GeoDataFrame
+    多边形数据
+    
+**输出**
+
+data1 : GeoDataFrame
+    处理后的面

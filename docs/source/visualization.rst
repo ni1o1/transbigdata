@@ -56,6 +56,28 @@ vmap : keplergl.keplergl.KeplerGl
 
 .. image:: example-taxi/datavis.png
 
+.. function:: transbigdata.visualization_dataagg(data,col = ['lon','lat','count'],accuracy = 100,height = 500,zoom = 'auto')
+
+输入带有权重的数据点，栅格化，集计并可视化
+
+**输入**
+
+data : DataFrame
+    数据点分布
+col : List
+    列名，按[经度，纬度，权重]的顺序
+zoom : number
+    地图缩放等级,默认'auto'自动选择
+height : number
+    地图图框高度
+accuracy : number
+    集计的栅格大小
+
+**输出**
+
+vmap : keplergl.keplergl.KeplerGl
+    keplergl提供的可视化
+
 轨迹可视化
 -------------------
 

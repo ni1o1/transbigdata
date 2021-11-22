@@ -183,3 +183,30 @@ def merge_polygon(data,col):
     data1['geometry'] = geometries
     data1[col] = groupnames
     return data1
+
+def polyon_exterior(data):
+    '''
+    输入多边形GeoDataFrame数据，对多边形取外边界构成新多边形
+    
+    输入
+    -------
+    data : GeoDataFrame
+        多边形数据
+        
+    输出
+    -------
+    data1 : GeoDataFrame
+        处理后的面
+    '''
+    data1 = data.copy()
+    def polyexterior(p):
+        from shapely.geometry import Polygon,MultiPolygon
+        if type(p)==MultiPolygon:
+            geometries = []
+            for i in p:
+                geometries.append(Polygon(i.exterior))
+            return MultiPolygon(geometries)
+        if type(p)==Polygon:
+            return Polygon(p.exterior)
+    data1['geometry'] = data1['geometry'].apply(lambda r:polyexterior(r))
+    return data1

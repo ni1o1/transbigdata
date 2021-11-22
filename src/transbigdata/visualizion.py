@@ -475,3 +475,115 @@ def visualization_data(data,col =  ['lon','lat'],accuracy = 500,height = 500,map
                         {}
                     }}},data = {'data':tmp},height=height)
     return vmap
+
+def visualization_dataagg(data,col = ['lon','lat','count'],accuracy = 100,height = 500,zoom = 'auto'):
+    '''
+    输入数据点，集计并可视化
+    
+    输入
+    -------
+    data : DataFrame
+        数据点分布
+    col : List
+        列名，按[经度，纬度，权重]的顺序
+    zoom : number
+        地图缩放等级,默认'auto'自动选择
+    height : number
+        地图图框高度
+    accuracy : number
+        集计的栅格大小
+
+    输出
+    -------
+    vmap : keplergl.keplergl.KeplerGl
+        keplergl提供的可视化
+    '''
+    lon,lat,count = col
+    bounds = [data[lon].min(),data[lat].min(),data[lon].max(),data[lat].max()]
+    lon_center,lat_center = data[lon].mean(),data[lat].mean()
+    if zoom == 'auto':
+        lon_min,lon_max = data[lon].quantile(0.05),data[lon].quantile(0.95)
+        zoom = 8.5-np.log(lon_max-lon_min)/np.log(2)
+    params = grid_params(bounds,accuracy = accuracy)
+    data['LONCOL'],data['LATCOL']= GPS_to_grids(data[lon],data[lat],params)
+    data = data.groupby(['LONCOL','LATCOL'])[count].sum().reset_index()
+    data['geometry'] = gridid_to_polygon(data['LONCOL'],data['LATCOL'],params)
+    data = gpd.GeoDataFrame(data)
+    try:
+        from keplergl import KeplerGl
+    except:
+        raise Exception('请安装keplergl，在终端或命令提示符中运行pip install keplergl，然后重启Python') 
+
+    vmap = KeplerGl(config = {'version': 'v1',
+     'config': {'visState': {'filters': [],
+       'layers': [{'id': 'w8t3xv',
+         'type': 'geojson',
+         'config': {'dataId': 'CO',
+          'label': 'CO',
+          'color': [136, 87, 44],
+          'highlightColor': [252, 242, 26, 255],
+          'columns': {'geojson': 'geometry'},
+          'isVisible': True,
+          'visConfig': {'opacity': 0.8,
+           'strokeOpacity': 0.8,
+           'thickness': 0.5,
+           'strokeColor': [255, 153, 31],
+           'colorRange': {'name': 'Global Warming 8',
+            'type': 'sequential',
+            'category': 'Uber',
+            'colors': ['#4C0035',
+             '#650031',
+             '#7F0023',
+             '#98000A',
+             '#B21800',
+             '#CB4600',
+             '#E57F00',
+             '#FFC300']},
+           'strokeColorRange': {'name': 'Global Warming',
+            'type': 'sequential',
+            'category': 'Uber',
+            'colors': ['#5A1846',
+             '#900C3F',
+             '#C70039',
+             '#E3611C',
+             '#F1920E',
+             '#FFC300']},
+           'radius': 10,
+           'sizeRange': [0, 10],
+           'radiusRange': [0, 50],
+           'heightRange': [0, 500],
+           'elevationScale': 5,
+           'enableElevationZoomFactor': True,
+           'stroked': False,
+           'filled': True,
+           'enable3d': False,
+           'wireframe': False},
+          'hidden': False,
+          'textLabel': [{'field': None,
+            'color': [255, 255, 255],
+            'size': 18,
+            'offset': [0, 0],
+            'anchor': 'start',
+            'alignment': 'center'}]},
+         'visualChannels': {'colorField': {'name': count, 'type': 'real'},
+          'colorScale': 'quantile',
+          'strokeColorField': None,
+          'strokeColorScale': 'quantile',
+          'sizeField': None,
+          'sizeScale': 'linear',
+          'heightField': None,
+          'heightScale': 'linear',
+          'radiusField': None,
+          'radiusScale': 'linear'}}],
+       'layerBlending': 'normal',
+       'splitMaps': [],
+       'animationConfig': {'currentTime': None, 'speed': 1}},
+      'mapState': {'bearing': 0,
+       'dragRotate': False,
+       'latitude': 43.827208861183514,
+       'longitude': 87.55024378535197,
+       'pitch': 0,
+       'zoom': 10,
+       'isSplit': False}}},
+    data = {count:data},height=height)
+    return vmap
