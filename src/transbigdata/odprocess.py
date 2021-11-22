@@ -6,18 +6,36 @@ import math
 import numpy as np
 def odagg_grid(oddata,params,col = ['slon','slat','elon','elat'],arrow = False,**kwargs):
     '''
-    输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame
-    oddata - OD数据
-    col - 起终点列名
-    params - 栅格化参数
-    arrow - 生成的OD地理线型是否包含箭头
+    OD集计与地理信息生成（栅格）。输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame
+
+    输入
+    -------
+    oddata : DataFrame
+        OD数据
+    col : List
+        起终点列名,['slon','slat','elon','elat']，此时每一列权重为1。
+        也可以传入权重列，如['slon','slat','elon','elat','count']
+    params : List
+        栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+    arrow : bool
+        生成的OD地理线型是否包含箭头
+
+    输出
+    -------
+    oddata1 : GeoDataFrame
+        集计后生成OD的GeoDataFrame
     '''
     #将起终点栅格化
-    [slon,slat,elon,elat]=col
+    if len(col)==4:
+        [slon,slat,elon,elat]=col
+        count = 'count'
+    if len(col)==5:
+        [slon,slat,elon,elat,count]=col
     oddata['SLONCOL'],oddata['SLATCOL'] = GPS_to_grids(oddata[slon],oddata[slat],params)
     oddata['ELONCOL'],oddata['ELATCOL'] = GPS_to_grids(oddata[elon],oddata[elat],params)
-    oddata['count'] = 1
-    oddata_agg = oddata.groupby(['SLONCOL','SLATCOL','ELONCOL','ELATCOL'])['count'].count().reset_index()
+    if len(col)==4:
+        oddata[count] = 1
+    oddata_agg = oddata.groupby(['SLONCOL','SLATCOL','ELONCOL','ELATCOL'])[count].sum().reset_index()
     #生成起终点栅格中心点位置
     oddata_agg['SHBLON'],oddata_agg['SHBLAT'] = grids_centre(oddata_agg['SLONCOL'],oddata_agg['SLATCOL'],params)
     oddata_agg['EHBLON'],oddata_agg['EHBLAT'] = grids_centre(oddata_agg['ELONCOL'],oddata_agg['ELATCOL'],params)
@@ -29,21 +47,40 @@ def odagg_grid(oddata,params,col = ['slon','slat','elon','elat'],arrow = False,*
         oddata_agg['geometry'] = oddata_agg.apply(lambda r:LineString([[r['SHBLON'],r['SHBLAT']],[r['EHBLON'],r['EHBLAT']]]),axis = 1)    
     #转换为GeoDataFrame  
     oddata_agg = gpd.GeoDataFrame(oddata_agg)    
-    oddata_agg = oddata_agg.sort_values(by = 'count')
+    oddata_agg = oddata_agg.sort_values(by = count)
     return oddata_agg
 
 def odagg_shape(oddata,shape,col = ['slon','slat','elon','elat'],params = None,round_accuracy = 6,arrow = False,**kwargs):
     '''
-    输入OD数据（每一行数据是一个出行）与shape数据，OD集计到小区，生成OD的GeoDataFrame
-    oddata - OD数据
-    shape - 集计小区的GeoDataFrame
-    col - 起终点列名
-    params - 栅格化参数，如果传入，则先栅格化后以栅格中心点匹配小区，如果不传入，则直接以经纬度匹配。在数据量大时，用栅格化进行匹配速度会极大提升
-    round_accuracy - 集计时经纬度取小数位数
-    arrow - 生成的OD地理线型是否包含箭头
+    OD集计与地理信息生成（小区集计）。输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame
+
+    输入
+    -------
+    oddata : DataFrame
+        OD数据
+    shape : GeoDataFrame
+        集计小区的GeoDataFrame
+    col : List
+        起终点列名,['slon','slat','elon','elat']，此时每一列权重为1。
+        也可以传入权重列，如['slon','slat','elon','elat','count']
+    params : List
+        栅格化参数，如果传入，则先栅格化后以栅格中心点匹配小区，如果不传入，则直接以经纬度匹配。在数据量大时，用栅格化进行匹配速度会极大提升
+    round_accuracy : number
+        集计时经纬度取小数位数
+    arrow : bool
+        生成的OD地理线型是否包含箭头
+
+    输出
+    -------
+    oddata1 : GeoDataFrame
+        集计后生成OD的GeoDataFrame
     '''
     #将起终点栅格化
-    [slon,slat,elon,elat]=col
+    if len(col)==4:
+        [slon,slat,elon,elat]=col
+        count = 'count'
+    if len(col)==5:
+        [slon,slat,elon,elat,count]=col
     shape_1 = shape.copy()
     #提取shape数据的中心点
     shape['x'] = shape.centroid.x
@@ -52,8 +89,9 @@ def odagg_shape(oddata,shape,col = ['slon','slat','elon','elat'],params = None,r
     if params:
         oddata['SLONCOL'],oddata['SLATCOL'] = GPS_to_grids(oddata[slon],oddata[slat],params)
         oddata['ELONCOL'],oddata['ELATCOL'] = GPS_to_grids(oddata[elon],oddata[elat],params)
-        oddata['count'] = 1
-        oddata_agg = oddata.groupby(['SLONCOL','SLATCOL','ELONCOL','ELATCOL'])['count'].count().reset_index()
+        if len(col)==4:
+            oddata[count] = 1
+        oddata_agg = oddata.groupby(['SLONCOL','SLATCOL','ELONCOL','ELATCOL'])[count].sum().reset_index()
         #生成起终点栅格中心点位置
         oddata_agg['SHBLON'],oddata_agg['SHBLAT'] = grids_centre(oddata_agg['SLONCOL'],oddata_agg['SLATCOL'],params)
         oddata_agg['EHBLON'],oddata_agg['EHBLAT'] = grids_centre(oddata_agg['ELONCOL'],oddata_agg['ELATCOL'],params)
@@ -80,7 +118,7 @@ def odagg_shape(oddata,shape,col = ['slon','slat','elon','elat'],params = None,r
         oddata_agg = pd.merge(oddata_agg,c)
         #集计
 
-        oddata_agg = oddata_agg.groupby(['sindex','sx','sy','eindex','ex','ey'])['count'].sum().reset_index()
+        oddata_agg = oddata_agg.groupby(['sindex','sx','sy','eindex','ex','ey'])[count].sum().reset_index()
     else:
         #提取OD数据的坐标点去重
         a = oddata[[slon,slat]]
@@ -105,8 +143,9 @@ def odagg_shape(oddata,shape,col = ['slon','slat','elon','elat'],params = None,r
         c.columns = ['elon','elat','eindex','ex','ey']
         oddata = pd.merge(oddata,c)
         #集计
-        oddata['count'] = 1
-        oddata_agg = oddata.groupby(['sindex','sx','sy','eindex','ex','ey'])['count'].count().reset_index()
+        if len(col)==4:
+            oddata[count] = 1
+        oddata_agg = oddata.groupby(['sindex','sx','sy','eindex','ex','ey'])[count].sum().reset_index()
     from shapely.geometry import LineString    
     #遍历生成OD的LineString对象，并赋值给geometry列  
     if arrow:
@@ -116,10 +155,10 @@ def odagg_shape(oddata,shape,col = ['slon','slat','elon','elat'],params = None,r
     #转换为GeoDataFrame  
     oddata_agg = gpd.GeoDataFrame(oddata_agg)    
     #匹配shape
-    oddata_agg = oddata_agg[['sindex','eindex','count','geometry']]
+    oddata_agg = oddata_agg[['sindex','eindex',count,'geometry']]
     oddata_agg = pd.merge(oddata_agg,shape_1.reset_index().rename(columns = {'index':'sindex'}).drop('geometry',axis = 1),on = 'sindex')
     oddata_agg = pd.merge(oddata_agg,shape_1.reset_index().rename(columns = {'index':'eindex'}).drop('geometry',axis = 1),on = 'eindex')
-    oddata_agg = oddata_agg.sort_values(by = 'count')
+    oddata_agg = oddata_agg.sort_values(by = count)
     return oddata_agg
 
 

@@ -43,7 +43,8 @@ OD集计与地理信息生成（栅格）。输入OD数据（每一行数据是�
 oddata : DataFrame 
     OD数据
 col : List
-    起终点列名，['slon','slat','elon','elat']
+    起终点列名,['slon','slat','elon','elat']，此时每一列权重为1。
+    也可以传入权重列，如['slon','slat','elon','elat','count']
 params : List
     栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
 arrow : bool
@@ -65,7 +66,8 @@ oddata : DataFrame
 shape : GeoDataFrame
     集计小区的GeoDataFrame
 col : List   
-    起终点列名,['slon','slat','elon','elat']
+    起终点列名,['slon','slat','elon','elat']，此时每一列权重为1。
+    也可以传入权重列，如['slon','slat','elon','elat','count']
 params : List 
     栅格化参数，如果传入，则先栅格化后以栅格中心点匹配小区，如果不传入，则直接以经纬度匹配。在数据量大时，用栅格化进行匹配速度会极大提升
 round_accuracy : number
