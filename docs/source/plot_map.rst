@@ -12,7 +12,7 @@
 
     import transbigdata as tbd
     #用下面代码设置你的mapboxtoken
-    tbd.set_mapboxtoken('pk.eyxxxxxxxxxx.xxxxxxxxx')
+    tbd.set_mapboxtoken('pk.eyxxxxxxxxxx.xxxxxxxxx')#必须在里面设置你申请的token，直接复制此行代码无效！
 
 另外还需要设置一个地图底图的存储位置，下一次显示同一个位置时，地图会从本地读取加载。
 
