@@ -454,7 +454,7 @@ TransBigData包也提供了将OD直接集计到小区的方法
 基于matplotlib的地图绘制
 ------------------------------
 
-tbd中提供了地图底图加载和比例尺指北针的功能。使用plot_map方法添加地图底图，plotscale添加比例尺和指北针:
+tbd中提供了地图底图加载和比例尺指北针的功能。使用这个方法之前首先需要设置mapboxtoken和底图存放位置，详情看：\ `这个链接 <https://transbigdata.readthedocs.io/zh_CN/latest/plot_map.html>`__\ 。plot_map方法添加地图底图，plotscale添加比例尺和指北针:
 
 ::
 
