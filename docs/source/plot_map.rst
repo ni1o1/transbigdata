@@ -14,13 +14,17 @@
     #用下面代码设置你的mapboxtoken
     tbd.set_mapboxtoken('pk.eyxxxxxxxxxx.xxxxxxxxx')
 
-另外还需要设置一个地图底图的存储位置，下一次显示同一个位置时，地图会从本地读取加载：
+另外还需要设置一个地图底图的存储位置，下一次显示同一个位置时，地图会从本地读取加载。
 
 ::
 
-    #设置你的地图底图存储路径，注意最后有一个反斜杠
+    #设置你的地图底图存储路径
+    #如果你是linux或者mac系统，路径是这么写，注意最后有一个反斜杠
     tbd.set_imgsavepath(r'/Users/xxxx/xxxx/')
+    #如果是windows系统，路径这么写，最后注意要两个斜杠以防转义
+    tbd.set_imgsavepath(r'E:\pythonscript\xxx\\')
 
+设置好后，下次绘制底图时，会在你设置的路径下创建一个tileimg文件夹，底图都放在里面
 尝试一下下面的代码，看看能否成功绘制底图
 
 ::
