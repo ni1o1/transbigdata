@@ -5,10 +5,50 @@
 地图底图
 ***************
 
+| TransBigData包提供了在matplotlib上绘制地图底图的功能，底图由mapbox提供，坐标系为WGS84。如果你要使用该功能，首先需要点击\ `这个链接 <https://account.mapbox.com/auth/signin/?route-to=%22https://account.mapbox.com/%22>`__\ 注册一个mapbox的账号，mapbox上注册成为开发者，并获取到一个mapbox token。 `这个链接 <https://docs.mapbox.com/help/getting-started/access-tokens/#how-access-tokens-work>`__\ 介绍了mapbox token的作用。
+| 如果你已经得到了mapbox token，可以用以下代码为TransBigData设置mapbox token(只需要设置一次，后面重新打开python也不需要再重新设置了)：
+
+::
+
+    import transbigdata as tbd
+    #用下面代码设置你的mapboxtoken
+    tbd.set_mapboxtoken('pk.eyxxxxxxxxxx.xxxxxxxxx')
+
+另外还需要设置一个地图底图的存储位置，下一次显示同一个位置时，地图会从本地读取加载：
+
+::
+
+    #设置你的地图底图存储路径，注意最后有一个反斜杠
+    tbd.set_imgsavepath(r'/Users/xxxx/xxxx/')
+
+尝试一下下面的代码，看看能否成功绘制底图
+
+::
+
+    #定义显示范围范围
+    bounds = [113.6,22.4,114.8,22.9]
+    #创建图框
+    import matplotlib.pyplot as plt
+    fig =plt.figure(1,(8,8),dpi=250)
+    ax =plt.subplot(111)
+    plt.sca(ax)
+    #添加地图底图
+    tbd.plot_map(plt,bounds,zoom = 11,style = 4)
+    #添加比例尺和指北针
+    tbd.plotscale(ax,bounds = bounds,textsize = 10,compasssize = 1,accuracy = 2000,rect = [0.06,0.03],zorder = 10)
+    plt.axis('off')
+    plt.xlim(bounds[0],bounds[2])
+    plt.ylim(bounds[1],bounds[3])
+    plt.show()
+
+.. image:: plot_map/output_6_0.png
+
+
+
 地图底图加载
 =============================
 
-.. function:: transbigdata.plot_map(plt,bounds,zoom,style=4,imgsavepath = r'/Users/yuqing/Nutstore Files/我的坚果云/python_new/',printlog = False,apikey = '',access_token = '',styleid = 'dark')
+.. function:: transbigdata.plot_map(plt,bounds,zoom,style=4,printlog = False,styleid = 'dark')
 
 添加地图底图
 
@@ -20,8 +60,6 @@ zoom : number
     底图的放大等级，越大越精细，加载的时间也就越久，一般单个城市大小的范围，这个参数选取12到16之间 
 style : number
     地图底图的样式，可选1-5，或'light','dark'，style为4时为light，style为5时为dark      
-imgsavepath : str
-    瓦片地图储存路径，设置路径后，会把地图下载到本地的文件夹下，使用时也会优先搜索是否有已经下载的瓦片，默认的存放路径是...小旭学长自己电脑的路径！
 printlog : bool
     是否显示日志                                                
 

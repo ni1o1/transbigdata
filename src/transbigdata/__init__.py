@@ -1,5 +1,5 @@
 
-from plot_map import plot_map,plotscale
+from plot_map import plot_map,plotscale,set_mapboxtoken,set_imgsavepath
 from .grids import *
 from .grids_geohash import geohash_encode,geohash_decode,geohash_togrid
 from .gisprocess import *
@@ -13,4 +13,4 @@ from .busgps import *
 from .getbusdata import *
 from .visualizion import *
 from CoordinatesConverter import *
-__version__ = '0.1.28'
+__version__ = '0.1.29'
