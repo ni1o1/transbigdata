@@ -5,6 +5,9 @@
 地图底图
 ***************
 
+使用前的设置
+=============================
+
 | TransBigData包提供了在matplotlib上绘制地图底图的功能，底图由mapbox提供，坐标系为WGS84。如果你要使用该功能，首先需要点击\ `这个链接 <https://account.mapbox.com/auth/signin/?route-to=%22https://account.mapbox.com/%22>`__\ 注册一个mapbox的账号，mapbox上注册成为开发者，并获取到一个mapbox token。 `这个链接 <https://docs.mapbox.com/help/getting-started/access-tokens/#how-access-tokens-work>`__\ 介绍了mapbox token的作用。
 | 如果你已经得到了mapbox token，可以用以下代码为TransBigData设置mapbox token(只需要设置一次，后面重新打开python也不需要再重新设置了)：
 
@@ -51,6 +54,10 @@
 
 地图底图加载
 =============================
+
+TransBigData包的底图绘制功能由plot_map包提供。首先确保你的plot_map包在0.3.3版本以上::
+
+    pip install -U plot-map
 
 .. function:: transbigdata.plot_map(plt,bounds,zoom,style=4,printlog = False,styleid = 'dark')
 
@@ -126,6 +133,8 @@ style : number
 
 .. image:: plot_map/10.png
 
+用法
+----------------------------------------
 
 ::
 
