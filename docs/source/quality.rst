@@ -19,7 +19,9 @@ col : List
     列名，按[个体ID，时间]的顺序
 show_sample_duration : bool
     是否输出个体采样间隔信息
-
+roundnum : number
+    小数点取位数
+    
 使用方法
 
 ::

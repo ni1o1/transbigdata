@@ -32,7 +32,7 @@ def sample_duration(data,col = ['Vehicleid','Time']):
     sample_duration = data1[['duration']]
     return sample_duration
 
-def data_summary(data,col = ['Vehicleid','Time'],show_sample_duration = False):
+def data_summary(data,col = ['Vehicleid','Time'],show_sample_duration = False,roundnum = 4):
     '''
     输入数据，打印数据概况
     
@@ -44,6 +44,8 @@ def data_summary(data,col = ['Vehicleid','Time'],show_sample_duration = False):
         列名，按[个体ID，时间]的顺序
     show_sample_duration : bool
         是否输出个体采样间隔信息
+    roundnum : number
+        小数点取位数
     '''
     [Vehicleid,Time] = col
     print('数据量')
@@ -51,10 +53,10 @@ def data_summary(data,col = ['Vehicleid','Time'],show_sample_duration = False):
     print('数据总量 :',len(data),'条')
     Vehicleid_count = data[Vehicleid].value_counts()
     print('个体总量 :',len(Vehicleid_count),'个')
-    print('个体数据量均值 :',round(Vehicleid_count.mean(),2),'条')
-    print('个体数据量上四分位 :',round(Vehicleid_count.quantile(0.75),2),'条')
-    print('个体数据量中位数 :',round(Vehicleid_count.quantile(0.5),2),'条')
-    print('个体数据量下四分位 :',round(Vehicleid_count.quantile(0.25),2),'条')
+    print('个体数据量均值 :',round(Vehicleid_count.mean(),roundnum),'条')
+    print('个体数据量上四分位 :',round(Vehicleid_count.quantile(0.75),roundnum),'条')
+    print('个体数据量中位数 :',round(Vehicleid_count.quantile(0.5),roundnum),'条')
+    print('个体数据量下四分位 :',round(Vehicleid_count.quantile(0.25),roundnum),'条')
     print('')
     print('数据时间段')
     print('-----------------')
@@ -65,7 +67,7 @@ def data_summary(data,col = ['Vehicleid','Time'],show_sample_duration = False):
         sd = sample_duration(data, col=[Vehicleid, Time])
         print('个体采样间隔')
         print('-----------------')
-        print('均值 :',round(sd['duration'].mean(),2),'秒')
-        print('上四分位 :',round(sd['duration'].quantile(0.75),2),'秒')
-        print('中位数 :',sd['duration'].quantile(0.5),'秒')
-        print('下四分位 :',round(sd['duration'].quantile(0.25),2),'秒')
+        print('均值 :',round(sd['duration'].mean(),roundnum),'秒')
+        print('上四分位 :',round(sd['duration'].quantile(0.75),roundnum),'秒')
+        print('中位数 :',round(sd['duration'].quantile(0.5),roundnum),'秒')
+        print('下四分位 :',round(sd['duration'].quantile(0.25),roundnum),'秒')

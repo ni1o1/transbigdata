@@ -84,7 +84,7 @@ def visualization_trip(trajdata,col = ['Lng','Lat','ID','Time'],zoom = 'auto',he
                 "zoom": zoom,
             },
         }},
-    data = {'trajectory':traj},height=height)
+    data = {'trajectory':traj.to_json()},height=height)
     #激活KeplerGl对象到jupyter的窗口中
     return vmap
 
@@ -309,7 +309,7 @@ def visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',he
                 {}
             }
         }
-    },data = {'od':od_gdf},height=height)
+    },data = {'od':od_gdf.to_json()},height=height)
     return vmap
 
 def visualization_data(data,col =  ['lon','lat'],accuracy = 500,height = 500,maptype = 'point',zoom = 'auto'):
@@ -445,17 +445,17 @@ def visualization_data(data,col =  ['lon','lat'],accuracy = 500,height = 500,map
                         ],
                         'mapStyles':
                         {}
-                    }}},data = {'data':data},height=height)
+                    }}},data = {'data':data.to_json()},height=height)
     else:
         vmap = KeplerGl(config = {'version': 'v1',
          'config': {'visState': {'filters': [],
            'layers': [    {'id': 'ytak0zp',
      'type': 'geojson',
      'config': {'dataId': count,
-      'label': 'count',
-      'color': [34, 63, 154],
+      'label': count,
+      'color': [77, 193, 156],
       'highlightColor': [252, 242, 26, 255],
-      'columns': {'geojson': 'geometry'},
+      'columns': {'geojson': '_geojson'},
       'isVisible': True,
       'visConfig': {'opacity': 0.8,
        'strokeOpacity': 0.8,
@@ -516,7 +516,7 @@ def visualization_data(data,col =  ['lon','lat'],accuracy = 500,height = 500,map
            'pitch': 0,
            'zoom': 10,
            'isSplit': False}}},
-        data = {count:data},height=height)
+        data = {count:data.to_json()},height=height)
         
     
     return vmap
