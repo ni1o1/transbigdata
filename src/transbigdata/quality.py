@@ -22,8 +22,8 @@ def sample_duration(data,col = ['Vehicleid','Time']):
         一列的数据表，列名为duration，内容是数据的采样间隔，单位秒
     '''
     [Vehicleid,Time] = col
-    data[Time] = pd.to_datetime(data[Time])
     data1 = data.copy()
+    data1[Time] = pd.to_datetime(data1[Time])
     data1 = data1.sort_values(by = [Vehicleid,Time])
     data1[Vehicleid+'1'] = data1[Vehicleid].shift(-1)
     data1[Time+'1'] = data1[Time].shift(-1)

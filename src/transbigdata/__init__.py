@@ -13,4 +13,4 @@ from .busgps import *
 from .getbusdata import *
 from .visualizion import *
 from CoordinatesConverter import *
-__version__ = '0.2.1'
+__version__ = '0.2.2'
