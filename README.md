@@ -55,7 +55,7 @@ Aggregate OD into grids:
     bounds = [113.6,22.4,114.8,22.9]
     #Input the bounds for the study area and generates the rasterization parameters
     params = tbd.grid_params(bounds = bounds,accuracy = 1500)
-    #Rasterized OD and aggregate them into grids
+    #Rasterized OD and aggregate them into grids, this function will also generates a GeoDataFrame of the OD, which contains the counts of the aggregation.
     od_gdf = tbd.odagg_grid(oddata,params)
     od_gdf.plot(column = 'count')
 
