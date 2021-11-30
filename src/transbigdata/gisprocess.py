@@ -6,7 +6,7 @@ from scipy.spatial import cKDTree
 import itertools
 from operator import itemgetter
 import geopandas as gpd
-
+import math
 #定义函数，用cKDTree匹配点与点
 #定义KDTree的函数
 def ckdnearest(dfA_origin,dfB_origin,Aname = ['lon','lat'],Bname = ['lon','lat']):
@@ -218,3 +218,79 @@ def polyon_exterior(data,minarea = 0):
     data1['geometry'] = data1['geometry'].apply(lambda r:polyexterior(r))
     data1 = data1[-data1['geometry'].is_empty]
     return data1
+
+#置信椭圆
+
+#置信椭圆的绘制函数
+def ellipse_params(data,col = ['lon','lat'],confidence = 95,epsg = None):
+    '''
+    输入点数据，获取置信椭圆的参数
+    
+    输入
+    -------
+    data : DataFrame
+        公交GPS数据，单一公交线路，且需要含有车辆ID、GPS时间、经纬度（wgs84）
+    confidence : number
+        置信度，可选99，95，90
+    epsg : number
+        如果给了，则将原始坐标从wgs84，转换至给定epsg坐标系下进行置信椭圆参数估计
+    col: List
+        以[经度，纬度]形式存储的列名
+    
+    输出
+    -------
+    params: List
+        质心椭圆参数，分别为[pos,width,height,theta,area,alpha]
+        对应[中心点坐标，短轴，长轴，角度，面积，方向性]
+    '''
+    lon,lat = col
+    if confidence==99:
+        #99%置信椭圆
+        nstd = 9.210**0.5
+    if confidence==95:
+        #95%置信椭圆
+        nstd = 5.991**0.5
+    if confidence==90:
+        #90%置信椭圆
+        nstd = 4.605**0.5
+    points = data.copy()
+    points = gpd.GeoDataFrame(points)
+    points['geometry'] = gpd.points_from_xy(points[lon],points[lat])
+    if epsg:
+        points.crs = {'init':'epsg:4326'}
+        points = points.to_crs(epsg = epsg)
+    #转换坐标为np.array
+    point_np = np.array([points.geometry.x,points.geometry.y]).T
+    #均值，椭圆中心点
+    pos = point_np.mean(axis = 0)
+    #协方差
+    cov = np.cov(point_np, rowvar=False)
+    #协方差的特征向量方向是置信椭圆的长短轴方向，特征值的大小决定了这个特征向量是长轴还是短轴
+    vals, vecs = np.linalg.eigh(cov)
+    order = vals.argsort()[::-1]
+    #置信椭圆的方位角,arctan2(x,y)返回的是原点至点(x,y)的方位角
+    theta = np.degrees(np.arctan2(*vecs[:,0][::-1]))
+    #长轴短轴的长度
+    width, height = 2 * nstd * np.sqrt(vals)
+    area = width/2*height/2*math.pi
+    alpha = (height-width)/height
+    
+    ellip_params = [pos,width,height,theta,area,alpha]
+    return ellip_params
+
+def ellipse_plot(ellip_params,ax,**kwargs):
+    '''
+    输入置信椭圆的参数，绘制置信椭圆
+    
+    输入
+    -------
+    ellip_params : List
+        
+    ax : matplotlib.axes._subplots.AxesSubplot
+        画板
+    '''
+    [pos,width,height,theta,area,alpha] = ellip_params
+    #添加椭圆元素
+    from matplotlib.patches import Ellipse
+    ellip = Ellipse(xy = pos,width = width,height=height,angle = theta,linestyle = '-',**kwargs)
+    ax.add_artist(ellip)
