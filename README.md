@@ -9,7 +9,7 @@ English [中文版](README-zh_CN.md)
 
 **Main Functions**
 
-TransBigData is a Python package developed for spatio-temporal big data processing and relies on GeoPandas. TransBigData provides fast and concise methods for processing common traffic spatio-temporal big data such as Taxi GPS data, bicycle sharing data and bus GPS data. It includes general methods such as rasterization, data quality analysis, data pre-processing, data set counting, trajectory analysis, GIS processing, map base map loading, coordinate and distance calculation, and data visualization.
+TransBigData is a Python package developed for spatio-temporal big data processing. TransBigData provides fast and concise methods for processing common traffic spatio-temporal big data such as Taxi GPS data, bicycle sharing data and bus GPS data. It includes general methods such as rasterization, data quality analysis, data pre-processing, data set counting, trajectory analysis, GIS processing, map base map loading, coordinate and distance calculation, and data visualization.
 
 **Technical Features**
 
@@ -30,11 +30,10 @@ If you already have geopandas installed, run the following code directly from th
 
 ## Usage
 
-The following example shows how to use the TransBigData to quickly extract trip OD from cab GPS data:
+The following example shows how to use the TransBigData to quickly extract trip OD from taxi GPS data:
 
-    #导入TransBigData包
     import transbigdata as tbd
-    #读取数据    
+    #Read the data    
     import pandas as pd
     data = pd.read_csv('TaxiData-Sample.csv',header = None) 
     data.columns = ['VehicleNum','time','slon','slat','OpenStatus','Speed'] 
@@ -44,7 +43,7 @@ The following example shows how to use the TransBigData to quickly extract trip 
 
 Use the tbd.taxigps_to_od method and pass in the corresponding column name to extract the trip OD:
 
-    #从GPS数据提取OD
+    #Extract OD information from GPS
     oddata = tbd.taxigps_to_od(data,col = ['VehicleNum','time','slon','slat','OpenStatus'])
     oddata
 
@@ -52,11 +51,11 @@ Use the tbd.taxigps_to_od method and pass in the corresponding column name to ex
 
 Aggregate OD into grids:
 
-    #定义研究范围
+    #Defining study area
     bounds = [113.6,22.4,114.8,22.9]
-    #输入研究范围边界bounds与栅格宽度accuracy，获取栅格化参数
+    #Input the bounds for the study area and generates the rasterization parameters
     params = tbd.grid_params(bounds = bounds,accuracy = 1500)
-    #栅格化OD并集计
+    #Rasterized OD and aggregate them into grids
     od_gdf = tbd.odagg_grid(oddata,params)
     od_gdf.plot(column = 'count')
 
