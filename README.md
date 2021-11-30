@@ -13,7 +13,7 @@ TransBigData is a Python package developed for transportation spatio-temporal bi
 
 **Technical Features**
 
-* Provides different processing methods for different stages of traffic spatio-temporal big data analysis.
+* Provide a variety of processing methods for each stage of transportation spatio-temporal big data analysis.
 * The code with TransBigData is clean, efficient, flexible, and easy to use, allowing complex data tasks to be achieved with concise code.
 
 
