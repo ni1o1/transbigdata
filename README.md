@@ -30,7 +30,7 @@ If you already have geopandas installed, run the following code directly from th
 
 ## Usage
 
-The following example shows how to use the TransBigData to quickly extract trip OD from taxi GPS data:
+The following example shows how to use the TransBigData to extract Origin-Destination(OD) information of taxi trips from taxi GPS data:
 
     import transbigdata as tbd
     #Read the data    
