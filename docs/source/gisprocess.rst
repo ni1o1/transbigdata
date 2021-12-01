@@ -175,7 +175,7 @@ gdf : DataFrame
 
 .. function:: transbigdata.ckdnearest_point(gdA, gdB)
 
-输入两个GeoDataFrame，gdfA、gdfB均为点，该方法会为gdfA表连接上gdfB中最近的点，并添加距离字段dsit
+输入两个GeoDataFrame，gdfA、gdfB均为点，该方法会为gdfA表连接上gdfB中最近的点，并添加距离字段dist
 
 **输入**
 
@@ -332,7 +332,7 @@ gdf : GeoDataFrame
 
 .. function:: transbigdata.ckdnearest_line(gdfA, gdfB)
 
-输入两个GeoDataFrame，其中gdfA为点，gdfB为线，该方法会为gdfA表连接上gdfB中最近的线，并添加距离字段dsit
+输入两个GeoDataFrame，其中gdfA为点，gdfB为线，该方法会为gdfA表连接上gdfB中最近的线，并添加距离字段dist
 
 **输入**
 

@@ -33,7 +33,8 @@ TransBigData简介
 
     pip install -U transbigdata
 
-下面例子展示如何使用TransBigData工具快速地从出租车GPS数据中提取出行OD::
+下面例子展示如何使用TransBigData工具快速地从出租车GPS数据中提取出行OD
+::
 
     #导入TransBigData包
     import transbigdata as tbd
@@ -46,7 +47,9 @@ TransBigData简介
 .. image:: _static/WX20211021-192131@2x.png
    :height: 300
 
-使用tbd.taxigps_to_od方法，传入对应的列名，即可提取出行OD::
+
+使用*tbd.taxigps_to_od*方法，传入对应的列名，即可提取出行OD
+::
 
     #从GPS数据提取OD
     oddata = tbd.taxigps_to_od(data,col = ['VehicleNum','time','slon','slat','OpenStatus'])
