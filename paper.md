@@ -3,13 +3,19 @@ title: 'TransBigData: A Python package for transportation spatio-temporal big da
 tags:
   - Python
   - transportation
-  - spatio-temporal big data
-  - data processing
+  - spatio-temporal data
+  - geospatial
+  - GIS
+  - data quality analysis
+  - data pre-processing
   - data visualization
+  - taxi GPS data
+  - bus GPS data
+  - bike sharing data
 authors:
-  - name: Qing Yu^[first author] # note this makes a footnote saying 'co-first author'
+  - name: Qing Yu
     orcid: 0000-0003-2513-2969
-    affiliation: 1 # (Multiple affiliations must be quoted)
+    affiliation: 1
   - name: Jian Yuan^[corresponding author]
     orcid: 0000-0002-7202-0946
     affiliation: 1
@@ -23,6 +29,21 @@ bibliography: paper.bib
 
 # Summary
 
+背景
+
+tbd简介
+`TransBigData` is a Python package developed for transportation spatio-temporal big data processing and analysis. `TransBigData` provides fast and concise methods for processing common traffic spatio-temporal big data such as Taxi GPS data, bicycle sharing data and bus GPS data. It includes general methods such as rasterization, data quality analysis, data pre-processing, data set counting, trajectory analysis, GIS processing, map base map loading, coordinate and distance calculation, and data visualization.
+
+tbd主要分为几个模块，可视化示例 and many more. Its
+built-in visualization capabilities leverage matplotlib to easily plot routes (Figure 1),
+
+
+The latest stable release of the software can be installed via pip and full documentation
+can be found at https://transbigdata.readthedocs.io/en/latest/.
+
+
+
+
 The forces on stars, galaxies, and dark matter under external gravitational
 fields lead to the dynamical evolution of structures in the universe. The orbits
 of these bodies are therefore key to understanding the formation, history, and
@@ -33,11 +54,6 @@ Aside from toy problems and demonstrations, the majority of problems require
 efficient numerical tools, many of which require the same base code (e.g., for
 performing numerical orbit integration).
 
-
-
-
-
-# Statement of need
 
 `Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
 enables wrapping low-level languages (e.g., C) for speed without losing
@@ -50,7 +66,7 @@ interfaces well with the implementations of physical units and astronomical
 coordinate systems in the `Astropy` package [@astropy] (`astropy.units` and
 `astropy.coordinates`).
 
-`TransBigData` is a Python package developed for transportation spatio-temporal big data processing and analysis. `TransBigData` provides fast and concise methods for processing common traffic spatio-temporal big data such as Taxi GPS data, bicycle sharing data and bus GPS data. It includes general methods such as rasterization, data quality analysis, data pre-processing, data set counting, trajectory analysis, GIS processing, map base map loading, coordinate and distance calculation, and data visualization.
+
 
 `Gala` was designed to be used by both astronomical researchers and by
 students in courses on gravitational dynamics or astronomy. It has already been
@@ -61,22 +77,8 @@ design, and support for Astropy functionality in `Gala` will enable exciting
 scientific explorations of forthcoming data releases from the *Gaia* mission
 [@gaia] by students and experts alike.
 
-# Mathematics
 
-Single dollars ($) are required for inline mathematics e.g. $f(x) = e^{\pi/x}$
 
-Double dollars make self-standing equations:
-
-$$\Theta(x) = \left\{\begin{array}{l}
-0\textrm{ if } x < 0\cr
-1\textrm{ else}
-\end{array}\right.$$
-
-You can also use plain \LaTeX for equations
-\begin{equation}\label{eq:fourier}
-\hat f(\omega) = \int_{-\infty}^{\infty} f(x) e^{i\omega x} dx
-\end{equation}
-and refer to \autoref{eq:fourier} from text.
 
 # Citations
 
@@ -101,9 +103,5 @@ and referenced from text using \autoref{fig:example}.
 Figure sizes can be customized by adding an optional second parameter:
 ![Caption for example figure.](figure.png){ width=20% }
 
-# Acknowledgements
-
-We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
-Oh, and support from Kathryn Johnston during the genesis of this project.
 
 # References

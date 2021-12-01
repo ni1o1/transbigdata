@@ -84,7 +84,7 @@ def visualization_trip(trajdata,col = ['Lng','Lat','ID','Time'],zoom = 'auto',he
                 "zoom": zoom,
             },
         }},
-    data = {'trajectory':traj.to_json()},height=height)
+    data = {'trajectory':traj},height=height)
     #激活KeplerGl对象到jupyter的窗口中
     return vmap
 
