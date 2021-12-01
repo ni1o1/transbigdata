@@ -13,7 +13,7 @@ TransBigData is a Python package developed for transportation spatio-temporal bi
 
 **Technical Features**
 
-* Provides different processing methods for different stages of traffic spatio-temporal big data analysis.
+* Provide a variety of processing methods for each stage of transportation spatio-temporal big data analysis.
 * The code with TransBigData is clean, efficient, flexible, and easy to use, allowing complex data tasks to be achieved with concise code.
 
 
@@ -30,7 +30,7 @@ If you already have geopandas installed, run the following code directly from th
 
 ## Usage
 
-The following example shows how to use the TransBigData to quickly extract trip OD from taxi GPS data:
+The following example shows how to use the TransBigData to extract Origin-Destination(OD) information of taxi trips from taxi GPS data:
 
     import transbigdata as tbd
     #Read the data    
@@ -55,7 +55,7 @@ Aggregate OD into grids:
     bounds = [113.6,22.4,114.8,22.9]
     #Input the bounds for the study area and generates the rasterization parameters
     params = tbd.grid_params(bounds = bounds,accuracy = 1500)
-    #Rasterized OD and aggregate them into grids
+    #Rasterized OD and aggregate them into grids, this function will also generates a GeoDataFrame of the OD, which contains the counts of the aggregation.
     od_gdf = tbd.odagg_grid(oddata,params)
     od_gdf.plot(column = 'count')
 
