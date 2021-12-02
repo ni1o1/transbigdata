@@ -7,9 +7,8 @@
 [![Documentation Status](https://readthedocs.org/projects/transbigdata/badge/?version=latest)](https://transbigdata.readthedocs.io/en/latest/?badge=latest) [![PyPI version](https://badge.fury.io/py/transbigdata.svg)](https://badge.fury.io/py/transbigdata) ![PyPI - Downloads](https://img.shields.io/pypi/dm/transbigdata) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ni1o1/transbigdata) [![bilibili](https://img.shields.io/badge/bilibili-%E5%90%8C%E6%B5%8E%E5%B0%8F%E6%97%AD%E5%AD%A6%E9%95%BF-green.svg)](https://space.bilibili.com/3051484)  
 
 
-**主要功能**
-
-TransBigData工具针对时空大数据处理而开发，依托于GeoPandas。TransBigData集成了交通时空大数据处理过程中常用的方法。包括栅格化、数据质量分析、数据预处理、数据集计、轨迹分析、GIS处理、地图底图加载、坐标与距离计算、数据可视化等通用方法。TransBigData也针对出租车GPS数据、共享单车数据、公交GPS数据等多种常见交通时空大数据提供了快速简洁的处理方法。
+`TransBigData`是一个为交通时空大数据处理、分析和可视化而开发的Python包。`TransBigData`为处理常见的交通时空大数据（如出租车GPS数据、共享单车数据和公交车GPS数据）提供了快速而简洁的方法。`TransBigData`为交通时空大数据分析的各个阶段提供了多种处理方法,代码简洁、高效、灵活、易用，可以用简洁的代码实现复杂的数据任务。
+对于一些特定类型的数据，`TransBigData`还提供了针对特定需求的工具，如从出租车GPS数据中提取出租车行程的起点和终点信息（OD），从公交车GPS数据中识别到离站信息。该包的最新稳定版本可以通过pip安装，完整的文档可以查看：[TransBigData的说明文档](https://transbigdata.readthedocs.io/zh_CN/latest/)
 
 **技术特点**
 
@@ -17,8 +16,16 @@ TransBigData工具针对时空大数据处理而开发，依托于GeoPandas。Tr
 * 代码简洁、高效、灵活、易用，通过简短的代码即可实现复杂的数据任务。
 
 
-更多细节请查看：[TransBigData的说明文档](https://transbigdata.readthedocs.io/)
+**主要功能**
+目前，TransBigData主要提供以下方法。
 
+* *数据质量分析*:提供快速获取数据集一般信息的方法，包括数据量、时间段和采样间隔。
+* *数据预处理*:提供清洗多种类型的数据错误的方法。
+* *数据栅格化*:提供在研究区域内生成多种类型的地理网格（矩形网格、六角形网格）的方法。提供快速算法将GPS数据映射到生成的网格上。
+* *数据聚合集计*:提供将GPS数据和OD数据聚合到地理多边形的方法。
+* *数据可视化*:内置的可视化功能，利用可视化包keplergl，用简单的代码在Jupyter笔记本上交互式地可视化数据。
+* *轨迹数据处理*:提供处理轨迹数据的方法，包括从GPS点生成轨迹线型，轨迹增密等。
+* *地图底图*:提供在matplotlib上显示Mapbox地图底图的方法。
 
 ## 安装
 
