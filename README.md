@@ -84,7 +84,7 @@ And if you want to reference this GitHub repository, you can use the following b
 
 ```
 @misc{transbigdata,
-  author = {Qing Yu},
+  author = {Yu, Qing and Yuan, Jian},
   title = {TransBigData},
   year = {2021},
   publisher = {GitHub},
