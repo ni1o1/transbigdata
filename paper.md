@@ -1,5 +1,5 @@
 ---
-title: 'TransBigData: A Python package for transportation spatio-temporal big data processing and analysis'
+title: 'TransBigData: A Python package for transportation spatio-temporal big data processing, analysis and visualization'
 tags:
   - Python
   - transportation
