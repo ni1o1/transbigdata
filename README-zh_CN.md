@@ -19,7 +19,7 @@
 
 **主要功能**
 
-目前，TransBigData主要提供以下方法。
+目前，`TransBigData`主要提供以下方法。
 
 * **数据质量分析**: 提供快速获取数据集一般信息的方法，包括数据量、时间段和采样间隔。
 * **数据预处理**: 提供清洗多种类型的数据错误的方法。
@@ -31,7 +31,7 @@
 
 ## 安装
 
-在安装TransBigData之前，请确保已经安装了可用的geopandas包：https://geopandas.org/index.html  
+在安装`TransBigData`之前，请确保已经安装了可用的geopandas包：https://geopandas.org/index.html  
 如果你已经安装了geopandas，则直接在命令提示符中运行下面代码即可安装
 
     pip install -U transbigdata
@@ -39,7 +39,7 @@
 
 ## 使用
 
-下面例子展示如何使用TransBigData工具快速地从出租车GPS数据中提取出行OD:
+下面例子展示如何使用`TransBigData`工具快速地从出租车GPS数据中提取出行OD:
 
     #导入TransBigData包
     import transbigdata as tbd
@@ -51,7 +51,7 @@
 
 <img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/WX20211021-192131@2x.png" style="height:300px">
 
-使用transbigdata.taxigps_to_od方法，传入对应的列名，即可提取出行OD:
+使用`transbigdata.taxigps_to_od`方法，传入对应的列名，即可提取出行OD:
 
     #从GPS数据提取OD
     oddata = tbd.taxigps_to_od(data,col = ['VehicleNum','time','slon','slat','OpenStatus'])
