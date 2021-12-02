@@ -49,9 +49,9 @@ The latest stable release of the software can be installed via pip and full docu
 can be found at https://transbigdata.readthedocs.io/en/latest/.
 
 
-![TransBigData generates rectangular grids and aggregate GPS data to the grids.\label{fig:fig1}](image/figure1.png){ width=20% }
+![TransBigData generates rectangular grids and aggregate GPS data to the grids.\label{fig:fig1}](images/figure1.png){ width=20% }
 
-![TransBigData visulizes taxi trips OD and display basemap on matplotlib figures.\label{fig:fig2}](image/figure2.png){ width=20% }
+![TransBigData visulizes taxi trips OD and display basemap on matplotlib figures.\label{fig:fig2}](images/figure2.png){ width=20% }
 
 # Citations
 
