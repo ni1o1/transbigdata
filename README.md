@@ -17,9 +17,21 @@ For some specific types of data, `TransBigData` also provides targeted tools for
 * Provide a variety of processing methods for each stage of transportation spatio-temporal big data analysis.
 * The code with TransBigData is clean, efficient, flexible, and easy to use, allowing complex data tasks to be achieved with concise code.
 
+Currently, `TransBigData` mainly provides the following methods:  
+*Data Quality*: Provides methods to quickly obtain the general information of the dataset, including the data amount the time period and the sampling interval.  
+*Data Preprocess*: Provides methods to clean multiple types of data error.   
+*Data Gridding*: Provides methods to generate multiple types of geographic grids (Rectangular grids, Hexagonal grids) in the research area. Provides fast algorithms to map GPS data to the generated grids (\autoref{fig:fig1}).   
+*Data Aggregating*: Provides methods to aggregate GPS data and OD data into geographic polygon.  
+*Data Visualization*: Built-in visualization capabilities leverage the visualization package keplergl to interactively visualize data on Jupyter notebook with simple code.  
+*Trajectory Processing*: Provides methods to process trajectory data, including generating trajectory linestring from GPS points, and trajectory densification, etc.  
+*Basemap Loading*: Provides methods to display Mapbox basemap on matplotlib figures (\autoref{fig:fig2})  
 
-For more details please see the [documentation](https://transbigdata.readthedocs.io/en/latest/)
+The latest stable release of the software can be installed via pip and full documentation
+can be found at https://transbigdata.readthedocs.io/en/latest/.
 
+![`TransBigData` generates rectangular grids and aggregate GPS data to the grids.\label{fig:fig1}](images/figure1.png){ width=80% }
+
+![`TransBigData` visulizes taxi trips OD and display basemap on matplotlib figures.\label{fig:fig2}](images/figure2.png){ width=100% }
 
 ## Installation
 
