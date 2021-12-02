@@ -14,7 +14,7 @@ can be found at https://transbigdata.readthedocs.io/en/latest/.
 **Technical Features**
 
 * Provide a variety of processing methods for each stage of transportation spatio-temporal big data analysis.
-* The code with TransBigData is clean, efficient, flexible, and easy to use, allowing complex data tasks to be achieved with concise code.
+* The code with `TransBigData` is clean, efficient, flexible, and easy to use, allowing complex data tasks to be achieved with concise code.
 
 **Main Functions**
 
@@ -31,14 +31,14 @@ Currently, `TransBigData` mainly provides the following methods:
 
 ## Installation
 
-Before installing TransBigData, make sure that you have installed the available geopandas package: https://geopandas.org/index.html
+Before installing `TransBigData`, make sure that you have installed the available geopandas package: https://geopandas.org/index.html
 If you already have geopandas installed, run the following code directly from the command prompt to install it
 
     pip install -U transbigdata
 
 ## Usage
 
-The following example shows how to use the TransBigData to extract Origin-Destination(OD) information of taxi trips from taxi GPS data:
+The following example shows how to use the `TransBigData` to extract Origin-Destination(OD) information of taxi trips from taxi GPS data:
 
     import transbigdata as tbd
     #Read the data    
@@ -49,7 +49,7 @@ The following example shows how to use the TransBigData to extract Origin-Destin
 
 <img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/WX20211021-192131@2x.png" style="height:300px">
 
-Use the tbd.taxigps_to_od method and pass in the corresponding column name to extract the trip OD:
+Use the `tbd.taxigps_to_od` method and pass in the corresponding column name to extract the trip OD:
 
     #Extract OD information from GPS
     oddata = tbd.taxigps_to_od(data,col = ['VehicleNum','time','slon','slat','OpenStatus'])
