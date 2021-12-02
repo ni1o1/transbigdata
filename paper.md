@@ -29,56 +29,29 @@ bibliography: paper.bib
 
 # Summary
 
-背景
+In recent years, data generated in transportation field has begun to explode. Individual continuous tracking data, such as mobile phone data, IC smart card data, taxi GPS data, bus GPS data and bicycle sharing order data, also known as "spatio-temporal big data" or "Track &Trace data", has great potential for application in data-driven transportation research. These spatio-temporal big data typically require three aspects of information: Who? When? Where? They are characterized by high data quality, large collection scope, and fine-grained spatio-temporal information, which can fully capture the daily activities of individuals and their travel behavior in the city in both time and space dimensions. The emergence of these data provides new ways and opportunities for potential transportation demand analysis and travel mechanism understanding in supporting urban transportation planning. 
 
-tbd简介
-`TransBigData` is a Python package developed for transportation spatio-temporal big data processing and analysis. `TransBigData` provides fast and concise methods for processing common traffic spatio-temporal big data such as Taxi GPS data, bicycle sharing data and bus GPS data. It includes general methods such as rasterization, data quality analysis, data pre-processing, data set counting, trajectory analysis, GIS processing, map base map loading, coordinate and distance calculation, and data visualization.
 
-tbd主要分为几个模块，可视化示例 and many more. Its
-built-in visualization capabilities leverage matplotlib to easily plot routes (Figure 1),
+`TransBigData` is a Python package developed for transportation spatio-temporal big data processing, analysis and visualization. `TransBigData` provides fast and concise methods for processing common transportation spatio-temporal big data such as Taxi GPS data, bicycle sharing data and bus GPS data. `TransBigData` provides a variety of processing methods for each stage of transportation spatio-temporal big data analysis. The code with `TransBigData` is clean, efficient, flexible, and easy to use, allowing complex data tasks to be achieved with concise code. It has already been used in a number of scientific publications [@Pearson:2017]
 
+For some specific types of data, `TransBigData` also provides targeted tools for specific needs, such as extraction of Origin and Destination(OD) of taxi trips from taxi GPS data and identification of arrival and departure information from bus GPS data.
+
+Currently, `TransBigData` mainly provides the following methods:
+*Data Quality*: Provides methods to quickly obtain the general information of the dataset, including the data amount the time period and the sampling interval.
+*Data Preprocess*: Provides methods to clean multiple types of data error. 
+*Data Gridding*: Provides methods to generate multiple types of geographic grids (Rectangular grids, Hexagonal grids) in the research area. Provides fast algorithms to map GPS data to the generated grids (\autoref{fig:fig1}). 
+*Data Aggregating*: Provides methods to aggregate GPS data and OD data into geographic polygon.
+*Data Visualization*: Built-in visualization capabilities leverage the visualization package keplergl to interactively visualize data on Jupyter notebook with simple code.
+*Trajectory Processing*: Provides methods to process trajectory data, including generating trajectory linestring from GPS points, and trajectory densification, etc.
+*Basemap Loading*: Provides methods to display Mapbox basemap on matplotlib figures (\autoref{fig:fig1})
 
 The latest stable release of the software can be installed via pip and full documentation
 can be found at https://transbigdata.readthedocs.io/en/latest/.
 
 
+![TransBigData generates rectangular grids and aggregate GPS data to the grids.\label{fig:fig1}](image/figure1.png){ width=20% }
 
-
-The forces on stars, galaxies, and dark matter under external gravitational
-fields lead to the dynamical evolution of structures in the universe. The orbits
-of these bodies are therefore key to understanding the formation, history, and
-future state of galaxies. The field of "galactic dynamics," which aims to model
-the gravitating components of galaxies to study their structure and evolution,
-is now well-established, commonly taught, and frequently used in astronomy.
-Aside from toy problems and demonstrations, the majority of problems require
-efficient numerical tools, many of which require the same base code (e.g., for
-performing numerical orbit integration).
-
-
-`Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
-enables wrapping low-level languages (e.g., C) for speed without losing
-flexibility or ease-of-use in the user-interface. The API for `Gala` was
-designed to provide a class-based and user-friendly interface to fast (C or
-Cython-optimized) implementations of common operations such as gravitational
-potential and force evaluation, orbit integration, dynamical transformations,
-and chaos indicators for nonlinear dynamics. `Gala` also relies heavily on and
-interfaces well with the implementations of physical units and astronomical
-coordinate systems in the `Astropy` package [@astropy] (`astropy.units` and
-`astropy.coordinates`).
-
-
-
-`Gala` was designed to be used by both astronomical researchers and by
-students in courses on gravitational dynamics or astronomy. It has already been
-used in a number of scientific publications [@Pearson:2017] and has also been
-used in graduate courses on Galactic dynamics to, e.g., provide interactive
-visualizations of textbook material [@Binney:2008]. The combination of speed,
-design, and support for Astropy functionality in `Gala` will enable exciting
-scientific explorations of forthcoming data releases from the *Gaia* mission
-[@gaia] by students and experts alike.
-
-
-
+![TransBigData visulizes taxi trips OD and display basemap on matplotlib figures.\label{fig:fig2}](image/figure2.png){ width=20% }
 
 # Citations
 
