@@ -38,36 +38,215 @@ If you already have geopandas installed, run the following code directly from th
 
 ## Usage
 
-The following example shows how to use the `TransBigData` to extract Origin-Destination(OD) information of taxi trips from taxi GPS data:
+The following example shows how to use the `TransBigData` to perform data gridding, data aggregating and data visualization for taxi GPS data.
 
-    import transbigdata as tbd
-    #Read the data    
-    import pandas as pd
-    data = pd.read_csv('TaxiData-Sample.csv',header = None) 
-    data.columns = ['VehicleNum','time','slon','slat','OpenStatus','Speed'] 
-    data
+### Read the data
 
-<img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/WX20211021-192131@2x.png" style="height:300px">
+```python
+import transbigdata as tbd
+import pandas as pd
+#Read taxi gps data  
+data = pd.read_csv('TaxiData-Sample.csv',header = None) 
+data.columns = ['VehicleNum','time','lon','lat','OpenStatus','Speed'] 
+data
+```
 
-Use the `tbd.taxigps_to_od` method and pass in the corresponding column name to extract the trip OD:
 
-    #Extract OD information from GPS
-    oddata = tbd.taxigps_to_od(data,col = ['VehicleNum','time','slon','slat','OpenStatus'])
-    oddata
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/WX20211021-190104@2x.png" style="height:300px">
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-Aggregate OD into grids:
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>VehicleNum</th>
+      <th>time</th>
+      <th>lon</th>
+      <th>lat</th>
+      <th>OpenStatus</th>
+      <th>Speed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>34745</td>
+      <td>20:27:43</td>
+      <td>113.806847</td>
+      <td>22.623249</td>
+      <td>1</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>34745</td>
+      <td>20:24:07</td>
+      <td>113.809898</td>
+      <td>22.627399</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>34745</td>
+      <td>20:24:27</td>
+      <td>113.809898</td>
+      <td>22.627399</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>34745</td>
+      <td>20:22:07</td>
+      <td>113.811348</td>
+      <td>22.628067</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>34745</td>
+      <td>20:10:06</td>
+      <td>113.819885</td>
+      <td>22.647800</td>
+      <td>0</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>544994</th>
+      <td>28265</td>
+      <td>21:35:13</td>
+      <td>114.321503</td>
+      <td>22.709499</td>
+      <td>0</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>544995</th>
+      <td>28265</td>
+      <td>09:08:02</td>
+      <td>114.322701</td>
+      <td>22.681700</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>544996</th>
+      <td>28265</td>
+      <td>09:14:31</td>
+      <td>114.336700</td>
+      <td>22.690100</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>544997</th>
+      <td>28265</td>
+      <td>21:19:12</td>
+      <td>114.352600</td>
+      <td>22.728399</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>544998</th>
+      <td>28265</td>
+      <td>19:08:06</td>
+      <td>114.137703</td>
+      <td>22.621700</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>544999 rows × 6 columns</p>
+</div>
 
-    #Defining study area
-    bounds = [113.6,22.4,114.8,22.9]
-    #Input the bounds for the study area and generates the rasterization parameters
-    params = tbd.grid_params(bounds = bounds,accuracy = 1500)
-    #Rasterized OD and aggregate them into grids, this function will also generates a GeoDataFrame of the OD, which contains the counts of the aggregation.
-    od_gdf = tbd.odagg_grid(oddata,params)
-    od_gdf.plot(column = 'count')
 
-<img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/WX20211021-190524@2x.png" style="height:300px">
+### Data pre-processing
+
+Define the study area and use the `tbd.clean_outofbounds` method to delete the data out of the study area
+
+```python
+#Define the study area
+bounds = [113.75, 22.4, 114.62, 22.86]
+#Delete the data out of the study area
+data = tbd.clean_outofbounds(data,bounds = bounds,col = ['lon','lat'])
+```
+
+### Data gridding
+
+```python
+#Obtain the gridding parameters
+params = tbd.grid_params(bounds,accuracy = 1000)
+#Map the GPS data to grids
+data['LONCOL'],data['LATCOL'] = tbd.GPS_to_grids(data['lon'],data['lat'],params)
+#Aggregate data into grids
+grid_agg = data.groupby(['LONCOL','LATCOL'])['VehicleNum'].count().reset_index()
+#generate grid geometry
+grid_agg['geometry'] = tbd.gridid_to_polygon(grid_agg['LONCOL'],grid_agg['LATCOL'],params)
+#change the type into GeoDataFrame
+import geopandas as gpd
+grid_agg = gpd.GeoDataFrame(grid_agg)
+#Plot the grids
+grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
+```
+
+
+    
+![png](output_5_1.png)
+    
+
+### Data Visualization(with basemap)
+
+
+```python
+#创建图框
+import matplotlib.pyplot as plt
+import plot_map
+fig =plt.figure(1,(8,8),dpi=300)
+ax =plt.subplot(111)
+plt.sca(ax)
+#Load basemap
+tbd.plot_map(plt,bounds,zoom = 11,style = 4)
+#define colorbar
+cax = plt.axes([0.05, 0.33, 0.02, 0.3])
+plt.title('Data count')
+plt.sca(ax)
+#Plot the data
+grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r',ax = ax,cax = cax,legend = True)
+#Add scale
+tbd.plotscale(ax,bounds = bounds,textsize = 10,compasssize = 1,accuracy = 2000,rect = [0.06,0.03],zorder = 10)
+plt.axis('off')
+plt.xlim(bounds[0],bounds[2])
+plt.ylim(bounds[1],bounds[3])
+plt.show()
+```
+
+    
+![png](output_7_0.png)
+    
 
 ## Related Links
 
