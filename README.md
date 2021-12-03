@@ -215,7 +215,7 @@ grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
 
 
     
-![png](output_5_1.png)
+![png](images/output_5_1.png)
     
 
 ### Data Visualization(with basemap)
@@ -245,7 +245,7 @@ plt.show()
 ```
 
     
-![png](output_7_0.png)
+![png](images/output_7_0.png)
     
 
 ## Related Links
