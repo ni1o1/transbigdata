@@ -254,17 +254,3 @@ plt.show()
 * Github for this project： https://github.com/ni1o1/transbigdata/  
 * Bug report： https://github.com/ni1o1/transbigdata/issues  
 
-## Citation
-
-And if you want to reference this GitHub repository, you can use the following bibtex.
-
-```
-@misc{transbigdata,
-  author = {Yu, Qing and Yuan, Jian},
-  title = {TransBigData},
-  year = {2021},
-  publisher = {GitHub},
-  journal = {GitHub Repository},
-  howpublished = {\url{https://github.com/ni1o1/transbigdata}},
-}
-```

@@ -253,17 +253,3 @@ plt.show()
 * 本项目的github页面： https://github.com/ni1o1/transbigdata/  
 * 有bug请在这个页面提交： https://github.com/ni1o1/transbigdata/issues  
 
-## 引用
-
-而如果你想要引用这个 GitHub 仓库，可以使用如下的 bibtex：
-
-```
-@misc{transbigdata,
-  author = {Qing Yu},
-  title = {TransBigData},
-  year = {2021},
-  publisher = {GitHub},
-  journal = {GitHub Repository},
-  howpublished = {\url{https://github.com/ni1o1/transbigdata}},
-}
-```
