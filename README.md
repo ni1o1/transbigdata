@@ -197,11 +197,23 @@ data = tbd.clean_outofbounds(data,bounds = bounds,col = ['lon','lat'])
 
 ### Data gridding
 
+The most basic way to express the data distribution is in the form of geograpic grids. `TransBigData` provides methods to generate multiple types of geographic grids (Rectangular grids, Hexagonal grids) in the research area. For rectangular gridding, you need to determine the gridding parameters at first(which can be interpreted as defining a grid coordinate system):
+
 ```python
 #Obtain the gridding parameters
 params = tbd.grid_params(bounds,accuracy = 1000)
+```
+
+the next step is to map the GPS is to their corresponding grids. Using the `tbd.GPS_to_grids`, it will generate the LONCOL column and the LATCOL column. The two columns together can specify a grid:
+
+```python
 #Map the GPS data to grids
 data['LONCOL'],data['LATCOL'] = tbd.GPS_to_grids(data['lon'],data['lat'],params)
+```
+
+Count the amount of data in each grids, generate the geometry of the grids and transform it into a GeoDataFrame:
+
+```python
 #Aggregate data into grids
 grid_agg = data.groupby(['LONCOL','LATCOL'])['VehicleNum'].count().reset_index()
 #generate grid geometry
@@ -213,16 +225,14 @@ grid_agg = gpd.GeoDataFrame(grid_agg)
 grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
 ```
 
-
-    
 ![png](images/output_5_1.png)
     
 
 ### Data Visualization(with basemap)
 
+For a For a formal data visualization figure, we still have to add the basemap, the colorbar, the compass and the scale. Use `tbd.plot_map` to load the basemap and `tbd.plotscale` to add compass and scale in matplotlib figure:
 
 ```python
-#创建图框
 import matplotlib.pyplot as plt
 import plot_map
 fig =plt.figure(1,(8,8),dpi=300)
