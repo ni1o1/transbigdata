@@ -191,7 +191,7 @@ The most basic way to express the data distribution is in the form of geograpic 
 params = tbd.grid_params(bounds,accuracy = 1000)
 ```
 
-the next step is to map the GPS is to their corresponding grids. Using the `tbd.GPS_to_grids`, it will generate the LONCOL column and the LATCOL column. The two columns together can specify a grid:
+the next step is to map the GPS is to their corresponding grids. Using the `tbd.GPS_to_grids`, it will generate the `LONCOL` column and the `LATCOL` column. The two columns together can specify a grid:
 
 ```python
 #Map the GPS data to grids
