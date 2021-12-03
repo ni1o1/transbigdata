@@ -39,37 +39,210 @@
 
 ## 使用
 
-下面例子展示如何使用`TransBigData`工具快速地从出租车GPS数据中提取出行OD:
+下面例子展示如何使用`TransBigData`工具快速处理出租车GPS数据，实现数据栅格化，数据聚合集计与数据可视化:
 
-    #导入TransBigData包
-    import transbigdata as tbd
-    #读取数据    
-    import pandas as pd
-    data = pd.read_csv('TaxiData-Sample.csv',header = None) 
-    data.columns = ['VehicleNum','time','slon','slat','OpenStatus','Speed'] 
-    data
+```python
+import transbigdata as tbd
+import pandas as pd
+#读取出租车GPS数据 
+data = pd.read_csv('TaxiData-Sample.csv',header = None) 
+data.columns = ['VehicleNum','time','lon','lat','OpenStatus','Speed'] 
+data
+```
 
-<img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/WX20211021-192131@2x.png" style="height:300px">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>VehicleNum</th>
+      <th>time</th>
+      <th>lon</th>
+      <th>lat</th>
+      <th>OpenStatus</th>
+      <th>Speed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>34745</td>
+      <td>20:27:43</td>
+      <td>113.806847</td>
+      <td>22.623249</td>
+      <td>1</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>34745</td>
+      <td>20:24:07</td>
+      <td>113.809898</td>
+      <td>22.627399</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>34745</td>
+      <td>20:24:27</td>
+      <td>113.809898</td>
+      <td>22.627399</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>34745</td>
+      <td>20:22:07</td>
+      <td>113.811348</td>
+      <td>22.628067</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>34745</td>
+      <td>20:10:06</td>
+      <td>113.819885</td>
+      <td>22.647800</td>
+      <td>0</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>544994</th>
+      <td>28265</td>
+      <td>21:35:13</td>
+      <td>114.321503</td>
+      <td>22.709499</td>
+      <td>0</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>544995</th>
+      <td>28265</td>
+      <td>09:08:02</td>
+      <td>114.322701</td>
+      <td>22.681700</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>544996</th>
+      <td>28265</td>
+      <td>09:14:31</td>
+      <td>114.336700</td>
+      <td>22.690100</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>544997</th>
+      <td>28265</td>
+      <td>21:19:12</td>
+      <td>114.352600</td>
+      <td>22.728399</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>544998</th>
+      <td>28265</td>
+      <td>19:08:06</td>
+      <td>114.137703</td>
+      <td>22.621700</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>544999 rows × 6 columns</p>
+</div>
 
-使用`transbigdata.taxigps_to_od`方法，传入对应的列名，即可提取出行OD:
 
-    #从GPS数据提取OD
-    oddata = tbd.taxigps_to_od(data,col = ['VehicleNum','time','slon','slat','OpenStatus'])
-    oddata
+### 数据预处理
 
-<img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/WX20211021-190104@2x.png" style="height:300px">
+首先定义研究范围，并使用`tbd.clean_outofbounds`剔除研究范围外的数据
 
-对提取出的OD进行OD的栅格集计:
+```python
+#定义研究范围
+bounds = [113.75, 22.4, 114.62, 22.86]
+#剔除研究范围外的数据
+data = tbd.clean_outofbounds(data,bounds = bounds,col = ['lon','lat'])
+```
 
-    #定义研究范围
-    bounds = [113.6,22.4,114.8,22.9]
-    #输入研究范围边界bounds与栅格宽度accuracy，获取栅格化参数
-    params = tbd.grid_params(bounds = bounds,accuracy = 1500)
-    #栅格化OD并集计
-    od_gdf = tbd.odagg_grid(oddata,params)
-    od_gdf.plot(column = 'count')
+### 数据栅格化
 
-<img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/WX20211021-190524@2x.png" style="height:300px">
+以栅格形式表达数据分布是最基本的表达方法。GPS数据经过栅格化后，每个数据点都含有对应的栅格信息，采用栅格表达数据的分布时，其表示的分布情况与真实情况接近。如果要使用`TransBigData`工具进行栅格划分，首先需要确定栅格化的参数（可以理解为定义了一个栅格坐标系），参数可以帮助我们快速进行栅格化:
+
+```python
+#获取栅格化参数
+params = tbd.grid_params(bounds,accuracy = 1000)
+```
+
+取得栅格化参数后，将GPS对应至栅格。使用`tbd.GPS_to_grids`方法,该方法会生成`LONCOL`列与`LATCOL`列，并由这两列共同指定一个栅格:
+
+```python
+#将GPS数据对应至栅格
+data['LONCOL'],data['LATCOL'] = tbd.GPS_to_grids(data['lon'],data['lat'],params)
+```
+
+聚合集计栅格内数据量，并为栅格生成几何图形：
+
+```python
+#聚合集计栅格内数据量
+grid_agg = data.groupby(['LONCOL','LATCOL'])['VehicleNum'].count().reset_index()
+#生成栅格的几何图形
+grid_agg['geometry'] = tbd.gridid_to_polygon(grid_agg['LONCOL'],grid_agg['LATCOL'],params)
+#转换为GeoDataFrame
+import geopandas as gpd
+grid_agg = gpd.GeoDataFrame(grid_agg)
+#绘制栅格
+grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
+```
+
+![png](images/output_5_1.png)
+    
+
+### 数据可视化(在matplotlib中绘制地图底图)
+
+对于一个正式的数据可视化图来说，我们还需要添加底图、色条、指北针和比例尺。 用`tbd.plot_map`加载地图底图，并用`tbd.plotscale`添加指北针和比例尺:
+
+```python
+import matplotlib.pyplot as plt
+import plot_map
+fig =plt.figure(1,(8,8),dpi=300)
+ax =plt.subplot(111)
+plt.sca(ax)
+#加载地图底图
+tbd.plot_map(plt,bounds,zoom = 11,style = 4)
+#定义色条位置
+cax = plt.axes([0.05, 0.33, 0.02, 0.3])
+plt.title('Data count')
+plt.sca(ax)
+#绘制数据
+grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r',ax = ax,cax = cax,legend = True)
+#添加指北针和比例尺
+tbd.plotscale(ax,bounds = bounds,textsize = 10,compasssize = 1,accuracy = 2000,rect = [0.06,0.03],zorder = 10)
+plt.axis('off')
+plt.xlim(bounds[0],bounds[2])
+plt.ylim(bounds[1],bounds[3])
+plt.show()
+```
+
+    
+![png](images/output_7_0.png)
+    
+
 
 ## 相关链接
 
