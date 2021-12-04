@@ -219,7 +219,6 @@ grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
 
 ```python
 import matplotlib.pyplot as plt
-import plot_map
 fig =plt.figure(1,(8,8),dpi=300)
 ax =plt.subplot(111)
 plt.sca(ax)

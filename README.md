@@ -221,7 +221,6 @@ For a For a formal data visualization figure, we still have to add the basemap, 
 
 ```python
 import matplotlib.pyplot as plt
-import plot_map
 fig =plt.figure(1,(8,8),dpi=300)
 ax =plt.subplot(111)
 plt.sca(ax)
