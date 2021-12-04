@@ -53,6 +53,54 @@ def traj_densify(data,col = ['Vehicleid','Time','Lng','Lat'],timegap = 15):
     data1 = data1.drop([Vehicleid+'_new','utctime','utctime_new'],axis = 1)
     return data1
 
+def traj_sparsify(data,col = ['Vehicleid','Time','Lng','Lat'],timegap = 15):
+    '''
+    轨迹点稀疏化。轨迹数据采样间隔过高的时候，数据量太大，不便于分析。这个函数可以将采样间隔扩大，缩减数据量
+    
+    输入
+    -------
+    data : DataFrame
+        数据
+    col : List
+        列名，按[车辆ID,时间,经度,纬度]的顺序
+    timegap : number
+        单位为秒，每隔多长时间一个轨迹点
+    
+    输出
+    -------
+    data1 : DataFrame
+        处理后的数据
+    '''
+    Vehicleid,Time,Lng,Lat = col
+    data[Time] = pd.to_datetime(data[Time])
+    data1 = data.copy()
+    data1 = data1.drop_duplicates([Vehicleid,Time])
+    data1 = id_reindex(data1,Vehicleid)
+    data1 = data1.sort_values(by=[Vehicleid+'_new',Time])
+    data1['utctime'] = data1[Time].apply(lambda r:int(r.value/1000000000))
+    data1['utctime_new'] = data1[Vehicleid+'_new']*10000000000+data1['utctime']
+    a = data1.groupby([Vehicleid+'_new'])['utctime'].min().rename('mintime').reset_index()
+    b = data1.groupby([Vehicleid+'_new'])['utctime'].max().rename('maxtime').reset_index()
+    minmaxtime = pd.merge(a,b)
+    mintime = data1['utctime'].min()
+    maxtime = data1['utctime'].max()
+    timedata = pd.DataFrame(range(mintime,maxtime,timegap),columns = [Time])
+    timedata['tmp'] = 1
+    minmaxtime['tmp'] = 1
+    minmaxtime = pd.merge(minmaxtime,timedata)
+    minmaxtime = minmaxtime[(minmaxtime['mintime']<=minmaxtime[Time])&(minmaxtime['maxtime']>=minmaxtime[Time])]
+    minmaxtime['utctime_new'] = minmaxtime[Vehicleid+'_new']*10000000000+minmaxtime[Time]
+    minmaxtime[Time] = pd.to_datetime(minmaxtime[Time],unit = 's')
+    data1 = pd.concat([data1,minmaxtime[['utctime_new',Time]]]).sort_values(by = ['utctime_new'])
+    data1 = data1.drop_duplicates(['utctime_new'])
+    data1[Lng] =data1.set_index('utctime_new')[Lng].interpolate(method = 'index').values
+    data1[Lat] =data1.set_index('utctime_new')[Lat].interpolate(method = 'index').values
+    data1[Vehicleid]=data1[Vehicleid].ffill()
+    data1[Vehicleid]=data1[Vehicleid].bfill()
+    data1 = data1.drop([Vehicleid+'_new','utctime','utctime_new'],axis = 1)
+    data1 = pd.merge(minmaxtime['Time'],data1)
+    return data1
+
 def points_to_traj(traj_points,col = ['Lng','Lat','ID']):
     '''
     输入轨迹点，生成轨迹线型的GeoDataFrame

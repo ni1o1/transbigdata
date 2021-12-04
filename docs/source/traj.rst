@@ -48,6 +48,24 @@ timegap : number
 data1 : DataFrame
     处理后的数据
 
+.. function:: transbigdata.traj_sparsify(data,col = ['Vehicleid','Time','Lng','Lat'],timegap = 15)
+
+轨迹点稀疏化。轨迹数据采样间隔过高的时候，数据量太大，不便于分析。这个函数可以将采样间隔扩大，缩减数据量
+
+**输入**
+
+data : DataFrame
+    数据
+col : List
+    列名，按[车辆ID,时间,经度,纬度]的顺序
+timegap : number
+    单位为秒，每隔多长时间一个轨迹点
+
+**输出**
+
+data1 : DataFrame
+    处理后的数据
+
 使用方法
 
 ::
