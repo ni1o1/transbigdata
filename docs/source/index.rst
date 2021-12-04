@@ -111,7 +111,6 @@ TransBigData简介
    :maxdepth: 2
    
    quality.rst
-   datamanage.rst
    preprocess.rst
    grids.rst
    odprocess.rst

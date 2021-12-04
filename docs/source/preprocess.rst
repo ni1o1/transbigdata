@@ -129,7 +129,22 @@ suffix : str
 data1 : DataFrame
     重新编号的数据
 
-轨迹清洗
+数据格式转换
+==================
+
+.. function:: transbigdata.dumpjson(data,path)
+
+输入json数据，存储为文件。这个方法主要是解决numpy数值型无法兼容json包报错的问题
+
+**输入**
+
+data : json
+    要储存的json数据
+path : str
+    保存的路径
+
+
+轨迹数据清洗
 ==================
 .. function:: transbigdata.clean_traj(data,col = ['uid','str_time','lon','lat'],tripgap = 1800,disgap = 50000,speedlimit = 80)
 
