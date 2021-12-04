@@ -155,7 +155,7 @@ data1 : DataFrame
     tmp1 = gpd.GeoDataFrame(tmp1)
     tmp1[tmp1['Vehicleid']==36805].plot()
 
-    #轨迹稀疏化，60秒一条数据
+    #轨迹稀疏化，20秒一条数据
     tmp2 = tbd.traj_sparsify(tmp1,timegap = 20)
     import geopandas as gpd
     tmp2['geometry'] = gpd.points_from_xy(tmp2['Lng'],tmp2['Lat'])
