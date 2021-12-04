@@ -97,8 +97,8 @@ def traj_sparsify(data,col = ['Vehicleid','Time','Lng','Lat'],timegap = 15):
     data1[Lat] =data1.set_index('utctime_new')[Lat].interpolate(method = 'index').values
     data1[Vehicleid]=data1[Vehicleid].ffill()
     data1[Vehicleid]=data1[Vehicleid].bfill()
+    data1 = pd.merge(minmaxtime['utctime_new'],data1)
     data1 = data1.drop([Vehicleid+'_new','utctime','utctime_new'],axis = 1)
-    data1 = pd.merge(minmaxtime['Time'],data1)
     return data1
 
 def points_to_traj(traj_points,col = ['Lng','Lat','ID']):
