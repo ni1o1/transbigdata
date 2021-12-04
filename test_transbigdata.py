@@ -19,7 +19,7 @@ def de_sample_traj(df, sample_interval, col=['vehID','time']):
         df_each_veh = df[df[col[0]]==each_veh]
         
         # start_time, end_time
-        start_time, end_time = df_car_1.iloc[0][col[1]], df_car_1.iloc[-1][col[1]]
+        start_time, end_time = df_each_veh.iloc[0][col[1]], df_each_veh.iloc[-1][col[1]]
         
         # compress
         df_each_veh_compress = df_each_veh[((df_each_veh[col[1]] - start_time) % sample_interval == 0) | 
