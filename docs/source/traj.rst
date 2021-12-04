@@ -27,7 +27,7 @@ traj : GeoDataFrame或json
     生成的轨迹数据，如果timecol没定义则为GeoDataFrame，否则为json
 
 
-轨迹增密
+轨迹增密与稀疏化
 ==================
 
 .. function:: transbigdata.traj_densify(data,col = ['Vehicleid','Time','Lng','Lat'],timegap = 15)
@@ -141,20 +141,20 @@ data1 : DataFrame
     tmp = data.iloc[:10]
     tmp1 = data.iloc[-100:]
     tmp = tmp.append(tmp1)
-    
+
     #增密前数据
     import geopandas as gpd
     tmp['geometry'] = gpd.points_from_xy(tmp['Lng'],tmp['Lat'])
     tmp = gpd.GeoDataFrame(tmp)
     tmp[tmp['Vehicleid']==36805].plot()
-    
+
     #进行轨迹增密，设置5秒一条数据
     tmp1 = tbd.traj_densify(tmp,timegap = 1)
     import geopandas as gpd
     tmp1['geometry'] = gpd.points_from_xy(tmp1['Lng'],tmp1['Lat'])
     tmp1 = gpd.GeoDataFrame(tmp1)
     tmp1[tmp1['Vehicleid']==36805].plot()
-    
+
     #轨迹稀疏化，60秒一条数据
     tmp2 = tbd.traj_sparsify(tmp1,timegap = 20)
     import geopandas as gpd
