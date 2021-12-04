@@ -26,17 +26,6 @@ timecol : str
 traj : GeoDataFrame或json
     生成的轨迹数据，如果timecol没定义则为GeoDataFrame，否则为json
 
-.. function:: transbigdata.dumpjson(data,path)
-
-输入json数据，存储为文件。这个方法主要是解决numpy数值型无法兼容json包报错的问题
-
-**输入**
-
-data : json
-    要储存的json数据
-path : str
-    保存的路径
-
 
 轨迹增密
 ==================
