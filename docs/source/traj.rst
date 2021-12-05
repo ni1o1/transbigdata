@@ -60,6 +60,8 @@ col : List
     列名，按[车辆ID,时间,经度,纬度]的顺序
 timegap : number
     单位为秒，每隔多长时间一个轨迹点
+method : str
+    可选interpolate插值或subsample子采样
 
 **输出**
 
