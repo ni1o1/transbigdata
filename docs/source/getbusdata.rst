@@ -1,6 +1,6 @@
 
 ******************************
-爬虫
+数据获取
 ******************************
 
 .. function:: transbigdata.getbusdata(city,keywords)
