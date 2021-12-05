@@ -39,7 +39,7 @@ For some specific types of data, `TransBigData` also provides targeted tools for
 
 Currently, `TransBigData` mainly provides the following methods:  
 *Data Quality*: Provides methods to quickly obtain the general information of the dataset, including the data amount the time period and the sampling interval.  
-*Data Preprocess*: Provides methods to clean multiple types of data error.   
+*Data Preprocess*: Provides methods to fix multiple types of data error.   
 *Data Gridding*: Provides methods to generate multiple types of geographic grids (Rectangular grids, Hexagonal grids) in the research area. Provides fast algorithms to map GPS data to the generated grids (\autoref{fig:fig1}).   
 *Data Aggregating*: Provides methods to aggregate GPS data and OD data into geographic polygon.  
 *Trajectory Processing*: Provides quick methods to re-organize the data structure and implement data augmentation from various data formats, including generating trajectory linestring from GPS points, and trajectory densification, etc.  
