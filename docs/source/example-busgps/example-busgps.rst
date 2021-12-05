@@ -330,7 +330,7 @@
 
 ::
 
-    onewaytime = tbd.busgps_onewaytime(arriveinfo,stop,
+    onewaytime = tbd.busgps_onewaytime(arriveinfo,
                                        start = '延安东路外滩',
                                        end = '申昆路枢纽站',col = ['VehicleId','stopname'])
 
