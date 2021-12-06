@@ -55,7 +55,8 @@ def traj_densify(data,col = ['Vehicleid','Time','Lng','Lat'],timegap = 15):
 
 def traj_sparsify(data,col = ['Vehicleid','Time','Lng','Lat'],timegap = 15,method = 'subsample'):
     '''
-    轨迹点稀疏化。轨迹数据采样间隔过高的时候，数据量太大，不便于分析。这个函数可以将采样间隔扩大，缩减数据量
+    轨迹点稀疏化。轨迹数据采样频率过高的时候，数据量太大，不便于部分对数据频率要求不是那么高的研究的分析。
+    这个函数可以将采样间隔扩大，缩减数据量。
     
     输入
     -------
@@ -74,7 +75,7 @@ def traj_sparsify(data,col = ['Vehicleid','Time','Lng','Lat'],timegap = 15,metho
         处理后的数据
     '''
     Vehicleid,Time,Lng,Lat = col
-    data[Time] = pd.to_datetime(data[Time])
+    data[Time] = pd.to_datetime(data[Time], unit='s')
     data1 = data.copy()
     data1 = data1.drop_duplicates([Vehicleid,Time])
     data1 = id_reindex(data1,Vehicleid)
