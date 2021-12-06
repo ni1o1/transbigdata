@@ -71,6 +71,12 @@ TransBigData简介
 .. image:: _static/WX20211021-190524@2x.png
    :height: 300
 
+使用示例
+---------------
+.. raw:: html
+   :file: gallery/html/grid.html
+
+
 
 相关链接
 ---------------
@@ -82,11 +88,11 @@ TransBigData简介
 * 本项目的github页面： https://github.com/ni1o1/transbigdata/  
 * 有bug请在这个页面提交： https://github.com/ni1o1/transbigdata/issues
 
-安装、依赖与更新日志
+安装
 =========================
 
 .. toctree::
-   :caption: 安装、依赖与更新日志
+   :caption: 安装
    :maxdepth: 2
    
    getting_started.rst
