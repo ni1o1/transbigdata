@@ -6,17 +6,19 @@ English [中文版](README-zh_CN.md)
 
 [![Documentation Status](https://readthedocs.org/projects/transbigdata/badge/?version=latest)](https://transbigdata.readthedocs.io/en/latest/?badge=latest) [![PyPI version](https://badge.fury.io/py/transbigdata.svg)](https://badge.fury.io/py/transbigdata) ![PyPI - Downloads](https://img.shields.io/pypi/dm/transbigdata) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ni1o1/transbigdata) [![bilibili](https://img.shields.io/badge/bilibili-%E5%90%8C%E6%B5%8E%E5%B0%8F%E6%97%AD%E5%AD%A6%E9%95%BF-green.svg)](https://space.bilibili.com/3051484)  
 
+## Introduction
+
 `TransBigData` is a Python package developed for transportation spatio-temporal big data processing, analysis and visualization. `TransBigData` provides fast and concise methods for processing common transportation spatio-temporal big data such as Taxi GPS data, bicycle sharing data and bus GPS data. `TransBigData` provides a variety of processing methods for each stage of transportation spatio-temporal big data analysis. The code with `TransBigData` is clean, efficient, flexible, and easy to use, allowing complex data tasks to be achieved with concise code.   
 
 For some specific types of data, `TransBigData` also provides targeted tools for specific needs, such as extraction of Origin and Destination(OD) of taxi trips from taxi GPS data and identification of arrival and departure information from bus GPS data. The latest stable release of the software can be installed via pip and full documentation
 can be found at https://transbigdata.readthedocs.io/en/latest/.
 
-**Technical Features**
+### Technical Features
 
 * Provide a variety of processing methods for each stage of transportation spatio-temporal big data analysis.
 * The code with `TransBigData` is clean, efficient, flexible, and easy to use, allowing complex data tasks to be achieved with concise code.
 
-**Main Functions**
+### Main Functions
 
 Currently, `TransBigData` mainly provides the following methods:  
 
@@ -32,11 +34,11 @@ Currently, `TransBigData` mainly provides the following methods:
 ## Installation
 
 Before installing `TransBigData`, make sure that you have installed the available geopandas package: https://geopandas.org/index.html
-If you already have geopandas installed, run the following code directly from the command prompt to install it
+If you already have geopandas installed, run the following code directly from the command prompt to install `TransBigData`
 
     pip install -U transbigdata
 
-## Usage
+## Example of usage
 
 The following example shows how to use the `TransBigData` to perform data gridding, data aggregating and data visualization for taxi GPS data.
 
