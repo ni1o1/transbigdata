@@ -1,7 +1,7 @@
 共享单车数据社区发现
 ========================================
 
-
+| 这个案例的Jupyter notebook: `点击这里 <https://github.com/ni1o1/transbigdata/blob/main/example/Example%205-community%20detection%20for%20bikesharing%20data.ipynb>`__.
 
 ::
 
