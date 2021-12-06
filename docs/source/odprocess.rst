@@ -33,7 +33,7 @@ data1 : DataFrame
 OD集计
 ==========
 
-.. function:: transbigdata.odagg_grid(oddata,params,col = ['slon','slat','elon','elat'],arrow = False,**kwargs)
+.. function:: transbigdata.odagg_grid(oddata,params,col = ['slon','slat','elon','elat'],arrow = False)
 
 
 OD集计与地理信息生成（栅格）。输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame
@@ -55,7 +55,7 @@ arrow : bool
 oddata1 : GeoDataFrame 
     集计后生成OD的GeoDataFrame
 
-.. function:: transbigdata.odagg_shape(oddata,shape,col = ['slon','slat','elon','elat'],params = None,round_accuracy = 6,arrow = False,**kwargs)
+.. function:: transbigdata.odagg_shape(oddata,shape,col = ['slon','slat','elon','elat'],params = None,round_accuracy = 6,arrow = False)
 
 OD集计与地理信息生成（小区集计）。输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame
 
