@@ -4,7 +4,7 @@ tags:
   - Python
   - transportation
   - spatio-temporal data
-  - geospatial
+  - geospatial data
   - GIS
   - data quality analysis
   - data pre-processing

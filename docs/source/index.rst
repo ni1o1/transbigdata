@@ -114,12 +114,12 @@ TransBigData简介
    preprocess.rst
    grids.rst
    odprocess.rst
+   visualization.rst
+   getbusdata.rst
    traj.rst
    gisprocess.rst
-   visualization.rst
    plot_map.rst
    CoordinatesConverter.rst
-   getbusdata.rst
 
 
 各类数据处理方法
