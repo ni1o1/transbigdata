@@ -103,6 +103,7 @@ TransBigData简介
    example-busgps/example-busgps.rst
    metromodel/metromodel.rst
    Example-pNEUMA/Example-pNEUMA.rst
+   example-bikesharing/example-bikesharing.rst
    
 通用方法
 =========================
