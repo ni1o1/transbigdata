@@ -1,6 +1,7 @@
 pNEUMA trajectory dataset processing
 ====================================
 
+| Jupyter notebook for this example: `Here <https://github.com/ni1o1/transbigdata/blob/main/example/Example%204-pNEUMA%20trajectory%20dataset%20processing.ipynb>`__.
 | In this example, …the pNEUMA trajectory at Athens will be processed
   and visualized.
 | Note that the sample data has been reshaped to a neat form. The origin
@@ -105,6 +106,8 @@ The trajectory data
 
 
 
+
+
 ::
 
     # print the file size
@@ -130,7 +133,7 @@ The trajectory data
 OSM Map Data
 ~~~~~~~~~~~~
 
-You can load the map data directly from the ``data`` folder or download
+You can load the road data directly from the ``data`` folder or download
 it using the `OSMNX package <https://osmnx.readthedocs.io/en/stable/>`__
 
 ::
@@ -149,7 +152,7 @@ it using the `OSMNX package <https://osmnx.readthedocs.io/en/stable/>`__
     filepath = "data/pNEUMA_network.graphml"
     ox.save_graphml(G, filepath)
 
-If you cannot using OSMNX, you can run the code below
+If you are not using OSMNX, you can run the code below to read the road data
 
 ::
 
@@ -256,7 +259,7 @@ each vehicle.
 
 ::
 
-    # tbd清理中间不动的数据点
+    #using tbd.clean_same to delete the trajectory data which is not moving
     data_sparsify_clean = tbd.clean_same(data_sparsify, col=['track_id', 'time', 'lon', 'lat'])
     data_sparsify_clean.info()
 
@@ -514,18 +517,6 @@ Visualization of a single vehicle, and show the shortes path
 .. parsed-literal::
 
     250691723 358465943
-
-
-.. parsed-literal::
-
-    /Applications/anaconda3/envs/data/lib/python3.6/site-packages/geopandas/geodataframe.py:1322: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-    
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      super(GeoDataFrame, self).__setitem__(key, value)
-
-
 
 
 .. raw:: html
