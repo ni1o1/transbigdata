@@ -129,7 +129,7 @@ pNEUMA轨迹数据处理
 
 
 OSM路网数据获取
-~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 你可以直接从``data``文件夹加载道路数据，或者使用OSMNX下载路网 `OSMNX <https://osmnx.readthedocs.io/en/stable/>`__
 

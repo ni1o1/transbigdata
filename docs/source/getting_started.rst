@@ -37,6 +37,7 @@ TransBigData依赖如下包
 0.2.3 (2021-11-30)
 ------------------------
 版本更新太快来不及写更新日志：
+
 . 将visualization_dataagg合并至visualization_data中
 . 增加置信椭圆绘制功能
 . 增加英文文档页面
