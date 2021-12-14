@@ -1,3 +1,4 @@
+rtree
 geopandas
 matplotlib
 scipy
