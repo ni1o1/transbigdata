@@ -2,7 +2,7 @@
 =======================
 
 | 这个案例的Jupyter notebook: `点击这里 <https://github.com/ni1o1/transbigdata/blob/main/example/Example%202-Identifying%20arrival%20and%20departure%20information%20from%20Bus%20GPS%20data.ipynb>`__.
-
+| 可以点击 `这个链接 <https://mybinder.org/v2/gh/ni1o1/transbigdata/9507de936806c34a4befd74aa9227b012569a6aa?urlpath=lab%2Ftree%2Fexample%2FExample%202-Identifying%20arrival%20and%20departure%20information%20from%20Bus%20GPS%20data.ipynb>`__ 在线编辑器中尝试
 下面的案例展示如何用TransBigData包处理公交GPS数据，以内置方法计算公交车辆的到离站信息、统计公交单程耗时与运营车速
 
 ::
