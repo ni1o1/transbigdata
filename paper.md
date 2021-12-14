@@ -38,13 +38,13 @@ In recent years, data generated in transportation field has begun to explode. In
 For some specific types of data, `TransBigData` also provides targeted tools for specific needs, such as extraction of Origin and Destination(OD) of taxi trips from taxi GPS data and identification of arrival and departure information from bus GPS data.
 
 Currently, `TransBigData` mainly provides the following methods:  
-*Data Quality*: Provides methods to quickly obtain the general information of the dataset, including the data amount the time period and the sampling interval.  
-*Data Preprocess*: Provides methods to fix multiple types of data error.   
-*Data Gridding*: Provides methods to generate multiple types of geographic grids (Rectangular grids, Hexagonal grids) in the research area. Provides fast algorithms to map GPS data to the generated grids (\autoref{fig:fig1}).   
-*Data Aggregating*: Provides methods to aggregate GPS data and OD data into geographic polygon.  
-*Trajectory Processing*: Provides quick methods to re-organize the data structure and implement data augmentation from various data formats, including generating trajectory linestring from GPS points, and trajectory densification, etc.  
-*Data Visualization*: Built-in visualization capabilities leverage the visualization package keplergl to interactively visualize data on Jupyter notebook with simple code.  
-*Basemap Loading*: Provides methods to display Mapbox basemap on matplotlib figures (\autoref{fig:fig2})  
+- *Data Quality*: Provides methods to quickly obtain the general information of the dataset, including the data amount the time period and the sampling interval.  
+- *Data Preprocess*: Provides methods to fix multiple types of data error.   
+- *Data Gridding*: Provides methods to generate multiple types of geographic grids (Rectangular grids, Hexagonal grids) in the research area. Provides fast algorithms to map GPS data to the generated grids (\autoref{fig:fig1}).   
+- *Data Aggregating*: Provides methods to aggregate GPS data and OD data into geographic polygon.  
+- *Trajectory Processing*: Provides quick methods to re-organize the data structure and implement data augmentation from various data formats, including generating trajectory linestring from GPS points, and trajectory densification, etc.  
+- *Data Visualization*: Built-in visualization capabilities leverage the visualization package keplergl to interactively visualize data on Jupyter notebook with simple code.  
+- *Basemap Loading*: Provides methods to display Mapbox basemap on matplotlib figures (\autoref{fig:fig2})  
 
 The latest stable release of the software can be installed via pip and full documentation
 can be found at https://transbigdata.readthedocs.io/en/latest/.
