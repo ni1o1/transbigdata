@@ -38,6 +38,7 @@ In recent years, data generated in transportation field has begun to explode. In
 For some specific types of data, `TransBigData` also provides targeted tools for specific needs, such as extraction of Origin and Destination(OD) of taxi trips from taxi GPS data and identification of arrival and departure information from bus GPS data.
 
 Currently, `TransBigData` mainly provides the following methods:  
+
 - *Data Quality*: Provides methods to quickly obtain the general information of the dataset, including the data amount the time period and the sampling interval.  
 - *Data Preprocess*: Provides methods to fix multiple types of data error.   
 - *Data Gridding*: Provides methods to generate multiple types of geographic grids (Rectangular grids, Hexagonal grids) in the research area. Provides fast algorithms to map GPS data to the generated grids (\autoref{fig:fig1}).   
