@@ -5,3 +5,4 @@ seaborn
 scipy
 plot_map >= 0.3.4
 CoordinatesConverter>=0.1.4
+networkx
