@@ -1,6 +1,6 @@
 English [中文版](README-zh_CN.md)
 
-# TransBigData : A Python package developed for transportation spatio-temporal big data processing, analysis and visualization.
+# TransBigData
 
 <img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/logo-wordmark-dark.png" style="width:550px">
 
