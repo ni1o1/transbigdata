@@ -242,7 +242,9 @@ plt.show()
     
 ![png](images/output_7_0.png)
     
+### Visualize Taxi GPS trajectories(with keplergl)
 
+![gif](images/tbdexample1.gif)
 
 ## 相关链接
 
