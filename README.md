@@ -13,6 +13,7 @@ English [中文版](README-zh_CN.md)
 For some specific types of data, `TransBigData` also provides targeted tools for specific needs, such as extraction of Origin and Destination(OD) of taxi trips from taxi GPS data and identification of arrival and departure information from bus GPS data. The latest stable release of the software can be installed via pip and full documentation
 can be found at https://transbigdata.readthedocs.io/en/latest/.
 
+
 ### Technical Features
 
 * Provide a variety of processing methods for each stage of transportation spatio-temporal big data analysis.
@@ -30,6 +31,7 @@ Currently, `TransBigData` mainly provides the following methods:
 * **Trajectory Processing**: Provides methods to process trajectory data, including generating trajectory linestring from GPS points, and trajectory densification, etc.  
 * **Basemap Loading**: Provides methods to display Mapbox basemap on matplotlib figures
 
+![gif](images/tbdexample1.gif)
 
 ## Installation
 
@@ -245,6 +247,7 @@ plt.show()
     
 ![png](images/output_7_0.png)
     
+
 
 ## Related Links
 
