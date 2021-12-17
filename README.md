@@ -32,8 +32,6 @@ Currently, `TransBigData` mainly provides the following methods:
 * **Trajectory Processing**: Provides methods to process trajectory data, including generating trajectory linestring from GPS points, and trajectory densification, etc.  
 * **Basemap Loading**: Provides methods to display Mapbox basemap on matplotlib figures
 
-![gif](images/tbdexample1.gif)
-
 ## Installation
 
 Before installing `TransBigData`, make sure that you have installed the available geopandas package: https://geopandas.org/index.html
@@ -248,7 +246,9 @@ plt.show()
     
 ![png](images/output_7_0.png)
     
+### Visualize Taxi GPS trajectories(with keplergl)
 
+![gif](images/tbdexample1.gif)
 
 ## Related Links
 
