@@ -242,10 +242,16 @@ plt.show()
     
 ![png](images/output_7_0.png)
     
-### Visualize Taxi GPS trajectories(with keplergl)
+### 可视化轨迹(基于keplergl)
 
 ![gif](images/tbdexample1.gif)
+
+### 可视化数据分布(基于keplergl)
+
 ![gif](images/tbdexample2.gif)
+
+### 可视化OD(基于keplergl)
+
 ![gif](images/tbdexample3.gif)
 
 ## 相关链接
