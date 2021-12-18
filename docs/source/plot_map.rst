@@ -59,7 +59,7 @@ TransBigData包的底图绘制功能由plot_map包提供。首先确保你的plo
 
     pip install -U plot-map
 
-.. function:: transbigdata.plot_map(plt,bounds,zoom,style=4,printlog = False,styleid = 'dark')
+.. function:: transbigdata.plot_map(plt,bounds,zoom='auto',style=4,printlog = False,styleid = 'dark')
 
 添加地图底图
 
@@ -68,7 +68,7 @@ TransBigData包的底图绘制功能由plot_map包提供。首先确保你的plo
 bounds : List
     底图的绘图边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 
 zoom : number
-    底图的放大等级，越大越精细，加载的时间也就越久，一般单个城市大小的范围，这个参数选取12到16之间 
+    底图的放大等级，默认为auto自动选取。越大越精细，加载的时间也就越久，一般单个城市大小的范围，这个参数选取12到16之间 
 printlog : bool
     是否显示日志                                                
 style : number
