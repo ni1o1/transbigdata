@@ -39,7 +39,21 @@ If you already have geopandas installed, run the following code directly from th
 
     pip install -U transbigdata
 
-## Example of usage
+## Example of data visualization
+
+### Visualize trajectories (with keplergl)
+
+![gif](images/tbdexample1.gif)
+
+### Visualize data distribution (with keplergl)
+
+![gif](images/tbdexample2.gif)
+
+### Visualize OD (with keplergl)
+
+![gif](images/tbdexample3.gif)
+
+## Example of taxi GPS data processing
 
 The following example shows how to use the `TransBigData` to perform data gridding, data aggregating and data visualization for taxi GPS data.
 
@@ -242,21 +256,9 @@ plt.xlim(bounds[0],bounds[2])
 plt.ylim(bounds[1],bounds[3])
 plt.show()
 ```
-
     
 ![png](images/output_7_0.png)
-    
-### Visualize trajectories (with keplergl)
 
-![gif](images/tbdexample1.gif)
-
-### Visualize data distribution (with keplergl)
-
-![gif](images/tbdexample2.gif)
-
-### Visualize OD (with keplergl)
-
-![gif](images/tbdexample3.gif)
 
 ## Related Links
 

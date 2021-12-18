@@ -38,7 +38,21 @@
     pip install -U transbigdata
 
 
-## 使用
+## 可视化示例
+
+### 可视化轨迹(基于keplergl)
+
+![gif](images/tbdexample1.gif)
+
+### 可视化数据分布(基于keplergl)
+
+![gif](images/tbdexample2.gif)
+
+### 可视化OD(基于keplergl)
+
+![gif](images/tbdexample3.gif)
+
+## 使用示例
 
 下面例子展示如何使用`TransBigData`工具快速处理出租车GPS数据，实现数据栅格化，数据聚合集计与数据可视化:
 
@@ -242,17 +256,7 @@ plt.show()
     
 ![png](images/output_7_0.png)
     
-### 可视化轨迹(基于keplergl)
 
-![gif](images/tbdexample1.gif)
-
-### 可视化数据分布(基于keplergl)
-
-![gif](images/tbdexample2.gif)
-
-### 可视化OD(基于keplergl)
-
-![gif](images/tbdexample3.gif)
 
 ## 相关链接
 
