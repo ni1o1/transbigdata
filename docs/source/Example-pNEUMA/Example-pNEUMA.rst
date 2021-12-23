@@ -222,10 +222,9 @@ OSM路网数据获取
 
 
 ::
+
     #轨迹稀疏化
-    data_sparsify = tbd.traj_sparsify(data, col=['track_id', 'time', 'lon', 'lat'], 
-                                      timegap=0.4, 
-                                      method='subsample')
+    data_sparsify = tbd.traj_sparsify(data, col=['track_id', 'time', 'lon', 'lat'],timegap=0.4,method='subsample')
     data_sparsify.info()
 
 

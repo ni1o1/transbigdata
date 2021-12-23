@@ -131,26 +131,28 @@ def getbusdata(city,keywords):
     c = getcitycode(city)
     print('成功')
     stop = []
+    uids = []
     for keyword in keywords:
-        print(keyword,end = '')
-        try:
-            for uid in getlineuid(keyword,c):
-                linename,coo,stationnames,stationgeo = getlinegeo(uid,c)
-                coo = pd.DataFrame(list(pd.DataFrame(coo)[0].str.split(',')))
-                coo[0],coo[1] = CoordinatesConverter.bd09towgs84(coo[0],coo[1])
-                line = LineString(coo.values)
-                linenames.append(linename)
-                lines.append(line)
-                stops = pd.DataFrame({'stationnames':stationnames})
-                stops['linename']=linename
-                stops['geo'] = stationgeo
-                stops['lon'] = stops['geo'].apply(lambda row:row.split(',')[0])
-                stops['lat'] = stops['geo'].apply(lambda row:row.split(',')[1])
-                stop.append(stops)
-            print('成功')
-        except:
-            print('失败')
-            pass
+        print(keyword)
+        for uid in getlineuid(keyword,c):
+            if uid not in uids:
+                try:
+                    linename,coo,stationnames,stationgeo = getlinegeo(uid,c)
+                    coo = pd.DataFrame(list(pd.DataFrame(coo)[0].str.split(',')))
+                    coo[0],coo[1] = CoordinatesConverter.bd09towgs84(coo[0],coo[1])
+                    line = LineString(coo.values)
+                    linenames.append(linename)
+                    lines.append(line)
+                    stops = pd.DataFrame({'stationnames':stationnames})
+                    stops['linename']=linename
+                    stops['geo'] = stationgeo
+                    stops['lon'] = stops['geo'].apply(lambda row:row.split(',')[0])
+                    stops['lat'] = stops['geo'].apply(lambda row:row.split(',')[1])
+                    stop.append(stops)
+                    print(linename+'成功')
+                    uids.append(uid)
+                except:
+                    pass
     data = gpd.GeoDataFrame()
     data['linename'] = linenames
     data['geometry'] = lines
@@ -162,18 +164,22 @@ def getbusdata(city,keywords):
     stop = gpd.GeoDataFrame(stop)
     data['line'] = data['linename'].str.split('(').apply(lambda r:r[0])
     stop['line'] = stop['linename'].str.split('(').apply(lambda r:r[0])
+    stop['id'] = range(len(stop))
+    stop['id'] = stop.groupby('linename')['id'].rank()
+    data = data.drop_duplicates(subset = ['linename'])
+    stop = stop.drop_duplicates(subset = ['linename','stationnames'])
     return data,stop
 
 
 def getcitycode(c):
     url = 'http://map.baidu.com/?qt=s&wd='+urllib.parse.quote(c)
-    response1 = urllib.request.urlopen(url,timeout = 5)
+    response1 = urllib.request.urlopen(url,timeout = 60)
     searchinfo=json.loads(response1.read().decode('utf8'))
     return str(searchinfo['content']['code'])
     
 def getlinegeo(uid,c):
     url = 'http://map.baidu.com/?qt=bsl&uid='+uid+'&c='+c
-    response = urllib.request.urlopen(url,timeout = 5)
+    response = urllib.request.urlopen(url,timeout = 60)
     searchinfo=json.loads(response.read().decode('utf8'))
     linename = searchinfo['content'][0]['name']
     stations = searchinfo['content'][0]['stations']

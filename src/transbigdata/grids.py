@@ -127,8 +127,9 @@ def GPS_to_grids(lon,lat,params):
         纬度栅格编号列
     '''
     (lonStart,latStart,deltaLon,deltaLat) = params
-    loncol = ((lon - (lonStart - deltaLon / 2))/deltaLon).astype('int')  
-    latcol = ((lat - (latStart - deltaLat / 2))/deltaLat).astype('int')   
+    import numpy as np
+    loncol = np.floor(((lon - (lonStart - deltaLon / 2))/deltaLon)).astype('int')  
+    latcol = np.floor(((lat - (latStart - deltaLat / 2))/deltaLat)).astype('int')   
     return loncol,latcol
 def grids_centre(loncol,latcol,params):
     '''
@@ -286,3 +287,79 @@ def gridid_sjoin_shape(data,shape,params,col = ['LONCOL','LATCOL']):
     data1 = gpd.sjoin(data1,shape)
     return data1
 
+def grid_params_gini(data,col = ['lon','lat'],accuracy = 500,gini = 'max',gap = 10,sample = 10000):
+    '''
+    获取最佳的栅格化参数，以基尼系数为标准
+    输入
+    ----------
+    data : DataFrame
+        数据
+    col : List
+        经纬度列
+    accuracy : number
+        网格大小
+    gini : number
+        min,max,或者median。基尼系数的选取标准
+    gap : number
+        精度,越大越精确，效果越好，计算量越大
+    sample : number
+        抽样多少数据做测试
+
+    输出
+    ----------
+    params : List
+        最佳的栅格化参数
+    '''
+    trajdata = data.copy()
+    if len(trajdata)>sample:
+        trajdata = trajdata.sample(sample)
+    lon,lat = col
+    lon1 = trajdata[lon].mean()
+    lat1 = trajdata[lat].mean()
+    bounds = [lon1,lat1,lon1,lat1]
+    params = grid_params(bounds,accuracy = accuracy)
+    lonstart,latstart,deltalon,deltalat = params
+    x = np.linspace(lonstart,lonstart+deltalon,gap)
+    y = np.linspace(latstart,latstart+deltalat,gap)
+    xx,yy = np.meshgrid(x,y)
+    tmp1 = pd.DataFrame()
+    xx=xx.reshape(1,-1)
+    yy=yy.reshape(1,-1)
+    tmp1['lon'] = xx[0]
+    tmp1['lat'] = yy[0]
+    r = tmp1.iloc[0]
+    #估算基尼系数
+    def GiniIndex(p):
+        cum = np.cumsum(sorted(np.append(p, 0)))
+        sum = cum[-1]
+        x = np.array(range(len(cum))) / len(p)
+        y = cum / sum
+        B = np.trapz(y, x=x)
+        A = 0.5 - B
+        G = A / (A + B)
+        return G
+    def getgini(r):
+        lon1,lat1 = r['lon'], r['lat']
+        params_tmp=[lon1,lat1,deltalon,deltalat]
+        tmp = pd.DataFrame()
+        tmp['LONCOL'],tmp['LATCOL'] = GPS_to_grids(trajdata[lon], trajdata[lat], params_tmp)
+        tmp['count'] = 1
+        tmp = tmp.groupby(['LONCOL','LATCOL'])['count'].sum().reset_index()
+        Gini = GiniIndex(list(tmp['count']))
+        return Gini
+    tmp1['gini'] = tmp1.apply(lambda r:getgini(r),axis = 1)
+    if gini == 'max':
+        r = tmp1[tmp1['gini'] == tmp1['gini'].max()].iloc[0]
+        print('Gini index: '+str(r['gini']))
+    elif gini == 'min':
+        r = tmp1[tmp1['gini'] == tmp1['gini'].min()].iloc[0]
+        print('Gini index: '+str(r['gini']))
+    elif gini == 'median':
+        tmp1['tmp'] = abs(tmp1['gini']-tmp1['gini'].median())
+        tmp1 = tmp1.sort_values(by = 'tmp')
+        r = tmp1.iloc[0]
+        print('Gini index: '+str(r['gini']))
+    else:
+        raise Exception('gini参数设定错误') 
+    params = [r['lon'],r['lat'],deltalon,deltalat]
+    return params

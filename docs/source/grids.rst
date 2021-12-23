@@ -58,6 +58,30 @@ params : List
     bounds = [113.75194,22.447837,114.624187,22.864748]
     tbd.grid_params(bounds,accuracy = 500)
 
+
+.. function:: transbigdata.grid_params_best(data,col = ['lon','lat'],accuracy = 500,gap = 10,sample = 10000)
+
+获取最佳的栅格化参数，以基尼系数最大为标准
+
+**输入**
+
+data : DataFrame
+    数据
+col : List
+    经纬度列
+accuracy : number
+    网格大小
+gap : number
+    精度,越大越精确，效果越好，计算量越大
+sample : number
+    抽样多少数据做测试
+
+**输出**
+
+params : List
+    最佳的栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+
+
 .. function:: transbigdata.GPS_to_grids(lon,lat,params)
 
 GPS数据对应栅格编号。输入数据的经纬度列与栅格参数，输出对应的栅格编号

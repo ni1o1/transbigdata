@@ -5,6 +5,41 @@
 轨迹处理
 ******************************
 
+停留与出行识别
+==================
+.. function:: transbigdata.traj_stay_move(data,params,col = ['ID','dataTime','longitude','latitude'],activitytime = 1800)
+
+输入轨迹数据与栅格化参数，识别活动与出行
+
+**输入**
+
+data : DataFrame
+    轨迹数据集
+params : List
+    栅格化参数
+col : List
+    数据的列名[个体，时间，经度，纬度]顺序
+activitytime : Number
+    多长时间识别为停留
+    
+**输出**
+
+stay : DataFrame
+    个体停留信息
+move : DataFrame
+    个体移动信息
+
+.. function:: transbigdata.plot_activity(data,col = ['stime','etime','LONCOL','LATCOL'])
+
+输入个体的活动数据（单一个体），绘制活动图
+
+**输入**
+
+data : DataFrame
+    活动数据集
+col : List
+    列名，分别为[活动开始时间，活动结束时间，活动所在栅格经度编号，活动所在栅格纬度编号]
+
 轨迹线型生成
 ==================
 

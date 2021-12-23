@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
  
 setuptools.setup(
     name="transbigdata",
-    version="0.2.7",
+    version="0.3.0",
     author="Qing Yu",
     author_email="qingyu0815@foxmail.com",
     description="A Python package developed for transportation spatio-temporal big data processing and analysis.",
@@ -17,7 +17,7 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/ni1o1/transbigdata/issues",
     },
     install_requires=[
-        "geopandas","matplotlib","plot_map >= 0.3.4","CoordinatesConverter>=0.1.4"
+        "geopandas","matplotlib","plot_map >= 0.3.5","CoordinatesConverter>=0.1.4"
         ],
     classifiers=[
         "Environment :: Web Environment",
