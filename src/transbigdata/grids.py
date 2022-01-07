@@ -92,6 +92,14 @@ def grid_params(bounds,accuracy = 500):
     -------
     params : List
         栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+
+    Examples
+    -------
+    >>> import transbigdata as tbd
+    >>> bounds = [113.6,22.4,114.8,22.9]
+    >>> tbd.grid_params(bounds,accuracy = 500)
+    (113.6, 22.4, 0.004872390756896538, 0.004496605206422906)
+    
     '''
     #划定栅格划分范围
     lon1 = bounds[0]

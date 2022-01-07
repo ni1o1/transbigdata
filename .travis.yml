@@ -4,4 +4,4 @@ python:
 install:
     - pip install -U transbigdata
 script: 
-	- python test_transbigdata.py
+	- pytest -v --color=yes --doctest-modules src/transbigdata
