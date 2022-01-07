@@ -5,6 +5,7 @@ import pandas as pd
 from scipy.spatial import cKDTree
 import itertools
 from operator import itemgetter
+from CoordinatesConverter import getdistance 
 #定义KDTree的函数
 def ckdnearest(dfA_origin,dfB_origin,Aname = ['lon','lat'],Bname = ['lon','lat']):
     '''
