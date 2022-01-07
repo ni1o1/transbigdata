@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>数据预处理 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo2.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="数据栅格化" href="grids.html" />
+    <link rel="prev" title="数据质量分析" href="quality.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html"><img src="_static/logo-wordmark-light.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">安装</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">安装、依赖与更新日志</a></li>
+</ul>
+<p><span class="caption-text">使用示例</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example-taxi/example-taxi.html">出租车数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-busgps/example-busgps.html">公交GPS的到离站信息匹配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metromodel/metromodel.html">地铁网络拓扑建模</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Example-pNEUMA/Example-pNEUMA.html">pNEUMA轨迹数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-bikesharing/example-bikesharing.html">共享单车数据社区发现</a></li>
+</ul>
+<p><span class="caption-text">通用方法</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quality.html">数据质量分析</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">数据预处理</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">各类数据通用的预处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">数据格式转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">轨迹数据清洗</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">出租车数据的预处理</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="grids.html">数据栅格化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="odprocess.html">数据聚合集计</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">数据可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getbusdata.html">数据获取</a></li>
+<li class="toctree-l1"><a class="reference internal" href="traj.html">轨迹处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gisprocess.html">GIS处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_map.html">底图加载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CoordinatesConverter.html">坐标距离</a></li>
+</ul>
+<p><span class="caption-text">各类数据处理方法</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="taxigps.html">出租车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bikedata.html">共享单车数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="busgps.html">公交车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metroline.html">公交地铁网络拓扑建模</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TransBigData</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>数据预处理</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/preprocess.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="preprocess">
+<span id="id1"></span><h1>数据预处理<a class="headerlink" href="#preprocess" title="永久链接至标题">¶</a></h1>
+<section id="id2">
+<h2>各类数据通用的预处理<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<dl class="py function">
+<dt id="transbigdata.clean_same">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_same</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['VehicleNum',</span> <span class="pre">'Time',</span> <span class="pre">'Lng',</span> <span class="pre">'Lat']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_same" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>删除信息与前后数据相同的数据以减少数据量
+如：某个体连续n条数据除了时间以外其他信息都相同，则可以只保留首末两条数据</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">DataFrame</span></dt><dd><p>数据</p>
+</dd>
+<dt>col<span class="classifier">List</span></dt><dd><p>列名，按[个体ID,时间,经度,纬度]的顺序，可以传入更多列。会以时间排序，再判断除了时间以外其他列的信息</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>data1<span class="classifier">DataFrame</span></dt><dd><p>清洗后的数据</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt id="transbigdata.clean_drift">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_drift</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['VehicleNum',</span> <span class="pre">'Time',</span> <span class="pre">'Lng',</span> <span class="pre">'Lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speedlimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_drift" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>删除漂移数据。条件是，此数据与前后的速度都大于speedlimit，但前后数据之间的速度却小于speedlimit。
+传入的数据中时间列如果为datetime格式则计算效率更快</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">DataFrame</span></dt><dd><p>数据</p>
+</dd>
+<dt>col<span class="classifier">List</span></dt><dd><p>列名，按[个体ID,时间,经度,纬度]的顺序</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>data1<span class="classifier">DataFrame</span></dt><dd><p>研究范围内的数据</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt id="transbigdata.clean_outofbounds">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_outofbounds</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Lng',</span> <span class="pre">'Lat']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_outofbounds" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入研究范围的左下右上经纬度坐标，剔除超出研究范围的数据</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">DataFrame</span></dt><dd><p>数据</p>
+</dd>
+<dt>bounds<span class="classifier">List</span></dt><dd><p>研究范围的左下右上经纬度坐标，顺序为[lon1,lat1,lon2,lat2]</p>
+</dd>
+<dt>col<span class="classifier">List</span></dt><dd><p>经纬度列名</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>data1<span class="classifier">DataFrame</span></dt><dd><p>研究范围内的数据</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt id="transbigdata.clean_outofshape">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_outofshape</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Lng',</span> <span class="pre">'Lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_outofshape" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入研究范围的GeoDataFrame，剔除超出研究区域的数据</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">DataFrame</span></dt><dd><p>数据</p>
+</dd>
+<dt>shape<span class="classifier">GeoDataFrame</span></dt><dd><p>研究范围的GeoDataFrame</p>
+</dd>
+<dt>col<span class="classifier">List</span></dt><dd><p>经纬度列名</p>
+</dd>
+<dt>accuracy<span class="classifier">number</span></dt><dd><p>计算原理是先栅格化后剔除，这里定义栅格大小，越小精度越高</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>data1<span class="classifier">DataFrame</span></dt><dd><p>研究范围内的数据</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt id="transbigdata.id_reindex">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">id_reindex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timegap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timecol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_new'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.id_reindex" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>对数据的ID列重新编号</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">DataFrame</span></dt><dd><p>数据</p>
+</dd>
+<dt>col<span class="classifier">str</span></dt><dd><p>要重新编号的ID列名</p>
+</dd>
+<dt>new<span class="classifier">bool</span></dt><dd><p>False，相同ID的新编号相同；True，依据表中的顺序，ID再次出现则编号不同</p>
+</dd>
+<dt>timegap<span class="classifier">number</span></dt><dd><p>如果个体在一段时间内没出现（timegap为时间阈值），则编号为新的个体。此参数与timecol同时设定才有效果。</p>
+</dd>
+<dt>timecol<span class="classifier">str</span></dt><dd><p>时间字段名称，此参数与timegap同时设定才有效果。</p>
+</dd>
+<dt>suffix<span class="classifier">str</span></dt><dd><p>新编号列名的后缀，设置为False时替代原有列名</p>
+</dd>
+<dt>sample<span class="classifier">int</span></dt><dd><p>传入数值，对重新编号的个体进行抽样</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>data1<span class="classifier">DataFrame</span></dt><dd><p>重新编号的数据</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt id="transbigdata.id_reindex_disgap">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">id_reindex_disgap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['uid',</span> <span class="pre">'lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disgap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_new'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.id_reindex_disgap" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>对数据的ID列重新编号，如果相邻两条记录超过距离，则编号为新id</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">DataFrame</span></dt><dd><p>数据</p>
+</dd>
+<dt>col<span class="classifier">str</span></dt><dd><p>要重新编号的ID列名</p>
+</dd>
+<dt>disgap<span class="classifier">number</span></dt><dd><p>如果个体轨迹超过一定距离，则编号为新的个体。</p>
+</dd>
+<dt>suffix<span class="classifier">str</span></dt><dd><p>新编号列名的后缀</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>data1<span class="classifier">DataFrame</span></dt><dd><p>重新编号的数据</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h2>数据格式转换<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<dl class="py function">
+<dt id="transbigdata.dumpjson">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">dumpjson</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.dumpjson" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入json数据，存储为文件。这个方法主要是解决numpy数值型无法兼容json包报错的问题</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">json</span></dt><dd><p>要储存的json数据</p>
+</dd>
+<dt>path<span class="classifier">str</span></dt><dd><p>保存的路径</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h2>轨迹数据清洗<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<dl class="py function">
+<dt id="transbigdata.clean_traj">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_traj</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['uid',</span> <span class="pre">'str_time',</span> <span class="pre">'lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tripgap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1800</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disgap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speedlimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_traj" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>轨迹数据清洗组合拳</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">DataFrame</span></dt><dd><p>轨迹数据</p>
+</dd>
+<dt>col<span class="classifier">List</span></dt><dd><p>列名，以[个体id,时间,经度,纬度]排列</p>
+</dd>
+<dt>tripgap<span class="classifier">number</span></dt><dd><p>多长的时间视为新的出行</p>
+</dd>
+<dt>disgap<span class="classifier">number</span></dt><dd><p>多长距离视为新的出行</p>
+</dd>
+<dt>speedlimit<span class="classifier">number</span></dt><dd><p>车速限制</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>data1<span class="classifier">DataFrame</span></dt><dd><p>清洗后的数据</p>
+</dd>
+</dl>
+</section>
+<section id="id5">
+<h2>出租车数据的预处理<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<dl class="py function">
+<dt id="transbigdata.clean_taxi_status">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_taxi_status</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['VehicleNum',</span> <span class="pre">'Time',</span> <span class="pre">'OpenStatus']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timelimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_taxi_status" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>删除出租车数据中载客状态瞬间变化的记录，这些记录的存在会影响出行订单判断。
+判断条件为:如果对同一辆车，上一条记录与下一条记录的载客状态都与本条记录不同，则本条记录应该删去</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">DataFrame</span></dt><dd><p>数据</p>
+</dd>
+<dt>col<span class="classifier">List</span></dt><dd><p>列名，按[车辆ID,时间,载客状态]的顺序</p>
+</dd>
+<dt>timelimit<span class="classifier">number</span></dt><dd><p>可选，单位为秒，上一条记录与下一条记录的时间小于该时间阈值才予以删除</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>data1<span class="classifier">DataFrame</span></dt><dd><p>清洗后的数据</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="quality.html" class="btn btn-neutral float-left" title="数据质量分析" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="grids.html" class="btn btn-neutral float-right" title="数据栅格化" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021, Qing Yu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

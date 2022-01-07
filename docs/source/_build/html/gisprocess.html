@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GIS处理 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo2.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="底图加载" href="plot_map.html" />
+    <link rel="prev" title="轨迹处理" href="traj.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html"><img src="_static/logo-wordmark-light.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">安装</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">安装、依赖与更新日志</a></li>
+</ul>
+<p><span class="caption-text">使用示例</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example-taxi/example-taxi.html">出租车数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-busgps/example-busgps.html">公交GPS的到离站信息匹配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metromodel/metromodel.html">地铁网络拓扑建模</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Example-pNEUMA/Example-pNEUMA.html">pNEUMA轨迹数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-bikesharing/example-bikesharing.html">共享单车数据社区发现</a></li>
+</ul>
+<p><span class="caption-text">通用方法</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quality.html">数据质量分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess.html">数据预处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grids.html">数据栅格化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="odprocess.html">数据聚合集计</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">数据可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getbusdata.html">数据获取</a></li>
+<li class="toctree-l1"><a class="reference internal" href="traj.html">轨迹处理</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GIS处理</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">近邻匹配</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dataframedataframe">点与点匹配（DataFrame与DataFrame）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#geodataframegeodataframe">点与点匹配（GeoDataFrame与GeoDataFrame）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">点与线匹配（GeoDataFrame与GeoDataFrame）</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">打断线</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">面要素处理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">面合并</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">对面取外边界构成新多边形</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">置信椭圆</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">置信椭圆参数估计</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">置信椭圆绘制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">用法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plot_map.html">底图加载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CoordinatesConverter.html">坐标距离</a></li>
+</ul>
+<p><span class="caption-text">各类数据处理方法</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="taxigps.html">出租车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bikedata.html">共享单车数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="busgps.html">公交车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metroline.html">公交地铁网络拓扑建模</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TransBigData</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>GIS处理</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/gisprocess.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gis">
+<span id="gisprocess"></span><h1>GIS处理<a class="headerlink" href="#gis" title="永久链接至标题">¶</a></h1>
+<section id="id1">
+<h2>近邻匹配<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="line-block">
+<div class="line">下面的案例展示如何用TransBigData包进行点与点、点与线的近邻匹配。该方法使用的是KDTree算法，可查看wiki：<a class="reference external" href="https://en.wikipedia.org/wiki/K-d_tree">https://en.wikipedia.org/wiki/K-d_tree</a>，算法复杂度为o(log(n))</div>
+</div>
+<section id="dataframedataframe">
+<h3>点与点匹配（DataFrame与DataFrame）<a class="headerlink" href="#dataframedataframe" title="永久链接至标题">¶</a></h3>
+<div class="line-block">
+<div class="line">导入TransBigData包</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">transbigdata</span> <span class="k">as</span> <span class="nn">tbd</span>
+</pre></div>
+</div>
+<p>生成两个GeoDataFrame表，但它们只有经纬度列</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">LineString</span>
+<span class="n">dfA</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">],[</span><span class="mi">24</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">21</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mi">22</span><span class="p">,</span><span class="mi">6</span><span class="p">]],</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lon1&#39;</span><span class="p">,</span><span class="s1">&#39;lat1&#39;</span><span class="p">])</span>
+<span class="n">dfB</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]],</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span><span class="s1">&#39;lat&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>使用tbd.ckdnearest进行点与点匹配，如果是DataFrame与DataFrame匹配（不含有地理信息），则需要指定前后两个表的经纬度列</p>
+<dl class="py function">
+<dt id="transbigdata.ckdnearest">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ckdnearest</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfA_origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dfB_origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Aname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ckdnearest" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入两个DataFrame，分别指定经纬度列名，为表A匹配表B中最近点，并计算距离</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>dfA_origin<span class="classifier">DataFrame</span></dt><dd><p>表A</p>
+</dd>
+<dt>dfB_origin<span class="classifier">DataFrame</span></dt><dd><p>表B</p>
+</dd>
+<dt>Aname<span class="classifier">List</span></dt><dd><p>表A中经纬度列字段</p>
+</dd>
+<dt>Bname<span class="classifier">List</span></dt><dd><p>表B中经纬度列字段</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>gdf<span class="classifier">DataFrame</span></dt><dd><p>为A匹配到B上最近点的表</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tbd</span><span class="o">.</span><span class="n">ckdnearest</span><span class="p">(</span><span class="n">dfA</span><span class="p">,</span><span class="n">dfB</span><span class="p">,</span><span class="n">Aname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lon1&#39;</span><span class="p">,</span><span class="s1">&#39;lat1&#39;</span><span class="p">],</span><span class="n">Bname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span><span class="s1">&#39;lat&#39;</span><span class="p">])</span>
+<span class="c1">#此时计算出的距离为经纬度换算实际距离</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>lon1</th>
+      <th>lat1</th>
+      <th>index</th>
+      <th>lon</th>
+      <th>lat</th>
+      <th>dist</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1.111949e+05</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>4</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1.111949e+05</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>6</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1.111949e+05</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>10</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>5.559746e+05</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24</td>
+      <td>6</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>2.437393e+06</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>21</td>
+      <td>6</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>2.105798e+06</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>22</td>
+      <td>6</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>2.216318e+06</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section id="geodataframegeodataframe">
+<h3>点与点匹配（GeoDataFrame与GeoDataFrame）<a class="headerlink" href="#geodataframegeodataframe" title="永久链接至标题">¶</a></h3>
+<p>将A表B表变为含有点信息的GeoDataFrame</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dfA</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">dfA</span><span class="p">[</span><span class="s1">&#39;lon1&#39;</span><span class="p">],</span><span class="n">dfA</span><span class="p">[</span><span class="s1">&#39;lat1&#39;</span><span class="p">])</span>
+<span class="n">dfB</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">dfB</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">],</span><span class="n">dfB</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>使用tbd.ckdnearest_point进行点与点匹配</p>
+<dl class="py function">
+<dt id="transbigdata.ckdnearest_point">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ckdnearest_point</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdB</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ckdnearest_point" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入两个GeoDataFrame，gdfA、gdfB均为点，该方法会为gdfA表连接上gdfB中最近的点，并添加距离字段dist</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>gdA<span class="classifier">GeoDataFrame</span></dt><dd><p>表A，点要素</p>
+</dd>
+<dt>gdB<span class="classifier">GeoDataFrame</span></dt><dd><p>表B，点要素</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>gdf<span class="classifier">GeoDataFrame</span></dt><dd><p>为A匹配到B上最近点的表</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tbd</span><span class="o">.</span><span class="n">ckdnearest_point</span><span class="p">(</span><span class="n">dfA</span><span class="p">,</span><span class="n">dfB</span><span class="p">)</span>
+<span class="c1">#此时计算出的距离为经纬度距离</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>lon1</th>
+      <th>lat1</th>
+      <th>geometry_x</th>
+      <th>dist</th>
+      <th>index</th>
+      <th>lon</th>
+      <th>lat</th>
+      <th>geometry_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2</td>
+      <td>POINT (1.00000 2.00000)</td>
+      <td>1.000000</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>POINT (1.00000 3.00000)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>4</td>
+      <td>POINT (2.00000 4.00000)</td>
+      <td>1.000000</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>POINT (2.00000 5.00000)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>6</td>
+      <td>POINT (2.00000 6.00000)</td>
+      <td>1.000000</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>POINT (2.00000 5.00000)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>10</td>
+      <td>POINT (2.00000 10.00000)</td>
+      <td>5.000000</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>POINT (2.00000 5.00000)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24</td>
+      <td>6</td>
+      <td>POINT (24.00000 6.00000)</td>
+      <td>22.022716</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>POINT (2.00000 5.00000)</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>21</td>
+      <td>6</td>
+      <td>POINT (21.00000 6.00000)</td>
+      <td>19.026298</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>POINT (2.00000 5.00000)</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>22</td>
+      <td>6</td>
+      <td>POINT (22.00000 6.00000)</td>
+      <td>20.024984</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>POINT (2.00000 5.00000)</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section id="id2">
+<h3>点与线匹配（GeoDataFrame与GeoDataFrame）<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<p>将A表变为地理点，B表为线</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dfA</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">dfA</span><span class="p">[</span><span class="s1">&#39;lon1&#39;</span><span class="p">],</span><span class="n">dfA</span><span class="p">[</span><span class="s1">&#39;lat1&#39;</span><span class="p">])</span>
+<span class="n">dfB</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">LineString</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">],[</span><span class="mf">3.2</span><span class="p">,</span><span class="mi">4</span><span class="p">]]),</span>
+                  <span class="n">LineString</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">]]),</span>
+                   <span class="n">LineString</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mf">1.5</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">]])]</span>
+<span class="n">dfB</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/output_15_1.png" src="_images/output_15_1.png" />
+<dl class="py function">
+<dt id="transbigdata.ckdnearest_line">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ckdnearest_line</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdfA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdfB</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ckdnearest_line" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入两个GeoDataFrame，其中gdfA为点，gdfB为线，该方法会为gdfA表连接上gdfB中最近的线，并添加距离字段dist</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>gdA<span class="classifier">GeoDataFrame</span></dt><dd><p>表A，点要素</p>
+</dd>
+<dt>gdB<span class="classifier">GeoDataFrame</span></dt><dd><p>表B，线要素</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>gdf<span class="classifier">GeoDataFrame</span></dt><dd><p>为A匹配到B中最近的线</p>
+</dd>
+</dl>
+<p>用tbd.ckdnearest_line可以实现点匹配线，其原理是将线中的折点提取，然后使用点匹配点。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tbd</span><span class="o">.</span><span class="n">ckdnearest_line</span><span class="p">(</span><span class="n">dfA</span><span class="p">,</span><span class="n">dfB</span><span class="p">)</span>
+<span class="c1">#此时计算出的距离为经纬度距离</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>lon1</th>
+      <th>lat1</th>
+      <th>geometry_x</th>
+      <th>dist</th>
+      <th>index</th>
+      <th>lon</th>
+      <th>lat</th>
+      <th>geometry_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2</td>
+      <td>POINT (1.00000 2.00000)</td>
+      <td>0.707107</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>LINESTRING (1.00000 1.00000, 1.50000 2.50000, ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>4</td>
+      <td>POINT (2.00000 4.00000)</td>
+      <td>1.200000</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>LINESTRING (1.00000 1.00000, 1.50000 2.50000, ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>6</td>
+      <td>POINT (2.00000 6.00000)</td>
+      <td>2.332381</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>LINESTRING (1.00000 1.00000, 1.50000 2.50000, ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>10</td>
+      <td>POINT (2.00000 10.00000)</td>
+      <td>6.118823</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>LINESTRING (1.00000 1.00000, 1.50000 2.50000, ...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>21</td>
+      <td>6</td>
+      <td>POINT (21.00000 6.00000)</td>
+      <td>17.912007</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>LINESTRING (1.00000 1.00000, 1.50000 2.50000, ...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>22</td>
+      <td>6</td>
+      <td>POINT (22.00000 6.00000)</td>
+      <td>18.906084</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>LINESTRING (1.00000 1.00000, 1.50000 2.50000, ...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>24</td>
+      <td>6</td>
+      <td>POINT (24.00000 6.00000)</td>
+      <td>20.880613</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>LINESTRING (1.00000 0.00000, 1.50000 0.00000, ...</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+</section>
+<section id="id3">
+<h2>打断线<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>在实际应用中，我们可能会需要把很长的线打断为很多子线段，每一条线段不要超过一定的最大长度，此时则可以使用TransBigData包中的splitline_with_length方法。</p>
+<dl class="py function">
+<dt id="transbigdata.splitline_with_length">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">splitline_with_length</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Centerline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlength</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.splitline_with_length" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入线GeoDataFrame要素，打断为最大长度maxlength的小线段</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>Centerline<span class="classifier">GeoDataFrame</span></dt><dd><p>线要素</p>
+</dd>
+<dt>maxlength<span class="classifier">number</span></dt><dd><p>打断的线段最大长度</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>splitedline<span class="classifier">GeoDataFrame</span></dt><dd><p>打断后的线</p>
+</dd>
+</dl>
+<p>下面演示如何将线打断为100米一段的线段</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#读取线要素</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="n">Centerline</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;test_lines.json&#39;</span><span class="p">)</span>
+<span class="n">Centerline</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/output_2_1.png" src="_images/output_2_1.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#转换线为投影坐标系</span>
+<span class="n">Centerline</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span><span class="s1">&#39;epsg:4326&#39;</span><span class="p">}</span>
+<span class="n">Centerline</span> <span class="o">=</span> <span class="n">Centerline</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span> <span class="o">=</span> <span class="s1">&#39;4517&#39;</span><span class="p">)</span>
+<span class="c1">#计算线的长度</span>
+<span class="n">Centerline</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Centerline</span><span class="o">.</span><span class="n">length</span>
+<span class="n">Centerline</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>geometry</th>
+      <th>length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>LINESTRING (29554925.232 4882800.694, 29554987...</td>
+      <td>285.503444</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>LINESTRING (29554682.635 4882450.554, 29554773...</td>
+      <td>185.482276</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>LINESTRING (29554987.079 4882521.969, 29555040...</td>
+      <td>291.399180</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>LINESTRING (29554987.079 4882521.969, 29555073...</td>
+      <td>248.881529</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>LINESTRING (29554987.079 4882521.969, 29554969...</td>
+      <td>207.571197</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>LINESTRING (29554773.177 4882288.671, 29554828...</td>
+      <td>406.251357</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0</td>
+      <td>LINESTRING (29554773.177 4882288.671, 29554926...</td>
+      <td>158.114403</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0</td>
+      <td>LINESTRING (29555060.286 4882205.456, 29555082...</td>
+      <td>107.426629</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0</td>
+      <td>LINESTRING (29555040.278 4882235.468, 29555060...</td>
+      <td>36.069941</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0</td>
+      <td>LINESTRING (29555060.286 4882205.456, 29555095...</td>
+      <td>176.695446</td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#将线打断为最长100米的线段</span>
+<span class="kn">import</span> <span class="nn">transbigdata</span> <span class="k">as</span> <span class="nn">tbd</span>
+<span class="n">splitedline</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">splitline_with_length</span><span class="p">(</span><span class="n">Centerline</span><span class="p">,</span><span class="n">maxlength</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#打断后线型不变</span>
+<span class="n">splitedline</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/output_5_1.png" src="_images/output_5_1.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#但内容已经变成一段一段了</span>
+<span class="n">splitedline</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>id</th>
+      <th>length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>LINESTRING (29554925.232 4882800.694, 29554927...</td>
+      <td>0</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LINESTRING (29554946.894 4882703.068, 29554949...</td>
+      <td>0</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>LINESTRING (29554968.557 4882605.443, 29554970...</td>
+      <td>0</td>
+      <td>85.503444</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>LINESTRING (29554682.635 4882450.554, 29554688...</td>
+      <td>1</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LINESTRING (29554731.449 4882363.277, 29554736...</td>
+      <td>1</td>
+      <td>85.482276</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>LINESTRING (29554987.079 4882521.969, 29554989...</td>
+      <td>2</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LINESTRING (29555005.335 4882423.650, 29555007...</td>
+      <td>2</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>LINESTRING (29555023.592 4882325.331, 29555025...</td>
+      <td>2</td>
+      <td>91.399180</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>LINESTRING (29554987.079 4882521.969, 29554993...</td>
+      <td>3</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LINESTRING (29555042.051 4882438.435, 29555048...</td>
+      <td>3</td>
+      <td>99.855617</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>LINESTRING (29555111.265 4882370.450, 29555116...</td>
+      <td>3</td>
+      <td>48.881529</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>LINESTRING (29554987.079 4882521.969, 29554985...</td>
+      <td>4</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LINESTRING (29554973.413 4882422.908, 29554971...</td>
+      <td>4</td>
+      <td>99.756943</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>LINESTRING (29554930.341 4882335.023, 29554929...</td>
+      <td>4</td>
+      <td>7.571197</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>LINESTRING (29554773.177 4882288.671, 29554777...</td>
+      <td>5</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LINESTRING (29554816.361 4882198.476, 29554821...</td>
+      <td>5</td>
+      <td>99.782969</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>LINESTRING (29554882.199 4882125.314, 29554891...</td>
+      <td>5</td>
+      <td>99.745378</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>LINESTRING (29554976.612 4882096.588, 29554987...</td>
+      <td>5</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>LINESTRING (29555076.548 4882100.189, 29555077...</td>
+      <td>5</td>
+      <td>6.251357</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>LINESTRING (29554773.177 4882288.671, 29554783...</td>
+      <td>6</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LINESTRING (29554869.914 4882314.006, 29554876...</td>
+      <td>6</td>
+      <td>58.114403</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>LINESTRING (29555060.286 4882205.456, 29555062...</td>
+      <td>7</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LINESTRING (29555081.239 4882107.675, 29555081...</td>
+      <td>7</td>
+      <td>7.426629</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>LINESTRING (29555040.278 4882235.468, 29555042...</td>
+      <td>8</td>
+      <td>36.069941</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>LINESTRING (29555060.286 4882205.456, 29555064...</td>
+      <td>9</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LINESTRING (29555094.981 4882299.244, 29555100...</td>
+      <td>9</td>
+      <td>76.419694</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section id="id4">
+<h2>面要素处理<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<section id="id5">
+<h3>面合并<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<dl class="py function">
+<dt id="transbigdata.merge_polygon">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">merge_polygon</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.merge_polygon" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入多边形GeoDataFrame数据，以及分组列名col，对不同组别进行分组的多边形进行合并</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">GeoDataFrame</span></dt><dd><p>多边形数据</p>
+</dd>
+<dt>col<span class="classifier">str</span></dt><dd><p>分组列名</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>data1<span class="classifier">GeoDataFrame</span></dt><dd><p>合并后的面</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h3>对面取外边界构成新多边形<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<dl class="py function">
+<dt id="transbigdata.polyon_exterior">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">polyon_exterior</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minarea</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.polyon_exterior" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入多边形GeoDataFrame数据，对多边形取外边界构成新多边形</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">GeoDataFrame</span></dt><dd><p>多边形数据</p>
+</dd>
+<dt>minarea<span class="classifier">number</span></dt><dd><p>最小面积，小于这个面积的面全部剔除</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>data1<span class="classifier">GeoDataFrame</span></dt><dd><p>处理后的面</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="id7">
+<h2>置信椭圆<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<section id="id8">
+<h3>置信椭圆参数估计<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<dl class="py function">
+<dt id="transbigdata.ellipse_params">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ellipse_params</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">95</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ellipse_params" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入点数据，获取置信椭圆的参数</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">DataFrame</span></dt><dd><p>公交GPS数据，单一公交线路，且需要含有车辆ID、GPS时间、经纬度（wgs84）</p>
+</dd>
+<dt>confidence<span class="classifier">number</span></dt><dd><p>置信度，可选99，95，90</p>
+</dd>
+<dt>epsg<span class="classifier">number</span></dt><dd><p>如果给了，则将原始坐标从wgs84，转换至给定epsg坐标系下进行置信椭圆参数估计</p>
+</dd>
+<dt>col: List</dt><dd><p>以[经度，纬度]形式存储的列名</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>params: List</dt><dd><p>质心椭圆参数，分别为[pos,width,height,theta,area,alpha]
+对应[中心点坐标，短轴，长轴，角度，面积，方向性]</p>
+</dd>
+</dl>
+</section>
+<section id="id9">
+<h3>置信椭圆绘制<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<dl class="py function">
+<dt id="transbigdata.ellipse_plot">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ellipse_plot</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ellip_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ellipse_plot" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入置信椭圆的参数，绘制置信椭圆</p>
+<p><strong>输入</strong></p>
+<p>ellip_params : List</p>
+<dl class="simple">
+<dt>ax<span class="classifier">matplotlib.axes._subplots.AxesSubplot</span></dt><dd><p>画板</p>
+</dd>
+</dl>
+</section>
+<section id="id10">
+<h3>用法<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">transbigdata</span> <span class="k">as</span> <span class="nn">tbd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1">#生成测试用数据</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,(</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+<span class="c1">#绘制数据分布</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="c1">#绘制数据点</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span><span class="n">s</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="c1">#绘制坐标轴</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/output_1_0.png" src="_images/output_1_0.png" />
+<p>输入数据与xy坐标所在列名，置信度，估计椭圆参数
+分别代表[中心点坐标，短轴，长轴，角度，面积，扁率</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ellip_params</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">ellipse_params</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">confidence</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="n">ellip_params</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">array</span><span class="p">([</span><span class="mf">5.78928146</span><span class="p">,</span> <span class="mf">2.88466235</span><span class="p">]),</span>
+ <span class="mf">4.6981983145616875</span><span class="p">,</span>
+ <span class="mf">14.04315715927693</span><span class="p">,</span>
+ <span class="o">-</span><span class="mf">58.15524535916836</span><span class="p">,</span>
+ <span class="mf">51.8186366184246</span><span class="p">,</span>
+ <span class="mf">0.6654457212665993</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>再用tbd.ellipse_plot绘制置信椭圆</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#绘制数据分布</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="c1">#绘制数据点</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span><span class="n">s</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="c1">#获取置信椭圆参数并绘制椭圆</span>
+<span class="c1">#99%置信椭圆</span>
+<span class="n">ellip_params</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">ellipse_params</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">confidence</span><span class="o">=</span><span class="mi">99</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="n">tbd</span><span class="o">.</span><span class="n">ellipse_plot</span><span class="p">(</span><span class="n">ellip_params</span><span class="p">,</span><span class="n">ax</span><span class="p">,</span><span class="n">fill</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1">#95%置信椭圆</span>
+<span class="n">ellip_params</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">ellipse_params</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">confidence</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="n">tbd</span><span class="o">.</span><span class="n">ellipse_plot</span><span class="p">(</span><span class="n">ellip_params</span><span class="p">,</span><span class="n">ax</span><span class="p">,</span><span class="n">fill</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1">#90%置信椭圆</span>
+<span class="n">ellip_params</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">ellipse_params</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">confidence</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="n">tbd</span><span class="o">.</span><span class="n">ellipse_plot</span><span class="p">(</span><span class="n">ellip_params</span><span class="p">,</span><span class="n">ax</span><span class="p">,</span><span class="n">fill</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1">#绘制坐标轴</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/output_3_0.png" src="_images/output_3_0.png" />
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="traj.html" class="btn btn-neutral float-left" title="轨迹处理" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plot_map.html" class="btn btn-neutral float-right" title="底图加载" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021, Qing Yu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

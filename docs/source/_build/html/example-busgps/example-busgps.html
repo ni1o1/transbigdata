@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>公交GPS的到离站信息匹配 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo2.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="地铁网络拓扑建模" href="../metromodel/metromodel.html" />
+    <link rel="prev" title="出租车数据处理" href="../example-taxi/example-taxi.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html"><img src="../_static/logo-wordmark-light.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">安装</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">安装、依赖与更新日志</a></li>
+</ul>
+<p><span class="caption-text">使用示例</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../example-taxi/example-taxi.html">出租车数据处理</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">公交GPS的到离站信息匹配</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">读取数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">到离站信息匹配</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">单程耗时</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">运营车速</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../metromodel/metromodel.html">地铁网络拓扑建模</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Example-pNEUMA/Example-pNEUMA.html">pNEUMA轨迹数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example-bikesharing/example-bikesharing.html">共享单车数据社区发现</a></li>
+</ul>
+<p><span class="caption-text">通用方法</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quality.html">数据质量分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">数据预处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grids.html">数据栅格化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../odprocess.html">数据聚合集计</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualization.html">数据可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getbusdata.html">数据获取</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../traj.html">轨迹处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gisprocess.html">GIS处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plot_map.html">底图加载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CoordinatesConverter.html">坐标距离</a></li>
+</ul>
+<p><span class="caption-text">各类数据处理方法</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../taxigps.html">出租车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bikedata.html">共享单车数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../busgps.html">公交车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metroline.html">公交地铁网络拓扑建模</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TransBigData</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>公交GPS的到离站信息匹配</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/example-busgps/example-busgps.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gps">
+<h1>公交GPS的到离站信息匹配<a class="headerlink" href="#gps" title="永久链接至标题">¶</a></h1>
+<div class="line-block">
+<div class="line">这个案例的Jupyter notebook: <a class="reference external" href="https://github.com/ni1o1/transbigdata/blob/main/example/Example%202-Identifying%20arrival%20and%20departure%20information%20from%20Bus%20GPS%20data.ipynb">点击这里</a>.</div>
+<div class="line">可以点击 <a class="reference external" href="https://mybinder.org/v2/gh/ni1o1/transbigdata/9507de936806c34a4befd74aa9227b012569a6aa?urlpath=lab%2Ftree%2Fexample%2FExample%202-Identifying%20arrival%20and%20departure%20information%20from%20Bus%20GPS%20data.ipynb">这个链接</a> 在线编辑器中尝试</div>
+</div>
+<p>下面的案例展示如何用TransBigData包处理公交GPS数据，以内置方法计算公交车辆的到离站信息、统计公交单程耗时与运营车速</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">transbigdata</span> <span class="k">as</span> <span class="nn">tbd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+</pre></div>
+</div>
+<section id="id1">
+<h2>读取数据<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>读取GPS数据</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BUS_GPS</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;busgps.csv&#39;</span><span class="p">,</span><span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">BUS_GPS</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GPSDateTime&#39;</span><span class="p">,</span> <span class="s1">&#39;LineId&#39;</span><span class="p">,</span> <span class="s1">&#39;LineName&#39;</span><span class="p">,</span> <span class="s1">&#39;NextLevel&#39;</span><span class="p">,</span> <span class="s1">&#39;PrevLevel&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Strlatlon&#39;</span><span class="p">,</span> <span class="s1">&#39;ToDir&#39;</span><span class="p">,</span> <span class="s1">&#39;VehicleId&#39;</span><span class="p">,</span> <span class="s1">&#39;VehicleNo&#39;</span><span class="p">,</span> <span class="s1">&#39;unknow&#39;</span><span class="p">]</span>
+<span class="c1">#时间转换为datetime格式</span>
+<span class="n">BUS_GPS</span><span class="p">[</span><span class="s1">&#39;GPSDateTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">BUS_GPS</span><span class="p">[</span><span class="s1">&#39;GPSDateTime&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>经纬度坐标转换</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#切分经纬度的字符串</span>
+<span class="n">BUS_GPS</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">BUS_GPS</span><span class="p">[</span><span class="s1">&#39;Strlatlon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span><span class="n">r</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">BUS_GPS</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">BUS_GPS</span><span class="p">[</span><span class="s1">&#39;Strlatlon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span><span class="n">r</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1">#坐标系转换</span>
+<span class="n">BUS_GPS</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">],</span><span class="n">BUS_GPS</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">gcj02towgs84</span><span class="p">(</span><span class="n">BUS_GPS</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span><span class="n">BUS_GPS</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))</span>
+<span class="n">BUS_GPS</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GPSDateTime</th>
+      <th>LineId</th>
+      <th>LineName</th>
+      <th>NextLevel</th>
+      <th>PrevLevel</th>
+      <th>Strlatlon</th>
+      <th>ToDir</th>
+      <th>VehicleId</th>
+      <th>VehicleNo</th>
+      <th>unknow</th>
+      <th>lon</th>
+      <th>lat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2019-01-16 23:59:59</td>
+      <td>7100</td>
+      <td>71</td>
+      <td>2</td>
+      <td>1</td>
+      <td>121.335413,31.173188</td>
+      <td>1</td>
+      <td>沪D-R7103</td>
+      <td>Z5A-0021</td>
+      <td>1</td>
+      <td>121.330858</td>
+      <td>31.175129</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019-01-17 00:00:00</td>
+      <td>7100</td>
+      <td>71</td>
+      <td>2</td>
+      <td>1</td>
+      <td>121.334616,31.172271</td>
+      <td>1</td>
+      <td>沪D-R1273</td>
+      <td>Z5A-0002</td>
+      <td>1</td>
+      <td>121.330063</td>
+      <td>31.174214</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-01-17 00:00:00</td>
+      <td>7100</td>
+      <td>71</td>
+      <td>24</td>
+      <td>23</td>
+      <td>121.339955,31.173025</td>
+      <td>0</td>
+      <td>沪D-R5257</td>
+      <td>Z5A-0020</td>
+      <td>1</td>
+      <td>121.335390</td>
+      <td>31.174958</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2019-01-17 00:00:01</td>
+      <td>7100</td>
+      <td>71</td>
+      <td>14</td>
+      <td>13</td>
+      <td>121.409491,31.20433</td>
+      <td>0</td>
+      <td>沪D-R5192</td>
+      <td>Z5A-0013</td>
+      <td>1</td>
+      <td>121.404843</td>
+      <td>31.206179</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019-01-17 00:00:03</td>
+      <td>7100</td>
+      <td>71</td>
+      <td>15</td>
+      <td>14</td>
+      <td>121.398615,31.200253</td>
+      <td>0</td>
+      <td>沪D-T0951</td>
+      <td>Z5A-0022</td>
+      <td>1</td>
+      <td>121.393966</td>
+      <td>31.202103</td>
+    </tr>
+  </tbody>
+</table>
+</div><p>读取公交线数据</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shp</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;busline.json&#39;</span>
+<span class="n">linegdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">shp</span><span class="p">,</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;gbk&#39;</span><span class="p">)</span>
+<span class="n">line</span> <span class="o">=</span> <span class="n">linegdf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">line</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/output_8_1.png" src="../_images/output_8_1.png" />
+<p>读取公交站点数据</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shp</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;busstop.json&#39;</span>
+<span class="n">stop</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">shp</span><span class="p">,</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;gbk&#39;</span><span class="p">)</span>
+<span class="n">stop</span> <span class="o">=</span> <span class="n">stop</span><span class="p">[</span><span class="n">stop</span><span class="p">[</span><span class="s1">&#39;linename&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;71路(延安东路外滩-申昆路枢纽站)&#39;</span><span class="p">]</span>
+<span class="n">stop</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/output_10_1.png" src="../_images/output_10_1.png" />
+</section>
+<section id="id2">
+<h2>到离站信息匹配<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">arriveinfo</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">busgps_arriveinfo</span><span class="p">(</span><span class="n">BUS_GPS</span><span class="p">,</span><span class="n">line</span><span class="p">,</span><span class="n">stop</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>数据清洗中…</p>
+<p>运行位置匹配中……</p>
+<p>匹配到离站信息………………………………………………………………………………………………………………………………………</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">arriveinfo</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>arrivetime</th>
+      <th>leavetime</th>
+      <th>stopname</th>
+      <th>VehicleId</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2019-01-17 07:19:42</td>
+      <td>2019-01-17 07:31:14</td>
+      <td>延安东路外滩</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019-01-17 09:53:08</td>
+      <td>2019-01-17 10:09:34</td>
+      <td>延安东路外滩</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>2019-01-17 07:13:23</td>
+      <td>2019-01-17 07:15:45</td>
+      <td>西藏中路</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019-01-17 07:34:24</td>
+      <td>2019-01-17 07:35:38</td>
+      <td>西藏中路</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-01-17 09:47:03</td>
+      <td>2019-01-17 09:50:22</td>
+      <td>西藏中路</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-01-17 16:35:52</td>
+      <td>2019-01-17 16:36:49</td>
+      <td>吴宝路</td>
+      <td>148</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2019-01-17 19:21:09</td>
+      <td>2019-01-17 19:23:44</td>
+      <td>吴宝路</td>
+      <td>148</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>2019-01-17 13:36:26</td>
+      <td>2019-01-17 13:45:04</td>
+      <td>申昆路枢纽站</td>
+      <td>148</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019-01-17 15:52:26</td>
+      <td>2019-01-17 16:32:46</td>
+      <td>申昆路枢纽站</td>
+      <td>148</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-01-17 19:24:54</td>
+      <td>2019-01-17 19:25:55</td>
+      <td>申昆路枢纽站</td>
+      <td>148</td>
+    </tr>
+  </tbody>
+</table>
+<p>8984 rows × 4 columns</p>
+</div></section>
+<section id="id3">
+<h2>单程耗时<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">onewaytime</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">busgps_onewaytime</span><span class="p">(</span><span class="n">arriveinfo</span><span class="p">,</span>
+                                   <span class="n">start</span> <span class="o">=</span> <span class="s1">&#39;延安东路外滩&#39;</span><span class="p">,</span>
+                                   <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;申昆路枢纽站&#39;</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VehicleId&#39;</span><span class="p">,</span><span class="s1">&#39;stopname&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## 绘制耗时分布箱型图</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;SimHei&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SimHei&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span>
+<span class="n">fig</span>     <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="n">dpi</span> <span class="o">=</span> <span class="mi">250</span><span class="p">)</span>
+<span class="n">ax1</span>      <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;shour&#39;</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">onewaytime</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span><span class="n">hue</span> <span class="o">=</span> <span class="s1">&#39;方向&#39;</span><span class="p">,</span><span class="n">data</span> <span class="o">=</span> <span class="n">onewaytime</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;始发站至终点站耗时（分钟）&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;小时&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/output_16_0.png" src="../_images/output_16_0.png" />
+</section>
+<section id="id4">
+<h2>运营车速<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#转换坐标系为投影坐标系，方便后面计算距离</span>
+<span class="n">line</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span><span class="s1">&#39;epsg:4326&#39;</span><span class="p">}</span>
+<span class="n">line_2416</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span> <span class="o">=</span> <span class="mi">2416</span><span class="p">)</span>
+<span class="c1">#公交线路数据里面的geometry</span>
+<span class="n">lineshp</span> <span class="o">=</span> <span class="n">line_2416</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">linename</span> <span class="o">=</span> <span class="n">line_2416</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lineshp</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">anaconda3</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">pyproj</span><span class="o">/</span><span class="n">crs</span><span class="o">/</span><span class="n">crs</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span> <span class="ne">FutureWarning</span><span class="p">:</span> <span class="s1">&#39;+init=&lt;authority&gt;:&lt;code&gt;&#39;</span> <span class="n">syntax</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="s1">&#39;&lt;authority&gt;:&lt;code&gt;&#39;</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">preferred</span> <span class="n">initialization</span> <span class="n">method</span><span class="o">.</span> <span class="n">When</span> <span class="n">making</span> <span class="n">the</span> <span class="n">change</span><span class="p">,</span> <span class="n">be</span> <span class="n">mindful</span> <span class="n">of</span> <span class="n">axis</span> <span class="n">order</span> <span class="n">changes</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pyproj4</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">pyproj</span><span class="o">/</span><span class="n">stable</span><span class="o">/</span><span class="n">gotchas</span><span class="o">.</span><span class="n">html</span><span class="c1">#axis-order-changes-in-proj-6</span>
+  <span class="k">return</span> <span class="n">_prepare_from_string</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pjargs</span><span class="p">))</span>
+</pre></div>
+</div>
+<img alt="../_images/output_18_1.png" src="../_images/output_18_1.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#筛选去掉车速过快的</span>
+<span class="c1">#车速单位转换为km/h</span>
+<span class="n">onewaytime</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">lineshp</span><span class="o">.</span><span class="n">length</span><span class="o">/</span><span class="n">onewaytime</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">])</span><span class="o">*</span><span class="mf">3.6</span>
+<span class="n">onewaytime</span> <span class="o">=</span> <span class="n">onewaytime</span><span class="p">[</span><span class="n">onewaytime</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">60</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## 车速分布</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;SimHei&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SimHei&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span>
+<span class="n">fig</span>     <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="n">dpi</span> <span class="o">=</span> <span class="mi">250</span><span class="p">)</span>
+<span class="n">ax1</span>      <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;shour&#39;</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;speed&#39;</span><span class="p">,</span><span class="n">hue</span> <span class="o">=</span> <span class="s1">&#39;方向&#39;</span><span class="p">,</span><span class="n">data</span> <span class="o">=</span> <span class="n">onewaytime</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;运营速度（km/h）&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;小时&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/output_20_0.png" src="../_images/output_20_0.png" />
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../example-taxi/example-taxi.html" class="btn btn-neutral float-left" title="出租车数据处理" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../metromodel/metromodel.html" class="btn btn-neutral float-right" title="地铁网络拓扑建模" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021, Qing Yu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

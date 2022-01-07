@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>数据栅格化 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo2.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="数据聚合集计" href="odprocess.html" />
+    <link rel="prev" title="数据预处理" href="preprocess.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html"><img src="_static/logo-wordmark-light.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">安装</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">安装、依赖与更新日志</a></li>
+</ul>
+<p><span class="caption-text">使用示例</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example-taxi/example-taxi.html">出租车数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-busgps/example-busgps.html">公交GPS的到离站信息匹配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metromodel/metromodel.html">地铁网络拓扑建模</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Example-pNEUMA/Example-pNEUMA.html">pNEUMA轨迹数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-bikesharing/example-bikesharing.html">共享单车数据社区发现</a></li>
+</ul>
+<p><span class="caption-text">通用方法</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quality.html">数据质量分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess.html">数据预处理</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">数据栅格化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">方形栅格渔网的生成与对应</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#geohash">geohash编码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">六边形渔网生成</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="odprocess.html">数据聚合集计</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">数据可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getbusdata.html">数据获取</a></li>
+<li class="toctree-l1"><a class="reference internal" href="traj.html">轨迹处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gisprocess.html">GIS处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_map.html">底图加载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CoordinatesConverter.html">坐标距离</a></li>
+</ul>
+<p><span class="caption-text">各类数据处理方法</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="taxigps.html">出租车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bikedata.html">共享单车数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="busgps.html">公交车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metroline.html">公交地铁网络拓扑建模</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TransBigData</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>数据栅格化</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/grids.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="grids">
+<span id="id1"></span><h1>数据栅格化<a class="headerlink" href="#grids" title="永久链接至标题">¶</a></h1>
+<section id="id2">
+<h2>方形栅格渔网的生成与对应<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<dl class="py function">
+<dt id="transbigdata.rect_grids">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">rect_grids</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.rect_grids" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>生成研究范围内的方形栅格</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>bounds<span class="classifier">List</span></dt><dd><p>生成范围的边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标</p>
+</dd>
+<dt>accuracy<span class="classifier">number</span></dt><dd><p>栅格大小（米）</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>grid<span class="classifier">GeoDataFrame</span></dt><dd><p>栅格的GeoDataFrame，其中LONCOL与LATCOL为栅格的编号，HBLON与HBLAT为栅格的中心点坐标</p>
+</dd>
+<dt>params<span class="classifier">List</span></dt><dd><p>栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#设定范围</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="n">lon1</span><span class="p">,</span><span class="n">lat1</span><span class="p">,</span><span class="n">lon2</span><span class="p">,</span><span class="n">lat2</span><span class="p">]</span>
+<span class="n">grid</span><span class="p">,</span><span class="n">params</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">rect_grids</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span><span class="n">accuracy</span> <span class="o">=</span> <span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py function">
+<dt id="transbigdata.grid_params">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">grid_params</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.grid_params" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>栅格参数获取</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>bounds<span class="classifier">List</span></dt><dd><p>生成范围的边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标</p>
+</dd>
+<dt>accuracy<span class="classifier">number</span></dt><dd><p>栅格大小（米）</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>params<span class="classifier">List</span></dt><dd><p>栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">113.75194</span><span class="p">,</span><span class="mf">22.447837</span><span class="p">,</span><span class="mf">114.624187</span><span class="p">,</span><span class="mf">22.864748</span><span class="p">]</span>
+<span class="n">tbd</span><span class="o">.</span><span class="n">grid_params</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span><span class="n">accuracy</span> <span class="o">=</span> <span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py function">
+<dt id="transbigdata.grid_params_best">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">grid_params_best</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.grid_params_best" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>获取最佳的栅格化参数，以基尼系数最大为标准</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">DataFrame</span></dt><dd><p>数据</p>
+</dd>
+<dt>col<span class="classifier">List</span></dt><dd><p>经纬度列</p>
+</dd>
+<dt>accuracy<span class="classifier">number</span></dt><dd><p>网格大小</p>
+</dd>
+<dt>gap<span class="classifier">number</span></dt><dd><p>精度,越大越精确，效果越好，计算量越大</p>
+</dd>
+<dt>sample<span class="classifier">number</span></dt><dd><p>抽样多少数据做测试</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>params<span class="classifier">List</span></dt><dd><p>最佳的栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt id="transbigdata.GPS_to_grids">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">GPS_to_grids</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.GPS_to_grids" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>GPS数据对应栅格编号。输入数据的经纬度列与栅格参数，输出对应的栅格编号</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>lon<span class="classifier">Series</span></dt><dd><p>经度列</p>
+</dd>
+<dt>lat<span class="classifier">Series</span></dt><dd><p>纬度列</p>
+</dd>
+<dt>params<span class="classifier">List</span></dt><dd><p>栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>LONCOL<span class="classifier">Series</span></dt><dd><p>经度栅格编号列</p>
+</dd>
+<dt>LATCOL<span class="classifier">Series</span></dt><dd><p>纬度栅格编号列</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;LONCOL&#39;</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;LATCOL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">GPS_to_grids</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Lng&#39;</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Lat&#39;</span><span class="p">],</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py function">
+<dt id="transbigdata.grids_centre">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">grids_centre</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loncol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latcol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.grids_centre" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>栅格编号对应栅格中心点经纬度。输入数据的栅格编号与栅格参数，输出对应的栅格中心点</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>LONCOL<span class="classifier">Series</span></dt><dd><p>经度栅格编号列</p>
+</dd>
+<dt>LATCOL<span class="classifier">Series</span></dt><dd><p>纬度栅格编号列</p>
+</dd>
+<dt>params<span class="classifier">List</span></dt><dd><p>栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>HBLON<span class="classifier">Series</span></dt><dd><p>栅格中心点经度列</p>
+</dd>
+<dt>HBLAT<span class="classifier">Series</span></dt><dd><p>栅格中心点纬度列</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;HBLON&#39;</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;HBLAT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">grids_centre</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;LONCOL&#39;</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;LATCOL&#39;</span><span class="p">],</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py function">
+<dt id="transbigdata.gridid_to_polygon">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">gridid_to_polygon</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loncol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latcol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.gridid_to_polygon" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>栅格编号生成栅格的地理信息列。输入数据的栅格编号与栅格参数，输出对应的地理信息列</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>LONCOL<span class="classifier">Series</span></dt><dd><p>经度栅格编号列</p>
+</dd>
+<dt>LATCOL<span class="classifier">Series</span></dt><dd><p>纬度栅格编号列</p>
+</dd>
+<dt>params<span class="classifier">List</span></dt><dd><p>栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>geometry<span class="classifier">Series</span></dt><dd><p>栅格的矢量图形列</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">gridid_to_polygon</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;LONCOL&#39;</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;LATCOL&#39;</span><span class="p">],</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py function">
+<dt id="transbigdata.gridid_sjoin_shape">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">gridid_sjoin_shape</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['LONCOL',</span> <span class="pre">'LATCOL']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.gridid_sjoin_shape" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入数据（带有栅格经纬度编号两列），矢量图形与栅格化参数，输出数据栅格并对应矢量图形。</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">DataFrame</span></dt><dd><p>数据,（带有栅格经纬度编号两列）</p>
+</dd>
+<dt>shape<span class="classifier">GeoDataFrame</span></dt><dd><p>矢量图形</p>
+</dd>
+<dt>params<span class="classifier">List</span></dt><dd><p>栅格化参数</p>
+</dd>
+<dt>col<span class="classifier">List</span></dt><dd><p>列名，[经度栅格编号，纬度栅格编号]</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>data1<span class="classifier">DataFrame</span></dt><dd><p>数据栅格并对应矢量图形</p>
+</dd>
+</dl>
+</section>
+<section id="geohash">
+<h2>geohash编码<a class="headerlink" href="#geohash" title="永久链接至标题">¶</a></h2>
+<p>geohash是一种公共域地理编码系统，它的作用是将经纬度地理位置编码为字母和数字组成的字符串，字符串也可解码为经纬度。每个字符串代表一个网格编号，字符串的长度越长则精度越高。根据<a class="reference external" href="https://en.wikipedia.org/wiki/Geohash">wiki</a>，geohash字符串长度对应精度表格如下：</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>geohash length(precision)</p></th>
+<th class="head"><p>lat bits</p></th>
+<th class="head"><p>lng bits</p></th>
+<th class="head"><p>lat error</p></th>
+<th class="head"><p>lng error</p></th>
+<th class="head"><p>km error</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>±23</p></td>
+<td><p>±23</p></td>
+<td><p>±2500</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>5</p></td>
+<td><p>5</p></td>
+<td><p>±2.8</p></td>
+<td><p>±5.6</p></td>
+<td><p>±630</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>7</p></td>
+<td><p>8</p></td>
+<td><p>±0.70</p></td>
+<td><p>±0.70</p></td>
+<td><p>±78</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>±0.087</p></td>
+<td><p>±0.18</p></td>
+<td><p>±20</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>12</p></td>
+<td><p>13</p></td>
+<td><p>±0.022</p></td>
+<td><p>±0.022</p></td>
+<td><p>±2.4</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>15</p></td>
+<td><p>15</p></td>
+<td><p>±0.0027</p></td>
+<td><p>±0.0055</p></td>
+<td><p>±0.61</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>17</p></td>
+<td><p>18</p></td>
+<td><p>±0.00068</p></td>
+<td><p>±0.00068</p></td>
+<td><p>±0.076</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>20</p></td>
+<td><p>20</p></td>
+<td><p>±0.000085</p></td>
+<td><p>±0.00017</p></td>
+<td><p>±0.019</p></td>
+</tr>
+</tbody>
+</table>
+<p>TransBigData包中也提供了geohash的处理功能，主要包括三个函数：</p>
+<dl class="py function">
+<dt id="transbigdata.geohash_encode">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">geohash_encode</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.geohash_encode" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入经纬度与精度，输出geohash编码</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>lon<span class="classifier">Series</span></dt><dd><p>经度列</p>
+</dd>
+<dt>lat<span class="classifier">Series</span></dt><dd><p>纬度列</p>
+</dd>
+<dt>precision<span class="classifier">number</span></dt><dd><p>geohash精度</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>lon<span class="classifier">Series</span></dt><dd><p>经度列</p>
+</dd>
+<dt>lat<span class="classifier">Series</span></dt><dd><p>纬度列</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt id="transbigdata.geohash_decode">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">geohash_decode</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.geohash_decode" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入经纬度与精度，输出geohash编码</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>geohash<span class="classifier">Series</span></dt><dd><p>geohash编码列</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>geohash<span class="classifier">Series</span></dt><dd><p>geohash编码列</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt id="transbigdata.geohash_togrid">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">geohash_togrid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.geohash_togrid" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入geohash编码，输出geohash网格的地理信息图形Series列</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>geohash<span class="classifier">Series</span></dt><dd><p>geohash编码列</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>poly<span class="classifier">Series</span></dt><dd><p>geohash的栅格列</p>
+</dd>
+</dl>
+<p>相比TransBigData包中提供的方形栅格处理方法，geohash更慢，也无法提供自由定义的栅格大小。下面的示例展示如何利用这三个函数对数据进行geohash编码集计，并可视化</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">transbigdata</span> <span class="k">as</span> <span class="nn">tbd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="c1">#读取数据</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;TaxiData-Sample.csv&#39;</span><span class="p">,</span><span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VehicleNum&#39;</span><span class="p">,</span><span class="s1">&#39;time&#39;</span><span class="p">,</span><span class="s1">&#39;slon&#39;</span><span class="p">,</span><span class="s1">&#39;slat&#39;</span><span class="p">,</span><span class="s1">&#39;OpenStatus&#39;</span><span class="p">,</span><span class="s1">&#39;Speed&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#依据经纬度geohash编码，精确度选6时，栅格大小约为±0.61km</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;geohash&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">geohash_encode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;slon&#39;</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;slat&#39;</span><span class="p">],</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;geohash&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>         <span class="n">ws0btw</span>
+<span class="mi">1</span>         <span class="n">ws0btz</span>
+<span class="mi">2</span>         <span class="n">ws0btz</span>
+<span class="mi">3</span>         <span class="n">ws0btz</span>
+<span class="mi">4</span>         <span class="n">ws0by4</span>
+           <span class="o">...</span>
+<span class="mi">544994</span>    <span class="n">ws131q</span>
+<span class="mi">544995</span>    <span class="n">ws1313</span>
+<span class="mi">544996</span>    <span class="n">ws131f</span>
+<span class="mi">544997</span>    <span class="n">ws1361</span>
+<span class="mi">544998</span>    <span class="n">ws10tq</span>
+<span class="n">Name</span><span class="p">:</span> <span class="n">geohash</span><span class="p">,</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">544999</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="nb">object</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#基于geohash编码集计</span>
+<span class="n">dataagg</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;geohash&#39;</span><span class="p">])[</span><span class="s1">&#39;VehicleNum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="c1">#geohash编码解码为经纬度</span>
+<span class="n">dataagg</span><span class="p">[</span><span class="s1">&#39;lon_geohash&#39;</span><span class="p">],</span><span class="n">dataagg</span><span class="p">[</span><span class="s1">&#39;lat_geohash&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">geohash_decode</span><span class="p">(</span><span class="n">dataagg</span><span class="p">[</span><span class="s1">&#39;geohash&#39;</span><span class="p">])</span>
+<span class="c1">#geohash编码生成栅格矢量图形</span>
+<span class="n">dataagg</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">geohash_togrid</span><span class="p">(</span><span class="n">dataagg</span><span class="p">[</span><span class="s1">&#39;geohash&#39;</span><span class="p">])</span>
+<span class="c1">#转换为GeoDataFrame</span>
+<span class="n">dataagg</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">dataagg</span><span class="p">)</span>
+<span class="n">dataagg</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geohash</th>
+      <th>VehicleNum</th>
+      <th>lon_geohash</th>
+      <th>lat_geohash</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>w3uf3x</td>
+      <td>1</td>
+      <td>108.</td>
+      <td>10.28</td>
+      <td>POLYGON ((107.99561 10.27771, 107.99561 10.283...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>webzz6</td>
+      <td>12</td>
+      <td>113.9</td>
+      <td>22.47</td>
+      <td>POLYGON ((113.87329 22.46704, 113.87329 22.472...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>webzz7</td>
+      <td>21</td>
+      <td>113.9</td>
+      <td>22.48</td>
+      <td>POLYGON ((113.87329 22.47253, 113.87329 22.478...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>webzzd</td>
+      <td>1</td>
+      <td>113.9</td>
+      <td>22.47</td>
+      <td>POLYGON ((113.88428 22.46704, 113.88428 22.472...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>webzzf</td>
+      <td>2</td>
+      <td>113.9</td>
+      <td>22.47</td>
+      <td>POLYGON ((113.89526 22.46704, 113.89526 22.472...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2022</th>
+      <td>ws1d9u</td>
+      <td>1</td>
+      <td>114.7</td>
+      <td>22.96</td>
+      <td>POLYGON ((114.68628 22.96143, 114.68628 22.966...</td>
+    </tr>
+    <tr>
+      <th>2023</th>
+      <td>ws1ddh</td>
+      <td>6</td>
+      <td>114.7</td>
+      <td>22.96</td>
+      <td>POLYGON ((114.69727 22.96143, 114.69727 22.966...</td>
+    </tr>
+    <tr>
+      <th>2024</th>
+      <td>ws1ddj</td>
+      <td>2</td>
+      <td>114.7</td>
+      <td>22.97</td>
+      <td>POLYGON ((114.69727 22.96692, 114.69727 22.972...</td>
+    </tr>
+    <tr>
+      <th>2025</th>
+      <td>ws1ddm</td>
+      <td>4</td>
+      <td>114.7</td>
+      <td>22.97</td>
+      <td>POLYGON ((114.70825 22.96692, 114.70825 22.972...</td>
+    </tr>
+    <tr>
+      <th>2026</th>
+      <td>ws1ddq</td>
+      <td>7</td>
+      <td>114.7</td>
+      <td>22.98</td>
+      <td>POLYGON ((114.70825 22.97241, 114.70825 22.977...</td>
+    </tr>
+  </tbody>
+</table>
+<p>2027 rows × 5 columns</p>
+</div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#设定绘图边界</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">113.6</span><span class="p">,</span><span class="mf">22.4</span><span class="p">,</span><span class="mf">114.8</span><span class="p">,</span><span class="mf">22.9</span><span class="p">]</span>
+<span class="c1">#创建图框</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">plot_map</span>
+<span class="n">fig</span> <span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">280</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="c1">#添加地图底图</span>
+<span class="n">tbd</span><span class="o">.</span><span class="n">plot_map</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span><span class="n">bounds</span><span class="p">,</span><span class="n">zoom</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span><span class="n">style</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+<span class="c1">#绘制colorbar</span>
+<span class="n">cax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="c1">#绘制geohash的栅格集计</span>
+<span class="n">dataagg</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span><span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;VehicleNum&#39;</span><span class="p">,</span><span class="n">cax</span> <span class="o">=</span> <span class="n">cax</span><span class="p">,</span><span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1">#添加比例尺和指北针</span>
+<span class="n">tbd</span><span class="o">.</span><span class="n">plotscale</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">bounds</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">,</span><span class="n">textsize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span><span class="n">compasssize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">accuracy</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span><span class="n">rect</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.06</span><span class="p">,</span><span class="mf">0.03</span><span class="p">],</span><span class="n">zorder</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">bounds</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">bounds</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/output_9_0.png" src="_images/output_9_0.png" />
+</section>
+<section id="id3">
+<h2>六边形渔网生成<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<dl class="py function">
+<dt id="transbigdata.hexagon_grids">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">hexagon_grids</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.hexagon_grids" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>生成研究范围内的六边形渔网。</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>bounds<span class="classifier">List</span></dt><dd><p>生成范围的边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标</p>
+</dd>
+<dt>accuracy<span class="classifier">number</span></dt><dd><p>六边形的边长（米）</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>hexagon<span class="classifier">GeoDataFrame</span></dt><dd><p>六边形渔网的矢量图形</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#设定范围</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">113.6</span><span class="p">,</span><span class="mf">22.4</span><span class="p">,</span><span class="mf">114.8</span><span class="p">,</span><span class="mf">22.9</span><span class="p">]</span>
+<span class="n">hexagon</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">hexagon_grids</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span><span class="n">accuracy</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">)</span>
+<span class="n">hexagon</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/WX20211021-201747&#64;2x.png"><img alt="_images/WX20211021-201747&#64;2x.png" src="_images/WX20211021-201747&#64;2x.png" style="height: 200px;" /></a>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="preprocess.html" class="btn btn-neutral float-left" title="数据预处理" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="odprocess.html" class="btn btn-neutral float-right" title="数据聚合集计" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021, Qing Yu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

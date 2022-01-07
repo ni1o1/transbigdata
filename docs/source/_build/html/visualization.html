@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>数据可视化 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo2.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="数据获取" href="getbusdata.html" />
+    <link rel="prev" title="数据聚合集计" href="odprocess.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html"><img src="_static/logo-wordmark-light.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">安装</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">安装、依赖与更新日志</a></li>
+</ul>
+<p><span class="caption-text">使用示例</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example-taxi/example-taxi.html">出租车数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-busgps/example-busgps.html">公交GPS的到离站信息匹配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metromodel/metromodel.html">地铁网络拓扑建模</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Example-pNEUMA/Example-pNEUMA.html">pNEUMA轨迹数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-bikesharing/example-bikesharing.html">共享单车数据社区发现</a></li>
+</ul>
+<p><span class="caption-text">通用方法</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quality.html">数据质量分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess.html">数据预处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grids.html">数据栅格化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="odprocess.html">数据聚合集计</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">数据可视化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#jupyter">在jupyter中显示可视化的设置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">数据点分布可视化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">轨迹可视化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#od">OD可视化</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getbusdata.html">数据获取</a></li>
+<li class="toctree-l1"><a class="reference internal" href="traj.html">轨迹处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gisprocess.html">GIS处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_map.html">底图加载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CoordinatesConverter.html">坐标距离</a></li>
+</ul>
+<p><span class="caption-text">各类数据处理方法</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="taxigps.html">出租车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bikedata.html">共享单车数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="busgps.html">公交车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metroline.html">公交地铁网络拓扑建模</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TransBigData</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>数据可视化</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/visualization.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>数据可视化<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<section id="jupyter">
+<h2>在jupyter中显示可视化的设置<a class="headerlink" href="#jupyter" title="永久链接至标题">¶</a></h2>
+<div class="line-block">
+<div class="line">TransBigData包也依托于kepler.gl提供的可视化插件提供了一键数据整理与可视化的方法</div>
+<div class="line">使用此功能请先安装python的keplergl包</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">keplergl</span>
+</pre></div>
+</div>
+<p>如果要在jupyter notebook中显示可视化，则需要勾选jupyter-js-widgets（可能需要另外安装）和keplergl-jupyter两个插件</p>
+<img alt="_images/jupytersettings.png" src="_images/jupytersettings.png" />
+</section>
+<section id="id2">
+<h2>数据点分布可视化<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<dl class="py function">
+<dt id="transbigdata.visualization_data">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">visualization_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maptype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'point'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.visualization_data" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入数据点，集计并可视化</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>data<span class="classifier">DataFrame</span></dt><dd><p>数据点分布</p>
+</dd>
+<dt>col<span class="classifier">List</span></dt><dd><p>列名，可输入不带权重的OD，按[经度，纬度]的顺序，此时会自动集计。
+也可输入带权重的OD，按[经度，纬度，数量]的顺序。</p>
+</dd>
+<dt>zoom<span class="classifier">number</span></dt><dd><p>地图缩放等级,默认’auto’自动选择</p>
+</dd>
+<dt>height<span class="classifier">number</span></dt><dd><p>地图图框高度</p>
+</dd>
+<dt>accuracy<span class="classifier">number</span></dt><dd><p>集计的栅格大小</p>
+</dd>
+<dt>maptype<span class="classifier">str</span></dt><dd><p>出图类型，’point’或者’heatmap’</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>vmap<span class="classifier">keplergl.keplergl.KeplerGl</span></dt><dd><p>keplergl提供的可视化</p>
+</dd>
+</dl>
+<p>使用方法:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">transbigdata</span> <span class="k">as</span> <span class="nn">tbd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1">#读取数据</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;TaxiData-Sample.csv&#39;</span><span class="p">,</span><span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VehicleNum&#39;</span><span class="p">,</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span><span class="s1">&#39;Lng&#39;</span><span class="p">,</span><span class="s1">&#39;Lat&#39;</span><span class="p">,</span><span class="s1">&#39;OpenStatus&#39;</span><span class="p">,</span><span class="s1">&#39;Speed&#39;</span><span class="p">]</span>
+<span class="c1">#可视化数据点分布</span>
+<span class="n">tbd</span><span class="o">.</span><span class="n">visualization_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Lng&#39;</span><span class="p">,</span><span class="s1">&#39;Lat&#39;</span><span class="p">],</span><span class="n">accuracy</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/datavis.png" src="_images/datavis.png" />
+</section>
+<section id="id3">
+<h2>轨迹可视化<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<dl class="py function">
+<dt id="transbigdata.visualization_trip">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">visualization_trip</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Lng',</span> <span class="pre">'Lat',</span> <span class="pre">'ID',</span> <span class="pre">'Time']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.visualization_trip" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入轨迹数据与列名，生成kepler的可视化</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>trajdata<span class="classifier">DataFrame</span></dt><dd><p>轨迹点数据</p>
+</dd>
+<dt>col<span class="classifier">List</span></dt><dd><p>列名，按[经度,纬度,轨迹编号,时间]的顺序</p>
+</dd>
+<dt>zoom<span class="classifier">number</span></dt><dd><p>地图缩放等级</p>
+</dd>
+<dt>height<span class="classifier">number</span></dt><dd><p>地图图框高度</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>vmap<span class="classifier">keplergl.keplergl.KeplerGl</span></dt><dd><p>keplergl提供的可视化</p>
+</dd>
+</dl>
+<p>使用方法</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">transbigdata</span> <span class="k">as</span> <span class="nn">tbd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1">#读取数据</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;TaxiData-Sample.csv&#39;</span><span class="p">,</span><span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VehicleNum&#39;</span><span class="p">,</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span><span class="s1">&#39;Lng&#39;</span><span class="p">,</span><span class="s1">&#39;Lat&#39;</span><span class="p">,</span><span class="s1">&#39;OpenStatus&#39;</span><span class="p">,</span><span class="s1">&#39;Speed&#39;</span><span class="p">]</span>
+<span class="c1">#轨迹数据可视化</span>
+<span class="n">tbd</span><span class="o">.</span><span class="n">visualization_trip</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Lng&#39;</span><span class="p">,</span> <span class="s1">&#39;Lat&#39;</span><span class="p">,</span> <span class="s1">&#39;VehicleNum&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<img alt="_images/kepler-traj.png" src="_images/kepler-traj.png" />
+</section>
+<section id="od">
+<h2>OD可视化<a class="headerlink" href="#od" title="永久链接至标题">¶</a></h2>
+<dl class="py function">
+<dt id="transbigdata.visualization_od">
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">visualization_od</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oddata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['slon',</span> <span class="pre">'slat',</span> <span class="pre">'elon',</span> <span class="pre">'elat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mincount</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.visualization_od" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>输入od数据与列名，生成kepler的可视化</p>
+<p><strong>输入</strong></p>
+<dl class="simple">
+<dt>oddata<span class="classifier">DataFrame</span></dt><dd><p>od数据</p>
+</dd>
+<dt>col<span class="classifier">List</span></dt><dd><p>列名，可输入不带权重的OD，按[起点经度，起点纬度，终点经度，终点纬度]的顺序，此时会自动集计。
+也可输入带权重的OD，按[起点经度，起点纬度，终点经度，终点纬度，数量]的顺序。</p>
+</dd>
+<dt>zoom<span class="classifier">number</span></dt><dd><p>地图缩放等级,默认’auto’自动选择</p>
+</dd>
+<dt>height<span class="classifier">number</span></dt><dd><p>地图图框高度</p>
+</dd>
+<dt>accuracy<span class="classifier">number</span></dt><dd><p>集计的栅格大小</p>
+</dd>
+<dt>mincount<span class="classifier">number</span></dt><dd><p>最小的od数，少于这个的od就不显示了</p>
+</dd>
+</dl>
+<p><strong>输出</strong></p>
+<dl class="simple">
+<dt>vmap<span class="classifier">keplergl.keplergl.KeplerGl</span></dt><dd><p>keplergl提供的可视化</p>
+</dd>
+</dl>
+<p>使用方法</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">transbigdata</span> <span class="k">as</span> <span class="nn">tbd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1">#读取数据</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;TaxiData-Sample.csv&#39;</span><span class="p">,</span><span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VehicleNum&#39;</span><span class="p">,</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span><span class="s1">&#39;Lng&#39;</span><span class="p">,</span><span class="s1">&#39;Lat&#39;</span><span class="p">,</span><span class="s1">&#39;OpenStatus&#39;</span><span class="p">,</span><span class="s1">&#39;Speed&#39;</span><span class="p">]</span>
+<span class="c1">#提取OD</span>
+<span class="n">oddata</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">taxigps_to_od</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VehicleNum&#39;</span><span class="p">,</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span><span class="s1">&#39;Lng&#39;</span><span class="p">,</span><span class="s1">&#39;Lat&#39;</span><span class="p">,</span><span class="s1">&#39;OpenStatus&#39;</span><span class="p">])</span>
+<span class="c1">#OD可视化</span>
+<span class="n">tbd</span><span class="o">.</span><span class="n">visualization_od</span><span class="p">(</span><span class="n">oddata</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/odvisualization.png" src="_images/odvisualization.png" />
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="odprocess.html" class="btn btn-neutral float-left" title="数据聚合集计" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="getbusdata.html" class="btn btn-neutral float-right" title="数据获取" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021, Qing Yu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>地铁网络拓扑建模 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo2.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="pNEUMA轨迹数据处理" href="../Example-pNEUMA/Example-pNEUMA.html" />
+    <link rel="prev" title="公交GPS的到离站信息匹配" href="../example-busgps/example-busgps.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html"><img src="../_static/logo-wordmark-light.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">安装</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">安装、依赖与更新日志</a></li>
+</ul>
+<p><span class="caption-text">使用示例</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../example-taxi/example-taxi.html">出租车数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example-busgps/example-busgps.html">公交GPS的到离站信息匹配</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">地铁网络拓扑建模</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">爬取地铁线路</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">轨道断面信息获取</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">轨道网络拓扑模型构建</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Example-pNEUMA/Example-pNEUMA.html">pNEUMA轨迹数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example-bikesharing/example-bikesharing.html">共享单车数据社区发现</a></li>
+</ul>
+<p><span class="caption-text">通用方法</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quality.html">数据质量分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">数据预处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grids.html">数据栅格化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../odprocess.html">数据聚合集计</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualization.html">数据可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getbusdata.html">数据获取</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../traj.html">轨迹处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gisprocess.html">GIS处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plot_map.html">底图加载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CoordinatesConverter.html">坐标距离</a></li>
+</ul>
+<p><span class="caption-text">各类数据处理方法</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../taxigps.html">出租车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bikedata.html">共享单车数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../busgps.html">公交车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metroline.html">公交地铁网络拓扑建模</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TransBigData</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>地铁网络拓扑建模</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/metromodel/metromodel.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>地铁网络拓扑建模<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>这个案例的Jupyter notebook: <a class="reference external" href="https://github.com/ni1o1/transbigdata/blob/main/example/Example%203-Modeling%20for%20subway%20network%20topology.ipynb">点击这里</a>.</p>
+<div class="line-block">
+<div class="line">可以点击 <a class="reference external" href="https://mybinder.org/v2/gh/ni1o1/transbigdata/9507de936806c34a4befd74aa9227b012569a6aa?urlpath=lab%2Ftree%2Fexample%2FExample%203-Modeling%20for%20subway%20network%20topology.ipynb">这个链接</a> 在线编辑器中尝试</div>
+</div>
+<p>下面的案例展示如何用TransBigData包抓取地铁线路，并构建地铁线网的拓扑网络模型</p>
+<section id="id2">
+<h2>爬取地铁线路<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>首先爬取地铁线路使用tbd.getbusdata方法，输入城市跟公交或地铁线路名称的关键词，即可获取到线路数据，坐标系为wgs84。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">transbigdata</span> <span class="k">as</span> <span class="nn">tbd</span>
+<span class="n">line</span><span class="p">,</span><span class="n">stop</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">getbusdata</span><span class="p">(</span><span class="s1">&#39;厦门&#39;</span><span class="p">,[</span><span class="s1">&#39;1号线&#39;</span><span class="p">,</span><span class="s1">&#39;2号线&#39;</span><span class="p">,</span><span class="s1">&#39;3号线&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>获取城市id: 厦门成功
+1号线成功
+2号线成功
+3号线成功</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">line</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/output_5_11.png" src="../_images/output_5_11.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">stop</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/output_6_1.png" src="../_images/output_6_1.png" />
+</section>
+<section id="id3">
+<h2>轨道断面信息获取<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>tbd.split_subwayline方法可以用轨道站点切分轨道线路，得到轨道断面信息（这一步骤主要在地铁客流可视化中有用）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">metroline_splited</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">split_subwayline</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">stop</span><span class="p">)</span>
+<span class="n">metroline_splited</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;o_project&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/output_9_1.png" src="../_images/output_9_1.png" />
+</section>
+<section id="id4">
+<h2>轨道网络拓扑模型构建<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>同时我们也可以直接使用站点数据，构建地铁网络的拓扑结构模型，方便后续地铁出行路径的识别。这一功能依赖于networkx包。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#构建拓扑模型</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">metro_network</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/output_12_0.png" src="../_images/output_12_0.png" />
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../example-busgps/example-busgps.html" class="btn btn-neutral float-left" title="公交GPS的到离站信息匹配" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Example-pNEUMA/Example-pNEUMA.html" class="btn btn-neutral float-right" title="pNEUMA轨迹数据处理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021, Qing Yu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

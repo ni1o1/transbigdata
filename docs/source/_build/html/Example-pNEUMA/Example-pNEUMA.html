@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pNEUMA轨迹数据处理 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo2.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="共享单车数据社区发现" href="../example-bikesharing/example-bikesharing.html" />
+    <link rel="prev" title="地铁网络拓扑建模" href="../metromodel/metromodel.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html"><img src="../_static/logo-wordmark-light.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">安装</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">安装、依赖与更新日志</a></li>
+</ul>
+<p><span class="caption-text">使用示例</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../example-taxi/example-taxi.html">出租车数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example-busgps/example-busgps.html">公交GPS的到离站信息匹配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metromodel/metromodel.html">地铁网络拓扑建模</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pNEUMA轨迹数据处理</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">读取数据</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">轨迹数据</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#osm">OSM路网数据获取</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">地图底图加载</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">数据清洗</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">数据稀疏化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">冗余数据剔除</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">数据可视化</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../example-bikesharing/example-bikesharing.html">共享单车数据社区发现</a></li>
+</ul>
+<p><span class="caption-text">通用方法</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quality.html">数据质量分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">数据预处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grids.html">数据栅格化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../odprocess.html">数据聚合集计</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualization.html">数据可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getbusdata.html">数据获取</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../traj.html">轨迹处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gisprocess.html">GIS处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plot_map.html">底图加载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CoordinatesConverter.html">坐标距离</a></li>
+</ul>
+<p><span class="caption-text">各类数据处理方法</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../taxigps.html">出租车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bikedata.html">共享单车数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../busgps.html">公交车GPS数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metroline.html">公交地铁网络拓扑建模</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TransBigData</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>pNEUMA轨迹数据处理</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Example-pNEUMA/Example-pNEUMA.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pneuma">
+<h1>pNEUMA轨迹数据处理<a class="headerlink" href="#pneuma" title="永久链接至标题">¶</a></h1>
+<div class="line-block">
+<div class="line">这个案例的Jupyter notebook: <a class="reference external" href="https://github.com/ni1o1/transbigdata/blob/main/example/Example%204-pNEUMA%20trajectory%20dataset%20processing.ipynb">点击这里</a>.</div>
+<div class="line">在这个例子中，我们将示例如何将``TransBigData``融入到雅典pNEUMA轨迹数据集的处理与可视化中。</div>
+<div class="line">请注意，样本数据已经被经过了一定的处理。原始版本的数据集可以在这里下载。
+<a class="reference external" href="https://open-traffic.epfl.ch/">website</a></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">transbigdata</span> <span class="k">as</span> <span class="nn">tbd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<section id="id1">
+<h2>读取数据<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<section id="id2">
+<h3>轨迹数据<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 读取数据</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/pNEUMA_tbd_sample.csv&#39;</span><span class="p">)</span>
+<span class="c1"># 将时间戳转换为时间格式</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>track_id</th>
+      <th>lon</th>
+      <th>lat</th>
+      <th>speed</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>128</td>
+      <td>23.730362</td>
+      <td>37.990046</td>
+      <td>12.5845</td>
+      <td>1970-01-01 00:00:00.000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>128</td>
+      <td>23.730364</td>
+      <td>37.990045</td>
+      <td>12.4935</td>
+      <td>1970-01-01 00:00:00.040</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>128</td>
+      <td>23.730366</td>
+      <td>37.990045</td>
+      <td>12.3965</td>
+      <td>1970-01-01 00:00:00.080</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>128</td>
+      <td>23.730367</td>
+      <td>37.990045</td>
+      <td>12.2949</td>
+      <td>1970-01-01 00:00:00.120</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>128</td>
+      <td>23.730369</td>
+      <td>37.990044</td>
+      <td>12.1910</td>
+      <td>1970-01-01 00:00:00.160</td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 输出数据大小信息</span>
+<span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 581244 entries, 0 to 581243
+Data columns (total 5 columns):
+ #   Column    Non-Null Count   Dtype
+---  ------    --------------   -----
+ 0   track_id  581244 non-null  int64
+ 1   lon       581244 non-null  float64
+ 2   lat       581244 non-null  float64
+ 3   speed     581244 non-null  float64
+ 4   time      581244 non-null  datetime64[ns]
+dtypes: datetime64[ns](1), float64(3), int64(1)
+memory usage: 22.2 MB
+</pre></div>
+</div>
+</section>
+<section id="osm">
+<h3>OSM路网数据获取<a class="headerlink" href="#osm" title="永久链接至标题">¶</a></h3>
+<p>你可以直接从``data``文件夹加载道路数据，或者使用OSMNX下载路网 <a class="reference external" href="https://osmnx.readthedocs.io/en/stable/">OSMNX</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 从OSMNX中获取路网数据</span>
+<span class="c1"># OSM Graph</span>
+<span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">23.723577</span><span class="p">,</span> <span class="mf">37.975462</span><span class="p">,</span> <span class="mf">23.738471</span><span class="p">,</span> <span class="mf">37.993053</span><span class="p">]</span>
+<span class="n">north</span><span class="p">,</span> <span class="n">south</span><span class="p">,</span> <span class="n">east</span><span class="p">,</span> <span class="n">west</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_from_bbox</span><span class="p">(</span><span class="n">north</span><span class="p">,</span> <span class="n">south</span><span class="p">,</span> <span class="n">east</span><span class="p">,</span> <span class="n">west</span><span class="p">,</span> <span class="n">network_type</span><span class="o">=</span><span class="s1">&#39;drive&#39;</span><span class="p">)</span>
+
+<span class="c1"># 获取点和边</span>
+<span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 存储路网数据</span>
+<span class="n">filepath</span> <span class="o">=</span> <span class="s2">&quot;data/pNEUMA_network.graphml&quot;</span>
+<span class="n">ox</span><span class="o">.</span><span class="n">save_graphml</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>如果你没有OSMNX,可以运行下面代码读取已经现成的数据</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 读取OSM数据</span>
+<span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
+<span class="n">filepath</span> <span class="o">=</span> <span class="s2">&quot;data/pNEUMA_network.graphml&quot;</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">load_graphml</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+<span class="c1"># 获取点和边</span>
+<span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>地图底图加载<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<p>将地图底图加载并可视化</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 可视化地图底图 tbd.plot_map</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">23.723577</span><span class="p">,</span> <span class="mf">37.975462</span><span class="p">,</span> <span class="mf">23.738471</span><span class="p">,</span> <span class="mf">37.993053</span><span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">tbd</span><span class="o">.</span><span class="n">plot_map</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># the map</span>
+<span class="n">edges</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span> <span class="c1"># edges</span>
+<span class="n">nodes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span> <span class="c1"># nodes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">tbd</span><span class="o">.</span><span class="n">plot_map</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># the map</span>
+<span class="n">edges</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span> <span class="c1"># edges</span>
+<span class="n">nodes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span> <span class="c1"># nodes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/output_11_0.png" src="../_images/output_11_0.png" />
+</section>
+</section>
+<section id="id4">
+<h2>数据清洗<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<section id="id5">
+<h3>数据稀疏化<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<div class="line-block">
+<div class="line">数据集的采样间隔为 <span class="math notranslate nohighlight">\(0.04\)</span> 秒, 非常小，不便于处理。</div>
+<div class="line">然而，一些宏观层面的研究不需要如此高的采样间隔。在这种情况下，数据可以使用``tbd.traj_sparsify``进行稀疏化。</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 原始数据</span>
+<span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 581244 entries, 0 to 581243
+Data columns (total 5 columns):
+ #   Column    Non-Null Count   Dtype
+---  ------    --------------   -----
+ 0   track_id  581244 non-null  int64
+ 1   lon       581244 non-null  float64
+ 2   lat       581244 non-null  float64
+ 3   speed     581244 non-null  float64
+ 4   time      581244 non-null  datetime64[ns]
+dtypes: datetime64[ns](1), float64(3), int64(1)
+memory usage: 22.2 MB
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#轨迹稀疏化</span>
+<span class="n">data_sparsify</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">traj_sparsify</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;track_id&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">],</span><span class="n">timegap</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;subsample&#39;</span><span class="p">)</span>
+<span class="n">data_sparsify</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 23293 entries, 0 to 581229
+Data columns (total 5 columns):
+ #   Column    Non-Null Count  Dtype
+---  ------    --------------  -----
+ 0   track_id  23293 non-null  int64
+ 1   lon       23293 non-null  float64
+ 2   lat       23293 non-null  float64
+ 3   speed     23293 non-null  float64
+ 4   time      23293 non-null  datetime64[ns]
+dtypes: datetime64[ns](1), float64(3), int64(1)
+memory usage: 1.1 MB
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3>冗余数据剔除<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>在车辆停止运行时，位置没有发生移动，但仍然会产生大量GPS点，这些静止的GPS点除第一和最后一个点外的都可以删除。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#用 tbd.clean_same 删除冗余数据</span>
+<span class="n">data_sparsify_clean</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">clean_same</span><span class="p">(</span><span class="n">data_sparsify</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;track_id&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">])</span>
+<span class="n">data_sparsify_clean</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 10674 entries, 0 to 581229
+Data columns (total 5 columns):
+ #   Column    Non-Null Count  Dtype
+---  ------    --------------  -----
+ 0   track_id  10674 non-null  int64
+ 1   lon       10674 non-null  float64
+ 2   lat       10674 non-null  float64
+ 3   speed     10674 non-null  float64
+ 4   time      10674 non-null  datetime64[ns]
+dtypes: datetime64[ns](1), float64(3), int64(1)
+memory usage: 500.3 KB
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_sparsify_clean</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>track_id</th>
+      <th>lon</th>
+      <th>lat</th>
+      <th>speed</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>128</td>
+      <td>23.730362</td>
+      <td>37.990046</td>
+      <td>12.5845</td>
+      <td>1970-01-01 00:00:00</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>128</td>
+      <td>23.730399</td>
+      <td>37.990040</td>
+      <td>10.6835</td>
+      <td>1970-01-01 00:00:01</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>128</td>
+      <td>23.730429</td>
+      <td>37.990036</td>
+      <td>7.8580</td>
+      <td>1970-01-01 00:00:02</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>128</td>
+      <td>23.730443</td>
+      <td>37.990033</td>
+      <td>1.2661</td>
+      <td>1970-01-01 00:00:03</td>
+    </tr>
+    <tr>
+      <th>1775</th>
+      <td>128</td>
+      <td>23.730443</td>
+      <td>37.990033</td>
+      <td>0.0027</td>
+      <td>1970-01-01 00:01:11</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+</section>
+<section id="id7">
+<h2>数据可视化<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gdf_data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">data_sparsify_clean</span><span class="p">,</span>
+                            <span class="n">geometry</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">data_sparsify_clean</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">],</span>
+                                                        <span class="n">data_sparsify_clean</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]),</span>
+                            <span class="n">crs</span><span class="o">=</span><span class="mi">4326</span><span class="p">)</span>
+<span class="n">gdf_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>track_id</th>
+      <th>lon</th>
+      <th>lat</th>
+      <th>speed</th>
+      <th>time</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>128</td>
+      <td>23.730362</td>
+      <td>37.990046</td>
+      <td>12.5845</td>
+      <td>1970-01-01 00:00:00</td>
+      <td>POINT (23.73036 37.99005)</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>128</td>
+      <td>23.730399</td>
+      <td>37.990040</td>
+      <td>10.6835</td>
+      <td>1970-01-01 00:00:01</td>
+      <td>POINT (23.73040 37.99004)</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>128</td>
+      <td>23.730429</td>
+      <td>37.990036</td>
+      <td>7.8580</td>
+      <td>1970-01-01 00:00:02</td>
+      <td>POINT (23.73043 37.99004)</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>128</td>
+      <td>23.730443</td>
+      <td>37.990033</td>
+      <td>1.2661</td>
+      <td>1970-01-01 00:00:03</td>
+      <td>POINT (23.73044 37.99003)</td>
+    </tr>
+    <tr>
+      <th>1775</th>
+      <td>128</td>
+      <td>23.730443</td>
+      <td>37.990033</td>
+      <td>0.0027</td>
+      <td>1970-01-01 00:01:11</td>
+      <td>POINT (23.73044 37.99003)</td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 获取有最多数据点的车辆</span>
+<span class="n">gdf_count</span> <span class="o">=</span> <span class="n">gdf_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;track_id&#39;</span><span class="p">)[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">gdf_count</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">20</span><span class="p">][</span><span class="s1">&#39;track_id&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2138</span><span class="p">,</span> <span class="mi">3290</span><span class="p">,</span> <span class="mi">1442</span><span class="p">,</span> <span class="mi">3197</span><span class="p">,</span> <span class="mi">4408</span><span class="p">,</span> <span class="mi">1767</span><span class="p">,</span> <span class="mi">5002</span><span class="p">,</span> <span class="mi">5022</span><span class="p">,</span> <span class="mi">2140</span><span class="p">,</span> <span class="mi">347</span><span class="p">,</span> <span class="mi">2584</span><span class="p">,</span> <span class="mi">4750</span><span class="p">,</span> <span class="mi">4542</span><span class="p">,</span> <span class="mi">2431</span><span class="p">,</span> <span class="mi">4905</span><span class="p">,</span> <span class="mi">4997</span><span class="p">,</span> <span class="mi">1329</span><span class="p">,</span> <span class="mi">4263</span><span class="p">,</span> <span class="mi">1215</span><span class="p">,</span> <span class="mi">3400</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>可视化车辆</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="c1"># map</span>
+<span class="n">tbd</span><span class="o">.</span><span class="n">plot_map</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># the map</span>
+<span class="n">edges</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span> <span class="c1"># edges</span>
+<span class="c1"># nodes.plot(ax=ax, markersize = 6, color=&#39;red&#39;) # nodes</span>
+
+<span class="c1"># trajectory</span>
+<span class="n">gdf_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;speed&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/output_22_0.png" src="../_images/output_22_0.png" />
+<p>可视化单辆车，并显示最短路径</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># select a vehicle</span>
+<span class="n">tmpgdf_data</span> <span class="o">=</span> <span class="n">gdf_data</span><span class="p">[</span><span class="n">gdf_data</span><span class="p">[</span><span class="s1">&#39;track_id&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2138</span><span class="p">]</span>
+
+<span class="c1"># the origin / destination location</span>
+<span class="c1"># o_point = [tmpgdf_data.iloc[0][&#39;lon&#39;], tmpgdf_data.iloc[0][&#39;lat&#39;]]</span>
+<span class="c1"># d_point = [tmpgdf_data.iloc[-1][&#39;lon&#39;], tmpgdf_data.iloc[-1][&#39;lat&#39;]]</span>
+
+<span class="c1"># get the nearest node of each point on the map</span>
+<span class="n">tmpgdf_data</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">ckdnearest_point</span><span class="p">(</span><span class="n">tmpgdf_data</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span>
+
+<span class="c1"># extract the o/d node</span>
+<span class="n">o_index</span><span class="p">,</span> <span class="n">d_index</span> <span class="o">=</span> <span class="n">tmpgdf_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;index&#39;</span><span class="p">],</span> <span class="n">tmpgdf_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;index&#39;</span><span class="p">]</span>
+<span class="n">o_node_id</span><span class="p">,</span> <span class="n">d_node_id</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">o_index</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> \
+                       <span class="nb">list</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">d_index</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">o_node_id</span><span class="p">,</span> <span class="n">d_node_id</span><span class="p">)</span>
+
+<span class="n">tmpgdf_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">250691723</span> <span class="mi">358465943</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>track_id</th>
+      <th>lon</th>
+      <th>lat</th>
+      <th>speed</th>
+      <th>time</th>
+      <th>geometry_x</th>
+      <th>dist</th>
+      <th>index</th>
+      <th>y</th>
+      <th>x</th>
+      <th>street_count</th>
+      <th>highway</th>
+      <th>geometry_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2138</td>
+      <td>23.735287</td>
+      <td>37.977435</td>
+      <td>42.1006</td>
+      <td>1970-01-01 00:01:35.560</td>
+      <td>POINT (23.73529 37.97743)</td>
+      <td>0.000779</td>
+      <td>145</td>
+      <td>37.978086</td>
+      <td>23.734859</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>POINT (23.73486 37.97809)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2138</td>
+      <td>23.735254</td>
+      <td>37.977473</td>
+      <td>41.8663</td>
+      <td>1970-01-01 00:01:36.000</td>
+      <td>POINT (23.73525 37.97747)</td>
+      <td>0.000729</td>
+      <td>145</td>
+      <td>37.978086</td>
+      <td>23.734859</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>POINT (23.73486 37.97809)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2138</td>
+      <td>23.735181</td>
+      <td>37.977558</td>
+      <td>39.9012</td>
+      <td>1970-01-01 00:01:37.000</td>
+      <td>POINT (23.73518 37.97756)</td>
+      <td>0.000618</td>
+      <td>145</td>
+      <td>37.978086</td>
+      <td>23.734859</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>POINT (23.73486 37.97809)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2138</td>
+      <td>23.735111</td>
+      <td>37.977638</td>
+      <td>37.7748</td>
+      <td>1970-01-01 00:01:38.000</td>
+      <td>POINT (23.73511 37.97764)</td>
+      <td>0.000514</td>
+      <td>145</td>
+      <td>37.978086</td>
+      <td>23.734859</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>POINT (23.73486 37.97809)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2138</td>
+      <td>23.735047</td>
+      <td>37.977712</td>
+      <td>33.8450</td>
+      <td>1970-01-01 00:01:39.000</td>
+      <td>POINT (23.73505 37.97771)</td>
+      <td>0.000418</td>
+      <td>145</td>
+      <td>37.978086</td>
+      <td>23.734859</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>POINT (23.73486 37.97809)</td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">250691723</span> <span class="mi">358465943</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="c1"># map</span>
+<span class="n">tbd</span><span class="o">.</span><span class="n">plot_map</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># the map</span>
+<span class="n">edges</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span> <span class="c1"># edges</span>
+<span class="c1"># nodes.plot(ax=ax, markersize = 6, color=&#39;red&#39;) # nodes</span>
+
+<span class="c1"># trajectory</span>
+<span class="n">gdf_data</span><span class="p">[</span><span class="n">gdf_data</span><span class="p">[</span><span class="s1">&#39;track_id&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2138</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/output_27_0.png" src="../_images/output_27_0.png" />
+<p>我们可以将轨迹数据与最短路径做比对.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># the shortest path (optional)</span>
+<span class="c1"># ax = plt.subplot(122)</span>
+<span class="c1"># plt.sca(ax)</span>
+<span class="n">route</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">o_node_id</span><span class="p">,</span> <span class="n">d_node_id</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s2">&quot;length&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph_route</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">route</span><span class="p">,</span> <span class="n">route_color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">route_linewidth</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/output_29_0.png" src="../_images/output_29_0.png" />
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../metromodel/metromodel.html" class="btn btn-neutral float-left" title="地铁网络拓扑建模" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../example-bikesharing/example-bikesharing.html" class="btn btn-neutral float-right" title="共享单车数据社区发现" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021, Qing Yu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
