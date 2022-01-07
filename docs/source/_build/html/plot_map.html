@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>底图加载 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>底图加载 &mdash; TransBigData 0.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo2.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -13,10 +13,9 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="搜索" href="search.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="坐标距离" href="CoordinatesConverter.html" />
     <link rel="prev" title="GIS处理" href="gisprocess.html" /> 
 </head>
@@ -115,9 +114,9 @@
            <div itemprop="articleBody">
              
   <section id="plot-map">
-<span id="id1"></span><h1>底图加载<a class="headerlink" href="#plot-map" title="永久链接至标题">¶</a></h1>
+<span id="id1"></span><h1>底图加载<a class="headerlink" href="#plot-map" title="Permalink to this headline">¶</a></h1>
 <section id="id2">
-<h2>使用前的设置<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>使用前的设置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">TransBigData包提供了在matplotlib上绘制地图底图的功能，底图由mapbox提供，坐标系为WGS84。如果你要使用该功能，首先需要点击<a class="reference external" href="https://account.mapbox.com/auth/signin/?route-to=%22https://account.mapbox.com/%22">这个链接</a>注册一个mapbox的账号，mapbox上注册成为开发者，并获取到一个mapbox token。 <a class="reference external" href="https://docs.mapbox.com/help/getting-started/access-tokens/#how-access-tokens-work">这个链接</a>介绍了mapbox token的作用。</div>
 <div class="line">如果你已经得到了mapbox token，可以用以下代码为TransBigData设置mapbox token(只需要设置一次，后面重新打开python也不需要再重新设置了)：</div>
@@ -157,14 +156,14 @@
 <img alt="_images/output_6_0.png" src="_images/output_6_0.png" />
 </section>
 <section id="id3">
-<h2>地图底图加载<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>地图底图加载<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>TransBigData包的底图绘制功能由plot_map包提供。首先确保你的plot_map包在0.3.3版本以上:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">plot</span><span class="o">-</span><span class="nb">map</span>
 </pre></div>
 </div>
 <dl class="py function">
 <dt id="transbigdata.plot_map">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">plot_map</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">printlog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">styleid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dark'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.plot_map" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">plot_map</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">printlog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">styleid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dark'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.plot_map" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>添加地图底图</p>
@@ -180,47 +179,47 @@
 </dd>
 </dl>
 <section id="streets">
-<h3>底图样式1：streets<a class="headerlink" href="#streets" title="永久链接至标题">¶</a></h3>
+<h3>底图样式1：streets<a class="headerlink" href="#streets" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/1.png" src="_images/1.png" />
 </section>
 <section id="outdoors">
-<h3>底图样式2：outdoors<a class="headerlink" href="#outdoors" title="永久链接至标题">¶</a></h3>
+<h3>底图样式2：outdoors<a class="headerlink" href="#outdoors" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/2.png" src="_images/2.png" />
 </section>
 <section id="satellite">
-<h3>底图样式3：satellite<a class="headerlink" href="#satellite" title="永久链接至标题">¶</a></h3>
+<h3>底图样式3：satellite<a class="headerlink" href="#satellite" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/3.png" src="_images/3.png" />
 </section>
 <section id="light">
-<h3>底图样式4：light<a class="headerlink" href="#light" title="永久链接至标题">¶</a></h3>
+<h3>底图样式4：light<a class="headerlink" href="#light" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/4.png" src="_images/4.png" />
 </section>
 <section id="dark">
-<h3>底图样式5：dark<a class="headerlink" href="#dark" title="永久链接至标题">¶</a></h3>
+<h3>底图样式5：dark<a class="headerlink" href="#dark" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/5.png" src="_images/5.png" />
 </section>
 <section id="light-ch">
-<h3>底图样式6：light-ch（中文）<a class="headerlink" href="#light-ch" title="永久链接至标题">¶</a></h3>
+<h3>底图样式6：light-ch（中文）<a class="headerlink" href="#light-ch" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/6.png" src="_images/6.png" />
 </section>
 <section id="ice-creem">
-<h3>底图样式7：ice creem<a class="headerlink" href="#ice-creem" title="永久链接至标题">¶</a></h3>
+<h3>底图样式7：ice creem<a class="headerlink" href="#ice-creem" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/7.png" src="_images/7.png" />
 </section>
 <section id="night">
-<h3>底图样式8：night<a class="headerlink" href="#night" title="永久链接至标题">¶</a></h3>
+<h3>底图样式8：night<a class="headerlink" href="#night" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/8.png" src="_images/8.png" />
 </section>
 <section id="terrain">
-<h3>底图样式9：terrain<a class="headerlink" href="#terrain" title="永久链接至标题">¶</a></h3>
+<h3>底图样式9：terrain<a class="headerlink" href="#terrain" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/9.png" src="_images/9.png" />
 </section>
 <section id="basic-blue">
-<h3>底图样式10：basic blue<a class="headerlink" href="#basic-blue" title="永久链接至标题">¶</a></h3>
+<h3>底图样式10：basic blue<a class="headerlink" href="#basic-blue" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/10.png" src="_images/10.png" />
 </section>
 <section id="id4">
-<h3>用法<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<h3>用法<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#设定显示范围</span>
 <span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="n">lon1</span><span class="p">,</span><span class="n">lat1</span><span class="p">,</span><span class="n">lon2</span><span class="p">,</span><span class="n">lat2</span><span class="p">]</span>
 <span class="n">tbd</span><span class="o">.</span><span class="n">plot_map</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span><span class="n">bounds</span><span class="p">,</span><span class="n">zoom</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span><span class="n">style</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
@@ -229,10 +228,10 @@
 </section>
 </section>
 <section id="id5">
-<h2>指北针和比例尺<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>指北针和比例尺<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="transbigdata.plotscale">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">plotscale</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">textcolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'k'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">textsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compasssize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.1,</span> <span class="pre">0.1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KM'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.plotscale" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">plotscale</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">textcolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'k'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">textsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compasssize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.1,</span> <span class="pre">0.1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KM'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.plotscale" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>为底图添加指北针和比例尺</p>
@@ -270,7 +269,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2021, Qing Yu.</p>
+    <p>&#169; Copyright 2021, Qing Yu.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

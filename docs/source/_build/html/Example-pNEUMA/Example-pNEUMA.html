@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pNEUMA轨迹数据处理 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>pNEUMA轨迹数据处理 &mdash; TransBigData 0.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo2.ico"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -13,11 +13,10 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/translations.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="../_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="共享单车数据社区发现" href="../example-bikesharing/example-bikesharing.html" />
     <link rel="prev" title="地铁网络拓扑建模" href="../metromodel/metromodel.html" /> 
 </head>
@@ -112,7 +111,7 @@
            <div itemprop="articleBody">
              
   <section id="pneuma">
-<h1>pNEUMA轨迹数据处理<a class="headerlink" href="#pneuma" title="永久链接至标题">¶</a></h1>
+<h1>pNEUMA轨迹数据处理<a class="headerlink" href="#pneuma" title="Permalink to this headline">¶</a></h1>
 <div class="line-block">
 <div class="line">这个案例的Jupyter notebook: <a class="reference external" href="https://github.com/ni1o1/transbigdata/blob/main/example/Example%204-pNEUMA%20trajectory%20dataset%20processing.ipynb">点击这里</a>.</div>
 <div class="line">在这个例子中，我们将示例如何将``TransBigData``融入到雅典pNEUMA轨迹数据集的处理与可视化中。</div>
@@ -126,9 +125,9 @@
 </pre></div>
 </div>
 <section id="id1">
-<h2>读取数据<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<h2>读取数据<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <section id="id2">
-<h3>轨迹数据<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<h3>轨迹数据<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 读取数据</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/pNEUMA_tbd_sample.csv&#39;</span><span class="p">)</span>
 <span class="c1"># 将时间戳转换为时间格式</span>
@@ -224,7 +223,7 @@ memory usage: 22.2 MB
 </div>
 </section>
 <section id="osm">
-<h3>OSM路网数据获取<a class="headerlink" href="#osm" title="永久链接至标题">¶</a></h3>
+<h3>OSM路网数据获取<a class="headerlink" href="#osm" title="Permalink to this headline">¶</a></h3>
 <p>你可以直接从``data``文件夹加载道路数据，或者使用OSMNX下载路网 <a class="reference external" href="https://osmnx.readthedocs.io/en/stable/">OSMNX</a></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 从OSMNX中获取路网数据</span>
 <span class="c1"># OSM Graph</span>
@@ -252,7 +251,7 @@ memory usage: 22.2 MB
 </div>
 </section>
 <section id="id3">
-<h3>地图底图加载<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<h3>地图底图加载<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>将地图底图加载并可视化</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 可视化地图底图 tbd.plot_map</span>
 <span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">23.723577</span><span class="p">,</span> <span class="mf">37.975462</span><span class="p">,</span> <span class="mf">23.738471</span><span class="p">,</span> <span class="mf">37.993053</span><span class="p">]</span>
@@ -277,9 +276,9 @@ memory usage: 22.2 MB
 </section>
 </section>
 <section id="id4">
-<h2>数据清洗<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>数据清洗<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <section id="id5">
-<h3>数据稀疏化<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<h3>数据稀疏化<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">数据集的采样间隔为 <span class="math notranslate nohighlight">\(0.04\)</span> 秒, 非常小，不便于处理。</div>
 <div class="line">然而，一些宏观层面的研究不需要如此高的采样间隔。在这种情况下，数据可以使用``tbd.traj_sparsify``进行稀疏化。</div>
@@ -323,7 +322,7 @@ memory usage: 1.1 MB
 </div>
 </section>
 <section id="id6">
-<h3>冗余数据剔除<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<h3>冗余数据剔除<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p>在车辆停止运行时，位置没有发生移动，但仍然会产生大量GPS点，这些静止的GPS点除第一和最后一个点外的都可以删除。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#用 tbd.clean_same 删除冗余数据</span>
 <span class="n">data_sparsify_clean</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">clean_same</span><span class="p">(</span><span class="n">data_sparsify</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;track_id&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">])</span>
@@ -418,7 +417,7 @@ memory usage: 500.3 KB
 </div></section>
 </section>
 <section id="id7">
-<h2>数据可视化<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2>数据可视化<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gdf_data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">data_sparsify_clean</span><span class="p">,</span>
                             <span class="n">geometry</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">data_sparsify_clean</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">],</span>
                                                         <span class="n">data_sparsify_clean</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]),</span>
@@ -709,7 +708,7 @@ memory usage: 500.3 KB
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2021, Qing Yu.</p>
+    <p>&#169; Copyright 2021, Qing Yu.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/CoordinatesConverter.rst:6
+#, fuzzy
+msgid "坐标距离"
+msgstr "Coordinates and Distances"
+
+#: ../../source/CoordinatesConverter.rst:9
+msgid "火星坐标系互转"
+msgstr "Converting of Mars coordinate "
+
+#: ../../source/CoordinatesConverter.rst:12
+msgid "坐标互转方法"
+msgstr "Coordinate convertering method"
+
+#: ../../source/CoordinatesConverter.rst:14
+msgid "TransBigData包提供了GCJ02,BD09,BD09mc,WGS94坐标系互转。"
+msgstr ""
+"TransBigData package provides quick converting of coordinates such as "
+"GCJ02, BD09, BD09mc, WGS94"
+
+#: ../../source/CoordinatesConverter.rst:30
+msgid "坐标互转，基于numpy列运算::"
+msgstr "Coordinates reciprocal converting, based on numpy column computation::"
+
+#: ../../source/CoordinatesConverter.rst:41
+msgid "对地理要素转换坐标"
+msgstr "Convert coordinates of the geographic elements"
+
+#: ../../source/CoordinatesConverter.rst:45
+msgid "输入地理要素的GeoDataFrame，对整体做坐标转换"
+msgstr ""
+"Convert coordinates of all data. The input is the geographic elements' "
+"DataFrame. "
+
+#: ../../source/CoordinatesConverter.rst:47
+msgid "**输入**"
+msgstr "**Input**"
+
+#: ../../source/CoordinatesConverter.rst:49
+#: ../../source/CoordinatesConverter.rst:58
+msgid "gdf"
+msgstr "gdf"
+
+msgid "GeoDataFrame"
+msgstr "GeoDataFrame"
+
+#: ../../source/CoordinatesConverter.rst:50
+msgid "地理要素"
+msgstr "Geographic elements"
+
+#: ../../source/CoordinatesConverter.rst:52
+msgid "method"
+msgstr "method"
+
+msgid "function"
+msgstr "function"
+
+#: ../../source/CoordinatesConverter.rst:52
+msgid "坐标转换函数"
+msgstr "The coordinate converting function"
+
+#: ../../source/CoordinatesConverter.rst:54
+msgid "**输出**"
+msgstr "**Output**"
+
+#: ../../source/CoordinatesConverter.rst:57
+msgid "转换后结果"
+msgstr "The result of converting"
+
+#: ../../source/CoordinatesConverter.rst:82
+msgid "经纬度计算距离"
+msgstr "Distance measurment"
+
+#: ../../source/CoordinatesConverter.rst:86
+#, fuzzy
+msgid "按经度1，纬度1，经度2，纬度2 （十进制度数）顺序输入起终点经纬度，为DataFrame的列，获取距离（米），基于numpy列运算::"
+msgstr ""
+"Input the origin/destination location in the sequence of [lon1, lat1, "
+"lon2, lat2] (in decimal) from DataFrame. The output is the distance (m)."
+

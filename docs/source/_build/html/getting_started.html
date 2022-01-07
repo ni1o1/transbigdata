@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>安装、依赖与更新日志 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>安装、依赖与更新日志 &mdash; TransBigData 0.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo2.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -13,10 +13,9 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="搜索" href="search.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="出租车数据处理" href="example-taxi/example-taxi.html" />
     <link rel="prev" title="TransBigData 为交通时空大数据而生" href="index.html" /> 
 </head>
@@ -129,9 +128,9 @@
            <div itemprop="articleBody">
              
   <section id="getting-started">
-<span id="id1"></span><h1>安装、依赖与更新日志<a class="headerlink" href="#getting-started" title="永久链接至标题">¶</a></h1>
+<span id="id1"></span><h1>安装、依赖与更新日志<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
 <section id="id2">
-<h2>安装<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>安装<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>TransBigData依赖geopandas，在安装TransBigData前需要根据 <a class="reference external" href="https://geopandas.org/en/stable/getting_started.html#installation">这个链接</a> 中的方法安装geopandas。
 如果你已经安装了geopandas，则直接在命令提示符中运行下面代码即可安装:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">transbigdata</span>
@@ -143,7 +142,7 @@
 </div>
 </section>
 <section id="id4">
-<h2>依赖包<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>依赖包<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>TransBigData依赖如下包</p>
 <ul class="simple">
 <li><p><cite>pandas</cite></p></li>
@@ -163,9 +162,9 @@
 </ul>
 </section>
 <section id="id5">
-<h2>版本更新<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>版本更新<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <section id="id6">
-<h3>0.2.3 (2021-11-30)<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<h3>0.2.3 (2021-11-30)<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p>版本更新太快来不及写更新日志：</p>
 <p>. 将visualization_dataagg合并至visualization_data中
 . 增加置信椭圆绘制功能
@@ -173,86 +172,86 @@
 . 为plot_map地图底图增加10个style，现在需要输入mapboxtoken才能绘制</p>
 </section>
 <section id="id7">
-<h3>0.1.28 (2021-11-22)<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<h3>0.1.28 (2021-11-22)<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <p>为odagg_grid、odagg_shape增加了权重count的支持
 增加可视化方法visualization_dataagg，支持带权重的集计可视化
 visualization_dataagg的热力图模式加入更新计划</p>
 </section>
 <section id="id8">
-<h3>0.1.25 (2021-11-12)<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<h3>0.1.25 (2021-11-12)<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <p>添加轨迹增密函数traj_densify</p>
 </section>
 <section id="id9">
-<h3>0.1.24 (2021-11-11)<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<h3>0.1.24 (2021-11-11)<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <p>添加id_reindex_disgap方法对数据的ID列重新编号，如果相邻两条记录超过距离，则编号为新id
 添加clean_traj方法轨迹数据清洗组合拳，能够有效解决轨迹漂移的问题</p>
 </section>
 <section id="id10">
-<h3>0.1.23 (2021-11-10)<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<h3>0.1.23 (2021-11-10)<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
 <p>添加visualization_data方法,添加对keplergl的支持</p>
 </section>
 <section id="id11">
-<h3>0.1.22 (2021-11-10)<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h3>
+<h3>0.1.22 (2021-11-10)<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <p>添加visualization_od方法,添加对keplergl的支持</p>
 </section>
 <section id="id12">
-<h3>0.1.20 (2021-11-09)<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+<h3>0.1.20 (2021-11-09)<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <p>添加visualization_trip方法,添加对keplergl的支持</p>
 </section>
 <section id="id13">
-<h3>0.1.19 (2021-11-09)<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
+<h3>0.1.19 (2021-11-09)<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
 <p>添加transform_shape方法,可以将GeoDataFrame整体做坐标转换</p>
 </section>
 <section id="id14">
-<h3>0.1.18 (2021-11-09)<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h3>
+<h3>0.1.18 (2021-11-09)<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
 <p>添加splitline_with_length方法,可以将长线段全部打断</p>
 </section>
 <section id="id15">
-<h3>0.1.17 (2021-11-08)<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h3>
+<h3>0.1.17 (2021-11-08)<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
 <p>添加geohash编码方法</p>
 </section>
 <section id="id16">
-<h3>0.1.16 (2021-11-05)<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h3>
+<h3>0.1.16 (2021-11-05)<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
 <p>添加getadmin方法，输入关键词抓取行政区划信息</p>
 </section>
 <section id="id17">
-<h3>0.1.15 (2021-11-04)<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h3>
+<h3>0.1.15 (2021-11-04)<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
 <p>添加metro_network方法，输入站点信息，输出网络信息</p>
 </section>
 <section id="id18">
-<h3>0.1.13 (2021-11-03)<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+<h3>0.1.13 (2021-11-03)<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <p>增加公交地铁线网拓扑建模的模块，添加split_subwayline方法，用公交/地铁站点对公交/地铁线进行切分，得到断面</p>
 </section>
 <section id="id19">
-<h3>0.1.12 (2021-11-02)<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h3>
+<h3>0.1.12 (2021-11-02)<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
 <p>增加爬虫模块，用getbusdata通过输入城市与关键词，获取公交线路的线型与站点，且不依赖于ak</p>
 </section>
 <section id="id20">
-<h3>0.1.11 (2021-11-01)<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h3>
+<h3>0.1.11 (2021-11-01)<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
 <p>公交GPS模块增加busgps_onewaytime函数，
 输入到离站信息表arrive_info与站点信息表stop，计算单程耗时</p>
 </section>
 <section id="id21">
-<h3>0.1.10 (2021-10-31)<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h3>
+<h3>0.1.10 (2021-10-31)<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
 <p>增加公交GPS数据到离站信息识别的方法</p>
 </section>
 <section id="id22">
-<h3>0.1.9 (2021-10-28)<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h3>
+<h3>0.1.9 (2021-10-28)<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
 <p>改进id_reindex方法，sample支持所有模式，同时也添加了timegap和timecol参数</p>
 </section>
 <section id="id23">
-<h3>0.1.7 (2021-10-27)<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h3>
+<h3>0.1.7 (2021-10-27)<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
 <p>增加数据质量分析部分：</p>
 <ul class="simple">
 <li><p>sample_duration采样间隔</p></li>
 </ul>
 </section>
 <section id="id24">
-<h3>0.1.6 (2021-10-25)<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h3>
+<h3>0.1.6 (2021-10-25)<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
 <p>修正taxigps_traj_point的Bug</p>
 </section>
 <section id="id25">
-<h3>0.1.5 (2021-10-25)<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h3>
+<h3>0.1.5 (2021-10-25)<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
 <p>增加轨迹处理部分：</p>
 <ul class="simple">
 <li><p>taxigps_traj_point  输入出租车数据与OD数据，提取载客与空载的行驶路径点</p></li>
@@ -260,25 +259,25 @@ visualization_dataagg的热力图模式加入更新计划</p>
 </ul>
 </section>
 <section id="id26">
-<h3>0.1.4 (2021-10-24)<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h3>
+<h3>0.1.4 (2021-10-24)<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
 <p>增加栅格化的gridid_sjoin_shape方法，输入数据（带有栅格经纬度编号两列），矢量图形与栅格化参数，输出数据栅格并对应矢量图形。</p>
 </section>
 <section id="id27">
-<h3>0.1.3 (2021-10-23)<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h3>
+<h3>0.1.3 (2021-10-23)<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
 <p>增加预处理的clean_same,clean_drift,clean_taxi_status方法
 为预处理的id_reindex方法加入sample参数</p>
 </section>
 <section id="id28">
-<h3>0.1.2 (2021-10-23)<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h3>
+<h3>0.1.2 (2021-10-23)<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
 <p>更新数据预处理的clean_outofshape方法
 增加共享单车数据处理功能，bikedata_to_od提取骑行订单数据与停车数据</p>
 </section>
 <section id="id29">
-<h3>0.1.1 (2021-10-22)<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h3>
+<h3>0.1.1 (2021-10-22)<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
 <p>加入数据预处理的clean_outofbounds，dataagg，id_reindex方法</p>
 </section>
 <section id="id30">
-<h3>0.1.0 (2021-10-21)<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h3>
+<h3>0.1.0 (2021-10-21)<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h3>
 <p>最初版本发布</p>
 </section>
 </section>
@@ -295,7 +294,7 @@ visualization_dataagg的热力图模式加入更新计划</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2021, Qing Yu.</p>
+    <p>&#169; Copyright 2021, Qing Yu.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

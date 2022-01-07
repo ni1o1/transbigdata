@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/example-busgps/example-busgps.rst:2
+msgid "公交GPS的到离站信息匹配"
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:4
+#, python-format
+msgid ""
+"这个案例的Jupyter notebook: `点击这里 "
+"<https://github.com/ni1o1/transbigdata/blob/main/example/Example%202-Identifying%20arrival%20and%20departure%20information%20from%20Bus%20GPS%20data.ipynb>`__."
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:5
+#, python-format
+msgid ""
+"可以点击 `这个链接 "
+"<https://mybinder.org/v2/gh/ni1o1/transbigdata/9507de936806c34a4befd74aa9227b012569a6aa?urlpath=lab%2Ftree%2Fexample%2FExample%202-Identifying%20arrival%20and%20departure%20information%20from%20Bus%20GPS%20data.ipynb>`__"
+" 在线编辑器中尝试"
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:6
+msgid "下面的案例展示如何用TransBigData包处理公交GPS数据，以内置方法计算公交车辆的到离站信息、统计公交单程耗时与运营车速"
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:15
+msgid "读取数据"
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:17
+msgid "读取GPS数据"
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:27
+msgid "经纬度坐标转换"
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:157
+msgid "读取公交线数据"
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:177
+msgid "读取公交站点数据"
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:198
+msgid "到离站信息匹配"
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:206
+msgid "数据清洗中..."
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:208
+msgid "运行位置匹配中......"
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:210
+msgid "匹配到离站信息........................................................................................................................................................."
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:331
+msgid "单程耗时"
+msgstr ""
+
+#: ../../source/example-busgps/example-busgps.rst:365
+msgid "运营车速"
+msgstr ""
+

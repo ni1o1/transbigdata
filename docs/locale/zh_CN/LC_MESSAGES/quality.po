@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/quality.rst:6
+msgid "数据质量分析"
+msgstr ""
+
+#: ../../source/quality.rst:12
+msgid "输入数据，打印数据概况"
+msgstr ""
+
+#: ../../source/quality.rst:14 ../../source/quality.rst:65
+msgid "**输入**"
+msgstr ""
+
+#: ../../source/quality.rst:16 ../../source/quality.rst:67
+msgid "data"
+msgstr ""
+
+msgid "DataFrame"
+msgstr ""
+
+#: ../../source/quality.rst:17
+msgid "轨迹点数据"
+msgstr ""
+
+#: ../../source/quality.rst:18 ../../source/quality.rst:70
+msgid "col"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+#: ../../source/quality.rst:19
+msgid "列名，按[个体ID，时间]的顺序"
+msgstr ""
+
+#: ../../source/quality.rst:20
+msgid "show_sample_duration"
+msgstr ""
+
+msgid "bool"
+msgstr ""
+
+#: ../../source/quality.rst:21
+msgid "是否输出个体采样间隔信息"
+msgstr ""
+
+#: ../../source/quality.rst:23
+msgid "roundnum"
+msgstr ""
+
+msgid "number"
+msgstr ""
+
+#: ../../source/quality.rst:23
+msgid "小数点取位数"
+msgstr ""
+
+#: ../../source/quality.rst:25
+msgid "使用方法"
+msgstr ""
+
+#: ../../source/quality.rst:63
+msgid "统计数据采样间隔"
+msgstr ""
+
+#: ../../source/quality.rst:68
+msgid "数据"
+msgstr ""
+
+#: ../../source/quality.rst:70
+msgid "列名，按[个体ID,时间]的顺序"
+msgstr ""
+
+#: ../../source/quality.rst:72
+msgid "**输出**"
+msgstr ""
+
+#: ../../source/quality.rst:74
+msgid "sample_duration"
+msgstr ""
+
+#: ../../source/quality.rst:75
+msgid "一列的数据表，列名为duration，内容是数据的采样间隔，单位秒"
+msgstr ""
+

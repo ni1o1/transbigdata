@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:2
+msgid "共享单车数据社区发现"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:4
+#, python-format
+msgid ""
+"这个案例的Jupyter notebook: `点击这里 "
+"<https://github.com/ni1o1/transbigdata/blob/main/example/Example%205-community%20detection%20for%20bikesharing%20data.ipynb>`__."
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:5
+msgid "对于共享单车的出行，每一次出行都可以被看作是一个从起点行动到终点的出行过程。当我们把起点和终点视为节点，把它们之间的出行视为边时，就可以构建一个网络。通过分析这个网络，我们可以得到关于城市的空间结构、共享单车需求的宏观出行特征等信息。"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:6
+msgid "社区发现，也可以叫图分割，帮助我们揭示网络中节点之间的隐藏关系。在这个例子中，我们将介绍如何将TransBigData整合到共享单车数据的社区发现分析过程中。"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:17
+msgid "数据预处理"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:19
+msgid "在社区发现之前，我们首先需要对数据进行预处理。从共享单车订单中提取出行OD并剔除异常出行，并以清洗好的数据作为研究对象。"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:103
+msgid "读取研究区域的边界，并用tbd.clean_outofshape方法剔除研究区域以外的数据"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:112
+msgid "用tbd.bikedata_to_od方法从单车数据中识别出行OD信息"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:208
+msgid "我们需要剔除过长与过短的共享单车出行。用tbd.getdistance获取起终点之间的直线距离，并筛选删除直线距离小于100米与大于10千米的出行"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:217
+msgid "接下来，我们以500米×500米的栅格为最小分析单元，用tbd.grid_params方法获取栅格划分参数，再将参数输入tbd.odagg_grid方法，对OD进行栅格集计"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:333
+msgid "对OD集计的结果在地图上可视化，用tbd.plot_map加载地图底图，并用tbd.plotscale添加比例尺与指北针"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:364
+msgid "提取节点信息"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:366
+msgid ""
+"使用igraph包构建网络。在Python中，igraph与networkx功能类似，都提供了网络分析的功能，仅在部分算法的支持上有所区别。 "
+"构建网络时，我们需要向igraph提供网络的节点与边的信息。以OD数据中出现过的每个栅格作为节点，构建节点的信息时，需要为节点创建从0开始的数字编号，代码如下"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:473
+msgid "提取边信息"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:475
+msgid "将新的编号连接到OD信息表上，以提取新ID之间的出行量构成边"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:591
+msgid "构建网络"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:593
+msgid "导入igraph包，创建网络，添加节点，并将边数据输入网络。同时，为每一条边添加相应的权重"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:611
+msgid "社区发现"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:613
+msgid ""
+"在构建好的网络上应用社区发现算法。其中，我们使用igraph包自带的g.community_multilevel方法实现Fast "
+"unfolding社区发现算法。前面我们介绍过，Fast "
+"unfolding算法将社区逐层迭代合并直至模块度最优，而在g.community_multilevel方法中可以设定return_levels返回迭代的中间结果。这里我们设定return_levels为False，只返回最终结果进行分析"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:621
+msgid "社区发现的结果存储在g_clustered变量中，可以用内置方法直接计算模块度"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:635
+msgid "一般来说，模块度在0.5以上已经属于较高值。而这一结果的模块度达到0.84，表明网络的社区结构非常明显，社区划分结果也能够很好地划分网络。接下来，我们将社区划分结果赋值到节点信息表上，为后面的可视化做准备。代码如下"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:748
+msgid "社区可视化"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:750
+msgid "在社区发现的结果中，可能会存在部分社区中只存在少量的节点，无法形成规模较大的社区。这些社区为离群点，在可视化之前应该删去，这里我们保留包含10个栅格以上的社区"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:761
+msgid "将栅格编号复原，再用tbd.gridid_to_polygon方法从栅格编号生成栅格的地理几何图形"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:911
+msgid "在这一步中，我们将每一个节点复原为栅格，标记上节点所属的社区编号，生成了每个栅格的地理信息，并将其转换为GeoDataFrame，可以用如下代码绘制栅格，测试是否生成成功"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:923
+msgid "这里我们将group字段的分组编号映射到颜色上进行初步可视化，不同分组的颜色不同。从结果的图中可以看到，相同颜色的栅格在地理空间上大多聚集在一起，表明共享单车的空间联系可以将地理空间上接近的区域紧密地联系在一起"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:925
+msgid "前面的结果可视化的效果并不明显，我们并不能从图中清晰地看出分区的情况。接下来，我们可以对分区结果进行一定的调整与可视化。可视化的调整主要有以下思路:"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:927
+msgid "比较合适的分区结果应该是每个区域都为空间上连续的区域，在初步的可视化结果中，有不少的栅格在空间上为孤立存在，这些点应该予以剔除。"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:928
+msgid "在可视化结果中，我们可以将同一个组别的栅格合并，为每个分区形成面要素，这样在下一步可视化中就可以绘制出分区的边界。"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:929
+msgid "在分区结果中，有些区域的内部可能会存在其他区域的“飞地”，即隶属于本分区，却被其他分区所包围，只能“飞”过其他分区的属地，才能到达自己的飞地。这种分区在共享单车的实际运营中也是难以管理的，应该避免这种情况的出现。"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:931
+msgid "解决上述问题，我们可以使用TransBigData所提供的两个GIS处理方法，tbd.merge_polygon和tbd.polyon_exterior。其中tbd.merge_polygon能够将同一个组别的面要素进行合并，而tbd.polyon_exterior则可以对多边形取外边界后再构成新的多边形，以此剔除飞地。同时，也可以设定最小面积，对小于此面积的面要素进行剔除。代码如下"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:943
+msgid "处理好社区的面要素后，接下来需要对面要素进行可视化。我们希望对不同的面赋予不同的颜色。在可视化章节中我们提到，在显示的要素没有数值上的大小区别时，颜色的选择上需要保持它们各自的颜色具有相同的亮度与饱和度。而用seaborn的调色盘方法即可快速地生成同一亮度与饱和度下的多种颜色"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:958
+msgid "对社区结果进行可视化"
+msgstr ""
+
+#: ../../source/example-bikesharing/example-bikesharing.rst:988
+msgid "至此，我们就已经成功地可视化出共享单车社区，并绘制出每一个社区的边界。在用社区发现模型进行分区时，并没有往模型中输入任何地理空间信息，模型对研究区域的分割也仅仅依靠共享单车出行需求所构成的网络联系。"
+msgstr ""
+

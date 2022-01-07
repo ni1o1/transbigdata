@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>公交车GPS数据处理 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>公交车GPS数据处理 &mdash; TransBigData 0.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo2.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -13,10 +13,9 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="搜索" href="search.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="公交地铁网络拓扑建模" href="metroline.html" />
     <link rel="prev" title="共享单车数据处理" href="bikedata.html" /> 
 </head>
@@ -97,10 +96,10 @@
            <div itemprop="articleBody">
              
   <section id="gps">
-<span id="busgps"></span><h1>公交车GPS数据处理<a class="headerlink" href="#gps" title="永久链接至标题">¶</a></h1>
+<span id="busgps"></span><h1>公交车GPS数据处理<a class="headerlink" href="#gps" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="transbigdata.busgps_arriveinfo">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">busgps_arriveinfo</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['VehicleId',</span> <span class="pre">'GPSDateTime',</span> <span class="pre">'lon',</span> <span class="pre">'lat',</span> <span class="pre">'stopname']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopbuffer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mintime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_epsg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2416</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timegap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1800</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'project'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projectoutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.busgps_arriveinfo" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">busgps_arriveinfo</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['VehicleId',</span> <span class="pre">'GPSDateTime',</span> <span class="pre">'lon',</span> <span class="pre">'lat',</span> <span class="pre">'stopname']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopbuffer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mintime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_epsg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2416</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timegap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1800</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'project'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projectoutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.busgps_arriveinfo" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入公交GPS数据、公交线路与站点的GeoDataFrame，该方法能够识别公交的到离站信息</p>
@@ -136,7 +135,7 @@ dislimit则需要考虑前面点位置，加上距离限制，匹配速度慢。
 </dl>
 <dl class="py function">
 <dt id="transbigdata.busgps_onewaytime">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">busgps_onewaytime</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arrive_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['VehicleId',</span> <span class="pre">'stopname']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.busgps_onewaytime" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">busgps_onewaytime</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arrive_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['VehicleId',</span> <span class="pre">'stopname']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.busgps_onewaytime" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入到离站信息表arrive_info与站点信息表stop，计算单程耗时</p>
@@ -171,7 +170,7 @@ dislimit则需要考虑前面点位置，加上距离限制，匹配速度慢。
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2021, Qing Yu.</p>
+    <p>&#169; Copyright 2021, Qing Yu.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

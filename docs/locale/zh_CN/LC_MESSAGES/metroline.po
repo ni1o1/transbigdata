@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/metroline.rst:4
+msgid "公交地铁网络拓扑建模"
+msgstr ""
+
+#: ../../source/metroline.rst:8
+msgid "用公交/地铁站点对公交/地铁线进行切分，得到断面"
+msgstr ""
+
+#: ../../source/metroline.rst:10 ../../source/metroline.rst:27
+msgid "**输入**"
+msgstr ""
+
+#: ../../source/metroline.rst:12
+msgid "line"
+msgstr ""
+
+msgid "GeoDataFrame"
+msgstr ""
+
+#: ../../source/metroline.rst:13
+msgid "公交/地铁线路"
+msgstr ""
+
+#: ../../source/metroline.rst:15 ../../source/metroline.rst:29
+msgid "stop"
+msgstr ""
+
+#: ../../source/metroline.rst:15
+msgid "公交/地铁站点"
+msgstr ""
+
+#: ../../source/metroline.rst:17 ../../source/metroline.rst:38
+msgid "**输出**"
+msgstr ""
+
+#: ../../source/metroline.rst:21
+msgid "metro_line_splited"
+msgstr ""
+
+#: ../../source/metroline.rst:20
+msgid "生成的断面线型"
+msgstr ""
+
+#: ../../source/metroline.rst:25
+msgid "输入站点信息，输出网络信息，该方法依赖于NetworkX"
+msgstr ""
+
+#: ../../source/metroline.rst:30
+msgid "公交站点"
+msgstr ""
+
+#: ../../source/metroline.rst:31
+msgid "traveltime"
+msgstr ""
+
+msgid "number"
+msgstr ""
+
+#: ../../source/metroline.rst:32
+msgid "每个轨道断面的出行时长"
+msgstr ""
+
+#: ../../source/metroline.rst:33
+msgid "transfertime"
+msgstr ""
+
+#: ../../source/metroline.rst:34
+msgid "每个轨道换乘的时长"
+msgstr ""
+
+#: ../../source/metroline.rst:36
+msgid "nxgraph"
+msgstr ""
+
+msgid "bool"
+msgstr ""
+
+#: ../../source/metroline.rst:36
+msgid "默认True，如果True则直接输出由NetworkX构建的网络G，如果为False，则输出网络的边edge1,edge2,和节点node"
+msgstr ""
+
+#: ../../source/metroline.rst:40
+msgid "G"
+msgstr ""
+
+msgid "networkx.classes.graph.Graph"
+msgstr ""
+
+#: ../../source/metroline.rst:41
+msgid "networkx构建的网络G，nxgraph参数为True时只输出这个"
+msgstr ""
+
+#: ../../source/metroline.rst:42
+msgid "edge1"
+msgstr ""
+
+msgid "DataFrame"
+msgstr ""
+
+#: ../../source/metroline.rst:43
+msgid "轨道断面的边，nxgraph参数为False时输出这个"
+msgstr ""
+
+#: ../../source/metroline.rst:44
+msgid "edge2"
+msgstr ""
+
+#: ../../source/metroline.rst:45
+msgid "轨道换乘的边，nxgraph参数为False时输出这个"
+msgstr ""
+
+#: ../../source/metroline.rst:46
+msgid "node"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+#: ../../source/metroline.rst:47
+msgid "网络节点，nxgraph参数为False时输出这个"
+msgstr ""
+

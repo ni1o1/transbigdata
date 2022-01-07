@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-29 23:07+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.1\n"
+
+#: ../example-busgps/example-busgps.rst:2
+msgid "公交GPS的到离站信息匹配"
+msgstr "Identifying arrival and departure information from Bus GPS data"
+
+#: ../example-busgps/example-busgps.rst:4
+msgid "下面的案例展示如何用TransBigData包处理公交GPS数据，以内置方法计算公交车辆的到离站信息、统计公交单程耗时与运营车速"
+msgstr "The following example shows how to use TransBigData to process bus GPS data, including identifying bus arrival and departure information, calculate travel time and operating speed for buses."
+
+#: ../example-busgps/example-busgps.rst:13
+msgid "读取数据"
+msgstr "Read data"
+
+#: ../example-busgps/example-busgps.rst:15
+msgid "读取GPS数据"
+msgstr "Read GPS data"
+
+#: ../example-busgps/example-busgps.rst:25
+msgid "经纬度坐标转换"
+msgstr "Convert coordinates"
+
+#: ../example-busgps/example-busgps.rst:155
+msgid "读取公交线数据"
+msgstr "Read the bus line data"
+
+#: ../example-busgps/example-busgps.rst:175
+msgid "读取公交站点数据"
+msgstr "Read the bus stop data"
+
+#: ../example-busgps/example-busgps.rst:196
+msgid "到离站信息匹配"
+msgstr "Identifying arrival and departure information"
+
+#: ../example-busgps/example-busgps.rst:204
+msgid "数据清洗中..."
+msgstr "Data cleaning in progress..."
+
+#: ../example-busgps/example-busgps.rst:206
+msgid "运行位置匹配中......"
+msgstr "identifying bus position......"
+
+#: ../example-busgps/example-busgps.rst:208
+msgid "匹配到离站信息........................................................................................................................................................."
+msgstr "Identifying arrival and departure information........................................................................................................................................................."
+
+#: ../example-busgps/example-busgps.rst:329
+msgid "单程耗时"
+msgstr "One-way travel time"
+
+#: ../example-busgps/example-busgps.rst:363
+msgid "运营车速"
+msgstr "operating speed"
+

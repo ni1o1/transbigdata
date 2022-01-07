@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/index.rst:92 ../../source/index.rst:94
+msgid "安装"
+msgstr ""
+
+#: ../../source/index.rst:75 ../../source/index.rst:102
+#: ../../source/index.rst:104
+msgid "使用示例"
+msgstr "Example"
+
+#: ../../source/index.rst:115 ../../source/index.rst:117
+msgid "通用方法"
+msgstr "General Methods"
+
+#: ../../source/index.rst:134 ../../source/index.rst:136
+msgid "各类数据处理方法"
+msgstr "methods for specific data"
+
+#: ../../source/index.rst:7
+msgid "TransBigData 为交通时空大数据而生"
+msgstr "TransBigData -- for Transportation Spatio-Temporal Big Data"
+
+#: ../../source/index.rst:13
+msgid "**主要功能**"
+msgstr "**Main Functions**"
+
+#: ../../source/index.rst:15
+msgid "TransBigData工具针对时空大数据处理而开发，依托于GeoPandas。TransBigData集成了交通时空大数据处理过程中常用的方法。包括栅格化、数据质量分析、数据预处理、数据集计、轨迹分析、GIS处理、地图底图加载、坐标与距离计算、数据可视化等通用方法。TransBigData也针对出租车GPS数据、共享单车数据、公交GPS数据等多种常见交通时空大数据提供了快速简洁的处理方法。"
+msgstr ""
+"TransBigData is a Python package developed for transportation spatio-"
+"temporal big data processing and analysis. TransBigData provides fast and"
+" concise methods for processing common traffic spatio-temporal big data "
+"such as Taxi GPS data, bicycle sharing data and bus GPS data. It includes"
+" general methods such as rasterization, data quality analysis, data pre-"
+"processing, data set counting, trajectory analysis, GIS processing, map "
+"base map loading, coordinate and distance calculation, and data "
+"visualization."
+
+#: ../../source/index.rst:17
+msgid "**技术特点**"
+msgstr "**Technical Features**"
+
+#: ../../source/index.rst:19
+msgid "面向交通时空大数据分析不同阶段的处理需求提供不同处理功能。"
+msgstr ""
+"Provides different processing methods for different stages of traffic "
+"spatio-temporal big data analysis."
+
+#: ../../source/index.rst:20
+msgid "代码简洁、高效、灵活、易用，通过简短的代码即可实现复杂的数据任务。"
+msgstr ""
+"The code with TransBigData is clean, efficient, flexible, and easy to "
+"use, allowing complex data tasks to be achieved with concise code."
+
+#: ../../source/index.rst:24
+msgid "TransBigData简介"
+msgstr "Introduction"
+
+#: ../../source/index.rst:27
+msgid "快速入门"
+msgstr "Quick Start"
+
+#: ../../source/index.rst:29
+msgid "在安装TransBigData之前，请确保已经安装了可用的geopandas包：https://geopandas.org/index.html"
+msgstr ""
+"Before installing TransBigData, make sure that you have installed the "
+"geopandas package: https://geopandas.org/index.html"
+
+#: ../../source/index.rst:30
+msgid "如果你已经安装了geopandas，则直接在命令提示符中运行下面代码即可安装"
+msgstr ""
+"If you already have geopandas installed, run the following code directly "
+"from the command prompt to install it"
+
+#: ../../source/index.rst:36
+#, fuzzy
+msgid "下面例子展示如何使用TransBigData工具快速地从出租车GPS数据中提取出行OD ::"
+msgstr ""
+"The following example shows how to use the TransBigData to quickly "
+"extract trip OD from cab GPS data::"
+
+#: ../../source/index.rst:51
+#, fuzzy
+msgid "使用*tbd.taxigps_to_od*方法，传入对应的列名，即可提取出行OD ::"
+msgstr ""
+"Use the tbd.taxigps_to_od method and pass in the corresponding column "
+"name to extract the trip OD::"
+
+#: ../../source/index.rst:61
+msgid "对提取出的OD进行OD的栅格集计::"
+msgstr "Aggregate OD into grids::"
+
+#: ../../source/index.rst:82
+msgid "相关链接"
+msgstr "Related Links"
+
+#: ../../source/index.rst:84
+msgid "小旭学长的b站： https://space.bilibili.com/3051484"
+msgstr "Bilibili: https://space.bilibili.com/3051484"
+
+#: ../../source/index.rst:85
+msgid "小旭学长的七天入门交通时空大数据分析课程（零基础免费课）： https://www.lifangshuju.com/#/introduce/166"
+msgstr ""
+"data analytics course for beginner： "
+"https://www.lifangshuju.com/#/introduce/166"
+
+#: ../../source/index.rst:86
+msgid "小旭学长的交通时空大数据分析课程： https://www.lifangshuju.com/#/introduce/154"
+msgstr ""
+"Transportation Big Data analysis course by Xiao Xu: "
+"https://www.lifangshuju.com/#/introduce/154"
+
+#: ../../source/index.rst:87
+msgid "小旭学长的数据可视化课程： https://www.lifangshuju.com/#/introduce/165"
+msgstr ""
+"Data Visualization course by Xiao Xu: "
+"https://www.lifangshuju.com/#/introduce/165"
+
+#: ../../source/index.rst:88
+msgid "本项目的github页面： https://github.com/ni1o1/transbigdata/"
+msgstr "github for this project: https://github.com/ni1o1/transbigdata/"
+
+#: ../../source/index.rst:89
+msgid "有bug请在这个页面提交： https://github.com/ni1o1/transbigdata/issues"
+msgstr "Bug report: https://github.com/ni1o1/transbigdata/issues"
+
+#~ msgid "安装、依赖与更新日志"
+#~ msgstr "Installation"
+

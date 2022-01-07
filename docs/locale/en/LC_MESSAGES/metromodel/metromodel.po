@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/metromodel/metromodel.rst:2
+msgid "地铁网络拓扑建模"
+msgstr ""
+
+#: ../../source/metromodel/metromodel.rst:4
+#, python-format
+msgid ""
+"这个案例的Jupyter notebook: `点击这里 "
+"<https://github.com/ni1o1/transbigdata/blob/main/example/Example%203-Modeling%20for%20subway%20network%20topology.ipynb>`__."
+msgstr ""
+
+#: ../../source/metromodel/metromodel.rst:6
+#, python-format
+msgid ""
+"可以点击 `这个链接 "
+"<https://mybinder.org/v2/gh/ni1o1/transbigdata/9507de936806c34a4befd74aa9227b012569a6aa?urlpath=lab%2Ftree%2Fexample%2FExample%203-Modeling%20for%20subway%20network%20topology.ipynb>`__"
+" 在线编辑器中尝试"
+msgstr ""
+
+#: ../../source/metromodel/metromodel.rst:8
+msgid "下面的案例展示如何用TransBigData包抓取地铁线路，并构建地铁线网的拓扑网络模型"
+msgstr ""
+
+#: ../../source/metromodel/metromodel.rst:11
+msgid "爬取地铁线路"
+msgstr ""
+
+#: ../../source/metromodel/metromodel.rst:13
+msgid "首先爬取地铁线路使用tbd.getbusdata方法，输入城市跟公交或地铁线路名称的关键词，即可获取到线路数据，坐标系为wgs84。"
+msgstr ""
+
+#: ../../source/metromodel/metromodel.rst:22
+msgid "获取城市id: 厦门成功 1号线成功 2号线成功 3号线成功"
+msgstr ""
+
+#: ../../source/metromodel/metromodel.rst:57
+msgid "轨道断面信息获取"
+msgstr ""
+
+#: ../../source/metromodel/metromodel.rst:59
+msgid "tbd.split_subwayline方法可以用轨道站点切分轨道线路，得到轨道断面信息（这一步骤主要在地铁客流可视化中有用）"
+msgstr ""
+
+#: ../../source/metromodel/metromodel.rst:74
+msgid "轨道网络拓扑模型构建"
+msgstr ""
+
+#: ../../source/metromodel/metromodel.rst:76
+msgid "同时我们也可以直接使用站点数据，构建地铁网络的拓扑结构模型，方便后续地铁出行路径的识别。这一功能依赖于networkx包。"
+msgstr ""
+

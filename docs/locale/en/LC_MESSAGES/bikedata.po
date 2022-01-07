@@ -1,0 +1,84 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-29 23:07+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.1\n"
+
+#: ../bikedata.rst:6
+msgid "共享单车数据处理"
+msgstr "Bike-sharing data processing"
+
+#: ../bikedata.rst:10
+msgid "输入共享单车订单数据（只在开关锁时产生数据），指定列名，提取其中的骑行与停车信息"
+msgstr "Input bike-sharing order data (with data only generated when the lock is switched on and off), specify the column name, and extract the ride and parking information from it"
+
+#: ../bikedata.rst:12
+msgid "**输入**"
+msgstr "**Input**"
+
+#: ../bikedata.rst:14
+msgid "data"
+msgstr ""
+
+msgid "DataFrame"
+msgstr ""
+
+#: ../bikedata.rst:15
+msgid "共享单车订单数据，只在开关锁时产生数据"
+msgstr "bike-sharing order data"
+
+#: ../bikedata.rst:16
+msgid "col"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+#: ../bikedata.rst:17
+msgid "列名，顺序不能变，分别为[单车ID,时间,经度,纬度,锁状态]，例如['BIKE_ID','DATA_TIME','LONGITUDE','LATITUDE','LOCK_STATUS']"
+msgstr "Column names, the order cannot be changed.['BIKE_ID','DATA_TIME','LONGITUDE','LATITUDE','LOCK_STATUS']"
+
+#: ../bikedata.rst:20
+msgid "startend"
+msgstr ""
+
+#: ../bikedata.rst:19
+msgid ""
+"传入的为[开始时间,结束时间]，如['2018-08-27 00:00:00','2018-08-28 00:00:00']。 "
+"如传入，则考虑（观测时段开始时到单车第一次出现）与（单车最后一次出现到观测时段结束）的骑行与停车情况。"
+msgstr "The start time and end time of the observation period, for example ['2018-08-27 00:00:00','2018-08-28 00:00:00']. If it is passed in, the riding and parking situations (from the beginning of the observation period to the first appearance of the bicycle) and (from the last appearance of the bicycle to the end of the observation period) are considered."
+
+#: ../bikedata.rst:22
+msgid "**输出**"
+msgstr "**Output**"
+
+#: ../bikedata.rst:24
+msgid "move_data"
+msgstr ""
+
+#: ../bikedata.rst:25
+msgid "骑行订单数据"
+msgstr "Riding data"
+
+#: ../bikedata.rst:26
+msgid "stop_data"
+msgstr ""
+
+#: ../bikedata.rst:27
+msgid "停车数据"
+msgstr "Parking data"
+

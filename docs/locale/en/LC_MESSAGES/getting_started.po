@@ -1,0 +1,349 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/getting_started.rst:6
+msgid "安装、依赖与更新日志"
+msgstr "Installation"
+
+#: ../../source/getting_started.rst:9
+msgid "安装"
+msgstr "Installation"
+
+#: ../../source/getting_started.rst:11
+#, fuzzy
+msgid ""
+"TransBigData依赖geopandas，在安装TransBigData前需要根据 `这个链接 "
+"<https://geopandas.org/en/stable/getting_started.html#installation>`_ "
+"中的方法安装geopandas。 如果你已经安装了geopandas，则直接在命令提示符中运行下面代码即可安装::"
+msgstr ""
+"TransBigData depends on geopandas: https://geopandas.org/index.html. If "
+"you already have geopandas installed, run the following code directly "
+"from the command prompt to install it::"
+
+#: ../../source/getting_started.rst:16
+msgid "在Python中运行下面代码::"
+msgstr "To import `TransBigData`, run the following code in Python"
+
+#: ../../source/getting_started.rst:21
+msgid "依赖包"
+msgstr "Dependency"
+
+#: ../../source/getting_started.rst:22
+msgid "TransBigData依赖如下包"
+msgstr "TransBigData depends on the following packages"
+
+#: ../../source/getting_started.rst:24
+#, fuzzy
+msgid "`pandas`"
+msgstr "pandas"
+
+#: ../../source/getting_started.rst:25
+msgid "`shapely`"
+msgstr ""
+
+#: ../../source/getting_started.rst:26
+msgid "`rtree`"
+msgstr ""
+
+#: ../../source/getting_started.rst:27
+#, fuzzy
+msgid "`geopandas`"
+msgstr "geopandas"
+
+#: ../../source/getting_started.rst:28
+#, fuzzy
+msgid "`scipy`"
+msgstr "scipy"
+
+#: ../../source/getting_started.rst:29
+#, fuzzy
+msgid "`matplotlib`"
+msgstr "matplotlib"
+
+#: ../../source/getting_started.rst:30
+msgid "`plot_map`>=0.3.5"
+msgstr ""
+
+#: ../../source/getting_started.rst:31
+msgid "`CoordinatesConverter`>=0.1.4"
+msgstr ""
+
+#: ../../source/getting_started.rst:32
+msgid "`networkx` (optional)"
+msgstr ""
+
+#: ../../source/getting_started.rst:33
+msgid "`igraph` (optional)"
+msgstr ""
+
+#: ../../source/getting_started.rst:34
+msgid "`osmnx` (optional)"
+msgstr ""
+
+#: ../../source/getting_started.rst:35
+msgid "`seaborn` (optional)"
+msgstr ""
+
+#: ../../source/getting_started.rst:36
+msgid "`keplergl` (optional)"
+msgstr ""
+
+#: ../../source/getting_started.rst:37
+msgid "`leuvenmapmatching` (optional)"
+msgstr ""
+
+#: ../../source/getting_started.rst:40
+msgid "版本更新"
+msgstr ""
+
+#: ../../source/getting_started.rst:43
+msgid "0.2.3 (2021-11-30)"
+msgstr ""
+
+#: ../../source/getting_started.rst:44
+msgid "版本更新太快来不及写更新日志："
+msgstr ""
+
+#: ../../source/getting_started.rst:46
+msgid ""
+". 将visualization_dataagg合并至visualization_data中 . 增加置信椭圆绘制功能 . 增加英文文档页面 . "
+"为plot_map地图底图增加10个style，现在需要输入mapboxtoken才能绘制"
+msgstr ""
+
+#: ../../source/getting_started.rst:52
+msgid "0.1.28 (2021-11-22)"
+msgstr ""
+
+#: ../../source/getting_started.rst:53
+msgid ""
+"为odagg_grid、odagg_shape增加了权重count的支持 "
+"增加可视化方法visualization_dataagg，支持带权重的集计可视化 "
+"visualization_dataagg的热力图模式加入更新计划"
+msgstr ""
+
+#: ../../source/getting_started.rst:58
+msgid "0.1.25 (2021-11-12)"
+msgstr ""
+
+#: ../../source/getting_started.rst:59
+msgid "添加轨迹增密函数traj_densify"
+msgstr ""
+
+#: ../../source/getting_started.rst:62
+msgid "0.1.24 (2021-11-11)"
+msgstr ""
+
+#: ../../source/getting_started.rst:63
+msgid ""
+"添加id_reindex_disgap方法对数据的ID列重新编号，如果相邻两条记录超过距离，则编号为新id "
+"添加clean_traj方法轨迹数据清洗组合拳，能够有效解决轨迹漂移的问题"
+msgstr ""
+
+#: ../../source/getting_started.rst:67
+msgid "0.1.23 (2021-11-10)"
+msgstr ""
+
+#: ../../source/getting_started.rst:68
+msgid "添加visualization_data方法,添加对keplergl的支持"
+msgstr ""
+
+#: ../../source/getting_started.rst:71
+msgid "0.1.22 (2021-11-10)"
+msgstr ""
+
+#: ../../source/getting_started.rst:72
+msgid "添加visualization_od方法,添加对keplergl的支持"
+msgstr ""
+
+#: ../../source/getting_started.rst:75
+msgid "0.1.20 (2021-11-09)"
+msgstr ""
+
+#: ../../source/getting_started.rst:76
+msgid "添加visualization_trip方法,添加对keplergl的支持"
+msgstr ""
+
+#: ../../source/getting_started.rst:79
+msgid "0.1.19 (2021-11-09)"
+msgstr ""
+
+#: ../../source/getting_started.rst:80
+msgid "添加transform_shape方法,可以将GeoDataFrame整体做坐标转换"
+msgstr ""
+
+#: ../../source/getting_started.rst:83
+msgid "0.1.18 (2021-11-09)"
+msgstr ""
+
+#: ../../source/getting_started.rst:84
+msgid "添加splitline_with_length方法,可以将长线段全部打断"
+msgstr ""
+
+#: ../../source/getting_started.rst:87
+msgid "0.1.17 (2021-11-08)"
+msgstr ""
+
+#: ../../source/getting_started.rst:88
+msgid "添加geohash编码方法"
+msgstr ""
+
+#: ../../source/getting_started.rst:91
+msgid "0.1.16 (2021-11-05)"
+msgstr ""
+
+#: ../../source/getting_started.rst:92
+msgid "添加getadmin方法，输入关键词抓取行政区划信息"
+msgstr ""
+
+#: ../../source/getting_started.rst:95
+msgid "0.1.15 (2021-11-04)"
+msgstr ""
+
+#: ../../source/getting_started.rst:96
+msgid "添加metro_network方法，输入站点信息，输出网络信息"
+msgstr ""
+
+#: ../../source/getting_started.rst:99
+msgid "0.1.13 (2021-11-03)"
+msgstr ""
+
+#: ../../source/getting_started.rst:100
+msgid "增加公交地铁线网拓扑建模的模块，添加split_subwayline方法，用公交/地铁站点对公交/地铁线进行切分，得到断面"
+msgstr ""
+
+#: ../../source/getting_started.rst:103
+msgid "0.1.12 (2021-11-02)"
+msgstr ""
+
+#: ../../source/getting_started.rst:104
+msgid "增加爬虫模块，用getbusdata通过输入城市与关键词，获取公交线路的线型与站点，且不依赖于ak"
+msgstr ""
+
+#: ../../source/getting_started.rst:107
+msgid "0.1.11 (2021-11-01)"
+msgstr ""
+
+#: ../../source/getting_started.rst:108
+msgid "公交GPS模块增加busgps_onewaytime函数， 输入到离站信息表arrive_info与站点信息表stop，计算单程耗时"
+msgstr ""
+
+#: ../../source/getting_started.rst:112
+msgid "0.1.10 (2021-10-31)"
+msgstr ""
+
+#: ../../source/getting_started.rst:113
+msgid "增加公交GPS数据到离站信息识别的方法"
+msgstr ""
+
+#: ../../source/getting_started.rst:116
+msgid "0.1.9 (2021-10-28)"
+msgstr ""
+
+#: ../../source/getting_started.rst:117
+msgid "改进id_reindex方法，sample支持所有模式，同时也添加了timegap和timecol参数"
+msgstr ""
+
+#: ../../source/getting_started.rst:120
+msgid "0.1.7 (2021-10-27)"
+msgstr ""
+
+#: ../../source/getting_started.rst:121
+msgid "增加数据质量分析部分："
+msgstr ""
+
+#: ../../source/getting_started.rst:123
+msgid "sample_duration采样间隔"
+msgstr ""
+
+#: ../../source/getting_started.rst:126
+msgid "0.1.6 (2021-10-25)"
+msgstr ""
+
+#: ../../source/getting_started.rst:127
+msgid "修正taxigps_traj_point的Bug"
+msgstr ""
+
+#: ../../source/getting_started.rst:130
+msgid "0.1.5 (2021-10-25)"
+msgstr ""
+
+#: ../../source/getting_started.rst:131
+msgid "增加轨迹处理部分："
+msgstr ""
+
+#: ../../source/getting_started.rst:133
+msgid "taxigps_traj_point  输入出租车数据与OD数据，提取载客与空载的行驶路径点"
+msgstr ""
+
+#: ../../source/getting_started.rst:134
+msgid "points_to_traj 输入轨迹点，生成轨迹线型的GeoDataFrame"
+msgstr ""
+
+#: ../../source/getting_started.rst:138
+msgid "0.1.4 (2021-10-24)"
+msgstr ""
+
+#: ../../source/getting_started.rst:139
+msgid "增加栅格化的gridid_sjoin_shape方法，输入数据（带有栅格经纬度编号两列），矢量图形与栅格化参数，输出数据栅格并对应矢量图形。"
+msgstr ""
+
+#: ../../source/getting_started.rst:143
+msgid "0.1.3 (2021-10-23)"
+msgstr ""
+
+#: ../../source/getting_started.rst:144
+msgid ""
+"增加预处理的clean_same,clean_drift,clean_taxi_status方法 "
+"为预处理的id_reindex方法加入sample参数"
+msgstr ""
+
+#: ../../source/getting_started.rst:148
+msgid "0.1.2 (2021-10-23)"
+msgstr ""
+
+#: ../../source/getting_started.rst:149
+msgid "更新数据预处理的clean_outofshape方法 增加共享单车数据处理功能，bikedata_to_od提取骑行订单数据与停车数据"
+msgstr ""
+
+#: ../../source/getting_started.rst:153
+msgid "0.1.1 (2021-10-22)"
+msgstr ""
+
+#: ../../source/getting_started.rst:154
+msgid "加入数据预处理的clean_outofbounds，dataagg，id_reindex方法"
+msgstr ""
+
+#: ../../source/getting_started.rst:157
+msgid "0.1.0 (2021-10-21)"
+msgstr ""
+
+#: ../../source/getting_started.rst:158
+msgid "最初版本发布"
+msgstr ""
+
+#~ msgid "可选依赖："
+#~ msgstr "Optional dependencies:"
+
+#~ msgid "networkx"
+#~ msgstr "networkx"
+
+#~ msgid "keplergl"
+#~ msgstr "keplergl"
+

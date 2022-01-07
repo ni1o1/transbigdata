@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>共享单车数据社区发现 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>共享单车数据社区发现 &mdash; TransBigData 0.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo2.ico"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -13,10 +13,9 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/translations.js"></script>
     <script src="../_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="数据质量分析" href="../quality.html" />
     <link rel="prev" title="pNEUMA轨迹数据处理" href="../Example-pNEUMA/Example-pNEUMA.html" /> 
 </head>
@@ -105,7 +104,7 @@
            <div itemprop="articleBody">
              
   <section id="id1">
-<h1>共享单车数据社区发现<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1>共享单车数据社区发现<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="line-block">
 <div class="line">这个案例的Jupyter notebook: <a class="reference external" href="https://github.com/ni1o1/transbigdata/blob/main/example/Example%205-community%20detection%20for%20bikesharing%20data.ipynb">点击这里</a>.</div>
 <div class="line">对于共享单车的出行，每一次出行都可以被看作是一个从起点行动到终点的出行过程。当我们把起点和终点视为节点，把它们之间的出行视为边时，就可以构建一个网络。通过分析这个网络，我们可以得到关于城市的空间结构、共享单车需求的宏观出行特征等信息。</div>
@@ -118,7 +117,7 @@
 </pre></div>
 </div>
 <section id="id2">
-<h2>数据预处理<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>数据预处理<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>在社区发现之前，我们首先需要对数据进行预处理。从共享单车订单中提取出行OD并剔除异常出行，并以清洗好的数据作为研究对象。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#读取共享单车数据</span>
 <span class="n">bikedata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;data/bikedata-sample.csv&#39;</span><span class="p">)</span>
@@ -427,7 +426,7 @@
 <img alt="../_images/output_7_0.png" src="../_images/output_7_0.png" />
 </section>
 <section id="id3">
-<h2>提取节点信息<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>提取节点信息<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>使用igraph包构建网络。在Python中，igraph与networkx功能类似，都提供了网络分析的功能，仅在部分算法的支持上有所区别。
 构建网络时，我们需要向igraph提供网络的节点与边的信息。以OD数据中出现过的每个栅格作为节点，构建节点的信息时，需要为节点创建从0开始的数字编号，代码如下</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#把起终点的经纬度栅格编号变为一个字段</span>
@@ -525,7 +524,7 @@
 <p>9811 rows × 2 columns</p>
 </div></section>
 <section id="id4">
-<h2>提取边信息<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>提取边信息<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>将新的编号连接到OD信息表上，以提取新ID之间的出行量构成边</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#把新编号连接到OD数据上</span>
 <span class="n">node</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">,</span><span class="s1">&#39;S_id&#39;</span><span class="p">]</span>
@@ -632,7 +631,7 @@
 <p>68473 rows × 3 columns</p>
 </div></section>
 <section id="id5">
-<h2>构建网络<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>构建网络<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>导入igraph包，创建网络，添加节点，并将边数据输入网络。同时，为每一条边添加相应的权重</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">igraph</span>
 <span class="c1">#创建网络</span>
@@ -650,7 +649,7 @@
 </div>
 </section>
 <section id="id6">
-<h2>社区发现<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2>社区发现<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>在构建好的网络上应用社区发现算法。其中，我们使用igraph包自带的g.community_multilevel方法实现Fast unfolding社区发现算法。前面我们介绍过，Fast unfolding算法将社区逐层迭代合并直至模块度最优，而在g.community_multilevel方法中可以设定return_levels返回迭代的中间结果。这里我们设定return_levels为False，只返回最终结果进行分析</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#社区发现</span>
 <span class="n">g_clustered</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">community_multilevel</span><span class="p">(</span><span class="n">weights</span> <span class="o">=</span> <span class="n">edge_weights</span><span class="p">,</span> <span class="n">return_levels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -767,7 +766,7 @@
 <p>9811 rows × 3 columns</p>
 </div></section>
 <section id="id7">
-<h2>社区可视化<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2>社区可视化<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <p>在社区发现的结果中，可能会存在部分社区中只存在少量的节点，无法形成规模较大的社区。这些社区为离群点，在可视化之前应该删去，这里我们保留包含10个栅格以上的社区</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#统计每个社区的栅格数量</span>
 <span class="n">group</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -988,7 +987,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2021, Qing Yu.</p>
+    <p>&#169; Copyright 2021, Qing Yu.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>公交GPS的到离站信息匹配 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>公交GPS的到离站信息匹配 &mdash; TransBigData 0.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo2.ico"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -13,10 +13,9 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/translations.js"></script>
     <script src="../_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="地铁网络拓扑建模" href="../metromodel/metromodel.html" />
     <link rel="prev" title="出租车数据处理" href="../example-taxi/example-taxi.html" /> 
 </head>
@@ -103,7 +102,7 @@
            <div itemprop="articleBody">
              
   <section id="gps">
-<h1>公交GPS的到离站信息匹配<a class="headerlink" href="#gps" title="永久链接至标题">¶</a></h1>
+<h1>公交GPS的到离站信息匹配<a class="headerlink" href="#gps" title="Permalink to this headline">¶</a></h1>
 <div class="line-block">
 <div class="line">这个案例的Jupyter notebook: <a class="reference external" href="https://github.com/ni1o1/transbigdata/blob/main/example/Example%202-Identifying%20arrival%20and%20departure%20information%20from%20Bus%20GPS%20data.ipynb">点击这里</a>.</div>
 <div class="line">可以点击 <a class="reference external" href="https://mybinder.org/v2/gh/ni1o1/transbigdata/9507de936806c34a4befd74aa9227b012569a6aa?urlpath=lab%2Ftree%2Fexample%2FExample%202-Identifying%20arrival%20and%20departure%20information%20from%20Bus%20GPS%20data.ipynb">这个链接</a> 在线编辑器中尝试</div>
@@ -115,7 +114,7 @@
 </pre></div>
 </div>
 <section id="id1">
-<h2>读取数据<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<h2>读取数据<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>读取GPS数据</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BUS_GPS</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;busgps.csv&#39;</span><span class="p">,</span><span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 <span class="n">BUS_GPS</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GPSDateTime&#39;</span><span class="p">,</span> <span class="s1">&#39;LineId&#39;</span><span class="p">,</span> <span class="s1">&#39;LineName&#39;</span><span class="p">,</span> <span class="s1">&#39;NextLevel&#39;</span><span class="p">,</span> <span class="s1">&#39;PrevLevel&#39;</span><span class="p">,</span>
@@ -261,7 +260,7 @@
 <img alt="../_images/output_10_1.png" src="../_images/output_10_1.png" />
 </section>
 <section id="id2">
-<h2>到离站信息匹配<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>到离站信息匹配<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">arriveinfo</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">busgps_arriveinfo</span><span class="p">(</span><span class="n">BUS_GPS</span><span class="p">,</span><span class="n">line</span><span class="p">,</span><span class="n">stop</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -378,7 +377,7 @@
 <p>8984 rows × 4 columns</p>
 </div></section>
 <section id="id3">
-<h2>单程耗时<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>单程耗时<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">onewaytime</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">busgps_onewaytime</span><span class="p">(</span><span class="n">arriveinfo</span><span class="p">,</span>
                                    <span class="n">start</span> <span class="o">=</span> <span class="s1">&#39;延安东路外滩&#39;</span><span class="p">,</span>
                                    <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;申昆路枢纽站&#39;</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VehicleId&#39;</span><span class="p">,</span><span class="s1">&#39;stopname&#39;</span><span class="p">])</span>
@@ -405,7 +404,7 @@
 <img alt="../_images/output_16_0.png" src="../_images/output_16_0.png" />
 </section>
 <section id="id4">
-<h2>运营车速<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>运营车速<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#转换坐标系为投影坐标系，方便后面计算距离</span>
 <span class="n">line</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span><span class="s1">&#39;epsg:4326&#39;</span><span class="p">}</span>
 <span class="n">line_2416</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span> <span class="o">=</span> <span class="mi">2416</span><span class="p">)</span>
@@ -457,7 +456,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2021, Qing Yu.</p>
+    <p>&#169; Copyright 2021, Qing Yu.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

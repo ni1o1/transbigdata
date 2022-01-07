@@ -1,0 +1,169 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-29 23:07+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.1\n"
+
+#: ../odprocess.rst:6
+msgid "数据聚合集计"
+msgstr "Data Aggregating"
+
+#: ../odprocess.rst:9
+msgid "数据集计"
+msgstr "Data Aggregating"
+
+#: ../odprocess.rst:13
+msgid "数据集计至小区"
+msgstr "Aggregate data to traffic zone"
+
+#: ../odprocess.rst:15 ../odprocess.rst:41 ../odprocess.rst:62
+msgid "**输入**"
+msgstr "**Input**"
+
+#: ../odprocess.rst:17
+msgid "data"
+msgstr "data"
+
+msgid "DataFrame"
+msgstr "DataFrame"
+
+#: ../odprocess.rst:18
+msgid "数据"
+msgstr "The origin DataFrame"
+
+#: ../odprocess.rst:19 ../odprocess.rst:66
+msgid "shape"
+msgstr "shape"
+
+msgid "GeoDataFrame"
+msgstr "GeoDataFrame"
+
+#: ../odprocess.rst:20
+msgid "小区"
+msgstr "The shape of the traffic zone"
+
+#: ../odprocess.rst:21 ../odprocess.rst:46 ../odprocess.rst:69
+msgid "col"
+msgstr "col"
+
+msgid "List"
+msgstr "List"
+
+#: ../odprocess.rst:22
+msgid "可传入经纬度两列，如['Lng','Lat']，此时每一列权重为1。也可以传入经纬度和计数列三列，如['Lng','Lat','count']"
+msgstr "You can either choose to input two columns, i.e., ['Lng','Lat'], or to input three columns, i.e., ['Lng','Lat','count']", where `count` means the points counts
+
+#: ../odprocess.rst:24
+msgid "accuracy"
+msgstr "accuracy"
+
+msgid "number"
+msgstr "number"
+
+#: ../odprocess.rst:24
+msgid "计算原理是先栅格化后集计，这里定义栅格大小，越小精度越高"
+msgstr "The idea is to first implement data gridding and then the aggregation. Here, the grid size will be determined. The less the size is, the higher the accuracy will have."
+
+#: ../odprocess.rst:26 ../odprocess.rst:53 ../odprocess.rst:78
+msgid "**输出**"
+msgstr "**Output**"
+
+#: ../odprocess.rst:28
+msgid "aggresult"
+msgstr "aggresult"
+
+#: ../odprocess.rst:29
+msgid "小区，其中count列为统计结果"
+msgstr "Traffic zone. The `count` column is the output result"
+
+#: ../odprocess.rst:31
+msgid "data1"
+msgstr "data1"
+
+#: ../odprocess.rst:31
+msgid "数据，对应上了小区"
+msgstr "The zone-matched data"
+
+#: ../odprocess.rst:34
+msgid "OD集计"
+msgstr "OD aggregation"
+
+#: ../odprocess.rst:39
+msgid "OD集计与地理信息生成（栅格）。输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame"
+msgstr "Aggregate the OD matrix and generate the grid geometry. The input is the OD matrix (each row represents a trip). The OD will assigned to grids and then aggregated in the form of GeoDataFrame."
+
+#: ../odprocess.rst:43 ../odprocess.rst:64
+msgid "oddata"
+msgstr "oddata"
+
+#: ../odprocess.rst:44 ../odprocess.rst:65
+msgid "OD数据"
+msgstr "OD data"
+
+#: ../odprocess.rst:46 ../odprocess.rst:69
+msgid ""
+"起终点列名,['slon','slat','elon','elat']，此时每一列权重为1。 "
+"也可以传入权重列，如['slon','slat','elon','elat','count']"
+msgstr "The column of the origin/destination location,['slon','slat','elon','elat']. The default weight is 1 for each column. You can also add the weight parameter, for example, ['slon','slat','elon','elat','count']. "
+
+#: ../odprocess.rst:48 ../odprocess.rst:71
+msgid "params"
+msgstr "params"
+
+#: ../odprocess.rst:49
+msgid "栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽"
+msgstr "The grid parameter, (lonStart, latStart, deltaLon, deltaLat), are the coordinates of the lower left corner of the grid, and the grid size, respectively"
+
+#: ../odprocess.rst:51 ../odprocess.rst:76
+msgid "arrow"
+msgstr "arrow"
+
+msgid "bool"
+msgstr "bool"
+
+#: ../odprocess.rst:51 ../odprocess.rst:76
+msgid "生成的OD地理线型是否包含箭头"
+msgstr "Whether the generated OD geographic line contains arrows"
+
+#: ../odprocess.rst:56 ../odprocess.rst:82
+msgid "oddata1"
+msgstr "oddata1"
+
+#: ../odprocess.rst:56 ../odprocess.rst:81
+msgid "集计后生成OD的GeoDataFrame"
+msgstr "GeoDataFrame of OD after aggregation "
+
+#: ../odprocess.rst:60
+msgid "OD集计与地理信息生成（小区集计）。输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame"
+msgstr "Generate the OD aggregation results and the corresponding geometry. The input is the OD data (each row represents a trip). The OD will assigned to grids and then aggregated in the form of GeoDataFrame."
+
+#: ../odprocess.rst:67
+msgid "集计小区的GeoDataFrame"
+msgstr "GeoDataFrame of the target traffic zone"
+
+#: ../odprocess.rst:72
+msgid "栅格化参数，如果传入，则先栅格化后以栅格中心点匹配小区，如果不传入，则直接以经纬度匹配。在数据量大时，用栅格化进行匹配速度会极大提升"
+msgstr "Parameter gridding (optional). If availabel, After the data gridding, the traffic zone will be matched based on the grid center. If not available, then the matching will be processed based on longitude and latitude. When the number of data items is large, the matching efficiency will be improved greatly thanks to data gridding. "
+
+#: ../odprocess.rst:73
+msgid "round_accuracy"
+msgstr "round_accuracy"
+
+#: ../odprocess.rst:74
+msgid "集计时经纬度取小数位数"
+msgstr "The number of decimal for latitude and longitude when implementing aggregation"
+

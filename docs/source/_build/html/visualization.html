@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>数据可视化 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>数据可视化 &mdash; TransBigData 0.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo2.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -13,10 +13,9 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="搜索" href="search.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="数据获取" href="getbusdata.html" />
     <link rel="prev" title="数据聚合集计" href="odprocess.html" /> 
 </head>
@@ -103,9 +102,9 @@
            <div itemprop="articleBody">
              
   <section id="id1">
-<h1>数据可视化<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1>数据可视化<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <section id="jupyter">
-<h2>在jupyter中显示可视化的设置<a class="headerlink" href="#jupyter" title="永久链接至标题">¶</a></h2>
+<h2>在jupyter中显示可视化的设置<a class="headerlink" href="#jupyter" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">TransBigData包也依托于kepler.gl提供的可视化插件提供了一键数据整理与可视化的方法</div>
 <div class="line">使用此功能请先安装python的keplergl包</div>
@@ -117,10 +116,10 @@
 <img alt="_images/jupytersettings.png" src="_images/jupytersettings.png" />
 </section>
 <section id="id2">
-<h2>数据点分布可视化<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>数据点分布可视化<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="transbigdata.visualization_data">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">visualization_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maptype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'point'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.visualization_data" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">visualization_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maptype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'point'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.visualization_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入数据点，集计并可视化</p>
@@ -158,10 +157,10 @@
 <img alt="_images/datavis.png" src="_images/datavis.png" />
 </section>
 <section id="id3">
-<h2>轨迹可视化<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>轨迹可视化<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="transbigdata.visualization_trip">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">visualization_trip</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Lng',</span> <span class="pre">'Lat',</span> <span class="pre">'ID',</span> <span class="pre">'Time']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.visualization_trip" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">visualization_trip</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Lng',</span> <span class="pre">'Lat',</span> <span class="pre">'ID',</span> <span class="pre">'Time']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.visualization_trip" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入轨迹数据与列名，生成kepler的可视化</p>
@@ -194,10 +193,10 @@
 <img alt="_images/kepler-traj.png" src="_images/kepler-traj.png" />
 </section>
 <section id="od">
-<h2>OD可视化<a class="headerlink" href="#od" title="永久链接至标题">¶</a></h2>
+<h2>OD可视化<a class="headerlink" href="#od" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="transbigdata.visualization_od">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">visualization_od</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oddata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['slon',</span> <span class="pre">'slat',</span> <span class="pre">'elon',</span> <span class="pre">'elat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mincount</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.visualization_od" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">visualization_od</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oddata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['slon',</span> <span class="pre">'slat',</span> <span class="pre">'elon',</span> <span class="pre">'elat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mincount</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.visualization_od" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入od数据与列名，生成kepler的可视化</p>
@@ -249,7 +248,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2021, Qing Yu.</p>
+    <p>&#169; Copyright 2021, Qing Yu.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

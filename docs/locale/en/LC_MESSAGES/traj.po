@@ -1,0 +1,250 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/traj.rst:6
+#, fuzzy
+msgid "轨迹处理"
+msgstr "Trajectory Processing"
+
+#: ../../source/traj.rst:9
+msgid "停留与出行识别"
+msgstr ""
+
+#: ../../source/traj.rst:12
+msgid "输入轨迹数据与栅格化参数，识别活动与出行"
+msgstr ""
+
+#: ../../source/traj.rst:14 ../../source/traj.rst:36 ../../source/traj.rst:50
+#: ../../source/traj.rst:72 ../../source/traj.rst:90
+msgid "**输入**"
+msgstr "**Input**"
+
+#: ../../source/traj.rst:16 ../../source/traj.rst:38 ../../source/traj.rst:74
+#: ../../source/traj.rst:92
+msgid "data"
+msgstr "data"
+
+msgid "DataFrame"
+msgstr "DataFrame"
+
+#: ../../source/traj.rst:17
+#, fuzzy
+msgid "轨迹数据集"
+msgstr "Trajectory data"
+
+#: ../../source/traj.rst:18
+msgid "params"
+msgstr ""
+
+msgid "List"
+msgstr "List"
+
+#: ../../source/traj.rst:19
+msgid "栅格化参数"
+msgstr ""
+
+#: ../../source/traj.rst:20 ../../source/traj.rst:41 ../../source/traj.rst:54
+#: ../../source/traj.rst:76 ../../source/traj.rst:94
+msgid "col"
+msgstr "col"
+
+#: ../../source/traj.rst:21
+msgid "数据的列名[个体，时间，经度，纬度]顺序"
+msgstr ""
+
+#: ../../source/traj.rst:23
+msgid "activitytime"
+msgstr ""
+
+#, fuzzy
+msgid "Number"
+msgstr "number"
+
+#: ../../source/traj.rst:23
+msgid "多长时间识别为停留"
+msgstr ""
+
+#: ../../source/traj.rst:25 ../../source/traj.rst:59 ../../source/traj.rst:81
+#: ../../source/traj.rst:101
+msgid "**输出**"
+msgstr "**Output**"
+
+#: ../../source/traj.rst:27
+msgid "stay"
+msgstr ""
+
+#: ../../source/traj.rst:28
+msgid "个体停留信息"
+msgstr ""
+
+#: ../../source/traj.rst:30
+msgid "move"
+msgstr ""
+
+#: ../../source/traj.rst:30
+msgid "个体移动信息"
+msgstr ""
+
+#: ../../source/traj.rst:34
+msgid "输入个体的活动数据（单一个体），绘制活动图"
+msgstr ""
+
+#: ../../source/traj.rst:39
+msgid "活动数据集"
+msgstr ""
+
+#: ../../source/traj.rst:41
+msgid "列名，分别为[活动开始时间，活动结束时间，活动所在栅格经度编号，活动所在栅格纬度编号]"
+msgstr ""
+
+#: ../../source/traj.rst:44
+msgid "轨迹线型生成"
+msgstr "Trajectory GeoDataFrame"
+
+#: ../../source/traj.rst:48
+msgid "输入轨迹点，生成轨迹线型的GeoDataFrame"
+msgstr ""
+"Input the trajectory points. The output is the GeoDataFrame with "
+"trajectory geometry"
+
+#: ../../source/traj.rst:52
+msgid "traj_points"
+msgstr "traj_points"
+
+#: ../../source/traj.rst:53
+msgid "轨迹点数据"
+msgstr "Trajectory data"
+
+#: ../../source/traj.rst:55
+msgid "列名，按[经度,纬度,轨迹编号]的顺序"
+msgstr "The column name, in the sequence of [lon, lat, ID]"
+
+#: ../../source/traj.rst:57
+msgid "timecol"
+msgstr "timecol"
+
+msgid "str"
+msgstr "str"
+
+#: ../../source/traj.rst:57
+msgid "可选，时间列的列名，如果给了则输出带有[经度,纬度,高度,时间]的geojson，可放入kepler中可视化轨迹"
+msgstr ""
+"Optional. If given, then output the GeoJSON file with the column of "
+"[longitude, latitude, altitude, time]. The GeoJSON can be uploaded to "
+"Kepler for visualization"
+
+#: ../../source/traj.rst:63
+msgid "traj"
+msgstr "traj"
+
+msgid "GeoDataFrame或json"
+msgstr "GeoDataFrame or json"
+
+#: ../../source/traj.rst:62
+msgid "生成的轨迹数据，如果timecol没定义则为GeoDataFrame，否则为json"
+msgstr "The output trajectory data. If no timecol is given, the type will be json"
+
+#: ../../source/traj.rst:66
+#, fuzzy
+msgid "轨迹增密与稀疏化"
+msgstr "Trajectory densification"
+
+#: ../../source/traj.rst:70
+msgid "轨迹点增密，确保每隔timegap秒会有一个轨迹点"
+msgstr ""
+"Trajectory densification, ensure that there is a trajectory point each "
+"`timegap` seconds"
+
+#: ../../source/traj.rst:75 ../../source/traj.rst:93
+msgid "数据"
+msgstr "Data"
+
+#: ../../source/traj.rst:77 ../../source/traj.rst:95
+msgid "列名，按[车辆ID,时间,经度,纬度]的顺序"
+msgstr "The column name, in the sequence of [Vehicleid, Time, lng, lat]"
+
+#: ../../source/traj.rst:79 ../../source/traj.rst:96
+msgid "timegap"
+msgstr "timegap"
+
+msgid "number"
+msgstr "number"
+
+#: ../../source/traj.rst:79
+msgid "单位为秒，每隔多长时间插入一个轨迹点"
+msgstr "The sampling interval (second)"
+
+#: ../../source/traj.rst:84 ../../source/traj.rst:104
+msgid "data1"
+msgstr "data1"
+
+#: ../../source/traj.rst:84 ../../source/traj.rst:104
+msgid "处理后的数据"
+msgstr "The processed data"
+
+#: ../../source/traj.rst:88
+msgid "轨迹点稀疏化。轨迹数据采样间隔过高的时候，数据量太大，不便于分析。这个函数可以将采样间隔扩大，缩减数据量"
+msgstr ""
+
+#: ../../source/traj.rst:97
+#, fuzzy
+msgid "单位为秒，每隔多长时间一个轨迹点"
+msgstr "The sampling interval (second)"
+
+#: ../../source/traj.rst:99
+msgid "method"
+msgstr ""
+
+#: ../../source/traj.rst:99
+msgid "可选interpolate插值或subsample子采样"
+msgstr ""
+
+#: ../../source/traj.rst:106
+msgid "使用方法"
+msgstr "Code example"
+
+#: ../../source/traj.rst:142
+msgid "进行轨迹增密，设置15秒一条数据::"
+msgstr "Trajectory densification, set the sampling interval to 15 seconds::"
+
+#: ../../source/traj.rst:171
+msgid "增密后的效果"
+msgstr "The results"
+
+#~ msgid "输入json数据，存储为文件。这个方法主要是解决numpy数值型无法兼容json包报错的问题"
+#~ msgstr ""
+#~ "Input the json data and save it"
+#~ " as a file. This method is "
+#~ "suitable for sovling the problem that"
+#~ " numpy cannot be compatiable with "
+#~ "json package."
+
+#~ msgid "json"
+#~ msgstr "json"
+
+#~ msgid "要储存的json数据"
+#~ msgstr "The json data to be saved"
+
+#~ msgid "path"
+#~ msgstr "path"
+
+#~ msgid "保存的路径"
+#~ msgstr "The storage path"
+

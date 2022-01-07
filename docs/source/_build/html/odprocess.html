@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>数据聚合集计 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>数据聚合集计 &mdash; TransBigData 0.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo2.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -13,10 +13,9 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="搜索" href="search.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="数据可视化" href="visualization.html" />
     <link rel="prev" title="数据栅格化" href="grids.html" /> 
 </head>
@@ -101,12 +100,12 @@
            <div itemprop="articleBody">
              
   <section id="odprocess">
-<span id="id1"></span><h1>数据聚合集计<a class="headerlink" href="#odprocess" title="永久链接至标题">¶</a></h1>
+<span id="id1"></span><h1>数据聚合集计<a class="headerlink" href="#odprocess" title="Permalink to this headline">¶</a></h1>
 <section id="id2">
-<h2>数据集计<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>数据集计<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="transbigdata.dataagg">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">dataagg</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Lng',</span> <span class="pre">'Lat',</span> <span class="pre">'count']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.dataagg" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">dataagg</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Lng',</span> <span class="pre">'Lat',</span> <span class="pre">'count']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.dataagg" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>数据集计至小区</p>
@@ -130,10 +129,10 @@
 </dl>
 </section>
 <section id="od">
-<h2>OD集计<a class="headerlink" href="#od" title="永久链接至标题">¶</a></h2>
+<h2>OD集计<a class="headerlink" href="#od" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="transbigdata.odagg_grid">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">odagg_grid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oddata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['slon',</span> <span class="pre">'slat',</span> <span class="pre">'elon',</span> <span class="pre">'elat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.odagg_grid" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">odagg_grid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oddata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['slon',</span> <span class="pre">'slat',</span> <span class="pre">'elon',</span> <span class="pre">'elat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.odagg_grid" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>OD集计与地理信息生成（栅格）。输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame</p>
@@ -156,7 +155,7 @@
 </dl>
 <dl class="py function">
 <dt id="transbigdata.odagg_shape">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">odagg_shape</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oddata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['slon',</span> <span class="pre">'slat',</span> <span class="pre">'elon',</span> <span class="pre">'elat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.odagg_shape" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">odagg_shape</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oddata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['slon',</span> <span class="pre">'slat',</span> <span class="pre">'elon',</span> <span class="pre">'elat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.odagg_shape" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>OD集计与地理信息生成（小区集计）。输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame</p>
@@ -195,7 +194,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2021, Qing Yu.</p>
+    <p>&#169; Copyright 2021, Qing Yu.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

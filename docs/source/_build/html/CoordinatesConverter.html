@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>坐标距离 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>坐标距离 &mdash; TransBigData 0.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo2.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -13,10 +13,9 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="搜索" href="search.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="出租车GPS数据处理" href="taxigps.html" />
     <link rel="prev" title="底图加载" href="plot_map.html" /> 
 </head>
@@ -105,45 +104,45 @@
            <div itemprop="articleBody">
              
   <section id="coordinatesconverter">
-<span id="id1"></span><h1>坐标距离<a class="headerlink" href="#coordinatesconverter" title="永久链接至标题">¶</a></h1>
+<span id="id1"></span><h1>坐标距离<a class="headerlink" href="#coordinatesconverter" title="Permalink to this headline">¶</a></h1>
 <section id="id2">
-<h2>火星坐标系互转<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>火星坐标系互转<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <section id="id3">
-<h3>坐标互转方法<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<h3>坐标互转方法<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>TransBigData包提供了GCJ02,BD09,BD09mc,WGS94坐标系互转。</p>
 <dl class="py function">
 <dt id="transbigdata.gcj02tobd09">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">gcj02tobd09</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lng</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.gcj02tobd09" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">gcj02tobd09</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lng</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.gcj02tobd09" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="transbigdata.bd09togcj02">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">bd09togcj02</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bd_lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bd_lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.bd09togcj02" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">bd09togcj02</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bd_lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bd_lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.bd09togcj02" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="transbigdata.wgs84togcj02">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">wgs84togcj02</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lng</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.wgs84togcj02" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">wgs84togcj02</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lng</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.wgs84togcj02" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="transbigdata.gcj02towgs84">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">gcj02towgs84</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lng</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.gcj02towgs84" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">gcj02towgs84</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lng</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.gcj02towgs84" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="transbigdata.wgs84tobd09">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">wgs84tobd09</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.wgs84tobd09" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">wgs84tobd09</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.wgs84tobd09" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="transbigdata.bd09towgs84">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">bd09towgs84</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.bd09towgs84" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">bd09towgs84</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.bd09towgs84" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="transbigdata.bd09mctobd09">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">bd09mctobd09</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.bd09mctobd09" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">bd09mctobd09</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.bd09mctobd09" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>坐标互转，基于numpy列运算:</p>
@@ -158,10 +157,10 @@
 </div>
 </section>
 <section id="id4">
-<h3>对地理要素转换坐标<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<h3>对地理要素转换坐标<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="transbigdata.transform_shape">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">transform_shape</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.transform_shape" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">transform_shape</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.transform_shape" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入地理要素的GeoDataFrame，对整体做坐标转换</p>
@@ -194,10 +193,10 @@
 </section>
 </section>
 <section id="id5">
-<h2>经纬度计算距离<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>经纬度计算距离<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="transbigdata.getdistance">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">getdistance</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.getdistance" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">getdistance</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.getdistance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>按经度1，纬度1，经度2，纬度2 （十进制度数）顺序输入起终点经纬度，为DataFrame的列，获取距离（米），基于numpy列运算:</p>
@@ -218,7 +217,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2021, Qing Yu.</p>
+    <p>&#169; Copyright 2021, Qing Yu.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

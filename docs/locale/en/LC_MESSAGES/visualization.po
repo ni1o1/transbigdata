@@ -1,0 +1,191 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-29 23:07+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.1\n"
+
+#: ../visualization.rst:4
+msgid "数据可视化"
+msgstr "Data Visualization"
+
+#: ../visualization.rst:7
+msgid "在jupyter中显示可视化的设置"
+msgstr "Visualization Settings in Jupyter"
+
+#: ../visualization.rst:9
+msgid "TransBigData包也依托于kepler.gl提供的可视化插件提供了一键数据整理与可视化的方法"
+msgstr "The TransBigData package also provide one-click data organization and visualization methods based on the visualization plugin provided by kepler.gl to ."
+
+#: ../visualization.rst:10
+msgid "使用此功能请先安装python的keplergl包"
+msgstr "To use this feature, please install the keplergl package for python first."
+
+#: ../visualization.rst:16
+msgid ""
+"如果要在jupyter notebook中显示可视化，则需要勾选jupyter-js-widgets（可能需要另外安装）和keplergl-"
+"jupyter两个插件"
+msgstr "If you want to display the visualization results in jupyter notebook, you need to check the jupyter-js-widgets (which may need to be installed separately) and keplergl-jupyter plugins"
+
+#: ../visualization.rst:21
+msgid "数据点分布可视化"
+msgstr "Visualization of data point distribution"
+
+#: ../visualization.rst:25
+msgid "输入数据点，集计并可视化"
+msgstr "The input is the data points, this function will aggregate and then visualize it"
+
+#: ../visualization.rst:27 ../visualization.rst:68 ../visualization.rst:105
+msgid "**输入**"
+msgstr "**Input**"
+
+#: ../visualization.rst:29
+msgid "data"
+msgstr "data"
+
+msgid "DataFrame"
+msgstr "DataFrame"
+
+#: ../visualization.rst:30
+msgid "数据点分布"
+msgstr "The data point"
+
+#: ../visualization.rst:32 ../visualization.rst:72 ../visualization.rst:110
+msgid "col"
+msgstr "col"
+
+msgid "List"
+msgstr "List"
+
+#: ../visualization.rst:32
+msgid "列名，可输入不带权重的OD，按[经度，纬度]的顺序，此时会自动集计。 也可输入带权重的OD，按[经度，纬度，数量]的顺序。"
+msgstr "The column name. The user can choose a non-weight Origin-Destination (OD) data, in the sequence of [longitude, latitude]. For this, The aggregation is automatic. Or, the user can also input a weighted OD data, in the sequence of [longitude, latitude, count]"
+
+#: ../visualization.rst:34 ../visualization.rst:74 ../visualization.rst:112
+msgid "zoom"
+msgstr "zoom"
+
+msgid "number"
+msgstr "number"
+
+#: ../visualization.rst:35 ../visualization.rst:113
+msgid "地图缩放等级,默认'auto'自动选择"
+msgstr "Map zoom level (Optional). Default value: auto"
+
+#: ../visualization.rst:36 ../visualization.rst:77 ../visualization.rst:114
+msgid "height"
+msgstr "height"
+
+#: ../visualization.rst:37 ../visualization.rst:77 ../visualization.rst:115
+msgid "地图图框高度"
+msgstr "The height of the map frame"
+
+#: ../visualization.rst:38 ../visualization.rst:116
+msgid "accuracy"
+msgstr "accuracy"
+
+#: ../visualization.rst:39 ../visualization.rst:117
+msgid "集计的栅格大小"
+msgstr "Grid size"
+
+#: ../visualization.rst:41
+msgid "maptype"
+msgstr "maptype"
+
+msgid "str"
+msgstr "str"
+
+#: ../visualization.rst:41
+msgid "出图类型，'point'或者'heatmap'"
+msgstr "Map type, 'point' or 'heatmap'"
+
+#: ../visualization.rst:43 ../visualization.rst:79 ../visualization.rst:121
+msgid "**输出**"
+msgstr "**Output**"
+
+#: ../visualization.rst:46 ../visualization.rst:82 ../visualization.rst:124
+msgid "vmap"
+msgstr "vmap"
+
+msgid "keplergl.keplergl.KeplerGl"
+msgstr "keplergl.keplergl.KeplerGl"
+
+#: ../visualization.rst:46 ../visualization.rst:82 ../visualization.rst:124
+msgid "keplergl提供的可视化"
+msgstr "Visualizations provided by keplergl"
+
+#: ../visualization.rst:48
+msgid "使用方法::"
+msgstr "**Method**::"
+
+#: ../visualization.rst:62
+msgid "轨迹可视化"
+msgstr "Trajectory Visualization"
+
+#: ../visualization.rst:66
+msgid "输入轨迹数据与列名，生成kepler的可视化"
+msgstr "The input is the trajectory data and the column name. The output is the visualization result based on kepler"
+
+#: ../visualization.rst:70
+msgid "trajdata"
+msgstr "trajdata"
+
+#: ../visualization.rst:71
+msgid "轨迹点数据"
+msgstr "Trajectory points data"
+
+#: ../visualization.rst:73
+msgid "列名，按[经度,纬度,轨迹编号,时间]的顺序"
+msgstr "The column name, in the sequence of [longitude, latitude, vehicle id, time]"
+
+#: ../visualization.rst:75
+msgid "地图缩放等级"
+msgstr "Map zoom level"
+
+#: ../visualization.rst:84 ../visualization.rst:126
+msgid "使用方法"
+msgstr "**Method**"
+
+#: ../visualization.rst:99
+msgid "OD可视化"
+msgstr "OD Visualization"
+
+#: ../visualization.rst:103
+msgid "输入od数据与列名，生成kepler的可视化"
+msgstr "The input is the OD data and the column. The output is the visualization result based on kepler"
+
+#: ../visualization.rst:107
+msgid "oddata"
+msgstr "oddata"
+
+#: ../visualization.rst:108
+msgid "od数据"
+msgstr "OD data"
+
+#: ../visualization.rst:110
+msgid ""
+"列名，可输入不带权重的OD，按[起点经度，起点纬度，终点经度，终点纬度]的顺序，此时会自动集计。 "
+"也可输入带权重的OD，按[起点经度，起点纬度，终点经度，终点纬度，数量]的顺序。"
+msgstr "The column name. The user can choose a non-weight Origin-Destination (OD) data, in the sequence of [origin longitude, origin latitude, destination longitude, destination latitude]. For this, The aggregation is automatic. Or, the user can also input a weighted OD data, in the sequence of [origin longitude, origin latitude, destination longitude, destination latitude, count]"
+
+#: ../visualization.rst:119
+msgid "mincount"
+msgstr "mincount"
+
+#: ../visualization.rst:119
+msgid "最小的od数，少于这个的od就不显示了"
+msgstr "The minimum OD counts, OD with less counts will not be displayed"
+

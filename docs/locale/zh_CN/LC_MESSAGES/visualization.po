@@ -1,0 +1,199 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/visualization.rst:4
+msgid "数据可视化"
+msgstr ""
+
+#: ../../source/visualization.rst:7
+msgid "在jupyter中显示可视化的设置"
+msgstr ""
+
+#: ../../source/visualization.rst:9
+msgid "TransBigData包也依托于kepler.gl提供的可视化插件提供了一键数据整理与可视化的方法"
+msgstr ""
+
+#: ../../source/visualization.rst:10
+msgid "使用此功能请先安装python的keplergl包"
+msgstr ""
+
+#: ../../source/visualization.rst:16
+msgid ""
+"如果要在jupyter notebook中显示可视化，则需要勾选jupyter-js-widgets（可能需要另外安装）和keplergl-"
+"jupyter两个插件"
+msgstr ""
+
+#: ../../source/visualization.rst:21
+msgid "数据点分布可视化"
+msgstr ""
+
+#: ../../source/visualization.rst:25
+msgid "输入数据点，集计并可视化"
+msgstr ""
+
+#: ../../source/visualization.rst:27 ../../source/visualization.rst:68
+#: ../../source/visualization.rst:105
+msgid "**输入**"
+msgstr ""
+
+#: ../../source/visualization.rst:29
+msgid "data"
+msgstr ""
+
+msgid "DataFrame"
+msgstr ""
+
+#: ../../source/visualization.rst:30
+msgid "数据点分布"
+msgstr ""
+
+#: ../../source/visualization.rst:32 ../../source/visualization.rst:72
+#: ../../source/visualization.rst:110
+msgid "col"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+#: ../../source/visualization.rst:32
+msgid "列名，可输入不带权重的OD，按[经度，纬度]的顺序，此时会自动集计。 也可输入带权重的OD，按[经度，纬度，数量]的顺序。"
+msgstr ""
+
+#: ../../source/visualization.rst:34 ../../source/visualization.rst:74
+#: ../../source/visualization.rst:112
+msgid "zoom"
+msgstr ""
+
+msgid "number"
+msgstr ""
+
+#: ../../source/visualization.rst:35 ../../source/visualization.rst:113
+msgid "地图缩放等级,默认'auto'自动选择"
+msgstr ""
+
+#: ../../source/visualization.rst:36 ../../source/visualization.rst:77
+#: ../../source/visualization.rst:114
+msgid "height"
+msgstr ""
+
+#: ../../source/visualization.rst:37 ../../source/visualization.rst:77
+#: ../../source/visualization.rst:115
+msgid "地图图框高度"
+msgstr ""
+
+#: ../../source/visualization.rst:38 ../../source/visualization.rst:116
+msgid "accuracy"
+msgstr ""
+
+#: ../../source/visualization.rst:39 ../../source/visualization.rst:117
+msgid "集计的栅格大小"
+msgstr ""
+
+#: ../../source/visualization.rst:41
+msgid "maptype"
+msgstr ""
+
+msgid "str"
+msgstr ""
+
+#: ../../source/visualization.rst:41
+msgid "出图类型，'point'或者'heatmap'"
+msgstr ""
+
+#: ../../source/visualization.rst:43 ../../source/visualization.rst:79
+#: ../../source/visualization.rst:121
+msgid "**输出**"
+msgstr ""
+
+#: ../../source/visualization.rst:46 ../../source/visualization.rst:82
+#: ../../source/visualization.rst:124
+msgid "vmap"
+msgstr ""
+
+msgid "keplergl.keplergl.KeplerGl"
+msgstr ""
+
+#: ../../source/visualization.rst:46 ../../source/visualization.rst:82
+#: ../../source/visualization.rst:124
+msgid "keplergl提供的可视化"
+msgstr ""
+
+#: ../../source/visualization.rst:48
+msgid "使用方法::"
+msgstr ""
+
+#: ../../source/visualization.rst:62
+msgid "轨迹可视化"
+msgstr ""
+
+#: ../../source/visualization.rst:66
+msgid "输入轨迹数据与列名，生成kepler的可视化"
+msgstr ""
+
+#: ../../source/visualization.rst:70
+msgid "trajdata"
+msgstr ""
+
+#: ../../source/visualization.rst:71
+msgid "轨迹点数据"
+msgstr ""
+
+#: ../../source/visualization.rst:73
+msgid "列名，按[经度,纬度,轨迹编号,时间]的顺序"
+msgstr ""
+
+#: ../../source/visualization.rst:75
+msgid "地图缩放等级"
+msgstr ""
+
+#: ../../source/visualization.rst:84 ../../source/visualization.rst:126
+msgid "使用方法"
+msgstr ""
+
+#: ../../source/visualization.rst:99
+msgid "OD可视化"
+msgstr ""
+
+#: ../../source/visualization.rst:103
+msgid "输入od数据与列名，生成kepler的可视化"
+msgstr ""
+
+#: ../../source/visualization.rst:107
+msgid "oddata"
+msgstr ""
+
+#: ../../source/visualization.rst:108
+msgid "od数据"
+msgstr ""
+
+#: ../../source/visualization.rst:110
+msgid ""
+"列名，可输入不带权重的OD，按[起点经度，起点纬度，终点经度，终点纬度]的顺序，此时会自动集计。 "
+"也可输入带权重的OD，按[起点经度，起点纬度，终点经度，终点纬度，数量]的顺序。"
+msgstr ""
+
+#: ../../source/visualization.rst:119
+msgid "mincount"
+msgstr ""
+
+#: ../../source/visualization.rst:119
+msgid "最小的od数，少于这个的od就不显示了"
+msgstr ""
+

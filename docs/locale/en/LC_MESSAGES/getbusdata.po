@@ -1,0 +1,134 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/getbusdata.rst:4
+msgid "数据获取"
+msgstr ""
+
+#: ../../source/getbusdata.rst:8
+msgid "通过输入城市与关键词，获取公交线路的线型与站点"
+msgstr ""
+"Obtain the geographic information of the bus station and bus line from "
+"the map service"
+
+#: ../../source/getbusdata.rst:10 ../../source/getbusdata.rst:28
+msgid "**输入**"
+msgstr "**Input**"
+
+#: ../../source/getbusdata.rst:12
+msgid "city"
+msgstr "city"
+
+msgid "str"
+msgstr "str"
+
+#: ../../source/getbusdata.rst:13
+msgid "城市"
+msgstr "City"
+
+#: ../../source/getbusdata.rst:15 ../../source/getbusdata.rst:30
+msgid "keywords"
+msgstr "keywords"
+
+msgid "List"
+msgstr "List"
+
+#: ../../source/getbusdata.rst:15
+msgid "关键词，线路名称"
+msgstr "Keyword, the line name"
+
+#: ../../source/getbusdata.rst:17 ../../source/getbusdata.rst:37
+msgid "**输出**"
+msgstr "**Output**"
+
+#: ../../source/getbusdata.rst:19
+msgid "data"
+msgstr "data"
+
+msgid "GeoDataFrame"
+msgstr "GeoDataFrame"
+
+#: ../../source/getbusdata.rst:20
+msgid "生成的公交线路"
+msgstr "The generated bus line"
+
+#: ../../source/getbusdata.rst:22
+msgid "stop"
+msgstr "stop"
+
+#: ../../source/getbusdata.rst:22
+msgid "生成的公交站点"
+msgstr "The generated bus station"
+
+#: ../../source/getbusdata.rst:26
+msgid "输入关键词与高德ak，抓取行政区划gis"
+msgstr ""
+"Input the keyword and the Amap ak. The output is the GIS file of the "
+"administrative boundary"
+
+#: ../../source/getbusdata.rst:31
+msgid "关键词，可以是名称，如\"深圳市\"，或行政区划编号，如440500"
+msgstr ""
+"The keyword. It might be the city name such as Shengzheng, or the "
+"administrative code such as 440500"
+
+#: ../../source/getbusdata.rst:32
+msgid "ak"
+msgstr "ak"
+
+#: ../../source/getbusdata.rst:33
+msgid "高德ak"
+msgstr "Amap ak"
+
+#: ../../source/getbusdata.rst:35
+msgid "subdistricts"
+msgstr "subdistricts"
+
+msgid "bool"
+msgstr "bool"
+
+#: ../../source/getbusdata.rst:35
+msgid "是否输出子行政区划的信息"
+msgstr "whether to output the information of the administrative district boundary"
+
+#: ../../source/getbusdata.rst:39
+msgid "admin"
+msgstr "admin"
+
+#: ../../source/getbusdata.rst:40
+msgid "行政区划信息"
+msgstr "Administrative district boundary"
+
+#: ../../source/getbusdata.rst:41
+msgid "districts"
+msgstr "districts"
+
+msgid "DataFrame"
+msgstr "DataFrame"
+
+#: ../../source/getbusdata.rst:42
+msgid "子行政区划的信息，利用这个可以进一步抓下一级的行政区划"
+msgstr ""
+"The information of subdistricts. This can be used to further get the "
+"boundary of lower level districts"
+
+#~ msgid "爬虫"
+#~ msgstr "Data Acquisition"
+

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>数据栅格化 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>数据栅格化 &mdash; TransBigData 0.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo2.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -13,10 +13,9 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="搜索" href="search.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="数据聚合集计" href="odprocess.html" />
     <link rel="prev" title="数据预处理" href="preprocess.html" /> 
 </head>
@@ -102,12 +101,12 @@
            <div itemprop="articleBody">
              
   <section id="grids">
-<span id="id1"></span><h1>数据栅格化<a class="headerlink" href="#grids" title="永久链接至标题">¶</a></h1>
+<span id="id1"></span><h1>数据栅格化<a class="headerlink" href="#grids" title="Permalink to this headline">¶</a></h1>
 <section id="id2">
-<h2>方形栅格渔网的生成与对应<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>方形栅格渔网的生成与对应<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="transbigdata.rect_grids">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">rect_grids</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.rect_grids" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">rect_grids</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.rect_grids" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>生成研究范围内的方形栅格</p>
@@ -132,7 +131,7 @@
 </div>
 <dl class="py function">
 <dt id="transbigdata.grid_params">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">grid_params</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.grid_params" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">grid_params</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.grid_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>栅格参数获取</p>
@@ -154,7 +153,7 @@
 </div>
 <dl class="py function">
 <dt id="transbigdata.grid_params_best">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">grid_params_best</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.grid_params_best" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">grid_params_best</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.grid_params_best" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>获取最佳的栅格化参数，以基尼系数最大为标准</p>
@@ -178,7 +177,7 @@
 </dl>
 <dl class="py function">
 <dt id="transbigdata.GPS_to_grids">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">GPS_to_grids</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.GPS_to_grids" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">GPS_to_grids</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.GPS_to_grids" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>GPS数据对应栅格编号。输入数据的经纬度列与栅格参数，输出对应的栅格编号</p>
@@ -203,7 +202,7 @@
 </div>
 <dl class="py function">
 <dt id="transbigdata.grids_centre">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">grids_centre</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loncol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latcol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.grids_centre" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">grids_centre</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loncol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latcol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.grids_centre" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>栅格编号对应栅格中心点经纬度。输入数据的栅格编号与栅格参数，输出对应的栅格中心点</p>
@@ -228,7 +227,7 @@
 </div>
 <dl class="py function">
 <dt id="transbigdata.gridid_to_polygon">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">gridid_to_polygon</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loncol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latcol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.gridid_to_polygon" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">gridid_to_polygon</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loncol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latcol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.gridid_to_polygon" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>栅格编号生成栅格的地理信息列。输入数据的栅格编号与栅格参数，输出对应的地理信息列</p>
@@ -251,7 +250,7 @@
 </div>
 <dl class="py function">
 <dt id="transbigdata.gridid_sjoin_shape">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">gridid_sjoin_shape</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['LONCOL',</span> <span class="pre">'LATCOL']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.gridid_sjoin_shape" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">gridid_sjoin_shape</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['LONCOL',</span> <span class="pre">'LATCOL']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.gridid_sjoin_shape" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入数据（带有栅格经纬度编号两列），矢量图形与栅格化参数，输出数据栅格并对应矢量图形。</p>
@@ -273,7 +272,7 @@
 </dl>
 </section>
 <section id="geohash">
-<h2>geohash编码<a class="headerlink" href="#geohash" title="永久链接至标题">¶</a></h2>
+<h2>geohash编码<a class="headerlink" href="#geohash" title="Permalink to this headline">¶</a></h2>
 <p>geohash是一种公共域地理编码系统，它的作用是将经纬度地理位置编码为字母和数字组成的字符串，字符串也可解码为经纬度。每个字符串代表一个网格编号，字符串的长度越长则精度越高。根据<a class="reference external" href="https://en.wikipedia.org/wiki/Geohash">wiki</a>，geohash字符串长度对应精度表格如下：</p>
 <table class="docutils align-default">
 <colgroup>
@@ -355,7 +354,7 @@
 <p>TransBigData包中也提供了geohash的处理功能，主要包括三个函数：</p>
 <dl class="py function">
 <dt id="transbigdata.geohash_encode">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">geohash_encode</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.geohash_encode" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">geohash_encode</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.geohash_encode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入经纬度与精度，输出geohash编码</p>
@@ -377,7 +376,7 @@
 </dl>
 <dl class="py function">
 <dt id="transbigdata.geohash_decode">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">geohash_decode</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.geohash_decode" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">geohash_decode</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.geohash_decode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入经纬度与精度，输出geohash编码</p>
@@ -393,7 +392,7 @@
 </dl>
 <dl class="py function">
 <dt id="transbigdata.geohash_togrid">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">geohash_togrid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.geohash_togrid" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">geohash_togrid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.geohash_togrid" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入geohash编码，输出geohash网格的地理信息图形Series列</p>
@@ -590,10 +589,10 @@
 <img alt="_images/output_9_0.png" src="_images/output_9_0.png" />
 </section>
 <section id="id3">
-<h2>六边形渔网生成<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>六边形渔网生成<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="transbigdata.hexagon_grids">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">hexagon_grids</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.hexagon_grids" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">hexagon_grids</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.hexagon_grids" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>生成研究范围内的六边形渔网。</p>
@@ -630,7 +629,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2021, Qing Yu.</p>
+    <p>&#169; Copyright 2021, Qing Yu.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

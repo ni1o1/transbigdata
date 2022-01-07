@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GIS处理 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>GIS处理 &mdash; TransBigData 0.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo2.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -13,10 +13,9 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="搜索" href="search.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="底图加载" href="plot_map.html" />
     <link rel="prev" title="轨迹处理" href="traj.html" /> 
 </head>
@@ -117,14 +116,14 @@
            <div itemprop="articleBody">
              
   <section id="gis">
-<span id="gisprocess"></span><h1>GIS处理<a class="headerlink" href="#gis" title="永久链接至标题">¶</a></h1>
+<span id="gisprocess"></span><h1>GIS处理<a class="headerlink" href="#gis" title="Permalink to this headline">¶</a></h1>
 <section id="id1">
-<h2>近邻匹配<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<h2>近邻匹配<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">下面的案例展示如何用TransBigData包进行点与点、点与线的近邻匹配。该方法使用的是KDTree算法，可查看wiki：<a class="reference external" href="https://en.wikipedia.org/wiki/K-d_tree">https://en.wikipedia.org/wiki/K-d_tree</a>，算法复杂度为o(log(n))</div>
 </div>
 <section id="dataframedataframe">
-<h3>点与点匹配（DataFrame与DataFrame）<a class="headerlink" href="#dataframedataframe" title="永久链接至标题">¶</a></h3>
+<h3>点与点匹配（DataFrame与DataFrame）<a class="headerlink" href="#dataframedataframe" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">导入TransBigData包</div>
 </div>
@@ -144,7 +143,7 @@
 <p>使用tbd.ckdnearest进行点与点匹配，如果是DataFrame与DataFrame匹配（不含有地理信息），则需要指定前后两个表的经纬度列</p>
 <dl class="py function">
 <dt id="transbigdata.ckdnearest">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ckdnearest</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfA_origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dfB_origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Aname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ckdnearest" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ckdnearest</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfA_origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dfB_origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Aname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ckdnearest" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入两个DataFrame，分别指定经纬度列名，为表A匹配表B中最近点，并计算距离</p>
@@ -262,7 +261,7 @@
 </table>
 </div></section>
 <section id="geodataframegeodataframe">
-<h3>点与点匹配（GeoDataFrame与GeoDataFrame）<a class="headerlink" href="#geodataframegeodataframe" title="永久链接至标题">¶</a></h3>
+<h3>点与点匹配（GeoDataFrame与GeoDataFrame）<a class="headerlink" href="#geodataframegeodataframe" title="Permalink to this headline">¶</a></h3>
 <p>将A表B表变为含有点信息的GeoDataFrame</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dfA</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">dfA</span><span class="p">[</span><span class="s1">&#39;lon1&#39;</span><span class="p">],</span><span class="n">dfA</span><span class="p">[</span><span class="s1">&#39;lat1&#39;</span><span class="p">])</span>
 <span class="n">dfB</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">dfB</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">],</span><span class="n">dfB</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">])</span>
@@ -271,7 +270,7 @@
 <p>使用tbd.ckdnearest_point进行点与点匹配</p>
 <dl class="py function">
 <dt id="transbigdata.ckdnearest_point">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ckdnearest_point</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdB</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ckdnearest_point" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ckdnearest_point</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdB</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ckdnearest_point" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入两个GeoDataFrame，gdfA、gdfB均为点，该方法会为gdfA表连接上gdfB中最近的点，并添加距离字段dist</p>
@@ -401,7 +400,7 @@
 </table>
 </div></section>
 <section id="id2">
-<h3>点与线匹配（GeoDataFrame与GeoDataFrame）<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<h3>点与线匹配（GeoDataFrame与GeoDataFrame）<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>将A表变为地理点，B表为线</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dfA</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">dfA</span><span class="p">[</span><span class="s1">&#39;lon1&#39;</span><span class="p">],</span><span class="n">dfA</span><span class="p">[</span><span class="s1">&#39;lat1&#39;</span><span class="p">])</span>
 <span class="n">dfB</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">LineString</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">],[</span><span class="mf">3.2</span><span class="p">,</span><span class="mi">4</span><span class="p">]]),</span>
@@ -413,7 +412,7 @@
 <img alt="_images/output_15_1.png" src="_images/output_15_1.png" />
 <dl class="py function">
 <dt id="transbigdata.ckdnearest_line">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ckdnearest_line</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdfA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdfB</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ckdnearest_line" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ckdnearest_line</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdfA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdfB</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ckdnearest_line" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入两个GeoDataFrame，其中gdfA为点，gdfB为线，该方法会为gdfA表连接上gdfB中最近的线，并添加距离字段dist</p>
@@ -545,11 +544,11 @@
 </div></section>
 </section>
 <section id="id3">
-<h2>打断线<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>打断线<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>在实际应用中，我们可能会需要把很长的线打断为很多子线段，每一条线段不要超过一定的最大长度，此时则可以使用TransBigData包中的splitline_with_length方法。</p>
 <dl class="py function">
 <dt id="transbigdata.splitline_with_length">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">splitline_with_length</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Centerline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlength</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.splitline_with_length" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">splitline_with_length</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Centerline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlength</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.splitline_with_length" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入线GeoDataFrame要素，打断为最大长度maxlength的小线段</p>
@@ -865,12 +864,12 @@
 </table>
 </div></section>
 <section id="id4">
-<h2>面要素处理<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>面要素处理<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <section id="id5">
-<h3>面合并<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<h3>面合并<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="transbigdata.merge_polygon">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">merge_polygon</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.merge_polygon" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">merge_polygon</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.merge_polygon" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入多边形GeoDataFrame数据，以及分组列名col，对不同组别进行分组的多边形进行合并</p>
@@ -888,10 +887,10 @@
 </dl>
 </section>
 <section id="id6">
-<h3>对面取外边界构成新多边形<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<h3>对面取外边界构成新多边形<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="transbigdata.polyon_exterior">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">polyon_exterior</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minarea</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.polyon_exterior" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">polyon_exterior</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minarea</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.polyon_exterior" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入多边形GeoDataFrame数据，对多边形取外边界构成新多边形</p>
@@ -910,12 +909,12 @@
 </section>
 </section>
 <section id="id7">
-<h2>置信椭圆<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2>置信椭圆<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <section id="id8">
-<h3>置信椭圆参数估计<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<h3>置信椭圆参数估计<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="transbigdata.ellipse_params">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ellipse_params</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">95</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ellipse_params" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ellipse_params</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">95</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ellipse_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入点数据，获取置信椭圆的参数</p>
@@ -938,10 +937,10 @@
 </dl>
 </section>
 <section id="id9">
-<h3>置信椭圆绘制<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<h3>置信椭圆绘制<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="transbigdata.ellipse_plot">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ellipse_plot</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ellip_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ellipse_plot" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">ellipse_plot</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ellip_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.ellipse_plot" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入置信椭圆的参数，绘制置信椭圆</p>
@@ -953,7 +952,7 @@
 </dl>
 </section>
 <section id="id10">
-<h3>用法<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<h3>用法<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">transbigdata</span> <span class="k">as</span> <span class="nn">tbd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -1031,7 +1030,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2021, Qing Yu.</p>
+    <p>&#169; Copyright 2021, Qing Yu.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

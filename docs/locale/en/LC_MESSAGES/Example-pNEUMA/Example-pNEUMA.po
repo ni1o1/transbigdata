@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:2
+msgid "pNEUMA轨迹数据处理"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:4
+#, python-format
+msgid ""
+"这个案例的Jupyter notebook: `点击这里 "
+"<https://github.com/ni1o1/transbigdata/blob/main/example/Example%204-pNEUMA%20trajectory%20dataset%20processing.ipynb>`__."
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:5
+msgid "在这个例子中，我们将示例如何将``TransBigData``融入到雅典pNEUMA轨迹数据集的处理与可视化中。"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:7
+msgid ""
+"请注意，样本数据已经被经过了一定的处理。原始版本的数据集可以在这里下载。 `website <https://open-"
+"traffic.epfl.ch/>`__"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:17
+msgid "读取数据"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:20
+msgid "轨迹数据"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:132
+msgid "OSM路网数据获取"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:134
+msgid ""
+"你可以直接从``data``文件夹加载道路数据，或者使用OSMNX下载路网 `OSMNX "
+"<https://osmnx.readthedocs.io/en/stable/>`__"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:152
+msgid "如果你没有OSMNX,可以运行下面代码读取已经现成的数据"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:164
+msgid "地图底图加载"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:166
+msgid "将地图底图加载并可视化"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:194
+msgid "数据清洗"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:197
+msgid "数据稀疏化"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:199
+msgid "数据集的采样间隔为 :math:`0.04` 秒, 非常小，不便于处理。"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:200
+msgid "然而，一些宏观层面的研究不需要如此高的采样间隔。在这种情况下，数据可以使用``tbd.traj_sparsify``进行稀疏化。"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:248
+msgid "冗余数据剔除"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:250
+msgid "在车辆停止运行时，位置没有发生移动，但仍然会产生大量GPS点，这些静止的GPS点除第一和最后一个点外的都可以删除。"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:357
+msgid "数据可视化"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:462
+msgid "可视化车辆"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:486
+msgid "可视化单辆车，并显示最短路径"
+msgstr ""
+
+#: ../../source/Example-pNEUMA/Example-pNEUMA.rst:667
+msgid "我们可以将轨迹数据与最短路径做比对."
+msgstr ""
+

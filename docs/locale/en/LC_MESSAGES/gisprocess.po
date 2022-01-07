@@ -1,0 +1,388 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/gisprocess.rst:6
+msgid "GIS处理"
+msgstr "GIS Processing"
+
+#: ../../source/gisprocess.rst:9
+msgid "近邻匹配"
+msgstr "Nearest neighbor searches"
+
+#: ../../source/gisprocess.rst:11
+msgid "下面的案例展示如何用TransBigData包进行点与点、点与线的近邻匹配。该方法使用的是KDTree算法，可查看wiki：https://en.wikipedia.org/wiki/K-d_tree，算法复杂度为o(log(n))"
+msgstr ""
+"The following example will show how to search the nearest point-point, "
+"nearest point-edge throuh TransBigData. This method is based on KDTree "
+"algorithm. The computation complexity is o(log(n)). For more details, "
+"refer to wiki：https://en.wikipedia.org/wiki/K-d_tree"
+
+#: ../../source/gisprocess.rst:15
+msgid "点与点匹配（DataFrame与DataFrame）"
+msgstr "Point to point searching (DataFrame and DataFrame)"
+
+#: ../../source/gisprocess.rst:17
+msgid "导入TransBigData包"
+msgstr "Import the TransBigData package"
+
+#: ../../source/gisprocess.rst:23
+msgid "生成两个GeoDataFrame表，但它们只有经纬度列"
+msgstr ""
+"Generate two GeoDataFrame sample data with two columns: longitude and "
+"latitude"
+
+#: ../../source/gisprocess.rst:35
+msgid "使用tbd.ckdnearest进行点与点匹配，如果是DataFrame与DataFrame匹配（不含有地理信息），则需要指定前后两个表的经纬度列"
+msgstr ""
+"Note: If the input data do not include the `geometry` column, then the "
+"column of longitude and latitude should be specified"
+
+#: ../../source/gisprocess.rst:40
+msgid "输入两个DataFrame，分别指定经纬度列名，为表A匹配表B中最近点，并计算距离"
+msgstr ""
+"The input is two DataFrame with the column name of longitude and latitude"
+" specified. The function will search the nearest points in dfB_origin for"
+" dfA_origin, and calculate the distance"
+
+#: ../../source/gisprocess.rst:42 ../../source/gisprocess.rst:180
+#: ../../source/gisprocess.rst:337 ../../source/gisprocess.rst:486
+#: ../../source/gisprocess.rst:843 ../../source/gisprocess.rst:864
+#: ../../source/gisprocess.rst:888 ../../source/gisprocess.rst:913
+msgid "**输入**"
+msgstr "**Input**"
+
+#: ../../source/gisprocess.rst:44
+msgid "dfA_origin"
+msgstr "dfA_origin"
+
+msgid "DataFrame"
+msgstr "DataFrame"
+
+#: ../../source/gisprocess.rst:45
+msgid "表A"
+msgstr "DataFrame A"
+
+#: ../../source/gisprocess.rst:46
+msgid "dfB_origin"
+msgstr "dfB_origin "
+
+#: ../../source/gisprocess.rst:47
+msgid "表B"
+msgstr "DataFrame B"
+
+#: ../../source/gisprocess.rst:48
+msgid "Aname"
+msgstr "Aname"
+
+msgid "List"
+msgstr "List"
+
+#: ../../source/gisprocess.rst:49
+msgid "表A中经纬度列字段"
+msgstr "The column of lng and lat in DataFrame A"
+
+#: ../../source/gisprocess.rst:51
+msgid "Bname"
+msgstr "Bname"
+
+#: ../../source/gisprocess.rst:51
+msgid "表B中经纬度列字段"
+msgstr "The column of lng and lat in DataFrame A"
+
+#: ../../source/gisprocess.rst:53 ../../source/gisprocess.rst:187
+#: ../../source/gisprocess.rst:344 ../../source/gisprocess.rst:493
+#: ../../source/gisprocess.rst:850 ../../source/gisprocess.rst:871
+#: ../../source/gisprocess.rst:899
+msgid "**输出**"
+msgstr "**Output**"
+
+#: ../../source/gisprocess.rst:56 ../../source/gisprocess.rst:191
+#: ../../source/gisprocess.rst:347
+msgid "gdf"
+msgstr "gdf"
+
+#: ../../source/gisprocess.rst:56 ../../source/gisprocess.rst:190
+msgid "为A匹配到B上最近点的表"
+msgstr "The output DataFrame"
+
+#: ../../source/gisprocess.rst:165
+msgid "点与点匹配（GeoDataFrame与GeoDataFrame）"
+msgstr "Point to point searching"
+
+#: ../../source/gisprocess.rst:167
+msgid "将A表B表变为含有点信息的GeoDataFrame"
+msgstr "Transform DataFrame to GeoDataFrame"
+
+#: ../../source/gisprocess.rst:174
+msgid "使用tbd.ckdnearest_point进行点与点匹配"
+msgstr "Implement point to point searching using tbd.ckdnearest_point"
+
+#: ../../source/gisprocess.rst:178
+#, fuzzy
+msgid "输入两个GeoDataFrame，gdfA、gdfB均为点，该方法会为gdfA表连接上gdfB中最近的点，并添加距离字段dist"
+msgstr ""
+"The input is two GeoDataFrame. This method will select the nearest points"
+" in gdfB and attach them to gdfA, and add a new column called `dist`"
+
+#: ../../source/gisprocess.rst:182 ../../source/gisprocess.rst:339
+msgid "gdA"
+msgstr "gdA"
+
+msgid "GeoDataFrame"
+msgstr "GeoDataFrame"
+
+#: ../../source/gisprocess.rst:183 ../../source/gisprocess.rst:340
+msgid "表A，点要素"
+msgstr "Table A, the geometry element is point"
+
+#: ../../source/gisprocess.rst:185 ../../source/gisprocess.rst:342
+msgid "gdB"
+msgstr "gdB"
+
+#: ../../source/gisprocess.rst:185
+msgid "表B，点要素"
+msgstr "Table B, point geometry"
+
+#: ../../source/gisprocess.rst:316
+msgid "点与线匹配（GeoDataFrame与GeoDataFrame）"
+msgstr "Point to Line searching (GeoDataFrame and GeoDataFrame)"
+
+#: ../../source/gisprocess.rst:318
+msgid "将A表变为地理点，B表为线"
+msgstr "In this case, Table A is still a node file, Table B is a linestring file"
+
+#: ../../source/gisprocess.rst:335
+#, fuzzy
+msgid "输入两个GeoDataFrame，其中gdfA为点，gdfB为线，该方法会为gdfA表连接上gdfB中最近的线，并添加距离字段dist"
+msgstr ""
+"The input is two GeoDataFrame. This method will seach from gdfB to find "
+"the line nearest to the point in gdfA and attach them on gdfA, and add a "
+"new column called `dist`"
+
+#: ../../source/gisprocess.rst:342
+msgid "表B，线要素"
+msgstr "Table B, linestring geometry"
+
+#: ../../source/gisprocess.rst:347
+msgid "为A匹配到B中最近的线"
+msgstr "Searching the nearset linestring in gdfB for the node in gdfA"
+
+#: ../../source/gisprocess.rst:349
+msgid "用tbd.ckdnearest_line可以实现点匹配线，其原理是将线中的折点提取，然后使用点匹配点。"
+msgstr ""
+"The nearest line can be matched through `tbd.ckdnearest_line`. The "
+"principle is to extract the point in the linestring, and implement the "
+"line "
+
+#: ../../source/gisprocess.rst:477
+msgid "打断线"
+msgstr "Split the line"
+
+#: ../../source/gisprocess.rst:479
+msgid "在实际应用中，我们可能会需要把很长的线打断为很多子线段，每一条线段不要超过一定的最大长度，此时则可以使用TransBigData包中的splitline_with_length方法。"
+msgstr ""
+"`splitline_with_length` can be used to split a line into several sub-line"
+" with a maximum length threshold"
+
+#: ../../source/gisprocess.rst:484
+msgid "输入线GeoDataFrame要素，打断为最大长度maxlength的小线段"
+msgstr ""
+"The intput is the linestring GeoDataFrame. The splited line's length wull"
+" be no longer than maxlength"
+
+#: ../../source/gisprocess.rst:488
+msgid "Centerline"
+msgstr "Centerline"
+
+#: ../../source/gisprocess.rst:489
+msgid "线要素"
+msgstr "Linestring geometry"
+
+#: ../../source/gisprocess.rst:491
+msgid "maxlength"
+msgstr "maxlength"
+
+msgid "number"
+msgstr "number"
+
+#: ../../source/gisprocess.rst:491
+msgid "打断的线段最大长度"
+msgstr "the maximum length of the splited line"
+
+#: ../../source/gisprocess.rst:496
+msgid "splitedline"
+msgstr "splitedline"
+
+#: ../../source/gisprocess.rst:496
+msgid "打断后的线"
+msgstr "Splited line"
+
+#: ../../source/gisprocess.rst:498
+msgid "下面演示如何将线打断为100米一段的线段"
+msgstr "The following case will show how to split a line itno 100 subline"
+
+#: ../../source/gisprocess.rst:834
+msgid "面要素处理"
+msgstr ""
+
+#: ../../source/gisprocess.rst:837
+msgid "面合并"
+msgstr "Polygon merging "
+
+#: ../../source/gisprocess.rst:841
+msgid "输入多边形GeoDataFrame数据，以及分组列名col，对不同组别进行分组的多边形进行合并"
+msgstr ""
+"The input is the GeoDataFrame of polygon geometry, and the col name. This"
+" function will merge the polygon based on the category in the mentioned "
+"column"
+
+#: ../../source/gisprocess.rst:845 ../../source/gisprocess.rst:866
+#: ../../source/gisprocess.rst:890
+msgid "data"
+msgstr "data"
+
+#: ../../source/gisprocess.rst:846 ../../source/gisprocess.rst:867
+msgid "多边形数据"
+msgstr "The polygon geometry"
+
+#: ../../source/gisprocess.rst:848
+msgid "col"
+msgstr "col"
+
+msgid "str"
+msgstr "str"
+
+#: ../../source/gisprocess.rst:848
+msgid "分组列名"
+msgstr "The column name for indicating category"
+
+#: ../../source/gisprocess.rst:854 ../../source/gisprocess.rst:875
+msgid "data1"
+msgstr "data1"
+
+#: ../../source/gisprocess.rst:853
+msgid "合并后的面"
+msgstr "The merged polygon"
+
+#: ../../source/gisprocess.rst:857
+msgid "对面取外边界构成新多边形"
+msgstr "Construct new polygon by extending the outer boundary of the ploygon"
+
+#: ../../source/gisprocess.rst:862
+msgid "输入多边形GeoDataFrame数据，对多边形取外边界构成新多边形"
+msgstr ""
+"The input is the GeoDataFrame of the polygon geometry. The method will "
+"construct new polygon by extending the outer boundary of the ploygon"
+
+#: ../../source/gisprocess.rst:869
+msgid "minarea"
+msgstr "minarea"
+
+#: ../../source/gisprocess.rst:869
+msgid "最小面积，小于这个面积的面全部剔除"
+msgstr "The minimum area. Polygon of less area will be removed"
+
+#: ../../source/gisprocess.rst:874
+msgid "处理后的面"
+msgstr "The processed polygon"
+
+#: ../../source/gisprocess.rst:878
+msgid "置信椭圆"
+msgstr ""
+
+#: ../../source/gisprocess.rst:882
+msgid "置信椭圆参数估计"
+msgstr ""
+
+#: ../../source/gisprocess.rst:886
+msgid "输入点数据，获取置信椭圆的参数"
+msgstr ""
+
+#: ../../source/gisprocess.rst:891
+msgid "公交GPS数据，单一公交线路，且需要含有车辆ID、GPS时间、经纬度（wgs84）"
+msgstr ""
+
+#: ../../source/gisprocess.rst:892
+msgid "confidence"
+msgstr ""
+
+#: ../../source/gisprocess.rst:893
+msgid "置信度，可选99，95，90"
+msgstr ""
+
+#: ../../source/gisprocess.rst:894
+msgid "epsg"
+msgstr ""
+
+#: ../../source/gisprocess.rst:895
+msgid "如果给了，则将原始坐标从wgs84，转换至给定epsg坐标系下进行置信椭圆参数估计"
+msgstr ""
+
+#: ../../source/gisprocess.rst:897
+msgid "col: List"
+msgstr ""
+
+#: ../../source/gisprocess.rst:897
+msgid "以[经度，纬度]形式存储的列名"
+msgstr ""
+
+#: ../../source/gisprocess.rst:904
+msgid "params: List"
+msgstr ""
+
+#: ../../source/gisprocess.rst:902
+msgid "质心椭圆参数，分别为[pos,width,height,theta,area,alpha] 对应[中心点坐标，短轴，长轴，角度，面积，方向性]"
+msgstr ""
+
+#: ../../source/gisprocess.rst:907
+msgid "置信椭圆绘制"
+msgstr ""
+
+#: ../../source/gisprocess.rst:911
+msgid "输入置信椭圆的参数，绘制置信椭圆"
+msgstr ""
+
+#: ../../source/gisprocess.rst:915
+msgid "ellip_params : List"
+msgstr ""
+
+#: ../../source/gisprocess.rst:918
+msgid "ax"
+msgstr ""
+
+msgid "matplotlib.axes._subplots.AxesSubplot"
+msgstr ""
+
+#: ../../source/gisprocess.rst:918
+msgid "画板"
+msgstr ""
+
+#: ../../source/gisprocess.rst:921
+msgid "用法"
+msgstr ""
+
+#: ../../source/gisprocess.rst:949
+msgid "输入数据与xy坐标所在列名，置信度，估计椭圆参数 分别代表[中心点坐标，短轴，长轴，角度，面积，扁率"
+msgstr ""
+
+#: ../../source/gisprocess.rst:968
+msgid "再用tbd.ellipse_plot绘制置信椭圆"
+msgstr ""
+

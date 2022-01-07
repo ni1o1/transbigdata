@@ -1,0 +1,210 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../source/plot_map.rst:6
+msgid "底图加载"
+msgstr ""
+
+#: ../../source/plot_map.rst:9
+msgid "使用前的设置"
+msgstr ""
+
+#: ../../source/plot_map.rst:11
+msgid ""
+"TransBigData包提供了在matplotlib上绘制地图底图的功能，底图由mapbox提供，坐标系为WGS84。如果你要使用该功能，首先需要点击\\"
+" `这个链接 <https://account.mapbox.com/auth/signin/?route-"
+"to=%22https://account.mapbox.com/%22>`__\\ "
+"注册一个mapbox的账号，mapbox上注册成为开发者，并获取到一个mapbox token。 `这个链接 "
+"<https://docs.mapbox.com/help/getting-started/access-tokens/#how-access-"
+"tokens-work>`__\\ 介绍了mapbox token的作用。"
+msgstr ""
+
+#: ../../source/plot_map.rst:12
+msgid ""
+"如果你已经得到了mapbox token，可以用以下代码为TransBigData设置mapbox "
+"token(只需要设置一次，后面重新打开python也不需要再重新设置了)："
+msgstr ""
+
+#: ../../source/plot_map.rst:20
+msgid "另外还需要设置一个地图底图的存储位置，下一次显示同一个位置时，地图会从本地读取加载。"
+msgstr ""
+
+#: ../../source/plot_map.rst:30
+msgid "设置好后，下次绘制底图时，会在你设置的路径下创建一个tileimg文件夹，底图都放在里面 尝试一下下面的代码，看看能否成功绘制底图"
+msgstr ""
+
+#: ../../source/plot_map.rst:56
+msgid "地图底图加载"
+msgstr ""
+
+#: ../../source/plot_map.rst:58
+msgid "TransBigData包的底图绘制功能由plot_map包提供。首先确保你的plot_map包在0.3.3版本以上::"
+msgstr ""
+
+#: ../../source/plot_map.rst:64
+msgid "添加地图底图"
+msgstr ""
+
+#: ../../source/plot_map.rst:66 ../../source/plot_map.rst:152
+msgid "**输入**"
+msgstr ""
+
+#: ../../source/plot_map.rst:68 ../../source/plot_map.rst:154
+msgid "bounds"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+#: ../../source/plot_map.rst:69 ../../source/plot_map.rst:155
+msgid ""
+"底图的绘图边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) "
+"其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标"
+msgstr ""
+
+#: ../../source/plot_map.rst:70
+msgid "zoom"
+msgstr ""
+
+msgid "number"
+msgstr ""
+
+#: ../../source/plot_map.rst:71
+msgid "底图的放大等级，默认为auto自动选取。越大越精细，加载的时间也就越久，一般单个城市大小的范围，这个参数选取12到16之间"
+msgstr ""
+
+#: ../../source/plot_map.rst:72
+msgid "printlog"
+msgstr ""
+
+msgid "bool"
+msgstr ""
+
+#: ../../source/plot_map.rst:73
+msgid "是否显示日志"
+msgstr ""
+
+#: ../../source/plot_map.rst:75 ../../source/plot_map.rst:164
+msgid "style"
+msgstr ""
+
+#: ../../source/plot_map.rst:75
+msgid "地图底图的样式，可选1-10，对应分别如下（需要plot_map包在0.3.3版本以上）"
+msgstr ""
+
+#: ../../source/plot_map.rst:78
+msgid "底图样式1：streets"
+msgstr ""
+
+#: ../../source/plot_map.rst:84
+msgid "底图样式2：outdoors"
+msgstr ""
+
+#: ../../source/plot_map.rst:90
+msgid "底图样式3：satellite"
+msgstr ""
+
+#: ../../source/plot_map.rst:96
+msgid "底图样式4：light"
+msgstr ""
+
+#: ../../source/plot_map.rst:102
+msgid "底图样式5：dark"
+msgstr ""
+
+#: ../../source/plot_map.rst:108
+msgid "底图样式6：light-ch（中文）"
+msgstr ""
+
+#: ../../source/plot_map.rst:114
+msgid "底图样式7：ice creem"
+msgstr ""
+
+#: ../../source/plot_map.rst:120
+msgid "底图样式8：night"
+msgstr ""
+
+#: ../../source/plot_map.rst:126
+msgid "底图样式9：terrain"
+msgstr ""
+
+#: ../../source/plot_map.rst:132
+msgid "底图样式10：basic blue"
+msgstr ""
+
+#: ../../source/plot_map.rst:137
+msgid "用法"
+msgstr ""
+
+#: ../../source/plot_map.rst:146
+msgid "指北针和比例尺"
+msgstr ""
+
+#: ../../source/plot_map.rst:150
+msgid "为底图添加指北针和比例尺"
+msgstr ""
+
+#: ../../source/plot_map.rst:156
+msgid "textsize"
+msgstr ""
+
+#: ../../source/plot_map.rst:157
+msgid "标注文字大小"
+msgstr ""
+
+#: ../../source/plot_map.rst:158
+msgid "compasssize"
+msgstr ""
+
+#: ../../source/plot_map.rst:159
+msgid "标注的指北针大小"
+msgstr ""
+
+#: ../../source/plot_map.rst:160
+msgid "accuracy"
+msgstr ""
+
+#: ../../source/plot_map.rst:161
+msgid "标注比例尺的长度（米）"
+msgstr ""
+
+#: ../../source/plot_map.rst:162
+msgid "unit"
+msgstr ""
+
+msgid "str"
+msgstr ""
+
+#: ../../source/plot_map.rst:163
+msgid "'KM','km','M','m' 比例尺的单位"
+msgstr ""
+
+#: ../../source/plot_map.rst:165
+msgid "1或2，比例尺样式"
+msgstr ""
+
+#: ../../source/plot_map.rst:168
+msgid "rect"
+msgstr ""
+
+#: ../../source/plot_map.rst:167
+msgid "比例尺在图中的大致位置，如[0.9,0.9]则在右上角"
+msgstr ""
+

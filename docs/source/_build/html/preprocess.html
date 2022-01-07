@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>数据预处理 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>数据预处理 &mdash; TransBigData 0.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo2.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -13,10 +13,9 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="搜索" href="search.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="数据栅格化" href="grids.html" />
     <link rel="prev" title="数据质量分析" href="quality.html" /> 
 </head>
@@ -103,12 +102,12 @@
            <div itemprop="articleBody">
              
   <section id="preprocess">
-<span id="id1"></span><h1>数据预处理<a class="headerlink" href="#preprocess" title="永久链接至标题">¶</a></h1>
+<span id="id1"></span><h1>数据预处理<a class="headerlink" href="#preprocess" title="Permalink to this headline">¶</a></h1>
 <section id="id2">
-<h2>各类数据通用的预处理<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>各类数据通用的预处理<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="transbigdata.clean_same">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_same</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['VehicleNum',</span> <span class="pre">'Time',</span> <span class="pre">'Lng',</span> <span class="pre">'Lat']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_same" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_same</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['VehicleNum',</span> <span class="pre">'Time',</span> <span class="pre">'Lng',</span> <span class="pre">'Lat']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_same" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>删除信息与前后数据相同的数据以减少数据量
@@ -127,7 +126,7 @@
 </dl>
 <dl class="py function">
 <dt id="transbigdata.clean_drift">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_drift</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['VehicleNum',</span> <span class="pre">'Time',</span> <span class="pre">'Lng',</span> <span class="pre">'Lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speedlimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_drift" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_drift</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['VehicleNum',</span> <span class="pre">'Time',</span> <span class="pre">'Lng',</span> <span class="pre">'Lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speedlimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_drift" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>删除漂移数据。条件是，此数据与前后的速度都大于speedlimit，但前后数据之间的速度却小于speedlimit。
@@ -146,7 +145,7 @@
 </dl>
 <dl class="py function">
 <dt id="transbigdata.clean_outofbounds">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_outofbounds</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Lng',</span> <span class="pre">'Lat']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_outofbounds" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_outofbounds</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Lng',</span> <span class="pre">'Lat']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_outofbounds" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入研究范围的左下右上经纬度坐标，剔除超出研究范围的数据</p>
@@ -166,7 +165,7 @@
 </dl>
 <dl class="py function">
 <dt id="transbigdata.clean_outofshape">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_outofshape</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Lng',</span> <span class="pre">'Lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_outofshape" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_outofshape</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Lng',</span> <span class="pre">'Lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_outofshape" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入研究范围的GeoDataFrame，剔除超出研究区域的数据</p>
@@ -188,7 +187,7 @@
 </dl>
 <dl class="py function">
 <dt id="transbigdata.id_reindex">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">id_reindex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timegap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timecol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_new'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.id_reindex" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">id_reindex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timegap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timecol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_new'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.id_reindex" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>对数据的ID列重新编号</p>
@@ -216,7 +215,7 @@
 </dl>
 <dl class="py function">
 <dt id="transbigdata.id_reindex_disgap">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">id_reindex_disgap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['uid',</span> <span class="pre">'lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disgap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_new'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.id_reindex_disgap" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">id_reindex_disgap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['uid',</span> <span class="pre">'lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disgap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_new'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.id_reindex_disgap" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>对数据的ID列重新编号，如果相邻两条记录超过距离，则编号为新id</p>
@@ -238,10 +237,10 @@
 </dl>
 </section>
 <section id="id3">
-<h2>数据格式转换<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>数据格式转换<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="transbigdata.dumpjson">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">dumpjson</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.dumpjson" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">dumpjson</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.dumpjson" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>输入json数据，存储为文件。这个方法主要是解决numpy数值型无法兼容json包报错的问题</p>
@@ -254,10 +253,10 @@
 </dl>
 </section>
 <section id="id4">
-<h2>轨迹数据清洗<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>轨迹数据清洗<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="transbigdata.clean_traj">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_traj</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['uid',</span> <span class="pre">'str_time',</span> <span class="pre">'lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tripgap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1800</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disgap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speedlimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_traj" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_traj</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['uid',</span> <span class="pre">'str_time',</span> <span class="pre">'lon',</span> <span class="pre">'lat']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tripgap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1800</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disgap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speedlimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_traj" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>轨迹数据清洗组合拳</p>
@@ -281,10 +280,10 @@
 </dl>
 </section>
 <section id="id5">
-<h2>出租车数据的预处理<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>出租车数据的预处理<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="transbigdata.clean_taxi_status">
-<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_taxi_status</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['VehicleNum',</span> <span class="pre">'Time',</span> <span class="pre">'OpenStatus']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timelimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_taxi_status" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">transbigdata.</span></code><code class="sig-name descname"><span class="pre">clean_taxi_status</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['VehicleNum',</span> <span class="pre">'Time',</span> <span class="pre">'OpenStatus']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timelimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#transbigdata.clean_taxi_status" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>删除出租车数据中载客状态瞬间变化的记录，这些记录的存在会影响出行订单判断。
@@ -317,7 +316,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2021, Qing Yu.</p>
+    <p>&#169; Copyright 2021, Qing Yu.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

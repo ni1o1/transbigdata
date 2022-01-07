@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>地铁网络拓扑建模 &mdash; TransBigData 0.3.0 文档</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>地铁网络拓扑建模 &mdash; TransBigData 0.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo2.ico"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -13,10 +13,9 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/translations.js"></script>
     <script src="../_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="pNEUMA轨迹数据处理" href="../Example-pNEUMA/Example-pNEUMA.html" />
     <link rel="prev" title="公交GPS的到离站信息匹配" href="../example-busgps/example-busgps.html" /> 
 </head>
@@ -102,14 +101,14 @@
            <div itemprop="articleBody">
              
   <section id="id1">
-<h1>地铁网络拓扑建模<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1>地铁网络拓扑建模<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>这个案例的Jupyter notebook: <a class="reference external" href="https://github.com/ni1o1/transbigdata/blob/main/example/Example%203-Modeling%20for%20subway%20network%20topology.ipynb">点击这里</a>.</p>
 <div class="line-block">
 <div class="line">可以点击 <a class="reference external" href="https://mybinder.org/v2/gh/ni1o1/transbigdata/9507de936806c34a4befd74aa9227b012569a6aa?urlpath=lab%2Ftree%2Fexample%2FExample%203-Modeling%20for%20subway%20network%20topology.ipynb">这个链接</a> 在线编辑器中尝试</div>
 </div>
 <p>下面的案例展示如何用TransBigData包抓取地铁线路，并构建地铁线网的拓扑网络模型</p>
 <section id="id2">
-<h2>爬取地铁线路<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>爬取地铁线路<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>首先爬取地铁线路使用tbd.getbusdata方法，输入城市跟公交或地铁线路名称的关键词，即可获取到线路数据，坐标系为wgs84。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">transbigdata</span> <span class="k">as</span> <span class="nn">tbd</span>
 <span class="n">line</span><span class="p">,</span><span class="n">stop</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">getbusdata</span><span class="p">(</span><span class="s1">&#39;厦门&#39;</span><span class="p">,[</span><span class="s1">&#39;1号线&#39;</span><span class="p">,</span><span class="s1">&#39;2号线&#39;</span><span class="p">,</span><span class="s1">&#39;3号线&#39;</span><span class="p">])</span>
@@ -129,7 +128,7 @@
 <img alt="../_images/output_6_1.png" src="../_images/output_6_1.png" />
 </section>
 <section id="id3">
-<h2>轨道断面信息获取<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>轨道断面信息获取<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>tbd.split_subwayline方法可以用轨道站点切分轨道线路，得到轨道断面信息（这一步骤主要在地铁客流可视化中有用）</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">metroline_splited</span> <span class="o">=</span> <span class="n">tbd</span><span class="o">.</span><span class="n">split_subwayline</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">stop</span><span class="p">)</span>
 <span class="n">metroline_splited</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;o_project&#39;</span><span class="p">)</span>
@@ -138,7 +137,7 @@
 <img alt="../_images/output_9_1.png" src="../_images/output_9_1.png" />
 </section>
 <section id="id4">
-<h2>轨道网络拓扑模型构建<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>轨道网络拓扑模型构建<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>同时我们也可以直接使用站点数据，构建地铁网络的拓扑结构模型，方便后续地铁出行路径的识别。这一功能依赖于networkx包。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#构建拓扑模型</span>
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
@@ -161,7 +160,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2021, Qing Yu.</p>
+    <p>&#169; Copyright 2021, Qing Yu.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
