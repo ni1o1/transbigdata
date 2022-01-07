@@ -39,13 +39,13 @@ For some types of data, `TransBigData` also provides targeted tools for specific
 
 Currently, `TransBigData` mainly provides the following methods:  
 
-- *Data Quality*: Provides methods to quickly obtain the general information of the dataset, including the data amount, the time period, and the sampling interval. 
-- *Data Preprocess*: Provides methods to fix multiple types of data error.   
-- *Data Gridding*: Provides methods to generate multiple types of geographic grids (rectangular and hexagonal) in the research area. Provides fast algorithms to map GPS data to the generated grids (\autoref{fig:fig1}).   
-- *Data Aggregating*: Provides methods to aggregate GPS and OD data into geographic polygons.  
-- *Trajectory Processing*: Provides quick methods to re-organize the data structure and implement data augmentation from various data formats, including generating trajectory linestrings from GPS points, and trajectory densification, etc.  
-- *Data Visualization*: Built-in visualization capabilities leverage the visualization package `keplergl` to interactively visualize data in Jupyter notebooks with simple code.  
-- *Basemap Loading*: Provides methods to display Mapbox basemaps in `matplotlib` figures (\autoref{fig:fig2})  
+- *Data Quality*: Provides methods to quickly obtain the general information of the dataset, including the data amount, the time period, and the sampling interval.
+- *Data Preprocess*: Provides methods to fix multiple types of data error.
+- *Data Gridding*: Provides methods to generate multiple types of geographic grids (rectangular and hexagonal) in the research area. Provides fast algorithms to map GPS data to the generated grids (\autoref{fig:fig1}).
+- *Data Aggregating*: Provides methods to aggregate GPS and OD data into geographic polygons.
+- *Trajectory Processing*: Provides quick methods to re-organize the data structure and implement data augmentation from various data formats, including generating trajectory linestrings from GPS points, and trajectory densification, etc.
+- *Data Visualization*: Built-in visualization capabilities leverage the visualization package `keplergl` to interactively visualize data in Jupyter notebooks with simple code. 
+- *Basemap Loading*: Provides methods to display Mapbox basemaps in `matplotlib` figures (\autoref{fig:fig2}).
 
 The latest stable release of the software can be installed via `pip` and full documentation
 can be found at https://transbigdata.readthedocs.io/en/latest/.
