@@ -176,22 +176,6 @@ def getbusdata(city,keywords):
             coo[0],coo[1] = CoordinatesConverter.bd09mctobd09(coo[0],coo[1])
             return list(coo[0].astype(str)+','+coo[1].astype(str))
         return linename,coodconvert(coo),stationnames,coodconvert(stationgeo)
-    def getline(r2,line_geometry):
-        #生成空的list用以存放轨道断面的节点
-        ls = []
-        #对大部分情况，线段的起点的位置在终点前，在起终点之间生成10个点
-        if r2['o_project']<=r2['d_project']:
-            #numpy的linespace线性插值生成10个点距离线段起点的距离
-            tmp1 = np.linspace(r2['o_project'],r2['d_project'],10)
-        #对四号线环线，最后一个站点与第一个站点之间的轨道断面需要特殊处理
-        if r2['o_project']>r2['d_project']:
-            tmp1 = np.linspace(r2['o_project']-line_geometry.length,r2['d_project'],10)
-            tmp1[tmp1<0] = tmp1[tmp1<0]+line_geometry.length
-        #tmp1存储的是点距离线段起点的距离，将每个距离转换为点要素，并添加到ls中
-        for j in tmp1:
-            ls.append(line_geometry.interpolate(j))
-        #最后，把点序列转换为线型输出
-        return LineString(ls)
     print('Obtaining city id:',city,end = '')
     linenames = []
     lines = []
@@ -238,18 +222,6 @@ def getbusdata(city,keywords):
     stop = stop.drop_duplicates(subset = ['linename','stationnames'])
     return data,stop
 
-
-
-    
-
-
-    
-
-
-
-
-
-
 def split_subwayline(line,stop):
     '''
     To slice the metro line with metro stations to obtain metro section information (This step is useful in subway passenger flow visualization)
@@ -266,6 +238,22 @@ def split_subwayline(line,stop):
     metro_line_splited : GeoDataFrame
         Generated section line shape
     '''
+    def getline(r2,line_geometry):
+        #生成空的list用以存放轨道断面的节点
+        ls = []
+        #对大部分情况，线段的起点的位置在终点前，在起终点之间生成10个点
+        if r2['o_project']<=r2['d_project']:
+            #numpy的linespace线性插值生成10个点距离线段起点的距离
+            tmp1 = np.linspace(r2['o_project'],r2['d_project'],10)
+        #对四号线环线，最后一个站点与第一个站点之间的轨道断面需要特殊处理
+        if r2['o_project']>r2['d_project']:
+            tmp1 = np.linspace(r2['o_project']-line_geometry.length,r2['d_project'],10)
+            tmp1[tmp1<0] = tmp1[tmp1<0]+line_geometry.length
+        #tmp1存储的是点距离线段起点的距离，将每个距离转换为点要素，并添加到ls中
+        for j in tmp1:
+            ls.append(line_geometry.interpolate(j))
+        #最后，把点序列转换为线型输出
+        return LineString(ls)
     lss = []
     #遍历每条轨道线
     for k in range(len(line)):
