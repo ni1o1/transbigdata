@@ -6,24 +6,23 @@ import math
 import numpy as np
 def odagg_grid(oddata,params,col = ['slon','slat','elon','elat'],arrow = False,**kwargs):
     '''
-    OD集计与地理信息生成（栅格）。输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame
+    Aggregate the OD matrix and generate the grid geometry. The input is the OD matrix (each row represents a trip). The OD will assigned to grids and then aggregated in the form of GeoDataFrame.
 
-    输入
+    Parameters
     -------
     oddata : DataFrame
-        OD数据
+        OD data
     col : List
-        起终点列名,['slon','slat','elon','elat']，此时每一列权重为1。
-        也可以传入权重列，如['slon','slat','elon','elat','count']
+        The column of the origin/destination location,[‘slon’,’slat’,’elon’,’elat’]. The default weight is 1 for each column. You can also add the weight parameter, for example, [‘slon’,’slat’,’elon’,’elat’,’count’].
     params : List
-        栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
     arrow : bool
-        生成的OD地理线型是否包含箭头
+        Whether the generated OD geographic line contains arrows
 
-    输出
+    Returns
     -------
     oddata1 : GeoDataFrame
-        集计后生成OD的GeoDataFrame
+        GeoDataFrame of OD after aggregation
     '''
     #将起终点栅格化
     if len(col)==4:
@@ -52,28 +51,28 @@ def odagg_grid(oddata,params,col = ['slon','slat','elon','elat'],arrow = False,*
 
 def odagg_shape(oddata,shape,col = ['slon','slat','elon','elat'],params = None,round_accuracy = 6,arrow = False,**kwargs):
     '''
-    OD集计与地理信息生成（小区集计）。输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame
+    Generate the OD aggregation results and the corresponding geometry. The input is the OD data (each row represents a trip). The OD will assigned to grids and then aggregated in the form of GeoDataFrame.
 
-    输入
+    Parameters
     -------
     oddata : DataFrame
-        OD数据
+        OD data
     shape : GeoDataFrame
-        集计小区的GeoDataFrame
+        GeoDataFrame of the target traffic zone
     col : List
-        起终点列名,['slon','slat','elon','elat']，此时每一列权重为1。
-        也可以传入权重列，如['slon','slat','elon','elat','count']
-    params : List
-        栅格化参数，如果传入，则先栅格化后以栅格中心点匹配小区，如果不传入，则直接以经纬度匹配。在数据量大时，用栅格化进行匹配速度会极大提升
+        The column of the origin/destination location,[‘slon’,’slat’,’elon’,’elat’]. The default weight is 1 for each column. You can also add the weight parameter, for example, [‘slon’,’slat’,’elon’,’elat’,’count’].
+    params : List (optional)
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
+        If availabel, After the data gridding, the traffic zone will be matched based on the grid center. If not available, then the matching will be processed based on longitude and latitude. When the number of data items is large, the matching efficiency will be improved greatly thanks to data gridding.
     round_accuracy : number
-        集计时经纬度取小数位数
+        The number of decimal for latitude and longitude when implementing aggregation
     arrow : bool
-        生成的OD地理线型是否包含箭头
+        Whether the generated OD geographic line contains arrows
 
-    输出
+    Returns
     -------
     oddata1 : GeoDataFrame
-        集计后生成OD的GeoDataFrame
+        GeoDataFrame of OD after aggregation
     '''
     #将起终点栅格化
     if len(col)==4:
@@ -165,7 +164,7 @@ def odagg_shape(oddata,shape,col = ['slon','slat','elon','elat'],params = None,r
 # 定义带箭头的LineString函数
 def tolinewitharrow(x1,y1,x2,y2,theta = 20,length = 0.1,pos = 0.8):
     '''
-    输入起终点坐标，输出带箭头的LineString
+    Parameters起终点坐标，Returns带箭头的LineString
     x1,y1,x2,y2  - 起终点坐标
     theta        - 箭头旋转角度
     length       - 箭头相比于原始线的长度比例，例如原始线的长度为1，length设置为0.3，则箭头大小为0.3

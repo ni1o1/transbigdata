@@ -11,22 +11,23 @@ import math
 #定义KDTree的函数
 def ckdnearest(dfA_origin,dfB_origin,Aname = ['lon','lat'],Bname = ['lon','lat']):
     '''
-    输入两个DataFrame，分别指定经纬度列名，为表A匹配表B中最近点，并计算距离
-    输入
+    Search the nearest points in dfB_origin for dfA_origin, and calculate the distance
+
+    Parameters
     -------
     dfA_origin : DataFrame
-        表A
+        DataFrame A
     dfB_origin : DataFrame
-        表B
+        DataFrame B
     Aname : List
-        表A中经纬度列字段
+        The column of lng and lat in DataFrame A
     Bname : List
-        表B中经纬度列字段
-
-    输出
+        The column of lng and lat in DataFrame A
+               
+    Returns
     -------
     gdf : DataFrame
-        为A匹配到B上最近点的表
+        The output DataFrame
     '''
     gdA = dfA_origin.copy()
     gdB = dfB_origin.copy()
@@ -47,18 +48,20 @@ def ckdnearest(dfA_origin,dfB_origin,Aname = ['lon','lat'],Bname = ['lon','lat']
     return gdf
 def ckdnearest_point(gdA, gdB):
     '''
-    输入两个geodataframe，gdfA、gdfB均为点，该方法会为gdfA表连接上gdfB中最近的点，并添加距离字段dsit
-    输入
+    This method will match the nearest points in gdfB to gdfA, and add a new column called dist
+    
+    Parameters
     -------
     gdA : GeoDataFrame
-        表A，点要素
-    gdB : GeoDataFrame
-        表B，点要素
+        GeoDataFrame A, point geometry
 
-    输出
+    gdB : GeoDataFrame
+        GeoDataFrame B, point geometry
+
+    Returns
     -------
-    gdf : GeoDataFrame
-        为A匹配到B上最近点的表
+    gdf : DataFrame
+        The output DataFrame
     '''
     #提取gdA中的所有点要素
     nA = np.array(list(gdA.geometry.apply(lambda x: (x.x, x.y))))
@@ -78,18 +81,20 @@ def ckdnearest_point(gdA, gdB):
 #定义函数，用cKDTree匹配点与线
 def ckdnearest_line(gdfA, gdfB):
     '''
-    输入两个geodataframe，其中gdfA为点，gdfB为线，该方法会为gdfA表连接上gdfB中最近的线，并添加距离字段dsit
-    输入
+    This method will seach from gdfB to find the nearest line to the point in gdfA.
+
+    Parameters
     -------
     gdA : GeoDataFrame
-        表A，点要素
-    gdB : GeoDataFrame
-        表B，线要素
+        GeoDataFrame A, point geometry
 
-    输出
+    gdB : GeoDataFrame
+        GeoDataFrame B, linestring geometry
+
+    Returns
     -------
-    gdf : GeoDataFrame
-        为A匹配到B中最近的线
+    gdf : DataFrame
+        Searching the nearset linestring in gdfB for the point in gdfA
     '''
     #提取gdA中的所有点要素
     A = np.concatenate(
@@ -118,18 +123,19 @@ def ckdnearest_line(gdfA, gdfB):
 #打断线
 def splitline_with_length(Centerline,maxlength = 100):
     '''
-    输入线GeoDataFrame要素，打断为最大长度maxlength的小线段
-    输入
+    The intput is the linestring GeoDataFrame. The splited line’s length wull be no longer than maxlength
+
+    Parameters
     -------
     Centerline : GeoDataFrame
-        线要素
+        Linestring geometry
     maxlength : number
-        打断的线段最大长度
+        The maximum length of the splited line
 
-    输出
+    Returns
     -------
     splitedline : GeoDataFrame
-        打断后的线
+        Splited line
     '''
     def splitline(route,maxlength):
         routelength = route.length
@@ -160,19 +166,19 @@ def splitline_with_length(Centerline,maxlength = 100):
 
 def merge_polygon(data,col):
     '''
-    输入多边形GeoDataFrame数据，以及分组列名col，对不同组别进行分组的多边形进行合并
+    The input is the GeoDataFrame of polygon geometry, and the col name. This function will merge the polygon based on the category in the mentioned column
     
-    输入
+    Parameters
     -------
     data : GeoDataFrame
-        多边形数据
+        The polygon geometry
     col : str
-        分组列名
+        The column name for indicating category
 
-    输出
+    Returns
     -------
     data1 : GeoDataFrame
-        合并后的面
+        The merged polygon
     '''
     groupnames = []
     geometries = []
@@ -186,19 +192,19 @@ def merge_polygon(data,col):
 
 def polyon_exterior(data,minarea = 0):
     '''
-    输入多边形GeoDataFrame数据，对多边形取外边界构成新多边形
+    The input is the GeoDataFrame of the polygon geometry. The method will construct new polygon by extending the outer boundary of the ploygon
     
-    输入
+    Parameters
     -------
     data : GeoDataFrame
-        多边形数据
+        The polygon geometry
     minarea : number
-        最小面积，小于这个面积的面全部剔除
+        The minimum area. Polygon of less area will be removed
         
-    输出
+    Returns
     -------
     data1 : GeoDataFrame
-        处理后的面
+        The processed polygon
     '''
     data1 = data.copy()
     def polyexterior(p):
@@ -224,24 +230,24 @@ def polyon_exterior(data,minarea = 0):
 #置信椭圆的绘制函数
 def ellipse_params(data,col = ['lon','lat'],confidence = 95,epsg = None):
     '''
-    输入点数据，获取置信椭圆的参数
-    
-    输入
+    confidence ellipse parameter estimation for point data
+
+    Parameters
     -------
     data : DataFrame
-        公交GPS数据，单一公交线路，且需要含有车辆ID、GPS时间、经纬度（wgs84）
+        point data
     confidence : number
-        置信度，可选99，95，90
+        confidence level: 99，95 or 90
     epsg : number
-        如果给了，则将原始坐标从wgs84，转换至给定epsg坐标系下进行置信椭圆参数估计
+        If given, the original coordinates are transformed from WGS84 to the given EPSG coordinate system for confidence ellipse parameter estimation
     col: List
-        以[经度，纬度]形式存储的列名
+        Column names, [lon，lat]
     
-    输出
+    Returns
     -------
     params: List
-        质心椭圆参数，分别为[pos,width,height,theta,area,alpha]
-        对应[中心点坐标，短轴，长轴，角度，面积，方向性]
+        Centroid ellipse parameters[pos,width,height,theta,area,oblateness]
+        Respectively[Center point coordinates, minor axis, major axis, angle, area, oblateness]
     '''
     lon,lat = col
     if confidence==99:
@@ -273,21 +279,23 @@ def ellipse_params(data,col = ['lon','lat'],confidence = 95,epsg = None):
     #长轴短轴的长度
     width, height = 2 * nstd * np.sqrt(vals)
     area = width/2*height/2*math.pi
-    alpha = (height-width)/height
+    oblateness = (height-width)/height
     
-    ellip_params = [pos,width,height,theta,area,alpha]
+    ellip_params = [pos,width,height,theta,area,oblateness]
     return ellip_params
 
 def ellipse_plot(ellip_params,ax,**kwargs):
     '''
-    输入置信椭圆的参数，绘制置信椭圆
+    Enter the parameters of the confidence ellipse and plot the confidence ellipse
     
     输入
     -------
     ellip_params : List
-        
+        Centroid ellipse parameters[pos,width,height,theta,area,oblateness]
+        Respectively[Center point coordinates, minor axis, major axis, angle, area, oblateness]
+
     ax : matplotlib.axes._subplots.AxesSubplot
-        画板
+        Where to plot
     '''
     [pos,width,height,theta,area,alpha] = ellip_params
     #添加椭圆元素

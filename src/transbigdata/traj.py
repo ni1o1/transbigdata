@@ -8,14 +8,14 @@ import numpy as np
 
 def plot_activity(data,col = ['stime','etime','LONCOL','LATCOL']):
     '''
-    输入个体的活动数据（单一个体），绘制活动图
+    Plot the activity plot of individual
     
-    输入
+    Parameters
     ----------------
     data : DataFrame
-        活动数据集
+        activity information of one person
     col : List
-        列名，分别为[活动开始时间，活动结束时间，活动所在栅格经度编号，活动所在栅格纬度编号]
+        The column name.[starttime,endtime,LONCOL,LATCOL] of activities
     '''
     stime,etime,LONCOL,LATCOL = col
     activity = data.copy()
@@ -76,25 +76,25 @@ def plot_activity(data,col = ['stime','etime','LONCOL','LATCOL']):
 
 def traj_stay_move(data,params,col = ['ID','dataTime','longitude','latitude'],activitytime = 1800):
     '''
-    输入轨迹数据与栅格化参数，识别活动与出行
+    Input trajectory data and gridding parameters, identify stay and move
     
-    输入
+    Parameters
     ----------------
     data : DataFrame
-        轨迹数据集
+        trajectory data
     params : List
-        栅格化参数
+        gridding parameters
     col : List
-        数据的列名[个体，时间，经度，纬度]顺序
+        The column name, in the order of ['ID','dataTime','longitude','latitude']
     activitytime : Number
-        多长时间识别为停留
+        How much time to regard as activity
         
-    输出
+    Returns
     ----------------
     stay : DataFrame
-        个体停留信息
+        stay information
     move : DataFrame
-        个体移动信息
+        move information
     '''
     uid,timecol,lon,lat = col
     trajdata = data.copy()
@@ -133,21 +133,21 @@ def traj_stay_move(data,params,col = ['ID','dataTime','longitude','latitude'],ac
 
 def traj_densify(data,col = ['Vehicleid','Time','Lng','Lat'],timegap = 15):
     '''
-    轨迹点增密，确保每隔timegap秒会有一个轨迹点
+    Trajectory densification, ensure that there is a trajectory point each timegap seconds
     
-    输入
+    Parameters
     -------
     data : DataFrame
-        数据
+        Data
     col : List
-        列名，按[车辆ID,时间,经度,纬度]的顺序
+        The column name, in the sequence of [Vehicleid, Time, lng, lat]
     timegap : number
-        单位为秒，每隔多长时间插入一个轨迹点
+        The sampling interval (second)
     
-    输出
+    Returns
     -------
     data1 : DataFrame
-        处理后的数据
+        The processed data
     '''
     Vehicleid,Time,Lng,Lat = col
     data[Time] = pd.to_datetime(data[Time])
@@ -180,24 +180,23 @@ def traj_densify(data,col = ['Vehicleid','Time','Lng','Lat'],timegap = 15):
 
 def traj_sparsify(data,col = ['Vehicleid','Time','Lng','Lat'],timegap = 15,method = 'subsample'):
     '''
-    轨迹点稀疏化。轨迹数据采样频率过高的时候，数据量太大，不便于部分对数据频率要求不是那么高的研究的分析。
-    这个函数可以将采样间隔扩大，缩减数据量。
-    
-    输入
+    Trajectory sparsify. When the sampling frequency of trajectory data is too high, the amount of data is too large, which is not convenient for the analysis of some studies that require less data frequency. This function can expand the sampling interval and reduce the amount of data.
+
+    Parameters
     -------
     data : DataFrame
-        数据
+        Data
     col : List
-        列名，按[车辆ID,时间,经度,纬度]的顺序
+        The column name, in the sequence of [Vehicleid, Time, lng, lat]
     timegap : number
-        单位为秒，每隔多长时间一个轨迹点
+        Time gap between trajectory point
     method : str
-        可选interpolate插值或subsample子采样
+        'interpolate' or 'subsample'
     
-    输出
+    Returns
     -------
     data1 : DataFrame
-        处理后的数据
+        Sparsified trajectory data
     '''
     Vehicleid,Time,Lng,Lat = col
     data[Time] = pd.to_datetime(data[Time], unit='s')
@@ -234,57 +233,23 @@ def traj_sparsify(data,col = ['Vehicleid','Time','Lng','Lat'],timegap = 15,metho
         data1 = data1.drop([Vehicleid+'_new','utctime','utctime_new'],axis = 1)
     return data1
 
-def points_to_traj(traj_points,col = ['Lng','Lat','ID']):
-    '''
-    输入轨迹点，生成轨迹线型的GeoDataFrame
-    
-    输入
-    -------
-    traj_points : DataFrame
-        轨迹点数据
-    col : List
-        列名，按[经度,纬度,轨迹编号]的顺序
-
-    输出
-    -------
-    traj : GeoDataFrame
-        生成的轨迹数据
-    '''
-    [Lng,Lat,ID] = col 
-    traj = gpd.GeoDataFrame()
-    from shapely.geometry import LineString
-    geometry = []
-    traj_id = []
-    for i in traj_points[ID].drop_duplicates():
-        coords = traj_points[traj_points[ID]==i][[Lng,Lat]].values
-        traj_id.append(i)
-        if len(coords)>=2:
-            geometry.append(LineString(coords))
-        else:
-            geometry.append(None)
-    traj[ID] = traj_id
-    traj['geometry'] = geometry
-    traj = gpd.GeoDataFrame(traj)
-    return traj
-
-
 def points_to_traj(traj_points,col = ['Lng','Lat','ID'],timecol = None):
     '''
-    输入轨迹点，生成轨迹线型的GeoDataFrame
-
-    输入
+    Input trajectory, generate GeoDataFrame
+    
+    Parameters
     -------
     traj_points : DataFrame
-        轨迹点数据
+        trajectory data
     col : List
-        列名，按[经度,纬度,轨迹编号]的顺序
-    timecol : str
-        可选，时间列的列名，如果给了则输出带有[经度,纬度,高度,时间]的geojson，可放入kepler中可视化轨迹
-
-    输出
+        The column name, in the sequence of [lng, lat,trajectoryid]
+    timecol : str(Optional)
+        Optional, the column name of the time column. If given, the geojson with [longitude, latitude, altitude, time] in returns can be put into the Kepler to visualize the trajectory
+    
+    Returns
     -------
-    traj : GeoDataFrame或json
-        生成的轨迹数据，如果timecol没定义则为GeoDataFrame，否则为json
+    traj : GeoDataFrame
+        Generated trajectory
     '''
     [Lng,Lat,ID] = col 
     if timecol:
@@ -323,14 +288,16 @@ def points_to_traj(traj_points,col = ['Lng','Lat','ID'],timecol = None):
 
 def dumpjson(data,path):
     '''
-    输入json数据，存储为文件。这个方法主要是解决numpy数值型无法兼容json包报错的问题
-
-    输入
+    Input the json data and save it as a file. This method is suitable for sovling the problem that numpy cannot be compatiable with json package.
+    
+    Parameters
     -------
     data : json
-        要储存的json数据
+        The json data to be saved
+
+
     path : str
-        保存的路径
+        The storage path
 
     '''
     import json

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-07 16:44+0800\n"
+"POT-Creation-Date: 2022-01-07 17:43+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,11 +25,11 @@ msgstr "Trajectory Processing"
 
 #: ../../source/traj.rst:9
 msgid "停留与出行识别"
-msgstr ""
+msgstr "Identification of stay and move from trajectory data"
 
 #: ../../source/traj.rst:12
 msgid "输入轨迹数据与栅格化参数，识别活动与出行"
-msgstr ""
+msgstr "In put trajectory data and gridding params, identify stay and move"
 
 #: ../../source/traj.rst:14 ../../source/traj.rst:36 ../../source/traj.rst:50
 #: ../../source/traj.rst:72 ../../source/traj.rst:90
@@ -58,7 +58,7 @@ msgstr "List"
 
 #: ../../source/traj.rst:19
 msgid "栅格化参数"
-msgstr ""
+msgstr "gridding params"
 
 #: ../../source/traj.rst:20 ../../source/traj.rst:41 ../../source/traj.rst:54
 #: ../../source/traj.rst:76 ../../source/traj.rst:94
@@ -67,19 +67,19 @@ msgstr "col"
 
 #: ../../source/traj.rst:21
 msgid "数据的列名[个体，时间，经度，纬度]顺序"
-msgstr ""
+msgstr "Columns of the data, should be input with the sequence: [uid, time, lon,lat]"
 
 #: ../../source/traj.rst:23
 msgid "activitytime"
-msgstr ""
+msgstr "activitytime"
 
 #, fuzzy
 msgid "Number"
-msgstr "number"
+msgstr "Number"
 
 #: ../../source/traj.rst:23
 msgid "多长时间识别为停留"
-msgstr ""
+msgstr "Time threshold to identify as stay"
 
 #: ../../source/traj.rst:25 ../../source/traj.rst:59 ../../source/traj.rst:81
 #: ../../source/traj.rst:101
@@ -92,7 +92,7 @@ msgstr ""
 
 #: ../../source/traj.rst:28
 msgid "个体停留信息"
-msgstr ""
+msgstr "Stay information of individual"
 
 #: ../../source/traj.rst:30
 msgid "move"
@@ -100,19 +100,19 @@ msgstr ""
 
 #: ../../source/traj.rst:30
 msgid "个体移动信息"
-msgstr ""
+msgstr "Move information of individual"
 
 #: ../../source/traj.rst:34
 msgid "输入个体的活动数据（单一个体），绘制活动图"
-msgstr ""
+msgstr "Input the stay information data of one user, generate the activity plot"
 
 #: ../../source/traj.rst:39
 msgid "活动数据集"
-msgstr ""
+msgstr "Stay information"
 
 #: ../../source/traj.rst:41
 msgid "列名，分别为[活动开始时间，活动结束时间，活动所在栅格经度编号，活动所在栅格纬度编号]"
-msgstr ""
+msgstr "Columns of the data, should be input with the sequence: [starttime, endtime, loncol, latcol]"
 
 #: ../../source/traj.rst:44
 msgid "轨迹线型生成"

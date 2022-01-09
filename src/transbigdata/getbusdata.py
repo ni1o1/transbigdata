@@ -10,21 +10,23 @@ from urllib import request
 
 def getadmin(keyword,ak,subdistricts = False):
     '''
-    输入关键词与高德ak，抓取行政区划gis
-    输入
+    Input the keyword and the Amap ak. The output is the GIS file of the administrative boundary (Only in China)
+    
+    Parameters
     -------
     keywords : str
-        关键词，可以是名称，如"深圳市"，或行政区划编号，如440500
+        The keyword. It might be the city name such as Shengzheng, or the administrative code such as 440500
     ak : str
-        高德ak
+        Amap accesstoken
     subdistricts : bool
-        是否输出子行政区划的信息
-    输出
+        Whether to output the information of the administrative district boundary
+
+    Returns
     -------
     admin : GeoDataFrame
-        行政区划信息
+        Administrative district
     districts : DataFrame
-        子行政区划的信息，利用这个可以进一步抓下一级的行政区划
+        The information of subdistricts. This can be used to further get the boundary of lower level districts
     '''
     
     #查询的接口地址
@@ -110,28 +112,94 @@ def getadmin(keyword,ak,subdistricts = False):
 
 def getbusdata(city,keywords):
     '''
-    通过输入城市与关键词，获取公交线路的线型与站点
-    输入
+    Obtain the geographic information of the bus station and bus line from the map service (Only in China)
+
+    Parameters
     -------
     city : str
-        城市
+        city name
     keywords : List
-        关键词，线路名称
+        Keyword, the line name
 
-    输出
+    Returns
     -------
     data : GeoDataFrame
-        生成的公交线路
+        The generated bus line
     stop : GeoDataFrame
-        生成的公交站点
+        The generated bus station
     '''
-    print('获取城市id:',city,end = '')
+    def getlineuid(keyword,c):
+        url = 'http://map.baidu.com/?qt=s&wd='+urllib.parse.quote(keyword)+'&c='+c
+        response1 = urllib.request.urlopen(url)
+        searchinfo=json.loads(response1.read().decode('utf8'))
+        if searchinfo['content'][0]['catalogID'] ==904 or searchinfo['content'][0]['catalogID'] ==905:
+            try:
+                uidlist = list(pd.DataFrame(searchinfo['content'][8]['blinfo'])['uid'])
+            except:
+                uidlist = []
+            uidlist.append(searchinfo['content'][0]['uid'])
+            uidlist.append(searchinfo['content'][1]['uid'])
+            return list(set(uidlist))
+        else:
+            return []
+    def getcitycode(c):
+        url = 'http://map.baidu.com/?qt=s&wd='+urllib.parse.quote(c)
+        response1 = urllib.request.urlopen(url,timeout = 60)
+        searchinfo=json.loads(response1.read().decode('utf8'))
+        return str(searchinfo['content']['code'])
+    def getlinegeo(uid,c):
+        url = 'http://map.baidu.com/?qt=bsl&uid='+uid+'&c='+c
+        response = urllib.request.urlopen(url,timeout = 60)
+        searchinfo=json.loads(response.read().decode('utf8'))
+        linename = searchinfo['content'][0]['name']
+        stations = searchinfo['content'][0]['stations']
+        geo = searchinfo['content'][0]['geo'].split('|')[2][:-1].split(',')
+        stationgeo = []
+        stationnames = []
+        for station in stations:
+            stationname = station['name']
+            coo = station['geo'].split(';')[1].split('|')[0]
+            stationnames.append(stationname)
+            stationgeo.append(coo)
+        coo=[]
+        t=0
+        cood = ''
+        for each in geo:
+            t += 1
+            cood += each + ','
+            if t == 2:
+                t=0
+                coo.append(cood[:-1])
+                cood = ''
+        def coodconvert(coo):
+            coo = pd.DataFrame(list(pd.DataFrame(coo)[0].str.split(','))).astype(float)
+            coo[0],coo[1] = CoordinatesConverter.bd09mctobd09(coo[0],coo[1])
+            return list(coo[0].astype(str)+','+coo[1].astype(str))
+        return linename,coodconvert(coo),stationnames,coodconvert(stationgeo)
+    def getline(r2,line_geometry):
+        #生成空的list用以存放轨道断面的节点
+        ls = []
+        #对大部分情况，线段的起点的位置在终点前，在起终点之间生成10个点
+        if r2['o_project']<=r2['d_project']:
+            #numpy的linespace线性插值生成10个点距离线段起点的距离
+            tmp1 = np.linspace(r2['o_project'],r2['d_project'],10)
+        #对四号线环线，最后一个站点与第一个站点之间的轨道断面需要特殊处理
+        if r2['o_project']>r2['d_project']:
+            tmp1 = np.linspace(r2['o_project']-line_geometry.length,r2['d_project'],10)
+            tmp1[tmp1<0] = tmp1[tmp1<0]+line_geometry.length
+        #tmp1存储的是点距离线段起点的距离，将每个距离转换为点要素，并添加到ls中
+        for j in tmp1:
+            ls.append(line_geometry.interpolate(j))
+        #最后，把点序列转换为线型输出
+        return LineString(ls)
+    print('Obtaining city id:',city,end = '')
     linenames = []
     lines = []
     c = getcitycode(city)
-    print('成功')
+    print('success')
     stop = []
     uids = []
+    
     for keyword in keywords:
         print(keyword)
         for uid in getlineuid(keyword,c):
@@ -149,7 +217,7 @@ def getbusdata(city,keywords):
                     stops['lon'] = stops['geo'].apply(lambda row:row.split(',')[0])
                     stops['lat'] = stops['geo'].apply(lambda row:row.split(',')[1])
                     stop.append(stops)
-                    print(linename+'成功')
+                    print(linename+' success')
                     uids.append(uid)
                 except:
                     pass
@@ -171,92 +239,32 @@ def getbusdata(city,keywords):
     return data,stop
 
 
-def getcitycode(c):
-    url = 'http://map.baidu.com/?qt=s&wd='+urllib.parse.quote(c)
-    response1 = urllib.request.urlopen(url,timeout = 60)
-    searchinfo=json.loads(response1.read().decode('utf8'))
-    return str(searchinfo['content']['code'])
-    
-def getlinegeo(uid,c):
-    url = 'http://map.baidu.com/?qt=bsl&uid='+uid+'&c='+c
-    response = urllib.request.urlopen(url,timeout = 60)
-    searchinfo=json.loads(response.read().decode('utf8'))
-    linename = searchinfo['content'][0]['name']
-    stations = searchinfo['content'][0]['stations']
-    geo = searchinfo['content'][0]['geo'].split('|')[2][:-1].split(',')
-    stationgeo = []
-    stationnames = []
-    for station in stations:
-        stationname = station['name']
-        coo = station['geo'].split(';')[1].split('|')[0]
-        stationnames.append(stationname)
-        stationgeo.append(coo)
-    coo=[]
-    t=0
-    cood = ''
-    for each in geo:
-        t += 1
-        cood += each + ','
-        if t == 2:
-            t=0
-            coo.append(cood[:-1])
-            cood = ''
-    return linename,coodconvert(coo),stationnames,coodconvert(stationgeo)
 
     
-def getlineuid(keyword,c):
-    url = 'http://map.baidu.com/?qt=s&wd='+urllib.parse.quote(keyword)+'&c='+c
-    response1 = urllib.request.urlopen(url)
-    searchinfo=json.loads(response1.read().decode('utf8'))
-    if searchinfo['content'][0]['catalogID'] ==904 or searchinfo['content'][0]['catalogID'] ==905:
-        try:
-            uidlist = list(pd.DataFrame(searchinfo['content'][8]['blinfo'])['uid'])
-        except:
-            uidlist = []
-        uidlist.append(searchinfo['content'][0]['uid'])
-        uidlist.append(searchinfo['content'][1]['uid'])
-        return list(set(uidlist))
-    else:
-        return []
-        
-
-def coodconvert(coo):
-    coo = pd.DataFrame(list(pd.DataFrame(coo)[0].str.split(','))).astype(float)
-    coo[0],coo[1] = CoordinatesConverter.bd09mctobd09(coo[0],coo[1])
-    return list(coo[0].astype(str)+','+coo[1].astype(str))
 
 
-def getline(r2,line_geometry):
-    #生成空的list用以存放轨道断面的节点
-    ls = []
-    #对大部分情况，线段的起点的位置在终点前，在起终点之间生成10个点
-    if r2['o_project']<=r2['d_project']:
-        #numpy的linespace线性插值生成10个点距离线段起点的距离
-        tmp1 = np.linspace(r2['o_project'],r2['d_project'],10)
-    #对四号线环线，最后一个站点与第一个站点之间的轨道断面需要特殊处理
-    if r2['o_project']>r2['d_project']:
-        tmp1 = np.linspace(r2['o_project']-line_geometry.length,r2['d_project'],10)
-        tmp1[tmp1<0] = tmp1[tmp1<0]+line_geometry.length
-    #tmp1存储的是点距离线段起点的距离，将每个距离转换为点要素，并添加到ls中
-    for j in tmp1:
-        ls.append(line_geometry.interpolate(j))
-    #最后，把点序列转换为线型输出
-    return LineString(ls)
+    
+
+
+
+
+
 
 def split_subwayline(line,stop):
     '''
-    用公交/地铁站点对公交/地铁线进行切分，得到断面
-    输入
+    To slice the metro line with metro stations to obtain metro section information (This step is useful in subway passenger flow visualization)
+
+    Parameters
     -------
     line : GeoDataFrame
-        公交/地铁线路
+        Bus/metro lines
     stop : GeoDataFrame
-        公交/地铁站点
+        Bus/metro stations
 
-    输出
+    Returns
     -------
     metro_line_splited : GeoDataFrame
-        生成的断面线型
+        Generated section line shape
     '''
     lss = []
     #遍历每条轨道线
@@ -286,28 +294,29 @@ def split_subwayline(line,stop):
 
 def metro_network(stop,traveltime = 3,transfertime = 5,nxgraph = True):
     '''
-    输入站点信息，输出网络信息
-    输入
+    Inputting the metro station data and outputting the network topology model. The graph generated relies on NetworkX.
+
+    Parameters
     -------
     stop : GeoDataFrame
-        公交站点
+        Bus/metro stations
     traveltime : number
-        每个轨道断面的出行时长
+        Travel time per section
     transfertime : number
-        每个轨道换乘的时长
+        Travel time per transfer
     nxgraph : bool
-        默认True，如果True则直接输出由networkx构建的网络G，如果为False，则输出网络的边edge1,edge2,和节点node
-        
-    输出
+        Default True, if True then output the network G constructed by NetworkX, if False then output the edges1(line section),edge2(station transfer), and the node of the network
+
+    Returns
     -------
     G : networkx.classes.graph.Graph
-        networkx构建的网络G，nxgraph参数为True时只输出这个
+        Network G built by networkx. Output when the nxgraph parameter is True
     edge1 : DataFrame
-        轨道断面的边，nxgraph参数为False时输出这个
+        Network edge for line section. Output when the nxgraph parameter is False
     edge2 : DataFrame
-        轨道换乘的边，nxgraph参数为False时输出这个
+        Network edge for transfering. Output when the nxgraph parameter is False
     node : List
-        网络节点，nxgraph参数为False时输出这个
+        Network nodes. Output when the nxgraph parameter is False
     '''
     linestop = stop.copy()
     #提取相邻站点够成的轨道段

@@ -68,42 +68,46 @@ def encode(longitude,latitude, precision=12):
             ch = 0
         i+=1
     return ''.join(geohash)
+
 def geohash_encode(lon,lat,precision=12):
     '''
-    输入经纬度与精度，输出geohash编码
-    输入
-    -------
-    lon : Series
-        经度列
-    lat : Series
-        纬度列
-    precision : number
-        geohash精度                       
+    Input latitude and longitude and precision, and encode geohash code
 
-    输出
+    Parameters
     -------
     lon : Series
-        经度列
+        longitude Series
     lat : Series
-        纬度列
+        latitude Series
+    precision : number
+        geohash precision                  
+
+    Returns
+    -------
+    geohash : Series
+        encoded geohash Series 
     '''
     tmp = pd.DataFrame()
     tmp['lon'] = lon
     tmp['lat'] = lat
     geohash = tmp.apply(lambda r:encode(r['lon'],r['lat'],precision),axis = 1)
     return geohash
+
 def geohash_decode(geohash):
     '''
-    输入经纬度与精度，输出geohash编码
-    输入
-    -------
-    geohash : Series
-        geohash编码列                    
+    Decode geohash code
 
-    输出
+    Parameters
     -------
     geohash : Series
-        geohash编码列
+        encoded geohash Series                   
+
+    Returns
+    -------
+    lon : Series
+        decoded longitude Series
+    lat : Series
+        decoded latitude Series
     '''
     lonslats = geohash.apply(lambda r:decode(r))
     lon = lonslats.apply(lambda r:r[0])
@@ -112,16 +116,17 @@ def geohash_decode(geohash):
 
 def geohash_togrid(geohash):
     '''
-    输入geohash编码，输出geohash网格的地理信息图形Series列
-    输入
+    Input geohash code to generate geohash grid cell
+
+    Parameters
     -------
     geohash : Series
-        geohash编码列                    
+        encoded geohash Series                  
 
-    输出
+    Returns
     -------
     poly : Series
-        geohash的栅格列
+        grid cell polygon for geohash
     '''
     lonslats = geohash.apply(lambda r:decode_exactly(r))
     def topoly(r):

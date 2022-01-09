@@ -7,19 +7,19 @@ import numpy as np
 
 def sample_duration(data,col = ['Vehicleid','Time']):
     '''
-    统计数据采样间隔
+    Calculate the data sampling interval.
     
-    输入
+    Parameters
     -------
     data : DataFrame
-        数据
+        Data
     col : List
-        列名，按[个体ID,时间]的顺序
+        The column name, in the order of [‘Vehicleid’, ‘Time’]
     
-    输出
+    Returns
     -------
     sample_duration : DataFrame
-        一列的数据表，列名为duration，内容是数据的采样间隔，单位秒
+        A Series with the column name duration, the content is the sampling interval of the data, in seconds
     '''
     [Vehicleid,Time] = col
     data1 = data.copy()
@@ -34,40 +34,40 @@ def sample_duration(data,col = ['Vehicleid','Time']):
 
 def data_summary(data,col = ['Vehicleid','Time'],show_sample_duration = False,roundnum = 4):
     '''
-    输入数据，打印数据概况
+    Output the general information of the dataset.
     
-    输入
+    Parameters
     -------
     data : DataFrame
-        轨迹点数据
+        The trajectory points data
     col : List
-        列名，按[个体ID，时间]的顺序
+        The column name, in the order of [‘Vehicleid’, ‘Time’]
     show_sample_duration : bool
-        是否输出个体采样间隔信息
+        Whether to output individual sampling interval
     roundnum : number
-        小数点取位数
+        Number of decimal places
     '''
     [Vehicleid,Time] = col
-    print('数据量')
+    print('Amount of data')
     print('-----------------')
-    print('数据总量 :',len(data),'条')
+    print('Total number of data items: ',len(data))
     Vehicleid_count = data[Vehicleid].value_counts()
-    print('个体总量 :',len(Vehicleid_count),'个')
-    print('个体数据量均值 :',round(Vehicleid_count.mean(),roundnum),'条')
-    print('个体数据量上四分位 :',round(Vehicleid_count.quantile(0.75),roundnum),'条')
-    print('个体数据量中位数 :',round(Vehicleid_count.quantile(0.5),roundnum),'条')
-    print('个体数据量下四分位 :',round(Vehicleid_count.quantile(0.25),roundnum),'条')
+    print('Total number of individuals: ',len(Vehicleid_count))
+    print('Data volume of individuals(Mean): ',round(Vehicleid_count.mean(),roundnum))
+    print('Data volume of individuals(Upper quartile): ',round(Vehicleid_count.quantile(0.75),roundnum))
+    print('Data volume of individuals(Median): ',round(Vehicleid_count.quantile(0.5),roundnum))
+    print('Data volume of individuals(Lower quartile): ',round(Vehicleid_count.quantile(0.25),roundnum))
     print('')
-    print('数据时间段')
+    print('Data time period')
     print('-----------------')
-    print('开始时间 :',data[Time].min())
-    print('结束时间 :',data[Time].max())
+    print('Start time: ',data[Time].min())
+    print('End time: ',data[Time].max())
     print('')
     if show_sample_duration:
         sd = sample_duration(data, col=[Vehicleid, Time])
-        print('个体采样间隔')
+        print('Sampling interval')
         print('-----------------')
-        print('均值 :',round(sd['duration'].mean(),roundnum),'秒')
-        print('上四分位 :',round(sd['duration'].quantile(0.75),roundnum),'秒')
-        print('中位数 :',round(sd['duration'].quantile(0.5),roundnum),'秒')
-        print('下四分位 :',round(sd['duration'].quantile(0.25),roundnum),'秒')
+        print('Mean: ',round(sd['duration'].mean(),roundnum),'s')
+        print('Upper quartile: ',round(sd['duration'].quantile(0.75),roundnum),'s')
+        print('Median: ',round(sd['duration'].quantile(0.5),roundnum),'s')
+        print('Lower quartile: ',round(sd['duration'].quantile(0.25),roundnum),'s')

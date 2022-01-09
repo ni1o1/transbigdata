@@ -6,29 +6,29 @@ from .odprocess import *
 
 def visualization_trip(trajdata,col = ['Lng','Lat','ID','Time'],zoom = 'auto',height=500):
     '''
-    输入轨迹数据与列名，生成kepler的可视化
+    The input is the trajectory data and the column name. The output is the visualization result based on kepler
     
-    输入
+    Parameters
     -------
     trajdata : DataFrame
-        轨迹点数据
+        Trajectory points data
     col : List
-        列名，按[经度,纬度,轨迹编号,时间]的顺序
+        The column name, in the sequence of [longitude, latitude, vehicle id, time]
     zoom : number
-        地图缩放等级,默认'auto'自动选择
+        Map zoom level
     height : number
-        地图图框高度
+        The height of the map frame
 
-    输出
+    Returns
     -------
     vmap : keplergl.keplergl.KeplerGl
-        keplergl提供的可视化
+        Visualizations provided by keplergl
     '''
     try:
         from keplergl import KeplerGl
     except:
-        raise Exception('请安装keplergl，在终端或命令提示符中运行pip install keplergl，然后重启Python') 
-    print('整理轨迹数据...')
+        raise Exception('Please install keplergl，run the following code in cmd: pip install keplergl') 
+    print('Processing trajectory data...')
     [Lng,Lat,ID,timecol] = col
     trajdata[timecol] = pd.to_datetime(trajdata[timecol])
     trajdata = trajdata.sort_values(by = [ID,timecol])
@@ -43,7 +43,7 @@ def visualization_trip(trajdata,col = ['Lng','Lat','ID','Time'],zoom = 'auto',he
     if zoom == 'auto':
         lon_min,lon_max = ls[0].quantile(0.05),ls[0].quantile(0.95)
         zoom = 8.5-np.log(lon_max-lon_min)/np.log(2)
-    print('生成可视化...')
+    print('Generate visualization...')
     #创建一个KeplerGl对象
     vmap = KeplerGl(config = {
         "version": "v1",
@@ -91,33 +91,32 @@ def visualization_trip(trajdata,col = ['Lng','Lat','ID','Time'],zoom = 'auto',he
 
 def visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',height=500,accuracy = 500,mincount = 0):
     '''
-    输入od数据与列名，生成kepler的可视化
+    The input is the OD data and the column. The output is the visualization result based on kepler
     
-    输入
+    Parameters
     -------
     oddata : DataFrame
-        od数据
+        OD data
     col : List
-        列名，可输入不带权重的OD，按[起点经度，起点纬度，终点经度，终点纬度]的顺序，此时会自动集计。
-        也可输入带权重的OD，按[起点经度，起点纬度，终点经度，终点纬度，数量]的顺序。
+        The column name. The user can choose a non-weight Origin-Destination (OD) data, in the sequence of [origin longitude, origin latitude, destination longitude, destination latitude]. For this, The aggregation is automatic. Or, the user can also input a weighted OD data, in the sequence of [origin longitude, origin latitude, destination longitude, destination latitude, count]
     zoom : number
-        地图缩放等级,默认'auto'自动选择
+        Map zoom level (Optional). Default value: auto
     height : number
-        地图图框高度
+        The height of the map frame
     accuracy : number
-        集计的栅格大小
+        Grid size
     mincount : number
-        最小的od数，少于这个的od就不显示了
+        The minimum OD counts, OD with less counts will not be displayed
 
-    输出
+    Returns
     -------
     vmap : keplergl.keplergl.KeplerGl
-        keplergl提供的可视化
+        Visualizations provided by keplergl
     '''
     try:
         from keplergl import KeplerGl
     except:
-        raise Exception('请安装keplergl，在终端或命令提示符中运行pip install keplergl，然后重启Python') 
+        raise Exception('Please install keplergl，run the following code in cmd: pip install keplergl')     
     import numpy as np
     if len(col)==4:
         slon,slat,elon,elat = col
@@ -314,33 +313,32 @@ def visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',he
 
 def visualization_data(data,col =  ['lon','lat'],accuracy = 500,height = 500,maptype = 'point',zoom = 'auto'):
     '''
-    输入数据点，集计并可视化
+    The input is the data points, this function will aggregate and then visualize it
     
-    输入
+    Parameters
     -------
     data : DataFrame
-        数据点分布
+        The data point
     col : List
-        列名，可输入不带权重的OD，按[经度，纬度]的顺序，此时会自动集计。
-        也可输入带权重的OD，按[经度，纬度，数量]的顺序。
+        The column name. The user can choose a non-weight Origin-Destination (OD) data, in the sequence of [longitude, latitude]. For this, The aggregation is automatic. Or, the user can also input a weighted OD data, in the sequence of [longitude, latitude, count]
     zoom : number
-        地图缩放等级,默认'auto'自动选择
+        Map zoom level (Optional). Default value: auto
     height : number
-        地图图框高度
+        The height of the map frame
     accuracy : number
-        集计的栅格大小
+        Grid size
     maptype : str
-        出图类型，'point'或者'heatmap'
+        Map type, ‘point’ or ‘heatmap’
 
-    输出
+    Returns
     -------
     vmap : keplergl.keplergl.KeplerGl
-        keplergl提供的可视化
+        Visualizations provided by keplergl
     '''
     try:
         from keplergl import KeplerGl
     except:
-        raise Exception('请安装keplergl，在终端或命令提示符中运行pip install keplergl，然后重启Python') 
+        raise Exception('Please install keplergl，run the following code in cmd: pip install keplergl') 
     if len(col)==2:
         lon,lat = col[0],col[1]
         count = 'count'

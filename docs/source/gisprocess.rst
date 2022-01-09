@@ -888,7 +888,7 @@ data1 : GeoDataFrame
 **输入**
 
 data : DataFrame
-    公交GPS数据，单一公交线路，且需要含有车辆ID、GPS时间、经纬度（wgs84）
+    点数据
 confidence : number
     置信度，可选99，95，90
 epsg : number

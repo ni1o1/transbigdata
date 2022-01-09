@@ -8,20 +8,19 @@ from CoordinatesConverter import getdistance
 
 def clean_same(data,col = ['VehicleNum','Time','Lng','Lat']):
     '''
-    删除信息与前后数据相同的数据以减少数据量
-    如：某个体连续n条数据除了时间以外其他信息都相同，则可以只保留首末两条数据
+    Delete the data with the same information as the data before and after to reduce the amount of data. For example, if several consecutive data of an individual have the same information except for the time, only the first and last two data can be kept    
     
-    输入
+    Parameters
     -------
     data : DataFrame
-        数据
+        Data
     col : List
-        列名，按[个体ID,时间,经度,纬度]的顺序，可以传入更多列。会以时间排序，再判断除了时间以外其他列的信息
-    
-    输出
+        The column name, in the order of [‘Vehicleid, Time’]. It will sort by time, and then determine the information of other columns besides the time
+
+    Returns
     -------
     data1 : DataFrame
-        清洗后的数据
+        Cleaned data
     '''
     [VehicleNum,Time,Lng,Lat] = col[:4]
     extra = col[4:]
@@ -37,22 +36,21 @@ def clean_same(data,col = ['VehicleNum','Time','Lng','Lat']):
 
 def clean_drift(data,col = ['VehicleNum','Time','Lng','Lat'],speedlimit = 80,dislimit = 1000):
     '''
-    删除漂移数据。条件是，此数据与前后的速度都大于speedlimit，但前后数据之间的速度却小于speedlimit。
-    传入的数据中时间列如果为datetime格式则计算效率更快
+    Delete the drift data. The select principle is that: if the speed of a trajectory point is larger than the speed limit with before and after points, while the speed between the before and after data is less than the speedlimit. The time column in the input data is calculated more efficiently if it is in datetime format.
     
-    输入
+    Parameters
     -------
     data : DataFrame
-        数据
+        Data
     col : List
-        列名，按[个体ID,时间,经度,纬度]的顺序
+        Column names, in the order of [‘VehicleNum’, ‘Time’, ‘Lng’, ‘Lat’]
     speedlimit : number
-        速度阈值
+        Speed limitation
     
-    输出
+    Returns
     -------
     data1 : DataFrame
-        清洗后的数据
+        Cleaned data
     '''
     [VehicleNum,Time,Lng,Lat] = col
     data1 = data.copy()
@@ -84,21 +82,21 @@ def clean_drift(data,col = ['VehicleNum','Time','Lng','Lat'],speedlimit = 80,dis
 
 def clean_outofbounds(data,bounds,col = ['Lng','Lat']):
     '''
-    剔除超出研究范围的数据
+    The input is the latitude and longitude coordinates of the lower left and upper right of the study area and exclude data that are outside the study area
 
-    输入
+    Parameters
     -------
     data : DataFrame
-        数据
+        Data
     bounds : List    
-        研究范围的左下右上经纬度坐标，顺序为[lon1,lat1,lon2,lat2]
+        Latitude and longitude of the lower left and upper right of the study area, in the order of [lon1, lat1, lon2, lat2]
     col : List
-        经纬度列名
+        Column name of longitude and latitude
     
-    输出
+    Returns
     -------
     data1 : DataFrame
-        清洗后的数据
+        Data within the scope of the study
     '''
     Lng,Lat = col
     data1 = data.copy()
@@ -107,23 +105,23 @@ def clean_outofbounds(data,bounds,col = ['Lng','Lat']):
 
 def clean_outofshape(data,shape,col = ['Lng','Lat'],accuracy=500):
     '''
-    剔除超出研究区域的数据
+    Input the GeoDataFrame of the study area and exclude the data beyond the study area
 
-    输入
+    Parameters
     -------
     data : DataFrame
-        数据
+        Data
     shape : GeoDataFrame    
-        研究范围的GeoDataFrame
+        The GeoDataFrame of the study area
     col : List
-        经纬度列名
+        Column name of longitude and latitude
     accuracy : number
-        计算原理是先栅格化后剔除，这里定义栅格大小，越小精度越高
-    
-    输出
+        The size of grid. The principle is to do the data gridding first and then do the data cleaning. The smaller the size is, the higher accuracy it has
+
+    Returns
     -------
     data1 : DataFrame
-        清洗后的数据
+        Data within the scope of the study
     '''
     Lng,Lat = col
     shape_unary = shape.unary_union
@@ -142,24 +140,25 @@ def clean_outofshape(data,shape,col = ['Lng','Lat'],accuracy=500):
 
 def clean_traj(data,col = ['uid','str_time','lon','lat'],tripgap = 1800,disgap = 50000,speedlimit = 80):
     '''
-    轨迹数据清洗组合拳
-    输入
+    A combo for trajectory data cleaning, including defining the the time length threshold considered as a new trip, and the distance threshold considered as a new trip
+
+    Parameters
     -------
     data : DataFrame
-        轨迹数据
+        Trajectory data
     col : List
-        列名，以[个体id,时间,经度,纬度]排列
+        Column names, in the order of [‘VehicleNum’, ‘Time’, ‘Lng’, ‘Lat’]
     tripgap : number
-        多长的时间视为新的出行
+        The time length threshold considered as a new trip
     disgap : number
-        多长距离视为新的出行
+        The distance threshold considered as a new trip
     speedlimit : number
-        车速限制
+        Speed limit
     
-    输出
+    Returns
     -------
     data1 : DataFrame
-        清洗后的数据
+        Cleaned data
     '''
     uid,timecol,lon,lat = col
     data[timecol] = pd.to_datetime(data[timecol])
@@ -200,25 +199,25 @@ def clean_traj(data,col = ['uid','str_time','lon','lat'],tripgap = 1800,disgap =
 
 def dataagg(data,shape,col = ['Lng','Lat','count'],accuracy=500):
     '''
-    数据集计至小区
+    Aggregate data to traffic zone
 
-    输入
+    Parameters
     -------
     data : DataFrame
-        数据
+        The origin DataFrame
     shape : GeoDataFrame
-        小区
+        The shape of the traffic zone
     col : List
-        可传入经纬度两列，如['Lng','Lat']，此时每一列权重为1。也可以传入经纬度和计数列三列，如['Lng','Lat','count']
+        You can either choose to input two columns, i.e., [‘Lng’,’Lat’], or to input three columns, i.e., [‘Lng’,’Lat’,’count’]”, where count means the points count
     accuracy : number
-        计算原理是先栅格化后集计，这里定义栅格大小，越小精度越高
+        The idea is to first implement data gridding and then the aggregation. Here, the grid size will be determined. The less the size is, the higher the accuracy will have.
 
-    输出
+    Returns
     -------
     aggresult : GeoDataFrame
-        小区，其中count列为统计结果
+        Traffic zone. The count column is the output result
     data1 : DataFrame
-        数据，对应上了小区
+        The zone-matched data
     '''
     if len(col) == 2:
         Lng,Lat = col
@@ -249,23 +248,23 @@ def dataagg(data,shape,col = ['Lng','Lat','count'],accuracy=500):
 
 def id_reindex_disgap(data,col = ['uid','lon','lat'],disgap=1000,suffix = '_new'):
     '''
-    对数据的ID列重新编号，如果相邻两条记录超过距离，则编号为新id
+    Renumber the ID columns of the data，If two adjacent records exceed the distance, the number is the new ID
     
-    输入
+    Parameters
     -------
     data : DataFrame
-        数据 
+        Data
     col : str
-        要重新编号的ID列名
+        Name of the ID column to be re-indexed
     disgap : number
-        如果个体轨迹超过一定距离，则编号为新的个体。
+        If two adjacent records exceed this distance, the number is the new ID
     suffix : str
-        新编号列名的后缀
+        The suffix of the new column. When set to False, the former column will be replaced
         
-    输出
+    Returns
     -------
     data1 : DataFrame
-        重新编号的数据
+        Renumbered data
     '''
     uid,lon,lat = col
     data1 = data.copy()
@@ -277,29 +276,29 @@ def id_reindex_disgap(data,col = ['uid','lon','lat'],disgap=1000,suffix = '_new'
 
 def id_reindex(data,col,new = False,timegap = None,timecol = None,suffix = '_new',sample = None):
     '''
-    对数据的ID列重新编号
+    Renumber the ID columns of the data
 
-    输入
+    Parameters
     -------
     data : DataFrame
-        数据 
+        Data 
     col : str
-        要重新编号的ID列名
+        Name of the ID column to be re-indexed
     new : bool
-        False，相同ID的新编号相同；True，依据表中的顺序，ID再次出现则编号不同
+        False: the new number of the same ID will be the same index; True: according to the order of the table, the origin ID appears again with different index
     timegap : number
-        如果个体在一段时间内没出现（timegap为时间阈值），则编号为新的个体。此参数与timecol同时设定才有效果。
+        If an individual does not appear for a period of time (timegap is the time threshold), it is numbered as a new individual. This parameter should be set with timecol to take effect.
     timecol : str
-        时间字段名称，此参数与timegap同时设定才有效果。
+        The column name of time, it should be set with timegap to take effect
     suffix : str
-        新编号列名的后缀，设置为False时替代原有列名
-    sample : int
-        传入数值，对重新编号的个体进行抽样
+        The suffix of the new column. When set to False, the former column will be replaced
+    sample : int (optional)
+        To desampling the data
         
-    输出
+    Returns
     -------
     data1 : DataFrame
-        重新编号的数据
+        Renumbered data
     '''
     if suffix == False:
         suffix = ''
@@ -330,59 +329,3 @@ def id_reindex(data,col,new = False,timegap = None,timecol = None,suffix = '_new
         tmp = data1[col+suffix].drop_duplicates().sample(sample)
         data1 = pd.merge(data1,tmp)
     return data1
-
-def odagg(oddata,params,col = ['slon','slat','elon','elat'],arrow = False,**kwargs):
-    '''
-    输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame
-    oddata - OD数据（清洗好的）
-    col - 起终点列名
-    params - 栅格化参数
-    arrow - 生成的OD地理线型是否包含箭头
-    '''
-    #将起终点栅格化
-    [slon,slat,elon,elat]=col
-    oddata['SLONCOL'],oddata['SLATCOL'] = GPS_to_grids(oddata[slon],oddata[slat],params)
-    oddata['ELONCOL'],oddata['ELATCOL'] = GPS_to_grids(oddata[elon],oddata[elat],params)
-    oddata['count'] = 1
-    oddata_agg = oddata.groupby(['SLONCOL','SLATCOL','ELONCOL','ELATCOL'])['count'].count().reset_index()
-    #生成起终点栅格中心点位置
-    oddata_agg['SHBLON'],oddata_agg['SHBLAT'] = grids_centre(oddata_agg['SLONCOL'],oddata_agg['SLATCOL'],params)
-    oddata_agg['EHBLON'],oddata_agg['EHBLAT'] = grids_centre(oddata_agg['ELONCOL'],oddata_agg['ELATCOL'],params)
-    from shapely.geometry import LineString    
-    #遍历生成OD的LineString对象，并赋值给geometry列  
-    if arrow:
-        oddata_agg['geometry'] = oddata_agg.apply(lambda r:tolinewitharrow(r['SHBLON'],r['SHBLAT'],r['EHBLON'],r['EHBLAT'],**kwargs),axis = 1)    
-    else:
-        oddata_agg['geometry'] = oddata_agg.apply(lambda r:LineString([[r['SHBLON'],r['SHBLAT']],[r['EHBLON'],r['EHBLAT']]]),axis = 1)    
-    #转换为GeoDataFrame  
-    oddata_agg = gpd.GeoDataFrame(oddata_agg)    
-    oddata_agg = oddata_agg.sort_values(by = 'count')
-    #绘制看看是否能够识别图形信息  
-    return oddata_agg
-
-# 定义带箭头的LineString函数
-def tolinewitharrow(x1,y1,x2,y2,theta = 20,length = 0.1,pos = 0.8):
-    '''
-    输入起终点坐标，输出带箭头的LineString
-    x1,y1,x2,y2  - 起终点坐标
-    theta        - 箭头旋转角度
-    length       - 箭头相比于原始线的长度比例，例如原始线的长度为1，length设置为0.3，则箭头大小为0.3
-    pos          - 箭头位置，0则在起点，1则在终点
-    '''
-    import numpy as np
-    from shapely.geometry import MultiLineString
-    #主线
-    l_main = [[x1,y1],[x2,y2]]
-    #箭头标记位置
-    p1,p2 = (1-pos)*x1+pos*x2,(1-pos)*y1+pos*y2
-    #箭头一半
-    R = np.array([[np.cos(np.radians(theta)),-np.sin(np.radians(theta))],
-                  [np.sin(np.radians(theta)),np.cos(np.radians(theta))]])
-    l1 = np.dot(R,np.array([[x1-x2,y1-y2]]).T).T[0]*length+np.array([p1,p2]).T
-    l1 = [list(l1),[p1,p2]]
-    #箭头另一半
-    R = np.array([[np.cos(np.radians(-theta)),-np.sin(np.radians(-theta))],
-                  [np.sin(np.radians(-theta)),np.cos(np.radians(-theta))]])
-    l2 = np.dot(R,np.array([[x1-x2,y1-y2]]).T).T[0]*length+np.array([p1,p2]).T
-    l2 = [list(l2),[p1,p2]]
-    return MultiLineString([l_main,l1,l2])

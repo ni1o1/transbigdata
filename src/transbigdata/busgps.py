@@ -9,40 +9,39 @@ from .preprocess import *
 def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat','stopname'],
                       stopbuffer = 200,mintime = 300,project_epsg = 2416,timegap = 1800,method = 'project',projectoutput = False):
     '''
-    输入公交GPS数据、公交线路与站点的GeoDataFrame，该方法能够识别公交的到离站信息
-    输入
+    Input bus GPS data, bus route and station GeoDataFrame, this method can identify the bus arrival and departure information
+    
+    Parameters
     -------
     data : DataFrame
-        公交GPS数据，单一公交线路，且需要含有车辆ID、GPS时间、经纬度（wgs84）
+        Bus GPS data. It should be the data from one bus route, and need to contain vehicle ID, GPS time, latitude and longitude (wgs84)
     line : GeoDataFrame
-        公交线型的GeoDataFrame数据，单一公交线路
+        GeoDataFrame for the bus line
     stop : GeoDataFrame
-        公交站点的GeoDataFrame数据
+        GeoDataFrame for bus stops
     col : List
-        列名，按[车辆ID,时间,经度,纬度，站点名称字段]的顺序
+        Column names, in the order of [vehicle ID, time, longitude, latitude, station name]
     stopbuffer : number
-        米，站点的一定距离范围，车辆进入这一范围视为到站，离开则视为离站
+        Meter. When the vehicle approaches the station within this certain distance, it is considered to be arrive at the station.
     mintime : number
-        秒，短时间内公交再次到站则需要与前一次的到站数据结合一起计算到离站时间，该参数设置阈值
+        Seconds. Within a short period of time that the bus arrive at bus station again, it will not be consider as another arrival
     project_epsg : number
-        匹配时会将数据转换为投影坐标系以计算距离，这里需要给定投影坐标系的epsg代号
+        The matching algorithm will convert the data into a projection coordinate system to calculate the distance, here the epsg code of the projection coordinate system is given
     timegap : number
-        秒，清洗数据用，多长时间车辆不出现，就视为新的车辆
+        Seconds. For how long the vehicle does not appear, it will be considered as a new vehicle
     method : str
-        公交运行图匹配方法，可选'project'或'dislimit'；
-        project为直接匹配线路上最近点，匹配速度快；
-        dislimit则需要考虑前面点位置，加上距离限制，匹配速度慢。
+        The method of matching the bus, either ‘project’ or ‘dislimit’; ‘project’ is to directly match the nearest point on the route, which is fast. ‘dislimit’ needs to consider the front point position with the distance limitation, the matching speed is slow.
     projectoutput : bool
-        是否输出投影后的数据
+        Whether to output the projected data
 
-    输出
+    Returns
     -------
     arrive_info : DataFrame
-        公交到离站信息
+        Bus arrival and departure information
     '''
     VehicleId,GPSDateTime,lon,lat,stopcol = col
     #数据清洗
-    print('数据清洗中',end = '')
+    print('Cleaning data',end = '')
     line.set_crs(crs='epsg:4326',allow_override=True,inplace=True)
     line = line.to_crs(epsg = project_epsg)
     line_buffer = line.copy()
@@ -55,7 +54,7 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
     print('.')
     data = id_reindex(data,VehicleId,timegap = timegap,timecol = GPSDateTime,suffix='')
 
-    print('运行位置匹配中',end = '')
+    print('Position matching',end = '')
     #利用project方法，将数据点投影至公交线路上
     lineshp = line['geometry'].iloc[0]
     print('.',end = '')
@@ -112,7 +111,7 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
     #定义一个空的list存储识别结果
     ls = []
 
-    print('匹配到离站信息...',end = '')
+    print('Matching arrival and leaving info...',end = '')
     #对每一辆车遍历
     for car in BUS_project[VehicleId].drop_duplicates():
         print('.',end = '')
@@ -174,23 +173,24 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
 
 def busgps_onewaytime(arrive_info,start,end,col = ['VehicleId','stopname']):
     '''
-    输入到离站信息表arrive_info与起终点名称，计算单程耗时
-    输入
+    Input the departure information table drive_info and the station information table stop to calculate the one-way travel time
+
+    Parameters
     -------
     arrive_info : DataFrame
-        公交到离站数据
+        The departure information table drive_info
     start : Str
-        起点站名字
+        Starting station name
     end : Str
-        终点站名字
+        Ending station name
     col : List
-        字段列名[车辆ID,站点名称]
+        Column name [vehicle ID, station name]
 
     
-    输出
+    Returns
     -------
     onewaytime : DataFrame
-        公交单程耗时
+        One-way travel time of the bus
     '''
     #上行
     #将起终点的信息提取后合并到一起
@@ -230,7 +230,7 @@ def busgps_onewaytime(arrive_info,start,end,col = ['VehicleId','stopname']):
     c = c[(c[VehicleId] == c[VehicleId+'1'])&(c[stopname]==end)&(c[stopname+'1']==start)]
     c['duration'] = (c['time1'] - c['time']).dt.total_seconds()
     c['shour'] = c['time'].dt.hour
-    c['方向'] = end+'-'+start
+    c['direction'] = end+'-'+start
     c2 = c.copy()
     onewaytime = pd.concat([c1,c2])
     return onewaytime

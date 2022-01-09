@@ -7,24 +7,23 @@ import numpy as np
 
 def bikedata_to_od(data,col = ['BIKE_ID','DATA_TIME','LONGITUDE','LATITUDE','LOCK_STATUS'],startend = None):
     '''
-    输入共享单车订单数据（只在开关锁时产生数据），指定列名，提取其中的骑行与停车信息
+    Input bike-sharing order data (with data only generated when the lock is switched on and off), specify the column name, and extract the ride and parking information from it
 
-    输入
+    Parameters
     -------
     data : DataFrame
-        共享单车订单数据，只在开关锁时产生数据
+        Bike-sharing order data
     col : List
-        列名，顺序不能变，分别为[单车ID,时间,经度,纬度,锁状态]，例如['BIKE_ID','DATA_TIME','LONGITUDE','LATITUDE','LOCK_STATUS']
+        Column names, the order cannot be changed.[‘BIKE_ID’,’DATA_TIME’,’LONGITUDE’,’LATITUDE’,’LOCK_STATUS’]
     startend : List
-        传入的为[开始时间,结束时间]，如['2018-08-27 00:00:00','2018-08-28 00:00:00']。
-        如传入，则考虑（观测时段开始时到单车第一次出现）与（单车最后一次出现到观测时段结束）的骑行与停车，情况。
+        The start time and end time of the observation period, for example [‘2018-08-27 00:00:00’,’2018-08-28 00:00:00’]. If it is passed in, the riding and parking situations (from the beginning of the observation period to the first appearance of the bicycle) and (from the last appearance of the bicycle to the end of the observation period) are considered.
         
-    输出
+    Returns
     -------
     move_data : DataFrame
-        骑行订单数据
+        Riding data
     stop_data : DataFrame
-        停车数据
+        Parking data
     '''
     [BIKE_ID,DATA_TIME,LONGITUDE,LATITUDE,LOCK_STATUS] = col
     oddata = data.copy()

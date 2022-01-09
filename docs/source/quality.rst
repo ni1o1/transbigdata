@@ -28,35 +28,37 @@ roundnum : number
 
     import transbigdata as tbd
     import pandas as pd
-    #读取数据    
-    data = pd.read_csv('TaxiData-Sample.csv',header = None) 
-    data.columns = ['Vehicleid','Time','Lng','Lat','OpenStatus','Speed']      
+
+    # Read data
+    data = pd.read_csv('TaxiData-Sample.csv',header = None)
+    data.columns = ['Vehicleid','Time','Lng','Lat','OpenStatus','Speed']
     data['Time'] = pd.to_datetime(data['Time'])
-    #轨迹增密前的采样间隔
-    tbd.data_summary(data,col = ['Vehicleid','Time','Lng','Lat'],show_sample_duration=True)
+
+    # The sampling interval
+    tbd.data_summary(data,col = ['Vehicleid','Time'],show_sample_duration=True)
 
 ::
 
-    数据量
+    Amount of data
     -----------------
-    数据总量 : 544999 条
-    个体总量 : 180 个
-    个体数据量均值 : 3027.77 条
-    个体数据量上四分位 : 4056.25 条
-    个体数据量中位数 : 2600.5 条
-    个体数据量下四分位 : 1595.75 条
+    Total number of data items:  544999
+    Total number of individuals:  180
+    Data volume of individuals(Mean):  3027.7722
+    Data volume of individuals(Upper quartile):  4056.25
+    Data volume of individuals(Median):  2600.5
+    Data volume of individuals(Lower quartile):  1595.75
 
-    数据时间段
+    Data time period
     -----------------
-    开始时间 : 2021-11-12 00:00:00
-    结束时间 : 2021-11-12 23:59:59
+    Start time:  2022-01-09 00:00:00
+    End time:  2022-01-09 23:59:59
 
-    个体采样间隔
+    Sampling interval
     -----------------
-    均值 : 28.0 秒
-    上四分位 : 30.0 秒
-    中位数 : 20.0 秒
-    下四分位 : 15.0 秒
+    Mean:  27.995 s
+    Upper quartile:  30.0 s
+    Median:  20.0 s
+    Lower quartile:  15.0 s
 
 .. function:: transbigdata.sample_duration(data,col = ['Vehicleid','Time']):
 

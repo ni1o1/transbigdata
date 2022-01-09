@@ -5,22 +5,22 @@ import math
 import numpy as np
 def rect_grids(bounds,accuracy = 500):
     '''
-    生成研究范围内的方形栅格
+    Generate the rectangular grids in the bounds
 
-    输入
+    Parameters
     -------
     bounds : List
-        生成范围的边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 
+        Create the bounds, [lon1, lat1, lon2, lat2](WGS84), where lon1 , lat1 are the lower-left coordinates, lon2 , lat2 are the upper-right coordinates
     accuracy : number
-        栅格大小（米）
+        Grid size (meter)
                                                
 
-    输出
+    Returns
     -------
     grid : GeoDataFrame
-        栅格的GeoDataFrame，其中LONCOL与LATCOL为栅格的编号，HBLON与HBLAT为栅格的中心点坐标 
+        Grids’ GeoDataFrame, LONCOL and LATCOL are the index of grids, HBLON and HBLAT are the center of the grids
     params : List
-        栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
     '''
     #导入math包  
     #划定栅格划分范围
@@ -78,20 +78,20 @@ def rect_grids(bounds,accuracy = 500):
 
 def grid_params(bounds,accuracy = 500):
     '''
-    栅格参数获取
+    Generate gridding params
 
-    输入
+    Parameters
     -------
     bounds : List
-        生成范围的边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 
+        Bounds of the study area， [lon1, lat1, lon2, lat2](WGS84), where lon1 , lat1 are the lower-left coordinates, lon2 , lat2 are the upper-right coordinates 
     accuracy : number
-        栅格大小（米）
+        Grid size (meter)
                                                
 
-    输出
+    Returns
     -------
     params : List
-        栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
 
     Examples
     -------
@@ -116,23 +116,23 @@ def grid_params(bounds,accuracy = 500):
 
 def GPS_to_grids(lon,lat,params):
     '''
-    GPS数据对应栅格编号。输入数据的经纬度列与栅格参数，输出对应的栅格编号
+    Match the GPS data to the grids. The input is the columns of longitude, latitude, and the grids parameter. The output is the grid ID.
 
-    输入
+    Parameters
     -------
     lon : Series
-        经度列
+        The column of longitude
     lat : Series
-        纬度列
+        The column of latitude
     params : List
-        栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
-                                               
-    输出
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
+                                            
+    Returns
     -------
     LONCOL : Series
-        经度栅格编号列
+        The index of the grid longitude. The two columns LONCOL and LATCOL together can specify a grid.
     LATCOL : Series
-        纬度栅格编号列
+        The index of the grid latitude. The two columns LONCOL and LATCOL together can specify a grid.
     '''
     (lonStart,latStart,deltaLon,deltaLat) = params
     import numpy as np
@@ -141,23 +141,23 @@ def GPS_to_grids(lon,lat,params):
     return loncol,latcol
 def grids_centre(loncol,latcol,params):
     '''
-    栅格编号对应栅格中心点经纬度。输入数据的栅格编号与栅格参数，输出对应的栅格中心点
+    The center location of the grid. The input is the grid ID and parameters, the output is the grid center location.
 
-    输入
+    Parameters
     -------
     LONCOL : Series
-        经度栅格编号列
+        The index of the grid longitude. The two columns LONCOL and LATCOL together can specify a grid.
     LATCOL : Series
-        纬度栅格编号列
+        The index of the grid latitude. The two columns LONCOL and LATCOL together can specify a grid.
     params : List
-        栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
-                                               
-    输出
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
+                                              
+    Returns
     -------
     HBLON : Series
-        栅格中心点经度列
+        The longitude of the grid center
     HBLAT : Series
-        栅格中心点纬度列
+        The latitude of the grid center
     '''
     (lonStart,latStart,deltaLon,deltaLat) = params
     hblon = loncol*deltaLon + lonStart #格子编号*格子宽+起始横坐标=格子中心横坐标  
@@ -166,21 +166,21 @@ def grids_centre(loncol,latcol,params):
 
 def gridid_to_polygon(loncol,latcol,params):
     '''
-    栅格编号生成栅格的地理信息列。输入数据的栅格编号与栅格参数，输出对应的地理信息列
+    Generate the geometry column based on the grid ID. The input is the grid ID, the output is the geometry.
 
-    输入
+    Parameters
     -------
     LONCOL : Series
-        经度栅格编号列
+        The index of the grid longitude. The two columns LONCOL and LATCOL together can specify a grid.
     LATCOL : Series
-        纬度栅格编号列
+        The index of the grid latitude. The two columns LONCOL and LATCOL together can specify a grid.
     params : List
-        栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
                                                
-    输出
+    Returns
     -------
     geometry : Series
-        栅格的矢量图形列
+        The column of grid geographic polygon
     '''
     (lonStart,latStart,deltaLon,deltaLat) = params
     HBLON = loncol*deltaLon + lonStart   
@@ -201,19 +201,19 @@ def gridid_to_polygon(loncol,latcol,params):
 
 def hexagon_grids(bounds,accuracy = 500):
     '''
-    生成研究范围内的六边形渔网。
+    Generate hexagonal grids in the bounds
 
-    输入
+    Parameters
     -------
     bounds : List
-        生成范围的边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 
+        Create the bounds, [lon1, lat1, lon2, lat2](WGS84), where lon1 , lat1 are the lower-left coordinates, lon2 , lat2 are the upper-right coordinates
     accuracy : number
-        六边形的边长（米）
+        Side length of hexagon (m)
                                                
-    输出
+    Returns
     -------
     hexagon : GeoDataFrame
-        六边形渔网的矢量图形
+        hexagon grid’s geographic polygon
     ''' 
     #划定栅格划分范围
     (lon1,lat1,lon2,lat2) = bounds
@@ -270,23 +270,23 @@ def hexagon_grids(bounds,accuracy = 500):
 
 def gridid_sjoin_shape(data,shape,params,col = ['LONCOL','LATCOL']):
     '''
-    输入数据（带有栅格经纬度编号两列），矢量图形与栅格化参数，输出数据栅格并对应矢量图形。
+    Input the two columns of grid ID, the geographic polygon and gridding paramters. The output is the grid.
     
-    输入
+    Parameters
     -------
     data : DataFrame
-        数据,（带有栅格经纬度编号两列）
+        Data, with two columns of grid ID
     shape : GeoDataFrame
-        矢量图形
+        Geographic polygon
     params : List
-        栅格化参数
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
     col : List
-        列名，[经度栅格编号，纬度栅格编号]
+        Column names [LONCOL,LATCOL]
 
-    输出
+    Returns
     -------
     data1 : DataFrame
-        数据栅格并对应矢量图形
+        Data gridding and mapping to the corresponding geographic polygon
     '''
     LONCOL,LATCOL = col
     data1 = data.copy()
@@ -297,26 +297,26 @@ def gridid_sjoin_shape(data,shape,params,col = ['LONCOL','LATCOL']):
 
 def grid_params_gini(data,col = ['lon','lat'],accuracy = 500,gini = 'max',gap = 10,sample = 10000):
     '''
-    获取最佳的栅格化参数，以基尼系数为标准
-    输入
+    Obtain the best griding param
+    Parameters
     ----------
     data : DataFrame
-        数据
+        data
     col : List
-        经纬度列
+        Column names [lon,lat]
     accuracy : number
-        网格大小
+        Size of the grids
     gini : number
-        min,max,或者median。基尼系数的选取标准
+        min,max,or median
     gap : number
-        精度,越大越精确，效果越好，计算量越大
+        the step of the algorithm
     sample : number
-        抽样多少数据做测试
+        sample rate
 
-    输出
+    Returns
     ----------
     params : List
-        最佳的栅格化参数
+        calculated params
     '''
     trajdata = data.copy()
     if len(trajdata)>sample:
@@ -368,6 +368,6 @@ def grid_params_gini(data,col = ['lon','lat'],accuracy = 500,gini = 'max',gap = 
         r = tmp1.iloc[0]
         print('Gini index: '+str(r['gini']))
     else:
-        raise Exception('gini参数设定错误') 
+        raise Exception('Error setting of gini') 
     params = [r['lon'],r['lat'],deltalon,deltalat]
     return params

@@ -7,22 +7,21 @@ import numpy as np
 
 def clean_taxi_status(data,col = ['VehicleNum','Time','OpenStatus'],timelimit = None):
     '''
-    删除出租车数据中载客状态瞬间变化的记录，这些记录的存在会影响出行订单判断。
-    判断条件为:如果对同一辆车，上一条记录与下一条记录的载客状态都与本条记录不同，则本条记录应该删去
+    Deletes records of instantaneous changes in passenger carrying status from taxi data. These abnormal records can affect travel order judgments. Judgement method: If the passenger status of the previous record and the next record are different from this record for the same vehicle, then this record should be deleted.    
     
-    输入
+    Parameters
     -------
     data : DataFrame
-        数据
+        Data
     col : List
-        列名，按[车辆ID,时间,载客状态]的顺序
+        Column names, in the order of [‘VehicleNum’, ‘Time’, ‘OpenStatus’]
     timelimit : number
-        可选，单位为秒，上一条记录与下一条记录的时间小于该时间阈值才予以删除
+        Optional, in seconds. If the time between the previous record and the next record is less than the time threshold, then it will be deleted
     
-    输出
+    Returns
     -------
     data1 : DataFrame
-        清洗后的数据
+        Cleaned data
     '''
     data1 = data.copy()
     [VehicleNum,Time,OpenStatus] = col
@@ -46,9 +45,19 @@ def clean_taxi_status(data,col = ['VehicleNum','Time','OpenStatus'],timelimit = 
 
 def taxigps_to_od(data,col = ['VehicleNum','Stime','Lng','Lat','OpenStatus']):
     '''
-    输入出租车GPS数据,提取OD
-    data - 出租车GPS数据（清洗好的）
-    col - 数据中各列列名，需要按顺序[车辆id，时间，经度，纬度，载客状态]
+    Input Taxi GPS data, extract OD information
+
+    Parameters
+    -------
+    data : DataFrame
+        Taxi GPS data
+    col : List
+        Column names in the data, need to be in order [vehicle id, time, longitude, latitude, passenger status]
+
+    Returns
+    -------
+    oddata : DataFrame
+        OD information
     '''
     [VehicleNum,Stime,Lng,Lat,OpenStatus]=col
     data1 = data[col]
@@ -78,23 +87,23 @@ def taxigps_to_od(data,col = ['VehicleNum','Stime','Lng','Lat','OpenStatus']):
 
 def taxigps_traj_point(data,oddata,col=['Vehicleid', 'Time', 'Lng', 'Lat', 'OpenStatus']):
     '''
-    输入出租车数据与OD数据，提取载客与空载的行驶路径点
+    Input Taxi data and OD data to extract the trajectory points for delivery and idle trips
     
-    输入
+    Parameters
     -------
     data : DataFrame
-        出租车GPS数据，字段名由col变量指定
+        Taxi GPS data, field name specified by col variable
     oddata : DataFrame
-        出租车OD数据
+        Taxi OD data
     col : List
-        列名，按[车辆ID,时间,经度,纬度,载客状态]的顺序
+        Column names, need to be in order [vehicle id, time, longitude, latitude, passenger status]
 
-    输出
+    Returns
     -------
     data_deliver : DataFrame
-        载客轨迹点
+        Trajectory points for delivery trips
     data_idle : DataFrame
-        空载轨迹点
+        Trajectory points for idle trips
     '''
     VehicleNum, Time, Lng, Lat, OpenStatus = col
     oddata1 = oddata.copy()
