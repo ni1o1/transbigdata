@@ -55,7 +55,9 @@ class TestODprocess:
         data = tbd.clean_outofbounds(data, bounds, col=['slon', 'slat'])
         assert len(data) == 19
         params = tbd.grid_params(bounds, accuracy=1000)
-        assert len(tbd.traj_stay_move(data,params,col = ['VehicleNum','time','slon','slat'],activitytime = 1800)[0])==2
+        stay,move = tbd.traj_stay_move(data,params,col = ['VehicleNum','time','slon','slat'],activitytime = 1800)
+        assert len(stay)==2
+        tbd.plot_activity(stay)
         data['LONCOL'], data['LATCOL'] = tbd.GPS_to_grids(
             data['slon'], data['slat'], params)
         res = data[['LONCOL', 'LATCOL']].values
