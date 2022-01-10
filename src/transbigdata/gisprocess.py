@@ -104,9 +104,9 @@ def ckdnearest_line(gdfA, gdfB):
     gdf : DataFrame
         Searching the nearset linestring in gdfB for the point in gdfA
     '''
-    if len(gdA)==0:
+    if len(gdfA)==0:
         raise Exception('The input GeoDataFrame gdfA is empty') 
-    if len(gdB)==0:
+    if len(gdfB)==0:
         raise Exception('The input GeoDataFrame gdfB is empty') 
     #提取gdA中的所有点要素
     A = np.concatenate(
