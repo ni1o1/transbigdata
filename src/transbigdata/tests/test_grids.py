@@ -72,3 +72,26 @@ class TestGrids:
         truth = [113.60333333333331, 22.41,
                  0.004863931711621178, 0.004496605206422906]
         assert np.allclose(result, truth)
+
+    def test_geohash(self):
+        d = pd.DataFrame([[113.59550842,  22.4],
+                 [113.59775421,  22.40359627],
+                 [113.60224579,  22.40359627],
+                 [113.60449158,  22.4],
+                 [113.60224579,  22.39640364],
+                 [113.59775421,  22.39640364],
+                 [113.59550842,  22.4]],columns = ['lon','lat'])
+        c = tbd.geohash_encode(d['lon'],d['lat'],precision=12)
+        assert c.sum()=='webz2vv9rnwkwebz2yrq7t0cwebz3n6wkjn1webz3ju32w8swebz3j4ss0npwebz2vpke80zwebz2vv9rnwk'
+        result = np.array(tbd.geohash_togrid(c).iloc[0].exterior.coords)
+        truth = [[113.59550837,  22.39999987],
+            [113.59550837,  22.40000004],
+            [113.59550871,  22.40000004],
+            [113.59550871,  22.39999987],
+            [113.59550837,  22.39999987]]
+        assert np.allclose(result,truth)
+        c = tbd.geohash_decode(c)[0].astype('float').values
+        assert np.allclose(c,[113.595509, 113.597754, 113.602246, 113.604492, 113.602246,
+        113.597754, 113.595509])
+        
+         
