@@ -42,3 +42,8 @@ jobs:
       run: |
         pip install pytest-cov
         pytest -v -r s --color=yes --cov=src --cov-append --cov-report term-missing --cov-report xml 
+    
+    - name: "Upload coverage to Codecov"
+      uses: codecov/codecov-action@v2
+      with:
+        fail_ci_if_error: true
