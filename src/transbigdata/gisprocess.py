@@ -29,6 +29,10 @@ def ckdnearest(dfA_origin,dfB_origin,Aname = ['lon','lat'],Bname = ['lon','lat']
     gdf : DataFrame
         The output DataFrame
     '''
+    if len(dfA_origin)==0:
+        raise Exception('The input DataFrame dfA is empty') 
+    if len(dfB_origin)==0:
+        raise Exception('The input DataFrame dfB is empty') 
     gdA = dfA_origin.copy()
     gdB = dfB_origin.copy()
     from scipy.spatial import cKDTree
@@ -63,6 +67,10 @@ def ckdnearest_point(gdA, gdB):
     gdf : DataFrame
         The output DataFrame
     '''
+    if len(gdA)==0:
+        raise Exception('The input GeoDataFrame gdfA is empty') 
+    if len(gdB)==0:
+        raise Exception('The input GeoDataFrame gdfB is empty') 
     #提取gdA中的所有点要素
     nA = np.array(list(gdA.geometry.apply(lambda x: (x.x, x.y))))
     #提取gdB中的所有点要素
@@ -96,6 +104,10 @@ def ckdnearest_line(gdfA, gdfB):
     gdf : DataFrame
         Searching the nearset linestring in gdfB for the point in gdfA
     '''
+    if len(gdA)==0:
+        raise Exception('The input GeoDataFrame gdfA is empty') 
+    if len(gdB)==0:
+        raise Exception('The input GeoDataFrame gdfB is empty') 
     #提取gdA中的所有点要素
     A = np.concatenate(
         [np.array(geom.coords) for geom in gdfA.geometry.to_list()])
