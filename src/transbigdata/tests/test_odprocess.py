@@ -91,5 +91,6 @@ class TestODprocess:
                  [18, 16]]
         assert np.allclose(res2, truth)
         assert len(tbd.odagg_shape(oddata, self.sz,params=params)) == 1
+        assert len(tbd.odagg_shape(oddata, self.sz)) == 1
         data['count'] = 1
         assert tbd.dataagg(data,self.sz,col = ['slon','slat','count'],accuracy=500)[0]['count'].iloc[0]==19
