@@ -171,7 +171,7 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
         return arrive_info
 
 
-def busgps_onewaytime(arrive_info,start,end,col = ['VehicleId','stopname']):
+def busgps_onewaytime(arrive_info,start,end,col = ['VehicleId','stopname','arrivetime','leavetime']):
     '''
     Input the departure information table drive_info and the station information table stop to calculate the one-way travel time
 
@@ -184,7 +184,7 @@ def busgps_onewaytime(arrive_info,start,end,col = ['VehicleId','stopname']):
     end : Str
         Ending station name
     col : List
-        Column name [vehicle ID, station name]
+        Column name [vehicle ID, station name,arrivetime,leavetime]
 
     
     Returns
@@ -195,10 +195,12 @@ def busgps_onewaytime(arrive_info,start,end,col = ['VehicleId','stopname']):
     #上行
     #将起终点的信息提取后合并到一起
     #终点站的到达时间
-    [VehicleId,stopname] = col
-    a = arrive_info[arrive_info[stopname] == end][['arrivetime',stopname,VehicleId]]
+    [VehicleId,stopname,arrivetime,leavetime] = col
+    arrive_info[arrivetime] = pd.to_datetime(arrive_info[arrivetime])
+    arrive_info[leavetime] = pd.to_datetime(arrive_info[leavetime])
+    a = arrive_info[arrive_info[stopname] == end][[arrivetime,stopname,VehicleId]]
     #起点站的离开时间
-    b = arrive_info[arrive_info[stopname] == start][['leavetime',stopname,VehicleId]]
+    b = arrive_info[arrive_info[stopname] == start][[leavetime,stopname,VehicleId]]
     a.columns = ['time',stopname,VehicleId]
     b.columns = ['time',stopname,VehicleId]
     #合并信息
@@ -215,7 +217,7 @@ def busgps_onewaytime(arrive_info,start,end,col = ['VehicleId','stopname']):
     c['duration'] = (c['time1'] - c['time']).dt.total_seconds()
     #标识该趟出行的时间中点在哪一个小时
     c['shour'] = c['time'].dt.hour
-    c['方向'] = start+'-'+end
+    c['direction'] = start+'-'+end
     #储存为c1变量
     c1 = c.copy()
     #下行

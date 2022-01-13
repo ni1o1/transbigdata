@@ -39,7 +39,7 @@ projectoutput : bool
 arrive_info : DataFrame
     公交到离站信息
 
-.. function:: transbigdata.busgps_onewaytime(arrive_info,stop,start,end,col = ['VehicleId','stopname'])
+.. function:: transbigdata.busgps_onewaytime(arrive_info,start,end,col = ['VehicleId','stopname','arrivetime','leavetime'])
 
 输入到离站信息表arrive_info与站点信息表stop，计算单程耗时
 
@@ -54,7 +54,7 @@ start : Str
 end : Str
     终点站名字
 col : List
-    字段列名[车辆ID,站点名称]
+    字段列名[车辆ID,站点名称,到站时间,离站时间]
 
 
 **输出**
