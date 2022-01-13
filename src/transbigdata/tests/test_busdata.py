@@ -117,5 +117,5 @@ class TestBikedata:
         assert len(tbd.busgps_arriveinfo(self.data, self.line, self.stop,method='dislimit'))==7
         onewaytime = tbd.busgps_onewaytime(arriveinfo,
                                            start='剑河路',
-                                           end='航新路', col=['VehicleId', 'stopname'])
+                                           end='航新路', col=['VehicleId', 'stopname','arrivetime','leavetime'])
         assert onewaytime['duration'].iloc[0] == 562.0
