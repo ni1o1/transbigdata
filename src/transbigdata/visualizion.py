@@ -33,7 +33,6 @@ def visualization_trip(trajdata,col = ['Lng','Lat','ID','Time'],zoom = 'auto',he
     trajdata[timecol] = pd.to_datetime(trajdata[timecol])
     trajdata = trajdata.sort_values(by = [ID,timecol])
     traj = points_to_traj(trajdata,col = [Lng,Lat,ID],timecol = timecol)
-    #获取基本参数
     ls = []
     for i in range(len(traj['features'])):
         ls.append(traj['features'][i]['geometry']['coordinates'][0])
@@ -44,7 +43,6 @@ def visualization_trip(trajdata,col = ['Lng','Lat','ID','Time'],zoom = 'auto',he
         lon_min,lon_max = ls[0].quantile(0.05),ls[0].quantile(0.95)
         zoom = 8.5-np.log(lon_max-lon_min)/np.log(2)
     print('Generate visualization...')
-    #创建一个KeplerGl对象
     vmap = KeplerGl(config = {
         "version": "v1",
         "config":
@@ -85,7 +83,6 @@ def visualization_trip(trajdata,col = ['Lng','Lat','ID','Time'],zoom = 'auto',he
             },
         }},
     data = {'trajectory':traj},height=height)
-    #激活KeplerGl对象到jupyter的窗口中
     return vmap
 
 
@@ -124,11 +121,8 @@ def visualization_od(oddata,col = ['slon','slat','elon','elat'],zoom = 'auto',he
         lon2 = oddata[slon].quantile(0.99)
         lat1 = oddata[slat].quantile(0.01)
         lat2 = oddata[slat].quantile(0.99)
-        #定义研究范围
         bounds = [lon1,lat1,lon2,lat2]
-        #获取栅格化参数
         params = grid_params(bounds = bounds,accuracy = accuracy)
-        #栅格化OD并集计
         od_gdf = odagg_grid(oddata,params,col = col)
         if zoom == 'auto':
             zoom = 8.5-np.log(lon2-lon1)/np.log(2)

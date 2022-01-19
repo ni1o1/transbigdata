@@ -1,9 +1,4 @@
-import geopandas as gpd  
 import pandas as pd
-from shapely.geometry import Polygon,Point
-from .grids import GPS_to_grids,grids_centre
-import math 
-import numpy as np
 
 def clean_taxi_status(data,col = ['VehicleNum','Time','OpenStatus'],timelimit = None):
     '''
@@ -62,24 +57,17 @@ def taxigps_to_od(data,col = ['VehicleNum','Stime','Lng','Lat','OpenStatus']):
     [VehicleNum,Stime,Lng,Lat,OpenStatus]=col
     data1 = data[col]
     data1 = data1.sort_values(by = [VehicleNum,Stime])
-    #构建StatusChange列
     data1['StatusChange'] = data1[OpenStatus] - data1[OpenStatus].shift()
-    #筛选出行开始和结束信息  
     oddata = data1[((data1['StatusChange'] == -1)|  
                    (data1['StatusChange'] == 1))&    
                    (data1[VehicleNum].shift() == data1[VehicleNum])]  
-    #删去无用的列  
     oddata = oddata.drop([OpenStatus],axis = 1)   
-    #首先给oddata更改列名  
     oddata.columns = [VehicleNum, 'stime', 'slon', 'slat', 'StatusChange']  
-    #把一个订单的两行数据整理成一行  
     oddata['etime'] = oddata['stime'].shift(-1)  
     oddata['elon'] = oddata['slon'].shift(-1)  
     oddata['elat'] = oddata['slat'].shift(-1)  
-    #筛选正确的订单OD数据：StatusChange == 1；shift后的数据属于同一个出租车  
     oddata = oddata[(oddata['StatusChange'] == 1)&  
                       (oddata[VehicleNum] == oddata[VehicleNum].shift(-1))]  
-    #去掉StatusChange列
     oddata = oddata.drop('StatusChange',axis = 1)  
     oddata['ID'] = range(len(oddata))
     return oddata   

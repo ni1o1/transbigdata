@@ -1,9 +1,7 @@
 import geopandas as gpd  
 import pandas as pd
-from shapely.geometry import Polygon,Point
-from .grids import GPS_to_grids,grids_centre
+from .grids import GPS_to_grids
 from .preprocess import id_reindex,clean_same
-import math 
 import numpy as np
 
 def plot_activity(data,col = ['stime','etime','LONCOL','LATCOL']):
@@ -21,7 +19,6 @@ def plot_activity(data,col = ['stime','etime','LONCOL','LATCOL']):
     activity = data.copy()
     activity['date'] = activity[stime].dt.date
     dates = list(activity['date'].astype(str).drop_duplicates())
-    #扩充天
     dates_all = []
     minday = min(dates)
     maxday = max(dates)
@@ -31,28 +28,22 @@ def plot_activity(data,col = ['stime','etime','LONCOL','LATCOL']):
         dates_all.append(thisdate)
         thisdate = str((pd.to_datetime(thisdate+' 00:00:00')+datetime.timedelta(days =1)).date())
     dates = dates_all
-    #计算活动
     import matplotlib.pyplot as plt
     import numpy as np
-    #计算活动持续时间
     activity['duration'] = (activity[etime]-activity[stime]).dt.total_seconds()
     activity = activity[-activity['duration'].isnull()]
-    #计算开始结束时间戳
     import time
     activity['ststmp'] = activity[stime].astype(str).apply(lambda x:time.mktime(time.strptime(x,'%Y-%m-%d %H:%M:%S'))).astype('int64')
     activity['etstmp'] = activity[etime].astype(str).apply(lambda x:time.mktime(time.strptime(x,'%Y-%m-%d %H:%M:%S'))).astype('int64')
-    #提取活动信息
     activityinfo = activity[[LONCOL,LATCOL]].drop_duplicates()
     indexs = list(range(1,len(activityinfo)+1))
     np.random.shuffle(indexs)
     activityinfo['index'] = indexs
-    #定义活动点颜色
     import matplotlib as mpl
     norm = mpl.colors.Normalize(vmin=0,vmax=len(activityinfo))
     from matplotlib.colors import ListedColormap
     import seaborn as sns
     cmap = ListedColormap(sns.hls_palette(n_colors=len(activityinfo), l=.5, s=0.8))
-    #绘制活动点分布
     fig     = plt.figure(1,(10,5),dpi = 250)    
     ax      = plt.subplot(111)
     plt.sca(ax)
@@ -98,9 +89,7 @@ def traj_stay_move(data,params,col = ['ID','dataTime','longitude','latitude'],ac
     '''
     uid,timecol,lon,lat = col
     trajdata = data.copy()
-    #时间处理
     trajdata[timecol] = pd.to_datetime(trajdata[timecol])
-    #栅格化
     trajdata['LONCOL'],trajdata['LATCOL'] = GPS_to_grids(trajdata[lon], trajdata[lat], params)
     trajdata = clean_same(trajdata,col = [uid,timecol,'LONCOL','LATCOL'])
     trajdata['stime'] = trajdata[timecol]
@@ -109,10 +98,8 @@ def traj_stay_move(data,params,col = ['ID','dataTime','longitude','latitude'],ac
     trajdata = trajdata[trajdata[uid+'_next']==trajdata[uid]]
     trajdata['duration'] = (trajdata['etime']- trajdata['stime']).dt.total_seconds()
     activity = trajdata[[uid,lon,lat,'stime','etime','duration','LONCOL','LATCOL']]
-    #提取活动点
     activity = activity[activity['duration']>=activitytime].rename(columns = {lon:'lon',lat:'lat'})
     stay = activity.copy()
-    #提取出行
     activity['stime_next'] = activity['stime'].shift(-1)
     activity['elon'] = activity['lon'].shift(-1)
     activity['elat'] = activity['lat'].shift(-1)

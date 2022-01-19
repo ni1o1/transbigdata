@@ -1,14 +1,13 @@
 
 import numpy as np
 import pandas as pd
-from CoordinatesConverter import gcj02tobd09,bd09togcj02,wgs84togcj02,gcj02towgs84,wgs84tobd09,bd09towgs84,getdistance
+from CoordinatesConverter import getdistance
 from scipy.spatial import cKDTree
 import itertools
 from operator import itemgetter
 import geopandas as gpd
 import math
-#定义函数，用cKDTree匹配点与点
-#定义KDTree的函数
+
 def ckdnearest(dfA_origin,dfB_origin,Aname = ['lon','lat'],Bname = ['lon','lat']):
     '''
     Search the nearest points in dfB_origin for dfA_origin, and calculate the distance
@@ -36,15 +35,11 @@ def ckdnearest(dfA_origin,dfB_origin,Aname = ['lon','lat'],Bname = ['lon','lat']
     gdA = dfA_origin.copy()
     gdB = dfB_origin.copy()
     from scipy.spatial import cKDTree
-    #为gdB表的点建立KDTree
     btree = cKDTree(gdB[Bname].values)
-    #在gdB的KDTree中查询gdA的点,dist为距离,idx为gdB中离gdA最近的坐标点
     dist,idx = btree.query(gdA[Aname].values,k = 1)
-    #构建匹配的结果
     gdA['index'] = idx
     gdB['index'] = range(len(gdB))
     gdf = pd.merge(gdA,gdB,on = 'index')
-    #计算
     if (Aname[0] == Bname[0])&(Aname[1] == Bname[1]):
         gdf['dist'] = getdistance(gdf[Aname[0]+'_x'],gdf[Aname[1]+'_y'],gdf[Bname[0]+'_x'],gdf[Bname[1]+'_y'])
     else:
@@ -71,22 +66,16 @@ def ckdnearest_point(gdA, gdB):
         raise Exception('The input GeoDataFrame gdfA is empty') 
     if len(gdB)==0:
         raise Exception('The input GeoDataFrame gdfB is empty') 
-    #提取gdA中的所有点要素
     nA = np.array(list(gdA.geometry.apply(lambda x: (x.x, x.y))))
-    #提取gdB中的所有点要素
     nB = np.array(list(gdB.geometry.apply(lambda x: (x.x, x.y))))
-    #为gdB表的点建立KDTree
     btree = cKDTree(nB)
-    #在gdB的KDTree中查询gdA的点,dist为距离,idx为gdB中离gdA最近的坐标点
     dist, idx = btree.query(nA, k=1)
-    #构建匹配的结果
     gdA['dist'] = dist
     gdA['index'] = idx
     gdB['index'] = range(len(gdB))
     gdf = pd.merge(gdA,gdB,on = 'index')
     return gdf
 
-#定义函数，用cKDTree匹配点与线
 def ckdnearest_line(gdfA, gdfB):
     '''
     This method will seach from gdfB to find the nearest line to the point in gdfA.
@@ -108,31 +97,21 @@ def ckdnearest_line(gdfA, gdfB):
         raise Exception('The input GeoDataFrame gdfA is empty') 
     if len(gdfB)==0:
         raise Exception('The input GeoDataFrame gdfB is empty') 
-    #提取gdA中的所有点要素
     A = np.concatenate(
         [np.array(geom.coords) for geom in gdfA.geometry.to_list()])
-    #把gdfB的几何坐标提取到B，此时B为一个大list中包含多个小list，每个小list代表一个几何图形，小list中为坐标
-    #B=[[[要素1坐标1],[要素1坐标2],...],[[要素2坐标1],[要素2坐标2],...]]
     B = [np.array(geom.coords) for geom in gdfB.geometry.to_list()]
-    #B_ix代表B中的每个坐标点分别属于B中的哪个几何图形
     B_ix = tuple(itertools.chain.from_iterable(
         [itertools.repeat(i, x) for i, x in enumerate(list(map(len, B)))]))
-    #把B表展开，B=[[要素1坐标1],[要素1坐标2],...,[要素2坐标2],[要素2坐标2],...]
     B = np.concatenate(B)
-    #为B表建立KDTree
     ckd_tree = cKDTree(B)
-    #在B的KDTree中查询A的点,dist为距离,idx为B中离A最近的坐标点
     dist, idx = ckd_tree.query(A, k=1)
-    #由坐标点对应到几何要素
     idx = itemgetter(*idx)(B_ix)
-    #构建匹配的结果
     gdfA['dist'] = dist
     gdfA['index'] = idx
     gdfB['index'] = range(len(gdfB))
     gdf = pd.merge(gdfA,gdfB,on = 'index')
     return gdf
 
-#打断线
 def splitline_with_length(Centerline,maxlength = 100):
     '''
     The intput is the linestring GeoDataFrame. The splited line’s length wull be no longer than maxlength
@@ -237,9 +216,6 @@ def polyon_exterior(data,minarea = 0):
     data1 = data1[-data1['geometry'].is_empty]
     return data1
 
-#置信椭圆
-
-#置信椭圆的绘制函数
 def ellipse_params(data,col = ['lon','lat'],confidence = 95,epsg = None):
     '''
     confidence ellipse parameter estimation for point data
@@ -263,13 +239,10 @@ def ellipse_params(data,col = ['lon','lat'],confidence = 95,epsg = None):
     '''
     lon,lat = col
     if confidence==99:
-        #99%置信椭圆
         nstd = 9.210**0.5
     if confidence==95:
-        #95%置信椭圆
         nstd = 5.991**0.5
     if confidence==90:
-        #90%置信椭圆
         nstd = 4.605**0.5
     points = data.copy()
     points = gpd.GeoDataFrame(points)
@@ -277,18 +250,12 @@ def ellipse_params(data,col = ['lon','lat'],confidence = 95,epsg = None):
     if epsg:
         points.crs = {'init':'epsg:4326'}
         points = points.to_crs(epsg = epsg)
-    #转换坐标为np.array
     point_np = np.array([points.geometry.x,points.geometry.y]).T
-    #均值，椭圆中心点
     pos = point_np.mean(axis = 0)
-    #协方差
     cov = np.cov(point_np, rowvar=False)
-    #协方差的特征向量方向是置信椭圆的长短轴方向，特征值的大小决定了这个特征向量是长轴还是短轴
     vals, vecs = np.linalg.eigh(cov)
     order = vals.argsort()[::-1]
-    #置信椭圆的方位角,arctan2(x,y)返回的是原点至点(x,y)的方位角
     theta = np.degrees(np.arctan2(*vecs[:,0][::-1]))
-    #长轴短轴的长度
     width, height = 2 * nstd * np.sqrt(vals)
     area = width/2*height/2*math.pi
     oblateness = (height-width)/height
@@ -310,7 +277,6 @@ def ellipse_plot(ellip_params,ax,**kwargs):
         Where to plot
     '''
     [pos,width,height,theta,area,alpha] = ellip_params
-    #添加椭圆元素
     from matplotlib.patches import Ellipse
     ellip = Ellipse(xy = pos,width = width,height=height,angle = theta,linestyle = '-',**kwargs)
     ax.add_artist(ellip)

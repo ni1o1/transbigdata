@@ -1,9 +1,4 @@
-import geopandas as gpd  
 import pandas as pd
-from shapely.geometry import Polygon,Point
-from .grids import GPS_to_grids,grids_centre
-import math 
-import numpy as np
 
 def bikedata_to_od(data,col = ['BIKE_ID','DATA_TIME','LONGITUDE','LATITUDE','LOCK_STATUS'],startend = None):
     '''
@@ -30,20 +25,18 @@ def bikedata_to_od(data,col = ['BIKE_ID','DATA_TIME','LONGITUDE','LATITUDE','LOC
     oddata = oddata.sort_values(by = [BIKE_ID,DATA_TIME])
     if startend:
         oddata['tmp_index'] = range(len(oddata))
-        #在一天开始的时刻加入记录  
+        #Add records at the beginning of the time period
         data_1 = oddata.copy()  
-        #对单车ID分组后，依据时间升序排序，得到序号
+        #After grouping the single vehicle ID, sort it in ascending order according to time to get the rank id
         data_1['rank'] = data_1.groupby(BIKE_ID)['tmp_index'].rank(method = 'first')  
         data_1 = data_1[data_1['rank']==1]  
-        #时间修改为观测时段开始时间
+        #Modify time to the start time of the observation period
         data_1[DATA_TIME] = startend[0]
         data_1[LOCK_STATUS] = 1
-        #在一天开始的时刻加入记录  
+        #Add records at the end of the time period
         data_2 = oddata.copy()  
-        #对单车ID分组后，依据时间升序排序，得到序号
         data_2['rank'] = data_2.groupby(BIKE_ID)['tmp_index'].rank(ascending = False,method = 'first')  
         data_2 = data_2[data_2['rank']==1]  
-        #时间修改为观测时段开始时间
         data_2[DATA_TIME] = startend[1]
         data_2[LOCK_STATUS] = 0
         oddata = pd.concat([oddata,data_1,data_2]).sort_values(by = [BIKE_ID,DATA_TIME])

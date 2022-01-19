@@ -1,6 +1,5 @@
 import geopandas as gpd  
 import pandas as pd
-import numpy as np
 from .grids import *
 from CoordinatesConverter import getdistance
 
@@ -70,11 +69,9 @@ def clean_drift(data,col = ['VehicleNum','Time','Lng','Lat'],speedlimit = 80,dis
     data1['speed_next'] = data1['dis_next']/data1['timegap_next'].dt.total_seconds()*3.6
     data1['speed_prenext'] = data1['dis_prenext']/data1['timegap_prenext'].dt.total_seconds()*3.6
     if speedlimit:
-        #条件是，此数据与前后的速度都大于speedlimit，但前后数据之间的速度却小于speedlimit
         data1 = data1[-((data1[VehicleNum+'_pre'] == data1[VehicleNum])&(data1[VehicleNum+'_next'] == data1[VehicleNum])&\
         (data1['speed_pre']>speedlimit)&(data1['speed_next']>speedlimit)&(data1['speed_prenext']<speedlimit))]
     if dislimit:
-        #条件是，此数据与前后的距离都大于dislimit，但前后数据之间的距离却小于dislimit
         data1 = data1[-((data1[VehicleNum+'_pre'] == data1[VehicleNum])&(data1[VehicleNum+'_next'] == data1[VehicleNum])&\
         (data1['dis_pre']>dislimit)&(data1['dis_next']>dislimit)&(data1['dis_prenext']<dislimit))]
     data1 = data1[data.columns]
@@ -98,6 +95,9 @@ def clean_outofbounds(data,bounds,col = ['Lng','Lat']):
     data1 : DataFrame
         Data within the scope of the study
     '''
+    lon1,lat1,lon2,lat2 = bounds
+    if (lon1>lon2)|(lat1>lat2)|(abs(lat1)>90)|(abs(lon1)>180)|(abs(lat2)>90)|(abs(lon2)>180):
+        raise Exception('Bounds error. The input bounds should be in the order of [lon1,lat1,lon2,lat2]. (lon1,lat1) is the lower left corner and (lon2,lat2) is the upper right corner.')
     Lng,Lat = col
     data1 = data.copy()
     data1 = data1[(data1[Lng]>bounds[0])&(data1[Lng]<bounds[2])&(data1[Lat]>bounds[1])&(data1[Lat]<bounds[3])]
@@ -126,9 +126,7 @@ def clean_outofshape(data,shape,col = ['Lng','Lat'],accuracy=500):
     Lng,Lat = col
     shape_unary = shape.unary_union
     bounds = shape_unary.bounds
-    #栅格化参数
     params = grid_params(bounds,accuracy)
-    #数据栅格化
     data1 = data.copy()
     data1['LONCOL'],data1['LATCOL'] = GPS_to_grids(data1[Lng],data1[Lat],params)
     data1_gdf = data1[['LONCOL','LATCOL']].drop_duplicates()
@@ -162,23 +160,17 @@ def clean_traj(data,col = ['uid','str_time','lon','lat'],tripgap = 1800,disgap =
     '''
     uid,timecol,lon,lat = col
     data[timecol] = pd.to_datetime(data[timecol])
-    #出行识别
     data = data.sort_values(by = [uid,timecol])
     cols = []
     for i in data.columns:
         if i not in [uid,timecol,lon,lat]:
             cols.append(i)
-    #清洗
     data = clean_same(data,col = [uid,timecol,lon,lat]+cols)
-    #简单清洗漂移数据
     data = clean_drift(data,col = [uid, timecol, lon, lat],
         speedlimit=speedlimit)
-    #出行识别
     data = id_reindex(data,uid,timecol = timecol,timegap = tripgap)
     data = data.rename(columns = {uid+'_new':'tripid'})
-    #距离太大就编号为新的出行
     data = id_reindex_disgap(data,col = ['tripid',lon,lat],disgap=disgap,suffix='')
-    #距离太短的出行剔除
     data1 = data.copy()
     data1['lon1'] = data1[lon].shift(-1)
     data1['lat1'] = data1[lat].shift(-1)
@@ -188,11 +180,9 @@ def clean_traj(data,col = ['uid','str_time','lon','lat'],tripgap = 1800,disgap =
     a = data1.groupby(['tripid'])['dis'].sum()
     a = a[-(a<50)].reset_index()['tripid']
     data = pd.merge(data,a)
-    #再重新编号
     data = data.drop('tripid',axis = 1)
     data = id_reindex(data,uid,timecol = timecol,timegap = tripgap)
     data = data.rename(columns = {uid+'_new':'tripid'})
-    #大距离筛选出行
     data = id_reindex_disgap(data,col = ['tripid',lon,lat],disgap=disgap,suffix='')
     return data
 
@@ -227,9 +217,7 @@ def dataagg(data,shape,col = ['Lng','Lat','count'],accuracy=500):
     shape['index'] = range(len(shape))
     shape_unary = shape.unary_union
     bounds = shape_unary.bounds
-    #栅格化参数
     params = grid_params(bounds,accuracy)
-    #数据栅格化
     data1 = data.copy()
     data1['LONCOL'],data1['LATCOL'] = GPS_to_grids(data1[Lng],data1[Lat],params)
     data1_gdf = data1[['LONCOL','LATCOL']].drop_duplicates()
@@ -304,16 +292,11 @@ def id_reindex(data,col,new = False,timegap = None,timecol = None,suffix = '_new
         suffix = ''
     data1 = data.copy()
     if new:
-        #新建一列判断是否是新的id
         data1[col+suffix]=data1[col]!=data1[col].shift()
-        #累加求和
         data1[col+suffix]=data1[col+suffix].cumsum()-1
     else:
-        #提取所有的ID，去重得到个体信息表
         tmp=data1[[col]].drop_duplicates()
-        #定义新的编号
         tmp[col+'_']=range(len(tmp))
-        #表连接
         data1=pd.merge(data1,tmp,on=col)
         data1[col+suffix] = data1[col+'_']
         if suffix != '_':
@@ -321,7 +304,6 @@ def id_reindex(data,col,new = False,timegap = None,timecol = None,suffix = '_new
     if (timegap is not None)&(timecol is not None):
         data1[timecol] = pd.to_datetime(data1[timecol])
         data1 = data1.sort_values(by = [col+suffix,timecol])
-        #此时两个条件：时间间隔大于30分钟或者本来这一条记录就是新车
         data1[col+suffix] = ((data1[col+suffix].shift()!=data1[col+suffix])|
                         ((data1[timecol]-data1[timecol].shift()).dt.total_seconds()>timegap)).astype(int).cumsum()-1
 

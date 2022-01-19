@@ -1,8 +1,5 @@
 import geopandas as gpd  
 import pandas as pd
-from shapely.geometry import Polygon,Point
-from .grids import GPS_to_grids,grids_centre
-import math 
 import numpy as np
 from .preprocess import *
 
@@ -40,7 +37,7 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
         Bus arrival and departure information
     '''
     VehicleId,GPSDateTime,lon,lat,stopcol = col
-    #数据清洗
+    #Clean data
     print('Cleaning data',end = '')
     line.set_crs(crs='epsg:4326',allow_override=True,inplace=True)
     line = line.to_crs(epsg = project_epsg)
@@ -55,7 +52,7 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
     data = id_reindex(data,VehicleId,timegap = timegap,timecol = GPSDateTime,suffix='')
 
     print('Position matching',end = '')
-    #利用project方法，将数据点投影至公交线路上
+    #project data points onto bus LineString
     lineshp = line['geometry'].iloc[0]
     print('.',end = '')
     data['geometry'] = gpd.points_from_xy(data[lon],data[lat])
@@ -68,7 +65,7 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
         data['project'] = data['geometry'].apply(lambda r:lineshp.project(r))
     elif method == 'dislimit':
         tmps = []
-        #改进的匹配方法
+        #Distance limit method 
         for vid in data[VehicleId].drop_duplicates():
             print('.',end = '')
             tmp = data[data[VehicleId]==vid].copy()
@@ -96,41 +93,34 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
             tmps.append(tmp)
         data = pd.concat(tmps)
     print('.',end = '')
-    #公交站点也进行project
+    #Project bus stop to bus line
     stop = stop.to_crs(epsg = project_epsg)
     stop['project'] = stop['geometry'].apply(lambda r:lineshp.project(r))
     print('.',end = '')
-    #标准化时间
     starttime = data[GPSDateTime].min()
     data['time_st'] = (data[GPSDateTime]-starttime).dt.total_seconds()
     BUS_project = data
     print('.')
-    from shapely.geometry import LineString,Polygon
+    from shapely.geometry import LineString
     import shapely
-
-    #定义一个空的list存储识别结果
     ls = []
-
     print('Matching arrival and leaving info...',end = '')
-    #对每一辆车遍历
     for car in BUS_project[VehicleId].drop_duplicates():
         print('.',end = '')
-        #提取车辆轨迹
+        #Extract bus trajectory
         tmp = BUS_project[BUS_project[VehicleId] == car]
-        #如果车辆数据点少于1个，则无法构成轨迹
         if len(tmp)>1:
-            #对每一个站点识别
             for stopname in stop[stopcol].drop_duplicates():
-                #提取站点位置
+                #Get the stop position
                 position = stop[stop[stopcol] == stopname]['project'].iloc[0]
-                #通过缓冲区与线段交集识别到离站轨迹
+                #Identify arrival and departure by intersection of stop buffer and line segment
                 buffer_polygon = LineString([[0,position],
                                              [data['time_st'].max(),position]]).buffer(stopbuffer)
                 bus_linestring = LineString(tmp[['time_st','project']].values)
                 line_intersection = bus_linestring.intersection(buffer_polygon)
-                #整理轨迹，提取到离站时间
+                #Extract leave time
                 if line_intersection.is_empty:
-                    #如果为空，说明车辆没有到站信息
+                    #If empty, no bus arrive
                     continue
                 else:
                     if type(line_intersection) == shapely.geometry.linestring.LineString:
@@ -140,8 +130,7 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
                 arrive = pd.DataFrame(arrive)
                 arrive['arrivetime']= arrive[0].apply(lambda r:r.coords[0][0])
                 arrive['leavetime']= arrive[0].apply(lambda r:r.coords[-1][0])
-
-                #通过时间阈值筛选到离站信息
+                #Filtering arrival information through time threshold
                 a = arrive[['arrivetime']].copy()
                 a.columns = ['time']
                 a['flag'] = 1
@@ -159,9 +148,9 @@ def busgps_arriveinfo(data,line,stop,col = ['VehicleId','GPSDateTime','lon','lat
                 arrive_new['leavetime'] = list(c[c['flag'] == 0]['time'])
                 arrive_new[stopcol] = stopname
                 arrive_new[VehicleId] = car
-                #合并数据
+                #Save data
                 ls.append(arrive_new)
-    #合成一个大表
+    #Concat data
     arrive_info = pd.concat(ls)
     arrive_info['arrivetime'] = starttime+arrive_info['arrivetime'].apply(lambda r:pd.Timedelta(int(r),unit = 's'))
     arrive_info['leavetime'] = starttime+arrive_info['leavetime'].apply(lambda r:pd.Timedelta(int(r),unit = 's'))
@@ -192,35 +181,32 @@ def busgps_onewaytime(arrive_info,start,end,col = ['VehicleId','stopname','arriv
     onewaytime : DataFrame
         One-way travel time of the bus
     '''
-    #上行
-    #将起终点的信息提取后合并到一起
-    #终点站的到达时间
+    #For one direction
+    #The information of start and end points is extracted and merged together
+    #Arrival time of terminal
     [VehicleId,stopname,arrivetime,leavetime] = col
     arrive_info[arrivetime] = pd.to_datetime(arrive_info[arrivetime])
     arrive_info[leavetime] = pd.to_datetime(arrive_info[leavetime])
     a = arrive_info[arrive_info[stopname] == end][[arrivetime,stopname,VehicleId]]
-    #起点站的离开时间
+    #Departure time of starting station
     b = arrive_info[arrive_info[stopname] == start][[leavetime,stopname,VehicleId]]
     a.columns = ['time',stopname,VehicleId]
     b.columns = ['time',stopname,VehicleId]
-    #合并信息
+    #Concat data
     c = pd.concat([a,b])
-    #排序后提取每一单程的出行时间
+    #After sorting, extract the travel time of each one-way trip
     c = c.sort_values(by = [VehicleId,'time'])
     for i in c.columns:
         c[i+'1'] = c[i].shift(-1)
-    #提取以申昆路枢纽站为起点，延安东路外滩为终点的趟次
     c = c[(c[VehicleId] == c[VehicleId+'1'])&
           (c[stopname]==start)&
           (c[stopname+'1']==end)]
-    #计算该趟出行的持续时间
+    #Calculate the duration of the trip
     c['duration'] = (c['time1'] - c['time']).dt.total_seconds()
-    #标识该趟出行的时间中点在哪一个小时
     c['shour'] = c['time'].dt.hour
     c['direction'] = start+'-'+end
-    #储存为c1变量
     c1 = c.copy()
-    #下行
+    #Do the same for the other direction
     a = arrive_info[arrive_info[stopname] == start][['arrivetime',stopname,VehicleId]]
     b = arrive_info[arrive_info[stopname] == end][['leavetime',stopname,VehicleId]]
     a.columns = ['time',stopname,VehicleId]
