@@ -31,9 +31,9 @@ In recent years, data generated in the field of transportation has begun to expl
 
 # **Similar software packages**
 
-Several tools exist which allow process and visualization of spatio-temporal mobility data. moveVis [@2020moveVis] providing tools to visualize movement data and temporal changes of environmental data by creating video animations. TraViA [@Siebinga2021] provides tools to visualize and annotate movement data in an interactive approach. MovingPandas [@0x003aba2b] is a comprehensive tool that could both provide trajectory data structures and functions for data exploration and visualization. PySAL [@rey_pysal_2010] is a family of packages allows for advanced geospatial data science, which supports the development of high-level applications. The traffic library [@Olive2019] is a toolbox for processing and analyzing air traffic data.
+Several similar tools exist which involves process and visualization of spatio-temporal big data. `moveVis` [@2020moveVis] providing tools to visualize movement data and temporal changes of environmental data by creating video animations. `TraViA` [@Siebinga2021] provides tools to visualize and annotate movement data in an interactive approach. `MovingPandas` [@0x003aba2b] is a comprehensive tool that could both provide trajectory data structures and functions for data exploration and visualization. `PySAL` [@rey_pysal_2010] is a family of packages allows for advanced geospatial data science, which supports the development of high-level applications. The traffic library [@Olive2019] is a toolbox for processing and analyzing air traffic data.
 
-However, there is a lot of work before transforming raw spatio-temporal data into valuable insights. For example, transformation of coordinate systems, trip map-matching, origin-destination calculation. Thus, a tool that integrates multiple data processing functions, GIS analysis tools, and various visualization features through one language could effectively facilitate the research progress.
+Each of the softwares described above provide processing and analysis support from sepcific aspects of spatio-temporal big datatrack big data process. However, there are still a lot of works to do during the process of transforming raw spatio-temporal data into valuable insights. These tasks can hardly be fully covered by these softwares. Thus, a tool that integrates multiple data processing methods, GIS analysis tools, and various visualization features through one programming language could effectively facilitate the research progress.
 
 # Statement of need
 
@@ -51,13 +51,13 @@ Currently, `TransBigData` mainly provides the following methods:
 - *Data Visualization*: Built-in visualization capabilities leverage the visualization package `keplergl` to interactively visualize data in Jupyter notebooks with simple code.
 - *Basemap Loading*: Provides methods to display Mapbox basemaps in `matplotlib` figures (\autoref{fig:fig2}).
 
-The target audience includes: 1) researchers and workers centering on smart transportation and urban computing, particular who wants to integrate innovative algorithms into the intelligent trasnportation systems; 2) government or enterprises who expect efficient and reliable management decision supports through spatio-temporal data analysis.  
+The target audience of `TransBigData` includes: 1) Data science researchers and data engineers in the field of transportation big data, smart transportation system and urban computing, particular who wants to integrate innovative algorithms into the intelligent trasnportation systems; 2) Government, enterprises or other entities who expect efficient and reliable management decision supports through transportation spatio-temporal data analysis.
 
 The latest stable release of the software can be installed via `pip` and full documentation
 can be found at https://transbigdata.readthedocs.io/en/latest/.
 
-![TransBigData</code></code> generates rectangular grids and aggregates GPS data to the grids.\label{fig:fig1}](images/figure1.png){ width=100% }
+![TransBigData</code></code></code></code> generates rectangular grids and aggregates GPS data to the grids.\label{fig:fig1}](images/figure1.png){ width=100% }
 
-![TransBigData</code></code> visualizes taxi trip ODs and displays basemaps with matplotlib</code></code>.\label{fig:fig2}](images/figure2.png){ width=100% }
+![TransBigData</code></code></code></code> visualizes taxi trip ODs and displays basemaps with matplotlib</code></code></code></code>.\label{fig:fig2}](images/figure2.png){ width=100% }
 
 # References
