@@ -51,7 +51,7 @@ Currently, `TransBigData` mainly provides the following methods:
 - *Data Visualization*: Built-in visualization capabilities leverage the visualization package `keplergl` to interactively visualize data in Jupyter notebooks with simple code.
 - *Basemap Loading*: Provides methods to display Mapbox basemaps in `matplotlib` figures (\autoref{fig:fig2}).
 
-The target audience includes researchers and workers who work on smart transportation and urban computing; government or enterprises who expect efficient and reliable decision supports through spatio-temporal data analysis.  
+The target audience includes: 1) researchers and workers centering on smart transportation and urban computing, particular who wants to integrate innovative algorithms into the intelligent trasnportation systems; 2) government or enterprises who expect efficient and reliable management decision supports through spatio-temporal data analysis.  
 
 The latest stable release of the software can be installed via `pip` and full documentation
 can be found at https://transbigdata.readthedocs.io/en/latest/.
