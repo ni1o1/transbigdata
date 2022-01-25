@@ -204,14 +204,14 @@ data = tbd.clean_outofbounds(data,bounds = bounds,col = ['lon','lat'])
 
 #### Data gridding
 
-The most basic way to express the data distribution is in the form of geograpic grids. `TransBigData` provides methods to generate multiple types of geographic grids (Rectangular grids, Hexagonal grids) in the research area. For rectangular gridding, you need to determine the gridding parameters at first(which can be interpreted as defining a grid coordinate system):
+The most basic way to express the data distribution is in the form of geograpic grids. `TransBigData` provides methods to generate multiple types of geographic grids (Rectangular grids, Hexagonal grids) in the research area. For rectangular gridding, you need to determine the gridding parameters at first (which can be interpreted as defining a grid coordinate system):
 
 ```python
 #Obtain the gridding parameters
 params = tbd.grid_params(bounds,accuracy = 1000)
 ```
 
-the next step is to map the GPS data to their corresponding grids. Using the `tbd.GPS_to_grids`, it will generate the `LONCOL` column and the `LATCOL` column. The two columns together can specify a grid:
+The next step is to map the GPS data to their corresponding grids. Using the `tbd.GPS_to_grids`, it will generate the `LONCOL` column and the `LATCOL` column. The two columns together can specify a grid:
 
 ```python
 #Map the GPS data to grids
@@ -223,9 +223,9 @@ Count the amount of data in each grids, generate the geometry of the grids and t
 ```python
 #Aggregate data into grids
 grid_agg = data.groupby(['LONCOL','LATCOL'])['VehicleNum'].count().reset_index()
-#generate grid geometry
+#Generate grid geometry
 grid_agg['geometry'] = tbd.gridid_to_polygon(grid_agg['LONCOL'],grid_agg['LATCOL'],params)
-#change the type into GeoDataFrame
+#Change the type into GeoDataFrame
 import geopandas as gpd
 grid_agg = gpd.GeoDataFrame(grid_agg)
 #Plot the grids
@@ -245,7 +245,7 @@ ax =plt.subplot(111)
 plt.sca(ax)
 #Load basemap
 tbd.plot_map(plt,bounds,zoom = 11,style = 4)
-#define colorbar
+#Define colorbar
 cax = plt.axes([0.05, 0.33, 0.02, 0.3])
 plt.title('Data count')
 plt.sca(ax)
@@ -261,7 +261,7 @@ plt.show()
 
 ![png](images/output_7_0.png)
 
-## Introducing Videos (In Chinese)
+## Introducing Video (In Chinese)
 
 [![Video1](https://i.ytimg.com/vi/V_KHFv75W_w/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBjWN92SQQ8PcTY_RqsJ_VgIf_SCA)](https://www.youtube.com/watch?v=V_KHFv75W_w "我写了一个Python包，时空大数据分析从此零门槛（TransBigData）")
 
