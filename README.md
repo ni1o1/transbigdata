@@ -264,7 +264,4 @@ plt.show()
 ## Introducing Videos (In Chinese)
 
 [![Video1](https://i.ytimg.com/vi/V_KHFv75W_w/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBjWN92SQQ8PcTY_RqsJ_VgIf_SCA)](https://www.youtube.com/watch?v=V_KHFv75W_w "我写了一个Python包，时空大数据分析从此零门槛（TransBigData）")
-[![Video2](https://i.ytimg.com/vi/iKOpPs-9YHA/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCf86V2rFWjEZFKpW0t-DwIO-BPeQ)](https://www.youtube.com/watch?v=iKOpPs-9YHA "Video2")
-[![Video3](https://i.ytimg.com/an_webp/DCWwQKdnp1s/mqdefault_6s.webp?du=3000&sqp=CIuovY8G&rs=AOn4CLBVb2SlMGDHmd3osM7UWsDnWVivmQ)](https://www.youtube.com/watch?v=DCWwQKdnp1s "Video3")
-[![Video4](https://i.ytimg.com/vi/No_PbOcM0n8/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBWzotBeA3NbcUIlb_m522u8L6chg)](https://www.youtube.com/watch?v=No_PbOcM0n8 "Video4")
 
