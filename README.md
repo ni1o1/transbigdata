@@ -32,8 +32,7 @@ Currently, `TransBigData` mainly provides the following methods:
 
 ## Installation
 
-Before installing `TransBigData`, make sure that you have installed the available geopandas package: https://geopandas.org/index.html
-If you already have geopandas installed, run the following code directly from the command prompt to install `TransBigData`
+Before installing `TransBigData`, make sure that you have installed the available [geopandas package](https://geopandas.org/index.html). If you already have geopandas installed, run the following code directly from the command prompt to install `TransBigData`:
 
     pip install -U transbigdata
 
@@ -41,9 +40,7 @@ If you already have geopandas installed, run the following code directly from th
 
 ## Contributing to TransBigData [![GitHub contributors](https://img.shields.io/github/contributors/ni1o1/transbigdata.svg)](https://github.com/ni1o1/transbigdata/graphs/contributors)
 
-All contributions, bug reports, bug fixes, documentation improvements, enhancements and ideas are welcome.
-
-A detailed overview on how to contribute can be found in the [contributing guide](https://github.com/ni1o1/transbigdata/blob/master/CONTRIBUTING.md) on GitHub.
+All contributions, bug reports, bug fixes, documentation improvements, enhancements and ideas are welcome. A detailed overview on how to contribute can be found in the [contributing guide](https://github.com/ni1o1/transbigdata/blob/master/CONTRIBUTING.md) on GitHub.
 
 ## Examples
 
