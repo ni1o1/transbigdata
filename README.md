@@ -6,14 +6,12 @@ English [中文版](README-zh_CN.md)
 
 [![Documentation Status](https://readthedocs.org/projects/transbigdata/badge/?version=latest)](https://transbigdata.readthedocs.io/en/latest/?badge=latest) [![PyPI version](https://badge.fury.io/py/transbigdata.svg)](https://badge.fury.io/py/transbigdata) [![Downloads](https://pepy.tech/badge/transbigdata)](https://pepy.tech/project/transbigdata) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ni1o1/transbigdata) [![bilibili](https://img.shields.io/badge/bilibili-%E5%90%8C%E6%B5%8E%E5%B0%8F%E6%97%AD%E5%AD%A6%E9%95%BF-green.svg)](https://space.bilibili.com/3051484) [![status](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b/status.svg)](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ni1o1/transbigdata/d7d6fa33ff16440ba1698b10dd3cf3f76ff00abd?urlpath=lab%2Ftree%2Fexample%2FExample%201-Taxi%20GPS%20data%20processing.ipynb) [![Tests](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml/badge.svg)](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/ni1o1/transbigdata/branch/main/graph/badge.svg?token=GLAVYYCD9L)](https://codecov.io/gh/ni1o1/transbigdata)
 
-
 ## Introduction
 
-`TransBigData` is a Python package developed for transportation spatio-temporal big data processing, analysis and visualization. `TransBigData` provides fast and concise methods for processing common transportation spatio-temporal big data such as Taxi GPS data, bicycle sharing data and bus GPS data. `TransBigData` provides a variety of processing methods for each stage of transportation spatio-temporal big data analysis. The code with `TransBigData` is clean, efficient, flexible, and easy to use, allowing complex data tasks to be achieved with concise code.   
+`TransBigData` is a Python package developed for transportation spatio-temporal big data processing, analysis and visualization. `TransBigData` provides fast and concise methods for processing common transportation spatio-temporal big data such as Taxi GPS data, bicycle sharing data and bus GPS data. `TransBigData` provides a variety of processing methods for each stage of transportation spatio-temporal big data analysis. The code with `TransBigData` is clean, efficient, flexible, and easy to use, allowing complex data tasks to be achieved with concise code.
 
 For some specific types of data, `TransBigData` also provides targeted tools for specific needs, such as extraction of Origin and Destination(OD) of taxi trips from taxi GPS data and identification of arrival and departure information from bus GPS data. The latest stable release of the software can be installed via pip and full documentation
 can be found at https://transbigdata.readthedocs.io/en/latest/.
-
 
 ### Technical Features
 
@@ -22,14 +20,14 @@ can be found at https://transbigdata.readthedocs.io/en/latest/.
 
 ### Main Functions
 
-Currently, `TransBigData` mainly provides the following methods:  
+Currently, `TransBigData` mainly provides the following methods:
 
-* **Data Quality**: Provides methods to quickly obtain the general information of the dataset, including the data amount the time period and the sampling interval.  
-* **Data Preprocess**: Provides methods to clean multiple types of data error.   
-* **Data Gridding**: Provides methods to generate multiple types of geographic grids (Rectangular grids, Hexagonal grids) in the research area. Provides fast algorithms to map GPS data to the generated grids.   
-* **Data Aggregating**: Provides methods to aggregate GPS data and OD data into geographic polygon.  
-* **Data Visualization**: Built-in visualization capabilities leverage the visualization package keplergl to interactively visualize data on Jupyter notebook with simple code.  
-* **Trajectory Processing**: Provides methods to process trajectory data, including generating trajectory linestring from GPS points, and trajectory densification, etc.  
+* **Data Quality**: Provides methods to quickly obtain the general information of the dataset, including the data amount the time period and the sampling interval.
+* **Data Preprocess**: Provides methods to clean multiple types of data error.
+* **Data Gridding**: Provides methods to generate multiple types of geographic grids (Rectangular grids, Hexagonal grids) in the research area. Provides fast algorithms to map GPS data to the generated grids.
+* **Data Aggregating**: Provides methods to aggregate GPS data and OD data into geographic polygon.
+* **Data Visualization**: Built-in visualization capabilities leverage the visualization package keplergl to interactively visualize data on Jupyter notebook with simple code.
+* **Trajectory Processing**: Provides methods to process trajectory data, including generating trajectory linestring from GPS points, and trajectory densification, etc.
 * **Basemap Loading**: Provides methods to display Mapbox basemap on matplotlib figures
 
 ## Installation
@@ -39,25 +37,35 @@ If you already have geopandas installed, run the following code directly from th
 
     pip install -U transbigdata
 
-## Example of data visualization
 
-### Visualize trajectories (with keplergl)
+
+## Contributing to TransBigData [![GitHub contributors](https://img.shields.io/github/contributors/ni1o1/transbigdata.svg)](https://github.com/ni1o1/transbigdata/graphs/contributors)
+
+All contributions, bug reports, bug fixes, documentation improvements, enhancements and ideas are welcome.
+
+A detailed overview on how to contribute can be found in the [contributing guide](https://github.com/ni1o1/transbigdata/blob/master/CONTRIBUTING.md) on GitHub.
+
+## Examples
+
+### Example of data visualization
+
+#### Visualize trajectories (with keplergl)
 
 ![gif](images/tbdexample1.gif)
 
-### Visualize data distribution (with keplergl)
+#### Visualize data distribution (with keplergl)
 
 ![gif](images/tbdexample2.gif)
 
-### Visualize OD (with keplergl)
+#### Visualize OD (with keplergl)
 
 ![gif](images/tbdexample3.gif)
 
-## Example of taxi GPS data processing
+### Example of taxi GPS data processing
 
 The following example shows how to use the `TransBigData` to perform data gridding, data aggregating and data visualization for taxi GPS data.
 
-### Read the data
+#### Read the data
 
 ```python
 import transbigdata as tbd
@@ -67,7 +75,6 @@ data = pd.read_csv('TaxiData-Sample.csv',header = None)
 data.columns = ['VehicleNum','time','lon','lat','OpenStatus','Speed'] 
 data
 ```
-
 
 <div>
 <table border="1" class="dataframe">
@@ -187,8 +194,7 @@ data
 <p>544999 rows × 6 columns</p>
 </div>
 
-
-### Data pre-processing
+#### Data pre-processing
 
 Define the study area and use the `tbd.clean_outofbounds` method to delete the data out of the study area
 
@@ -199,7 +205,7 @@ bounds = [113.75, 22.4, 114.62, 22.86]
 data = tbd.clean_outofbounds(data,bounds = bounds,col = ['lon','lat'])
 ```
 
-### Data gridding
+#### Data gridding
 
 The most basic way to express the data distribution is in the form of geograpic grids. `TransBigData` provides methods to generate multiple types of geographic grids (Rectangular grids, Hexagonal grids) in the research area. For rectangular gridding, you need to determine the gridding parameters at first(which can be interpreted as defining a grid coordinate system):
 
@@ -230,9 +236,8 @@ grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
 ```
 
 ![png](images/output_5_1.png)
-    
 
-### Data Visualization(with basemap)
+#### Data Visualization(with basemap)
 
 For a For a formal data visualization figure, we still have to add the basemap, the colorbar, the compass and the scale. Use `tbd.plot_map` to load the basemap and `tbd.plotscale` to add compass and scale in matplotlib figure:
 
@@ -256,16 +261,20 @@ plt.xlim(bounds[0],bounds[2])
 plt.ylim(bounds[1],bounds[3])
 plt.show()
 ```
-    
-![png](images/output_7_0.png)
 
+![png](images/output_7_0.png)
 
 ## Related Links
 
+* Github for this project： https://github.com/ni1o1/transbigdata/
+* Bug report： https://github.com/ni1o1/transbigdata/issues
 * Bilibili:  https://space.bilibili.com/3051484
-* Data analytics course for beginner https://www.lifangshuju.com/#/introduce/166  
-* Transportation Big Data analysis course： https://www.lifangshuju.com/#/introduce/154  
-* Data Visualization course： https://www.lifangshuju.com/#/introduce/165  
-* Github for this project： https://github.com/ni1o1/transbigdata/  
-* Bug report： https://github.com/ni1o1/transbigdata/issues  
+* Data analytics course for beginner https://www.lifangshuju.com/#/introduce/166
+* Transportation Big Data analysis course： https://www.lifangshuju.com/#/introduce/154
+* Data Visualization course： https://www.lifangshuju.com/#/introduce/165
 
+## Introducing Videos (In Chinese)
+
+[![Video1](https://i.ytimg.com/vi/V_KHFv75W_w/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBjWN92SQQ8PcTY_RqsJ_VgIf_SCA)](https://www.youtube.com/watch?v=V_KHFv75W_w "我写了一个Python包，时空大数据分析从此零门槛（TransBigData）")
+[![Video2](https://i.ytimg.com/vi/iKOpPs-9YHA/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCf86V2rFWjEZFKpW0t-DwIO-BPeQ)](https://www.youtube.com/watch?v=iKOpPs-9YHA "Video2")
+[![Video3](https://i.ytimg.com/an_webp/DCWwQKdnp1s/mqdefault_6s.webp?du=3000&sqp=CIuovY8G&rs=AOn4CLBVb2SlMGDHmd3osM7UWsDnWVivmQ)](https://www.youtube.com/watch?v=DCWwQKdnp1s "Video3")
