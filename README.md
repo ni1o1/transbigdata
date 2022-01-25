@@ -236,7 +236,7 @@ grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
 
 #### Data Visualization(with basemap)
 
-For a For a formal data visualization figure, we still have to add the basemap, the colorbar, the compass and the scale. Use `tbd.plot_map` to load the basemap and `tbd.plotscale` to add compass and scale in matplotlib figure:
+For a geographical data visualization figure, we still have to add the basemap, the colorbar, the compass and the scale. Use `tbd.plot_map` to load the basemap and `tbd.plotscale` to add compass and scale in matplotlib figure:
 
 ```python
 import matplotlib.pyplot as plt
@@ -260,15 +260,6 @@ plt.show()
 ```
 
 ![png](images/output_7_0.png)
-
-## Related Links
-
-* Github for this project： https://github.com/ni1o1/transbigdata/
-* Bug report： https://github.com/ni1o1/transbigdata/issues
-* Bilibili:  https://space.bilibili.com/3051484
-* Data analytics course for beginner https://www.lifangshuju.com/#/introduce/166
-* Transportation Big Data analysis course： https://www.lifangshuju.com/#/introduce/154
-* Data Visualization course： https://www.lifangshuju.com/#/introduce/165
 
 ## Introducing Videos (In Chinese)
 
