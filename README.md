@@ -263,5 +263,5 @@ plt.show()
 
 ## Introducing Video (In Chinese)
 
-[![Video1](https://i.ytimg.com/vi/V_KHFv75W_w/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBjWN92SQQ8PcTY_RqsJ_VgIf_SCA)](https://www.youtube.com/watch?v=V_KHFv75W_w "我写了一个Python包，时空大数据分析从此零门槛（TransBigData）")
+[![Video1](https://i1.hdslb.com/bfs/archive/bc1ffd9264b22b97854d9b123643e2e00e3e5a5d.jpg@640w_400h_100Q_1c.webp)](https://www.bilibili.com/video/BV1nq4y1u7i1 "我写了一个Python包，时空大数据分析从此零门槛（TransBigData）")
 
