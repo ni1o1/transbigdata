@@ -4,7 +4,7 @@ Whether you are a novice or experienced software developer, all contributions an
 
 ## Getting Started
 
-If you are looking to contribute to the *MovingPandas* codebase, the best place to start is the [GitHub &#34;issues&#34; tab](https://github.com/ni1o1/transbigdata/issues).
+If you are looking to contribute to the *TransBigData* codebase, the best place to start is the [GitHub &#34;issues&#34; tab](https://github.com/ni1o1/transbigdata/issues).
 This is also a great place for filing bug reports and making suggestions for
 ways in which we can improve the code and documentation.
 
