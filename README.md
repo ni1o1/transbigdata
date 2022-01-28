@@ -13,6 +13,11 @@ English [中文版](README-zh_CN.md)
 For some specific types of data, `TransBigData` also provides targeted tools for specific needs, such as extraction of Origin and Destination(OD) of taxi trips from taxi GPS data and identification of arrival and departure information from bus GPS data. The latest stable release of the software can be installed via pip and full documentation
 can be found at https://transbigdata.readthedocs.io/en/latest/.
 
+The target audience of `TransBigData` includes:
+
+- Data science researchers and data engineers in the field of transportation big data, smart transportation system and urban computing, particular who wants to integrate innovative algorithms into the intelligent trasnportation systems.
+- Government, enterprises or other entities who expect efficient and reliable management decision supports through transportation spatio-temporal data analysis.
+
 ### Technical Features
 
 * Provide a variety of processing methods for each stage of transportation spatio-temporal big data analysis.
@@ -35,8 +40,6 @@ Currently, `TransBigData` mainly provides the following methods:
 Before installing `TransBigData`, make sure that you have installed the available [geopandas package](https://geopandas.org/index.html). If you already have geopandas installed, run the following code directly from the command prompt to install `TransBigData`:
 
     pip install -U transbigdata
-
-
 
 ## Contributing to TransBigData [![GitHub contributors](https://img.shields.io/github/contributors/ni1o1/transbigdata.svg)](https://github.com/ni1o1/transbigdata/graphs/contributors)
 
@@ -262,10 +265,10 @@ plt.show()
 ![png](images/output_7_0.png)
 
 ## Citation information
+
 Please cite [this](https://doi.org/10.5281/zenodo.5912101) when using `TransBigData` in your research. Citation information can be found at [CITATION.cff](https://github.com/ni1o1/transbigdata/blob/main/CITATION.cff)
 
 ## Introducing Video (In Chinese)
 
 * [Bilibili](https://www.bilibili.com/video/BV1nq4y1u7i1)
 * [Youtube](https://www.youtube.com/watch?v=V_KHFv75W_w)
-
