@@ -261,6 +261,9 @@ plt.show()
 
 ![png](images/output_7_0.png)
 
+## Citation information
+Please cite [this](https://doi.org/10.5281/zenodo.5912101) when using `TransBigData` in your research. Citation information can be found at [CITATION.cff](https://github.com/ni1o1/transbigdata/blob/main/CITATION.cff)
+
 ## Introducing Video (In Chinese)
 
 * [Bilibili](https://www.bilibili.com/video/BV1nq4y1u7i1)
