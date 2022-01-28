@@ -1,0 +1,15 @@
+cff-version: 1.1.0
+message: "If you use this software, please cite it as below."
+authors:
+  - name: Qing Yu
+    orcid: 0000-0003-2513-2969
+    affiliation: 1
+  - name: Jian Yuan^[corresponding author]
+    orcid: 0000-0002-7202-0946
+    affiliation: 1
+affiliations:
+ - name: Key Laboratory of Road and Traffic Engineering of the Ministry of Education, Tongji University, 4800 Cao’an Road, Shanghai 201804, People’s Republic of China
+   index: 1
+title: ni1o1/transbigdata: 0.3.3
+version: 0.3.3
+date-released: 2022-01-28
