@@ -39,7 +39,7 @@ Currently, `TransBigData` mainly provides the following methods:
 
 ## Installation
 
-Before installing `TransBigData`, make sure that you have installed the available [geopandas package](https://geopandas.org/index.html). If you already have geopandas installed, run the following code directly from the command prompt to install `TransBigData`:
+Before installing `TransBigData`, make sure that you have installed the available [geopandas package](https://geopandas.org/en/stable/getting_started/install.html). If you already have geopandas installed, run the following code directly from the command prompt to install `TransBigData`:
 
     pip install -U transbigdata
 
