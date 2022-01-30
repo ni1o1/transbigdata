@@ -20,20 +20,17 @@ setuptools.setup(
         "geopandas","matplotlib","plot_map >= 0.3.6","CoordinatesConverter>=0.1.4"
         ],
     classifiers=[
-        "Environment :: Web Environment",
-        "Intended Audience :: Developers",
         "Operating System :: OS Independent",
-        "Framework :: Matplotlib",
         "Topic :: Text Processing :: Indexing",
         "Topic :: Utilities",
-        "Topic :: Internet",
         "Topic :: Software Development :: Libraries :: Python Modules",
+        "License :: OSI Approved :: BSD License",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
     ],
-    package_dir={"": "src"},
-    packages=setuptools.find_packages(where="src"),
+    package_dir={'transbigdata': 'src/transbigdata'},
+    packages=['transbigdata'],
     python_requires=">=3.7",
 )

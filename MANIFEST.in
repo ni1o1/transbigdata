@@ -1,0 +1,4 @@
+prune docs
+prune example
+prune images
+prune src/transbigdata/tests
