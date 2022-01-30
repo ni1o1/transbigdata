@@ -17,8 +17,8 @@ can be found at https://transbigdata.readthedocs.io/en/latest/.
 
 The target audience of `TransBigData` includes:
 
-- Data science researchers and data engineers in the field of transportation big data, smart transportation system and urban computing, particular who wants to integrate innovative algorithms into the intelligent trasnportation systems.
-- Government, enterprises or other entities who expect efficient and reliable management decision supports through transportation spatio-temporal data analysis.
+- Data science researchers and data engineers in the field of transportation big data, smart transportation systems, and urban computing, particularly those who want to integrate innovative algorithms into intelligent trasnportation systems
+- Government, enterprises, or other entities who expect efficient and reliable management decision support through transportation spatio-temporal data analysis.
 
 ### Technical Features
 
@@ -39,7 +39,7 @@ Currently, `TransBigData` mainly provides the following methods:
 
 ## Installation
 
-Before installing `TransBigData`, make sure that you have installed the available [geopandas package](https://geopandas.org/index.html). If you already have geopandas installed, run the following code directly from the command prompt to install `TransBigData`:
+Before installing `TransBigData`, make sure that you have installed the available [geopandas package](https://geopandas.org/en/stable/getting_started/install.html). If you already have geopandas installed, run the following code directly from the command prompt to install `TransBigData`:
 
     pip install -U transbigdata
 
