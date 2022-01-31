@@ -31,4 +31,9 @@ class TestBikedata:
     def test_bikedata(self):
         assert len(tbd.bikedata_to_od(self.data,startend = ['2018-08-27 00:00:00','2018-08-28 00:00:00'])[0])==5
         assert len(tbd.bikedata_to_od(self.data)[1])==3
-    
+        lon,lat = tbd.wgs84tobd09(self.data['LONGITUDE'],self.data['LATITUDE'])
+        assert np.allclose([lon.iloc[0],lat.iloc[0]],[121.44400198,  31.13461178])
+        lon,lat = tbd.bd09towgs84(self.data['LONGITUDE'],self.data['LATITUDE'])
+        assert np.allclose([lon.iloc[0],lat.iloc[0]],[121.42189628157456, 31.125775772415125])
+
+        
