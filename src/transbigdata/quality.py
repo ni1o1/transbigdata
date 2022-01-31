@@ -1,9 +1,4 @@
-import geopandas as gpd  
 import pandas as pd
-from shapely.geometry import Polygon,Point
-from .grids import GPS_to_grids,grids_centre
-import math 
-import numpy as np
 
 def sample_duration(data,col = ['Vehicleid','Time']):
     '''
