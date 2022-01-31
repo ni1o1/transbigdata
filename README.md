@@ -53,15 +53,15 @@ All contributions, bug reports, bug fixes, documentation improvements, enhanceme
 
 #### Visualize trajectories (with keplergl)
 
-![gif](images/tbdexample1.gif)
+![gif](https://github.com/ni1o1/transbigdata/raw/main/images/tbdexample1.gif)
 
 #### Visualize data distribution (with keplergl)
 
-![gif](images/tbdexample2.gif)
+![gif](https://github.com/ni1o1/transbigdata/raw/main/images/tbdexample2.gif)
 
 #### Visualize OD (with keplergl)
 
-![gif](images/tbdexample3.gif)
+![gif](https://github.com/ni1o1/transbigdata/raw/main/images/tbdexample3.gif)
 
 ### Example of taxi GPS data processing
 
@@ -237,7 +237,7 @@ grid_agg = gpd.GeoDataFrame(grid_agg)
 grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
 ```
 
-![png](images/output_5_1.png)
+![png](https://github.com/ni1o1/transbigdata/raw/main/images/output_5_1.png)
 
 #### Data Visualization(with basemap)
 
@@ -264,7 +264,7 @@ plt.ylim(bounds[1],bounds[3])
 plt.show()
 ```
 
-![png](images/output_7_0.png)
+![png](https://github.com/ni1o1/transbigdata/raw/main/images/output_7_0.png)
 
 ## Citation information [![DOI](https://zenodo.org/badge/419559811.svg)](https://zenodo.org/badge/latestdoi/419559811) [![status](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b/status.svg)](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b) 
 
