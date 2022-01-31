@@ -1,7 +1,7 @@
 
 import numpy as np
 import pandas as pd
-from CoordinatesConverter import getdistance
+from .CoordinatesConverter import getdistance
 from scipy.spatial import cKDTree
 import itertools
 from operator import itemgetter

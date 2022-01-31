@@ -4,7 +4,7 @@ import geopandas as gpd
 from shapely.geometry import Polygon,LineString
 import urllib.request
 import json
-import CoordinatesConverter
+from .CoordinatesConverter import gcj02towgs84,bd09towgs84,bd09mctobd09
 from urllib import parse
 
 def getadmin(keyword,ak,subdistricts = False):
@@ -63,7 +63,7 @@ def getadmin(keyword,ak,subdistricts = False):
             a,b = i.split(',')
             p.append([float(a),float(b)])
         x = pd.DataFrame(p)
-        x[0],x[1] = CoordinatesConverter.gcj02towgs84(x[0],x[1])
+        x[0],x[1] = gcj02towgs84(x[0],x[1])
         p = x.values
         res.append(Polygon(p))
     data = pd.DataFrame()
@@ -167,7 +167,7 @@ def getbusdata(city,keywords):
                 cood = ''
         def coodconvert(coo):
             coo = pd.DataFrame(list(pd.DataFrame(coo)[0].str.split(','))).astype(float)
-            coo[0],coo[1] = CoordinatesConverter.bd09mctobd09(coo[0],coo[1])
+            coo[0],coo[1] = bd09mctobd09(coo[0],coo[1])
             return list(coo[0].astype(str)+','+coo[1].astype(str))
         return linename,coodconvert(coo),stationnames,coodconvert(stationgeo)
     print('Obtaining city id:',city,end = '')
@@ -185,7 +185,7 @@ def getbusdata(city,keywords):
                 try:
                     linename,coo,stationnames,stationgeo = getlinegeo(uid,c)
                     coo = pd.DataFrame(list(pd.DataFrame(coo)[0].str.split(',')))
-                    coo[0],coo[1] = CoordinatesConverter.bd09towgs84(coo[0],coo[1])
+                    coo[0],coo[1] = bd09towgs84(coo[0],coo[1])
                     line = LineString(coo.values)
                     linenames.append(linename)
                     lines.append(line)
@@ -204,7 +204,7 @@ def getbusdata(city,keywords):
     data['geometry'] = lines
     data['city'] = city
     stop = pd.concat(stop)
-    stop['lon'],stop['lat'] = CoordinatesConverter.bd09towgs84(stop['lon'],stop['lat'])
+    stop['lon'],stop['lat'] = bd09towgs84(stop['lon'],stop['lat'])
     stop['geometry'] = gpd.points_from_xy(stop['lon'],stop['lat'])
     stop = stop.drop('geo',axis = 1)
     stop = gpd.GeoDataFrame(stop)

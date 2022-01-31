@@ -1,7 +1,7 @@
 import geopandas as gpd  
 import pandas as pd
 from .grids import *
-from CoordinatesConverter import getdistance
+from .CoordinatesConverter import getdistance
 
 
 
