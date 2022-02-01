@@ -37,15 +37,15 @@ Currently, `TransBigData` mainly provides the following methods:
 * **Trajectory Processing**: Provides methods to process trajectory data, including generating trajectory linestring from GPS points, and trajectory densification, etc.
 * **Basemap Loading**: Provides methods to display Mapbox basemap on matplotlib figures
 
-## Installation [![PyPI version](https://badge.fury.io/py/transbigdata.svg)](https://badge.fury.io/py/transbigdata) [![Conda Version](https://img.shields.io/conda/vn/conda-forge/transbigdata.svg)](https://anaconda.org/conda-forge/transbigdata)
+## Installation
 
-### Installing transbigdata using pypi
+### Installing transbigdata using pypi [![PyPI version](https://badge.fury.io/py/transbigdata.svg)](https://badge.fury.io/py/transbigdata)
 
 `TransBigData` can be installed by using `pip install`. Before installing `TransBigData`, make sure that you have installed the available [geopandas package](https://geopandas.org/en/stable/getting_started/install.html). If you already have geopandas installed, run the following code directly from the command prompt to install `TransBigData`:
 
     pip install transbigdata
 
-### Installing transbigdata using conda-forge
+### Installing transbigdata using conda-forge [![Conda Version](https://img.shields.io/conda/vn/conda-forge/transbigdata.svg)](https://anaconda.org/conda-forge/transbigdata)
 
 You can also install `TransBigData` by `conda-forge`, this will automaticaly solve the dependency, it can be installed with:
 
