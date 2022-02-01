@@ -32,11 +32,18 @@
 
 ## 安装
 
+### 用pypi安装
+
 在安装`TransBigData`之前，请确保已经安装了可用的geopandas包：https://geopandas.org/index.html  
-如果你已经安装了geopandas，则直接在命令提示符中运行下面代码即可安装
+如果你已经安装了geopandas，则直接在命令提示符中运行下面代码即可安装：
 
     pip install -U transbigdata
 
+### 用conda-forge安装
+
+你也可以用conda-forge安装`TransBigData`，这种方式会自动解决环境依赖，不过国内可能需要更换conda源。运行下面代码即可安装：
+
+    conda install -c conda-forge transbigdata
 
 ## 可视化示例
 
