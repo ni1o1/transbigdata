@@ -16,4 +16,22 @@ changes to the codebase.
 2. Create a new branch from the `TransBigData` master branch.
 3. Within your forked copy, the source code of `TransBigData` is located at the [src](https://github.com/ni1o1/transbigdata/tree/main/src) folder, you can make and test changes in the source code.
 4. Before submitting your changes for review, make sure to check that your changes do not break any tests by running: ``pytest``. The tests are located in the [tests](https://github.com/ni1o1/transbigdata/tree/main/src/transbigdata/tests) folder.
-4. When you are ready to submit your contribution, raise the Pull Request(PR). Once you finished your PR, the github [testing workflow](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml) will test your code. We will review your changes, and might ask you to make additional changes before it is finally ready to merge. However, once it's ready, we will merge it, and you will have successfully contributed to the codebase!
+5. When you are ready to submit your contribution, raise the Pull Request(PR). Once you finished your PR, the github [testing workflow](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml) will test your code. We will review your changes, and might ask you to make additional changes before it is finally ready to merge. However, once it's ready, we will merge it, and you will have successfully contributed to the codebase!
+
+# 为TransBigData贡献代码
+
+无论您是新手还是经验丰富的软件开发人员，欢迎您提供所有意见和建议！
+
+## 开始
+
+如果你想为*TransBigData*代码库做贡献，最好从[GitHub &#34;issues&#34; tab](https://github.com/ni1o1/transbigdata/issues)开始。你可以在这里提交BUG报告，并提出改进代码和文档的方法和建议。
+
+## 如何贡献代码
+
+代码托管在[GitHub](https://github.com/ni1o1/transbigdata)，所以你需要使用[Git](http://git-scm.com/)克隆项目并对代码做出更改。具体方法如下：
+1. Fork[TransBigData仓库](https://github.com/ni1o1/transbigdata).
+2. 以`TransBigData`的`main`分支为基础创建新分支。
+3. 在您的分支仓库中，`TransBigData`的源代码位于[src](https://github.com/ni1o1/transbigdata/tree/main/src)文件夹，您可以在源代码中进行和测试更改。
+4.在提交更改以供审阅之前，请运行`pytest`来测试代码，确保您对代码的更改不会破坏任何测试结果。测试代码位于[tests](https://github.com/ni1o1/transbigdata/tree/main/src/transbigdata/tests)文件夹中
+5.当你准备好提交你的贡献时，提交Pull Request（PR）。完成PR后，github提供的[测试工作流](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml)将测试您的代码，并将测试结果做出分析。test分两部分，一部分是旧的代码会test保证输出一致，另一部分是你增加的方法需要自己写个test文件，增加test，这样后面贡献的人要改你代码时也会test，确保不会更变你的程序功能。
+6. 测试成功后，我们将检查您的更改，并可能要求您在最终准备合并之前进行其他更改。如果成功，我们将merge到`main`分支中，贡献就成功啦。
