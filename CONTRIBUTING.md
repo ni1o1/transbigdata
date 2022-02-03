@@ -36,3 +36,7 @@ changes to the codebase.
 5. 当你准备好提交你的贡献时，提交Pull Request（PR）。完成PR后，github提供的[测试工作流](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml)将测试您的代码，并将测试结果做出分析。
 6. test分两部分，一部分是旧的代码会test保证输出一致，另一部分是你增加的方法需要自己写个test文件，增加test，这样后面贡献的人要改你代码时也会test，确保不会更变你的程序功能。`TransBigData`的测试结果在[![codecov](https://codecov.io/gh/ni1o1/transbigdata/branch/main/graph/badge.svg?token=GLAVYYCD9L)](https://codecov.io/gh/ni1o1/transbigdata)这里可以看到，其中的百分比表示单元测试覆盖率，表明有多少比例的代码通过了测试。
 7. 测试成功后，我们将检查您的更改，并可能要求您在最终准备合并之前进行其他更改。如果成功，我们将merge到`main`分支中，贡献就成功啦。
+
+## 如何贡献代码的视频介绍
+[bilibili](https://www.bilibili.com/video/BV1K44y1H7ML/)
+[Youtube](https://www.youtube.com/watch?v=ocjzT-23pak)
