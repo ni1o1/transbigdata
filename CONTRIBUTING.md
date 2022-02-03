@@ -31,7 +31,7 @@ changes to the codebase.
 代码托管在[GitHub](https://github.com/ni1o1/transbigdata)，所以你需要使用[Git](http://git-scm.com/)克隆项目并对代码做出更改。具体方法如下：
 1. Fork [`TransBigData`仓库](https://github.com/ni1o1/transbigdata).
 2. 以`TransBigData`的`main`分支为基础创建新分支。
-3. 在您的分支仓库中，`TransBigData`的源代码位于[src](https://github.com/ni1o1/transbigdata/tree/main/src)文件夹，您可以在源代码中进行和测试更改。
+3. 在您的分支仓库中，`TransBigData`的源代码位于[src](https://github.com/ni1o1/transbigdata/tree/main/src)文件夹，您可以在源代码中进行和测试更改，如果你使用的是jupyter notebook,可以在src文件夹下建立ipynb文件进行调试，这样修改transbigdata的源码时可以直接读取到。
 4. 在提交更改以供审阅之前，请运行`pytest`来测试代码，确保您对代码的更改不会破坏任何测试结果。测试代码位于[tests](https://github.com/ni1o1/transbigdata/tree/main/src/transbigdata/tests)文件夹中
 5. 当你准备好提交你的贡献时，提交Pull Request（PR）。完成PR后，github提供的[测试工作流](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml)将测试您的代码，并将测试结果做出分析。
 6. test分两部分，一部分是旧的代码会test保证输出一致，另一部分是你增加的方法需要自己写个test文件，增加test，这样后面贡献的人要改你代码时也会test，确保不会更变你的程序功能。`TransBigData`的测试结果在[![codecov](https://codecov.io/gh/ni1o1/transbigdata/branch/main/graph/badge.svg?token=GLAVYYCD9L)](https://codecov.io/gh/ni1o1/transbigdata)这里可以看到，其中的百分比表示单元测试覆盖率，表明有多少比例的代码通过了测试。
