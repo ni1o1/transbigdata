@@ -11,7 +11,7 @@ affiliations:
  - name: Key Laboratory of Road and Traffic Engineering of the Ministry of Education, Tongji University, 4800 Cao’an Road, Shanghai 201804, People’s Republic of China
    index: 1
 title: "TransBigData: A Python package developed for transportation spatio-temporal big data processing, analysis and visualization"
-version: 0.3.3
-date-released: 2022-01-28
+version: 0.3.5
+date-released: 2022-02-01
 doi: 10.5281/zenodo.5912102
 url: "https://github.com/ni1o1/transbigdata"
