@@ -4,7 +4,7 @@ English [中文版](README-zh_CN.md)
 
 <img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/logo-wordmark-dark.png" style="width:550px">
 
-[![Documentation Status](https://readthedocs.org/projects/transbigdata/badge/?version=latest)](https://transbigdata.readthedocs.io/en/latest/?badge=latest) [![Downloads](https://pepy.tech/badge/transbigdata)](https://pepy.tech/project/transbigdata) [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/transbigdata.svg)](https://anaconda.org/conda-forge/transbigdata)  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ni1o1/transbigdata/d7d6fa33ff16440ba1698b10dd3cf3f76ff00abd?urlpath=lab%2Ftree%2Fexample%2FExample%201-Taxi%20GPS%20data%20processing.ipynb) [![Tests](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml/badge.svg)](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/ni1o1/transbigdata/branch/main/graph/badge.svg?token=GLAVYYCD9L)](https://codecov.io/gh/ni1o1/transbigdata) 
+[![Documentation Status](https://readthedocs.org/projects/transbigdata/badge/?version=latest)](https://transbigdata.readthedocs.io/en/latest/?badge=latest) [![Downloads](https://pepy.tech/badge/transbigdata)](https://pepy.tech/project/transbigdata) [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/transbigdata.svg)](https://anaconda.org/conda-forge/transbigdata)  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ni1o1/transbigdata/d7d6fa33ff16440ba1698b10dd3cf3f76ff00abd?urlpath=lab%2Ftree%2Fexample%2FExample%201-Taxi%20GPS%20data%20processing.ipynb) [![Tests](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml/badge.svg)](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/ni1o1/transbigdata/branch/main/graph/badge.svg?token=GLAVYYCD9L)](https://codecov.io/gh/ni1o1/transbigdata)
 
 ## Introduction
 
@@ -51,7 +51,7 @@ You can also install `TransBigData` by `conda-forge`, this will automaticaly sol
 
     conda install -c conda-forge transbigdata
 
-## Contributing to TransBigData [![GitHub contributors](https://img.shields.io/github/contributors/ni1o1/transbigdata.svg)](https://github.com/ni1o1/transbigdata/graphs/contributors) [![Join the chat at https://gitter.im/transbigdata/community](https://badges.gitter.im/transbigdata/community.svg)](https://gitter.im/transbigdata/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ni1o1/transbigdata) 
+## Contributing to TransBigData [![GitHub contributors](https://img.shields.io/github/contributors/ni1o1/transbigdata.svg)](https://github.com/ni1o1/transbigdata/graphs/contributors) [![Join the chat at https://gitter.im/transbigdata/community](https://badges.gitter.im/transbigdata/community.svg)](https://gitter.im/transbigdata/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ni1o1/transbigdata)
 
 All contributions, bug reports, bug fixes, documentation improvements, enhancements and ideas are welcome. A detailed overview on how to contribute can be found in the [contributing guide](https://github.com/ni1o1/transbigdata/blob/master/CONTRIBUTING.md) on GitHub.
 
@@ -274,11 +274,11 @@ plt.show()
 
 ![png](https://github.com/ni1o1/transbigdata/raw/main/images/output_7_0.png)
 
-## Citation information [![DOI](https://zenodo.org/badge/419559811.svg)](https://zenodo.org/badge/latestdoi/419559811) [![status](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b/status.svg)](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b) 
+## Citation information [![DOI](https://zenodo.org/badge/419559811.svg)](https://zenodo.org/badge/latestdoi/419559811) [![status](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b/status.svg)](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b)
 
-Please cite [this](https://doi.org/10.5281/zenodo.5912101) when using `TransBigData` in your research. Citation information can be found at [CITATION.cff](https://github.com/ni1o1/transbigdata/blob/main/CITATION.cff)
+Please cite [this](https://doi.org/10.5281/zenodo.5912101) when using `TransBigData` in your research. Citation information can be found at [CITATION.cff](https://github.com/ni1o1/transbigdata/blob/main/CITATION.cff) or download this [RIS file](https://github.com/ni1o1/transbigdata/blob/main/CITATION.ris)
 
-## Introducing Video (In Chinese) [![bilibili](https://img.shields.io/badge/bilibili-%E5%90%8C%E6%B5%8E%E5%B0%8F%E6%97%AD%E5%AD%A6%E9%95%BF-green.svg)](https://space.bilibili.com/3051484) 
+## Introducing Video (In Chinese) [![bilibili](https://img.shields.io/badge/bilibili-%E5%90%8C%E6%B5%8E%E5%B0%8F%E6%97%AD%E5%AD%A6%E9%95%BF-green.svg)](https://space.bilibili.com/3051484)
 
 * [Bilibili](https://www.bilibili.com/video/BV1nq4y1u7i1)
 * [Youtube](https://www.youtube.com/watch?v=V_KHFv75W_w)
