@@ -70,7 +70,7 @@ class TestGrids:
             [[113.6, 22.4], [113.61, 22.41], [113.6, 22.42]])
         ], columns=['geometry'])
         result = tbd.gridid_sjoin_shape(data, shape, self.params, col=[
-                                        'LONCOL', 'LATCOL'])['geometry'].iloc[0].wkt
+                                        'LONCOL', 'LATCOL'])['geometry'].iloc[0]
         truth = [[113.60243183,  22.4022483],
                  [113.6072955,  22.4022483],
                  [113.6072955,  22.40674491],
