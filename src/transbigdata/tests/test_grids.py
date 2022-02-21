@@ -41,7 +41,7 @@ class TestGrids:
         assert np.allclose(result, truth)
 
     def test_gridid_to_polygon(self):
-        result = tbd.gridid_to_polygon(pd.Series(21), pd.Series(67), params)[0]
+        result = tbd.gridid_to_polygon(pd.Series(21), pd.Series(67), self.params)[0]
         truth = [[113.69970522,  22.69902425],
                  [113.70456889,  22.69902425],
                  [113.70456889,  22.70352085],
