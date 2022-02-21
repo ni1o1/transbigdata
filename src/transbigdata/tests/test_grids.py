@@ -12,7 +12,7 @@ class TestGrids:
 
     def test_rect_grids(self):
         result = tbd.rect_grids(self.bounds, accuracy=500)
-        res1 = result[0]['geometry'].to_wkt().iloc[0]
+        res1 = result[0]['geometry'].iloc[0]
         res2 = result[1]
         assert np.allclose(np.array(res1.exterior.coords), [[113.59756817,  22.3977517],
                                                             [113.60243183,
