@@ -14,7 +14,14 @@ class TestGrids:
         result = tbd.rect_grids(self.bounds, accuracy=500)
         res1 = result[0]['geometry'].to_wkt().iloc[0]
         res2 = result[1]
-        assert res1 == 'POLYGON ((113.597568165393 22.39775169739679, 113.602431834607 22.39775169739679, 113.602431834607 22.40224830260321, 113.597568165393 22.40224830260321, 113.597568165393 22.39775169739679))'
+        assert np.allclose(np.array(res1.exterior.coords), [[113.59756817,  22.3977517],
+                                                            [113.60243183,
+                                                                22.3977517],
+                                                            [113.60243183,
+                                                                22.4022483],
+                                                            [113.59756817,
+                                                                22.4022483],
+                                                            [113.59756817,  22.3977517]])
         truth = (113.6, 22.4, 0.004863669213934598, 0.004496605206422906)
         assert np.allclose(res2, truth)
 
@@ -34,10 +41,13 @@ class TestGrids:
         assert np.allclose(result, truth)
 
     def test_gridid_to_polygon(self):
-        result = tbd.gridid_to_polygon(
-            pd.Series(21), pd.Series(67), self.params)[0].wkt
-        truth = 'POLYGON ((113.6997052188857 22.69902424622712, 113.7045688880996 22.69902424622712, 113.7045688880996 22.70352085143355, 113.6997052188857 22.70352085143355, 113.6997052188857 22.69902424622712))'
-        assert result == truth
+        result = tbd.gridid_to_polygon(pd.Series(21), pd.Series(67), params)[0]
+        truth = [[113.69970522,  22.69902425],
+                 [113.70456889,  22.69902425],
+                 [113.70456889,  22.70352085],
+                 [113.69970522,  22.70352085],
+                 [113.69970522,  22.69902425]]
+        assert np.allclose(np.array(result.exterior.coords), truth)
 
     def test_hexagon_grids(self):
         result = tbd.hexagon_grids(self.bounds, accuracy=500)[
@@ -61,8 +71,12 @@ class TestGrids:
         ], columns=['geometry'])
         result = tbd.gridid_sjoin_shape(data, shape, self.params, col=[
                                         'LONCOL', 'LATCOL'])['geometry'].iloc[0].wkt
-        truth = 'POLYGON ((113.602431834607 22.40224830260321, 113.6072955038209 22.40224830260321, 113.6072955038209 22.40674490780964, 113.602431834607 22.40674490780964, 113.602431834607 22.40224830260321))'
-        assert result == truth
+        truth = [[113.60243183,  22.4022483],
+                 [113.6072955,  22.4022483],
+                 [113.6072955,  22.40674491],
+                 [113.60243183,  22.40674491],
+                 [113.60243183,  22.4022483]]
+        assert np.allclose(np.array(result.exterior.coords), truth)
 
     def test_grid_params_gini(self):
         data = pd.DataFrame([[113.6, 22.4], [113.61, 22.41], [113.6, 22.42]],
@@ -75,23 +89,21 @@ class TestGrids:
 
     def test_geohash(self):
         d = pd.DataFrame([[113.59550842,  22.4],
-                 [113.59775421,  22.40359627],
-                 [113.60224579,  22.40359627],
-                 [113.60449158,  22.4],
-                 [113.60224579,  22.39640364],
-                 [113.59775421,  22.39640364],
-                 [113.59550842,  22.4]],columns = ['lon','lat'])
-        c = tbd.geohash_encode(d['lon'],d['lat'],precision=12)
-        assert c.sum()=='webz2vv9rnwkwebz2yrq7t0cwebz3n6wkjn1webz3ju32w8swebz3j4ss0npwebz2vpke80zwebz2vv9rnwk'
+                          [113.59775421,  22.40359627],
+                          [113.60224579,  22.40359627],
+                          [113.60449158,  22.4],
+                          [113.60224579,  22.39640364],
+                          [113.59775421,  22.39640364],
+                          [113.59550842,  22.4]], columns=['lon', 'lat'])
+        c = tbd.geohash_encode(d['lon'], d['lat'], precision=12)
+        assert c.sum() == 'webz2vv9rnwkwebz2yrq7t0cwebz3n6wkjn1webz3ju32w8swebz3j4ss0npwebz2vpke80zwebz2vv9rnwk'
         result = np.array(tbd.geohash_togrid(c).iloc[0].exterior.coords)
         truth = [[113.59550837,  22.39999987],
-            [113.59550837,  22.40000004],
-            [113.59550871,  22.40000004],
-            [113.59550871,  22.39999987],
-            [113.59550837,  22.39999987]]
-        assert np.allclose(result,truth)
+                 [113.59550837,  22.40000004],
+                 [113.59550871,  22.40000004],
+                 [113.59550871,  22.39999987],
+                 [113.59550837,  22.39999987]]
+        assert np.allclose(result, truth)
         c = tbd.geohash_decode(c)[0].astype('float').values
-        assert np.allclose(c,[113.595509, 113.597754, 113.602246, 113.604492, 113.602246,
-        113.597754, 113.595509])
-        
-         
+        assert np.allclose(c, [113.595509, 113.597754, 113.602246, 113.604492, 113.602246,
+                               113.597754, 113.595509])
