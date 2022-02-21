@@ -39,6 +39,8 @@ Currently, `TransBigData` mainly provides the following methods:
 
 ## Installation
 
+It is recommended to use `Python >= 3.7`
+
 ### Using pypi [![PyPI version](https://badge.fury.io/py/transbigdata.svg)](https://badge.fury.io/py/transbigdata)
 
 `TransBigData` can be installed by using `pip install`. Before installing `TransBigData`, make sure that you have installed the available [geopandas package](https://geopandas.org/en/stable/getting_started/install.html). If you already have geopandas installed, run the following code directly from the command prompt to install `TransBigData`:
