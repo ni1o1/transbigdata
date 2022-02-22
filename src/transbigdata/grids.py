@@ -372,7 +372,7 @@ def regenerate_params(grid):
     >>> bounds = [113.6, 22.4, 113.605, 22.405]
     >>> grid,params = tbd.rect_grids(bounds,500)
     >>> tbd.regenerate_params(grid)
-    (113.6, 22.4, 0.004863669213934598, 0.004496605206422906)
+    (113.60000000000001, 22.400000000000002, 0.004863669213932553, 0.004496605206423254)
     '''
     loncol_unique = grid.drop_duplicates(subset = ['LONCOL']).copy()
     latcol_unique = grid.drop_duplicates(subset = ['LATCOL']).copy()
