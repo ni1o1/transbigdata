@@ -178,14 +178,13 @@ data1 : DataFrame
 
 输入栅格参数和地理范围（可以是边界bounds也可以是几何要素shape），生成栅格
 
-**输入**
+**输入**  
 params : List  
     栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽  
-
 location : bounds(List) or shape(GeoDataFrame)  
     在哪里生成栅格  
                                             
-**输出**
+**输出**  
 grid : GeoDataFrame  
     栅格  
 
@@ -193,12 +192,11 @@ grid : GeoDataFrame
 
 从栅格数据重新生成栅格参数  
 
-**输入**
+**输入**  
 grid : GeoDataFrame  
-    transbigdata中生成的grid  
-                                            
+    transbigdata中生成的grid                 
 
-**输出**
+**输出**  
 params : List  
     栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽  
 
