@@ -107,3 +107,21 @@ class TestGrids:
         c = tbd.geohash_decode(c)[0].astype('float').values
         assert np.allclose(c, [113.595509, 113.597754, 113.602246, 113.604492, 113.602246,
                                113.597754, 113.595509])
+
+    def test_regenerate_params(self):
+        grid,params = tbd.rect_grids(self.bounds,500)
+        result = tbd.regenerate_params(grid)
+        truth = (113.60000000000001,
+ 22.400000000000002,
+ 0.004863669213932553,
+ 0.004496605206423254)
+        assert np.allclose(result,truth)
+    
+    def test_grid_from_params(self):
+        result = list(tbd.grid_from_params(self.params,self.bounds)['geometry'].iloc[3].exterior.coords)
+        truth = [(113.60243183460696, 22.402248302603212),
+ (113.6072955038209, 22.402248302603212),
+ (113.6072955038209, 22.406744907809635),
+ (113.60243183460696, 22.406744907809635),
+ (113.60243183460696, 22.402248302603212)]
+        assert np.allclose(result,truth)
