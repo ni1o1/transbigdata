@@ -3,25 +3,39 @@ import pandas as pd
 from shapely.geometry import Polygon,Point
 import math 
 import numpy as np
-def rect_grids(bounds,accuracy = 500):
+
+def rect_grids(location,accuracy = 500,params='auto'):
     '''
-    Generate the rectangular grids in the bounds
+    Generate the rectangular grids in the bounds or shape
 
     Parameters
     -------
-    bounds : List
-        Create the bounds, [lon1, lat1, lon2, lat2](WGS84), where lon1 , lat1 are the lower-left coordinates, lon2 , lat2 are the upper-right coordinates
+    location : bounds(List) or shape(GeoDataFrame)
+        Where to generate grids.
+        If bounds, [lon1, lat1, lon2, lat2](WGS84), where lon1 , lat1 are the lower-left coordinates, lon2 , lat2 are the upper-right coordinates
+        If shape, it should be GeoDataFrame
     accuracy : number
         Grid size (meter)
-                                               
+    params : List
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
+        When Gridding parameters is given, accuracy will not be used.                          
 
     Returns
     -------
     grid : GeoDataFrame
-        Grids’ GeoDataFrame, LONCOL and LATCOL are the index of grids, HBLON and HBLAT are the center of the grids
+        Grid GeoDataFrame, LONCOL and LATCOL are the index of grids, HBLON and HBLAT are the center of the grids
     params : List
         Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
     '''
+    
+    if (type(location)==list)|(type(location)==tuple):
+        shape = ''
+        bounds = location
+    elif type(location)==gpd.geodataframe.GeoDataFrame:
+        shape = location
+        bounds = shape.unary_union.bounds
+    else:
+        raise Exception('Location should be either bounds(List) or shape(GeoDataFrame)')
     lon1,lat1,lon2,lat2 = bounds
     if (lon1>lon2)|(lat1>lat2)|(abs(lat1)>90)|(abs(lon1)>180)|(abs(lat2)>90)|(abs(lon2)>180):
         raise Exception('Bounds error. The input bounds should be in the order of [lon1,lat1,lon2,lat2]. (lon1,lat1) is the lower left corner and (lon2,lat2) is the upper right corner.')
@@ -29,37 +43,56 @@ def rect_grids(bounds,accuracy = 500):
     lonStart = min(lon1, lon2);  
     deltaLon = accuracy * 360 / (2 * math.pi * 6371004 * math.cos((lat1 + lat2) * math.pi / 360));  
     deltaLat = accuracy * 360 / (2 * math.pi * 6371004);  
-    data = gpd.GeoDataFrame()  
-    LONCOL_list = []  
-    LATCOL_list = []  
-    geometry_list = []  
-    HBLON_list = []  
-    HBLAT_list = []  
-    lonsnum = int((lon2-lon1)/deltaLon)+1  
-    latsnum = int((lat2-lat1)/deltaLat)+1  
-    for i in range(lonsnum):  
-        for j in range(latsnum):  
-            HBLON = i*deltaLon + lonStart   
-            HBLAT = j*deltaLat + latStart  
-            HBLON_1 = (i+1)*deltaLon + lonStart  
-            HBLAT_1 = (j+1)*deltaLat + latStart  
-            grid_ij = Polygon([  
-            (HBLON-deltaLon/2,HBLAT-deltaLat/2),  
-            (HBLON_1-deltaLon/2,HBLAT-deltaLat/2),  
-            (HBLON_1-deltaLon/2,HBLAT_1-deltaLat/2),  
-            (HBLON-deltaLon/2,HBLAT_1-deltaLat/2)]) 
-            LONCOL_list.append(i)  
-            LATCOL_list.append(j)  
-            HBLON_list.append(HBLON)  
-            HBLAT_list.append(HBLAT)  
-            geometry_list.append(grid_ij)  
-    data['LONCOL'] = LONCOL_list  
-    data['LATCOL'] = LATCOL_list  
-    data['HBLON'] = HBLON_list  
-    data['HBLAT'] = HBLAT_list  
-    data['geometry'] = geometry_list  
-    params = (lonStart,latStart,deltaLon,deltaLat)
-    return data,params 
+    if params=='auto':
+        data = gpd.GeoDataFrame()  
+        LONCOL_list = []  
+        LATCOL_list = []  
+        geometry_list = []  
+        HBLON_list = []  
+        HBLAT_list = []  
+        lonsnum = int((lon2-lon1)/deltaLon)+1  
+        latsnum = int((lat2-lat1)/deltaLat)+1  
+        for i in range(lonsnum):  
+            for j in range(latsnum):  
+                HBLON = i*deltaLon + lonStart   
+                HBLAT = j*deltaLat + latStart  
+                HBLON_1 = (i+1)*deltaLon + lonStart  
+                HBLAT_1 = (j+1)*deltaLat + latStart  
+                grid_ij = Polygon([  
+                (HBLON-deltaLon/2,HBLAT-deltaLat/2),  
+                (HBLON_1-deltaLon/2,HBLAT-deltaLat/2),  
+                (HBLON_1-deltaLon/2,HBLAT_1-deltaLat/2),  
+                (HBLON-deltaLon/2,HBLAT_1-deltaLat/2)]) 
+                LONCOL_list.append(i)  
+                LATCOL_list.append(j)  
+                HBLON_list.append(HBLON)  
+                HBLAT_list.append(HBLAT)  
+                geometry_list.append(grid_ij)  
+        data['LONCOL'] = LONCOL_list  
+        data['LATCOL'] = LATCOL_list  
+        data['HBLON'] = HBLON_list  
+        data['HBLAT'] = HBLAT_list  
+        data['geometry'] = geometry_list  
+        params = (lonStart,latStart,deltaLon,deltaLat)
+    else:
+        loncolstart,latcolstart = GPS_to_grids(bounds[0],bounds[1],params)
+        loncolend,latcolend = GPS_to_grids(bounds[2],bounds[3],params)
+        loncolstart,latcolstart,loncolend,latcolend
+        grid = []
+        for i in range(loncolstart,loncolend+1):
+            for j in range(latcolstart,latcolend+1):
+                grid.append([i,j])
+        grid = gpd.GeoDataFrame(grid,columns = ['LONCOL','LATCOL'])
+        grid['HBLON'],grid['HBLAT'] = grids_centre(grid['LONCOL'],grid['LATCOL'],params)
+        grid['geometry'] = gridid_to_polygon(grid['LONCOL'],grid['LATCOL'],params)
+        data = grid
+    if type(shape) !=gpd.geodataframe.GeoDataFrame:
+        return data,params 
+    else:
+        data.crs = shape.crs
+        data = data[data.intersects(shape.unary_union)]
+        return data,params 
+
 
 def grid_params(bounds,accuracy = 500):
     '''
@@ -387,52 +420,8 @@ def regenerate_params(grid):
     latcol_unique['x'] = latcol_unique['geometry'].apply(lambda r:r.exterior.coords[0][1])
     latcol_unique['x_gap'] = latcol_unique['x'].shift(-1)-latcol_unique['x']
     deltaLat = (latcol_unique['x_gap']/latcol_unique['LATCOL_gap']).iloc[:-1].mean()
-
     a = grid.iloc[:1]
     lonstart = (a.centroid.x-a['LONCOL'].iloc[0]*deltaLon).iloc[0]
     latstart = (a.centroid.y-a['LATCOL'].iloc[0]*deltaLat).iloc[0]
     params = (lonstart,latstart,deltaLon,deltaLat)
     return params
-
-
-def grid_from_params(params,location):
-    '''
-    Generate grids from params and bounds or shape.
-
-    Parameters
-    -------
-    params : List
-        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
-    location : bounds(List) or shape(GeoDataFrame)
-        Where to generate grids.
-                                               
-    Returns
-    -------
-    grid : GeoDataFrame
-        grids generated by transbigdata 
-    
-    '''
-    if type(location)==list:
-        shape = ''
-        bounds = location
-    elif type(location)==gpd.geodataframe.GeoDataFrame:
-        shape = location
-        bounds = shape.unary_union.bounds
-    else:
-        raise Exception('Location should be either bounds(List) or shape(GeoDataFrame)')
-    loncolstart,latcolstart = GPS_to_grids(bounds[0],bounds[1],params)
-    loncolend,latcolend = GPS_to_grids(bounds[2],bounds[3],params)
-    loncolstart,latcolstart,loncolend,latcolend
-    grid = []
-    for i in range(loncolstart,loncolend+1):
-        for j in range(latcolstart,latcolend+1):
-            grid.append([i,j])
-    grid = gpd.GeoDataFrame(grid,columns = ['LONCOL','LATCOL'])
-    grid['HBLON'],grid['HBLAT'] = grids_centre(grid['LONCOL'],grid['LATCOL'],params)
-    grid['geometry'] = gridid_to_polygon(grid['LONCOL'],grid['LATCOL'],params)
-    if type(shape) !=gpd.geodataframe.GeoDataFrame:
-        return grid
-    else:
-        grid.crs = shape.crs
-        grid = gpd.sjoin(grid,shape)
-        return grid

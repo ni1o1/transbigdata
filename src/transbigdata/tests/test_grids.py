@@ -118,7 +118,7 @@ class TestGrids:
         assert np.allclose(result,truth)
     
     def test_grid_from_params(self):
-        result = list(tbd.grid_from_params(self.params,self.bounds)['geometry'].iloc[3].exterior.coords)
+        result = list(tbd.rect_grids(self.bounds,params=self.params)[0]['geometry'].iloc[3].exterior.coords)
         truth = [(113.60243183460696, 22.402248302603212),
  (113.6072955038209, 22.402248302603212),
  (113.6072955038209, 22.406744907809635),
