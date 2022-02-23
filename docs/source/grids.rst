@@ -8,17 +8,22 @@
 方形栅格渔网的生成与对应
 =============================
 
-.. function:: transbigdata.rect_grids(bounds,accuracy = 500)
+.. function:: transbigdata.rect_grids(location,accuracy = 500,params='auto')
 
 生成研究范围内的方形栅格
 
 **输入**
 
-bounds : List
-    生成范围的边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 
+location : bounds(List) or shape(GeoDataFrame)
+    在哪生成栅格
+    如果是生成范围的边界bounds，则内容为[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 
+    如果是面要素，则必须是GeoDataFrame
 accuracy : number
     栅格大小（米）
-                                           
+params : List
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+    默认值为auto自动生成，当给定栅格参数时，栅格大小将从栅格参数中计算得到                   
+    
 
 **输出**
 
