@@ -3,7 +3,7 @@
 数据获取
 ******************************
 
-.. function:: transbigdata.getbusdata(city,keywords)
+.. function:: transbigdata.getbusdata(city,keywords,accurate)
 
 通过输入城市与关键词，获取公交线路的线型与站点
 
@@ -11,8 +11,10 @@
 
 city : str
     城市
-keywords : List
-    关键词，线路名称
+keywords : str或List
+    关键词，线路名称，支持单个关键词或多个关键词
+accurate : bool
+    是否精确匹配，默认True
 
 **输出**
 

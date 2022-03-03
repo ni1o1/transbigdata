@@ -112,9 +112,9 @@ def getbusdata(city,keywords,accurate=True):
     -------
     city : str
         city name
-    keywords : List
+    keywords : list
         Keyword, the line name
-    accurate : Bool
+    accurate : bool
         Accurate matching
 
     Returns
