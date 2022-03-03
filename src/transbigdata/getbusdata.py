@@ -104,7 +104,7 @@ def getadmin(keyword,ak,subdistricts = False):
 
 
 
-def getbusdata(city,keywords):
+def getbusdata(city,keywords,accurate=True):
     '''
     Obtain the geographic information of the bus station and bus line from the map service (Only in China)
 
@@ -114,6 +114,8 @@ def getbusdata(city,keywords):
         city name
     keywords : List
         Keyword, the line name
+    accurate : Bool
+        Accurate matching
 
     Returns
     -------
@@ -122,19 +124,19 @@ def getbusdata(city,keywords):
     stop : GeoDataFrame
         The generated bus station
     '''
-    def getlineuid(keyword,c):
-        url = 'http://map.baidu.com/?qt=s&wd='+urllib.parse.quote(keyword)+'&c='+c
+    def getlineuid(keyword,c,acc=True):
+        url = 'http://map.baidu.com/?qt=s&wd='+urllib.parse.quote(keyword)+'&c='+c+'&from=webmap'
         response1 = urllib.request.urlopen(url)
         searchinfo=json.loads(response1.read().decode('utf8'))
-        if searchinfo['content'][0]['catalogID'] ==904 or searchinfo['content'][0]['catalogID'] ==905:
-            try:
-                uidlist = list(pd.DataFrame(searchinfo['content'][8]['blinfo'])['uid'])
-            except:
-                uidlist = []
-            uidlist.append(searchinfo['content'][0]['uid'])
-            uidlist.append(searchinfo['content'][1]['uid'])
-            return list(set(uidlist))
-        else:
+        try:
+            res = pd.DataFrame(searchinfo['content'])
+            if acc:
+                res = list(res[(res['geo_type']==1)&(res['acc_flag']==1)]['uid'])
+                return res
+            else:
+                res = list(res[res['geo_type']==1]['uid'])
+                return res
+        except:
             return []
     def getcitycode(c):
         url = 'http://map.baidu.com/?qt=s&wd='+urllib.parse.quote(c)
@@ -177,10 +179,11 @@ def getbusdata(city,keywords):
     print('success')
     stop = []
     uids = []
-    
+    if type(keywords)!=list:
+        keywords = [str(keywords)]
     for keyword in keywords:
         print(keyword)
-        for uid in getlineuid(keyword,c):
+        for uid in getlineuid(keyword,c,accurate):
             if uid not in uids:
                 try:
                     linename,coo,stationnames,stationgeo = getlinegeo(uid,c)
@@ -199,6 +202,9 @@ def getbusdata(city,keywords):
                     uids.append(uid)
                 except:
                     pass
+    if len(stop)==0:
+        print('No such busline')
+        return gpd.GeoDataFrame(),gpd.GeoDataFrame()
     data = gpd.GeoDataFrame()
     data['linename'] = linenames
     data['geometry'] = lines
