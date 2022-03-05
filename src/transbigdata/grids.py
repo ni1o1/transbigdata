@@ -75,23 +75,29 @@ def rect_grids(location,accuracy = 500,params='auto'):
         data['geometry'] = geometry_list  
         params = (lonStart,latStart,deltaLon,deltaLat)
     else:
-        loncolstart,latcolstart = GPS_to_grids(bounds[0],bounds[1],params)
-        loncolend,latcolend = GPS_to_grids(bounds[2],bounds[3],params)
-        loncolstart,latcolstart,loncolend,latcolend
+        loncol_a,latcol_a = GPS_to_grids(bounds[0],bounds[1],params)
+        loncol_b,latcol_b = GPS_to_grids(bounds[2],bounds[1],params)
+        loncol_c,latcol_c = GPS_to_grids(bounds[0],bounds[3],params)
+        loncol_d,latcol_d = GPS_to_grids(bounds[2],bounds[3],params)
+        loncolstart = min([loncol_a,loncol_b,loncol_c,loncol_d])
+        loncolend = max([loncol_a,loncol_b,loncol_c,loncol_d])
+        latcolstart = min([latcol_a,latcol_b,latcol_c,latcol_d])
+        latcolend = max([latcol_a,latcol_b,latcol_c,latcol_d])
         grid = []
         for i in range(loncolstart,loncolend+1):
             for j in range(latcolstart,latcolend+1):
                 grid.append([i,j])
         grid = gpd.GeoDataFrame(grid,columns = ['LONCOL','LATCOL'])
         grid['HBLON'],grid['HBLAT'] = grids_centre(grid['LONCOL'],grid['LATCOL'],params)
+        grid = grid[(grid['HBLON']>bounds[0]-params[2])&(grid['HBLON']<bounds[2]+params[2])&(grid['HBLAT']>bounds[1]-params[3])&(grid['HBLAT']<bounds[3]+params[3])]
         grid['geometry'] = gridid_to_polygon(grid['LONCOL'],grid['LATCOL'],params)
         data = grid
     if type(shape) !=gpd.geodataframe.GeoDataFrame:
-        return data,params 
+        return gpd.GeoDataFrame(data),params 
     else:
         data.crs = shape.crs
         data = data[data.intersects(shape.unary_union)]
-        return data,params 
+        return gpd.GeoDataFrame(data),params 
 
 
 def grid_params(bounds,accuracy = 500):
@@ -148,11 +154,29 @@ def GPS_to_grids(lon,lat,params):
     LATCOL : Series
         The index of the grid latitude. The two columns LONCOL and LATCOL together can specify a grid.
     '''
-    (lonStart,latStart,deltaLon,deltaLat) = params
-    import numpy as np
-    loncol = np.floor(((lon - (lonStart - deltaLon / 2))/deltaLon)).astype('int')  
-    latcol = np.floor(((lat - (latStart - deltaLat / 2))/deltaLat)).astype('int')   
+    if len(params)==4:
+        (lonStart,latStart,deltaLon,deltaLat) = params
+        theta = 0
+    else:
+        (lonStart,latStart,deltaLon,deltaLat,theta) = params
+    lon = pd.Series(lon)
+    lat = pd.Series(lat)
+    costheta = np.cos(theta*np.pi/180)
+    sintheta = np.sin(theta*np.pi/180)
+    R = np.array([[costheta*deltaLon,-sintheta*deltaLat],
+                [sintheta*deltaLon,costheta*deltaLat]])
+    
+    coords = np.array([lon,lat]).T
+
+    coords = coords-np.array([lonStart - deltaLon / 2,latStart- deltaLat / 2])
+    res = np.floor(np.dot(coords,np.linalg.inv(R)))
+    loncol = res[:,0].astype(int)
+    latcol = res[:,1].astype(int)
+    if len(loncol)==1:
+        loncol = loncol[0]
+        latcol = latcol[0]
     return loncol,latcol
+    
 def grids_centre(loncol,latcol,params):
     '''
     The center location of the grid. The input is the grid ID and parameters, the output is the grid center location.
@@ -173,10 +197,25 @@ def grids_centre(loncol,latcol,params):
     HBLAT : Series
         The latitude of the grid center
     '''
-    (lonStart,latStart,deltaLon,deltaLat) = params
-    hblon = loncol*deltaLon + lonStart
-    hblat = latcol*deltaLat + latStart
+    if len(params)==4:
+        (lonStart,latStart,deltaLon,deltaLat) = params
+        theta = 0
+    else:
+        (lonStart,latStart,deltaLon,deltaLat,theta) = params
+    loncol = pd.Series(loncol)
+    latcol = pd.Series(latcol)
+    costheta = np.cos(theta*np.pi/180)
+    sintheta = np.sin(theta*np.pi/180)
+    R = np.array([[costheta*deltaLon,-sintheta*deltaLat],
+                [sintheta*deltaLon,costheta*deltaLat]])
+    hblonhblat = np.dot(np.array([loncol.values,latcol.values]).T,R)+np.array([lonStart,latStart])
+    hblon = hblonhblat[:,0]
+    hblat = hblonhblat[:,1]
+    if len(hblon)==1:
+        hblon = hblon[0]
+        hblat = hblat[0]
     return hblon,hblat
+
 
 def gridid_to_polygon(loncol,latcol,params):
     '''
@@ -196,21 +235,31 @@ def gridid_to_polygon(loncol,latcol,params):
     geometry : Series
         The column of grid geographic polygon
     '''
-    (lonStart,latStart,deltaLon,deltaLat) = params
-    HBLON = loncol*deltaLon + lonStart   
-    HBLAT = latcol*deltaLat + latStart  
-    HBLON_1 = (loncol+1)*deltaLon + lonStart  
-    HBLAT_1 = (latcol+1)*deltaLat + latStart  
-    df = pd.DataFrame()
-    df['HBLON'] = HBLON
-    df['HBLAT'] = HBLAT
-    df['HBLON_1'] = HBLON_1
-    df['HBLAT_1'] = HBLAT_1
-    return df.apply(lambda r:Polygon([  
-    (r['HBLON']-deltaLon/2,r['HBLAT']-deltaLat/2),  
-    (r['HBLON_1']-deltaLon/2,r['HBLAT']-deltaLat/2),  
-    (r['HBLON_1']-deltaLon/2,r['HBLAT_1']-deltaLat/2),  
-    (r['HBLON']-deltaLon/2,r['HBLAT_1']-deltaLat/2)]),axis = 1)
+    if len(params)==4:
+        (lonStart,latStart,deltaLon,deltaLat) = params
+        theta = 0
+    else:
+        (lonStart,latStart,deltaLon,deltaLat,theta) = params
+    loncol = pd.Series(loncol)
+    latcol = pd.Series(latcol)
+    costheta = np.cos(theta*np.pi/180)
+    sintheta = np.sin(theta*np.pi/180)
+    R = np.array([[costheta*deltaLon,-sintheta*deltaLat],
+                [sintheta*deltaLon,costheta*deltaLat]])
+    res_a = np.array([loncol.values,latcol.values]).T
+    res_b = np.array([loncol.values+1,latcol.values]).T
+    res_c = np.array([loncol.values+1,latcol.values+1]).T
+    res_d = np.array([loncol.values,latcol.values+1]).T
+    hblonhblat_a = np.dot(res_a,R)+np.array([lonStart,latStart])
+    hblonhblat_b = np.dot(res_b,R)+np.array([lonStart,latStart])
+    hblonhblat_c = np.dot(res_c,R)+np.array([lonStart,latStart])
+    hblonhblat_d = np.dot(res_d,R)+np.array([lonStart,latStart])
+    a = hblonhblat_a-R[:,0]/2-R[:,1]/2
+    b = hblonhblat_b-R[:,0]/2-R[:,1]/2
+    c = hblonhblat_c-R[:,0]/2-R[:,1]/2
+    d = hblonhblat_d-R[:,0]/2-R[:,1]/2
+    from shapely.geometry import Polygon
+    return [Polygon([a[i],b[i],c[i],d[i],a[i]]) for i in range(len(a))]
 
 def hexagon_grids(bounds,accuracy = 500):
     '''
