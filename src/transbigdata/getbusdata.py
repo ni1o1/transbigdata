@@ -3,9 +3,12 @@ import numpy as np
 import geopandas as gpd
 from shapely.geometry import Polygon,LineString
 import urllib.request
-import json
-from .CoordinatesConverter import gcj02towgs84,bd09towgs84,bd09mctobd09
 from urllib import parse
+import urllib
+import json
+import re
+from .plot_map import read_mapboxtoken
+from .CoordinatesConverter import gcj02towgs84,bd09towgs84,bd09mctobd09,wgs84togcj02
 
 def getadmin(keyword,ak,subdistricts = False):
     '''
@@ -23,7 +26,7 @@ def getadmin(keyword,ak,subdistricts = False):
     Returns
     -------
     admin : GeoDataFrame
-        Administrative district
+        Administrative district(WGS84)
     districts : DataFrame
         The information of subdistricts. This can be used to further get the boundary of lower level districts
     '''
@@ -120,9 +123,9 @@ def getbusdata(city,keywords,accurate=True):
     Returns
     -------
     data : GeoDataFrame
-        The generated bus line
+        The generated bus line(WGS84)
     stop : GeoDataFrame
-        The generated bus station
+        The generated bus station(WGS84)
     '''
     def getlineuid(keyword,c,acc=True):
         url = 'http://map.baidu.com/?qt=s&wd='+urllib.parse.quote(keyword)+'&c='+c+'&from=webmap'
@@ -221,6 +224,104 @@ def getbusdata(city,keywords,accurate=True):
     data = data.drop_duplicates(subset = ['linename'])
     stop = stop.drop_duplicates(subset = ['linename','stationnames'])
     return data,stop
+
+
+def get_isochrone_amap(lon,lat,reachtime,ak,mode=2):
+    '''
+    Obtain the isochrone from Amap reachcricle
+
+    Parameters
+    -------
+    lon : float
+        Longitude of the start point(WGS84)
+    lat : float
+        Latitude of the start point(WGS84)
+    reachtime : number
+        Reachtime of the isochrone
+    ak : str
+        Amap access token
+    mode : int or str
+        Travel mode, should be 0(bus), 1(subway), 2(bus+subway)
+
+    Returns
+    -------
+    isochrone : GeoDataFrame
+        The isochrone GeoDataFrame(WGS84)
+    '''
+    strategy = str(mode)
+    if strategy not in ['0','1','2']:
+        raise ValueError('Travel mode, should be 0(bus), 1(subway), 2(bus+subway)')
+    lon,lat = wgs84togcj02(lon,lat)
+    url = 'http://restapi.amap.com/v3/direction/reachcircle?'
+    dict1 = {
+    'key':ak,
+    'location':str(round(float(lon),6))+','+str(round(float(lat),6)),
+    'time':reachtime,
+    'output':'json',
+    's':'rsv3',
+    'extensions':'all',
+        'strategy':str(strategy)
+    }
+    url_data = parse.urlencode(dict1)
+    url = url+url_data
+    request = urllib.request.Request(url)
+    response = urllib.request.urlopen(request,timeout = 1)
+    webpage = response.read()
+    result = json.loads(webpage.decode('utf8','ignore'))
+    P_all = []
+    for each in result['polylines']:
+        data = each['outer']
+        ll = re.split('[,;]',data)
+        ll = np.reshape(ll,(int(len(ll)/2),2))
+        l2 = []
+        for i in ll:
+            l2.append((gcj02towgs84(float(i[0]),float(i[1]))))
+        P_all.append(Polygon(l2))
+    
+    a = gpd.GeoSeries(P_all)
+    g = gpd.GeoSeries(a[a.is_valid].unary_union)
+    g = gpd.GeoDataFrame(g,columns = ['geometry'])
+    g['lon'] = lon
+    g['lat'] = lat
+    g['reachtime'] = reachtime
+    return g
+
+def get_isochrone_mapbox(lon,lat,reachtime,access_token='auto',mode = 'driving'):
+    '''
+    Obtain the isochrone from mapbox isochrone
+
+    Parameters
+    -------
+    lon : float
+        Longitude of the start point(WGS84)
+    lat : float
+        Latitude of the start point(WGS84)
+    reachtime : number
+        Reachtime of the isochrone
+    access_token : str
+        Mapbox access token, if `auto` it will use the preset access token
+    mode : bool
+        Travel mode, should be `driving`, `walking` or `cycling`
+
+    Returns
+    -------
+    isochrone : GeoDataFrame
+        The isochrone GeoDataFrame(WGS84)
+    '''
+    if access_token=='auto':
+        access_token=read_mapboxtoken()
+    if mode not in ['driving', 'walking','cycling']:
+        raise ValueError('Travel mode should be `driving`, `walking` or `cycling`')
+    url = 'https://api.mapbox.com/isochrone/v1/mapbox/'+mode+'/'+str(lon)+','+str(lat)+'?contours_minutes='+str(reachtime)+'&polygons=true&access_token='+access_token
+    request = urllib.request.Request(url)
+    response = urllib.request.urlopen(request,timeout = 1)
+    webpage = response.read()
+    result = webpage.decode('utf8','ignore')
+    isochrone = gpd.GeoDataFrame.from_features(json.loads(result))
+    isochrone['lon'] = lon
+    isochrone['lat'] = lat
+    isochrone['reachtime'] = reachtime
+    return isochrone[['lon','lat','reachtime','geometry']]
 
 def split_subwayline(line,stop):
     '''
