@@ -32,7 +32,7 @@ class TestGrids:
 
     def test_GPS_to_grids(self):
         result = tbd.GPS_to_grids(113.7, 22.7, self.params)
-        truth = (21, 67)
+        truth = [21, 67]
         assert np.allclose(result, truth)
 
     def test_grids_centre(self):
@@ -120,8 +120,8 @@ class TestGrids:
     def test_grid_from_params(self):
         result = list(tbd.rect_grids(self.bounds,params=self.params)[0]['geometry'].iloc[3].exterior.coords)
         truth = [(113.60243183460696, 22.402248302603212),
- (113.6072955038209, 22.402248302603212),
- (113.6072955038209, 22.406744907809635),
- (113.60243183460696, 22.406744907809635),
- (113.60243183460696, 22.402248302603212)]
+                (113.6072955038209, 22.402248302603212),
+                (113.6072955038209, 22.406744907809635),
+                (113.60243183460696, 22.406744907809635),
+                (113.60243183460696, 22.402248302603212)]
         assert np.allclose(result,truth)

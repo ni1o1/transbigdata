@@ -21,7 +21,7 @@ location : bounds(List) or shape(GeoDataFrame)
 accuracy : number
     栅格大小（米）
 params : List
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
     默认值为auto自动生成，当给定栅格参数时，栅格大小将从栅格参数中计算得到                   
     
 
@@ -30,7 +30,7 @@ params : List
 grid : GeoDataFrame
     栅格的GeoDataFrame，其中LONCOL与LATCOL为栅格的编号，HBLON与HBLAT为栅格的中心点坐标 
 params : List
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
 
 
 ::
@@ -55,7 +55,7 @@ accuracy : number
 **输出**
 
 params : List
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
 
 
 ::
@@ -84,7 +84,7 @@ sample : number
 **输出**
 
 params : List
-    最佳的栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+    最佳的栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
 
 
 .. function:: transbigdata.GPS_to_grids(lon,lat,params)
@@ -98,7 +98,7 @@ lon : Series
 lat : Series
     纬度列
 params : List
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
                                            
 **输出**
 
@@ -122,7 +122,7 @@ LONCOL : Series
 LATCOL : Series
     纬度栅格编号列
 params : List
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
                                            
 **输出**
 
@@ -147,7 +147,7 @@ LONCOL : Series
 LATCOL : Series
     纬度栅格编号列
 params : List
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
                                            
 **输出**
 
@@ -189,7 +189,7 @@ grid : GeoDataFrame
 
 **输出**  
 params : List  
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽  
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0  
 
 
 geohash编码

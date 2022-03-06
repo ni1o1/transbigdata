@@ -42,3 +42,47 @@ admin : GeoDataFrame
     行政区划信息
 districts : DataFrame
     子行政区划的信息，利用这个可以进一步抓下一级的行政区划
+
+.. function:: transbigdata.get_isochrone_amap(lon,lat,reachtime,ak,mode=2)
+
+获取高德地图等时圈，支持`公交`、`地铁`、`公交+地铁`三种模式
+
+**Parameters**
+
+lon : float
+    起点经度(WGS84)
+lat : float
+    起点纬度(WGS84)
+reachtime : number
+    等时圈时间
+ak : str
+    高德地图ak
+mode : int or str
+    出行方式，0`公交`、1`地铁`、2`公交+地铁`
+
+**Returns**
+
+isochrone : GeoDataFrame
+    等时圈的GeoDataFrame(WGS84)
+
+.. function:: transbigdata.get_isochrone_mapbox(lon,lat,reachtime,access_token='auto',mode = 'driving')
+
+获取mapbox地图等时圈，支持驾车、步行、骑行
+
+**Parameters**
+
+lon : float
+    起点经度(WGS84)
+lat : float
+    起点纬度(WGS84)
+reachtime : number
+    等时圈时间
+access_token : str
+    Mapbox的access token，如果设置为 `auto`则会自动读取已经保存的access token
+mode : bool
+    出行方式，取值为 `driving`， `walking` 或 `cycling`
+
+**Returns**
+
+isochrone : GeoDataFrame
+    等时圈的GeoDataFrame(WGS84)

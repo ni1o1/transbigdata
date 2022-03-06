@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
  
 setuptools.setup(
     name="transbigdata",
-    version="0.3.8",
+    version="0.3.9",
     author="Qing Yu",
     author_email="qingyu0815@foxmail.com",
     description="A Python package developed for transportation spatio-temporal big data processing and analysis.",
@@ -32,5 +32,5 @@ setuptools.setup(
     ],
     package_dir={'transbigdata': 'src/transbigdata'},
     packages=['transbigdata'],
-    python_requires=">=3.7",
+    python_requires=">=3.6",
 )
