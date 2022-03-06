@@ -17,7 +17,7 @@ def rect_grids(location,accuracy = 500,params='auto'):
     accuracy : number
         Grid size (meter)
     params : List
-        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat) or (lonStart,latStart,deltaLon,deltaLat,theta), lonStart and latStart are the lower-left coordinates; deltaLon, deltaLat are the length and width of a single grid; theta is the angle of the grid, it will be 0 if not given
         When Gridding parameters is given, accuracy will not be used.                          
 
     Returns
@@ -25,7 +25,7 @@ def rect_grids(location,accuracy = 500,params='auto'):
     grid : GeoDataFrame
         Grid GeoDataFrame, LONCOL and LATCOL are the index of grids, HBLON and HBLAT are the center of the grids
     params : List
-        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat) or (lonStart,latStart,deltaLon,deltaLat,theta), lonStart and latStart are the lower-left coordinates; deltaLon, deltaLat are the length and width of a single grid; theta is the angle of the grid, it will be 0 if not given
     '''
     
     if (type(location)==list)|(type(location)==tuple):
@@ -115,7 +115,7 @@ def grid_params(bounds,accuracy = 500):
     Returns
     -------
     params : List
-        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat) or (lonStart,latStart,deltaLon,deltaLat,theta), lonStart and latStart are the lower-left coordinates; deltaLon, deltaLat are the length and width of a single grid; theta is the angle of the grid, it will be 0 if not given
 
     Examples
     -------
@@ -145,7 +145,7 @@ def GPS_to_grids(lon,lat,params):
     lat : Series
         The column of latitude
     params : List
-        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat) or (lonStart,latStart,deltaLon,deltaLat,theta), lonStart and latStart are the lower-left coordinates; deltaLon, deltaLat are the length and width of a single grid; theta is the angle of the grid, it will be 0 if not given
                                             
     Returns
     -------
@@ -186,7 +186,7 @@ def grids_centre(loncol,latcol,params):
     LATCOL : Series
         The index of the grid latitude. The two columns LONCOL and LATCOL together can specify a grid.
     params : List
-        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat) or (lonStart,latStart,deltaLon,deltaLat,theta), lonStart and latStart are the lower-left coordinates; deltaLon, deltaLat are the length and width of a single grid; theta is the angle of the grid, it will be 0 if not given
                                               
     Returns
     -------
@@ -226,7 +226,7 @@ def gridid_to_polygon(loncol,latcol,params):
     LATCOL : Series
         The index of the grid latitude. The two columns LONCOL and LATCOL together can specify a grid.
     params : List
-        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat) or (lonStart,latStart,deltaLon,deltaLat,theta), lonStart and latStart are the lower-left coordinates; deltaLon, deltaLat are the length and width of a single grid; theta is the angle of the grid, it will be 0 if not given
                                                
     Returns
     -------
@@ -339,7 +339,7 @@ def gridid_sjoin_shape(data,shape,params,col = ['LONCOL','LATCOL']):
     shape : GeoDataFrame
         Geographic polygon
     params : List
-        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat) or (lonStart,latStart,deltaLon,deltaLat,theta), lonStart and latStart are the lower-left coordinates; deltaLon, deltaLat are the length and width of a single grid; theta is the angle of the grid, it will be 0 if not given
     col : List
         Column names [LONCOL,LATCOL]
 
@@ -444,7 +444,7 @@ def regenerate_params(grid):
     Returns
     -------
     params : List
-        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat) or (lonStart,latStart,deltaLon,deltaLat,theta), lonStart and latStart are the lower-left coordinates; deltaLon, deltaLat are the length and width of a single grid; theta is the angle of the grid, it will be 0 if not given
 
     Examples
     -------
