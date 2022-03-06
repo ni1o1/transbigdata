@@ -165,10 +165,8 @@ def GPS_to_grids(lon,lat,params):
     sintheta = np.sin(theta*np.pi/180)
     R = np.array([[costheta*deltaLon,-sintheta*deltaLat],
                 [sintheta*deltaLon,costheta*deltaLat]])
-    
     coords = np.array([lon,lat]).T
-
-    coords = coords-np.array([lonStart - deltaLon / 2,latStart- deltaLat / 2])
+    coords = coords-(np.array([lonStart,latStart])-R[0,:]/2-R[1,:]/2)
     res = np.floor(np.dot(coords,np.linalg.inv(R)))
     loncol = res[:,0].astype(int)
     latcol = res[:,1].astype(int)
@@ -246,18 +244,18 @@ def gridid_to_polygon(loncol,latcol,params):
     sintheta = np.sin(theta*np.pi/180)
     R = np.array([[costheta*deltaLon,-sintheta*deltaLat],
                 [sintheta*deltaLon,costheta*deltaLat]])
-    res_a = np.array([loncol.values,latcol.values]).T
-    res_b = np.array([loncol.values+1,latcol.values]).T
-    res_c = np.array([loncol.values+1,latcol.values+1]).T
-    res_d = np.array([loncol.values,latcol.values+1]).T
+    res_a = np.array([loncol.values-0.5,latcol.values-0.5]).T
+    res_b = np.array([loncol.values+0.5,latcol.values-0.5]).T
+    res_c = np.array([loncol.values+0.5,latcol.values+0.5]).T
+    res_d = np.array([loncol.values-0.5,latcol.values+0.5]).T
     hblonhblat_a = np.dot(res_a,R)+np.array([lonStart,latStart])
     hblonhblat_b = np.dot(res_b,R)+np.array([lonStart,latStart])
     hblonhblat_c = np.dot(res_c,R)+np.array([lonStart,latStart])
     hblonhblat_d = np.dot(res_d,R)+np.array([lonStart,latStart])
-    a = hblonhblat_a-R[:,0]/2-R[:,1]/2
-    b = hblonhblat_b-R[:,0]/2-R[:,1]/2
-    c = hblonhblat_c-R[:,0]/2-R[:,1]/2
-    d = hblonhblat_d-R[:,0]/2-R[:,1]/2
+    a = hblonhblat_a
+    b = hblonhblat_b
+    c = hblonhblat_c
+    d = hblonhblat_d
     from shapely.geometry import Polygon
     return [Polygon([a[i],b[i],c[i],d[i],a[i]]) for i in range(len(a))]
 
@@ -456,21 +454,21 @@ def regenerate_params(grid):
     >>> tbd.regenerate_params(grid)
     (113.60000000000001, 22.400000000000002, 0.004863669213932553, 0.004496605206423254)
     '''
-    loncol_unique = grid.drop_duplicates(subset = ['LONCOL']).copy()
-    latcol_unique = grid.drop_duplicates(subset = ['LATCOL']).copy()
-    if (len(latcol_unique)==1)|(len(loncol_unique)==1):
-        raise Exception('Generate params failed, you must ensure that there are multiple LONCOL and LATCOL in the grids')
-    loncol_unique['LONCOL_gap'] = loncol_unique['LONCOL'].shift(-1)-loncol_unique['LONCOL']
-    loncol_unique['x'] = loncol_unique['geometry'].apply(lambda r:r.exterior.coords[0][0])
-    loncol_unique['x_gap'] = loncol_unique['x'].shift(-1)-loncol_unique['x']
-    deltaLon = (loncol_unique['x_gap']/loncol_unique['LONCOL_gap']).iloc[:-1].mean()
-
-    latcol_unique['LATCOL_gap'] = latcol_unique['LATCOL'].shift(-1)-latcol_unique['LATCOL']
-    latcol_unique['x'] = latcol_unique['geometry'].apply(lambda r:r.exterior.coords[0][1])
-    latcol_unique['x_gap'] = latcol_unique['x'].shift(-1)-latcol_unique['x']
-    deltaLat = (latcol_unique['x_gap']/latcol_unique['LATCOL_gap']).iloc[:-1].mean()
-    a = grid.iloc[:1]
-    lonstart = (a.centroid.x-a['LONCOL'].iloc[0]*deltaLon).iloc[0]
-    latstart = (a.centroid.y-a['LATCOL'].iloc[0]*deltaLat).iloc[0]
-    params = (lonstart,latstart,deltaLon,deltaLat)
+    grid_coord = np.array(grid['geometry'].iloc[0].exterior.coords)
+    loncol = grid['LONCOL'].iloc[0]
+    latcol = grid['LATCOL'].iloc[0]
+    hblon = grid['geometry'].iloc[0].centroid.x
+    hblat = grid['geometry'].iloc[0].centroid.y
+    grid_coord = grid_coord-grid_coord[0]
+    x = grid_coord[1]
+    y = grid_coord[3]
+    R = np.array([x,y])
+    lonstart,latstart = np.array([hblon,hblat])-R[0,:]*loncol-R[1,:]*latcol
+    deltalon = (x[0]**2+y[0]**2).sum()**0.5
+    deltalat = (x[1]**2+y[1]**2).sum()**0.5
+    theta = np.arccos(x[0]/deltalon)*180/np.pi
+    if np.allclose(theta,0):
+        params = [lonstart,latstart,deltalon,deltalat]
+    else:
+        params = [lonstart,latstart,deltalon,deltalat,theta]
     return params

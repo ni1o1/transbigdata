@@ -32,5 +32,5 @@ setuptools.setup(
     ],
     package_dir={'transbigdata': 'src/transbigdata'},
     packages=['transbigdata'],
-    python_requires=">=3.7",
+    python_requires=">=3.6",
 )
