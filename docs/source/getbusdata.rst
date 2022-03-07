@@ -3,6 +3,9 @@
 数据获取
 ******************************
 
+获取公交线路
+=============================
+
 .. function:: transbigdata.getbusdata(city,keywords,accurate=True)
 
 通过输入城市与关键词，获取公交线路的线型与站点
@@ -22,6 +25,9 @@ data : GeoDataFrame
     生成的公交线路
 stop : GeoDataFrame
     生成的公交站点
+
+获取行政区划
+=============================
 
 .. function:: transbigdata.getadmin(keyword,ak,subdistricts = False)
 
@@ -43,11 +49,14 @@ admin : GeoDataFrame
 districts : DataFrame
     子行政区划的信息，利用这个可以进一步抓下一级的行政区划
 
+获取等时圈
+=============================
+
 .. function:: transbigdata.get_isochrone_amap(lon,lat,reachtime,ak,mode=2)
 
 获取高德地图等时圈，支持`公交`、`地铁`、`公交+地铁`三种模式
 
-**Parameters**
+**输入**
 
 lon : float
     起点经度(WGS84)
@@ -60,7 +69,7 @@ ak : str
 mode : int or str
     出行方式，0`公交`、1`地铁`、2`公交+地铁`
 
-**Returns**
+**输出**
 
 isochrone : GeoDataFrame
     等时圈的GeoDataFrame(WGS84)
@@ -69,7 +78,7 @@ isochrone : GeoDataFrame
 
 获取mapbox地图等时圈，支持驾车、步行、骑行
 
-**Parameters**
+**输入**
 
 lon : float
     起点经度(WGS84)
@@ -82,7 +91,7 @@ access_token : str
 mode : bool
     出行方式，取值为 `driving`， `walking` 或 `cycling`
 
-**Returns**
+**输出**
 
 isochrone : GeoDataFrame
     等时圈的GeoDataFrame(WGS84)
