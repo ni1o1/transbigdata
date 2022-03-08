@@ -150,7 +150,7 @@ def getbusdata(city,keywords,accurate=True):
         url = 'http://map.baidu.com/?qt=bsl&uid='+uid+'&c='+c
         response = urllib.request.urlopen(url,timeout = 60)
         searchinfo=json.loads(response.read().decode('utf8'))
-        linename = searchinfo['content'][0]['name']
+        linename = searchinfo['content'][0]['pair_line']['name']
         stations = searchinfo['content'][0]['stations']
         geo = searchinfo['content'][0]['geo'].split('|')[2][:-1].split(',')
         stationgeo = []
