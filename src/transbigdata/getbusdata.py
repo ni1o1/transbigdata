@@ -189,6 +189,7 @@ def getbusdata(city,keywords,accurate=True):
         for uid in getlineuid(keyword,c,accurate):
             if uid not in uids:
                 try:
+                    print(uid,c)
                     linename,coo,stationnames,stationgeo = getlinegeo(uid,c)
                     coo = pd.DataFrame(list(pd.DataFrame(coo)[0].str.split(',')))
                     coo[0],coo[1] = bd09towgs84(coo[0],coo[1])
