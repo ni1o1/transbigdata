@@ -3,7 +3,7 @@ import pandas as pd
 from shapely.geometry import Polygon,Point
 import math 
 import numpy as np
-
+from .CoordinatesConverter import getdistance
 def rect_grids(location,accuracy = 500,params='auto'):
     '''
     Generate the rectangular grids in the bounds or shape
@@ -355,81 +355,151 @@ def gridid_sjoin_shape(data,shape,params,col = ['LONCOL','LATCOL']):
     data1 = gpd.sjoin(data1,shape)
     return data1
 
-def grid_params_gini(data,col = ['lon','lat'],accuracy = 500,gini = 'max',gap = 10,sample = 10000):
+def grid_params_optimize(data,initialparams,col=['uid','lon','lat'],method='centerdist',printlog=False,sample=0):
     '''
-    Obtain the best griding param
-    Parameters
-    ----------
-    data : DataFrame
-        data
-    col : List
-        Column names [lon,lat]
-    accuracy : number
-        Size of the grids
-    gini : number
-        min,max,or median
-    gap : number
-        the step of the algorithm
-    sample : number
-        sample rate
+    Optimize the grid params
 
+    Parameters
+    -------
+    data : DataFrame
+        Trajectory data
+    initialparams : List
+        Initial griding params
+    col : List
+        Column names [uid,lon,lat]
+    method : str
+        The method to optimize: centerdist, gini, gridscount
+    printlog : bool
+        Whether to print log or not
+    sample : int
+        Sample the data as input, if 0 it will not perform sampling
+        
     Returns
-    ----------
-    params : List
-        calculated params
+    -------
+    params_optimized : List
+        Optimized params
     '''
-    trajdata = data.copy()
-    if len(trajdata)>sample:
-        trajdata = trajdata.sample(sample)
-    lon,lat = col
-    lon1 = trajdata[lon].mean()
-    lat1 = trajdata[lat].mean()
-    bounds = [lon1,lat1,lon1,lat1]
-    params = grid_params(bounds,accuracy = accuracy)
-    lonstart,latstart,deltalon,deltalat = params
-    x = np.linspace(lonstart,lonstart+deltalon,gap)
-    y = np.linspace(latstart,latstart+deltalat,gap)
-    xx,yy = np.meshgrid(x,y)
-    tmp1 = pd.DataFrame()
-    xx=xx.reshape(1,-1)
-    yy=yy.reshape(1,-1)
-    tmp1['lon'] = xx[0]
-    tmp1['lat'] = yy[0]
-    r = tmp1.iloc[0]
-    def GiniIndex(p):
-        cum = np.cumsum(sorted(np.append(p, 0)))
-        sum = cum[-1]
-        x = np.array(range(len(cum))) / len(p)
-        y = cum / sum
-        B = np.trapz(y, x=x)
-        A = 0.5 - B
-        G = A / (A + B)
-        return G
-    def getgini(r):
-        lon1,lat1 = r['lon'], r['lat']
-        params_tmp=[lon1,lat1,deltalon,deltalat]
-        tmp = pd.DataFrame()
-        tmp['LONCOL'],tmp['LATCOL'] = GPS_to_grids(trajdata[lon], trajdata[lat], params_tmp)
-        tmp['count'] = 1
-        tmp = tmp.groupby(['LONCOL','LATCOL'])['count'].sum().reset_index()
-        Gini = GiniIndex(list(tmp['count']))
-        return Gini
-    tmp1['gini'] = tmp1.apply(lambda r:getgini(r),axis = 1)
-    if gini == 'max':
-        r = tmp1[tmp1['gini'] == tmp1['gini'].max()].iloc[0]
-        print('Gini index: '+str(r['gini']))
-    elif gini == 'min':
-        r = tmp1[tmp1['gini'] == tmp1['gini'].min()].iloc[0]
-        print('Gini index: '+str(r['gini']))
-    elif gini == 'median':
-        tmp1['tmp'] = abs(tmp1['gini']-tmp1['gini'].median())
-        tmp1 = tmp1.sort_values(by = 'tmp')
-        r = tmp1.iloc[0]
-        print('Gini index: '+str(r['gini']))
+    if sample>0:
+        trajdata = data.sample(sample)
     else:
-        raise Exception('Error setting of gini') 
-    params = [r['lon'],r['lat'],deltalon,deltalat]
-    return params
+        trajdata = data.copy()
+    params = initialparams
+    times = 1000
+    theta_lambda = 90
+
+    if len(params)==4:
+        params = [*params,0]
+    [uid,lon,lat] = col
+    try:
+        from sko.GA import GA
+    except:
+        raise Exception('Please install scikit-opt, run following code in cmd: pip install scikit-opt')
+    def grids_index_gini(gpsdata,params,col=['longitude','latitude']):
+        [lon,lat] = col
+        data = gpsdata.copy()
+        data['LONCOL'],data['LATCOL'] = GPS_to_grids(data[lon],data[lat],params=params)
+        data['count'] = 1
+        data = data.groupby(['LONCOL','LATCOL'])['count'].sum().reset_index()
+        def GiniIndex(p):
+            cum = np.cumsum(sorted(np.append(p, 0)))
+            sum = cum[-1]
+            x = np.array(range(len(cum))) / len(p)
+            y = cum / sum
+            B = np.trapz(y, x=x)
+            A = 0.5 - B
+            G = A / (A + B)
+            return G
+        Gini = GiniIndex(list(data['count']))
+        return Gini
+
+    def grids_index_centerdist(gpsdata,params, col = [lon,lat]):
+        [lon,lat] = col
+        data = gpsdata.copy()
+        data['LONCOL'],data['LATCOL'] = GPS_to_grids(data[lon],data[lat],params=params)
+        data['HBLON'],data['HBLAT'] = grids_centre(data['LONCOL'],data['LATCOL'],params=params)
+        data['dist'] = getdistance(data['HBLON'],data['HBLAT'],data[lon],data[lat])
+        return data['dist'].quantile(0.5)
+
+    def grids_index_gridscount(gpsdata,params, col = [uid,lon,lat]):
+        [uid,lon,lat] = col
+        data = gpsdata.copy()
+        data['LONCOL'],data['LATCOL'] = GPS_to_grids(data[lon],data[lat],params=params)
+        return data[[uid,'LONCOL','LATCOL']].drop_duplicates().groupby(uid)['LONCOL'].count().quantile(0.5)
+    
+    if method=="centerdist":
+        def f_centerdist(x):
+            return grids_index_centerdist(trajdata,[params[0]+x[0]/times,
+            params[1]+x[1]/times,
+            params[2], 
+            params[3],
+            x[2]/theta_lambda],col=[lon,lat])
+        f = f_centerdist
+
+    elif method=="gini":
+        def f_gini(x):
+            return -grids_index_gini(trajdata,[params[0]+x[0]/times,
+            params[1]+x[1]/times,
+            params[2], 
+            params[3],
+            x[2]/theta_lambda],col=[lon,lat])
+        f = f_gini
+    elif method=="gridscount":
+        def f_gridscount(x):
+            return grids_index_gridscount(trajdata,[params[0]+x[0]/times,
+            params[1]+x[1]/times,
+            params[2], 
+            params[3],
+            x[2]/theta_lambda],col=[uid,lon,lat])
+        f = f_gridscount
+    else:
+        raise Exception('Method should be one of: centerdist,gini,gridscount')
+
+    ga = GA(func=f, 
+            n_dim=3, 
+            size_pop=50, 
+            max_iter=300, 
+            prob_mut=0.001, 
+            lb=[0, 0,0], 
+            ub=[params[2]*times, params[3]*times,90*theta_lambda], 
+            precision=1e-7)
+    result = ga.run()
+    
+    x = result[0]
+    params_optimized = [params[0]+x[0]/times,params[1]+x[1]/times,params[2], 
+        params[3],x[2]/theta_lambda]
+    
+    if printlog:
+        print('Optimized index '+method+':',f(result[0]))
+        print('Optimized gridding params:',params_optimized)
+        print('Optimizing cost:')
+        import pandas as pd
+        import matplotlib.pyplot as plt
+        Y_history = pd.DataFrame(ga.all_history_Y)
+        fig, ax = plt.subplots(2, 1)
+        ax[0].plot(Y_history.index, Y_history.values, '.', color='red')
+        Y_history.min(axis=1).cummin().plot(kind='line')
+
+        plt.show()
+        #生成点的geodataframe
+        trajdata['geometry'] = gpd.points_from_xy(trajdata[lon],trajdata[lat])
+        trajdata = gpd.GeoDataFrame(trajdata)
+        #效果
+        trajdata['LONCOL'],trajdata['LATCOL'] = GPS_to_grids(trajdata[lon],trajdata[lat],params=params_optimized)
+        grids = trajdata.drop_duplicates(subset = ['LONCOL','LATCOL']).copy()
+        grids['geometry'] = gridid_to_polygon(grids['LONCOL'],grids['LATCOL'],params=params_optimized)
+        grids = gpd.GeoDataFrame(grids)
+        print('Result:')
+        import matplotlib.pyplot as plt
+        fig =plt.figure(1,(8,8),dpi=300)
+        ax =plt.subplot(111)
+        plt.sca(ax)
+        plt.axis('off')
+        trajdata.plot(ax = ax,markersize = 0.3)
+        grids.plot(lw = 1,edgecolor = (0.8,0.8,0.8,1),facecolor = (0,0,0,0.05),ax = ax)
+
+        plt.show()
+    return params_optimized
+
 
 def regenerate_params(grid):
     '''

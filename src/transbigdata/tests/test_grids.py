@@ -78,15 +78,6 @@ class TestGrids:
                  [113.60243183,  22.4022483]]
         assert np.allclose(np.array(result.exterior.coords), truth)
 
-    def test_grid_params_gini(self):
-        data = pd.DataFrame([[113.6, 22.4], [113.61, 22.41], [113.6, 22.42]],
-                            columns=['lon', 'lat'])
-        result = tbd.grid_params_gini(
-            data, col=['lon', 'lat'], accuracy=500, gini='max', gap=2, sample=10000)
-        truth = [113.60333333333331, 22.41,
-                 0.004863931711621178, 0.004496605206422906]
-        assert np.allclose(result, truth)
-
     def test_geohash(self):
         d = pd.DataFrame([[113.59550842,  22.4],
                           [113.59775421,  22.40359627],
