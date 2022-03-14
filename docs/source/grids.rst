@@ -64,29 +64,7 @@ params : List
     tbd.grid_params(bounds,accuracy = 500)
 
 
-.. function:: grid_params_optimize(data,initialparams,col=['uid','lon','lat'],method='centerdist',printlog=False,sample=0)
 
-提供了三种优化栅格化参数的方法
-
-**输入**
-
-data : DataFrame
-    轨迹数据
-initialparams : List
-    初始栅格化参数
-col : List
-    列名 [uid,lon,lat]
-method : str
-    优化方法: centerdist, gini, gridscount
-printlog : bool
-    是否打印日志
-sample : int
-    抽样数据量，设置为0则不抽样
-    
-**输出**
-
-params_optimized : List
-    优化后的栅格化参数
 
 .. function:: transbigdata.GPS_to_grids(lon,lat,params)
 
@@ -192,6 +170,32 @@ grid : GeoDataFrame
 params : List  
     栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0  
 
+栅格参数的优化
+=====================
+
+.. function:: transbigdata.grid_params_optimize(data,initialparams,col=['uid','lon','lat'],method='centerdist',printlog=False,sample=0)
+
+提供了三种优化栅格化参数的方法
+
+**输入**
+
+data : DataFrame
+    轨迹数据
+initialparams : List
+    初始栅格化参数
+col : List
+    列名 [uid,lon,lat]
+method : str
+    优化方法: centerdist, gini, gridscount
+printlog : bool
+    是否打印日志
+sample : int
+    抽样数据量，设置为0则不抽样
+    
+**输出**
+
+params_optimized : List
+    优化后的栅格化参数
 
 geohash编码
 ==============
