@@ -362,7 +362,7 @@ def grid_params_optimize(data,initialparams,col=['uid','lon','lat'],method='cent
     Parameters
     -------
     data : DataFrame
-        Data, with two columns of grid ID
+        Trajectory data
     initialparams : List
         Initial griding params
     col : List
