@@ -147,7 +147,7 @@ def getbusdata(city,keywords,accurate=True):
         searchinfo=json.loads(response1.read().decode('utf8'))
         return str(searchinfo['content']['code'])
     def getlinegeo(uid,c):
-        url = 'http://map.baidu.com/?qt=bsl&uid='+uid+'&c='+c
+        url = 'http://map.baidu.com/?qt=bsl&uid='+uid+'&c='+c+"&auth=1"
         response = urllib.request.urlopen(url,timeout = 60)
         searchinfo=json.loads(response.read().decode('utf8'))
         linename = searchinfo['content'][0]['pair_line']['name']
