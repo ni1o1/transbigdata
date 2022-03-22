@@ -41,7 +41,8 @@ class TestGrids:
         assert np.allclose(result, truth)
 
     def test_gridid_to_polygon(self):
-        result = tbd.gridid_to_polygon(pd.Series(21), pd.Series(67), self.params)[0]
+        result = tbd.gridid_to_polygon(
+            pd.Series(21), pd.Series(67), self.params)[0]
         truth = [[113.69970522,  22.69902425],
                  [113.70456889,  22.69902425],
                  [113.70456889,  22.70352085],
@@ -100,19 +101,20 @@ class TestGrids:
                                113.597754, 113.595509])
 
     def test_regenerate_params(self):
-        grid,params = tbd.rect_grids(self.bounds,500)
+        grid, params = tbd.rect_grids(self.bounds, 500)
         result = tbd.regenerate_params(grid)
         truth = (113.60000000000001,
- 22.400000000000002,
- 0.004863669213932553,
- 0.004496605206423254)
-        assert np.allclose(result,truth)
-    
+                 22.400000000000002,
+                 0.004863669213932553,
+                 0.004496605206423254)
+        assert np.allclose(result, truth)
+
     def test_grid_from_params(self):
-        result = list(tbd.rect_grids(self.bounds,params=self.params)[0]['geometry'].iloc[3].exterior.coords)
+        result = list(tbd.rect_grids(self.bounds, params=self.params)[
+                      0]['geometry'].iloc[3].exterior.coords)
         truth = [(113.60243183460696, 22.402248302603212),
-                (113.6072955038209, 22.402248302603212),
-                (113.6072955038209, 22.406744907809635),
-                (113.60243183460696, 22.406744907809635),
-                (113.60243183460696, 22.402248302603212)]
-        assert np.allclose(result,truth)
+                 (113.6072955038209, 22.402248302603212),
+                 (113.6072955038209, 22.406744907809635),
+                 (113.60243183460696, 22.406744907809635),
+                 (113.60243183460696, 22.402248302603212)]
+        assert np.allclose(result, truth)

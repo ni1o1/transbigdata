@@ -1,8 +1,5 @@
 import transbigdata as tbd
-import numpy as np
 import pandas as pd
-import geopandas as gpd
-from shapely.geometry import Polygon
 
 
 class TestDataquality:
@@ -34,7 +31,7 @@ class TestDataquality:
                                       22.556867999999998, 1, 57],
                                   [22233, '14:57:35', 113.934036, 22.555267, 1, 65],
                                   [22233, '20:54:11', 113.942467, 22.507566, 0, 21],
-                                  [22233, '18:51:30', 113.964569, 22.541849, 0, 0]],columns = ['Vehicleid','Time','slon','slat','OpenStatus','Speed'] )
+                                  [22233, '18:51:30', 113.964569, 22.541849, 0, 0]], columns=['Vehicleid', 'Time', 'slon', 'slat', 'OpenStatus', 'Speed'])
 
     def test_data_summary(self):
-        tbd.data_summary(self.data,show_sample_duration = True)
+        tbd.data_summary(self.data, show_sample_duration=True)

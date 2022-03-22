@@ -1,9 +1,7 @@
 
 import transbigdata as tbd
-import numpy as np
 import pandas as pd
 import geopandas as gpd
-from shapely.geometry import Polygon
 
 
 class TestBikedata:
@@ -114,8 +112,9 @@ class TestBikedata:
     def test_busgps_arriveinfo(self):
         arriveinfo = tbd.busgps_arriveinfo(self.data, self.line, self.stop)
         assert len(arriveinfo) == 9
-        assert len(tbd.busgps_arriveinfo(self.data, self.line, self.stop,method='dislimit'))==7
+        assert len(tbd.busgps_arriveinfo(
+            self.data, self.line, self.stop, method='dislimit')) == 7
         onewaytime = tbd.busgps_onewaytime(arriveinfo,
                                            start='剑河路',
-                                           end='航新路', col=['VehicleId', 'stopname','arrivetime','leavetime'])
+                                           end='航新路', col=['VehicleId', 'stopname', 'arrivetime', 'leavetime'])
         assert onewaytime['duration'].iloc[0] == 562.0

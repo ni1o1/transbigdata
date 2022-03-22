@@ -1,8 +1,5 @@
 import transbigdata as tbd
-import numpy as np
 import pandas as pd
-import geopandas as gpd
-from shapely.geometry import Polygon
 
 
 class TestVisualization:
@@ -34,16 +31,23 @@ class TestVisualization:
                                       22.556867999999998, 1, 57],
                                   [22233, '14:57:35', 113.934036, 22.555267, 1, 65],
                                   [22233, '20:54:11', 113.942467, 22.507566, 0, 21],
-                                  [22233, '18:51:30', 113.964569, 22.541849, 0, 0]], columns=['VehicleNum','Time','Lng','Lat','OpenStatus','Speed'])
+                                  [22233, '18:51:30', 113.964569, 22.541849, 0, 0]], columns=['VehicleNum', 'Time', 'Lng', 'Lat', 'OpenStatus', 'Speed'])
 
     def test_visualization(self):
         data = self.data
-        data['count']=1
-        vmap = tbd.visualization_data(data,col = ['Lng','Lat'],accuracy=1000,height = 500)
-        vmap = tbd.visualization_data(data,col = ['Lng','Lat','count'],accuracy=1000,height = 500)
-        vmap = tbd.visualization_trip(data,col = ['Lng', 'Lat', 'VehicleNum', 'Time'])
-        oddata = tbd.taxigps_to_od(data, col=['VehicleNum', 'Time', 'Lng', 'Lat', 'OpenStatus'])
-        vmap = tbd.visualization_od(oddata,col=['slon', 'slat', 'elon', 'elat'])
+        data['count'] = 1
+        vmap = tbd.visualization_data(
+            data, col=['Lng', 'Lat'], accuracy=1000, height=500)
+        vmap = tbd.visualization_data(
+            data, col=['Lng', 'Lat', 'count'], accuracy=1000, height=500)
+        vmap = tbd.visualization_trip(
+            data, col=['Lng', 'Lat', 'VehicleNum', 'Time'])
+        oddata = tbd.taxigps_to_od(
+            data, col=['VehicleNum', 'Time', 'Lng', 'Lat', 'OpenStatus'])
+        vmap = tbd.visualization_od(
+            oddata, col=['slon', 'slat', 'elon', 'elat'])
         oddata['count'] = 1
-        vmap = tbd.visualization_od(oddata,col=['slon', 'slat', 'elon', 'elat','count'])
-        assert len(tbd.taxigps_traj_point(data,oddata,col=['VehicleNum', 'Time', 'Lng', 'Lat', 'OpenStatus'])[0])==5
+        vmap = tbd.visualization_od(
+            oddata, col=['slon', 'slat', 'elon', 'elat', 'count'])
+        assert len(tbd.taxigps_traj_point(data, oddata, col=[
+                   'VehicleNum', 'Time', 'Lng', 'Lat', 'OpenStatus'])[0]) == 5

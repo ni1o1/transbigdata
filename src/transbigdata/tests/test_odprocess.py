@@ -39,24 +39,33 @@ class TestODprocess:
             114.62397036947118, 22.864719035968925], [114.62397036947118, 22.39928709355355]])], columns=['geometry'])
 
     def test_odprocess(self):
-        
-        assert len(tbd.clean_drift(self.data,col = ['VehicleNum','time','slon','slat']))==19
-        assert len(tbd.clean_taxi_status(self.data,['VehicleNum','time','OpenStatus']))==19
-        assert len(tbd.clean_traj(self.data,col = ['VehicleNum','time','slon','slat']))==18
+
+        assert len(tbd.clean_drift(self.data, col=[
+                   'VehicleNum', 'time', 'slon', 'slat'])) == 19
+        assert len(tbd.clean_taxi_status(
+            self.data, ['VehicleNum', 'time', 'OpenStatus'])) == 19
+        assert len(tbd.clean_traj(self.data, col=[
+                   'VehicleNum', 'time', 'slon', 'slat'])) == 18
         data = tbd.clean_outofshape(self.data, self.sz, col=['slon', 'slat'])
         data['time'] = pd.to_datetime(data['time'])
-        assert len(tbd.traj_sparsify(data,col=['VehicleNum', 'time', 'slon', 'slat']))==19
-        assert len(tbd.traj_sparsify(data,col = ['VehicleNum','time', 'slon', 'slat'],method = 'interpolate'))==1707
-        assert len(tbd.traj_densify(data,col=['VehicleNum', 'time', 'slon', 'slat']))==1725
-        assert len(tbd.points_to_traj(data,col=[ 'slon', 'slat','VehicleNum']))==2
+        assert len(tbd.traj_sparsify(
+            data, col=['VehicleNum', 'time', 'slon', 'slat'])) == 19
+        assert len(tbd.traj_sparsify(
+            data, col=['VehicleNum', 'time', 'slon', 'slat'], method='interpolate')) == 1707
+        assert len(tbd.traj_densify(
+            data, col=['VehicleNum', 'time', 'slon', 'slat'])) == 1725
+        assert len(tbd.points_to_traj(
+            data, col=['slon', 'slat', 'VehicleNum'])) == 2
         assert len(data) == 19
-        assert len(tbd.clean_same(data,col = ['VehicleNum','time', 'slon', 'slat']))==19
+        assert len(tbd.clean_same(
+            data, col=['VehicleNum', 'time', 'slon', 'slat'])) == 19
         bounds = [113.75, 22.4, 114.62, 22.86]
         data = tbd.clean_outofbounds(data, bounds, col=['slon', 'slat'])
         assert len(data) == 19
         params = tbd.grid_params(bounds, accuracy=1000)
-        stay,move = tbd.traj_stay_move(data,params,col = ['VehicleNum','time','slon','slat'],activitytime = 1800)
-        assert len(stay)==2
+        stay, move = tbd.traj_stay_move(
+            data, params, col=['VehicleNum', 'time', 'slon', 'slat'], activitytime=1800)
+        assert len(stay) == 2
         tbd.plot_activity(stay)
         data['LONCOL'], data['LATCOL'] = tbd.GPS_to_grids(
             data['slon'], data['slat'], params)
@@ -84,13 +93,15 @@ class TestODprocess:
         oddata = tbd.taxigps_to_od(
             data, col=['VehicleNum', 'time', 'slon', 'slat', 'OpenStatus'])
         assert len(oddata) == 4
-        res2 = tbd.odagg_grid(oddata, params,arrow = True)[['SLONCOL', 'SLATCOL']].values
+        res2 = tbd.odagg_grid(oddata, params, arrow=True)[
+            ['SLONCOL', 'SLATCOL']].values
         truth = [[6, 25],
                  [7, 28],
                  [17, 17],
                  [18, 16]]
         assert np.allclose(res2, truth)
-        assert len(tbd.odagg_shape(oddata, self.sz,params=params)) == 1
+        assert len(tbd.odagg_shape(oddata, self.sz, params=params)) == 1
         assert len(tbd.odagg_shape(oddata, self.sz)) == 1
         data['count'] = 1
-        assert tbd.dataagg(data,self.sz,col = ['slon','slat','count'],accuracy=500)[0]['count'].iloc[0]==19
+        assert tbd.dataagg(data, self.sz, col=['slon', 'slat', 'count'], accuracy=500)[
+            0]['count'].iloc[0] == 19
