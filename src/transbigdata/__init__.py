@@ -29,3 +29,4 @@ from .visualizion import *
 
 name = "transbigdata"
 __version__ = '0.3.11'
+__author__ = 'Qing Yu <qingyu0815@foxmail.com>'
