@@ -1,8 +1,8 @@
 import geopandas as gpd
 import pandas as pd
+import numpy as np
 from .grids import GPS_to_grids
 from .preprocess import id_reindex, clean_same
-import numpy as np
 
 
 def plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],

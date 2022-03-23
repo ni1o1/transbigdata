@@ -1,12 +1,12 @@
 
 import numpy as np
 import pandas as pd
-from .coordinates import getdistance
 from scipy.spatial import cKDTree
 import itertools
 from operator import itemgetter
 import geopandas as gpd
 import math
+from .coordinates import getdistance
 
 
 def ckdnearest(dfA_origin,

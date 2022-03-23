@@ -485,11 +485,10 @@ def grid_params_optimize(data,
     [uid, lon, lat] = col
     try:
         from sko.GA import GA
-    except Exception as e:
-        print(e.args)
-        raise Exception('Please install scikit-opt, run following code \
-in cmd: pip install scikit-opt')
-
+    except ImportError:
+        raise ImportError(
+            "Please install scikit-opt, run following code "
+            "in cmd: pip install scikit-opt")
     def grids_index_gini(gpsdata, params, col=['longitude', 'latitude']):
         [lon, lat] = col
         data = gpsdata.copy()

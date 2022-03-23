@@ -49,9 +49,11 @@ def read_mapboxtoken():
         mapboxtoken = f.readline()
         f.close()
     except Exception:
-        raise Exception('Mapboxtoken not found, \
- please use tbd.set_mapboxtoken() to set it first, \
- see: https://transbigdata.readthedocs.io/en/latest/plot_map.html')
+        raise Exception(
+            "Mapboxtoken not found, "
+            "please use tbd.set_mapboxtoken() to set it first, see: "
+            "https://transbigdata.readthedocs.io/en/latest/plot_map.html"
+        )
     return mapboxtoken
 
 

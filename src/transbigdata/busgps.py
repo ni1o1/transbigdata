@@ -1,13 +1,13 @@
 import geopandas as gpd
 import pandas as pd
 import numpy as np
+from shapely.geometry import LineString
+import shapely
 from .preprocess import (
     clean_same,
     clean_outofshape,
     id_reindex
 )
-from shapely.geometry import LineString
-import shapely
 
 
 def busgps_arriveinfo(data, line, stop, col=[

@@ -38,9 +38,10 @@ def visualization_trip(trajdata, col=['Lng', 'Lat', 'ID', 'Time'],
     '''
     try:
         from keplergl import KeplerGl
-    except Exception:
-        raise Exception('Please install keplergl，run \
-the following code in cmd: pip install keplergl')
+    except ImportError:
+        raise ImportError(
+            "Please install keplergl, run "
+            "the following code in cmd: pip install keplergl")
     print('Processing trajectory data...')
     [Lng, Lat, ID, timecol] = col
     trajdata[timecol] = pd.to_datetime(trajdata[timecol])
@@ -132,9 +133,10 @@ def visualization_od(oddata, col=['slon', 'slat', 'elon', 'elat'],
     '''
     try:
         from keplergl import KeplerGl
-    except Exception:
-        raise Exception('Please install keplergl，run the following code in cmd: \
-            pip install keplergl')
+    except ImportError:
+        raise ImportError(
+            "Please install keplergl, run "
+            "the following code in cmd: pip install keplergl")
     import numpy as np
     if len(col) == 4:
         slon, slat, elon, elat = col
@@ -364,9 +366,10 @@ def visualization_data(data, col=['lon', 'lat'], accuracy=500, height=500,
     '''
     try:
         from keplergl import KeplerGl
-    except Exception:
-        raise Exception('Please install keplergl，run the following code in cmd: \
-pip install keplergl')
+    except ImportError:
+        raise ImportError(
+            "Please install keplergl, run "
+            "the following code in cmd: pip install keplergl")
     if len(col) == 2:
         lon, lat = col[0], col[1]
         count = 'count'
