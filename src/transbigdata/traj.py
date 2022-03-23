@@ -5,7 +5,8 @@ from .preprocess import id_reindex, clean_same
 import numpy as np
 
 
-def plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL']):
+def plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
+                  figsize=(10, 5), dpi=250):
     '''
     Plot the activity plot of individual
 
@@ -51,7 +52,7 @@ def plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL']):
     import seaborn as sns
     cmap = ListedColormap(sns.hls_palette(
         n_colors=len(activityinfo), l=.5, s=0.8))
-    plt.figure(1, (10, 5), dpi=250)
+    plt.figure(1, figsize, dpi)
     ax = plt.subplot(111)
     plt.sca(ax)
     for day in range(len(dates)):
