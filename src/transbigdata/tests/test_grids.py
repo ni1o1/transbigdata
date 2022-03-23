@@ -14,14 +14,13 @@ class TestGrids:
         result = tbd.rect_grids(self.bounds, accuracy=500)
         res1 = result[0]['geometry'].iloc[0]
         res2 = result[1]
-        assert np.allclose(np.array(res1.exterior.coords), [[113.59756817,  22.3977517],
-                                                            [113.60243183,
-                                                                22.3977517],
-                                                            [113.60243183,
-                                                                22.4022483],
-                                                            [113.59756817,
-                                                                22.4022483],
-                                                            [113.59756817,  22.3977517]])
+        assert np.allclose(
+            np.array(res1.exterior.coords), [
+                [113.59756817,  22.3977517],
+                [113.60243183, 22.3977517],
+                [113.60243183, 22.4022483],
+                [113.59756817, 22.4022483],
+                [113.59756817,  22.3977517]])
         truth = (113.6, 22.4, 0.004863669213934598, 0.004496605206422906)
         assert np.allclose(res2, truth)
 
@@ -97,8 +96,10 @@ class TestGrids:
                  [113.59550837,  22.39999987]]
         assert np.allclose(result, truth)
         c = tbd.geohash_decode(c)[0].astype('float').values
-        assert np.allclose(c, [113.595509, 113.597754, 113.602246, 113.604492, 113.602246,
-                               113.597754, 113.595509])
+        assert np.allclose(c,
+                           [113.595509, 113.597754,
+                            113.602246, 113.604492,
+                            113.602246, 113.597754, 113.595509])
 
     def test_regenerate_params(self):
         grid, params = tbd.rect_grids(self.bounds, 500)

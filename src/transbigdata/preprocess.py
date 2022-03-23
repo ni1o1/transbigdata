@@ -1,19 +1,29 @@
 import geopandas as gpd
 import pandas as pd
-from .grids import *
+from .grids import (
+    grid_params,
+    GPS_to_grids,
+    grids_centre,
+    gridid_to_polygon
+)
 from .CoordinatesConverter import getdistance
 
 
 def clean_same(data, col=['VehicleNum', 'Time', 'Lng', 'Lat']):
     '''
-    Delete the data with the same information as the data before and after to reduce the amount of data. For example, if several consecutive data of an individual have the same information except for the time, only the first and last two data can be kept    
+    Delete the data with the same information as the data before and
+    after to reduce the amount of data. For example, if several consecutive
+    data of an individual have the same information except for the time,
+    only the first and last two data can be kept
 
     Parameters
     -------
     data : DataFrame
         Data
     col : List
-        The column name, in the order of [‘Vehicleid, Time’]. It will sort by time, and then determine the information of other columns besides the time
+        The column name, in the order of [‘Vehicleid, Time’]. It will sort
+        by time, and then determine the information of other columns besides
+        the time
 
     Returns
     -------
@@ -34,9 +44,14 @@ def clean_same(data, col=['VehicleNum', 'Time', 'Lng', 'Lat']):
     return data1
 
 
-def clean_drift(data, col=['VehicleNum', 'Time', 'Lng', 'Lat'], speedlimit=80, dislimit=1000):
+def clean_drift(data, col=['VehicleNum', 'Time', 'Lng', 'Lat'],
+                speedlimit=80, dislimit=1000):
     '''
-    Delete the drift data. The select principle is that: if the speed of a trajectory point is larger than the speed limit with before and after points, while the speed between the before and after data is less than the speedlimit. The time column in the input data is calculated more efficiently if it is in datetime format.
+    Delete the drift data. The select principle is that: if the speed of a
+    trajectory point is larger than the speed limit with before and after
+    points, while the speed between the before and after data is less than
+    the speedlimit. The time column in the input data is calculated more
+    efficiently if it is in datetime format.
 
     Parameters
     -------
@@ -61,11 +76,20 @@ def clean_drift(data, col=['VehicleNum', 'Time', 'Lng', 'Lat'], speedlimit=80, d
         data1[i+'_pre'] = data1[i].shift()
         data1[i+'_next'] = data1[i].shift(-1)
     data1['dis_pre'] = getdistance(
-        data1[Lng], data1[Lat], data1[Lng+'_pre'], data1[Lat+'_pre'])
+        data1[Lng],
+        data1[Lat],
+        data1[Lng+'_pre'],
+        data1[Lat+'_pre'])
     data1['dis_next'] = getdistance(
-        data1[Lng], data1[Lat], data1[Lng+'_next'], data1[Lat+'_next'])
+        data1[Lng],
+        data1[Lat],
+        data1[Lng+'_next'],
+        data1[Lat+'_next'])
     data1['dis_prenext'] = getdistance(
-        data1[Lng+'_pre'], data1[Lat+'_pre'], data1[Lng+'_next'], data1[Lat+'_next'])
+        data1[Lng+'_pre'],
+        data1[Lat+'_pre'],
+        data1[Lng+'_next'],
+        data1[Lat+'_next'])
     data1['timegap_pre'] = data1[Time+'_dt'] - data1[Time+'_dt_pre']
     data1['timegap_next'] = data1[Time+'_dt_next'] - data1[Time+'_dt']
     data1['timegap_prenext'] = data1[Time+'_dt_next'] - data1[Time+'_dt_pre']
@@ -76,25 +100,36 @@ def clean_drift(data, col=['VehicleNum', 'Time', 'Lng', 'Lat'], speedlimit=80, d
     data1['speed_prenext'] = data1['dis_prenext'] / \
         data1['timegap_prenext'].dt.total_seconds()*3.6
     if speedlimit:
-        data1 = data1[-((data1[VehicleNum+'_pre'] == data1[VehicleNum]) & (data1[VehicleNum+'_next'] == data1[VehicleNum]) &
-                        (data1['speed_pre'] > speedlimit) & (data1['speed_next'] > speedlimit) & (data1['speed_prenext'] < speedlimit))]
+        data1 = data1[
+            -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
+              (data1[VehicleNum+'_next'] == data1[VehicleNum]) &
+                (data1['speed_pre'] > speedlimit) &
+              (data1['speed_next'] > speedlimit) &
+              (data1['speed_prenext'] < speedlimit))]
     if dislimit:
-        data1 = data1[-((data1[VehicleNum+'_pre'] == data1[VehicleNum]) & (data1[VehicleNum+'_next'] == data1[VehicleNum]) &
-                        (data1['dis_pre'] > dislimit) & (data1['dis_next'] > dislimit) & (data1['dis_prenext'] < dislimit))]
+        data1 = data1[
+            -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
+              (data1[VehicleNum+'_next'] == data1[VehicleNum]) &
+              (data1['dis_pre'] > dislimit) &
+              (data1['dis_next'] > dislimit) &
+              (data1['dis_prenext'] < dislimit))]
     data1 = data1[data.columns]
     return data1
 
 
 def clean_outofbounds(data, bounds, col=['Lng', 'Lat']):
     '''
-    The input is the latitude and longitude coordinates of the lower left and upper right of the study area and exclude data that are outside the study area
+    The input is the latitude and longitude coordinates of the lower
+    left and upper right of the study area and exclude data that are
+    outside the study area
 
     Parameters
     -------
     data : DataFrame
         Data
-    bounds : List    
-        Latitude and longitude of the lower left and upper right of the study area, in the order of [lon1, lat1, lon2, lat2]
+    bounds : List
+        Latitude and longitude of the lower left and upper right of
+        the study area, in the order of [lon1, lat1, lon2, lat2]
     col : List
         Column name of longitude and latitude
 
@@ -104,9 +139,12 @@ def clean_outofbounds(data, bounds, col=['Lng', 'Lat']):
         Data within the scope of the study
     '''
     lon1, lat1, lon2, lat2 = bounds
-    if (lon1 > lon2) | (lat1 > lat2) | (abs(lat1) > 90) | (abs(lon1) > 180) | (abs(lat2) > 90) | (abs(lon2) > 180):
+    if (lon1 > lon2) | (lat1 > lat2) | (abs(lat1) > 90) | (
+            abs(lon1) > 180) | (abs(lat2) > 90) | (abs(lon2) > 180):
         raise Exception(
-            'Bounds error. The input bounds should be in the order of [lon1,lat1,lon2,lat2]. (lon1,lat1) is the lower left corner and (lon2,lat2) is the upper right corner.')
+            'Bounds error. The input bounds should be in the order \
+of [lon1,lat1,lon2,lat2]. (lon1,lat1) is the lower left corner and \
+(lon2,lat2) is the upper right corner.')
     Lng, Lat = col
     data1 = data.copy()
     data1 = data1[(data1[Lng] > bounds[0]) & (data1[Lng] < bounds[2]) & (
@@ -116,18 +154,21 @@ def clean_outofbounds(data, bounds, col=['Lng', 'Lat']):
 
 def clean_outofshape(data, shape, col=['Lng', 'Lat'], accuracy=500):
     '''
-    Input the GeoDataFrame of the study area and exclude the data beyond the study area
+    Input the GeoDataFrame of the study area and exclude the data beyond
+    the study area
 
     Parameters
     -------
     data : DataFrame
         Data
-    shape : GeoDataFrame    
+    shape : GeoDataFrame
         The GeoDataFrame of the study area
     col : List
         Column name of longitude and latitude
     accuracy : number
-        The size of grid. The principle is to do the data gridding first and then do the data cleaning. The smaller the size is, the higher accuracy it has
+        The size of grid. The principle is to do the data gridding first
+        and then do the data cleaning. The smaller the size is, the higher
+        accuracy it has
 
     Returns
     -------
@@ -151,9 +192,12 @@ def clean_outofshape(data, shape, col=['Lng', 'Lat'], accuracy=500):
     return data1
 
 
-def clean_traj(data, col=['uid', 'str_time', 'lon', 'lat'], tripgap=1800, disgap=50000, speedlimit=80):
+def clean_traj(data, col=['uid', 'str_time', 'lon', 'lat'], tripgap=1800,
+               disgap=50000, speedlimit=80):
     '''
-    A combo for trajectory data cleaning, including defining the the time length threshold considered as a new trip, and the distance threshold considered as a new trip
+    A combo for trajectory data cleaning, including defining the the time
+    length threshold considered as a new trip, and the distance threshold
+    considered as a new trip
 
     Parameters
     -------
@@ -216,9 +260,13 @@ def dataagg(data, shape, col=['Lng', 'Lat', 'count'], accuracy=500):
     shape : GeoDataFrame
         The shape of the traffic zone
     col : List
-        You can either choose to input two columns, i.e., [‘Lng’,’Lat’], or to input three columns, i.e., [‘Lng’,’Lat’,’count’]”, where count means the points count
+        You can either choose to input two columns, i.e., [‘Lng’,’Lat’], or
+        to input three columns, i.e., [‘Lng’,’Lat’,’count’]”, where count
+        means the points count
     accuracy : number
-        The idea is to first implement data gridding and then the aggregation. Here, the grid size will be determined. The less the size is, the higher the accuracy will have.
+        The idea is to first implement data gridding and then the aggregation.
+        Here, the grid size will be determined. The less the size is, the
+        higher the accuracy will have.
 
     Returns
     -------
@@ -257,9 +305,11 @@ def dataagg(data, shape, col=['Lng', 'Lat', 'count'], accuracy=500):
     return aggresult, data1
 
 
-def id_reindex_disgap(data, col=['uid', 'lon', 'lat'], disgap=1000, suffix='_new'):
+def id_reindex_disgap(data, col=['uid', 'lon', 'lat'], disgap=1000,
+                      suffix='_new'):
     '''
-    Renumber the ID columns of the data，If two adjacent records exceed the distance, the number is the new ID
+    Renumber the ID columns of the data，If two adjacent records exceed the
+    distance, the number is the new ID
 
     Parameters
     -------
@@ -268,9 +318,11 @@ def id_reindex_disgap(data, col=['uid', 'lon', 'lat'], disgap=1000, suffix='_new
     col : str
         Name of the ID column to be re-indexed
     disgap : number
-        If two adjacent records exceed this distance, the number is the new ID
+        If two adjacent records exceed this distance, the number is the
+        new ID
     suffix : str
-        The suffix of the new column. When set to False, the former column will be replaced
+        The suffix of the new column. When set to False, the former column
+        will be replaced
 
     Returns
     -------
@@ -279,31 +331,41 @@ def id_reindex_disgap(data, col=['uid', 'lon', 'lat'], disgap=1000, suffix='_new
     '''
     uid, lon, lat = col
     data1 = data.copy()
-    data1[uid+suffix] = ((data1[uid].shift() != data1[uid]) |
-                         (getdistance(data1[lon], data1[lat], data1[lon].shift(), data1[lat].shift()) > disgap)).astype(int).cumsum()-1
+    data1[uid+suffix] = (
+        (data1[uid].shift() != data1[uid]) |
+        (getdistance(data1[lon],
+                     data1[lat],
+                     data1[lon].shift(),
+                     data1[lat].shift()) > disgap)).astype(int).cumsum()-1
     a = data1.groupby([uid+suffix])[lon].count()
     data1 = pd.merge(data1, a[a > 1].reset_index()[[uid+suffix]])
     return data1
 
 
-def id_reindex(data, col, new=False, timegap=None, timecol=None, suffix='_new', sample=None):
+def id_reindex(data, col, new=False, timegap=None, timecol=None,
+               suffix='_new', sample=None):
     '''
     Renumber the ID columns of the data
 
     Parameters
     -------
     data : DataFrame
-        Data 
+        Data
     col : str
         Name of the ID column to be re-indexed
     new : bool
-        False: the new number of the same ID will be the same index; True: according to the order of the table, the origin ID appears again with different index
+        False: the new number of the same ID will be the same index;
+        True: according to the order of the table, the origin ID appears
+        again with different index
     timegap : number
-        If an individual does not appear for a period of time (timegap is the time threshold), it is numbered as a new individual. This parameter should be set with timecol to take effect.
+        If an individual does not appear for a period of time (timegap is
+        the time threshold), it is numbered as a new individual. This parameter
+        should be set with timecol to take effect.
     timecol : str
         The column name of time, it should be set with timegap to take effect
     suffix : str
-        The suffix of the new column. When set to False, the former column will be replaced
+        The suffix of the new column. When set to False, the former column will
+        be replaced
     sample : int (optional)
         To desampling the data
 
@@ -312,7 +374,7 @@ def id_reindex(data, col, new=False, timegap=None, timecol=None, suffix='_new', 
     data1 : DataFrame
         Renumbered data
     '''
-    if suffix == False:
+    if not suffix:
         suffix = ''
     data1 = data.copy()
     if new:
@@ -328,8 +390,10 @@ def id_reindex(data, col, new=False, timegap=None, timecol=None, suffix='_new', 
     if (timegap is not None) & (timecol is not None):
         data1[timecol] = pd.to_datetime(data1[timecol])
         data1 = data1.sort_values(by=[col+suffix, timecol])
-        data1[col+suffix] = ((data1[col+suffix].shift() != data1[col+suffix]) |
-                             ((data1[timecol]-data1[timecol].shift()).dt.total_seconds() > timegap)).astype(int).cumsum()-1
+        data1[col+suffix] = (
+            (data1[col+suffix].shift() != data1[col+suffix]) |
+            ((data1[timecol]-data1[timecol].shift()).dt.total_seconds()
+             > timegap)).astype(int).cumsum()-1
 
     if sample:
         tmp = data1[col+suffix].drop_duplicates().sample(sample)

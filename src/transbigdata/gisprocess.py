@@ -9,9 +9,13 @@ import geopandas as gpd
 import math
 
 
-def ckdnearest(dfA_origin, dfB_origin, Aname=['lon', 'lat'], Bname=['lon', 'lat']):
+def ckdnearest(dfA_origin,
+               dfB_origin,
+               Aname=['lon', 'lat'],
+               Bname=['lon', 'lat']):
     '''
-    Search the nearest points in dfB_origin for dfA_origin, and calculate the distance
+    Search the nearest points in dfB_origin for dfA_origin,
+    and calculate the distance
 
     Parameters
     -------
@@ -43,16 +47,23 @@ def ckdnearest(dfA_origin, dfB_origin, Aname=['lon', 'lat'], Bname=['lon', 'lat'
     gdf = pd.merge(gdA, gdB, on='index')
     if (Aname[0] == Bname[0]) & (Aname[1] == Bname[1]):
         gdf['dist'] = getdistance(
-            gdf[Aname[0]+'_x'], gdf[Aname[1]+'_y'], gdf[Bname[0]+'_x'], gdf[Bname[1]+'_y'])
+            gdf[Aname[0]+'_x'],
+            gdf[Aname[1]+'_y'],
+            gdf[Bname[0]+'_x'],
+            gdf[Bname[1]+'_y'])
     else:
         gdf['dist'] = getdistance(
-            gdf[Aname[0]], gdf[Aname[1]], gdf[Bname[0]], gdf[Bname[1]])
+            gdf[Aname[0]],
+            gdf[Aname[1]],
+            gdf[Bname[0]],
+            gdf[Bname[1]])
     return gdf
 
 
 def ckdnearest_point(gdA, gdB):
     '''
-    This method will match the nearest points in gdfB to gdfA, and add a new column called dist
+    This method will match the nearest points in gdfB to gdfA,
+    and add a new column called dist
 
     Parameters
     -------
@@ -84,7 +95,8 @@ def ckdnearest_point(gdA, gdB):
 
 def ckdnearest_line(gdfA, gdfB):
     '''
-    This method will seach from gdfB to find the nearest line to the point in gdfA.
+    This method will seach from gdfB to find the nearest line to
+    the point in gdfA.
 
     Parameters
     -------
@@ -121,7 +133,8 @@ def ckdnearest_line(gdfA, gdfB):
 
 def splitline_with_length(Centerline, maxlength=100):
     '''
-    The intput is the linestring GeoDataFrame. The splited line’s length wull be no longer than maxlength
+    The intput is the linestring GeoDataFrame. The splited line’s
+    length wull be no longer than maxlength
 
     Parameters
     -------
@@ -146,8 +159,8 @@ def splitline_with_length(Centerline, maxlength=100):
                 lm = (k+1)*maxlength
             a = np.linspace(k*maxlength, lm, 10)
             ls = []
-            for l in a:
-                ls.append(route.interpolate(l))
+            for line in a:
+                ls.append(route.interpolate(line))
             lss.append(LineString(ls))
         lss = gpd.GeoDataFrame(lss, columns=['geometry'])
         return lss
@@ -165,7 +178,9 @@ def splitline_with_length(Centerline, maxlength=100):
 
 def merge_polygon(data, col):
     '''
-    The input is the GeoDataFrame of polygon geometry, and the col name. This function will merge the polygon based on the category in the mentioned column
+    The input is the GeoDataFrame of polygon geometry, and the col
+    name. This function will merge the polygon based on the category
+    in the mentioned column
 
     Parameters
     -------
@@ -192,7 +207,9 @@ def merge_polygon(data, col):
 
 def polyon_exterior(data, minarea=0):
     '''
-    The input is the GeoDataFrame of the polygon geometry. The method will construct new polygon by extending the outer boundary of the ploygon
+    The input is the GeoDataFrame of the polygon geometry. The method
+    will construct new polygon by extending the outer boundary of the
+    ploygon
 
     Parameters
     -------
@@ -238,7 +255,9 @@ def ellipse_params(data, col=['lon', 'lat'], confidence=95, epsg=None):
     confidence : number
         confidence level: 99，95 or 90
     epsg : number
-        If given, the original coordinates are transformed from WGS84 to the given EPSG coordinate system for confidence ellipse parameter estimation
+        If given, the original coordinates are transformed from WGS84 to
+        the given EPSG coordinate system for confidence ellipse parameter
+        estimation
     col: List
         Column names, [lon，lat]
 
@@ -246,7 +265,8 @@ def ellipse_params(data, col=['lon', 'lat'], confidence=95, epsg=None):
     -------
     params: List
         Centroid ellipse parameters[pos,width,height,theta,area,oblateness]
-        Respectively[Center point coordinates, minor axis, major axis, angle, area, oblateness]
+        Respectively [Center point coordinates, minor axis, major axis,
+        angle, area, oblateness]
     '''
     lon, lat = col
     if confidence == 99:
@@ -265,7 +285,6 @@ def ellipse_params(data, col=['lon', 'lat'], confidence=95, epsg=None):
     pos = point_np.mean(axis=0)
     cov = np.cov(point_np, rowvar=False)
     vals, vecs = np.linalg.eigh(cov)
-    order = vals.argsort()[::-1]
     theta = np.degrees(np.arctan2(*vecs[:, 0][::-1]))
     width, height = 2 * nstd * np.sqrt(vals)
     area = width/2*height/2*math.pi
@@ -277,13 +296,15 @@ def ellipse_params(data, col=['lon', 'lat'], confidence=95, epsg=None):
 
 def ellipse_plot(ellip_params, ax, **kwargs):
     '''
-    Enter the parameters of the confidence ellipse and plot the confidence ellipse
+    Enter the parameters of the confidence ellipse and plot the confidence
+    ellipse
 
     输入
     -------
     ellip_params : List
         Centroid ellipse parameters[pos,width,height,theta,area,oblateness]
-        Respectively[Center point coordinates, minor axis, major axis, angle, area, oblateness]
+        Respectively[Center point coordinates, minor axis, major axis, angle
+        , area, oblateness]
 
     ax : matplotlib.axes._subplots.AxesSubplot
         Where to plot

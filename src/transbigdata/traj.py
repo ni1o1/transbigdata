@@ -36,9 +36,11 @@ def plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL']):
     activity = activity[-activity['duration'].isnull()]
     import time
     activity['ststmp'] = activity[stime].astype(str).apply(
-        lambda x: time.mktime(time.strptime(x, '%Y-%m-%d %H:%M:%S'))).astype('int64')
+        lambda x: time.mktime(
+            time.strptime(x, '%Y-%m-%d %H:%M:%S'))).astype('int64')
     activity['etstmp'] = activity[etime].astype(str).apply(
-        lambda x: time.mktime(time.strptime(x, '%Y-%m-%d %H:%M:%S'))).astype('int64')
+        lambda x: time.mktime(
+            time.strptime(x, '%Y-%m-%d %H:%M:%S'))).astype('int64')
     activityinfo = activity[[LONCOL, LATCOL]].drop_duplicates()
     indexs = list(range(1, len(activityinfo)+1))
     np.random.shuffle(indexs)
@@ -49,7 +51,7 @@ def plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL']):
     import seaborn as sns
     cmap = ListedColormap(sns.hls_palette(
         n_colors=len(activityinfo), l=.5, s=0.8))
-    fig = plt.figure(1, (10, 5), dpi=250)
+    plt.figure(1, (10, 5), dpi=250)
     ax = plt.subplot(111)
     plt.sca(ax)
     for day in range(len(dates)):
@@ -63,10 +65,17 @@ def plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL']):
         bars['etstmp'] = bars['etstmp'] - \
             time.mktime(time.strptime(stime, '%Y-%m-%d %H:%M:%S'))
         for row in range(len(bars)):
-            plt.bar(day, height=bars['etstmp'].iloc[row]-bars['ststmp'].iloc[row],
+            plt.bar(day,
+                    height=bars['etstmp'].iloc[row]-bars['ststmp'].iloc[row],
                     bottom=bars['ststmp'].iloc[row],
-                    color=cmap(norm(activityinfo[(activityinfo[LONCOL] == bars[LONCOL].iloc[row]) &
-                                                 (activityinfo[LATCOL] == bars[LATCOL].iloc[row])]['index'].iloc[0])))
+                    color=cmap(
+                        norm(
+                            activityinfo[
+                                (activityinfo[LONCOL] == bars[LONCOL].
+                                 iloc[row]) &
+                                (activityinfo[LATCOL] ==
+                                 bars[LATCOL].iloc[row])
+                            ]['index'].iloc[0])))
     plt.xlim(-0.5, len(dates))
     plt.ylim(0, 24*3600)
     plt.xticks(range(len(dates)), [i[-5:] for i in dates])
@@ -75,7 +84,9 @@ def plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL']):
     plt.show()
 
 
-def traj_stay_move(data, params, col=['ID', 'dataTime', 'longitude', 'latitude'], activitytime=1800):
+def traj_stay_move(data, params,
+                   col=['ID', 'dataTime', 'longitude', 'latitude'],
+                   activitytime=1800):
     '''
     Input trajectory data and gridding parameters, identify stay and move
 
@@ -86,7 +97,8 @@ def traj_stay_move(data, params, col=['ID', 'dataTime', 'longitude', 'latitude']
     params : List
         gridding parameters
     col : List
-        The column name, in the order of ['ID','dataTime','longitude','latitude']
+        The column name, in the order of ['ID','dataTime','longitude',
+        'latitude']
     activitytime : Number
         How much time to regard as activity
 
@@ -137,7 +149,8 @@ def traj_stay_move(data, params, col=['ID', 'dataTime', 'longitude', 'latitude']
 
 def traj_densify(data, col=['Vehicleid', 'Time', 'Lng', 'Lat'], timegap=15):
     '''
-    Trajectory densification, ensure that there is a trajectory point each timegap seconds
+    Trajectory densification, ensure that there is a trajectory point each
+    timegap seconds
 
     Parameters
     -------
@@ -190,9 +203,13 @@ def traj_densify(data, col=['Vehicleid', 'Time', 'Lng', 'Lat'], timegap=15):
     return data1
 
 
-def traj_sparsify(data, col=['Vehicleid', 'Time', 'Lng', 'Lat'], timegap=15, method='subsample'):
+def traj_sparsify(data, col=['Vehicleid', 'Time', 'Lng', 'Lat'], timegap=15,
+                  method='subsample'):
     '''
-    Trajectory sparsify. When the sampling frequency of trajectory data is too high, the amount of data is too large, which is not convenient for the analysis of some studies that require less data frequency. This function can expand the sampling interval and reduce the amount of data.
+    Trajectory sparsify. When the sampling frequency of trajectory data is too
+    high, the amount of data is too large, which is not convenient for the
+    analysis of some studies that require less data frequency. This function
+    can expand the sampling interval and reduce the amount of data.
 
     Parameters
     -------
@@ -236,8 +253,9 @@ def traj_sparsify(data, col=['Vehicleid', 'Time', 'Lng', 'Lat'], timegap=15, met
         minmaxtime['utctime_new'] = minmaxtime[Vehicleid+'_new'] * \
             10000000000+minmaxtime[Time]
         minmaxtime[Time] = pd.to_datetime(minmaxtime[Time], unit='s')
-        data1 = pd.concat([data1, minmaxtime[['utctime_new', Time]]]).sort_values(
-            by=['utctime_new'])
+        data1 = pd.concat([
+            data1, minmaxtime[['utctime_new', Time]]
+        ]).sort_values(by=['utctime_new'])
         data1 = data1.drop_duplicates(['utctime_new'])
         data1[Lng] = data1.set_index('utctime_new')[
             Lng].interpolate(method='index').values
@@ -267,7 +285,9 @@ def points_to_traj(traj_points, col=['Lng', 'Lat', 'ID'], timecol=None):
     col : List
         The column name, in the sequence of [lng, lat,trajectoryid]
     timecol : str(Optional)
-        Optional, the column name of the time column. If given, the geojson with [longitude, latitude, altitude, time] in returns can be put into the Kepler to visualize the trajectory
+        Optional, the column name of the time column. If given, the geojson
+        with [longitude, latitude, altitude, time] in returns can be put into
+        the Kepler to visualize the trajectory
 
     Returns
     -------
@@ -313,7 +333,8 @@ def points_to_traj(traj_points, col=['Lng', 'Lat', 'ID'], timecol=None):
 
 def dumpjson(data, path):
     '''
-    Input the json data and save it as a file. This method is suitable for sovling the problem that numpy cannot be compatiable with json package.
+    Input the json data and save it as a file. This method is suitable for
+    sovling the problem that numpy cannot be compatiable with json package.
 
     Parameters
     -------

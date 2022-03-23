@@ -16,7 +16,7 @@ def searchfile(filename):
         try:
             if filename in os.listdir(i):
                 fileroot = i
-        except:
+        except Exception:
             pass
     if fileroot == '':
         fileroot = sys.path[-1]
@@ -48,9 +48,10 @@ def read_mapboxtoken():
         f = open(filepath, mode='r')
         mapboxtoken = f.readline()
         f.close()
-    except:
-        raise Exception(
-            'Mapboxtoken not found, please use tbd.set_mapboxtoken() to set it first, see: https://transbigdata.readthedocs.io/en/latest/plot_map.html')
+    except Exception:
+        raise Exception('Mapboxtoken not found, \
+ please use tbd.set_mapboxtoken() to set it first, \
+ see: https://transbigdata.readthedocs.io/en/latest/plot_map.html')
     return mapboxtoken
 
 
@@ -72,16 +73,18 @@ def set_imgsavepath(imgsavepath):
 
 def read_imgsavepath():
     '''
-    Read map savepath 
+    Read map savepath
     '''
     filepath = searchfile('imgsavepath.txt')
     try:
         f = open(filepath, mode='r')
         imgsavepath = f.readline()
         f.close()
-    except:
+    except Exception:
         raise Exception(
-            'Map base map storage path not found, please use tbd.set_imgsavepath() to set it first, see: https://transbigdata.readthedocs.io/en/latest/plot_map.html')
+            'Map base map storage path not found, \
+please use tbd.set_imgsavepath() to set it first, \
+see: https://transbigdata.readthedocs.io/en/latest/plot_map.html')
     return imgsavepath
 
 
@@ -126,7 +129,8 @@ def num2deg(xtile, ytile, zoom):
     return (lat_deg, lon_deg)
 
 
-def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom, printlog, imgsavepath, style=4, access_token=''):
+def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
+                    printlog, imgsavepath, style=4, access_token=''):
     '''
     Get map image
     '''
@@ -193,7 +197,7 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom, printlog, img
                             print('figsaved:'+imgsavepath+'tileimg/'+filename)
                 else:
                     os.mkdir(imgsavepath+'tileimg')
-            except:
+            except Exception:
                 pass
 
         def loadfig(filename):
@@ -207,7 +211,7 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom, printlog, img
                 else:
                     os.mkdir(imgsavepath+'tileimg')
                     return None
-            except:
+            except Exception:
                 return None
         tile = loadfig(filename)
         if tile is None:
@@ -216,7 +220,6 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom, printlog, img
                 while t < 10:
                     try:
                         imgurl = smurl.format(zoom, xtile, ytile)
-                        #print("Opening: " + imgurl)
                         imgstr = urllib.request.urlopen(
                             imgurl, timeout=6).read()
                         tile = Image.open(io.BytesIO(imgstr))
@@ -224,11 +227,11 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom, printlog, img
                         Cluster.paste(tile, box=(
                             (xtile-xmin)*imgsize,  (ytile-ymin)*imgsize))
                         t = 10
-                    except:
+                    except Exception:
                         if printlog:
                             print('Get map tile failed, retry ', t)
                         t += 1
-            except:
+            except Exception:
                 print("Couldn't download image")
                 tile = None
         else:
@@ -262,9 +265,14 @@ def plot_map(plt, bounds, zoom='auto', style=4, printlog=False):
     plt : matplotlib.pyplot
         Where to plot
     bounds : List
-        The drawing boundary of the base map, [lon1,lat1,lon2,lat2] (WGS84 coordinate system), where lon1 and lat1 are the coordinates of the lower left corner and lon2 and lat2 are the coordinates of the upper right corner
+        The drawing boundary of the base map, [lon1,lat1,lon2,lat2]
+        (WGS84 coordinate system), where lon1 and lat1 are the coordinates
+        of the lower left corner and lon2 and lat2 are the coordinates of
+        the upper right corner
     zoom : number
-        The larger the magnification level of the base map, the longer the loading time. Generally, the range for a single city is between 12 and 16
+        The larger the magnification level of the base map, the longer the
+        loading time. Generally, the range for a single city is between 12
+        and 16
     printlog : bool
         Show log
     style : number
@@ -275,7 +283,7 @@ def plot_map(plt, bounds, zoom='auto', style=4, printlog=False):
     try:
         import os
         os.listdir(imgsavepath)
-    except:
+    except Exception:
         print('imgsavepath do not exist, your tile map will not save')
     lon1 = bounds[0]
     lat1 = bounds[1]
@@ -285,7 +293,8 @@ def plot_map(plt, bounds, zoom='auto', style=4, printlog=False):
         zoom = 11-np.log(lon2-lon1)/np.log(2)
     zoom = min(18, int(zoom+0.5))
     a = getImageCluster(lon1, lat1, lon2-lon1,  lat2-lat1, zoom, style=style,
-                        printlog=printlog, imgsavepath=imgsavepath, access_token=access_token)
+                        printlog=printlog, imgsavepath=imgsavepath,
+                        access_token=access_token)
     x1, y1 = deg2num(lat1, lon1, zoom)
     x2, y2 = deg2num(lat2, lon2, zoom)
     x1, y1 = num2deg(x1, y1+1, zoom)
@@ -293,14 +302,18 @@ def plot_map(plt, bounds, zoom='auto', style=4, printlog=False):
     plt.imshow(np.asarray(a), extent=(y1, y2, x1+0.00, x2+0.00))
 
 
-def plotscale(ax, bounds, textcolor='k', textsize=8, compasssize=1, accuracy='auto', rect=[0.1, 0.1], unit="KM", style=1, **kwargs):
+def plotscale(ax, bounds, textcolor='k', textsize=8, compasssize=1,
+              accuracy='auto', rect=[0.1, 0.1], unit="KM", style=1, **kwargs):
     '''
     Add compass and scale for a map
 
     Parameters
     -------
     bounds : List
-        The drawing boundary of the base map, [lon1,lat1,lon2,lat2] (WGS84 coordinate system), where lon1 and lat1 are the coordinates of the lower left corner and lon2 and lat2 are the coordinates of the upper right corner
+        The drawing boundary of the base map, [lon1,lat1,lon2,lat2]
+        (WGS84 coordinate system), where lon1 and lat1 are the coordinates
+        of the lower left corner and lon2 and lat2 are the coordinates of
+        the upper right corner
     textsize : number
         size of the text
     compasssize : number
@@ -312,7 +325,8 @@ def plotscale(ax, bounds, textcolor='k', textsize=8, compasssize=1, accuracy='au
     style : number
         1 or 2, the style of the scale
     rect : List
-        The approximate position of the scale bar in the figure, such as [0.9,0.9], is in the upper right corner
+        The approximate position of the scale bar in the figure, such as
+        [0.9,0.9], is in the upper right corner
     '''
     import math
     lon1 = bounds[0]
@@ -331,67 +345,115 @@ def plotscale(ax, bounds, textcolor='k', textsize=8, compasssize=1, accuracy='au
     from shapely.geometry import Polygon
     import geopandas as gpd
     if style == 1:
-        scale = gpd.GeoDataFrame({'color': [(0, 0, 0), (1, 1, 1), (0, 0, 0), (1, 1, 1)], 'geometry':
-                                  [Polygon([(alon, alat), (alon+deltaLon, alat), (alon+deltaLon, alat+deltaLon*0.4), (alon, alat+deltaLon*0.4)]),
-                                   Polygon([(alon+deltaLon, alat), (alon+2*deltaLon, alat), (alon+2 *
-                                           deltaLon, alat+deltaLon*0.4), (alon+deltaLon, alat+deltaLon*0.4)]),
-                                   Polygon([(alon+2*deltaLon, alat), (alon+4*deltaLon, alat), (alon+4 *
-                                           deltaLon, alat+deltaLon*0.4), (alon+2*deltaLon, alat+deltaLon*0.4)]),
-                                   Polygon([(alon+4*deltaLon, alat), (alon+8*deltaLon, alat), (alon+8 *
-                                                                                               deltaLon, alat+deltaLon*0.4), (alon+4*deltaLon, alat+deltaLon*0.4)])
-                                   ]})
+        scale = gpd.GeoDataFrame({
+            'color': [(0, 0, 0), (1, 1, 1), (0, 0, 0), (1, 1, 1)],
+            'geometry':
+            [Polygon([
+                (alon, alat),
+                (alon+deltaLon, alat),
+                (alon+deltaLon, alat+deltaLon*0.4),
+                (alon, alat+deltaLon*0.4)]),
+             Polygon([
+                 (alon+deltaLon, alat),
+                 (alon+2*deltaLon, alat),
+                 (alon+2 * deltaLon, alat+deltaLon*0.4),
+                 (alon+deltaLon, alat+deltaLon*0.4)]),
+             Polygon([
+                 (alon+2*deltaLon, alat),
+                 (alon+4*deltaLon, alat),
+                 (alon+4 * deltaLon, alat+deltaLon*0.4),
+                 (alon+2*deltaLon, alat+deltaLon*0.4)]),
+             Polygon([
+                 (alon+4*deltaLon, alat),
+                 (alon+8*deltaLon, alat),
+                 (alon+8 * deltaLon, alat+deltaLon*0.4),
+                 (alon+4*deltaLon, alat+deltaLon*0.4)])
+             ]})
         scale.plot(ax=ax, edgecolor=textcolor,
                    facecolor=scale['color'], lw=0.6, **kwargs)
         if (unit == 'KM') | (unit == 'km'):
-            ax.text(alon+1*deltaLon, alat+deltaLon*0.5, str(int(1*accuracy/1000)),
-                    color=textcolor, fontsize=textsize, ha='center', va='bottom')
-            ax.text(alon+2*deltaLon, alat+deltaLon*0.5, str(int(2*accuracy/1000)),
-                    color=textcolor, fontsize=textsize, ha='center', va='bottom')
-            ax.text(alon+4*deltaLon, alat+deltaLon*0.5, str(int(4*accuracy/1000)),
-                    color=textcolor, fontsize=textsize, ha='center', va='bottom')
-            ax.text(alon+8*deltaLon, alat+deltaLon*0.5, str(int(8*accuracy/1000)),
-                    color=textcolor, fontsize=textsize, ha='center', va='bottom')
+            ax.text(alon+1*deltaLon, alat+deltaLon*0.5,
+                    str(int(1*accuracy/1000)), color=textcolor,
+                    fontsize=textsize, ha='center', va='bottom')
+            ax.text(alon+2*deltaLon, alat+deltaLon*0.5,
+                    str(int(2*accuracy/1000)), color=textcolor,
+                    fontsize=textsize, ha='center', va='bottom')
+            ax.text(alon+4*deltaLon, alat+deltaLon*0.5,
+                    str(int(4*accuracy/1000)), color=textcolor,
+                    fontsize=textsize, ha='center', va='bottom')
+            ax.text(alon+8*deltaLon, alat+deltaLon*0.5,
+                    str(int(8*accuracy/1000)), color=textcolor,
+                    fontsize=textsize, ha='center', va='bottom')
             ax.text(alon+8.5*deltaLon, alat+deltaLon*0.5, unit,
-                    color=textcolor, fontsize=textsize, ha='left', va='top')
+                    color=textcolor, fontsize=textsize, ha='left',
+                    va='top')
         if (unit == 'M') | (unit == 'm'):
             ax.text(alon+1*deltaLon, alat+deltaLon*0.5, str(int(1*accuracy)),
-                    color=textcolor, fontsize=textsize, ha='center', va='bottom')
+                    color=textcolor, fontsize=textsize,
+                    ha='center', va='bottom')
             ax.text(alon+2*deltaLon, alat+deltaLon*0.5, str(int(2*accuracy)),
-                    color=textcolor, fontsize=textsize, ha='center', va='bottom')
+                    color=textcolor, fontsize=textsize,
+                    ha='center', va='bottom')
             ax.text(alon+4*deltaLon, alat+deltaLon*0.5, str(int(4*accuracy)),
-                    color=textcolor, fontsize=textsize, ha='center', va='bottom')
+                    color=textcolor, fontsize=textsize,
+                    ha='center', va='bottom')
             ax.text(alon+8*deltaLon, alat+deltaLon*0.5, str(int(8*accuracy)),
-                    color=textcolor, fontsize=textsize, ha='center', va='bottom')
+                    color=textcolor, fontsize=textsize,
+                    ha='center', va='bottom')
             ax.text(alon+8.5*deltaLon, alat+deltaLon*0.5, unit,
-                    color=textcolor, fontsize=textsize, ha='left', va='top')
+                    color=textcolor, fontsize=textsize,
+                    ha='left', va='top')
     if style == 2:
-        scale = gpd.GeoDataFrame({'color': [(0, 0, 0), (1, 1, 1)], 'geometry':
-                                  [Polygon([(alon+deltaLon, alat), (alon+4*deltaLon, alat), (alon+4*deltaLon, alat+deltaLon*0.4), (alon+deltaLon, alat+deltaLon*0.4)]),
-                                   Polygon([(alon+4*deltaLon, alat), (alon+8*deltaLon, alat), (alon+8 *
-                                           deltaLon, alat+deltaLon*0.4), (alon+4*deltaLon, alat+deltaLon*0.4)])
-                                   ]})
+        scale = gpd.GeoDataFrame({
+            'color': [(0, 0, 0), (1, 1, 1)],
+            'geometry':
+            [Polygon([(alon+deltaLon, alat),
+                      (alon+4*deltaLon, alat),
+                      (alon+4*deltaLon, alat+deltaLon*0.4),
+                      (alon+deltaLon, alat+deltaLon*0.4)]),
+                Polygon([(alon+4*deltaLon, alat),
+                         (alon+8*deltaLon, alat),
+                         (alon+8 * deltaLon, alat+deltaLon*0.4),
+                         (alon+4*deltaLon, alat+deltaLon*0.4)])
+             ]})
         scale.plot(ax=ax, edgecolor=textcolor,
                    facecolor=scale['color'], lw=0.6, **kwargs)
         if (unit == 'KM') | (unit == 'km'):
-            ax.text(alon+4*deltaLon, alat+deltaLon*0.5, str(int(4*accuracy/1000)),
-                    color=textcolor, fontsize=textsize, ha='center', va='bottom')
-            ax.text(alon+8*deltaLon, alat+deltaLon*0.5, str(int(8*accuracy/1000)),
-                    color=textcolor, fontsize=textsize, ha='center', va='bottom')
+            ax.text(alon+4*deltaLon, alat+deltaLon*0.5,
+                    str(int(4*accuracy/1000)),
+                    color=textcolor, fontsize=textsize,
+                    ha='center', va='bottom')
+            ax.text(alon+8*deltaLon, alat+deltaLon*0.5,
+                    str(int(8*accuracy/1000)),
+                    color=textcolor, fontsize=textsize,
+                    ha='center', va='bottom')
             ax.text(alon+8.5*deltaLon, alat+deltaLon*0.5, unit,
-                    color=textcolor, fontsize=textsize, ha='left', va='top')
+                    color=textcolor, fontsize=textsize,
+                    ha='left', va='top')
         if (unit == 'M') | (unit == 'm'):
-            ax.text(alon+4*deltaLon, alat+deltaLon*0.5, str(int(4*accuracy)),
-                    color=textcolor, fontsize=textsize, ha='center', va='bottom')
-            ax.text(alon+8*deltaLon, alat+deltaLon*0.5, str(int(8*accuracy)),
-                    color=textcolor, fontsize=textsize, ha='center', va='bottom')
+            ax.text(alon+4*deltaLon, alat+deltaLon*0.5,
+                    str(int(4*accuracy)),
+                    color=textcolor, fontsize=textsize,
+                    ha='center', va='bottom')
+            ax.text(alon+8*deltaLon, alat+deltaLon*0.5,
+                    str(int(8*accuracy)),
+                    color=textcolor, fontsize=textsize,
+                    ha='center', va='bottom')
             ax.text(alon+8.5*deltaLon, alat+deltaLon*0.5, unit,
-                    color=textcolor, fontsize=textsize, ha='left', va='top')
+                    color=textcolor, fontsize=textsize,
+                    ha='left', va='top')
     # add compass
     deltaLon = compasssize*deltaLon
     alon = alon-deltaLon
-    compass = gpd.GeoDataFrame({'color': [(0, 0, 0), (1, 1, 1)], 'geometry':
-                                [Polygon([[alon, alat], [alon, alat+deltaLon], [alon+1/2*deltaLon, alat-1/2*deltaLon]]),
-                                 Polygon([[alon, alat], [alon, alat+deltaLon], [alon-1/2*deltaLon, alat-1/2*deltaLon]])]})
+    compass = gpd.GeoDataFrame({
+        'color': [(0, 0, 0), (1, 1, 1)],
+        'geometry': [
+            Polygon([[alon, alat],
+                     [alon, alat+deltaLon],
+                     [alon+1/2*deltaLon, alat-1/2*deltaLon]]),
+            Polygon([[alon, alat],
+                     [alon, alat+deltaLon],
+                     [alon-1/2*deltaLon, alat-1/2*deltaLon]])]})
     compass.plot(ax=ax, edgecolor=textcolor,
                  facecolor=compass['color'], lw=0.6, **kwargs)
     ax.text(alon, alat+deltaLon, 'N', color=textcolor,

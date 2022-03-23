@@ -21,8 +21,9 @@ class TestGisprocess:
 
     def test_ckdnearest(self):
 
-        result = tbd.ckdnearest(self.dfA, self.dfB, Aname=['lon1', 'lat1'], Bname=[
-                                'lon', 'lat'])[['lon1', 'lat1', 'lon', 'lat']].values
+        result = tbd.ckdnearest(self.dfA, self.dfB,
+                                Aname=['lon1', 'lat1'], Bname=['lon', 'lat'])[[
+                                    'lon1', 'lat1', 'lon', 'lat']].values
         truth = [[1,  2,  1,  3],
                  [2,  4,  2,  5],
                  [2,  6,  2,  5],

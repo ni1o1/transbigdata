@@ -1,34 +1,54 @@
 import geopandas as gpd
 import pandas as pd
 import numpy as np
-from .preprocess import *
+from .preprocess import (
+    clean_same,
+    clean_outofshape,
+    id_reindex
+)
+from shapely.geometry import LineString
+import shapely
 
 
-def busgps_arriveinfo(data, line, stop, col=['VehicleId', 'GPSDateTime', 'lon', 'lat', 'stopname'],
-                      stopbuffer=200, mintime=300, project_epsg=2416, timegap=1800, method='project', projectoutput=False):
+def busgps_arriveinfo(data, line, stop, col=[
+        'VehicleId', 'GPSDateTime', 'lon', 'lat', 'stopname'],
+        stopbuffer=200, mintime=300, project_epsg=2416,
+        timegap=1800, method='project', projectoutput=False):
     '''
-    Input bus GPS data, bus route and station GeoDataFrame, this method can identify the bus arrival and departure information
+    Input bus GPS data, bus route and station GeoDataFrame, this
+    method can identify the bus arrival and departure information
 
     Parameters
     -------
     data : DataFrame
-        Bus GPS data. It should be the data from one bus route, and need to contain vehicle ID, GPS time, latitude and longitude (wgs84)
+        Bus GPS data. It should be the data from one bus route,
+        and need to contain vehicle ID, GPS time, latitude and
+        longitude (wgs84)
     line : GeoDataFrame
         GeoDataFrame for the bus line
     stop : GeoDataFrame
         GeoDataFrame for bus stops
     col : List
-        Column names, in the order of [vehicle ID, time, longitude, latitude, station name]
+        Column names, in the order of [vehicle ID, time, longitude,
+        latitude, station name]
     stopbuffer : number
-        Meter. When the vehicle approaches the station within this certain distance, it is considered to be arrive at the station.
+        Meter. When the vehicle approaches the station within this
+        certain distance, it is considered to be arrive at the station.
     mintime : number
-        Seconds. Within a short period of time that the bus arrive at bus station again, it will not be consider as another arrival
+        Seconds. Within a short period of time that the bus arrive
+        at bus station again, it will not be consider as another arrival
     project_epsg : number
-        The matching algorithm will convert the data into a projection coordinate system to calculate the distance, here the epsg code of the projection coordinate system is given
+        The matching algorithm will convert the data into a projection
+        coordinate system to calculate the distance, here the epsg code
+        of the projection coordinate system is given
     timegap : number
-        Seconds. For how long the vehicle does not appear, it will be considered as a new vehicle
+        Seconds. For how long the vehicle does not appear, it will be
+        considered as a new vehicle
     method : str
-        The method of matching the bus, either ‘project’ or ‘dislimit’; ‘project’ is to directly match the nearest point on the route, which is fast. ‘dislimit’ needs to consider the front point position with the distance limitation, the matching speed is slow.
+        The method of matching the bus, either ‘project’ or ‘dislimit’;
+        ‘project’ is to directly match the nearest point on the route,
+        which is fast. ‘dislimit’ needs to consider the front point position
+        with the distance limitation, the matching speed is slow.
     projectoutput : bool
         Whether to output the projected data
 
@@ -71,12 +91,10 @@ def busgps_arriveinfo(data, line, stop, col=['VehicleId', 'GPSDateTime', 'lon', 
         for vid in data[VehicleId].drop_duplicates():
             print('.', end='')
             tmp = data[data[VehicleId] == vid].copy()
-            gap = 30
             i = 0
             tmp = tmp.sort_values(
                 by=[VehicleId, GPSDateTime]).reset_index(drop=True)
             tmp['project'] = 0
-            from shapely.geometry import LineString
             for i in range(len(tmp)-1):
                 if i == 0:
                     proj = lineshp.project(tmp.iloc[i]['geometry'])
@@ -105,8 +123,7 @@ def busgps_arriveinfo(data, line, stop, col=['VehicleId', 'GPSDateTime', 'lon', 
     data['time_st'] = (data[GPSDateTime]-starttime).dt.total_seconds()
     BUS_project = data
     print('.')
-    from shapely.geometry import LineString
-    import shapely
+
     ls = []
     print('Matching arrival and leaving info...', end='')
     for car in BUS_project[VehicleId].drop_duplicates():
@@ -117,9 +134,11 @@ def busgps_arriveinfo(data, line, stop, col=['VehicleId', 'GPSDateTime', 'lon', 
             for stopname in stop[stopcol].drop_duplicates():
                 # Get the stop position
                 position = stop[stop[stopcol] == stopname]['project'].iloc[0]
-                # Identify arrival and departure by intersection of stop buffer and line segment
+                # Identify arrival and departure by intersection ofstop buffer
+                # and line segment
                 buffer_polygon = LineString([[0, position],
-                                             [data['time_st'].max(), position]]).buffer(stopbuffer)
+                                             [data['time_st'].max(), position]
+                                             ]).buffer(stopbuffer)
                 bus_linestring = LineString(tmp[['time_st', 'project']].values)
                 line_intersection = bus_linestring.intersection(buffer_polygon)
                 # Extract leave time
@@ -127,7 +146,9 @@ def busgps_arriveinfo(data, line, stop, col=['VehicleId', 'GPSDateTime', 'lon', 
                     # If empty, no bus arrive
                     continue
                 else:
-                    if type(line_intersection) == shapely.geometry.linestring.LineString:
+                    if type(
+                        line_intersection
+                    ) == shapely.geometry.linestring.LineString:
                         arrive = [line_intersection]
                     else:
                         arrive = list(line_intersection)
@@ -171,9 +192,12 @@ def busgps_arriveinfo(data, line, stop, col=['VehicleId', 'GPSDateTime', 'lon', 
         return arrive_info
 
 
-def busgps_onewaytime(arrive_info, start, end, col=['VehicleId', 'stopname', 'arrivetime', 'leavetime']):
+def busgps_onewaytime(arrive_info, start, end,
+                      col=['VehicleId', 'stopname',
+                           'arrivetime', 'leavetime']):
     '''
-    Input the departure information table drive_info and the station information table stop to calculate the one-way travel time
+    Input the departure information table drive_info and the station
+    information table stop to calculate the one-way travel time
 
     Parameters
     -------

@@ -12,12 +12,15 @@ class TestGetbusdata:
         assert type(G) == nx.classes.graph.Graph
 
     def test_getadmin(self):
-        admin, districts = tbd.getadmin(
+        admin, _ = tbd.getadmin(
             '深圳市', 'f35aa69595d3fd9527dfe9033a640b9c', subdistricts=True)
         assert '深圳市' in admin['name'].sum()
 
     def test_getisochrone(self):
-        result = tbd.get_isochrone_mapbox(
-            120, 30, 20, access_token='pk.eyJ1IjoibHByMTIxNDc5IiwiYSI6ImNrd2c0YXVydTBremQyb3V0cHVhMml5anAifQ.Y-q937VgT0diVxukUqwofw', mode='walking')
-        result = tbd.get_isochrone_amap(
-            121.212403, 31.282477, 60, ak='f35aa69595d3fd9527dfe9033a640b9c', mode=0)
+        tbd.get_isochrone_mapbox(
+            120, 30, 20,
+            access_token='pk.eyJ1IjoibHByMTIxNDc5IiwiYSI6ImNrd2c0YXVydTBremQyb3V0cHVhMml5anAifQ.Y-q937VgT0diVxukUqwofw',
+            mode='walking')
+        tbd.get_isochrone_amap(
+            121.212403, 31.282477, 60, ak='f35aa69595d3fd9527dfe9033a640b9c',
+            mode=0)

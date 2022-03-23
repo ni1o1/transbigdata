@@ -1,9 +1,14 @@
 import pandas as pd
 
 
-def clean_taxi_status(data, col=['VehicleNum', 'Time', 'OpenStatus'], timelimit=None):
+def clean_taxi_status(data, col=['VehicleNum', 'Time', 'OpenStatus'],
+                      timelimit=None):
     '''
-    Deletes records of instantaneous changes in passenger carrying status from taxi data. These abnormal records can affect travel order judgments. Judgement method: If the passenger status of the previous record and the next record are different from this record for the same vehicle, then this record should be deleted.    
+    Deletes records of instantaneous changes in passenger carrying status from
+    taxi data. These abnormal records can affect travel order judgments.
+    Judgement method: If the passenger status of the previous record and the
+    next record are different from this record for the same vehicle, then this
+    record should be deleted.
 
     Parameters
     -------
@@ -12,7 +17,8 @@ def clean_taxi_status(data, col=['VehicleNum', 'Time', 'OpenStatus'], timelimit=
     col : List
         Column names, in the order of [‘VehicleNum’, ‘Time’, ‘OpenStatus’]
     timelimit : number
-        Optional, in seconds. If the time between the previous record and the next record is less than the time threshold, then it will be deleted
+        Optional, in seconds. If the time between the previous record and the
+        next record is less than the time threshold, then it will be deleted
 
     Returns
     -------
@@ -23,22 +29,25 @@ def clean_taxi_status(data, col=['VehicleNum', 'Time', 'OpenStatus'], timelimit=
     [VehicleNum, Time, OpenStatus] = col
     if timelimit:
         data1[Time] = pd.to_datetime(data1[Time])
-        data1 = data1[-((data1[OpenStatus].shift(-1) == data1[OpenStatus].shift()) &
-                        (data1[OpenStatus] != data1[OpenStatus].shift()) &
-                        (data1[VehicleNum].shift(-1) == data1[VehicleNum].shift()) &
-                        (data1[VehicleNum] == data1[VehicleNum].shift()) &
-                        ((data1[Time].shift(-1) - data1[Time].shift()
-                          ).dt.total_seconds() <= timelimit)
-                        )]
+        data1 = data1[
+            -((data1[OpenStatus].shift(-1) == data1[OpenStatus].shift()) &
+              (data1[OpenStatus] != data1[OpenStatus].shift()) &
+              (data1[VehicleNum].shift(-1) == data1[VehicleNum].shift()) &
+              (data1[VehicleNum] == data1[VehicleNum].shift()) &
+              ((data1[Time].shift(-1) - data1[Time].shift()
+                ).dt.total_seconds() <= timelimit)
+              )]
     else:
-        data1 = data1[-((data1[OpenStatus].shift(-1) == data1[OpenStatus].shift()) &
-                        (data1[OpenStatus] != data1[OpenStatus].shift()) &
-                        (data1[VehicleNum].shift(-1) == data1[VehicleNum].shift()) &
-                        (data1[VehicleNum] == data1[VehicleNum].shift()))]
+        data1 = data1[
+            -((data1[OpenStatus].shift(-1) == data1[OpenStatus].shift()) &
+              (data1[OpenStatus] != data1[OpenStatus].shift()) &
+              (data1[VehicleNum].shift(-1) == data1[VehicleNum].shift()) &
+              (data1[VehicleNum] == data1[VehicleNum].shift()))]
     return data1
 
 
-def taxigps_to_od(data, col=['VehicleNum', 'Stime', 'Lng', 'Lat', 'OpenStatus']):
+def taxigps_to_od(data,
+                  col=['VehicleNum', 'Stime', 'Lng', 'Lat', 'OpenStatus']):
     '''
     Input Taxi GPS data, extract OD information
 
@@ -47,7 +56,8 @@ def taxigps_to_od(data, col=['VehicleNum', 'Stime', 'Lng', 'Lat', 'OpenStatus'])
     data : DataFrame
         Taxi GPS data
     col : List
-        Column names in the data, need to be in order [vehicle id, time, longitude, latitude, passenger status]
+        Column names in the data, need to be in order [vehicle id, time,
+        longitude, latitude, passenger status]
 
     Returns
     -------
@@ -73,9 +83,11 @@ def taxigps_to_od(data, col=['VehicleNum', 'Stime', 'Lng', 'Lat', 'OpenStatus'])
     return oddata
 
 
-def taxigps_traj_point(data, oddata, col=['Vehicleid', 'Time', 'Lng', 'Lat', 'OpenStatus']):
+def taxigps_traj_point(data, oddata,
+                       col=['Vehicleid', 'Time', 'Lng', 'Lat', 'OpenStatus']):
     '''
-    Input Taxi data and OD data to extract the trajectory points for delivery and idle trips
+    Input Taxi data and OD data to extract the trajectory points for delivery
+    and idle trips
 
     Parameters
     -------
@@ -84,7 +96,8 @@ def taxigps_traj_point(data, oddata, col=['Vehicleid', 'Time', 'Lng', 'Lat', 'Op
     oddata : DataFrame
         Taxi OD data
     col : List
-        Column names, need to be in order [vehicle id, time, longitude, latitude, passenger status]
+        Column names, need to be in order [vehicle id, time, longitude,
+        latitude, passenger status]
 
     Returns
     -------

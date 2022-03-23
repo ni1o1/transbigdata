@@ -8,28 +8,37 @@ import urllib
 import json
 import re
 from .plot_map import read_mapboxtoken
-from .CoordinatesConverter import gcj02towgs84, bd09towgs84, bd09mctobd09, wgs84togcj02
+from .CoordinatesConverter import (
+    gcj02towgs84,
+    bd09towgs84,
+    bd09mctobd09,
+    wgs84togcj02
+)
 
 
 def getadmin(keyword, ak, subdistricts=False):
     '''
-    Input the keyword and the Amap ak. The output is the GIS file of the administrative boundary (Only in China)
+    Input the keyword and the Amap ak. The output is the GIS file of
+    the administrative boundary (Only in China)
 
     Parameters
     -------
     keywords : str
-        The keyword. It might be the city name such as Shengzheng, or the administrative code such as 440500
+        The keyword. It might be the city name such as Shengzheng, or
+        the administrative code such as 440500
     ak : str
         Amap accesstoken
     subdistricts : bool
-        Whether to output the information of the administrative district boundary
+        Whether to output the information of the administrative district
+        boundary
 
     Returns
     -------
     admin : GeoDataFrame
         Administrative district(WGS84)
     districts : DataFrame
-        The information of subdistricts. This can be used to further get the boundary of lower level districts
+        The information of subdistricts. This can be used to further get
+        the boundary of lower level districts
     '''
 
     # API url
@@ -78,23 +87,23 @@ def getadmin(keyword, ak, subdistricts=False):
     data['geometry'] = [poly]
     try:
         data['citycode'] = result['districts'][k]['citycode']
-    except:
+    except Exception:
         pass
     try:
         data['adcode'] = result['districts'][k]['adcode']
-    except:
+    except Exception:
         pass
     try:
         data['name'] = result['districts'][k]['name']
-    except:
+    except Exception:
         pass
     try:
         data['level'] = result['districts'][k]['level']
-    except:
+    except Exception:
         pass
     try:
         data['center'] = result['districts'][k]['center']
-    except:
+    except Exception:
         pass
     datas.append(data)
     datas = pd.concat(datas)
@@ -109,7 +118,8 @@ def getadmin(keyword, ak, subdistricts=False):
 
 def getbusdata(city, keywords, accurate=True):
     '''
-    Obtain the geographic information of the bus station and bus line from the map service (Only in China)
+    Obtain the geographic information of the bus station and bus line from
+    the map service (Only in China)
 
     Parameters
     -------
@@ -141,7 +151,7 @@ def getbusdata(city, keywords, accurate=True):
             else:
                 res = list(res[res['geo_type'] == 1]['uid'])
                 return res
-        except:
+        except Exception:
             return []
 
     def getcitycode(c):
@@ -180,7 +190,12 @@ def getbusdata(city, keywords, accurate=True):
                 list(pd.DataFrame(coo)[0].str.split(','))).astype(float)
             coo[0], coo[1] = bd09mctobd09(coo[0], coo[1])
             return list(coo[0].astype(str)+','+coo[1].astype(str))
-        return linename, coodconvert(coo), stationnames, coodconvert(stationgeo)
+        return (
+            linename,
+            coodconvert(coo),
+            stationnames,
+            coodconvert(stationgeo)
+        )
     print('Obtaining city id:', city, end='')
     linenames = []
     lines = []
@@ -213,7 +228,7 @@ def getbusdata(city, keywords, accurate=True):
                     stop.append(stops)
                     print(linename+' success')
                     uids.append(uid)
-                except:
+                except Exception:
                     pass
     if len(stop) == 0:
         print('No such busline')
@@ -298,7 +313,8 @@ def get_isochrone_amap(lon, lat, reachtime, ak, mode=2):
     return g
 
 
-def get_isochrone_mapbox(lon, lat, reachtime, access_token='auto', mode='driving'):
+def get_isochrone_mapbox(lon, lat, reachtime, access_token='auto',
+                         mode='driving'):
     '''
     Obtain the isochrone from mapbox isochrone
 
@@ -325,8 +341,9 @@ def get_isochrone_mapbox(lon, lat, reachtime, access_token='auto', mode='driving
     if mode not in ['driving', 'walking', 'cycling']:
         raise ValueError(
             'Travel mode should be `driving`, `walking` or `cycling`')
-    url = 'https://api.mapbox.com/isochrone/v1/mapbox/'+mode+'/'+str(lon)+','+str(
-        lat)+'?contours_minutes='+str(reachtime)+'&polygons=true&access_token='+access_token
+    url = 'https://api.mapbox.com/isochrone/v1/mapbox/'+mode+'/' +\
+        str(lon)+','+str(lat)+'?contours_minutes='+str(reachtime) +\
+        '&polygons=true&access_token='+access_token
     request = urllib.request.Request(url)
     response = urllib.request.urlopen(request, timeout=1)
     webpage = response.read()
@@ -340,7 +357,8 @@ def get_isochrone_mapbox(lon, lat, reachtime, access_token='auto', mode='driving
 
 def split_subwayline(line, stop):
     '''
-    To slice the metro line with metro stations to obtain metro section information (This step is useful in subway passenger flow visualization)
+    To slice the metro line with metro stations to obtain metro section
+    information (This step is useful in subway passenger flow visualization)
 
     Parameters
     -------
@@ -388,7 +406,8 @@ def split_subwayline(line, stop):
 
 def metro_network(stop, traveltime=3, transfertime=5, nxgraph=True):
     '''
-    Inputting the metro station data and outputting the network topology model. The graph generated relies on NetworkX.
+    Inputting the metro station data and outputting the network topology
+    model. The graph generated relies on NetworkX.
 
     Parameters
     -------
@@ -399,16 +418,21 @@ def metro_network(stop, traveltime=3, transfertime=5, nxgraph=True):
     transfertime : number
         Travel time per transfer
     nxgraph : bool
-        Default True, if True then output the network G constructed by NetworkX, if False then output the edges1(line section),edge2(station transfer), and the node of the network
+        Default True, if True then output the network G constructed by
+        NetworkX, if False then output the edges1(line section),
+        edge2(station transfer), and the node of the network
 
     Returns
     -------
     G : networkx.classes.graph.Graph
-        Network G built by networkx. Output when the nxgraph parameter is True
+        Network G built by networkx.
+        Output when the nxgraph parameter is True
     edge1 : DataFrame
-        Network edge for line section. Output when the nxgraph parameter is False
+        Network edge for line section.
+        Output when the nxgraph parameter is False
     edge2 : DataFrame
-        Network edge for transfering. Output when the nxgraph parameter is False
+        Network edge for transfering.
+        Output when the nxgraph parameter is False
     node : List
         Network nodes. Output when the nxgraph parameter is False
     '''

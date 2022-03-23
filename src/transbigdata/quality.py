@@ -15,7 +15,8 @@ def sample_duration(data, col=['Vehicleid', 'Time']):
     Returns
     -------
     sample_duration : DataFrame
-        A Series with the column name duration, the content is the sampling interval of the data, in seconds
+        A Series with the column name duration, the content is the sampling
+        interval of the data, in seconds
     '''
     [Vehicleid, Time] = col
     data1 = data.copy()
@@ -29,7 +30,8 @@ def sample_duration(data, col=['Vehicleid', 'Time']):
     return sample_duration
 
 
-def data_summary(data, col=['Vehicleid', 'Time'], show_sample_duration=False, roundnum=4):
+def data_summary(data, col=['Vehicleid', 'Time'], show_sample_duration=False,
+                 roundnum=4):
     '''
     Output the general information of the dataset.
 
