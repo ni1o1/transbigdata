@@ -3,13 +3,13 @@
 data processing, analysis and visualization.
 """
 
-from .plot_map import (
+from .plotmap import (
     plot_map,
     plotscale,
     set_mapboxtoken,
     set_imgsavepath
 )
-from .CoordinatesConverter import (
+from .coordinates import (
     gcj02tobd09,
     bd09togcj02,
     wgs84togcj02,
@@ -83,7 +83,7 @@ from .busgps import (
     busgps_arriveinfo,
     busgps_onewaytime
 )
-from .getbusdata import (
+from .crawler import (
     getadmin,
     getbusdata,
     get_isochrone_amap,
@@ -99,5 +99,5 @@ from .visualization import (
 
 
 name = "transbigdata"
-__version__ = '0.3.11'
+__version__ = '0.3.12'
 __author__ = 'Qing Yu <qingyu0815@foxmail.com>'

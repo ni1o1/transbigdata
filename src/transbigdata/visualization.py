@@ -1,7 +1,7 @@
-from .traj import points_to_traj
 import pandas as pd
 import numpy as np
 import geopandas as gpd
+from .traj import points_to_traj
 from .grids import (
     grid_params,
     GPS_to_grids,

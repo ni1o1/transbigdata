@@ -3,7 +3,7 @@ import pandas as pd
 from shapely.geometry import Polygon, Point
 import math
 import numpy as np
-from .CoordinatesConverter import getdistance
+from .coordinates import getdistance
 
 
 def rect_grids(location, accuracy=500, params='auto'):

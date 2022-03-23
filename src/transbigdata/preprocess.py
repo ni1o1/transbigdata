@@ -6,7 +6,7 @@ from .grids import (
     grids_centre,
     gridid_to_polygon
 )
-from .CoordinatesConverter import getdistance
+from .coordinates import getdistance
 
 
 def clean_same(data, col=['VehicleNum', 'Time', 'Lng', 'Lat']):

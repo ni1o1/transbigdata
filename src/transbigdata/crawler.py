@@ -7,8 +7,8 @@ from urllib import parse
 import urllib
 import json
 import re
-from .plot_map import read_mapboxtoken
-from .CoordinatesConverter import (
+from .plotmap import read_mapboxtoken
+from .coordinates import (
     gcj02towgs84,
     bd09towgs84,
     bd09mctobd09,

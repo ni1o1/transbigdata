@@ -57,14 +57,14 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 html_theme = 'sphinx_rtd_theme'
-html_sidebars = { 
-     '**': [ 
-       'localtoc.html', 
-       'relations.html', 
-       'searchbox.html', 
-       'sourcelink.html',
-      ] 
-     } 
+html_sidebars = {
+    '**': [
+        'localtoc.html',
+        'relations.html',
+        'searchbox.html',
+        'sourcelink.html',
+    ]
+}
 html_theme_options = {
     'logo_only': True,
     'display_version': True,
