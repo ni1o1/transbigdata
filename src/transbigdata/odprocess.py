@@ -3,18 +3,27 @@ import pandas as pd
 from .grids import GPS_to_grids, grids_centre
 
 
-def odagg_grid(oddata, params, col=['slon', 'slat', 'elon', 'elat'], arrow=False, **kwargs):
+def odagg_grid(oddata, params, col=['slon', 'slat', 'elon', 'elat'],
+               arrow=False, **kwargs):
     '''
-    Aggregate the OD matrix and generate the grid geometry. The input is the OD matrix (each row represents a trip). The OD will assigned to grids and then aggregated in the form of GeoDataFrame.
+    Aggregate the OD matrix and generate the grid geometry.
+    The input is the OD matrix (each row represents a trip).
+    The OD will assigned to grids and then aggregated in the form of
+    GeoDataFrame.
 
     Parameters
     -------
     oddata : DataFrame
         OD data
     col : List
-        The column of the origin/destination location,[‘slon’,’slat’,’elon’,’elat’]. The default weight is 1 for each column. You can also add the weight parameter, for example, [‘slon’,’slat’,’elon’,’elat’,’count’].
+        The column of the origin/destination location,[‘slon’,’slat’,
+        ’elon’,’elat’]. The default weight is 1 for each column.
+        You can also add the weight parameter, for example, [‘slon’,
+        ’slat’,’elon’,’elat’,’count’].
     params : List
-        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat),
+        lonStart and latStart are the lower-left coordinates,
+        deltaLon, deltaLat are the length and width of a single grid
     arrow : bool
         Whether the generated OD geographic line contains arrows
 
@@ -43,7 +52,8 @@ def odagg_grid(oddata, params, col=['slon', 'slat', 'elon', 'elat'], arrow=False
     from shapely.geometry import LineString
     if arrow:
         oddata_agg['geometry'] = oddata_agg.apply(lambda r: tolinewitharrow(
-            r['SHBLON'], r['SHBLAT'], r['EHBLON'], r['EHBLAT'], **kwargs), axis=1)
+            r['SHBLON'], r['SHBLAT'], r['EHBLON'], r['EHBLAT'],
+            **kwargs), axis=1)
     else:
         oddata_agg['geometry'] = oddata_agg.apply(lambda r: LineString(
             [[r['SHBLON'], r['SHBLAT']], [r['EHBLON'], r['EHBLAT']]]), axis=1)
@@ -52,9 +62,12 @@ def odagg_grid(oddata, params, col=['slon', 'slat', 'elon', 'elat'], arrow=False
     return oddata_agg
 
 
-def odagg_shape(oddata, shape, col=['slon', 'slat', 'elon', 'elat'], params=None, round_accuracy=6, arrow=False, **kwargs):
+def odagg_shape(oddata, shape, col=['slon', 'slat', 'elon', 'elat'],
+                params=None, round_accuracy=6, arrow=False, **kwargs):
     '''
-    Generate the OD aggregation results and the corresponding geometry. The input is the OD data (each row represents a trip). The OD will assigned to grids and then aggregated in the form of GeoDataFrame.
+    Generate the OD aggregation results and the corresponding geometry.
+    The input is the OD data (each row represents a trip). The OD will
+    assigned to grids and then aggregated in the form of GeoDataFrame.
 
     Parameters
     -------
@@ -63,12 +76,22 @@ def odagg_shape(oddata, shape, col=['slon', 'slat', 'elon', 'elat'], params=None
     shape : GeoDataFrame
         GeoDataFrame of the target traffic zone
     col : List
-        The column of the origin/destination location,[‘slon’,’slat’,’elon’,’elat’]. The default weight is 1 for each column. You can also add the weight parameter, for example, [‘slon’,’slat’,’elon’,’elat’,’count’].
+        The column of the origin/destination location,[‘slon’,’slat’,’elon’
+        ,’elat’]. The default weight is 1 for each column. You can also add
+        the weight parameter, for example, [‘slon’,’slat’,’elon’,’elat’,
+        ’count’].
     params : List (optional)
-        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and latStart are the lower-left coordinates, deltaLon, deltaLat are the length and width of a single grid
-        If availabel, After the data gridding, the traffic zone will be matched based on the grid center. If not available, then the matching will be processed based on longitude and latitude. When the number of data items is large, the matching efficiency will be improved greatly thanks to data gridding.
+        Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart
+        and latStart are the lower-left coordinates, deltaLon, deltaLat are
+        the length and width of a single grid
+        If availabel, After the data gridding, the traffic zone will be matched
+        based on the grid center. If not available, then the matching will be
+        processed based on longitude and latitude. When the number of data
+        items is large, the matching efficiency will be improved greatly thanks
+        to data gridding.
     round_accuracy : number
-        The number of decimal for latitude and longitude when implementing aggregation
+        The number of decimal for latitude and longitude when implementing
+        aggregation
     arrow : bool
         Whether the generated OD geographic line contains arrows
 
@@ -93,8 +116,9 @@ def odagg_shape(oddata, shape, col=['slon', 'slat', 'elon', 'elat'], params=None
             oddata[elon], oddata[elat], params)
         if len(col) == 4:
             oddata[count] = 1
-        oddata_agg = oddata.groupby(['SLONCOL', 'SLATCOL', 'ELONCOL', 'ELATCOL'])[
-            count].sum().reset_index()
+        oddata_agg = oddata.groupby([
+            'SLONCOL', 'SLATCOL', 'ELONCOL', 'ELATCOL'])[
+                count].sum().reset_index()
         oddata_agg['SHBLON'], oddata_agg['SHBLAT'] = grids_centre(
             oddata_agg['SLONCOL'], oddata_agg['SLATCOL'], params)
         oddata_agg['EHBLON'], oddata_agg['EHBLAT'] = grids_centre(
@@ -114,7 +138,8 @@ def odagg_shape(oddata, shape, col=['slon', 'slat', 'elon', 'elat'], params=None
         oddata_agg = pd.merge(oddata_agg, c)
         c.columns = ['EHBLON', 'EHBLAT', 'eindex', 'ex', 'ey']
         oddata_agg = pd.merge(oddata_agg, c)
-        oddata_agg = oddata_agg.groupby(['sindex', 'sx', 'sy', 'eindex', 'ex', 'ey'])[
+        oddata_agg = oddata_agg.groupby([
+            'sindex', 'sx', 'sy', 'eindex', 'ex', 'ey'])[
             count].sum().reset_index()
     else:
         a = oddata[[slon, slat]]
@@ -136,7 +161,8 @@ def odagg_shape(oddata, shape, col=['slon', 'slat', 'elon', 'elat'], params=None
         oddata = pd.merge(oddata, c)
         if len(col) == 4:
             oddata[count] = 1
-        oddata_agg = oddata.groupby(['sindex', 'sx', 'sy', 'eindex', 'ex', 'ey'])[
+        oddata_agg = oddata.groupby([
+            'sindex', 'sx', 'sy', 'eindex', 'ex', 'ey'])[
             count].sum().reset_index()
     from shapely.geometry import LineString
     if arrow:
@@ -166,7 +192,9 @@ def tolinewitharrow(x1, y1, x2, y2, theta=20, length=0.1, pos=0.8):
     theta : float
         Angle of arrow
     length : float
-        The length ratio of the arrow to the original line. For example, if the length of the original line is 1 and the length is set to 0.3, the arrow size is 0.3
+        The length ratio of the arrow to the original line. For example, if the
+        length of the original line is 1 and the length is set to 0.3, the
+        arrow size is 0.3
     pos : float
         Position of arrow, 0 at the start point, 1 at the end point
 

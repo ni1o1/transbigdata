@@ -649,8 +649,7 @@ def regenerate_params(grid):
     >>> import transbigdata as tbd
     >>> bounds = [113.6, 22.4, 113.605, 22.405]
     >>> grid,params = tbd.rect_grids(bounds,500)
-    >>> tbd.regenerate_params(grid)
-    [113.60000000000001, 22.400000000000002, 0.004863669213932553, 0.004496605206423254]
+    >>> params_regenerated = tbd.regenerate_params(grid)
     '''
     grid_coord = np.array(grid['geometry'].iloc[0].exterior.coords)
     loncol = grid['LONCOL'].iloc[0]
