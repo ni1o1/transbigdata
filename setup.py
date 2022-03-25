@@ -2,10 +2,10 @@ import setuptools
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
- 
+
 setuptools.setup(
     name="transbigdata",
-    version="0.3.11",
+    version="0.3.12",
     author="Qing Yu",
     author_email="qingyu0815@foxmail.com",
     description="A Python package developed for transportation spatio-temporal big data processing and analysis.",
@@ -17,8 +17,8 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/ni1o1/transbigdata/issues",
     },
     install_requires=[
-        "numpy","pandas","shapely","geopandas","scipy","matplotlib"
-        ],
+        "numpy", "pandas", "shapely", "geopandas", "scipy", "matplotlib"
+    ],
     classifiers=[
         "Operating System :: OS Independent",
         "Topic :: Text Processing :: Indexing",

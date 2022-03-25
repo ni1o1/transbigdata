@@ -1,16 +1,21 @@
 
 import numpy as np
 import pandas as pd
-from .CoordinatesConverter import getdistance
 from scipy.spatial import cKDTree
 import itertools
 from operator import itemgetter
 import geopandas as gpd
 import math
+from .coordinates import getdistance
 
-def ckdnearest(dfA_origin,dfB_origin,Aname = ['lon','lat'],Bname = ['lon','lat']):
+
+def ckdnearest(dfA_origin,
+               dfB_origin,
+               Aname=['lon', 'lat'],
+               Bname=['lon', 'lat']):
     '''
-    Search the nearest points in dfB_origin for dfA_origin, and calculate the distance
+    Search the nearest points in dfB_origin for dfA_origin,
+    and calculate the distance
 
     Parameters
     -------
@@ -22,33 +27,44 @@ def ckdnearest(dfA_origin,dfB_origin,Aname = ['lon','lat'],Bname = ['lon','lat']
         The column of lng and lat in DataFrame A
     Bname : List
         The column of lng and lat in DataFrame A
-               
+
     Returns
     -------
     gdf : DataFrame
         The output DataFrame
     '''
-    if len(dfA_origin)==0:
-        raise Exception('The input DataFrame dfA is empty') 
-    if len(dfB_origin)==0:
-        raise Exception('The input DataFrame dfB is empty') 
+    if len(dfA_origin) == 0:
+        raise Exception('The input DataFrame dfA is empty')
+    if len(dfB_origin) == 0:
+        raise Exception('The input DataFrame dfB is empty')
     gdA = dfA_origin.copy()
     gdB = dfB_origin.copy()
     from scipy.spatial import cKDTree
     btree = cKDTree(gdB[Bname].values)
-    dist,idx = btree.query(gdA[Aname].values,k = 1)
+    dist, idx = btree.query(gdA[Aname].values, k=1)
     gdA['index'] = idx
     gdB['index'] = range(len(gdB))
-    gdf = pd.merge(gdA,gdB,on = 'index')
-    if (Aname[0] == Bname[0])&(Aname[1] == Bname[1]):
-        gdf['dist'] = getdistance(gdf[Aname[0]+'_x'],gdf[Aname[1]+'_y'],gdf[Bname[0]+'_x'],gdf[Bname[1]+'_y'])
+    gdf = pd.merge(gdA, gdB, on='index')
+    if (Aname[0] == Bname[0]) & (Aname[1] == Bname[1]):
+        gdf['dist'] = getdistance(
+            gdf[Aname[0]+'_x'],
+            gdf[Aname[1]+'_y'],
+            gdf[Bname[0]+'_x'],
+            gdf[Bname[1]+'_y'])
     else:
-        gdf['dist'] = getdistance(gdf[Aname[0]],gdf[Aname[1]],gdf[Bname[0]],gdf[Bname[1]])
+        gdf['dist'] = getdistance(
+            gdf[Aname[0]],
+            gdf[Aname[1]],
+            gdf[Bname[0]],
+            gdf[Bname[1]])
     return gdf
+
+
 def ckdnearest_point(gdA, gdB):
     '''
-    This method will match the nearest points in gdfB to gdfA, and add a new column called dist
-    
+    This method will match the nearest points in gdfB to gdfA,
+    and add a new column called dist
+
     Parameters
     -------
     gdA : GeoDataFrame
@@ -62,10 +78,10 @@ def ckdnearest_point(gdA, gdB):
     gdf : DataFrame
         The output DataFrame
     '''
-    if len(gdA)==0:
-        raise Exception('The input GeoDataFrame gdfA is empty') 
-    if len(gdB)==0:
-        raise Exception('The input GeoDataFrame gdfB is empty') 
+    if len(gdA) == 0:
+        raise Exception('The input GeoDataFrame gdfA is empty')
+    if len(gdB) == 0:
+        raise Exception('The input GeoDataFrame gdfB is empty')
     nA = np.array(list(gdA.geometry.apply(lambda x: (x.x, x.y))))
     nB = np.array(list(gdB.geometry.apply(lambda x: (x.x, x.y))))
     btree = cKDTree(nB)
@@ -73,12 +89,14 @@ def ckdnearest_point(gdA, gdB):
     gdA['dist'] = dist
     gdA['index'] = idx
     gdB['index'] = range(len(gdB))
-    gdf = pd.merge(gdA,gdB,on = 'index')
+    gdf = pd.merge(gdA, gdB, on='index')
     return gdf
+
 
 def ckdnearest_line(gdfA, gdfB):
     '''
-    This method will seach from gdfB to find the nearest line to the point in gdfA.
+    This method will seach from gdfB to find the nearest line to
+    the point in gdfA.
 
     Parameters
     -------
@@ -93,10 +111,10 @@ def ckdnearest_line(gdfA, gdfB):
     gdf : DataFrame
         Searching the nearset linestring in gdfB for the point in gdfA
     '''
-    if len(gdfA)==0:
-        raise Exception('The input GeoDataFrame gdfA is empty') 
-    if len(gdfB)==0:
-        raise Exception('The input GeoDataFrame gdfB is empty') 
+    if len(gdfA) == 0:
+        raise Exception('The input GeoDataFrame gdfA is empty')
+    if len(gdfB) == 0:
+        raise Exception('The input GeoDataFrame gdfB is empty')
     A = np.concatenate(
         [np.array(geom.coords) for geom in gdfA.geometry.to_list()])
     B = [np.array(geom.coords) for geom in gdfB.geometry.to_list()]
@@ -109,12 +127,14 @@ def ckdnearest_line(gdfA, gdfB):
     gdfA['dist'] = dist
     gdfA['index'] = idx
     gdfB['index'] = range(len(gdfB))
-    gdf = pd.merge(gdfA,gdfB,on = 'index')
+    gdf = pd.merge(gdfA, gdfB, on='index')
     return gdf
 
-def splitline_with_length(Centerline,maxlength = 100):
+
+def splitline_with_length(Centerline, maxlength=100):
     '''
-    The intput is the linestring GeoDataFrame. The splited line’s length wull be no longer than maxlength
+    The intput is the linestring GeoDataFrame. The splited line’s
+    length wull be no longer than maxlength
 
     Parameters
     -------
@@ -128,7 +148,7 @@ def splitline_with_length(Centerline,maxlength = 100):
     splitedline : GeoDataFrame
         Splited line
     '''
-    def splitline(route,maxlength):
+    def splitline(route, maxlength):
         routelength = route.length
         from shapely.geometry import LineString
         lss = []
@@ -137,17 +157,17 @@ def splitline_with_length(Centerline,maxlength = 100):
                 lm = routelength
             else:
                 lm = (k+1)*maxlength
-            a = np.linspace(k*maxlength,lm,10)
+            a = np.linspace(k*maxlength, lm, 10)
             ls = []
-            for l in a:
-                ls.append(route.interpolate(l))
+            for line in a:
+                ls.append(route.interpolate(line))
             lss.append(LineString(ls))
-        lss = gpd.GeoDataFrame(lss,columns = ['geometry'])
+        lss = gpd.GeoDataFrame(lss, columns=['geometry'])
         return lss
     lsss = []
     for i in range(len(Centerline)):
         route = Centerline['geometry'].iloc[i]
-        lss = splitline(route,maxlength)
+        lss = splitline(route, maxlength)
         lss['id'] = i
         lsss.append(lss)
     lsss = pd.concat(lsss)
@@ -155,10 +175,13 @@ def splitline_with_length(Centerline,maxlength = 100):
     splitedline = lsss
     return splitedline
 
-def merge_polygon(data,col):
+
+def merge_polygon(data, col):
     '''
-    The input is the GeoDataFrame of polygon geometry, and the col name. This function will merge the polygon based on the category in the mentioned column
-    
+    The input is the GeoDataFrame of polygon geometry, and the col
+    name. This function will merge the polygon based on the category
+    in the mentioned column
+
     Parameters
     -------
     data : GeoDataFrame
@@ -175,48 +198,53 @@ def merge_polygon(data,col):
     geometries = []
     for i in data[col].drop_duplicates():
         groupnames.append(i)
-        geometries.append(data[data[col]==i].unary_union)
+        geometries.append(data[data[col] == i].unary_union)
     data1 = gpd.GeoDataFrame()
     data1['geometry'] = geometries
     data1[col] = groupnames
     return data1
 
-def polyon_exterior(data,minarea = 0):
+
+def polyon_exterior(data, minarea=0):
     '''
-    The input is the GeoDataFrame of the polygon geometry. The method will construct new polygon by extending the outer boundary of the ploygon
-    
+    The input is the GeoDataFrame of the polygon geometry. The method
+    will construct new polygon by extending the outer boundary of the
+    ploygon
+
     Parameters
     -------
     data : GeoDataFrame
         The polygon geometry
     minarea : number
         The minimum area. Polygon of less area will be removed
-        
+
     Returns
     -------
     data1 : GeoDataFrame
         The processed polygon
     '''
     data1 = data.copy()
+
     def polyexterior(p):
-        from shapely.geometry import Polygon,MultiPolygon
-        if type(p)==MultiPolygon:
+        from shapely.geometry import Polygon, MultiPolygon
+        if type(p) == MultiPolygon:
             geometries = []
             for i in p:
                 poly = Polygon(i.exterior)
-                if minarea>0:
-                    if poly.area>minarea:
+                if minarea > 0:
+                    if poly.area > minarea:
                         geometries.append(poly)
                 else:
                     geometries.append(poly)
             return MultiPolygon(geometries)
-        if type(p)==Polygon:
+        if type(p) == Polygon:
             return Polygon(p.exterior)
-    data1['geometry'] = data1['geometry'].apply(lambda r:polyexterior(r))
+    data1['geometry'] = data1['geometry'].apply(lambda r: polyexterior(r))
     data1 = data1[-data1['geometry'].is_empty]
     return data1
 
-def ellipse_params(data,col = ['lon','lat'],confidence = 95,epsg = None):
+
+def ellipse_params(data, col=['lon', 'lat'], confidence=95, epsg=None):
     '''
     confidence ellipse parameter estimation for point data
 
@@ -227,56 +255,62 @@ def ellipse_params(data,col = ['lon','lat'],confidence = 95,epsg = None):
     confidence : number
         confidence level: 99，95 or 90
     epsg : number
-        If given, the original coordinates are transformed from WGS84 to the given EPSG coordinate system for confidence ellipse parameter estimation
+        If given, the original coordinates are transformed from WGS84 to
+        the given EPSG coordinate system for confidence ellipse parameter
+        estimation
     col: List
         Column names, [lon，lat]
-    
+
     Returns
     -------
     params: List
         Centroid ellipse parameters[pos,width,height,theta,area,oblateness]
-        Respectively[Center point coordinates, minor axis, major axis, angle, area, oblateness]
+        Respectively [Center point coordinates, minor axis, major axis,
+        angle, area, oblateness]
     '''
-    lon,lat = col
-    if confidence==99:
+    lon, lat = col
+    if confidence == 99:
         nstd = 9.210**0.5
-    if confidence==95:
+    if confidence == 95:
         nstd = 5.991**0.5
-    if confidence==90:
+    if confidence == 90:
         nstd = 4.605**0.5
     points = data.copy()
     points = gpd.GeoDataFrame(points)
-    points['geometry'] = gpd.points_from_xy(points[lon],points[lat])
+    points['geometry'] = gpd.points_from_xy(points[lon], points[lat])
     if epsg:
-        points.crs = {'init':'epsg:4326'}
-        points = points.to_crs(epsg = epsg)
-    point_np = np.array([points.geometry.x,points.geometry.y]).T
-    pos = point_np.mean(axis = 0)
+        points.crs = {'init': 'epsg:4326'}
+        points = points.to_crs(epsg=epsg)
+    point_np = np.array([points.geometry.x, points.geometry.y]).T
+    pos = point_np.mean(axis=0)
     cov = np.cov(point_np, rowvar=False)
     vals, vecs = np.linalg.eigh(cov)
-    order = vals.argsort()[::-1]
-    theta = np.degrees(np.arctan2(*vecs[:,0][::-1]))
+    theta = np.degrees(np.arctan2(*vecs[:, 0][::-1]))
     width, height = 2 * nstd * np.sqrt(vals)
     area = width/2*height/2*math.pi
     oblateness = (height-width)/height
-    
-    ellip_params = [pos,width,height,theta,area,oblateness]
+
+    ellip_params = [pos, width, height, theta, area, oblateness]
     return ellip_params
 
-def ellipse_plot(ellip_params,ax,**kwargs):
+
+def ellipse_plot(ellip_params, ax, **kwargs):
     '''
-    Enter the parameters of the confidence ellipse and plot the confidence ellipse
-    
+    Enter the parameters of the confidence ellipse and plot the confidence
+    ellipse
+
     输入
     -------
     ellip_params : List
         Centroid ellipse parameters[pos,width,height,theta,area,oblateness]
-        Respectively[Center point coordinates, minor axis, major axis, angle, area, oblateness]
+        Respectively[Center point coordinates, minor axis, major axis, angle
+        , area, oblateness]
 
     ax : matplotlib.axes._subplots.AxesSubplot
         Where to plot
     '''
-    [pos,width,height,theta,area,alpha] = ellip_params
+    [pos, width, height, theta, area, alpha] = ellip_params
     from matplotlib.patches import Ellipse
-    ellip = Ellipse(xy = pos,width = width,height=height,angle = theta,linestyle = '-',**kwargs)
+    ellip = Ellipse(xy=pos, width=width, height=height,
+                    angle=theta, linestyle='-', **kwargs)
     ax.add_artist(ellip)

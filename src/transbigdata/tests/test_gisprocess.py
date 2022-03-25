@@ -21,8 +21,9 @@ class TestGisprocess:
 
     def test_ckdnearest(self):
 
-        result = tbd.ckdnearest(self.dfA, self.dfB, Aname=['lon1', 'lat1'], Bname=[
-                                'lon', 'lat'])[['lon1', 'lat1', 'lon', 'lat']].values
+        result = tbd.ckdnearest(self.dfA, self.dfB,
+                                Aname=['lon1', 'lat1'], Bname=['lon', 'lat'])[[
+                                    'lon1', 'lat1', 'lon', 'lat']].values
         truth = [[1,  2,  1,  3],
                  [2,  4,  2,  5],
                  [2,  6,  2,  5],
@@ -92,16 +93,17 @@ class TestGisprocess:
                   [3.2, 4.],
                   [1., 1.]]
         assert np.allclose(result2, truth2)
+
     def test_ellipse_params(self):
         np.random.seed(1)
-        data = np.random.uniform(1,10,(100,2))
-        data[:,1:] = 0.5*data[:,0:1]+np.random.uniform(-2,2,(100,1))
-        data = pd.DataFrame(data,columns = ['x','y'])
-        ellip_params = tbd.ellipse_params(data,confidence=95,col = ['x','y'])
-        assert np.allclose(ellip_params[0],[5.0412876 , 2.73948777])
+        data = np.random.uniform(1, 10, (100, 2))
+        data[:, 1:] = 0.5*data[:, 0:1]+np.random.uniform(-2, 2, (100, 1))
+        data = pd.DataFrame(data, columns=['x', 'y'])
+        ellip_params = tbd.ellipse_params(data, confidence=95, col=['x', 'y'])
+        assert np.allclose(ellip_params[0], [5.0412876, 2.73948777])
         assert np.allclose(ellip_params[1:], [
-        4.862704682680083,
-        15.338646317379267,
-        -62.20080325474961,
-        58.580734145363145,
-        0.6829769340746545])
+            4.862704682680083,
+            15.338646317379267,
+            -62.20080325474961,
+            58.580734145363145,
+            0.6829769340746545])
