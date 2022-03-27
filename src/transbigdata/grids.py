@@ -1,9 +1,42 @@
+'''
+BSD 3-Clause License
+
+Copyright (c) 2021, Qing Yu
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+'''
+
 import geopandas as gpd
 import pandas as pd
 from shapely.geometry import Polygon, Point
 import math
 import numpy as np
 from .coordinates import getdistance
+from .gisprocess import merge_polygon
 
 
 def rect_grids(location, accuracy=500, params='auto'):
@@ -175,7 +208,7 @@ def grid_params(bounds, accuracy=500):
     return (lonStart, latStart, deltaLon, deltaLat)
 
 
-def GPS_to_grids(lon, lat, params):
+def GPS_to_grids(lon, lat, params, from_origin=False):
     '''
     Match the GPS data to the grids. The input is the columns of
     longitude, latitude, and the grids parameter. The output is the grid ID.
@@ -193,6 +226,11 @@ def GPS_to_grids(lon, lat, params):
         deltaLon, deltaLat are the length and width of a single grid;
         theta is the angle of the grid, it will be 0 if not given.
         When Gridding parameters is given, accuracy will not be used.
+    from_origin : bool
+        If True, lonStart and latStart are the lower left of the first
+        grid.
+        If False, lonStart and latStart are the center of the first
+        grid.
 
     Returns
     -------
@@ -215,8 +253,11 @@ def GPS_to_grids(lon, lat, params):
     R = np.array([[costheta * deltaLon, -sintheta * deltaLat],
                   [sintheta * deltaLon, costheta * deltaLat]])
     coords = np.array([lon, lat]).T
-    coords = coords - (np.array([lonStart, latStart]) - R[0, :] / 2 -
-                       R[1, :] / 2)
+    if from_origin:
+        coords = coords - (np.array([lonStart, latStart]))
+    else:
+        coords = coords - (np.array([lonStart, latStart]) - R[0, :] / 2 -
+                           R[1, :] / 2)
     res = np.floor(np.dot(coords, np.linalg.inv(R)))
     loncol = res[:, 0].astype(int)
     latcol = res[:, 1].astype(int)
@@ -226,7 +267,7 @@ def GPS_to_grids(lon, lat, params):
     return loncol, latcol
 
 
-def grids_centre(loncol, latcol, params):
+def grids_centre(loncol, latcol, params, from_origin=False):
     '''
     The center location of the grid. The input is the grid ID and
     parameters, the output is the grid center location.
@@ -246,6 +287,11 @@ def grids_centre(loncol, latcol, params):
         deltaLon, deltaLat are the length and width of a single grid;
         theta is the angle of the grid, it will be 0 if not given.
         When Gridding parameters is given, accuracy will not be used.
+    from_origin : bool
+        If True, lonStart and latStart are the lower left of the first
+        grid.
+        If False, lonStart and latStart are the center of the first
+        grid.
 
     Returns
     -------
@@ -265,8 +311,13 @@ def grids_centre(loncol, latcol, params):
     sintheta = np.sin(theta * np.pi / 180)
     R = np.array([[costheta * deltaLon, -sintheta * deltaLat],
                   [sintheta * deltaLon, costheta * deltaLat]])
-    hblonhblat = np.dot(np.array([loncol.values, latcol.values]).T,
-                        R) + np.array([lonStart, latStart])
+    if from_origin:
+        hblonhblat = np.dot(np.array([loncol.values, latcol.values]).T,
+                            R) + np.array([lonStart, latStart]) - (
+                                R[0, :] / 2 + R[1, :] / 2)
+    else:
+        hblonhblat = np.dot(np.array([loncol.values, latcol.values]).T,
+                            R) + np.array([lonStart, latStart])
     hblon = hblonhblat[:, 0]
     hblat = hblonhblat[:, 1]
     if len(hblon) == 1:
@@ -326,87 +377,6 @@ def gridid_to_polygon(loncol, latcol, params):
     d = hblonhblat_d
     from shapely.geometry import Polygon
     return [Polygon([a[i], b[i], c[i], d[i], a[i]]) for i in range(len(a))]
-
-
-def hexagon_grids(bounds, accuracy=500):
-    '''
-    Generate hexagonal grids in the bounds
-
-    Parameters
-    -------
-    bounds : List
-        Create the bounds, [lon1, lat1, lon2, lat2](WGS84)
-        where lon1 , lat1 are the lower-left coordinates
-        lon2 , lat2 are the upper-right coordinates
-    accuracy : number
-        Side length of hexagon (m)
-
-    Returns
-    -------
-    hexagon : GeoDataFrame
-        hexagon grid’s geographic polygon
-    '''
-    lon1, lat1, lon2, lat2 = bounds
-    if (lon1 > lon2) | (lat1 > lat2) | (abs(lat1) > 90) | (abs(lon1) > 180) | (
-            abs(lat2) > 90) | (abs(lon2) > 180):
-        raise Exception(
-            'Bounds error. The input bounds should be in the order \
-                of [lon1,lat1,lon2,lat2]. (lon1,lat1) is the lower left\
-                     corner and (lon2,lat2) is the upper right corner.'
-        )
-    latStart = min(lat1, lat2)
-    lonStart = min(lon1, lon2)
-    latEnd = max(lat1, lat2)
-    lonEnd = max(lon1, lon2)
-    origin = gpd.GeoDataFrame(
-        [Point(lonStart, latStart),
-         Point(lonEnd, latEnd)],
-        columns=['geometry'])
-    origin.crs = {'init': 'epsg:4326'}
-    origin = origin.to_crs(epsg=3857)
-    x_o = origin['geometry'].iloc[0].x
-    y_o = origin['geometry'].iloc[0].y
-    x_d = origin['geometry'].iloc[1].x
-    y_d = origin['geometry'].iloc[1].y
-
-    lonsnum = (x_d - x_o) / accuracy
-    latsnum = (y_d - y_o) / accuracy
-    # 1
-    xs = np.arange(0, lonsnum, 3)
-    ys = np.arange(0, latsnum, 2 * (3 / 4)**0.5)
-    xs = pd.DataFrame(xs, columns=['x'])
-    xs['tmp'] = 1
-    ys = pd.DataFrame(ys, columns=['y'])
-    ys['tmp'] = 1
-    df1 = pd.merge(xs, ys)
-    # 2
-    xs = np.arange(1.5, lonsnum, 3)
-    ys = np.arange((3 / 4)**0.5, latsnum, 2 * (3 / 4)**0.5)
-    xs = pd.DataFrame(xs, columns=['x'])
-    xs['tmp'] = 1
-    ys = pd.DataFrame(ys, columns=['y'])
-    ys['tmp'] = 1
-    df2 = pd.merge(xs, ys)
-    df = pd.concat([df1, df2])
-    df['x'], df['y'] = x_o + df['x'] * accuracy, y_o + df['y'] * accuracy
-
-    def get_hexagon(x, y, accuracy):
-        return Polygon([(x - accuracy, y),
-                        (x - accuracy / 2, y + accuracy * (3 / 4)**0.5),
-                        (x + accuracy / 2, y + accuracy * (3 / 4)**0.5),
-                        (x + accuracy, y),
-                        (x + accuracy / 2, y - accuracy * (3 / 4)**0.5),
-                        (x - accuracy / 2, y - accuracy * (3 / 4)**0.5),
-                        (x - accuracy, y)])
-
-    df['geometry'] = df.apply(lambda r: get_hexagon(r['x'], r['y'], accuracy),
-                              axis=1)
-    df = gpd.GeoDataFrame(df)
-    df.crs = {'init': 'epsg:3857'}
-    df = df.to_crs(epsg=4326)
-    df = df[['geometry']]
-    df['ID'] = range(len(df))
-    return df
 
 
 def gridid_sjoin_shape(data, shape, params, col=['LONCOL', 'LATCOL']):
@@ -489,6 +459,7 @@ def grid_params_optimize(data,
         raise ImportError(
             "Please install scikit-opt, run following code "
             "in cmd: pip install scikit-opt")
+
     def grids_index_gini(gpsdata, params, col=['longitude', 'latitude']):
         [lon, lat] = col
         data = gpsdata.copy()
@@ -670,7 +641,308 @@ def regenerate_params(grid):
 
 
 '''
-geohash
+Triangle grids
+'''
+
+
+def GPS_to_grids_tri(lon, lat, params):
+    '''
+    Match the GPS data to the grids. The input is the columns of
+    longitude, latitude, and the grids parameter. The output is the grid ID.
+
+    Parameters
+    -------
+    lon : Series
+        The column of longitude
+    lat : Series
+        The column of latitude
+    params : List
+        Gridding parameters (lonStart, latStart, deltaLon, deltaLat) or
+        (lonStart, latStart, deltaLon, deltaLat, theta).
+        lonStart and latStart are the lower-left coordinates;
+        deltaLon, deltaLat are the length and width of a single grid;
+        theta is the angle of the grid, it will be 0 if not given.
+        When Gridding parameters is given, accuracy will not be used.
+
+    Returns
+    -------
+    gridid : Series
+        The index of the triangle grid.
+    '''
+    lon = pd.Series(lon, name='lon')
+    lat = pd.Series(lat, name='lat')
+    if len(params) == 4:
+        (lonStart, latStart, deltaLon, deltaLat) = params
+        theta = 0
+    else:
+        (lonStart, latStart, deltaLon, deltaLat, theta) = params
+    loncol_1, _ = GPS_to_grids(lon, lat,
+                               params=[*params[:4], theta+0],
+                               from_origin=True)
+    loncol_2, _ = GPS_to_grids(lon, lat,
+                               params=[*params[:4], theta+60],
+                               from_origin=True)
+    loncol_3, _ = GPS_to_grids(lon, lat,
+                               params=[*params[:4], theta+120],
+                               from_origin=True)
+    gridid = list(pd.Series(loncol_1).astype(str)+',' +
+                  pd.Series(loncol_2).astype(str)+',' +
+                  pd.Series(loncol_3).astype(str))
+    return gridid
+
+
+def gettripoints(loncol_1, loncol_2, loncol_3, params):
+    # Get triangle vertix coords from gridid and params
+    if len(params) == 4:
+        (lonStart, latStart, deltaLon, deltaLat) = params
+        theta = 0
+    else:
+        (lonStart, latStart, deltaLon, deltaLat, theta) = params
+    flag = (loncol_1+loncol_2+loncol_3)
+    x1, y1 = grids_centre(
+        loncol_1+flag % 2, np.zeros(len(loncol_1))-5,
+        params=[params[0], params[1], params[2], params[3], theta+0])
+    x2, y2 = grids_centre(
+        loncol_1+flag % 2, np.zeros(len(loncol_1))+5,
+        params=[params[0], params[1], params[2], params[3], theta+0])
+    x3, y3 = grids_centre(
+        loncol_2+(flag+1) % 2, np.zeros(len(loncol_2))-5,
+        params=[params[0], params[1], params[2], params[3], theta+60])
+    x4, y4 = grids_centre(
+        loncol_2+(flag+1) % 2, np.zeros(len(loncol_2))+5,
+        params=[params[0], params[1], params[2], params[3], theta+60])
+    x5, y5 = grids_centre(
+        loncol_3+flag % 2, np.zeros(len(loncol_3))-5,
+        params=[params[0], params[1], params[2], params[3], theta+120])
+    x6, y6 = grids_centre(
+        loncol_3+flag % 2, np.zeros(len(loncol_3))+5,
+        params=[params[0], params[1], params[2], params[3], theta+120])
+    x1 = pd.Series(x1)
+    x2 = pd.Series(x2)
+    x3 = pd.Series(x3)
+    x4 = pd.Series(x4)
+    x5 = pd.Series(x5)
+    x6 = pd.Series(x6)
+    y1 = pd.Series(y1)
+    y2 = pd.Series(y2)
+    y3 = pd.Series(y3)
+    y4 = pd.Series(y4)
+    y5 = pd.Series(y5)
+    y6 = pd.Series(y6)
+
+    def intersection(x1, y1, x2, y2, x3, y3, x4, y4):
+        if np.allclose((x2[0]-x1[0]), 0):
+            return x1, (x1-x3)*(y3-y4)/(x3-x4)+y3
+        elif np.allclose((x3[0]-x4[0]), 0):
+            return x3, (x3-x1)*(y1-y2)/(x1-x2)+y1
+        x = (x1*(y2-y1)/(x2-x1)-x3/(x4-x3)*(y4-y3)+y3-y1) / \
+            ((y2-y1)/(x2-x1)-(y4-y3)/(x4-x3))
+        y = (x-x1)*(y2-y1)/(x2-x1)+y1
+        return x, y
+
+    testpoint = pd.DataFrame()
+    testpoint['p1_x'], testpoint['p1_y'] = intersection(
+        x1, y1, x2, y2, x3, y3, x4, y4)
+    testpoint['p2_x'], testpoint['p2_y'] = intersection(
+        x5, y5, x6, y6, x3, y3, x4, y4)
+    testpoint['p3_x'], testpoint['p3_y'] = intersection(
+        x1, y1, x2, y2, x5, y5, x6, y6)
+    return testpoint.round(6)
+
+
+def gridid_to_polygon_tri(gridid, params):
+    '''
+    Generate the geometry column based on the grid ID.
+    The input is the grid ID, the output is the geometry.
+
+    Parameters
+    -------
+    gridid : Series
+        The index of the triangle grid.
+    params : List
+        Gridding parameters (lonStart, latStart, deltaLon, deltaLat) or
+        (lonStart, latStart, deltaLon, deltaLat, theta).
+        lonStart and latStart are the lower-left coordinates;
+        deltaLon, deltaLat are the length and width of a single grid;
+        theta is the angle of the grid, it will be 0 if not given.
+        When Gridding parameters is given, accuracy will not be used.
+
+    Returns
+    -------
+    geometry : Series
+        The column of grid geographic polygon
+    '''
+    gridid = pd.Series(gridid, name='gridid')
+    if len(params) == 4:
+        (lonStart, latStart, deltaLon, deltaLat) = params
+        theta = 0
+    else:
+        (lonStart, latStart, deltaLon, deltaLat, theta) = params
+
+    gridid_tmp = gridid.apply(lambda r: r.split(','))
+    loncol_1 = gridid_tmp.apply(lambda r: r[0]).astype(int)
+    loncol_2 = gridid_tmp.apply(lambda r: r[1]).astype(int)
+    loncol_3 = gridid_tmp.apply(lambda r: r[2]).astype(int)
+
+    testpoint = gettripoints(loncol_1, loncol_2, loncol_3, params)
+
+    geometry = testpoint.apply(
+        lambda r: Polygon(np.array([[r['p1_x'], r['p1_y']],
+                                    [r['p2_x'], r['p2_y']],
+                                    [r['p3_x'], r['p3_y']]]).round(6)), axis=1)
+    return geometry
+
+
+'''
+hexagon
+'''
+
+
+def GPS_to_grids_hexa(lon, lat, params):
+    '''
+    Match the GPS data to the grids. The input is the columns of
+    longitude, latitude, and the grids parameter. The output is the grid ID.
+
+    Parameters
+    -------
+    lon : Series
+        The column of longitude
+    lat : Series
+        The column of latitude
+    params : List
+        Gridding parameters (lonStart, latStart, deltaLon, deltaLat) or
+        (lonStart, latStart, deltaLon, deltaLat, theta).
+        lonStart and latStart are the lower-left coordinates;
+        deltaLon, deltaLat are the length and width of a single grid;
+        theta is the angle of the grid, it will be 0 if not given.
+        When Gridding parameters is given, accuracy will not be used.
+
+    Returns
+    -------
+    gridid : Series
+        The index of the hexagon grid.
+    '''
+    lon = pd.Series(lon, name='lon')
+    lat = pd.Series(lat, name='lat')
+    if len(params) == 4:
+        (lonStart, latStart, deltaLon, deltaLat) = params
+        theta = 0
+    else:
+        (lonStart, latStart, deltaLon, deltaLat, theta) = params
+    loncol_1, _ = GPS_to_grids(lon, lat,
+                               params=[*params[:4], theta+0],
+                               from_origin=True)
+    loncol_2, _ = GPS_to_grids(lon, lat,
+                               params=[*params[:4], theta+60],
+                               from_origin=True)
+    loncol_3, _ = GPS_to_grids(lon, lat,
+                               params=[*params[:4], theta+120],
+                               from_origin=True)
+    tmp = pd.DataFrame()
+    tmp['lon'] = lon
+    tmp['lat'] = lat
+    tmp['loncol_1'] = loncol_1
+    tmp['loncol_2'] = loncol_2
+    tmp['loncol_3'] = loncol_3
+    tmp['id'] = range(len(tmp))
+    tmp1 = tmp[['loncol_1', 'loncol_2', 'loncol_3']].drop_duplicates()
+    loncol_1 = tmp1['loncol_1']
+    loncol_2 = tmp1['loncol_2']
+    loncol_3 = tmp1['loncol_3']
+    center = pd.concat(
+        [pd.DataFrame(
+            np.array(
+                [loncol_1+1, loncol_2+1, loncol_3+1,
+                 loncol_1, loncol_2, loncol_3]).T),
+         pd.DataFrame(
+            np.array(
+                [loncol_1+1, loncol_2+1, loncol_3,
+                 loncol_1, loncol_2, loncol_3]).T),
+         pd.DataFrame(
+            np.array(
+                [loncol_1+1, loncol_2, loncol_3,
+                 loncol_1, loncol_2, loncol_3]).T),
+         pd.DataFrame(
+            np.array(
+                [loncol_1, loncol_2+1, loncol_3+1,
+                 loncol_1, loncol_2, loncol_3]).T),
+         pd.DataFrame(
+            np.array(
+                [loncol_1, loncol_2, loncol_3+1,
+                 loncol_1, loncol_2, loncol_3]).T),
+         pd.DataFrame(
+             np.array(
+                 [loncol_1, loncol_2, loncol_3,
+                  loncol_1, loncol_2, loncol_3]).T)]).drop_duplicates()
+    center.columns = ['i', 'j', 'k', 'loncol_1', 'loncol_2', 'loncol_3']
+    center = center[((((center['i']-1) % 3) == 0) &
+                     (((center['j']-1) % 3) == 0) &
+                     (((center['k']) % 3) == 0)) |
+                    ((((center['i']-2) % 3) == 0) &
+                     (((center['j']) % 3) == 0) &
+                     (((center['k']+2) % 3) == 0)) |
+                    ((((center['i']) % 3) == 0) &
+                     (((center['j']+1) % 3) == 0) &
+                     (((center['k']+1) % 3) == 0))
+                    ]
+    tmp = pd.merge(tmp, center, on=['loncol_1', 'loncol_2', 'loncol_3'])
+    tmp = tmp.sort_values(by='id')
+    tmp['gridid'] = tmp['i'].astype(
+        str)+','+tmp['j'].astype(str)+','+tmp['k'].astype(str)
+    return list(tmp['gridid'])
+
+
+def gridid_to_polygon_hexa(gridid, params):
+    '''
+    Generate the geometry column based on the grid ID.
+    The input is the grid ID, the output is the geometry.
+
+    Parameters
+    -------
+    gridid : Series
+        The index of the hexagon grid.
+    params : List
+        Gridding parameters (lonStart, latStart, deltaLon, deltaLat) or
+        (lonStart, latStart, deltaLon, deltaLat, theta).
+        lonStart and latStart are the lower-left coordinates;
+        deltaLon, deltaLat are the length and width of a single grid;
+        theta is the angle of the grid, it will be 0 if not given.
+        When Gridding parameters is given, accuracy will not be used.
+
+    Returns
+    -------
+    geometry : Series
+        The column of grid geographic polygon
+    '''
+    gridid = pd.Series(gridid, name='gridid')
+    gridid_tmp = gridid.apply(lambda r: r.split(','))
+    i = gridid_tmp.apply(lambda r: r[0]).astype(int)
+    j = gridid_tmp.apply(lambda r: r[1]).astype(int)
+    k = gridid_tmp.apply(lambda r: r[2]).astype(int)
+    tmp = pd.concat([pd.DataFrame(np.array([i-1, j-1, k-1, gridid]).T),
+                     pd.DataFrame(np.array([i-1, j-1, k, gridid]).T),
+                     pd.DataFrame(np.array([i-1, j, k, gridid]).T),
+                     pd.DataFrame(np.array([i, j-1, k-1, gridid]).T),
+                     pd.DataFrame(np.array([i, j, k-1, gridid]).T),
+                     pd.DataFrame(np.array([i, j, k, gridid]).T)])
+    tmp.columns = ['loncol_1', 'loncol_2', 'loncol_3', 'gridid']
+    tmp['geometry'] = list(
+        gettripoints(
+            tmp['loncol_1'],
+            tmp['loncol_2'],
+            tmp['loncol_3'], params).apply(
+            lambda r: Polygon(
+                np.array([[r['p1_x'], r['p1_y']],
+                          [r['p2_x'], r['p2_y']],
+                          [r['p3_x'], r['p3_y']]]).round(6)), axis=1))
+    tmp = gpd.GeoDataFrame(tmp)
+    tmp = merge_polygon(tmp, 'gridid')
+    geometry = pd.merge(gridid, tmp)['geometry']
+    return geometry
+
+
+'''
+Geohash
 '''
 
 __base32 = '0123456789bcdefghjkmnpqrstuvwxyz'
