@@ -263,7 +263,7 @@ plt.show()
     
 ![png](images/output_7_0.png)
     
-
+`TransBigData`提供的栅格系统也支持为栅格给定旋转角度。在`0.4.0`以上版本的`TransBigData`中也提供了**三角形网格**和**六边形网格**的对应方法，这些方法都是向量化计算，速度极快。具体用法可以参考[这个案例](https://github.com/ni1o1/transbigdata/blob/main/example/Example%207-More%20options%20for%20the%20grids.ipynb)。
 
 ## 相关链接
 
