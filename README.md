@@ -276,6 +276,9 @@ plt.show()
 
 ![png](https://github.com/ni1o1/transbigdata/raw/main/images/output_7_0.png)
 
+The grid coordinates system offer by `TransBigData` also support adding rotation angle for the grids. It also support **Triangle** and **Hexagon** gridding methods, these methods are vectorized and fast. See [This Example](https://github.com/ni1o1/transbigdata/blob/main/example/Example%207-More%20options%20for%20the%20grids.ipynb) for further details.
+
+
 ## Citation information [![DOI](https://zenodo.org/badge/419559811.svg)](https://zenodo.org/badge/latestdoi/419559811) [![status](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b/status.svg)](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b)
 
 Please cite [this](https://doi.org/10.21105/joss.04021) when using `TransBigData` in your research. Citation information can be found at [CITATION.cff](https://github.com/ni1o1/transbigdata/blob/main/CITATION.cff).
