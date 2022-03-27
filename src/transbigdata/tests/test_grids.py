@@ -49,19 +49,6 @@ class TestGrids:
                  [113.69970522,  22.69902425]]
         assert np.allclose(np.array(result.exterior.coords), truth)
 
-    def test_hexagon_grids(self):
-        result = tbd.hexagon_grids(self.bounds, accuracy=500)[
-            'geometry'].iloc[0]
-        result = np.array(result.exterior.coords)
-        truth = [[113.59550842,  22.4],
-                 [113.59775421,  22.40359627],
-                 [113.60224579,  22.40359627],
-                 [113.60449158,  22.4],
-                 [113.60224579,  22.39640364],
-                 [113.59775421,  22.39640364],
-                 [113.59550842,  22.4]]
-        assert np.allclose(result, truth)
-
     def test_gridid_sjoin_shape(self):
         data = pd.DataFrame([[1, 1], [10, 10], [100, 100]],
                             columns=['LONCOL', 'LATCOL'])
@@ -119,3 +106,27 @@ class TestGrids:
                  (113.60243183460696, 22.406744907809635),
                  (113.60243183460696, 22.402248302603212)]
         assert np.allclose(result, truth)
+
+    def test_tri_hexa_grids(self):
+        params = [113.75, 22.4, 0.04871681446449111, 0.044966052064229066, 25]
+        assert tbd.GPS_to_grids_tri(120, 31.3, params)[0] == '32,-186,-219'
+        assert tbd.GPS_to_grids_hexa(120, 31.3, params)[0] == '32,-186,-218'
+
+        hexagon = np.array(tbd.gridid_to_polygon_hexa(
+            '32,-186,-218', params)[0].exterior.coords)
+        truth = np.array([[119.909123,  31.293],
+                          [119.932897,  31.340058],
+                          [119.988936,  31.344583],
+                          [120.021201,  31.302051],
+                          [119.997428,  31.254993],
+                          [119.941388,  31.250468],
+                          [119.909123,  31.293]])
+        assert np.allclose(hexagon, truth)
+
+        triangle = np.array(tbd.gridid_to_polygon_tri(
+            '32,-186,-219', params)[0].exterior.coords)
+        truth = np.array([[120.021201,  31.302051],
+                          [119.965162,  31.297525],
+                          [119.997428,  31.254993],
+                          [120.021201,  31.302051]])
+        assert np.allclose(triangle, truth)
