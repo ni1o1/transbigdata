@@ -472,34 +472,105 @@ poly : Series
 .. image:: geohash/output_9_0.png
 
 
-
-
-六边形渔网生成
+三角边形网格
 =============================
 
-.. function:: transbigdata.hexagon_grids(bounds,accuracy = 500)
+.. function:: transbigdata.GPS_to_grids_tri(lon, lat, params)
 
-生成研究范围内的六边形渔网。
+GPS数据对应栅格编号。输入数据的经纬度列与栅格参数，输出对应的三角边形栅格编号
 
 **输入**
 
-bounds : List
-    生成范围的边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 
-accuracy : number
-    六边形的边长（米）
-                                           
+lon : Series
+    经度列
+lat : Series
+    纬度列
+params : List
+    栅格参数与方形栅格一致，生成栅格参数指定的距离将成为三角形的边长
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
+    
+
 **输出**
 
-hexagon : GeoDataFrame
-    六边形渔网的矢量图形
+gridid : Series
+    三角边形栅格编号
+
+
+.. function:: transbigdata.gridid_to_polygon_tri(gridid, params)
+
+栅格编号生成栅格的地理信息列。输入数据的栅格编号与栅格参数，输出对应的地理信息列
+
+**输入**
+
+gridid : Series
+    栅格编号列
+params : List
+    栅格参数与方形栅格一致，生成栅格参数指定的距离将成为三角形的边长
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
+   
+
+**输出**
+
+geometry : Series
+    栅格的矢量图形列
 
 ::
 
     
-    #设定范围
-    bounds = [113.6,22.4,114.8,22.9]
-    hexagon = tbd.hexagon_grids(bounds,accuracy = 5000)
-    hexagon.plot()
+    #将GPS数据匹配至三角形栅格
+    data['gridid'] = tbd.GPS_to_grids_tri(data['lon'],data['lat'],params)
+    #生成几何图形
+    grid_agg['geometry'] = tbd.gridid_to_polygon_tri(grid_agg['gridid'],params)
 
-.. image:: _static/WX20211021-201747@2x.png
+.. image:: _static/WechatIMG2459.jpeg
+   :height: 200
+
+六边形网格
+=============================
+
+.. function:: transbigdata.GPS_to_grids_hexa(lon, lat, params)
+
+GPS数据对应栅格编号。输入数据的经纬度列与栅格参数，输出对应的六边形栅格编号
+
+**输入**
+
+lon : Series
+    经度列
+lat : Series
+    纬度列
+params : List
+    栅格参数与方形栅格一致，生成栅格参数指定的距离将成为六边形的边长
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
+   
+**输出**
+
+gridid : Series
+    六边形栅格编号
+
+.. function:: transbigdata.gridid_to_polygon_hexa(gridid, params)
+
+栅格编号生成栅格的地理信息列。输入数据的栅格编号与栅格参数，输出对应的地理信息列
+
+**输入**
+
+gridid : Series
+    六边形栅格编号
+params : List
+    栅格参数与方形栅格一致，生成栅格参数指定的距离将成为六边形的边长
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
+
+**输出**
+
+geometry : Series
+    栅格的矢量图形列
+
+::
+
+    
+    #将GPS数据匹配至六边形栅格
+    data['gridid'] = tbd.GPS_to_grids_hexa(data['lon'],data['lat'],params)
+    #生成几何图形
+    grid_agg['geometry'] = tbd.gridid_to_polygon_hexa(grid_agg['gridid'],params)
+
+.. image:: _static/WechatIMG2470.jpeg
    :height: 200

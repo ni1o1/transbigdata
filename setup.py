@@ -5,11 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="transbigdata",
-<<<<<<< Updated upstream
-    version="0.3.12",
-=======
-    version="0.4.1",
->>>>>>> Stashed changes
+    version="0.4.0",
     author="Qing Yu",
     author_email="qingyu0815@foxmail.com",
     description="A Python package developed for transportation spatio-temporal big data processing and analysis.",
