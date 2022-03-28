@@ -152,12 +152,14 @@ def rect_grids(location, accuracy=500, params='auto'):
         grid['geometry'] = gridid_to_polygon(grid['LONCOL'], grid['LATCOL'],
                                              params)
         data = grid
+    params = convertparams(params)
+    params['gridsize'] = accuracy
     if type(shape) != gpd.geodataframe.GeoDataFrame:
-        return gpd.GeoDataFrame(data), convertparams(params)
+        return gpd.GeoDataFrame(data), params
     else:
         data.crs = shape.crs
         data = data[data.intersects(shape.unary_union)]
-        return gpd.GeoDataFrame(data), convertparams(params)
+        return gpd.GeoDataFrame(data), params
 
 
 def convertparams(params):
@@ -214,13 +216,6 @@ def grid_params(bounds, accuracy=500):
         theta is the angle of the grid, it will be 0 if not given.
         When Gridding parameters is given, accuracy will not be used.
 
-    Examples
-    -------
-    >>> import transbigdata as tbd
-    >>> bounds = [113.6,22.4,114.8,22.9]
-    >>> tbd.grid_params(bounds,accuracy = 500)
-    (113.6, 22.4, 0.004872390756896538, 0.004496605206422906)
-
     '''
     lon1, lat1, lon2, lat2 = bounds
     if (lon1 > lon2) | (lat1 > lat2) | (abs(lat1) > 90) | (abs(lon1) > 180) | (
@@ -237,6 +232,7 @@ def grid_params(bounds, accuracy=500):
     deltaLat = accuracy * 360 / (2 * math.pi * 6371004)
     params = [lonStart, latStart, deltaLon, deltaLat]
     params = convertparams(params)
+    params['gridsize'] = accuracy
     return params
 
 
