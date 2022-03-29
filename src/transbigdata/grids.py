@@ -55,12 +55,10 @@ def area_to_grid(location, accuracy=500, method='rect', params='auto'):
         Grid size (meter)
     method : str
         rect, tri or hexa
-    params : List
-        Gridding parameters (lonStart, latStart, deltaLon, deltaLat) or
-        (lonStart, latStart, deltaLon, deltaLat, theta).
-        lonStart and latStart are the lower-left coordinates;
-        deltaLon, deltaLat are the length and width of a single grid;
-        theta is the angle of the grid, it will be 0 if not given.
+    params : list or dict
+        Gridding parameters. 
+        See https://transbigdata.readthedocs.io/en/latest/grids.html 
+        for detail information about gridding parameters.
         When Gridding parameters is given, accuracy will not be used.
 
     Returns
@@ -69,13 +67,10 @@ def area_to_grid(location, accuracy=500, method='rect', params='auto'):
         Grid GeoDataFrame,
         LONCOL and LATCOL are the index of grids,
         HBLON and HBLAT are the center of the grids
-    params : List
-        Gridding parameters (lonStart, latStart, deltaLon, deltaLat) or
-        (lonStart, latStart, deltaLon, deltaLat, theta).
-        lonStart and latStart are the lower-left coordinates;
-        deltaLon, deltaLat are the length and width of a single grid;
-        theta is the angle of the grid, it will be 0 if not given.
-        When Gridding parameters is given, accuracy will not be used.
+    params : list or dict
+        Gridding parameters. 
+        See https://transbigdata.readthedocs.io/en/latest/grids.html 
+        for detail information about gridding parameters.
     '''
 
     if (type(location) == list) | (type(location) == tuple):
@@ -182,13 +177,10 @@ def area_to_params(location, accuracy=500, method='rect'):
 
     Returns
     -------
-    params : List
-        Gridding parameters (lonStart, latStart, deltaLon, deltaLat) or
-        (lonStart, latStart, deltaLon, deltaLat, theta).
-        lonStart and latStart are the lower-left coordinates;
-        deltaLon, deltaLat are the length and width of a single grid;
-        theta is the angle of the grid, it will be 0 if not given.
-        When Gridding parameters is given, accuracy will not be used.
+    params : list or dict
+        Gridding parameters. 
+        See https://transbigdata.readthedocs.io/en/latest/grids.html 
+        for detail information about gridding parameters.
 
     '''
     if (type(location) == list) | (type(location) == tuple):
@@ -228,13 +220,10 @@ def GPS_to_grid(lon, lat, params):
         The column of longitude
     lat : Series
         The column of latitude
-    params : List
-        Gridding parameters (lonStart, latStart, deltaLon, deltaLat) or
-        (lonStart, latStart, deltaLon, deltaLat, theta).
-        lonStart and latStart are the lower-left coordinates;
-        deltaLon, deltaLat are the length and width of a single grid;
-        theta is the angle of the grid, it will be 0 if not given.
-        When Gridding parameters is given, accuracy will not be used.
+    params : list or dict
+        Gridding parameters. 
+        See https://transbigdata.readthedocs.io/en/latest/grids.html 
+        for detail information about gridding parameters.
 
     Returns
     -------
@@ -277,13 +266,10 @@ def grid_to_centre(gridid, params):
         [loncol_1,loncol_2,loncol_3] : Series
             The index of the grid latitude. The two columns LONCOL and
             LATCOL together can specify a grid.
-    params : List
-        Gridding parameters (lonStart, latStart, deltaLon, deltaLat) or
-        (lonStart, latStart, deltaLon, deltaLat, theta).
-        lonStart and latStart are the lower-left coordinates;
-        deltaLon, deltaLat are the length and width of a single grid;
-        theta is the angle of the grid, it will be 0 if not given.
-        When Gridding parameters is given, accuracy will not be used.
+    params : list or dict
+        Gridding parameters. 
+        See https://transbigdata.readthedocs.io/en/latest/grids.html 
+        for detail information about gridding parameters.
 
     Returns
     -------
@@ -365,13 +351,10 @@ def grid_to_polygon(gridid, params):
             The index of the grid latitude. The two columns LONCOL and
             LATCOL together can specify a grid.
 
-    params : List/Dict
-        Gridding parameters (lonStart, latStart, deltaLon, deltaLat) or
-        (lonStart, latStart, deltaLon, deltaLat, theta).
-        lonStart and latStart are the lower-left coordinates;
-        deltaLon, deltaLat are the length and width of a single grid;
-        theta is the angle of the grid, it will be 0 if not given.
-        When Gridding parameters is given, accuracy will not be used.
+    params : list or dict
+        Gridding parameters. 
+        See https://transbigdata.readthedocs.io/en/latest/grids.html 
+        for detail information about gridding parameters.
 
     Returns
     -------
@@ -404,13 +387,10 @@ def grid_to_area(data, shape, params, col=['LONCOL', 'LATCOL']):
         Data, with two columns of grid ID
     shape : GeoDataFrame
         Geographic polygon
-    params : List
-        Gridding parameters (lonStart, latStart, deltaLon, deltaLat) or
-        (lonStart, latStart, deltaLon, deltaLat, theta).
-        lonStart and latStart are the lower-left coordinates;
-        deltaLon, deltaLat are the length and width of a single grid;
-        theta is the angle of the grid, it will be 0 if not given.
-        When Gridding parameters is given, accuracy will not be used.
+    params : list or dict
+        Gridding parameters. 
+        See https://transbigdata.readthedocs.io/en/latest/grids.html 
+        for detail information about gridding parameters.
     col : List
         Column names [LONCOL,LATCOL] for rect grids or
         [loncol_1,loncol_2,loncol_3] for tri and hexa grids
@@ -436,6 +416,47 @@ def grid_to_area(data, shape, params, col=['LONCOL', 'LATCOL']):
     return data1
 
 
+def grid_to_params(grid):
+    '''
+    Regenerate gridding params from grid. Only support rect grids now.
+
+    Parameters
+    -------
+    grid : GeoDataFrame
+        grids generated by transbigdata
+
+
+    Returns
+    -------
+    params : list or dict
+        Gridding parameters. 
+        See https://transbigdata.readthedocs.io/en/latest/grids.html 
+        for detail information about gridding parameters.
+
+    '''
+    # 该方法未来计划增加对三角形与六边形网格支持
+    grid_coord = np.array(grid['geometry'].iloc[0].exterior.coords)
+    loncol = grid['LONCOL'].iloc[0]
+    latcol = grid['LATCOL'].iloc[0]
+    hblon = grid['geometry'].iloc[0].centroid.x
+    hblat = grid['geometry'].iloc[0].centroid.y
+    grid_coord = grid_coord - grid_coord[0]
+    x = grid_coord[1]
+    y = grid_coord[3]
+    R = np.array([x, y])
+    lonstart, latstart = np.array([hblon, hblat
+                                   ]) - R[0, :] * loncol - R[1, :] * latcol
+    deltalon = (x[0]**2 + y[0]**2).sum()**0.5
+    deltalat = (x[1]**2 + y[1]**2).sum()**0.5
+    theta = np.arccos(x[0] / deltalon) * 180 / np.pi
+    if np.allclose(theta, 0):
+        params = [lonstart, latstart, deltalon, deltalat]
+    else:
+        params = [lonstart, latstart, deltalon, deltalat, theta]
+    params = convertparams(params)
+    return params
+
+
 def grid_params_optimize(data,
                          initialparams,
                          col=['uid', 'lon', 'lat'],
@@ -453,10 +474,10 @@ def grid_params_optimize(data,
         Initial griding params
     col : List
         Column names [uid,lon,lat]
-    method : str
+    optmethod : str
         The method to optimize: centerdist, gini, gridscount
     printlog : bool
-        Whether to print log or not
+        Whether to print detail result
     sample : int
         Sample the data as input, if 0 it will not perform sampling
 
@@ -664,51 +685,6 @@ def grid_params_optimize(data,
 
         plt.show()
     return params_optimized
-
-
-def grid_to_params(grid):
-    '''
-    Regenerate gridding params from grid.
-
-    Parameters
-    -------
-    grid : GeoDataFrame
-        grids generated by transbigdata
-
-
-    Returns
-    -------
-    params : List
-        Gridding parameters (lonStart, latStart, deltaLon, deltaLat) or
-        (lonStart, latStart, deltaLon, deltaLat, theta).
-        lonStart and latStart are the lower-left coordinates;
-        deltaLon, deltaLat are the length and width of a single grid;
-        theta is the angle of the grid, it will be 0 if not given.
-        When Gridding parameters is given, accuracy will not be used.
-
-    '''
-    # 该方法未来计划增加对三角形与六边形网格支持
-    grid_coord = np.array(grid['geometry'].iloc[0].exterior.coords)
-    loncol = grid['LONCOL'].iloc[0]
-    latcol = grid['LATCOL'].iloc[0]
-    hblon = grid['geometry'].iloc[0].centroid.x
-    hblat = grid['geometry'].iloc[0].centroid.y
-    grid_coord = grid_coord - grid_coord[0]
-    x = grid_coord[1]
-    y = grid_coord[3]
-    R = np.array([x, y])
-    lonstart, latstart = np.array([hblon, hblat
-                                   ]) - R[0, :] * loncol - R[1, :] * latcol
-    deltalon = (x[0]**2 + y[0]**2).sum()**0.5
-    deltalat = (x[1]**2 + y[1]**2).sum()**0.5
-    theta = np.arccos(x[0] / deltalon) * 180 / np.pi
-    if np.allclose(theta, 0):
-        params = [lonstart, latstart, deltalon, deltalat]
-    else:
-        params = [lonstart, latstart, deltalon, deltalat, theta]
-    params = convertparams(params)
-    return params
-
 
 '''
 Utils

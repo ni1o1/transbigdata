@@ -100,14 +100,16 @@ from .coordinates import (
     transform_shape
 )
 from .grids import (
+    # new
     area_to_grid,
     area_to_params,
     GPS_to_grid,
     grid_to_centre,
     grid_to_polygon,
     grid_to_area,
-    grid_params_optimize,
     grid_to_params,
+    grid_params_optimize,
+    # old
     rect_grids,
     grid_params,
     grids_centre,
