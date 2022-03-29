@@ -177,7 +177,7 @@ def visualization_od(oddata, col=['slon', 'slat', 'elon', 'elat'],
         lat1 = oddata[slat].quantile(0.01)
         lat2 = oddata[slat].quantile(0.99)
         bounds = [lon1, lat1, lon2, lat2]
-        params = grid_params(bounds=bounds, accuracy=accuracy)
+        params = grid_params(bounds, accuracy=accuracy)
         od_gdf = odagg_grid(oddata, params, col=col)
         if zoom == 'auto':
             zoom = 8.5-np.log(lon2-lon1)/np.log(2)

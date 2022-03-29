@@ -100,11 +100,18 @@ from .coordinates import (
     transform_shape
 )
 from .grids import (
+    area_to_grid,
+    area_to_params,
+    GPS_to_grid,
+    grid_to_centre,
+    grid_to_polygon,
+    grid_to_area,
+    grid_params_optimize,
+    grid_to_params,
     rect_grids,
     grid_params,
     grids_centre,
     gridid_sjoin_shape,
-    grid_params_optimize,
     regenerate_params,
     geohash_encode,
     geohash_decode,
