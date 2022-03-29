@@ -8,24 +8,27 @@ from shapely.geometry import Polygon
 class TestGrids:
     def setup_method(self):
         self.bounds = [113.6, 22.4, 113.605, 22.405]
-        self.params = (113.6, 22.4, 0.004863669213934598, 0.004496605206422906)
+        self.params = [113.6, 22.4, 0.004863669213934598, 0.004496605206422906]
 
     def test_rect_grids(self):
         result = tbd.rect_grids(self.bounds, accuracy=500)
         res1 = result[0]['geometry'].iloc[0]
         res2 = result[1]
+        res2 = [res2['slon'], res2['slat'], res2['deltalon'], res2['deltalat']]
         assert np.allclose(
-            np.array(res1.exterior.coords), [
-                [113.59756817,  22.3977517],
-                [113.60243183, 22.3977517],
-                [113.60243183, 22.4022483],
-                [113.59756817, 22.4022483],
-                [113.59756817,  22.3977517]])
-        truth = (113.6, 22.4, 0.004863669213934598, 0.004496605206422906)
+            np.array(res1.exterior.coords), [[113.5927045,  22.39325509],
+                                             [113.59756817,  22.39325509],
+                                             [113.59756817,  22.3977517],
+                                             [113.5927045,  22.3977517],
+                                             [113.5927045,  22.39325509]])
+
+        truth = [113.6, 22.4, 0.004863669213934598, 0.004496605206422906]
         assert np.allclose(res2, truth)
 
     def test_grid_params(self):
         result = tbd.grid_params(self.bounds, accuracy=500)
+        result = [result['slon'], result['slat'],
+                  result['deltalon'], result['deltalat']]
         truth = (113.6, 22.4, 0.004863669213934598, 0.004496605206422906)
         assert np.allclose(result, truth)
 
@@ -54,16 +57,12 @@ class TestGrids:
                             columns=['LONCOL', 'LATCOL'])
         shape = gpd.GeoDataFrame([Polygon([[1, 1], [10, 10], [100, 100]]),
                                   Polygon(
-            [[113.6, 22.4], [113.61, 22.41], [113.6, 22.42]])
+            [[113.59, 22.39], [113.61, 22.39], [113.61, 22.41], [113.6, 22.42]])
         ], columns=['geometry'])
         result = tbd.gridid_sjoin_shape(data, shape, self.params, col=[
                                         'LONCOL', 'LATCOL'])['geometry'].iloc[0]
-        truth = [[113.60243183,  22.4022483],
-                 [113.6072955,  22.4022483],
-                 [113.6072955,  22.40674491],
-                 [113.60243183,  22.40674491],
-                 [113.60243183,  22.4022483]]
-        assert np.allclose(np.array(result.exterior.coords), truth)
+        truth = [(113.60486366921393, 22.404496605206422)]
+        assert np.allclose(list(result.coords), truth)
 
     def test_geohash(self):
         d = pd.DataFrame([[113.59550842,  22.4],
@@ -91,6 +90,8 @@ class TestGrids:
     def test_regenerate_params(self):
         grid, params = tbd.rect_grids(self.bounds, 500)
         result = tbd.regenerate_params(grid)
+        result = [result['slon'], result['slat'],
+                  result['deltalon'], result['deltalat']]
         truth = (113.60000000000001,
                  22.400000000000002,
                  0.004863669213932553,
@@ -100,20 +101,20 @@ class TestGrids:
     def test_grid_from_params(self):
         result = list(tbd.rect_grids(self.bounds, params=self.params)[
                       0]['geometry'].iloc[3].exterior.coords)
-        truth = [(113.60243183460696, 22.402248302603212),
-                 (113.6072955038209, 22.402248302603212),
-                 (113.6072955038209, 22.406744907809635),
-                 (113.60243183460696, 22.406744907809635),
-                 (113.60243183460696, 22.402248302603212)]
+        truth = [(113.6072955038209, 22.393255092190365),
+                 (113.61215917303483, 22.393255092190365),
+                 (113.61215917303483, 22.39775169739679),
+                 (113.6072955038209, 22.39775169739679),
+                 (113.6072955038209, 22.393255092190365)]
         assert np.allclose(result, truth)
 
     def test_tri_hexa_grids(self):
         params = [113.75, 22.4, 0.04871681446449111, 0.044966052064229066, 25]
-        assert tbd.GPS_to_grids_tri(120, 31.3, params)[0] == '32,-186,-219'
-        assert tbd.GPS_to_grids_hexa(120, 31.3, params)[0] == '32,-186,-218'
+        assert tbd.GPS_to_grids_tri(120, 31.3, params)[-1] == -219
+        assert tbd.GPS_to_grids_hexa(120, 31.3, params)[-1] == -218
 
         hexagon = np.array(tbd.gridid_to_polygon_hexa(
-            '32,-186,-218', params)[0].exterior.coords)
+            32, -186, -218, params)[0].exterior.coords)
         truth = np.array([[119.909123,  31.293],
                           [119.932897,  31.340058],
                           [119.988936,  31.344583],
@@ -124,7 +125,7 @@ class TestGrids:
         assert np.allclose(hexagon.shape, truth.shape)
 
         triangle = np.array(tbd.gridid_to_polygon_tri(
-            '32,-186,-219', params)[0].exterior.coords)
+            32, -186, -219, params)[0].exterior.coords)
         truth = np.array([[120.021201,  31.302051],
                           [119.965162,  31.297525],
                           [119.997428,  31.254993],

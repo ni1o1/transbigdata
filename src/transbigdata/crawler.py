@@ -323,7 +323,7 @@ def get_isochrone_amap(lon, lat, reachtime, ak, mode=2):
     url_data = parse.urlencode(dict1)
     url = url+url_data
     request = urllib.request.Request(url)
-    response = urllib.request.urlopen(request, timeout=1)
+    response = urllib.request.urlopen(request, timeout=10)
     webpage = response.read()
     result = json.loads(webpage.decode('utf8', 'ignore'))
     P_all = []

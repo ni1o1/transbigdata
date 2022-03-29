@@ -5,68 +5,51 @@
 数据栅格化
 ***************
 
-方形栅格渔网的生成与对应
+栅格时空数据处理框架
 =============================
 
-.. function:: transbigdata.rect_grids(location,accuracy = 500,params='auto')
+.. function:: transbigdata.area_to_grid(location, accuracy=500, method='rect', params='auto')
 
-生成研究范围内的方形栅格
+从研究范围生成栅格
 
 **输入**
 
 location : bounds(List) or shape(GeoDataFrame)
-    在哪生成栅格
-    如果是生成范围的边界bounds，则内容为[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 
-    如果是面要素，则必须是GeoDataFrame
+    在哪生成栅格 如果是生成范围的边界bounds，则内容为[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 如果是面要素，则必须是GeoDataFrame
 accuracy : number
     栅格大小（米）
-params : List
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
-    默认值为auto自动生成，当给定栅格参数时，栅格大小将从栅格参数中计算得到                   
-    
+method : str
+    `rect`方形, `tri`三角形或`hexa`六边形
+params : list or dict
+    栅格参数。如果给定了栅格参数，`accuracy`参数将不起作用
 
 **输出**
 
 grid : GeoDataFrame
-    栅格的GeoDataFrame，其中LONCOL与LATCOL为栅格的编号，HBLON与HBLAT为栅格的中心点坐标 
-params : List
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
+    栅格的GeoDataFrame
+params : list or dict
+    栅格参数
 
+.. function:: transbigdata.area_to_params(location, accuracy=500, method='rect')
 
-::
-
-    #设定范围
-    bounds = [lon1,lat1,lon2,lat2]
-    grid,params = tbd.rect_grids(bounds,accuracy = 500)
-
-
-.. function:: transbigdata.grid_params(bounds,accuracy = 500)
-
-栅格参数获取
+从研究范围生成栅格参数
 
 **输入**
 
-bounds : List
-    生成范围的边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 
+locationbounds(List) or shape(GeoDataFrame)
+    在哪生成栅格 如果是生成范围的边界bounds，则内容为[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 如果是面要素，则必须是GeoDataFrame
 accuracy : number
     栅格大小（米）
-                                           
+method : str
+    `rect`方形, `tri`三角形或`hexa`六边形
+
 
 **输出**
 
-params : List
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
+params : list or dict
+    栅格参数
 
-
-::
-
-    bounds = [113.75194,22.447837,114.624187,22.864748]
-    tbd.grid_params(bounds,accuracy = 500)
-
-
-
-
-.. function:: transbigdata.GPS_to_grids(lon,lat,params)
+.. function:: transbigdata.GPS_to_grid(lon, lat, params)
 
 GPS数据对应栅格编号。输入数据的经纬度列与栅格参数，输出对应的栅格编号
 
@@ -76,33 +59,36 @@ lon : Series
     经度列
 lat : Series
     纬度列
-params : List
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
-                                           
+params : list or dict
+    栅格参数
+
 **输出**
 
-LONCOL : Series
-    经度栅格编号列
-LATCOL : Series
-    纬度栅格编号列
+方形栅格输出:
+[LONCOL,LATCOL] : list
+    栅格编号两列
 
-::
+三角形、六边形栅格输出:
+[loncol_1,loncol_2,loncol_3] : list
+    栅格编号三列
 
-    data['LONCOL'],data['LATCOL'] = tbd.GPS_to_grids(data['Lng'],data['Lat'],params)
-
-.. function:: transbigdata.grids_centre(loncol,latcol,params)
+.. function:: transbigdata.grid_to_centre(gridid, params)
 
 栅格编号对应栅格中心点经纬度。输入数据的栅格编号与栅格参数，输出对应的栅格中心点
 
 **输入**
 
-LONCOL : Series
-    经度栅格编号列
-LATCOL : Series
-    纬度栅格编号列
-params : List
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
-                                           
+gridid : list
+    方形栅格:
+    [LONCOL,LATCOL] : list
+        栅格编号两列
+    三角形、六边形栅格:
+    [loncol_1,loncol_2,loncol_3] : list
+        栅格编号三列
+
+params : list or dict
+    栅格参数
+
 **输出**
 
 HBLON : Series
@@ -110,70 +96,68 @@ HBLON : Series
 HBLAT : Series
     栅格中心点纬度列
 
-
-::
-
-    data['HBLON'],data['HBLAT'] = tbd.grids_centre(data['LONCOL'],data['LATCOL'],params)
-
-.. function:: transbigdata.gridid_to_polygon(loncol,latcol,params)
+.. function:: transbigdata.grid_to_polygon(gridid, params)
 
 栅格编号生成栅格的地理信息列。输入数据的栅格编号与栅格参数，输出对应的地理信息列
 
 **输入**
 
-LONCOL : Series
-    经度栅格编号列
-LATCOL : Series
-    纬度栅格编号列
-params : List
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
-                                           
+gridid : list
+    方形栅格:
+    [LONCOL,LATCOL] : list
+        栅格编号两列
+    三角形、六边形栅格:
+    [loncol_1,loncol_2,loncol_3] : list
+        栅格编号三列
+
+params : list or dict
+    栅格参数
+
 **输出**
 
 geometry : Series
     栅格的矢量图形列
 
-::
-
-    data['geometry'] = tbd.gridid_to_polygon(data['LONCOL'],data['LATCOL'],params)
-
-.. function:: transbigdata.gridid_sjoin_shape(data,shape,params,col = ['LONCOL','LATCOL'])
+.. function:: transbigdata.grid_to_area(data, shape, params, col=['LONCOL', 'LATCOL'])
 
 输入数据（带有栅格经纬度编号两列），矢量图形与栅格化参数，输出数据栅格并对应矢量图形。
 
 **输入**
 
 data : DataFrame
-    数据,（带有栅格经纬度编号两列）
+    数据,（带有栅格经纬度编号列）
 shape : GeoDataFrame
     矢量图形
-params : List
-    栅格化参数
+params : list or dict
+    栅格参数
 col : List
-    列名，[经度栅格编号，纬度栅格编号]
+    列名，方型栅格下为[LONCOL,LATCOL]
+    三角形、六边形栅格为[loncol_1,loncol_2,loncol_3]
 
 **输出**
 
 data1 : DataFrame
-    数据栅格并对应矢量图形
+    数据，对应至矢量图形
+    
+.. function:: transbigdata.grid_to_params(grid)
+
+从栅格数据重新生成栅格参数，目前仅支持方形栅格
+
+**输入**
+
+grid : GeoDataFrame
+    transbigdata中生成的方形栅格
 
 
-.. function:: transbigdata.regenerate_params(grid):
+**输出**
 
-从栅格数据重新生成栅格参数  
-
-**输入**  
-grid : GeoDataFrame  
-    transbigdata中生成的grid                 
-
-**输出**  
-params : List  
-    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0  
+params : list or dict
+    栅格参数
 
 栅格参数的优化
 =====================
 
-.. function:: transbigdata.grid_params_optimize(data,initialparams,col=['uid','lon','lat'],method='centerdist',printlog=False,sample=0)
+.. function:: transbigdata.grid_params_optimize(data,initialparams,col=['uid','lon','lat'],optmethod='centerdist',printlog=False,sample=0)
 
 提供了三种优化栅格化参数的方法
 
@@ -185,7 +169,7 @@ initialparams : List
     初始栅格化参数
 col : List
     列名 [uid,lon,lat]
-method : str
+optmethod : str
     优化方法: centerdist, gini, gridscount
 printlog : bool
     是否打印日志
@@ -472,8 +456,178 @@ poly : Series
 .. image:: geohash/output_9_0.png
 
 
-三角边形网格
+旧方法
 =============================
+
+.. function:: transbigdata.rect_grids(location,accuracy = 500,params='auto')
+
+该方法已经更名为`area_to_grid <https://transbigdata.readthedocs.io/en/latest/grids.html#transbigdata.area_to_grid>`_
+生成研究范围内的方形栅格
+
+**输入**
+
+location : bounds(List) or shape(GeoDataFrame)
+    在哪生成栅格
+    如果是生成范围的边界bounds，则内容为[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 
+    如果是面要素，则必须是GeoDataFrame
+accuracy : number
+    栅格大小（米）
+params : List
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
+    默认值为auto自动生成，当给定栅格参数时，栅格大小将从栅格参数中计算得到                   
+    
+
+**输出**
+
+grid : GeoDataFrame
+    栅格的GeoDataFrame，其中LONCOL与LATCOL为栅格的编号，HBLON与HBLAT为栅格的中心点坐标 
+params : List
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
+
+
+::
+
+    #设定范围
+    bounds = [lon1,lat1,lon2,lat2]
+    grid,params = tbd.rect_grids(bounds,accuracy = 500)
+
+
+.. function:: transbigdata.grid_params(bounds,accuracy = 500)
+
+该方法已经更名为`area_to_params <https://transbigdata.readthedocs.io/en/latest/grids.html#transbigdata.area_to_params>`_
+栅格参数获取
+
+**输入**
+
+bounds : List
+    生成范围的边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 
+accuracy : number
+    栅格大小（米）
+                                           
+
+**输出**
+
+params : List
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
+
+
+::
+
+    bounds = [113.75194,22.447837,114.624187,22.864748]
+    tbd.grid_params(bounds,accuracy = 500)
+
+
+
+
+.. function:: transbigdata.GPS_to_grids(lon,lat,params)
+
+该方法已经更名为`GPS_to_grid <https://transbigdata.readthedocs.io/en/latest/grids.html#transbigdata.GPS_to_grid>`_
+GPS数据对应栅格编号。输入数据的经纬度列与栅格参数，输出对应的栅格编号
+
+**输入**
+
+lon : Series
+    经度列
+lat : Series
+    纬度列
+params : List
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
+                                           
+**输出**
+
+LONCOL : Series
+    经度栅格编号列
+LATCOL : Series
+    纬度栅格编号列
+
+::
+
+    data['LONCOL'],data['LATCOL'] = tbd.GPS_to_grids(data['Lng'],data['Lat'],params)
+
+.. function:: transbigdata.grids_centre(loncol,latcol,params)
+
+该方法已经更名为`grid_to_centre <https://transbigdata.readthedocs.io/en/latest/grids.html#transbigdata.grid_to_centre>`_
+栅格编号对应栅格中心点经纬度。输入数据的栅格编号与栅格参数，输出对应的栅格中心点
+
+**输入**
+
+LONCOL : Series
+    经度栅格编号列
+LATCOL : Series
+    纬度栅格编号列
+params : List
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
+                                           
+**输出**
+
+HBLON : Series
+    栅格中心点经度列
+HBLAT : Series
+    栅格中心点纬度列
+
+
+::
+
+    data['HBLON'],data['HBLAT'] = tbd.grids_centre(data['LONCOL'],data['LATCOL'],params)
+
+.. function:: transbigdata.gridid_to_polygon(loncol,latcol,params)
+
+该方法已经更名为`grid_to_polygon <https://transbigdata.readthedocs.io/en/latest/grids.html#transbigdata.grid_to_polygon>`_
+栅格编号生成栅格的地理信息列。输入数据的栅格编号与栅格参数，输出对应的地理信息列
+
+**输入**
+
+LONCOL : Series
+    经度栅格编号列
+LATCOL : Series
+    纬度栅格编号列
+params : List
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0
+                                           
+**输出**
+
+geometry : Series
+    栅格的矢量图形列
+
+::
+
+    data['geometry'] = tbd.gridid_to_polygon(data['LONCOL'],data['LATCOL'],params)
+
+.. function:: transbigdata.gridid_sjoin_shape(data,shape,params,col = ['LONCOL','LATCOL'])
+
+该方法已经更名为`grid_to_area <https://transbigdata.readthedocs.io/en/latest/grids.html#transbigdata.grid_to_area>`_
+输入数据（带有栅格经纬度编号两列），矢量图形与栅格化参数，输出数据栅格并对应矢量图形。
+
+**输入**
+
+data : DataFrame
+    数据,（带有栅格经纬度编号两列）
+shape : GeoDataFrame
+    矢量图形
+params : List
+    栅格化参数
+col : List
+    列名，[经度栅格编号，纬度栅格编号]
+
+**输出**
+
+data1 : DataFrame
+    数据栅格并对应矢量图形
+
+
+.. function:: transbigdata.regenerate_params(grid):
+
+该方法已经更名为`grid_to_params <https://transbigdata.readthedocs.io/en/latest/grids.html#transbigdata.grid_to_params>`_
+从栅格数据重新生成栅格参数 
+
+**输入**  
+grid : GeoDataFrame  
+    transbigdata中生成的grid                 
+
+**输出**  
+params : List  
+    栅格参数(lonStart,latStart,deltaLon,deltaLat)，或(lonStart,latStart,deltaLon,deltaLat,theta)，其中，lonStart,latStart分别为栅格左下角坐标，deltaLon,deltaLat为单个栅格的经纬度长宽，theta为栅格的角度，不给则默认为0  
+
 
 .. function:: transbigdata.GPS_to_grids_tri(lon, lat, params)
 
@@ -525,8 +679,6 @@ geometry : Series
 .. image:: _static/WechatIMG2459.jpeg
    :height: 200
 
-六边形网格
-=============================
 
 .. function:: transbigdata.GPS_to_grids_hexa(lon, lat, params)
 
