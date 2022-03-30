@@ -35,10 +35,10 @@ import numpy as np
 import geopandas as gpd
 from .traj import points_to_traj
 from .grids import (
-    grid_params,
-    GPS_to_grids,
-    gridid_to_polygon,
-    grids_centre,
+    area_to_params,
+    GPS_to_grid,
+    grid_to_polygon,
+    grid_to_centre,
 )
 from .odprocess import (
     odagg_grid
@@ -177,7 +177,7 @@ def visualization_od(oddata, col=['slon', 'slat', 'elon', 'elat'],
         lat1 = oddata[slat].quantile(0.01)
         lat2 = oddata[slat].quantile(0.99)
         bounds = [lon1, lat1, lon2, lat2]
-        params = grid_params(bounds, accuracy=accuracy)
+        params = area_to_params(bounds, accuracy=accuracy)
         od_gdf = odagg_grid(oddata, params, col=col)
         if zoom == 'auto':
             zoom = 8.5-np.log(lon2-lon1)/np.log(2)
@@ -412,16 +412,16 @@ def visualization_data(data, col=['lon', 'lat'], accuracy=500, height=500,
             lon_min, lon_max = data[lon].quantile(
                 0.05), data[lon].quantile(0.95)
             zoom = 8.5-np.log(lon_max-lon_min)/np.log(2)
-        params = grid_params(bounds, accuracy=accuracy)
-        data['LONCOL'], data['LATCOL'] = GPS_to_grids(
+        params = area_to_params(bounds, accuracy=accuracy)
+        data['LONCOL'], data['LATCOL'] = GPS_to_grid(
             data[lon], data[lat], params)
         data[count] = 1
         data = data.groupby(['LONCOL', 'LATCOL'])[
             'count'].sum().reset_index().reset_index()
-        data['geometry'] = gridid_to_polygon(
-            data['LONCOL'], data['LATCOL'], params)
-        data[lon], data[lat] = grids_centre(
-            data['LONCOL'], data['LATCOL'], params)
+        data['geometry'] = grid_to_polygon(
+            [data['LONCOL'], data['LATCOL']], params)
+        data[lon], data[lat] = grid_to_centre(
+            [data['LONCOL'], data['LATCOL']], params)
         data = gpd.GeoDataFrame(data)
 
     if len(col) == 3:
@@ -433,14 +433,14 @@ def visualization_data(data, col=['lon', 'lat'], accuracy=500, height=500,
             lon_min, lon_max = data[lon].quantile(
                 0.05), data[lon].quantile(0.95)
             zoom = 8.5-np.log(lon_max-lon_min)/np.log(2)
-        params = grid_params(bounds, accuracy=accuracy)
-        data['LONCOL'], data['LATCOL'] = GPS_to_grids(
+        params = area_to_params(bounds, accuracy=accuracy)
+        data['LONCOL'], data['LATCOL'] = GPS_to_grid(
             data[lon], data[lat], params)
         data = data.groupby(['LONCOL', 'LATCOL'])[count].sum().reset_index()
-        data['geometry'] = gridid_to_polygon(
-            data['LONCOL'], data['LATCOL'], params)
-        data[lon], data[lat] = grids_centre(
-            data['LONCOL'], data['LATCOL'], params)
+        data['geometry'] = grid_to_polygon(
+            [data['LONCOL'], data['LATCOL']], params)
+        data[lon], data[lat] = grid_to_centre(
+            [data['LONCOL'], data['LATCOL']], params)
 
         data = gpd.GeoDataFrame(data)
 

@@ -32,7 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import geopandas as gpd
 import pandas as pd
-from .grids import GPS_to_grids, grids_centre
+from .grids import GPS_to_grid, grid_to_centre
 
 
 def odagg_grid(oddata, params, col=['slon', 'slat', 'elon', 'elat'],
@@ -69,18 +69,18 @@ def odagg_grid(oddata, params, col=['slon', 'slat', 'elon', 'elat'],
         count = 'count'
     if len(col) == 5:
         [slon, slat, elon, elat, count] = col
-    oddata['SLONCOL'], oddata['SLATCOL'] = GPS_to_grids(
+    oddata['SLONCOL'], oddata['SLATCOL'] = GPS_to_grid(
         oddata[slon], oddata[slat], params)
-    oddata['ELONCOL'], oddata['ELATCOL'] = GPS_to_grids(
+    oddata['ELONCOL'], oddata['ELATCOL'] = GPS_to_grid(
         oddata[elon], oddata[elat], params)
     if len(col) == 4:
         oddata[count] = 1
     oddata_agg = oddata.groupby(['SLONCOL', 'SLATCOL', 'ELONCOL', 'ELATCOL'])[
         count].sum().reset_index()
-    oddata_agg['SHBLON'], oddata_agg['SHBLAT'] = grids_centre(
-        oddata_agg['SLONCOL'], oddata_agg['SLATCOL'], params)
-    oddata_agg['EHBLON'], oddata_agg['EHBLAT'] = grids_centre(
-        oddata_agg['ELONCOL'], oddata_agg['ELATCOL'], params)
+    oddata_agg['SHBLON'], oddata_agg['SHBLAT'] = grid_to_centre(
+        [oddata_agg['SLONCOL'], oddata_agg['SLATCOL']], params)
+    oddata_agg['EHBLON'], oddata_agg['EHBLAT'] = grid_to_centre(
+        [oddata_agg['ELONCOL'], oddata_agg['ELATCOL']], params)
     from shapely.geometry import LineString
     if arrow:
         oddata_agg['geometry'] = oddata_agg.apply(lambda r: tolinewitharrow(
@@ -142,19 +142,19 @@ def odagg_shape(oddata, shape, col=['slon', 'slat', 'elon', 'elat'],
     shape['y'] = shape.centroid.y
     shape = shape[['x', 'y', 'geometry']]
     if params:
-        oddata['SLONCOL'], oddata['SLATCOL'] = GPS_to_grids(
+        oddata['SLONCOL'], oddata['SLATCOL'] = GPS_to_grid(
             oddata[slon], oddata[slat], params)
-        oddata['ELONCOL'], oddata['ELATCOL'] = GPS_to_grids(
+        oddata['ELONCOL'], oddata['ELATCOL'] = GPS_to_grid(
             oddata[elon], oddata[elat], params)
         if len(col) == 4:
             oddata[count] = 1
         oddata_agg = oddata.groupby([
             'SLONCOL', 'SLATCOL', 'ELONCOL', 'ELATCOL'])[
                 count].sum().reset_index()
-        oddata_agg['SHBLON'], oddata_agg['SHBLAT'] = grids_centre(
-            oddata_agg['SLONCOL'], oddata_agg['SLATCOL'], params)
-        oddata_agg['EHBLON'], oddata_agg['EHBLAT'] = grids_centre(
-            oddata_agg['ELONCOL'], oddata_agg['ELATCOL'], params)
+        oddata_agg['SHBLON'], oddata_agg['SHBLAT'] = grid_to_centre(
+            [oddata_agg['SLONCOL'], oddata_agg['SLATCOL']], params)
+        oddata_agg['EHBLON'], oddata_agg['EHBLAT'] = grid_to_centre(
+            [oddata_agg['ELONCOL'], oddata_agg['ELATCOL']], params)
         a = oddata_agg[['SHBLON', 'SHBLAT']]
         b = oddata_agg[['EHBLON', 'EHBLAT']]
         a.columns = ['lon', 'lat']

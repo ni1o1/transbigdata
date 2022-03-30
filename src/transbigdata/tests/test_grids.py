@@ -109,12 +109,38 @@ class TestGrids:
         assert np.allclose(result, truth)
 
     def test_tri_hexa_grids(self):
-        params = [113.75, 22.4, 0.04871681446449111, 0.044966052064229066, 25]
-        assert tbd.GPS_to_grids_tri(120, 31.3, params)[-1] == -219
-        assert tbd.GPS_to_grids_hexa(120, 31.3, params)[-1] == -218
+        #三角形
+        params = {'slon': 113.75,
+                  'slat':  22.4,
+                  'deltalon': 0.04871681446449111,
+                  'deltalat': 0.044966052064229066,
+                  'theta': 25,
+                  'method': 'tri'}
+        #测试栅格编号
+        assert tbd.GPS_to_grid(120, 31.3, params)[-1] == -219
 
-        hexagon = np.array(tbd.gridid_to_polygon_hexa(
-            32, -186, -218, params)[0].exterior.coords)
+        #测试栅格polygon
+        triangle = np.array(tbd.grid_to_polygon(
+            [32, -186, -219], params)[0].exterior.coords)
+        truth = np.array([[120.021201,  31.302051],
+                          [119.965162,  31.297525],
+                          [119.997428,  31.254993],
+                          [120.021201,  31.302051]])
+        assert np.allclose(triangle.shape, truth.shape)
+
+        #测试栅格中心点
+        result = tbd.grid_to_centre( [32, -186, -219], params)
+        truth = [[119.994597],[31.28485633]]
+        assert np.allclose(result,truth)
+
+        #六边形
+        params['method'] = 'hexa'
+        #测试栅格编号
+        assert tbd.GPS_to_grid(120, 31.3, params)[-1] == -218
+
+        #测试栅格polygon
+        hexagon = np.array(tbd.grid_to_polygon(
+            [32, -186, -218], params)[0].exterior.coords)
         truth = np.array([[119.909123,  31.293],
                           [119.932897,  31.340058],
                           [119.988936,  31.344583],
@@ -124,10 +150,59 @@ class TestGrids:
                           [119.909123,  31.293]])
         assert np.allclose(hexagon.shape, truth.shape)
 
-        triangle = np.array(tbd.gridid_to_polygon_tri(
-            32, -186, -219, params)[0].exterior.coords)
-        truth = np.array([[120.021201,  31.302051],
-                          [119.965162,  31.297525],
-                          [119.997428,  31.254993],
-                          [120.021201,  31.302051]])
-        assert np.allclose(triangle.shape, truth.shape)
+        #测试栅格中心点
+        result = tbd.grid_to_centre( [32, -186, -218], params)
+        truth = [[119.96516214],[31.29752543]]
+        assert np.allclose(result,truth)
+
+    def test_params_optimize(self):
+        data = pd.DataFrame([
+            [34745, '20:27:43', 113.80684699999999, 22.623248999999998, 1, 27],
+            [34745, '20:24:07', 113.809898, 22.627399, 0, 0],
+            [34745, '20:24:27', 113.809898, 22.627399, 1, 0],
+            [34745, '20:22:07', 113.811348, 22.628067, 1, 0],
+            [34745, '20:10:06', 113.81988500000001,
+             22.6478, 1, 54],
+            [34745, '19:59:48', 113.820213,
+             22.674967000000002, 0, 23],
+            [34745, '20:11:06', 113.82048, 22.6423, 0, 57],
+            [34745, '20:13:46', 113.82676699999999,
+             22.630899, 0, 66],
+            [34745, '19:43:18', 114.828217, 22.7069, 0, 62],
+            [34745, '19:42:18', 113.83161899999999,
+             22.716998999999998, 0, 69],
+            [22233, '14:41:40', 113.878571, 22.571199, 0, 0],
+            [22233, '14:42:00', 113.879135, 22.571617, 0, 7],
+            [22233, '14:45:40', 113.886253, 22.573217, 0, 25],
+            [22233, '14:49:00', 113.8899,
+             22.56956700000001, 0, 0],
+            [22233, '14:55:15', 113.91093400000001,
+             22.552383, 1, 60],
+            [22233, '19:02:12', 113.927116,
+             22.543948999999998, 1, 41],
+            [22233, '14:32:47', 113.92831399999999,
+             22.556867999999998, 1, 57],
+            [22233, '14:57:35', 113.934036, 22.555267, 1, 65],
+            [22233, '20:54:11', 113.942467, 22.507566, 0, 21],
+            [22233, '18:51:30', 113.964569, 22.541849, 0, 0]],
+            columns=['Vehicleid',
+                     'Time',
+                     'slon',
+                     'slat',
+                     'OpenStatus',
+                     'Speed'])
+        initialparams = {'slon': 113.75,
+                    'slat':  22.4,
+                    'deltalon': 0.04871681446449111,
+                    'deltalat': 0.044966052064229066,
+                    'theta': 25,
+                    'method': 'hexa'}
+        #Optimize gridding params
+        params_optimized = tbd.grid_params_optimize(data,
+                                                    initialparams,
+                                                    col=['Vehicleid','slon','slat'],
+                                                    optmethod='centerdist',
+                                                    sample=0, #not sampling
+                                                    printlog=True,
+                                                    max_iter=1)
+

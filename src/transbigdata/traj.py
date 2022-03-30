@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import geopandas as gpd
 import pandas as pd
 import numpy as np
-from .grids import GPS_to_grids
+from .grids import GPS_to_grid
 from .preprocess import id_reindex, clean_same
 
 
@@ -145,7 +145,7 @@ def traj_stay_move(data, params,
     uid, timecol, lon, lat = col
     trajdata = data.copy()
     trajdata[timecol] = pd.to_datetime(trajdata[timecol])
-    trajdata['LONCOL'], trajdata['LATCOL'] = GPS_to_grids(
+    trajdata['LONCOL'], trajdata['LATCOL'] = GPS_to_grid(
         trajdata[lon], trajdata[lat], params)
     trajdata = clean_same(trajdata, col=[uid, timecol, 'LONCOL', 'LATCOL'])
     trajdata['stime'] = trajdata[timecol]
