@@ -6,3 +6,4 @@ scipy
 networkx
 keplergl
 igraph
+scikit-opt
