@@ -82,7 +82,6 @@ def area_to_grid(location, accuracy=500, method='rect', params='auto'):
     else:
         raise Exception(
             'Location should be either bounds(List) or shape(GeoDataFrame)')
-    print(bounds)
     lon1, lat1, lon2, lat2 = bounds
     if (lon1 > lon2) | (lat1 > lat2) | (abs(lat1) > 90) | (abs(lon1) > 180) | (
             abs(lat2) > 90) | (abs(lon2) > 180):
@@ -135,9 +134,9 @@ def area_to_grid(location, accuracy=500, method='rect', params='auto'):
                               bounds[3]-deltaLat,
                               deltaLat/3))
             ).reshape(2, -1).T, columns=['lon', 'lat'])
-        tmppoints['loncol_1'],
-        tmppoints['loncol_2'],
-        tmppoints['loncol_3'] = GPS_to_grid(
+        tmppoints['loncol_1'],\
+            tmppoints['loncol_2'],\
+            tmppoints['loncol_3'] = GPS_to_grid(
             tmppoints['lon'], tmppoints['lat'], params)
         tmppoints = tmppoints[['loncol_1',
                                'loncol_2', 'loncol_3']].drop_duplicates()
@@ -282,9 +281,14 @@ def grid_to_centre(gridid, params):
     method = params['method']
     if method == 'rect':
         loncol, latcol = gridid
+        loncol = pd.Series(loncol, name='loncol')
+        latcol = pd.Series(latcol, name='latcol')
         return grid_to_centre_rect(loncol, latcol, params, from_origin=False)
     if method == 'tri':
         loncol_1, loncol_2, loncol_3 = gridid
+        loncol_1 = pd.Series(loncol_1, name='loncol_1')
+        loncol_2 = pd.Series(loncol_2, name='loncol_2')
+        loncol_3 = pd.Series(loncol_3, name='loncol_3')
         testpoint = gettripoints(loncol_1, loncol_2, loncol_3, params)
         hblon = ((testpoint['p1_x']+testpoint['p2_x'] +
                  testpoint['p3_x'])/3).values
@@ -293,6 +297,9 @@ def grid_to_centre(gridid, params):
         return hblon, hblat
     if method == 'hexa':
         loncol_1, loncol_2, loncol_3 = gridid
+        loncol_1 = pd.Series(loncol_1, name='loncol_1')
+        loncol_2 = pd.Series(loncol_2, name='loncol_2')
+        loncol_3 = pd.Series(loncol_3, name='loncol_3')
         lonStart = params['slon']
         latStart = params['slat']
         deltaLon = params['deltalon']
@@ -462,7 +469,10 @@ def grid_params_optimize(data,
                          col=['uid', 'lon', 'lat'],
                          optmethod='centerdist',
                          printlog=False,
-                         sample=0):
+                         sample=0,
+                         size_pop=50,
+                         max_iter=300,
+                         prob_mut=0.001):
     '''
     Optimize the grid params
 
@@ -480,6 +490,8 @@ def grid_params_optimize(data,
         Whether to print detail result
     sample : int
         Sample the data as input, if 0 it will not perform sampling
+    size_pop, max_iter, prob_mut:
+        Params in GA from scikit-opt
 
     Returns
     -------
@@ -516,11 +528,11 @@ def grid_params_optimize(data,
             data = data.groupby(['LONCOL', 'LATCOL'])[
                 'count'].sum().reset_index()
         elif (params['method'] == 'tri') | (params['method'] == 'hexa'):
-            data['loncol_1'],
-            data['loncol_2'],
-            data['loncol_3'] = GPS_to_grid(data[lon],
-                                           data[lat],
-                                           params=params)
+            data['loncol_1'],\
+                data['loncol_2'],\
+                data['loncol_3'] = GPS_to_grid(data[lon],
+                                               data[lat],
+                                               params=params)
             data['count'] = 1
             data = data.groupby(['loncol_1', 'loncol_2', 'loncol_3'])[
                 'count'].sum().reset_index()
@@ -559,11 +571,11 @@ def grid_params_optimize(data,
                 uid, 'LONCOL', 'LATCOL'
             ]].drop_duplicates().groupby(uid)['LONCOL'].count().quantile(0.5)
         elif (params['method'] == 'tri') | (params['method'] == 'hexa'):
-            data['loncol_1'],
-            data['loncol_2'],
-            data['loncol_3'] = GPS_to_grid(data[lon],
-                                           data[lat],
-                                           params=params)
+            data['loncol_1'],\
+                data['loncol_2'],\
+                data['loncol_3'] = GPS_to_grid(data[lon],
+                                               data[lat],
+                                               params=params)
             return data[[
                 uid, 'loncol_1', 'loncol_2', 'loncol_3'
             ]].drop_duplicates().groupby(uid)['loncol_1'].count().quantile(0.5)
@@ -616,9 +628,9 @@ def grid_params_optimize(data,
 
     ga = GA(func=f,
             n_dim=3,
-            size_pop=50,
-            max_iter=300,
-            prob_mut=0.001,
+            size_pop=size_pop,
+            max_iter=max_iter,
+            prob_mut=prob_mut,
             lb=[0, 0, 0],
             ub=[params['deltalon'] * times, params['deltalat']
                 * times, 90 * theta_lambda],
@@ -660,10 +672,9 @@ def grid_params_optimize(data,
                                                 grids['LATCOL']],
                                                 params=params_optimized)
         elif (method == 'tri') | (method == 'hexa'):
-            trajdata['loncol_1'],
-            trajdata['loncol_2'],
-            trajdata['loncol_3'] = GPS_to_grid(
+            result = GPS_to_grid(
                 trajdata[lon], trajdata[lat], params=params_optimized)
+            trajdata['loncol_1'], trajdata['loncol_2'], trajdata['loncol_3'] = result
             grids = trajdata.drop_duplicates(
                 subset=['loncol_1', 'loncol_2', 'loncol_3']).copy()
             grids['geometry'] = grid_to_polygon([grids['loncol_1'],
@@ -685,6 +696,7 @@ def grid_params_optimize(data,
 
         plt.show()
     return params_optimized
+
 
 '''
 Utils

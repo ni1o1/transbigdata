@@ -33,10 +33,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import geopandas as gpd
 import pandas as pd
 from .grids import (
-    grid_params,
-    GPS_to_grids,
-    grids_centre,
-    gridid_to_polygon
+    GPS_to_grid,
+    area_to_params,
+    grid_to_centre,
+    grid_to_polygon
 )
 from .coordinates import getdistance
 
@@ -210,13 +210,13 @@ def clean_outofshape(data, shape, col=['Lng', 'Lat'], accuracy=500):
     Lng, Lat = col
     shape_unary = shape.unary_union
     bounds = shape_unary.bounds
-    params = grid_params(bounds, accuracy)
+    params = area_to_params(bounds, accuracy)
     data1 = data.copy()
-    data1['LONCOL'], data1['LATCOL'] = GPS_to_grids(
+    data1['LONCOL'], data1['LATCOL'] = GPS_to_grid(
         data1[Lng], data1[Lat], params)
     data1_gdf = data1[['LONCOL', 'LATCOL']].drop_duplicates()
-    data1_gdf['geometry'] = gridid_to_polygon(
-        data1_gdf['LONCOL'], data1_gdf['LATCOL'], params)
+    data1_gdf['geometry'] = grid_to_polygon(
+        [data1_gdf['LONCOL'], data1_gdf['LATCOL']], params)
     data1_gdf = gpd.GeoDataFrame(data1_gdf)
     data1_gdf = data1_gdf[data1_gdf.intersects(shape_unary)]
     data1 = pd.merge(data1, data1_gdf[['LONCOL', 'LATCOL']]).drop(
@@ -315,13 +315,13 @@ def dataagg(data, shape, col=['Lng', 'Lat', 'count'], accuracy=500):
     shape['index'] = range(len(shape))
     shape_unary = shape.unary_union
     bounds = shape_unary.bounds
-    params = grid_params(bounds, accuracy)
+    params = area_to_params(bounds, accuracy)
     data1 = data.copy()
-    data1['LONCOL'], data1['LATCOL'] = GPS_to_grids(
+    data1['LONCOL'], data1['LATCOL'] = GPS_to_grid(
         data1[Lng], data1[Lat], params)
     data1_gdf = data1[['LONCOL', 'LATCOL']].drop_duplicates()
     data1_gdf['geometry'] = gpd.points_from_xy(
-        *grids_centre(data1_gdf['LONCOL'], data1_gdf['LATCOL'], params))
+        *grid_to_centre([data1_gdf['LONCOL'], data1_gdf['LATCOL']], params))
     data1_gdf = gpd.GeoDataFrame(data1_gdf)
     data1_gdf = gpd.sjoin(data1_gdf, shape, how='left')
     data1 = pd.merge(data1, data1_gdf).drop(['LONCOL', 'LATCOL'], axis=1)
