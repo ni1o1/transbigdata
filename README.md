@@ -223,14 +223,25 @@ The most basic way to express the data distribution is in the form of geograpic 
 
 ```python
 #Obtain the gridding parameters
-params = tbd.grid_params(bounds,accuracy = 1000)
+params = tbd.area_to_params(bounds,accuracy = 1000)
+params
 ```
 
-The next step is to map the GPS data to their corresponding grids. Using the `tbd.GPS_to_grids`, it will generate the `LONCOL` column and the `LATCOL` column. The two columns together can specify a grid:
+> {'slon': 113.75,
+> 'slat': 22.4,
+> 'deltalon': 0.00974336289289822,
+> 'deltalat': 0.008993210412845813,
+> 'theta': 0,
+> 'method': 'rect',
+> 'gridsize': 1000}
+
+The gridding parameters store the information of the initial position, the size and the angle of the gridding system.
+
+The next step is to map the GPS data to their corresponding grids. Using the `tbd.GPS_to_grid`, it will generate the `LONCOL` column and the `LATCOL` column (Rectangular grids). The two columns together can specify a grid:
 
 ```python
 #Map the GPS data to grids
-data['LONCOL'],data['LATCOL'] = tbd.GPS_to_grids(data['lon'],data['lat'],params)
+data['LONCOL'],data['LATCOL'] = tbd.GPS_to_grid(data['lon'],data['lat'],params)
 ```
 
 Count the amount of data in each grids, generate the geometry of the grids and transform it into a GeoDataFrame:
@@ -239,7 +250,7 @@ Count the amount of data in each grids, generate the geometry of the grids and t
 #Aggregate data into grids
 grid_agg = data.groupby(['LONCOL','LATCOL'])['VehicleNum'].count().reset_index()
 #Generate grid geometry
-grid_agg['geometry'] = tbd.gridid_to_polygon(grid_agg['LONCOL'],grid_agg['LATCOL'],params)
+grid_agg['geometry'] = tbd.grid_to_polygon([grid_agg['LONCOL'],grid_agg['LATCOL']],params)
 #Change the type into GeoDataFrame
 import geopandas as gpd
 grid_agg = gpd.GeoDataFrame(grid_agg)
@@ -248,6 +259,36 @@ grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
 ```
 
 ![png](https://github.com/ni1o1/transbigdata/raw/main/images/output_5_1.png)
+
+#### Triangle and Hexagon grids & rotation angle
+
+`TransBigData` also support the triangle and hexagon grids. It also supports given rotation angle for the grids. We can alter the gridding parameter:
+
+```python
+#set to the hexagon grids
+params['method'] = 'hexa'
+#or set as triangle grids: params['method'] = 'tri'
+#set a rotation angle (degree)
+params['theta'] = 5
+```
+
+Then we can do the GPS data matching again:
+
+```python
+#Triangle and Hexagon grids requires three columns to store ID
+data['loncol_1'],data['loncol_2'],data['loncol_3'] = tbd.GPS_to_grid(data['lon'],data['lat'],params)
+#Aggregate data into grids
+grid_agg = data.groupby(['loncol_1','loncol_2','loncol_3'])['VehicleNum'].count().reset_index()
+#Generate grid geometry
+grid_agg['geometry'] = tbd.grid_to_polygon([grid_agg['loncol_1'],grid_agg['loncol_2'],grid_agg['loncol_3']],params)
+#Change the type into GeoDataFrame
+import geopandas as gpd
+grid_agg = gpd.GeoDataFrame(grid_agg)
+#Plot the grids
+grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
+```
+
+![1648714436503.png](https://github.com/ni1o1/transbigdata/raw/main/image/README/1648714436503.png)
 
 #### Data Visualization(with basemap)
 
@@ -274,10 +315,15 @@ plt.ylim(bounds[1],bounds[3])
 plt.show()
 ```
 
-![png](https://github.com/ni1o1/transbigdata/raw/main/images/output_7_0.png)
+![1648714582961.png](https://github.com/ni1o1/transbigdata/raw/main/image/README/1648714582961.png)
 
-The grid coordinates system offer by `TransBigData` also support adding rotation angle for the grids. It also support **Triangle** and **Hexagon** gridding methods, these methods are vectorized and fast. See [This Example](https://github.com/ni1o1/transbigdata/blob/main/example/Example%207-More%20options%20for%20the%20grids.ipynb) for further details.
+#### Griding framework offered by TransBigData
 
+Here is an overview of the gridding framework offered by `TransBigData`.
+
+![1648715064154.png](https://github.com/ni1o1/transbigdata/raw/main/image/README/1648715064154.png)
+
+See [This Example](https://github.com/ni1o1/transbigdata/blob/main/example/TBD_Core_Functions.ipynb) for further details.
 
 ## Citation information [![DOI](https://zenodo.org/badge/419559811.svg)](https://zenodo.org/badge/latestdoi/419559811) [![status](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b/status.svg)](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b)
 
