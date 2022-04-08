@@ -331,5 +331,5 @@ Please cite [this](https://doi.org/10.21105/joss.04021) when using `TransBigData
 
 ## Introducing Video (In Chinese) [![bilibili](https://img.shields.io/badge/bilibili-%E5%90%8C%E6%B5%8E%E5%B0%8F%E6%97%AD%E5%AD%A6%E9%95%BF-green.svg)](https://space.bilibili.com/3051484)
 
-* [Bilibili](https://www.bilibili.com/video/BV1nq4y1u7i1)
-* [Youtube](https://www.youtube.com/watch?v=V_KHFv75W_w)
+* [Bilibili](https://www.bilibili.com/video/BV1na411i7sd/)
+* [Youtube](https://www.youtube.com/watch?v=ynqJ01WmPiQ)
