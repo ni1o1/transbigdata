@@ -1,5 +1,6 @@
-cff-version: 1.2.0
-title: TransBigData
+cff-version: 2.0.0
+title: "TransBigData: A Python package for transportation spatio-temporal big data processing, analysis and visualization"
+journal: "Journal of Open Source Software"
 authors:
   - name: Qing Yu
     orcid: 0000-0003-2513-2969
@@ -7,23 +8,11 @@ authors:
   - name: Jian Yuan
     orcid: 0000-0002-7202-0946
     affiliation: 1
-date-released:
 license: "BSD 3"
 repository-code: "https://github.com/ni1o1/transbigdata"
-message: "If you use this software, please cite relevant articles below."
-references:
-  - type: article
-    authors:
-      - name: Qing Yu
-        orcid: 0000-0003-2513-2969
-        affiliation: 1
-      - name: Jian Yuan
-        orcid: 0000-0002-7202-0946
-        affiliation: 1
-    title: "TransBigData: A Python package for transportation spatio-temporal big data processing, analysis and visualization"
-    journal: "Journal of Open Source Software"
-    date-published: "2022"
-    volume: "7"
-    number: "71"
-    pages: "4021"
-    doi: "10.21105/joss.04021"
+date-published: "2022"
+volume: "7"
+number: "71"
+pages: "4021"
+doi: "10.21105/joss.04021"
+year: "2022"
