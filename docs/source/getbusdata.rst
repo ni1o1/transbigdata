@@ -29,7 +29,7 @@ stop : GeoDataFrame
 获取行政区划
 =============================
 
-.. function:: transbigdata.getadmin(keyword,ak,subdistricts = False)
+.. function:: transbigdata.getadmin(keyword,ak,jscode='',subdistricts = False)
 
 输入关键词与高德ak，抓取行政区划gis
 
@@ -39,6 +39,8 @@ keywords : str
     关键词，可以是名称，如"深圳市"，或行政区划编号，如440500
 ak : str
     高德ak
+jscode : str
+    安全密钥，自2021年12月02日升级，升级之后所申请的 key 必须配备安全密钥 jscode 一起使用
 subdistricts : bool
     是否输出子行政区划的信息
 
@@ -52,7 +54,7 @@ districts : DataFrame
 获取等时圈
 =============================
 
-.. function:: transbigdata.get_isochrone_amap(lon,lat,reachtime,ak,mode=2)
+.. function:: transbigdata.get_isochrone_amap(lon,lat,reachtime,ak,jscode='',mode=2)
 
 获取高德地图等时圈，支持`公交`、`地铁`、`公交+地铁`三种模式
 
@@ -66,6 +68,8 @@ reachtime : number
     等时圈时间
 ak : str
     高德地图ak
+jscode : str
+    安全密钥，自2021年12月02日升级，升级之后所申请的 key 必须配备安全密钥 jscode 一起使用
 mode : int or str
     出行方式，0`公交`、1`地铁`、2`公交+地铁`
 

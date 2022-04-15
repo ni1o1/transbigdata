@@ -48,7 +48,7 @@ from .coordinates import (
 )
 
 
-def getadmin(keyword, ak, subdistricts=False):
+def getadmin(keyword, ak,jscode='', subdistricts=False):
     '''
     Input the keyword and the Amap ak. The output is the GIS file of
     the administrative boundary (Only in China)
@@ -60,6 +60,8 @@ def getadmin(keyword, ak, subdistricts=False):
         the administrative code such as 440500
     ak : str
         Amap accesstoken
+    jscode : jscode
+        Amap safty code
     subdistricts : bool
         Whether to output the information of the administrative district
         boundary
@@ -81,6 +83,7 @@ def getadmin(keyword, ak, subdistricts=False):
         'showbiz': 'false',
         'extensions': 'all',
         'key': ak,
+        'jscode':jscode,
         's': 'rsv3',
         'output': 'json',
         'level': 'district',
@@ -283,7 +286,7 @@ def getbusdata(city, keywords, accurate=True):
     return data, stop
 
 
-def get_isochrone_amap(lon, lat, reachtime, ak, mode=2):
+def get_isochrone_amap(lon, lat, reachtime, ak,jscode='', mode=2):
     '''
     Obtain the isochrone from Amap reachcricle
 
@@ -297,6 +300,8 @@ def get_isochrone_amap(lon, lat, reachtime, ak, mode=2):
         Reachtime of the isochrone
     ak : str
         Amap access token
+    jscode : jscode
+        Amap safty code
     mode : int or str
         Travel mode, should be 0(bus), 1(subway), 2(bus+subway)
 
@@ -313,6 +318,7 @@ def get_isochrone_amap(lon, lat, reachtime, ak, mode=2):
     url = 'http://restapi.amap.com/v3/direction/reachcircle?'
     dict1 = {
         'key': ak,
+        'jscode':jscode,
         'location': str(round(float(lon), 6))+','+str(round(float(lat), 6)),
         'time': reachtime,
         'output': 'json',

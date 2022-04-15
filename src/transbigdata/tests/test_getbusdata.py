@@ -13,7 +13,7 @@ class TestGetbusdata:
 
     def test_getadmin(self):
         admin, _ = tbd.getadmin(
-            '深圳市', 'f35aa69595d3fd9527dfe9033a640b9c', subdistricts=True)
+            '深圳市', ak='2305ee7c82c147f11aac58fcc5bb7f19',jscode = '694338a096c6c50b74e5d74f411c9ab5', subdistricts=True)
         assert '深圳市' in admin['name'].sum()
 
     def test_getisochrone(self):
@@ -22,5 +22,5 @@ class TestGetbusdata:
             access_token='pk.eyJ1IjoibHByMTIxNDc5IiwiYSI6ImNrd2c0YXVydTBremQyb3V0cHVhMml5anAifQ.Y-q937VgT0diVxukUqwofw',
             mode='walking')
         tbd.get_isochrone_amap(
-            121.212403, 31.282477, 60, ak='f35aa69595d3fd9527dfe9033a640b9c',
+            121.212403, 31.282477, 60, ak='2305ee7c82c147f11aac58fcc5bb7f19', jscode = '694338a096c6c50b74e5d74f411c9ab5',
             mode=0)
