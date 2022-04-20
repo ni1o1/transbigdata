@@ -217,15 +217,13 @@ precision : number
 
 **输出**
 
-lon : Series
-    经度列
-lat : Series
-    纬度列
+geohash : Series
+    geohash编码列 
 
 
 .. function:: transbigdata.geohash_decode(geohash)
 
-输入经纬度与精度，输出geohash编码
+输入geohash，输出经纬度
 
 **输入**
 
@@ -234,8 +232,10 @@ geohash : Series
 
 **输出**
 
-geohash : Series
-    geohash编码列
+lon : Series
+    经度列
+lat : Series
+    纬度列
 
 .. function:: transbigdata.geohash_togrid(geohash)
 
