@@ -172,10 +172,10 @@ def visualization_od(oddata, col=['slon', 'slat', 'elon', 'elat'],
     import numpy as np
     if len(col) == 4:
         slon, slat, elon, elat = col
-        lon1 = oddata[slon].quantile(0.01)
-        lon2 = oddata[slon].quantile(0.99)
-        lat1 = oddata[slat].quantile(0.01)
-        lat2 = oddata[slat].quantile(0.99)
+        lon1 = oddata[slon].astype(float).quantile(0.01)
+        lon2 = oddata[slon].astype(float).quantile(0.99)
+        lat1 = oddata[slat].astype(float).quantile(0.01)
+        lat2 = oddata[slat].astype(float).quantile(0.99)
         bounds = [lon1, lat1, lon2, lat2]
         params = area_to_params(bounds, accuracy=accuracy)
         od_gdf = odagg_grid(oddata, params, col=col)
@@ -191,10 +191,10 @@ def visualization_od(oddata, col=['slon', 'slat', 'elon', 'elat'],
         )
     if len(col) == 5:
         slon, slat, elon, elat, count = col
-        lon1 = oddata[slon].quantile(0.01)
-        lon2 = oddata[slon].quantile(0.99)
-        lat1 = oddata[slat].quantile(0.01)
-        lat2 = oddata[slat].quantile(0.99)
+        lon1 = oddata[slon].astype(float).quantile(0.01)
+        lon2 = oddata[slon].astype(float).quantile(0.99)
+        lat1 = oddata[slat].astype(float).quantile(0.01)
+        lat2 = oddata[slat].astype(float).quantile(0.99)
         lon_center, lat_center = (lon2+lon1)/2, (lat2+lat1)/2
         if zoom == 'auto':
             zoom = 8.5-np.log(lon2-lon1)/np.log(2)
@@ -405,6 +405,8 @@ def visualization_data(data, col=['lon', 'lat'], accuracy=500, height=500,
     if len(col) == 2:
         lon, lat = col[0], col[1]
         count = 'count'
+        data[lon] = data[lon].astype('float')
+        data[lat] = data[lat].astype('float')
         bounds = [data[lon].min(), data[lat].min(),
                   data[lon].max(), data[lat].max()]
         lon_center, lat_center = data[lon].mean(), data[lat].mean()
@@ -426,6 +428,8 @@ def visualization_data(data, col=['lon', 'lat'], accuracy=500, height=500,
 
     if len(col) == 3:
         lon, lat, count = col
+        data[lon] = data[lon].astype('float')
+        data[lat] = data[lat].astype('float')
         bounds = [data[lon].min(), data[lat].min(),
                   data[lon].max(), data[lat].max()]
         lon_center, lat_center = data[lon].mean(), data[lat].mean()
