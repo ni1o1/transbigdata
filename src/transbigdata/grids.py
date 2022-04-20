@@ -1291,14 +1291,8 @@ def decode_exactly(geohash):
 
 
 def decode(geohash):
-    lon, lat,  lon_err, lat_err = decode_exactly(geohash)
-    lats = "%.*f" % (max(1, int(round(-np.log10(lat_err)))) - 1, lat)
-    lons = "%.*f" % (max(1, int(round(-np.log10(lon_err)))) - 1, lon)
-    if '.' in lats:
-        lats = lats.rstrip('0')
-    if '.' in lons:
-        lons = lons.rstrip('0')
-    return lons, lats
+    lon, lat,  _, _ = decode_exactly(geohash)
+    return lon, lat
 
 
 def encode(longitude, latitude, precision=12):
