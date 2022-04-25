@@ -157,7 +157,7 @@ params : list or dict
 栅格参数的优化
 =====================
 
-.. function:: transbigdata.grid_params_optimize(data,initialparams,col=['uid','lon','lat'],optmethod='centerdist',printlog=False,sample=0)
+.. function:: transbigdata.grid_params_optimize(data,initialparams,col=['uid','lon','lat'],optmethod='centerdist',printlog=False,sample=0,pop=15,max_iter=50,w=0.1,c1=0.5,c2=0.5)
 
 提供了三种优化栅格化参数的方法
 
@@ -175,6 +175,8 @@ printlog : bool
     是否打印日志
 sample : int
     抽样数据量，设置为0则不抽样
+pop,max_iter,w,c1,c2:
+    scikit-opt中PSO的参数设置，详情看：https://scikit-opt.github.io/scikit-opt/#/zh/README
     
 **输出**
 
