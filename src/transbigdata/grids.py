@@ -470,9 +470,11 @@ def grid_params_optimize(data,
                          optmethod='centerdist',
                          printlog=False,
                          sample=0,
-                         size_pop=50,
-                         max_iter=300,
-                         prob_mut=0.001):
+                         pop=15,
+                         max_iter=50,
+                         w=0.1,
+                        c1=0.5,
+                        c2=0.5):
     '''
     Optimize the grid params
 
@@ -490,8 +492,8 @@ def grid_params_optimize(data,
         Whether to print detail result
     sample : int
         Sample the data as input, if 0 it will not perform sampling
-    size_pop, max_iter, prob_mut:
-        Params in GA from scikit-opt
+    pop,max_iter,w,c1,c2:
+        Params in PSO from scikit-opt
 
     Returns
     -------
@@ -503,15 +505,15 @@ def grid_params_optimize(data,
     else:
         trajdata = data.copy()
     params = initialparams
-    times = 1000
-    theta_lambda = 90
+    times = 10
+    theta_lambda = 1
 
     params = convertparams(params)
     method = params['method']
 
     [uid, lon, lat] = col
     try:
-        from sko.GA import GA
+        from sko.PSO import PSO
     except ImportError:
         raise ImportError(
             "Please install scikit-opt, run following code "
@@ -626,16 +628,17 @@ def grid_params_optimize(data,
     else:
         raise Exception('Method should be one of: centerdist,gini,gridscount')
 
-    ga = GA(func=f,
+    pso = PSO(func=f,
             n_dim=3,
-            size_pop=size_pop,
+            pop=pop, 
             max_iter=max_iter,
-            prob_mut=prob_mut,
             lb=[0, 0, 0],
             ub=[params['deltalon'] * times, params['deltalat']
                 * times, 90 * theta_lambda],
-            precision=1e-7)
-    result = ga.run()
+            w=w, 
+            c1=c1, 
+            c2=c2)
+    result = pso.run()
 
     x = result[0]
     params_optimized = {
@@ -650,15 +653,13 @@ def grid_params_optimize(data,
     if printlog:
         print('Optimized index ' + optmethod + ':', f(result[0]))
         print('Optimized gridding params:', params_optimized)
-        print('Optimizing cost:')
-        import pandas as pd
         import matplotlib.pyplot as plt
-        Y_history = pd.DataFrame(ga.all_history_Y)
-        _, ax = plt.subplots(2, 1)
-        ax[0].plot(Y_history.index, Y_history.values, '.', color='red')
-        Y_history.min(axis=1).cummin().plot(kind='line')
-
-        plt.show()
+        plt.figure(1, (14, 5), dpi=300)
+        ax = plt.subplot(121)
+        plt.plot(pso.gbest_y_hist)
+        plt.ylabel('Cost')
+        plt.xlabel('Iters')
+        plt.title('Optimize cost')
         # 生成点的geodataframe
         trajdata['geometry'] = gpd.points_from_xy(trajdata[lon], trajdata[lat])
         trajdata = gpd.GeoDataFrame(trajdata)
@@ -682,10 +683,8 @@ def grid_params_optimize(data,
                                                 grids['loncol_3']],
                                                 params=params_optimized)
         grids = gpd.GeoDataFrame(grids)
-        print('Result:')
-        import matplotlib.pyplot as plt
-        plt.figure(1, (8, 8), dpi=300)
-        ax = plt.subplot(111)
+
+        ax = plt.subplot(122)
         plt.sca(ax)
         plt.axis('off')
         trajdata.plot(ax=ax, markersize=0.3)
@@ -693,7 +692,7 @@ def grid_params_optimize(data,
                    edgecolor=(0.8, 0.8, 0.8, 1),
                    facecolor=(0, 0, 0, 0.05),
                    ax=ax)
-
+        plt.title('Gridding result')
         plt.show()
     return params_optimized
 
