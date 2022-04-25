@@ -116,11 +116,11 @@ def read_imgsavepath():
         f = open(filepath, mode='r')
         imgsavepath = f.readline()
         f.close()
-    except Exception:
-        raise Exception(
-            'Map base map storage path not found, \
-please use tbd.set_imgsavepath() to set it first, \
-see: https://transbigdata.readthedocs.io/en/latest/plot_map.html')
+    except:
+        warnings.warn('Map base map storage path not found, \
+        please use tbd.set_imgsavepath() to set it first, \
+        see: https://transbigdata.readthedocs.io/en/latest/plot_map.html')
+        imgsavepath=''
     return imgsavepath
 
 
@@ -330,11 +330,14 @@ def plot_map(plt, bounds, zoom='auto', style=0, printlog=False):
     if access_token == '':
         style = 0
     imgsavepath = read_imgsavepath()
-    try:
-        import os
-        os.listdir(imgsavepath)
-    except Exception:
-        print('imgsavepath do not exist, your tile map will not save')
+    if imgsavepath != '':
+        try:
+            import os
+            os.listdir(imgsavepath)
+        except Exception:
+            warnings.warn('imgsavepath do not exist, your tile map will not save')
+    else:
+        warnings.warn('imgsavepath do not exist, your tile map will not save')
     lon1 = bounds[0]
     lat1 = bounds[1]
     lon2 = bounds[2]
