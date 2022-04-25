@@ -37,6 +37,7 @@ import io
 from PIL import Image
 import os
 import sys
+import warnings
 
 
 def searchfile(filename):
@@ -81,11 +82,12 @@ def read_mapboxtoken():
         mapboxtoken = f.readline()
         f.close()
     except Exception:
-        raise Exception(
-            "Mapboxtoken not found, "
-            "please use tbd.set_mapboxtoken() to set it first, see: "
-            "https://transbigdata.readthedocs.io/en/latest/plot_map.html"
-        )
+        warnings.warn("Mapboxtoken not found, "
+                      "The basemap is set as OpenStreetMap"
+                      "please use tbd.set_mapboxtoken() to set the access token, see: "
+                      "https://transbigdata.readthedocs.io/en/latest/plot_map.html"
+                      )
+        mapboxtoken = ''
     return mapboxtoken
 
 
@@ -208,6 +210,9 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
         styleid = 'ckwio2ze12fgk15p2alr5a4xj'
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
             r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+    if (style == 0) | (style == 'OSM'):
+        styleid = 'osm'
+        smurl = r'https://tile.openstreetmap.org/{0}/{1}/{2}.png'
 
     else:
         styleid = ''
@@ -247,6 +252,7 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
                     return None
             except Exception:
                 return None
+
         tile = loadfig(filename)
         if tile is None:
             try:
@@ -254,8 +260,16 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
                 while t < 10:
                     try:
                         imgurl = smurl.format(zoom, xtile, ytile)
+                        header = {}
+                        header['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+                        header['Accept-Language'] = 'zh-CN,zh;q=0.8'
+                        header['Upgrade-Insecure-Requests'] = '1'
+                        header['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36'
+                        request = urllib.request.Request(imgurl)
+                        for k, v in header.items():
+                            request.add_header(k, v)
                         imgstr = urllib.request.urlopen(
-                            imgurl, timeout=6).read()
+                            request, timeout=6).read()
                         tile = Image.open(io.BytesIO(imgstr))
                         savefig(filename, tile)
                         Cluster.paste(tile, box=(
@@ -290,7 +304,7 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
     return Cluster
 
 
-def plot_map(plt, bounds, zoom='auto', style=4, printlog=False):
+def plot_map(plt, bounds, zoom='auto', style=0, printlog=False):
     '''
     Plot the basemap
 
@@ -313,6 +327,8 @@ def plot_map(plt, bounds, zoom='auto', style=4, printlog=False):
         The style of map basemap can be 1-10, as follows
     '''
     access_token = read_mapboxtoken()
+    if access_token == '':
+        style = 0
     imgsavepath = read_imgsavepath()
     try:
         import os

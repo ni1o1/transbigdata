@@ -8,13 +8,14 @@
 使用前的设置
 =============================
 
-| TransBigData包提供了在matplotlib上绘制地图底图的功能，底图由mapbox提供，坐标系为WGS84。如果你要使用该功能，首先需要点击\ `这个链接 <https://account.mapbox.com/auth/signin/?route-to=%22https://account.mapbox.com/%22>`__\ 注册一个mapbox的账号，mapbox上注册成为开发者，并获取到一个mapbox token。 `这个链接 <https://docs.mapbox.com/help/getting-started/access-tokens/#how-access-tokens-work>`__\ 介绍了mapbox token的作用。
+| TransBigData包提供了在matplotlib上绘制地图底图的功能，底图由mapbox提供，坐标系为WGS84。如果你没有mapbox token，在绘制地图时选择style=0可进行底图绘制（OpenStreetMap的底图）。
+| 如果你要使用style为1-10的地图底图（Mapbox的底图），则首先需要点击\ `这个链接 <https://account.mapbox.com/auth/signin/?route-to=%22https://account.mapbox.com/%22>`__\ 注册一个mapbox的账号，mapbox上注册成为开发者，并获取到一个mapbox token。 `这个链接 <https://docs.mapbox.com/help/getting-started/access-tokens/#how-access-tokens-work>`__\ 介绍了mapbox token的作用。
 | 如果你已经得到了mapbox token，可以用以下代码为TransBigData设置mapbox token(只需要设置一次，后面重新打开python也不需要再重新设置了)：
 
 ::
 
     import transbigdata as tbd
-    #用下面代码设置你的mapboxtoken
+    #用下面代码设置你的mapboxtoken，如果不设置，则只能使用style=0的地图底图
     tbd.set_mapboxtoken('pk.eyxxxxxxxxxx.xxxxxxxxx')#必须在里面设置你申请的token，直接复制此行代码无效！
 
 另外还需要设置一个地图底图的存储位置，下一次显示同一个位置时，地图会从本地读取加载。
