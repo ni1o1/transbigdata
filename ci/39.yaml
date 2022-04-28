@@ -1,0 +1,19 @@
+name: test
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  # required
+  - geopandas
+  - igraph
+  - keplergl
+  - matplotlib
+  - networkx
+  - rtree
+  - scipy
+  - seaborn
+  # testing/formatting
+  - flake8
+  - pip
+  - pytest
+  - pytest-cov
