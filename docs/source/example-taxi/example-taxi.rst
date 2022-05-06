@@ -462,7 +462,6 @@ tbd中提供了地图底图加载和比例尺指北针的功能。使用这个�
 
     #创建图框
     import matplotlib.pyplot as plt
-    import plot_map
     fig =plt.figure(1,(8,8),dpi=80)
     ax =plt.subplot(111)
     plt.sca(ax)
