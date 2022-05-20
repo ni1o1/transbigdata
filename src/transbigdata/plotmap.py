@@ -170,6 +170,7 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
     '''
     Get map image
     '''
+    smurl = ''
     if (style == 1) | (style == 'streets'):
         styleid = 'ckwinzgw581od14mpyfhka6nk'
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
@@ -210,12 +211,24 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
         styleid = 'ckwio2ze12fgk15p2alr5a4xj'
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
             r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+    if (style == 11) :
+        styleid = 'cl39hgul1000514llp3yj7yh3'
+        smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
+            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+    if (style == 12) :
+        styleid = 'cl38pljx0006r14qp7ioy7gcc'
+        smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
+            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
     if (style == 0) | (style == 'OSM'):
         styleid = 'osm'
         smurl = r'https://tile.openstreetmap.org/{0}/{1}/{2}.png'
+    if (str(style)[:16] == 'mapbox://styles/'):
+        styleid = style.split('/')[-1]
+        smurl = r'https://api.mapbox.com/styles/v1/'+style[16:] + \
+            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+    if smurl == '':
+        raise ValueError('Style error')
 
-    else:
-        styleid = ''
     xmin, ymax = deg2num(lat_deg, lon_deg, zoom)
     xmax, ymin = deg2num(lat_deg + delta_lat, lon_deg + delta_long, zoom)
 
