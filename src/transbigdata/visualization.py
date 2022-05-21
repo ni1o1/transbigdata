@@ -76,7 +76,12 @@ def visualization_trip(trajdata, col=['Lng', 'Lat', 'ID', 'Time'],
             "the following code in cmd: pip install keplergl")
     print('Processing trajectory data...')
     [Lng, Lat, ID, timecol] = col
+        #clean data
+    trajdata = trajdata[-((trajdata[Lng].isnull())|(trajdata[Lat].isnull()))]
+    trajdata = trajdata[(trajdata[Lng]>=-180)&(trajdata[Lng]<=180)&(trajdata[Lat]>=-90)&(trajdata[Lat]<=90)]
+    
     trajdata[timecol] = pd.to_datetime(trajdata[timecol])
+
     trajdata = trajdata.sort_values(by=[ID, timecol])
     traj = points_to_traj(trajdata, col=[Lng, Lat, ID], timecol=timecol)
     ls = []
@@ -402,11 +407,17 @@ def visualization_data(data, col=['lon', 'lat'], accuracy=500, height=500,
         raise ImportError(
             "Please install keplergl, run "
             "the following code in cmd: pip install keplergl")
+
     if len(col) == 2:
         lon, lat = col[0], col[1]
         count = 'count'
+
         data[lon] = data[lon].astype('float')
         data[lat] = data[lat].astype('float')
+        #clean data
+        data = data[-((data[lon].isnull())|(data[lat].isnull()))]
+        data = data[(data[lon]>=-180)&(data[lon]<=180)&(data[lat]>=-90)&(data[lat]<=90)]
+
         bounds = [data[lon].min(), data[lat].min(),
                   data[lon].max(), data[lat].max()]
         lon_center, lat_center = data[lon].mean(), data[lat].mean()
@@ -428,8 +439,13 @@ def visualization_data(data, col=['lon', 'lat'], accuracy=500, height=500,
 
     if len(col) == 3:
         lon, lat, count = col
+        
         data[lon] = data[lon].astype('float')
         data[lat] = data[lat].astype('float')
+        #clean data
+        data = data[-((data[lon].isnull())|(data[lat].isnull()))]
+        data = data[(data[lon]>=-180)&(data[lon]<=180)&(data[lat]>=-90)&(data[lat]<=90)]
+
         bounds = [data[lon].min(), data[lat].min(),
                   data[lon].max(), data[lat].max()]
         lon_center, lat_center = data[lon].mean(), data[lat].mean()
