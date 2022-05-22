@@ -432,9 +432,9 @@ def split_subwayline(line, stop):
         tmp = tmp[['stationnames', 'stationnames1',
                    'geometry', 'geometry1', 'linename']]
         tmp['o_project'] = tmp['geometry'].apply(
-            lambda r1: r['geometry'].project(r1))
+            r['geometry'].project)
         tmp['d_project'] = tmp['geometry1'].apply(
-            lambda r1: r['geometry'].project(r1))
+            r['geometry'].project)
         tmp['geometry'] = tmp.apply(
             lambda r2: getline(r2, line_geometry), axis=1)
         lss.append(tmp)

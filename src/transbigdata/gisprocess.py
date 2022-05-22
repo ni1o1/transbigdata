@@ -270,7 +270,7 @@ def polyon_exterior(data, minarea=0):
             return MultiPolygon(geometries)
         if type(p) == Polygon:
             return Polygon(p.exterior)
-    data1['geometry'] = data1['geometry'].apply(lambda r: polyexterior(r))
+    data1['geometry'] = data1['geometry'].apply(polyexterior)
     data1 = data1[-data1['geometry'].is_empty]
     return data1
 

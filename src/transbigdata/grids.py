@@ -1370,7 +1370,7 @@ def geohash_decode(geohash):
     lat : Series
         decoded latitude Series
     '''
-    lonslats = geohash.apply(lambda r: decode(r))
+    lonslats = geohash.apply(decoder)
     lon = lonslats.apply(lambda r: r[0])
     lat = lonslats.apply(lambda r: r[1])
     return lon, lat
@@ -1390,7 +1390,7 @@ def geohash_togrid(geohash):
     poly : Series
         grid cell polygon for geohash
     '''
-    lonslats = geohash.apply(lambda r: decode_exactly(r))
+    lonslats = geohash.apply(decode_exactly)
 
     def topoly(r):
         (lon, lat, lon_err, lat_err) = r
@@ -1401,5 +1401,5 @@ def geohash_togrid(geohash):
                         [lon+lon_err, lat-lat_err],
                         [lon-lon_err, lat-lat_err],
                         ])
-    poly = lonslats.apply(lambda r: topoly(r))
+    poly = lonslats.apply(topoly)
     return poly
