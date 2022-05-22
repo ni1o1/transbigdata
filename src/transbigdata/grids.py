@@ -1370,7 +1370,7 @@ def geohash_decode(geohash):
     lat : Series
         decoded latitude Series
     '''
-    lonslats = geohash.apply(decoder)
+    lonslats = geohash.apply(decode)
     lon = lonslats.apply(lambda r: r[0])
     lat = lonslats.apply(lambda r: r[1])
     return lon, lat
