@@ -7,7 +7,7 @@
 
 
 
-.. function:: transbigdata.data_summary(data,col = ['Vehicleid','Time'],show_sample_duration = False)
+.. function:: transbigdata.data_summary(data,col = ['Vehicleid','Time'],show_sample_duration = False,roundnum=4)
 
 输入数据，打印数据概况
 
@@ -60,7 +60,7 @@ roundnum : number
     Median:  20.0 s
     Lower quartile:  15.0 s
 
-.. function:: transbigdata.sample_duration(data,col = ['Vehicleid','Time']):
+.. function:: transbigdata.sample_duration(data,col = ['Vehicleid','Time'])
 
 统计数据采样间隔
 
