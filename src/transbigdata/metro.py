@@ -32,7 +32,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import pandas as pd
 import numpy as np
-import geopandas as gpd
 from shapely.geometry import LineString
 
 
@@ -188,48 +187,45 @@ def metro_network(line, stop, transfertime=5, nxgraph=True):
         return edge1, edge2, node
 
 
-def get_shortest_path_traveltime(ostation, dstation, G, stop):
-    '''
-    Obtain the travel time of shortest path from the metro nextwork
-
-    Parameters
-    -------
-
-    ostation : str
-        O station name
-    dstation : str
-        D station name
-    G : networkx.classes.graph.Graph
-        metro network
-    stop : DataFrame
-        metro stop dataframe
-
-    Returns
-    -------
-    traveltime : float
-        metro travel time
-    '''
-    import networkx as nx
-    o = stop[stop['stationnames'] == ostation]['line'].iloc[0]+ostation
-    d = stop[stop['stationnames'] == dstation]['line'].iloc[0]+dstation
-    return nx.shortest_path_length(G, source=o, target=d, weight='weight')
-
-
-def get_shortest_path(ostation, dstation, G, stop):
+def get_path_traveltime(G, path):
     '''
     Obtain the travel path of shortest path from the metro nextwork
 
     Parameters
     -------
 
-    ostation : str
-        O station name
-    dstation : str
-        D station name
+    G : networkx.classes.graph.Graph
+        metro network
+    path : list
+        list of stationnames
+
+    Returns
+    -------
+    traveltime : float
+        travel time of the path
+    '''
+    traveltime = 0
+    for i in range(len(path)-1):
+        traveltime += G.get_edge_data(path[i], path[i+1])['weight']
+    return traveltime
+
+
+def get_shortest_path(G, stop, ostation, dstation):
+    '''
+    Obtain the travel path of shortest path from the metro nextwork
+
+    Parameters
+    -------
+
     G : networkx.classes.graph.Graph
         metro network
     stop : DataFrame
         metro stop dataframe
+    ostation : str
+        O station name
+    dstation : str
+        D station name
+
 
     Returns
     -------
@@ -241,7 +237,8 @@ def get_shortest_path(ostation, dstation, G, stop):
     d = stop[stop['stationnames'] == dstation]['line'].iloc[0]+dstation
     return nx.shortest_path(G, source=o, target=d, weight='weight')
 
-def get_k_shortest_paths(ostation, dstation, k, G, stop):
+
+def get_k_shortest_paths(G, stop, ostation, dstation, k):
     from itertools import islice
     '''
     Obtain the k th shortest paths from the metro nextwork
@@ -249,16 +246,17 @@ def get_k_shortest_paths(ostation, dstation, k, G, stop):
     Parameters
     -------
 
+    G : networkx.classes.graph.Graph
+        metro network
+    stop : DataFrame
+        metro stop dataframe
     ostation : str
         O station name
     dstation : str
         D station name
     k : int
         the k th shortest paths
-    G : networkx.classes.graph.Graph
-        metro network
-    stop : DataFrame
-        metro stop dataframe
+
 
     Returns
     -------

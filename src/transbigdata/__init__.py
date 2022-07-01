@@ -185,7 +185,7 @@ from .crawler import (
 from .metro import (
     split_subwayline,
     metro_network,
-    get_shortest_path_traveltime,
+    get_path_traveltime,
     get_shortest_path,
     get_k_shortest_paths
 )
