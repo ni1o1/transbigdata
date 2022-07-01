@@ -1,6 +1,5 @@
 import transbigdata as tbd
-import networkx as nx
-
+import numpy as np
 
 class TestGetbusdata:
     def test_getbusdata(self):
