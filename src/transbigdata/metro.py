@@ -216,7 +216,6 @@ def get_shortest_path(G, stop, ostation, dstation):
 
 
 def get_k_shortest_paths(G, stop, ostation, dstation, k):
-    from itertools import islice
     '''
     Obtain the k th shortest paths from the metro nextwork
 
@@ -240,6 +239,7 @@ def get_k_shortest_paths(G, stop, ostation, dstation, k):
     paths : list
         travel path: list of travel paths
     '''
+    from itertools import islice
     import networkx as nx
     o = stop[stop['stationnames'] == ostation]['line'].iloc[0]+ostation
     d = stop[stop['stationnames'] == dstation]['line'].iloc[0]+dstation
