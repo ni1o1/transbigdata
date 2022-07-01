@@ -187,29 +187,6 @@ def metro_network(line, stop, transfertime=5, nxgraph=True):
         return edge1, edge2, node
 
 
-def get_path_traveltime(G, path):
-    '''
-    Obtain the travel path of shortest path from the metro nextwork
-
-    Parameters
-    -------
-
-    G : networkx.classes.graph.Graph
-        metro network
-    path : list
-        list of stationnames
-
-    Returns
-    -------
-    traveltime : float
-        travel time of the path
-    '''
-    traveltime = 0
-    for i in range(len(path)-1):
-        traveltime += G.get_edge_data(path[i], path[i+1])['weight']
-    return traveltime
-
-
 def get_shortest_path(G, stop, ostation, dstation):
     '''
     Obtain the travel path of shortest path from the metro nextwork
@@ -260,7 +237,7 @@ def get_k_shortest_paths(G, stop, ostation, dstation, k):
 
     Returns
     -------
-    path : list
+    paths : list
         travel path: list of travel paths
     '''
     import networkx as nx
@@ -269,3 +246,26 @@ def get_k_shortest_paths(G, stop, ostation, dstation, k):
     return list(
         islice(nx.shortest_simple_paths(G, o, d, weight='weight'), k)
     )
+
+
+def get_path_traveltime(G, path):
+    '''
+    Obtain the travel time of the path
+
+    Parameters
+    -------
+
+    G : networkx.classes.graph.Graph
+        metro network
+    path : list
+        list of stationnames
+
+    Returns
+    -------
+    traveltime : float
+        travel time of the path
+    '''
+    traveltime = 0
+    for i in range(len(path)-1):
+        traveltime += G.get_edge_data(path[i], path[i+1])['weight']
+    return traveltime

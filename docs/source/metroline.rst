@@ -24,15 +24,15 @@ nxgraph : bool
 
 *nxgraph为True时*
 G : networkx.classes.graph.Graph
-    networkx构建的网络G，nxgraph参数为True时只输出这个
+    networkx构建的网络G
 
 *nxgraph为False时*
 edge1 : DataFrame
-    轨道断面的边，nxgraph参数为False时输出这个
+    轨道断面的边
 edge2 : DataFrame
-    轨道换乘的边，nxgraph参数为False时输出这个
+    轨道换乘的边
 node : List
-    网络节点，nxgraph参数为False时输出这个
+    网络节点
 
 .. function:: transbigdata.get_shortest_path(G, stop, ostation, dstation)
 

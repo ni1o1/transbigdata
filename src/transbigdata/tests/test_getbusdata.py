@@ -8,7 +8,8 @@ class TestGetbusdata:
         assert '地铁1号线' in data['linename'].sum()
         assert '世界之窗' in tbd.split_subwayline(data, stop)['stationnames'].sum()
 
-        
+        data['speed'] = 36 #operation speed 36km/h
+        data['stoptime'] = 0.5 #stop time at each stations 30s
         G = tbd.metro_network(data,stop, transfertime=10)
         path = tbd.get_shortest_path(G,stop,'罗湖','竹子林')
         assert len(path) == 12
