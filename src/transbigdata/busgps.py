@@ -116,7 +116,7 @@ def busgps_arriveinfo(data, line, stop, col=[
     data = data.to_crs(epsg=project_epsg)
     print('.', end='')
     if method == 'project':
-        data['project'] = data['geometry'].apply(lambda r: lineshp.project(r))
+        data['project'] = data['geometry'].apply(lineshp.project)
     elif method == 'dislimit':
         tmps = []
         # Distance limit method
@@ -149,7 +149,7 @@ def busgps_arriveinfo(data, line, stop, col=[
     print('.', end='')
     # Project bus stop to bus line
     stop = stop.to_crs(epsg=project_epsg)
-    stop['project'] = stop['geometry'].apply(lambda r: lineshp.project(r))
+    stop['project'] = stop['geometry'].apply(lineshp.project)
     print('.', end='')
     starttime = data[GPSDateTime].min()
     data['time_st'] = (data[GPSDateTime]-starttime).dt.total_seconds()

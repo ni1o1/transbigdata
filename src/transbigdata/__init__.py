@@ -33,7 +33,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-__version__ = '0.4.8'
+__version__ = '0.4.9'
 __author__ = 'Qing Yu <qingyu0815@foxmail.com>'
 
 # module level doc-string
@@ -181,8 +181,13 @@ from .crawler import (
     getbusdata,
     get_isochrone_amap,
     get_isochrone_mapbox,
+)
+from .metro import (
     split_subwayline,
-    metro_network
+    metro_network,
+    get_path_traveltime,
+    get_shortest_path,
+    get_k_shortest_paths
 )
 from .visualization import (
     visualization_trip,
