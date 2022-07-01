@@ -48,7 +48,7 @@ from .coordinates import (
 )
 
 
-def getadmin(keyword, ak,jscode='', subdistricts=False):
+def getadmin(keyword, ak, jscode='', subdistricts=False):
     '''
     Input the keyword and the Amap ak. The output is the GIS file of
     the administrative boundary (Only in China)
@@ -83,7 +83,7 @@ def getadmin(keyword, ak,jscode='', subdistricts=False):
         'showbiz': 'false',
         'extensions': 'all',
         'key': ak,
-        'jscode':jscode,
+        'jscode': jscode,
         's': 'rsv3',
         'output': 'json',
         'level': 'district',
@@ -286,7 +286,7 @@ def getbusdata(city, keywords, accurate=True):
     return data, stop
 
 
-def get_isochrone_amap(lon, lat, reachtime, ak,jscode='', mode=2):
+def get_isochrone_amap(lon, lat, reachtime, ak, jscode='', mode=2):
     '''
     Obtain the isochrone from Amap reachcricle
 
@@ -318,7 +318,7 @@ def get_isochrone_amap(lon, lat, reachtime, ak,jscode='', mode=2):
     url = 'http://restapi.amap.com/v3/direction/reachcircle?'
     dict1 = {
         'key': ak,
-        'jscode':jscode,
+        'jscode': jscode,
         'location': str(round(float(lon), 6))+','+str(round(float(lat), 6)),
         'time': reachtime,
         'output': 'json',
@@ -391,117 +391,3 @@ def get_isochrone_mapbox(lon, lat, reachtime, access_token='auto',
     isochrone['lat'] = lat
     isochrone['reachtime'] = reachtime
     return isochrone[['lon', 'lat', 'reachtime', 'geometry']]
-
-
-def split_subwayline(line, stop):
-    '''
-    To slice the metro line with metro stations to obtain metro section
-    information (This step is useful in subway passenger flow visualization)
-
-    Parameters
-    -------
-    line : GeoDataFrame
-        Bus/metro lines
-    stop : GeoDataFrame
-        Bus/metro stations
-
-    Returns
-    -------
-    metro_line_splited : GeoDataFrame
-        Generated section line shape
-    '''
-    def getline(r2, line_geometry):
-        ls = []
-        if r2['o_project'] <= r2['d_project']:
-            tmp1 = np.linspace(r2['o_project'], r2['d_project'], 10)
-        if r2['o_project'] > r2['d_project']:
-            tmp1 = np.linspace(
-                r2['o_project']-line_geometry.length, r2['d_project'], 10)
-            tmp1[tmp1 < 0] = tmp1[tmp1 < 0]+line_geometry.length
-        for j in tmp1:
-            ls.append(line_geometry.interpolate(j))
-        return LineString(ls)
-    lss = []
-    for k in range(len(line)):
-        r = line.iloc[k]
-        line_geometry = r['geometry']
-        tmp = stop[stop['linename'] == r['linename']].copy()
-        for i in tmp.columns:
-            tmp[i+'1'] = tmp[i].shift(-1)
-        tmp = tmp.iloc[:-1]
-        tmp = tmp[['stationnames', 'stationnames1',
-                   'geometry', 'geometry1', 'linename']]
-        tmp['o_project'] = tmp['geometry'].apply(
-            r['geometry'].project)
-        tmp['d_project'] = tmp['geometry1'].apply(
-            r['geometry'].project)
-        tmp['geometry'] = tmp.apply(
-            lambda r2: getline(r2, line_geometry), axis=1)
-        lss.append(tmp)
-    metro_line_splited = pd.concat(lss).drop('geometry1', axis=1)
-    return metro_line_splited
-
-
-def metro_network(stop, traveltime=3, transfertime=5, nxgraph=True):
-    '''
-    Inputting the metro station data and outputting the network topology
-    model. The graph generated relies on NetworkX.
-
-    Parameters
-    -------
-    stop : GeoDataFrame
-        Bus/metro stations
-    traveltime : number
-        Travel time per section
-    transfertime : number
-        Travel time per transfer
-    nxgraph : bool
-        Default True, if True then output the network G constructed by
-        NetworkX, if False then output the edges1(line section),
-        edge2(station transfer), and the node of the network
-
-    Returns
-    -------
-    G : networkx.classes.graph.Graph
-        Network G built by networkx.
-        Output when the nxgraph parameter is True
-    edge1 : DataFrame
-        Network edge for line section.
-        Output when the nxgraph parameter is False
-    edge2 : DataFrame
-        Network edge for transfering.
-        Output when the nxgraph parameter is False
-    node : List
-        Network nodes. Output when the nxgraph parameter is False
-    '''
-    linestop = stop.copy()
-    for i in linestop.columns:
-        linestop[i+'1'] = linestop[i].shift(-1)
-    linestop = linestop[linestop['linename'] == linestop['linename1']].copy()
-    linestop = linestop.rename(
-        columns={'stationnames': 'ostop', 'stationnames1': 'dstop'})
-    linestop['ostation'] = linestop['line']+linestop['ostop']
-    linestop['dstation'] = linestop['line']+linestop['dstop']
-    edge1 = linestop[['ostation', 'dstation']].copy()
-    edge1['duration'] = traveltime
-    linestop = stop.copy()
-    linestop['station'] = linestop['line'] + linestop['stationnames']
-    tmp = linestop.groupby(['stationnames'])[
-        'linename'].count().rename('count').reset_index()
-    tmp = pd.merge(linestop, tmp[tmp['count'] > 2]
-                   ['stationnames'], on='stationnames')
-    tmp = tmp[['stationnames', 'line', 'station']].drop_duplicates()
-    tmp = pd.merge(tmp, tmp, on='stationnames')
-    edge2 = tmp[tmp['line_x'] != tmp['line_y']][['station_x', 'station_y']]
-    edge2['duration'] = transfertime
-    edge2.columns = edge1.columns
-    edge = edge1.append(edge2)
-    node = list(edge['ostation'].drop_duplicates())
-    if nxgraph:
-        import networkx as nx
-        G = nx.Graph()
-        G.add_nodes_from(node)
-        G.add_weighted_edges_from(edge.values)
-        return G
-    else:
-        return edge1, edge2, node
