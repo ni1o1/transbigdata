@@ -87,7 +87,7 @@ tbd.split_subwayline方法可以用轨道站点切分轨道线路，得到轨道
 ::
 
     #构建拓扑模型
-    line['speed'] = 36 #每条线路运营车速 36km/h
+    line['speed'] = 55 #每条线路运营车速 55km/h
     line['stoptime'] = 0.5 #每条线路停站时间 30s
     import networkx as nx
     G = tbd.metro_network(line,stop, transfertime=5)
@@ -176,7 +176,7 @@ tbd.split_subwayline方法可以用轨道站点切分轨道线路，得到轨道
     '地铁3号线后村',
     '地铁3号线蔡厝']]
 
-获取路径出行时长
+获取路径出行时长（分钟）
 
 ::
 
@@ -184,4 +184,4 @@ tbd.split_subwayline方法可以用轨道站点切分轨道线路，得到轨道
 
 ::
 
-    68.00206888083389
+    49.34680872200037
