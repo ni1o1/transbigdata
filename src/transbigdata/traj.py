@@ -143,41 +143,60 @@ def traj_stay_move(data, params,
         move information
     '''
     uid, timecol, lon, lat = col
-    trajdata = data.copy()
-    trajdata[timecol] = pd.to_datetime(trajdata[timecol])
-    trajdata['LONCOL'], trajdata['LATCOL'] = GPS_to_grid(
-        trajdata[lon], trajdata[lat], params)
-    trajdata = clean_same(trajdata, col=[uid, timecol, 'LONCOL', 'LATCOL'])
-    trajdata['stime'] = trajdata[timecol]
-    trajdata['etime'] = trajdata[timecol].shift(-1)
-    trajdata[uid+'_next'] = trajdata[uid].shift(-1)
-    trajdata = trajdata[trajdata[uid+'_next'] == trajdata[uid]]
-    trajdata['duration'] = (
-        trajdata['etime'] - trajdata['stime']).dt.total_seconds()
-    activity = trajdata[[uid, lon, lat, 'stime',
-                         'etime', 'duration', 'LONCOL', 'LATCOL']]
-    activity = activity[activity['duration'] >= activitytime].rename(
-        columns={lon: 'lon', lat: 'lat'})
-    stay = activity.copy()
-    activity['stime_next'] = activity['stime'].shift(-1)
-    activity['elon'] = activity['lon'].shift(-1)
-    activity['elat'] = activity['lat'].shift(-1)
-    activity['ELONCOL'] = activity['LONCOL'].shift(-1)
-    activity['ELATCOL'] = activity['LATCOL'].shift(-1)
-    activity[uid+'_next'] = activity[uid].shift(-1)
-    activity = activity[activity[uid+'_next'] == activity[uid]
+    #Identify stay
+    stay = data.copy()
+    stay = stay.rename(columns={lon: 'lon', lat: 'lat',timecol:'stime'})
+    stay[timecol] = pd.to_datetime(stay[timecol])
+    stay['LONCOL'], stay['LATCOL'] = GPS_to_grid(
+        stay['lon'], stay['lat'], params)
+    #Number the status
+    stay['status_id'] = ((stay['LONCOL'] != stay['LONCOL'].shift()) |
+                        (stay['LATCOL'] != stay['LATCOL'].shift()) |
+                        (stay[uid] != stay[uid].shift())).astype(int)
+    stay['status_id'] = stay.groupby([uid])['status_id'].cumsum()
+    stay = stay.drop_duplicates(
+        subset=[uid, 'status_id'], keep='first').copy()
+    stay['etime'] = stay['stime'].shift(-1)
+    stay = stay[stay[uid] == stay[uid].shift(-1)].copy()
+    #Remove the duration shorter than given activitytime
+    stay['duration'] = (pd.to_datetime(stay['etime']) -
+                        pd.to_datetime(stay['stime'])).dt.total_seconds()
+    stay = stay[stay['duration'] >= activitytime].copy()
+    #Renumber the status
+    stay['status_id'] = ((stay['LONCOL'] != stay['LONCOL'].shift()) |
+                        (stay['LATCOL'] != stay['LATCOL'].shift()) |
+                        (stay[uid] != stay[uid].shift())).astype(int)
+    stay['status_id'] = stay.groupby([uid])['status_id'].cumsum()
+    stay_stime = stay.drop_duplicates(subset=[uid, 'status_id'], keep='first')[
+        [uid, 'stime', 'LONCOL', 'LATCOL', 'status_id']]
+    stay_etime = stay.drop_duplicates(subset=[uid, 'status_id'], keep='last')[
+        [uid, 'etime', 'LONCOL', 'LATCOL', 'status_id']]
+    stay = pd.merge(stay_stime, stay_etime, how='left').drop('status_id',axis = 1)
+    stay['lon'], stay['lat'] = grid_to_centre(
+        [stay['LONCOL'], stay['LATCOL']], params)
+    stay['duration'] = (pd.to_datetime(stay['etime']) -
+                        pd.to_datetime(stay['stime'])).dt.total_seconds()
+    #Identify move
+    move = stay.copy()
+    move['stime_next'] = move['stime'].shift(-1)
+    move['elon'] = move['lon'].shift(-1)
+    move['elat'] = move['lat'].shift(-1)
+    move['ELONCOL'] = move['LONCOL'].shift(-1)
+    move['ELATCOL'] = move['LATCOL'].shift(-1)
+    move[uid+'_next'] = move[uid].shift(-1)
+    move = move[move[uid+'_next'] == move[uid]
                         ].drop(['stime', 'duration', uid+'_next'], axis=1)
-    activity = activity.rename(columns={'lon': 'slon',
+    move = move.rename(columns={'lon': 'slon',
                                         'lat': 'slat',
                                         'etime': 'stime',
                                         'stime_next': 'etime',
                                         'LONCOL': 'SLONCOL',
                                         'LATCOL': 'SLATCOL',
                                         })
-    activity['duration'] = (
-        activity['etime'] - activity['stime']).dt.total_seconds()
-    move = activity.copy()
+    move['duration'] = (
+        move['etime'] - move['stime']).dt.total_seconds()
     return stay, move
+
 
 
 def traj_densify(data, col=['Vehicleid', 'Time', 'Lng', 'Lat'], timegap=15):
