@@ -30,7 +30,6 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
 
-import geopandas as gpd
 import pandas as pd
 import numpy as np
 from .grids import GPS_to_grid, grid_to_centre
@@ -65,7 +64,7 @@ def traj_stay_move(data, params,
     # Identify stay
     stay = data.copy()
     stay = stay.rename(columns={lon: 'lon', lat: 'lat', timecol: 'stime'})
-    stay[timecol] = pd.to_datetime(stay[timecol])
+    stay['stime'] = pd.to_datetime(stay['stime'])
     stay['LONCOL'], stay['LATCOL'] = GPS_to_grid(
         stay['lon'], stay['lat'], params)
     # Number the status
