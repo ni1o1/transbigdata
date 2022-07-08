@@ -14,7 +14,7 @@ Mobile phone data processing
     
     data = pd.read_csv(r'data/mobiledata_sample.csv')
     #make sure the time column is correct
-    data['stime'] = pd.to_datetime(data['stime'], format='%Y%m%d%H%M%S')
+    data['stime'] = pd.to_datetime(data['stime'], format='%Y%m%d%H%M')
     
     data.head()
 
