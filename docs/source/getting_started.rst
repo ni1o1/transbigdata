@@ -27,11 +27,8 @@ TransBigData依赖如下包
 * `geopandas`
 * `scipy`
 * `matplotlib`
-* `plot_map`>=0.3.5
-* `CoordinatesConverter`>=0.1.4
 * `networkx` (optional)
 * `igraph` (optional)
 * `osmnx` (optional)
 * `seaborn` (optional)
 * `keplergl` (optional)
-* `leuvenmapmatching` (optional)
