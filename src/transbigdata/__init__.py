@@ -33,7 +33,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-__version__ = '0.4.9'
+__version__ = '0.4.10'
 __author__ = 'Qing Yu <qingyu0815@foxmail.com>'
 
 # module level doc-string
@@ -160,9 +160,18 @@ from .taxigps import (
     taxigps_to_od,
     taxigps_traj_point
 )
-from .traj import (
+from .mobilephonedata import (
+    #new
+    mobile_stay_move,
+    mobile_plot_activity,
+    mobile_stay_dutation,
+    mobile_identify_home,
+    mobile_identify_work,
+    #old    
     plot_activity,
     traj_stay_move,
+    )
+from .traj import (
     traj_densify,
     traj_sparsify,
     points_to_traj,

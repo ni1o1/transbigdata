@@ -110,6 +110,7 @@ TransBigData简介
    metromodel/metromodel.rst
    Example-pNEUMA/Example-pNEUMA.rst
    example-bikesharing/example-bikesharing.rst
+   Example-Mobile/Example-Mobile.rst
    
 通用方法
 =========================
@@ -137,6 +138,7 @@ TransBigData简介
    :caption: 各类数据处理方法
    :maxdepth: 2
 
+   mobile.rst
    taxigps.rst
    bikedata.rst
    busgps.rst
