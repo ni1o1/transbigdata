@@ -1,6 +1,7 @@
 手机信令数据处理
 =================================
 
+| 这个案例的Jupyter notebook: `点击这里 <https://github.com/ni1o1/transbigdata/blob/main/example/Example%208-Mobile%20phone%20data%20processing.ipynb>`__.
 | 本样例展示如何用TransBigData处理手机信令数据
 | 首先导入包并读取数据
 
