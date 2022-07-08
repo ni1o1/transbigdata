@@ -1,9 +1,8 @@
-Mobile phone data processing
+手机信令数据处理
 =================================
 
-| In this example, we will introduce how to use the TransBigData to
-  process mobile phone data.
-| Firstly, import the TransBigData and read the data using pandas
+| 本样例展示如何用TransBigData处理手机信令数据
+| 首先导入包并读取数据
 
 ::
 
@@ -13,7 +12,7 @@ Mobile phone data processing
     import transbigdata as tbd
     
     data = pd.read_csv(r'data/mobiledata_sample.csv')
-    #make sure the time column is correct
+    #确保时间列正确
     data['stime'] = pd.to_datetime(data['stime'], format='%Y%m%d%H%M')
     
     data.head()
@@ -95,20 +94,16 @@ Mobile phone data processing
 
 
 
-Identify stay and move infomation from mobile phone trajectory data
+识别出行和停留
 -------------------------------------------------------------------
 
-When processing mobile phone data, TransBigData’s approach is to first
-correspond the data to the grids and treat the data within the same grid
-as being at the same location to avoid data positioning errors that
-cause the same location to be identified as multiple.
 处理手机数据时，TransBigData的方法是先将数据对应至栅格，将同一个栅格内的数据视为在同一个位置，以避免数据定位误差导致同一位置被识别为多个。
 
 ::
 
-    #Obtain gridding parameters
+    #获取栅格参数
     params = tbd.area_to_params([121.860, 29.295, 121.862, 29.301], accuracy=500)
-    #Identify stay and move infomation from mobile phone trajectory data
+    #从手机数据中识别出行和停留
     stay,move = tbd.mobile_stay_move(data,params,col = ['user_id','stime','longitude', 'latitude'])
 
 ::
@@ -333,12 +328,12 @@ cause the same location to be identified as multiple.
 
 
 
-Home and work place identify
+识别居住地与工作地
 ----------------------------
 
 ::
 
-    #Identify home location
+    #识别居住地
     home = tbd.mobile_identify_home(stay, col=['user_id','stime', 'etime','LONCOL', 'LATCOL','lon','lat'], start_hour=8, end_hour=20 )
     home.head()
 
@@ -421,7 +416,7 @@ Home and work place identify
 
 ::
 
-    #Identify work location
+    #识别工作地
     work = tbd.mobile_identify_work(stay, col=['user_id', 'stime', 'etime', 'LONCOL', 'LATCOL','lon','lat'], minhour=3, start_hour=8, end_hour=20,workdaystart=0, workdayend=4)
     work.head()
 
@@ -504,18 +499,18 @@ Home and work place identify
 
 ::
 
-    # If you want to filter out the users with work place location from home location 
+    # 如果要确保工作地与居住地不同
     home['flag'] = 1
     work = pd.merge(work,home,how='left')
     home = home.drop(['flag'],axis = 1)
     work = work[work['flag'].isnull()].drop(['flag'],axis = 1)
 
-Plot activity
+绘制活动图
 -------------
 
 ::
 
-    #Plot the activity of the user, different color represent different location
+    #绘制活动图，不同颜色代表不同活动
     uid = work['user_id'].sample().iloc[0]
     tbd.mobile_plot_activity(stay[stay['user_id']==uid],figsize = (20, 5))
 
