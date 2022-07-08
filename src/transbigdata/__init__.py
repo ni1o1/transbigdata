@@ -160,10 +160,16 @@ from .taxigps import (
     taxigps_to_od,
     taxigps_traj_point
 )
-from .mobilephonedata import (    
+from .mobilephonedata import (
+    #new
+    mobile_stay_move,
+    mobile_plot_activity,
+    mobile_stay_dutation,
+    mobile_identify_home,
+    mobile_identify_work,
+    #old    
     plot_activity,
     traj_stay_move,
-    stay_dutation
     )
 from .traj import (
     traj_densify,

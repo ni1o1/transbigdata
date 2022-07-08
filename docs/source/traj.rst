@@ -9,6 +9,9 @@
 ==================
 .. function:: transbigdata.traj_stay_move(data,params,col = ['ID','dataTime','longitude','latitude'],activitytime = 1800)
 
+.. note::
+    该方法已经更名为`mobile_stay_move`，旧方法名称依然可以使用。
+
 输入轨迹数据与栅格化参数，识别活动与出行
 
 **输入**
@@ -30,6 +33,9 @@ move : DataFrame
     个体移动信息
 
 .. function:: transbigdata.plot_activity(data,col = ['stime','etime','LONCOL','LATCOL'])
+
+.. note::
+    该方法已经更名为`mobile_plot_activity`，旧方法名称依然可以使用。
 
 输入个体的活动数据（单一个体），绘制活动图
 
