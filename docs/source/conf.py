@@ -13,10 +13,12 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+
+
+# -- Project information -----------------------------------------------------
 import sys
 import os
 
-# -- Project information -----------------------------------------------------
 
 project = 'TransBigData'
 copyright = '2022, Qing Yu'
@@ -32,21 +34,7 @@ html_favicon = '_static/logo2.ico'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
-              'sphinx.ext.napoleon',
-              'sphinx.ext.mathjax',
-              'sphinx.ext.inheritance_diagram',
-              'numpydoc',
-              'nbsphinx',
-               'sphinx_gallery.load_style',
-              'matplotlib.sphinxext.plot_directive',
-              "IPython.sphinxext.ipython_directive",
-              "IPython.sphinxext.ipython_console_highlighting",
-              ]
-napoleon_google_docstring = False
-napoleon_numpy_docstring = True
-
-sys.path.insert(0, os.path.abspath('../../src'))
+extensions = []
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -89,3 +77,21 @@ latex_logo = '_static/logo-wordmark-dark.png'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+ipython_savefig_dir = '../'
+
+extensions = ['sphinx.ext.autodoc',
+              'sphinx.ext.napoleon',
+              'sphinx.ext.mathjax',
+              'sphinx.ext.inheritance_diagram',
+              'numpydoc',
+              'nbsphinx',
+               'sphinx_gallery.load_style',
+              'matplotlib.sphinxext.plot_directive',
+              "IPython.sphinxext.ipython_directive",
+              "IPython.sphinxext.ipython_console_highlighting",
+              ]
+napoleon_google_docstring = False
+napoleon_numpy_docstring = True
+
+sys.path.insert(0, os.path.abspath('../../src'))
