@@ -13,7 +13,8 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
-
+import sys
+import os
 
 # -- Project information -----------------------------------------------------
 
@@ -31,7 +32,21 @@ html_favicon = '_static/logo2.ico'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = []
+extensions = ['sphinx.ext.autodoc',
+              'sphinx.ext.napoleon',
+              'sphinx.ext.mathjax',
+              'sphinx.ext.inheritance_diagram',
+              'numpydoc',
+              'nbsphinx',
+               'sphinx_gallery.load_style',
+              'matplotlib.sphinxext.plot_directive',
+              "IPython.sphinxext.ipython_directive",
+              "IPython.sphinxext.ipython_console_highlighting",
+              ]
+napoleon_google_docstring = False
+napoleon_numpy_docstring = True
+
+sys.path.insert(0, os.path.abspath('../../src'))
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -41,7 +56,7 @@ templates_path = ['_templates']
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'zh_CN'
+language = 'en'
 locale_dirs = ['../locale/']   # path is example but recommended.
 gettext_compact = False     # optional.
 

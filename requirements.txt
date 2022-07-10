@@ -7,3 +7,8 @@ networkx
 keplergl
 igraph
 scikit-opt
+ipython
+sphinx
+numpydoc
+nbsphinx
+sphinx_gallery

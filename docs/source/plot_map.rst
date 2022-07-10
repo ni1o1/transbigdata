@@ -1,48 +1,53 @@
 .. _plot_map:
 
 
-***************
-底图加载
-***************
+.. currentmodule:: transbigdata
 
-使用前的设置
+**************************
+Load the basemap
+**************************
+
+Settings before start
 =============================
 
-| TransBigData包提供了在matplotlib上绘制地图底图的功能，底图由mapbox提供，坐标系为WGS84。如果你没有mapbox token，在绘制地图时选择style=0可进行底图绘制（OpenStreetMap的底图）。
-| 如果你要使用style为1-10的地图底图（Mapbox的底图），则首先需要点击\ `这个链接 <https://account.mapbox.com/auth/signin/?route-to=%22https://account.mapbox.com/%22>`__\ 注册一个mapbox的账号，mapbox上注册成为开发者，并获取到一个mapbox token。 `这个链接 <https://docs.mapbox.com/help/getting-started/access-tokens/#how-access-tokens-work>`__\ 介绍了mapbox token的作用。
-| 如果你已经得到了mapbox token，可以用以下代码为TransBigData设置mapbox token(只需要设置一次，后面重新打开python也不需要再重新设置了)：
+| The TransBigData package provides the function of drawing map basemap on matplotlib. The basemap is provided by mapbox and the coordinate system is WGS84. If you want to use this function, you first need to click `This link <https://account.mapbox.com/auth/signin/?route-to=%22https://account.mapbox.com/%22>`__\  to register for a mapbox account. Register as a developer on the mapbox, and obtain a mapbox token.  `This link <https://docs.mapbox.com/help/getting-started/access-tokens/#how-access-tokens-work>`__\ introduces the function of mapbox token.
+If you have obtained the mapbox token, you can use the following code to set the mapbox token for TransBigData (you only need to set it once, and you don’t need to reset it when you reopen python later)
 
 ::
 
     import transbigdata as tbd
-    #用下面代码设置你的mapboxtoken，如果不设置，则只能使用style=0的地图底图
-    tbd.set_mapboxtoken('pk.eyxxxxxxxxxx.xxxxxxxxx')#必须在里面设置你申请的token，直接复制此行代码无效！
+    #Set your mapboxtoken with the following code
+    tbd.set_mapboxtoken('pk.eyxxxxxxxxxx.xxxxxxxxx')
+    # The token you applied for must be set in it.
+    # Copying this line of code directly is invalid
 
-另外还需要设置一个地图底图的存储位置，下一次显示同一个位置时，地图会从本地读取加载。
+In addition, you need to set the storage location of a map basemap. When the same location is displayed next time, the map will be read and loaded locally
 
 ::
 
-    #设置你的地图底图存储路径
-    #如果你是linux或者mac系统，路径是这么写，注意最后有一个反斜杠
+    # Set your map basemap storage path
+    # On linux or mac, the path is written like this.
+    # Note that there is a backslash at the end
     tbd.set_imgsavepath(r'/Users/xxxx/xxxx/')
-    #如果是windows系统，路径这么写，最后注意要两个斜杠以防转义
+
+    # On windows, the path is written like this.
+    # Finally, pay attention to two slashes to prevent escape
     tbd.set_imgsavepath(r'E:\pythonscript\xxx\\')
 
-设置好后，下次绘制底图时，会在你设置的路径下创建一个tileimg文件夹，底图都放在里面  
-尝试一下下面的代码，看看能否成功绘制底图
+After setting, the next time you draw the base map, you will create a tileimg folder under the path you set, and put all the base maps in it. Try the following code to see if you can draw the base map successfully
 
 ::
 
-    #定义显示范围范围
+    # Define display range
     bounds = [113.6,22.4,114.8,22.9]
-    #创建图框
+    # Plot Frame
     import matplotlib.pyplot as plt
     fig =plt.figure(1,(8,8),dpi=250)
     ax =plt.subplot(111)
     plt.sca(ax)
-    #添加地图底图
+    # Add map basemap
     tbd.plot_map(plt,bounds,zoom = 11,style = 4)
-    #添加比例尺和指北针
+    # Add scale bar and north arrow
     tbd.plotscale(ax,bounds = bounds,textsize = 10,compasssize = 1,accuracy = 2000,rect = [0.06,0.03],zorder = 10)
     plt.axis('off')
     plt.xlim(bounds[0],bounds[2])
@@ -52,139 +57,99 @@
 .. image:: plot_map/output_6_0.png
 
 
+.. autofunction:: plot_map
 
-地图底图加载
-=============================
-
-TransBigData包的底图绘制功能由plot_map包提供。首先确保你的plot_map包在0.3.3版本以上::
-
-    pip install -U plot-map
-
-.. function:: transbigdata.plot_map(plt,bounds,zoom='auto',style=4,printlog = False,styleid = 'dark')
-
-添加地图底图
-
-**输入**
-
-bounds : List
-    底图的绘图边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 
-zoom : number
-    底图的放大等级，默认为auto自动选取。越大越精细，加载的时间也就越久，一般单个城市大小的范围，这个参数选取12到16之间 
-printlog : bool
-    是否显示日志                                                
-style : number
-    地图底图的样式，可选1-10，对应分别如下（需要plot_map包在0.3.3版本以上）   
-
-底图样式1：streets
+Basemap style 1：streets
 ----------------------------------------
 
 .. image:: plot_map/1.png
 
 
-底图样式2：outdoors
+Basemap style 2：outdoors
 ----------------------------------------
 
 .. image:: plot_map/2.png
 
 
-底图样式3：satellite
+Basemap style 3：satellite
 ----------------------------------------
 
 .. image:: plot_map/3.png
 
 
-底图样式4：light
+Basemap style 4：light
 ----------------------------------------
 
 .. image:: plot_map/4.png
 
 
-底图样式5：dark
+Basemap style 5：dark
 ----------------------------------------
 
 .. image:: plot_map/5.png
 
 
-底图样式6：light-ch（中文）
+Basemap style 6：light-ch（中文）
 ----------------------------------------
 
 .. image:: plot_map/6.png
 
 
-底图样式7：ice creem
+Basemap style 7：ice creem
 ----------------------------------------
 
 .. image:: plot_map/7.png
 
 
-底图样式8：night
+Basemap style 8：night
 ----------------------------------------
 
 .. image:: plot_map/8.png
 
 
-底图样式9：terrain
+Basemap style 9：terrain
 ----------------------------------------
 
 .. image:: plot_map/9.png
 
 
-底图样式10：basic blue
+Basemap style 10：basic blue
 ----------------------------------------
 
 .. image:: plot_map/10.png
 
-底图样式11：light(无标注)
+Basemap style 11：light(无标注)
 ----------------------------------------
 
 .. image:: plot_map/11.png
 
-底图样式12：dark(无标注)
+Basemap style 12：dark(无标注)
 ----------------------------------------
 
 .. image:: plot_map/12.png
 
-自定义样式：0.4.8以上版本支持
+Self-defined style
 ----------------------------------------
 
-需要传入mapbox的样式代码：
+support selfdefined mapbox style
 
 ::
 
     tbd.plot_map(plt,bounds,zoom = 11,style = 'mapbox://styles/ni1o1/cl38pljx0006r14qp7ioy7gcc')
 
-用法
+Code example
 ----------------------------------------
 
 ::
 
-    #设定显示范围
+    #Set display range
     bounds = [lon1,lat1,lon2,lat2]  
     tbd.plot_map(plt,bounds,zoom = 12,style = 4)  
 
-指北针和比例尺
+Compass and scale
 =============================
 
-.. function:: transbigdata.plotscale(ax,bounds,textcolor = 'k',textsize = 8,compasssize = 1,accuracy = 'auto',rect=[0.1,0.1],unit = "KM",style = 1,**kwargs)
-
-为底图添加指北针和比例尺
-
-**输入**
-
-bounds : List
-    底图的绘图边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) 其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标 
-textsize : number
-    标注文字大小                                                 
-compasssize : number
-    标注的指北针大小                                             
-accuracy : number
-    标注比例尺的长度（米）                                         
-unit : str
-    'KM','km','M','m' 比例尺的单位                               
-style : number
-    1或2，比例尺样式                                             
-rect : List
-    比例尺在图中的大致位置，如[0.9,0.9]则在右上角                    
+.. autofunction:: plotscale
 
 
 ::

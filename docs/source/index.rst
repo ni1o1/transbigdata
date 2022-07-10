@@ -10,35 +10,34 @@ TransBigData 为交通时空大数据而生
 
 
 
-**主要功能**
+**Main Functions**
 
-TransBigData工具针对时空大数据处理而开发，依托于GeoPandas。TransBigData集成了交通时空大数据处理过程中常用的方法。包括栅格化、数据质量分析、数据预处理、数据集计、轨迹分析、GIS处理、地图底图加载、坐标与距离计算、数据可视化等通用方法。TransBigData也针对出租车GPS数据、共享单车数据、公交GPS数据等多种常见交通时空大数据提供了快速简洁的处理方法。
+TransBigData is a Python package developed for transportation spatio-temporal big data processing and analysis. TransBigData provides fast and concise methods for processing common traffic spatio-temporal big data such as Taxi GPS data, bicycle sharing data and bus GPS data. It includes general methods such as rasterization, data quality analysis, data pre-processing, data set counting, trajectory analysis, GIS processing, map base map loading, coordinate and distance calculation, and data visualization.
 
-**技术特点**
+**Technical Features**
 
-* 面向交通时空大数据分析不同阶段的处理需求提供不同处理功能。
-* 代码简洁、高效、灵活、易用，通过简短的代码即可实现复杂的数据任务。
+* Provides different processing methods for different stages of traffic spatio-temporal big data analysis.
+* The code with TransBigData is clean, efficient, flexible, and easy to use, allowing complex data tasks to be achieved with concise code.
 
 
-TransBigData简介
+Introduction
 ==============================
 
-快速入门
+Quick Start
 ---------------
 
-| 在安装TransBigData之前，请确保已经安装了可用的geopandas包：https://geopandas.org/index.html
-| 如果你已经安装了geopandas，则直接在命令提示符中运行下面代码即可安装
+| Before installing TransBigData, make sure that you have installed the geopandas package: https://geopandas.org/index.html
+| If you already have geopandas installed, run the following code directly from the command prompt to install it
 
 ::
 
     pip install -U transbigdata
 
-下面例子展示如何使用TransBigData工具快速地从出租车GPS数据中提取出行OD
+The following example shows how to use the TransBigData to quickly extract trip OD from taxi GPS data
+
 ::
 
-    #导入TransBigData包
     import transbigdata as tbd
-    #读取数据    
     import pandas as pd
     data = pd.read_csv('TaxiData-Sample.csv',header = None) 
     data.columns = ['VehicleNum','time','slon','slat','OpenStatus','Speed'] 
@@ -48,75 +47,45 @@ TransBigData简介
    :height: 300
 
 
-使用*tbd.taxigps_to_od*方法，传入对应的列名，即可提取出行OD
+Use the `tbd.taxigps_to_od` method and pass in the corresponding column name to extract the trip OD:
 ::
 
-    #从GPS数据提取OD
+    #Extract OD from GPS data
     oddata = tbd.taxigps_to_od(data,col = ['VehicleNum','time','slon','slat','OpenStatus'])
     oddata
 
 .. image:: _static/WX20211021-190104@2x.png
    :height: 300
 
-对提取出的OD进行OD的栅格集计::
+Aggregate OD into grids::
 
-    #定义研究范围
+   #define bounds
    bounds = [113.6,22.4,114.8,22.9]
-   #输入研究范围边界bounds与栅格宽度accuracy，获取栅格化参数
+   #obtain the gridding parameters
    params = tbd.grid_params(bounds = bounds,accuracy = 1500)
-   #栅格化OD并集计
+   #gridding OD data and aggregate
    od_gdf = tbd.odagg_grid(oddata,params)
    od_gdf.plot(column = 'count')
 
 .. image:: _static/WX20211021-190524@2x.png
    :height: 300
 
-使用示例
----------------
-.. raw:: html
-   :file: gallery/html/grid.html
-
-
-
-相关链接
----------------
-
-* 小旭学长的b站： https://space.bilibili.com/3051484
-* 小旭学长的七天入门交通时空大数据分析课程（零基础免费课）： https://www.lifangshuju.com/#/introduce/166  
-* 小旭学长的交通时空大数据分析课程： https://www.lifangshuju.com/#/introduce/154  
-* 小旭学长的数据可视化课程： https://www.lifangshuju.com/#/introduce/165  
-* 本项目的github页面： https://github.com/ni1o1/transbigdata/  
-* 有bug请在这个页面提交： https://github.com/ni1o1/transbigdata/issues
-
-安装
-=========================
 
 .. toctree::
-   :caption: 安装
+   :caption: Installation
    :maxdepth: 2
    
    getting_started.rst
 
-
-使用示例
-=========================
-
 .. toctree::
-   :caption: 使用示例
+   :caption: Example
    :maxdepth: 2
 
-   example-taxi/example-taxi.rst
-   example-busgps/example-busgps.rst
-   metromodel/metromodel.rst
-   Example-pNEUMA/Example-pNEUMA.rst
-   example-bikesharing/example-bikesharing.rst
-   Example-Mobile/Example-Mobile.rst
-   
-通用方法
-=========================
+   gallery/index.rst
+
 
 .. toctree::
-   :caption: 通用方法
+   :caption: General Methods
    :maxdepth: 2
    
    quality.rst
@@ -129,13 +98,10 @@ TransBigData简介
    gisprocess.rst
    plot_map.rst
    CoordinatesConverter.rst
-
-
-各类数据处理方法
-=========================
+   utils.rst
 
 .. toctree::
-   :caption: 各类数据处理方法
+   :caption: Methods for specific data
    :maxdepth: 2
 
    mobile.rst
