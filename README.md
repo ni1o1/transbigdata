@@ -323,7 +323,7 @@ Here is an overview of the gridding framework offered by `TransBigData`.
 
 ![1648715064154.png](https://github.com/ni1o1/transbigdata/raw/main/image/README/1648715064154.png)
 
-See [This Example](https://github.com/ni1o1/transbigdata/blob/main/example/TBD_Core_Functions.ipynb) for further details.
+See [This Example](https://github.com/ni1o1/transbigdata/blob/main/docs/source/gallery/Example%202-Grid-base%20processing%20framework%20of%20TransBigData.ipynb) for further details.
 
 ## Citation information [![DOI](https://zenodo.org/badge/419559811.svg)](https://zenodo.org/badge/latestdoi/419559811) [![status](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b/status.svg)](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b)
 

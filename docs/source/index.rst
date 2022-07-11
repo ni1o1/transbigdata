@@ -71,11 +71,17 @@ Aggregate OD into grids::
    :height: 300
 
 
+Installation
+==============================
+
 .. toctree::
    :caption: Installation
    :maxdepth: 2
    
    getting_started.rst
+
+Example gallery
+==============================
 
 .. toctree::
    :caption: Example
@@ -83,6 +89,8 @@ Aggregate OD into grids::
 
    gallery/index.rst
 
+General Methods
+==============================
 
 .. toctree::
    :caption: General Methods
@@ -99,6 +107,9 @@ Aggregate OD into grids::
    plot_map.rst
    CoordinatesConverter.rst
    utils.rst
+
+Methods for specific data
+==============================
 
 .. toctree::
    :caption: Methods for specific data

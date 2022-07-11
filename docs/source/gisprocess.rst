@@ -20,11 +20,10 @@ GIS处理
 | 下面的案例展示如何用TransBigData包进行点与点、点与线的近邻匹配。该方法使用的是KDTree算法，可查看wiki：https://en.wikipedia.org/wiki/K-d_tree，算法复杂度为o(log(n))
 
 
-点与点匹配（DataFrame与DataFrame）
-----------------------------------
+Point to point matching (DataFrame and DataFrame)
+-------------------------------------------------------
 
-| 导入TransBigData包。
-| 生成两个GeoDataFrame表，用于测试
+| 
 
 .. ipython:: python
 
@@ -39,7 +38,7 @@ GIS处理
     dfB = gpd.GeoDataFrame([[1,3],[2,5],[2,2]],columns = ['lon','lat'])
     dfB
 
-| 使用 :func:`transbigdata.ckdnearest` 进行点与点匹配，如果是DataFrame与DataFrame匹配（不含有地理信息），则需要指定前后两个表的经纬度列
+| Use :func:`transbigdata.ckdnearest` to match points to points, if the inputs are two DataFrame without geometry columns, you should specify the `lon` and `lat` columns.
 
 .. ipython:: python
 
@@ -417,7 +416,7 @@ GIS处理
     </table>
     </div>
 
-面要素处理
+Polygon processing
 ========================
 
 

@@ -307,7 +307,7 @@ plt.show()
 
 ![1648715064154.png](https://github.com/ni1o1/transbigdata/raw/main/image/README/1648715064154.png)
 
-具体用法可以参考[这个案例](https://github.com/ni1o1/transbigdata/blob/main/example/TBD_Core_Functions.ipynb)。
+具体用法可以参考[这个案例](https://github.com/ni1o1/transbigdata/blob/main/docs/source/gallery/Example%202-Grid-base%20processing%20framework%20of%20TransBigData.ipynb)。
 
 ## 相关链接
 
