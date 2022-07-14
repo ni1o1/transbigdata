@@ -40,47 +40,32 @@ import sys
 import warnings
 
 
-def searchfile(filename):
-    '''
-    Search for mapboxtoken file
-    '''
-    fileroot = ''
-    for i in sys.path:
-        try:
-            if filename in os.listdir(i):
-                fileroot = i
-        except Exception:
-            pass
-    if fileroot == '':
-        fileroot = sys.path[-1]
-    return fileroot+'/'+filename
 
 
+from configparser import ConfigParser
+import os
 def set_mapboxtoken(mapboxtoken):
-    '''
-    Set mapboxtoken
-
-    Parameters
-    -------
-    mapboxtoken : str
-        mapboxtoken
-    '''
-    filepath = searchfile('mapboxtoken.txt')
-    f = open(filepath, mode='w')
-    f.write(mapboxtoken)
-    f.close()
-    print('Success')
-
+    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
+    config = ConfigParser()
+    config.read(config_path)
+    try:
+        config.add_section('MAPBOX')
+    except:
+        pass
+    config.set('MAPBOX', 'mapboxtoken', mapboxtoken)
+    with open(config_path, 'w') as configfile:
+        config.write(configfile)
+        print('Success')
 
 def read_mapboxtoken():
     '''
     Read mapboxtoken
     '''
-    filepath = searchfile('mapboxtoken.txt')
     try:
-        f = open(filepath, mode='r')
-        mapboxtoken = f.readline()
-        f.close()
+        config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
+        config = ConfigParser()
+        config.read(config_path)
+        mapboxtoken = config['MAPBOX']['mapboxtoken']
     except Exception:
         warnings.warn("Mapboxtoken not found, "
                       "The basemap is set as OpenStreetMap"
@@ -100,22 +85,30 @@ def set_imgsavepath(imgsavepath):
     imgsavepath : str
         savepath
     '''
-    filepath = searchfile('imgsavepath.txt')
-    f = open(filepath, mode='w')
-    f.write(imgsavepath)
-    f.close()
-    print('Success')
+    if not os.path.exists(imgsavepath):
+        raise ValueError('Path do not exist')
+    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
+    config = ConfigParser()
+    config.read(config_path)
+    try:
+        config.add_section('MAPBOX')
+    except:
+        pass
+    config.set('MAPBOX', 'imgsavepath', imgsavepath)
+    with open(config_path, 'w') as configfile:
+        config.write(configfile)
+        print('Success')
 
 
 def read_imgsavepath():
     '''
     Read map savepath
     '''
-    filepath = searchfile('imgsavepath.txt')
     try:
-        f = open(filepath, mode='r')
-        imgsavepath = f.readline()
-        f.close()
+        config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
+        config = ConfigParser()
+        config.read(config_path)
+        imgsavepath = config['MAPBOX']['imgsavepath']
     except:
         warnings.warn('Map base map storage path not found, \
         please use tbd.set_imgsavepath() to set it first, \
