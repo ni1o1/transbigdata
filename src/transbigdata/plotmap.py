@@ -48,14 +48,13 @@ def set_mapboxtoken(mapboxtoken):
     config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
     config = ConfigParser()
     config.read(config_path)
-    try:
+    if not config.has_section('MAPBOX'):
         config.add_section('MAPBOX')
-    except:
-        pass
+
     config.set('MAPBOX', 'mapboxtoken', mapboxtoken)
     with open(config_path, 'w') as configfile:
         config.write(configfile)
-        print('Success')
+        print('Set mapboxtoken success')
 
 def read_mapboxtoken():
     '''
@@ -90,14 +89,13 @@ def set_imgsavepath(imgsavepath):
     config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
     config = ConfigParser()
     config.read(config_path)
-    try:
+    if not config.has_section('MAPBOX'):
         config.add_section('MAPBOX')
-    except:
-        pass
+
     config.set('MAPBOX', 'imgsavepath', imgsavepath)
     with open(config_path, 'w') as configfile:
         config.write(configfile)
-        print('Success')
+        print('Set imgsavepath success')
 
 
 def read_imgsavepath():
