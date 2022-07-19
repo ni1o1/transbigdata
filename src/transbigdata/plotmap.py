@@ -36,16 +36,13 @@ import urllib
 import io
 from PIL import Image
 import os
-import sys
 import warnings
-
-
-
-
 from configparser import ConfigParser
-import os
+
+
 def set_mapboxtoken(mapboxtoken):
-    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
+    config_path = os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), 'config.ini')
     config = ConfigParser()
     config.read(config_path)
     if not config.has_section('MAPBOX'):
@@ -56,12 +53,14 @@ def set_mapboxtoken(mapboxtoken):
         config.write(configfile)
         print('Set mapboxtoken success')
 
+
 def read_mapboxtoken():
     '''
     Read mapboxtoken
     '''
     try:
-        config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
+        config_path = os.path.join(os.path.dirname(
+            os.path.abspath(__file__)), 'config.ini')
         config = ConfigParser()
         config.read(config_path)
         mapboxtoken = config['MAPBOX']['mapboxtoken']
@@ -86,7 +85,8 @@ def set_imgsavepath(imgsavepath):
     '''
     if not os.path.exists(imgsavepath):
         raise ValueError('Path do not exist')
-    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
+    config_path = os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), 'config.ini')
     config = ConfigParser()
     config.read(config_path)
     if not config.has_section('MAPBOX'):
@@ -103,7 +103,8 @@ def read_imgsavepath():
     Read map savepath
     '''
     try:
-        config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
+        config_path = os.path.join(os.path.dirname(
+            os.path.abspath(__file__)), 'config.ini')
         config = ConfigParser()
         config.read(config_path)
         imgsavepath = config['MAPBOX']['imgsavepath']
@@ -111,7 +112,7 @@ def read_imgsavepath():
         warnings.warn('Map base map storage path not found, \
         please use tbd.set_imgsavepath() to set it first, \
         see: https://transbigdata.readthedocs.io/en/latest/plot_map.html')
-        imgsavepath=''
+        imgsavepath = ''
     return imgsavepath
 
 
@@ -202,11 +203,11 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
         styleid = 'ckwio2ze12fgk15p2alr5a4xj'
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
             r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
-    if (style == 11) :
+    if (style == 11):
         styleid = 'cl39hgul1000514llp3yj7yh3'
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
             r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
-    if (style == 12) :
+    if (style == 12):
         styleid = 'cl38pljx0006r14qp7ioy7gcc'
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
             r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
@@ -339,7 +340,8 @@ def plot_map(plt, bounds, zoom='auto', style=0, printlog=False):
             import os
             os.listdir(imgsavepath)
         except Exception:
-            warnings.warn('imgsavepath do not exist, your tile map will not save')
+            warnings.warn(
+                'imgsavepath do not exist, your tile map will not save')
     else:
         warnings.warn('imgsavepath do not exist, your tile map will not save')
     lon1 = bounds[0]
