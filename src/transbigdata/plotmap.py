@@ -241,8 +241,8 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
                             print('figsaved:'+imgsavepath+'tileimg/'+filename)
                 else:
                     os.mkdir(imgsavepath+'tileimg')
-            except Exception:
-                pass
+            except Exception as e:
+                print(e)
 
         def loadfig(filename):
             try:
