@@ -36,51 +36,34 @@ import urllib
 import io
 from PIL import Image
 import os
-import sys
 import warnings
-
-
-def searchfile(filename):
-    '''
-    Search for mapboxtoken file
-    '''
-    fileroot = ''
-    for i in sys.path:
-        try:
-            if filename in os.listdir(i):
-                fileroot = i
-        except Exception:
-            pass
-    if fileroot == '':
-        fileroot = sys.path[-1]
-    return fileroot+'/'+filename
+from configparser import ConfigParser
 
 
 def set_mapboxtoken(mapboxtoken):
-    '''
-    Set mapboxtoken
+    config_path = os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), 'config.ini')
+    config = ConfigParser()
+    config.read(config_path)
+    if not config.has_section('MAPBOX'):
+        config.add_section('MAPBOX')
 
-    Parameters
-    -------
-    mapboxtoken : str
-        mapboxtoken
-    '''
-    filepath = searchfile('mapboxtoken.txt')
-    f = open(filepath, mode='w')
-    f.write(mapboxtoken)
-    f.close()
-    print('Success')
+    config.set('MAPBOX', 'mapboxtoken', mapboxtoken)
+    with open(config_path, 'w') as configfile:
+        config.write(configfile)
+        print('Set mapboxtoken success')
 
 
 def read_mapboxtoken():
     '''
     Read mapboxtoken
     '''
-    filepath = searchfile('mapboxtoken.txt')
     try:
-        f = open(filepath, mode='r')
-        mapboxtoken = f.readline()
-        f.close()
+        config_path = os.path.join(os.path.dirname(
+            os.path.abspath(__file__)), 'config.ini')
+        config = ConfigParser()
+        config.read(config_path)
+        mapboxtoken = config['MAPBOX']['mapboxtoken']
     except Exception:
         warnings.warn("Mapboxtoken not found, "
                       "The basemap is set as OpenStreetMap"
@@ -100,27 +83,36 @@ def set_imgsavepath(imgsavepath):
     imgsavepath : str
         savepath
     '''
-    filepath = searchfile('imgsavepath.txt')
-    f = open(filepath, mode='w')
-    f.write(imgsavepath)
-    f.close()
-    print('Success')
+    if not os.path.exists(imgsavepath):
+        raise ValueError('Path do not exist')
+    config_path = os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), 'config.ini')
+    config = ConfigParser()
+    config.read(config_path)
+    if not config.has_section('MAPBOX'):
+        config.add_section('MAPBOX')
+
+    config.set('MAPBOX', 'imgsavepath', imgsavepath)
+    with open(config_path, 'w') as configfile:
+        config.write(configfile)
+        print('Set imgsavepath success')
 
 
 def read_imgsavepath():
     '''
     Read map savepath
     '''
-    filepath = searchfile('imgsavepath.txt')
     try:
-        f = open(filepath, mode='r')
-        imgsavepath = f.readline()
-        f.close()
+        config_path = os.path.join(os.path.dirname(
+            os.path.abspath(__file__)), 'config.ini')
+        config = ConfigParser()
+        config.read(config_path)
+        imgsavepath = config['MAPBOX']['imgsavepath']
     except:
         warnings.warn('Map base map storage path not found, \
         please use tbd.set_imgsavepath() to set it first, \
         see: https://transbigdata.readthedocs.io/en/latest/plot_map.html')
-        imgsavepath=''
+        imgsavepath = ''
     return imgsavepath
 
 
@@ -211,11 +203,11 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
         styleid = 'ckwio2ze12fgk15p2alr5a4xj'
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
             r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
-    if (style == 11) :
+    if (style == 11):
         styleid = 'cl39hgul1000514llp3yj7yh3'
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
             r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
-    if (style == 12) :
+    if (style == 12):
         styleid = 'cl38pljx0006r14qp7ioy7gcc'
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
             r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
@@ -249,8 +241,8 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
                             print('figsaved:'+imgsavepath+'tileimg/'+filename)
                 else:
                     os.mkdir(imgsavepath+'tileimg')
-            except Exception:
-                pass
+            except Exception as e:
+                print(e)
 
         def loadfig(filename):
             try:
@@ -348,7 +340,8 @@ def plot_map(plt, bounds, zoom='auto', style=0, printlog=False):
             import os
             os.listdir(imgsavepath)
         except Exception:
-            warnings.warn('imgsavepath do not exist, your tile map will not save')
+            warnings.warn(
+                'imgsavepath do not exist, your tile map will not save')
     else:
         warnings.warn('imgsavepath do not exist, your tile map will not save')
     lon1 = bounds[0]
