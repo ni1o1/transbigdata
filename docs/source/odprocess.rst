@@ -5,6 +5,12 @@
 Data Aggregating
 ******************
 
+.. autosummary::
+
+    dataagg
+    odagg_grid
+    odagg_shape
+    
 .. autofunction:: dataagg
 
 

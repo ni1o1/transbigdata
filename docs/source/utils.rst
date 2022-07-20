@@ -6,4 +6,8 @@
 Others
 ******************************
 
+.. autosummary::
+    dumpjson
+
+
 .. autofunction:: dumpjson

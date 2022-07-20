@@ -5,6 +5,10 @@
 ******************************
 Bus GPS data processing
 ******************************
+.. autosummary::
+    
+    busgps_arriveinfo
+    busgps_onewaytime
 
 .. autofunction:: busgps_arriveinfo
 

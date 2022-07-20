@@ -8,8 +8,21 @@
 GIS处理
 ******************************
 
+
+.. autosummary::
+
+    ckdnearest
+    ckdnearest_point
+    ckdnearest_line
+    splitline_with_length
+    merge_polygon
+    polyon_exterior
+    ellipse_params
+    ellipse_plot
+
+
 近邻匹配
-================
+--------------------------
 
 .. autofunction:: ckdnearest
 
@@ -21,8 +34,7 @@ GIS处理
 
 
 Point to point matching (DataFrame and DataFrame)
--------------------------------------------------------
-
+========================================================================================
 | 
 
 .. ipython:: python
@@ -45,7 +57,7 @@ Point to point matching (DataFrame and DataFrame)
     tbd.ckdnearest(dfA,dfB,Aname=['lon1','lat1'],Bname=['lon','lat'])
 
 点与点匹配（GeoDataFrame与GeoDataFrame）
-----------------------------------------
+========================================================================================
 
 将A表B表变为含有点信息的GeoDataFrame
 
@@ -64,7 +76,7 @@ Point to point matching (DataFrame and DataFrame)
     tbd.ckdnearest_point(dfA,dfB)
 
 点与线匹配（GeoDataFrame与GeoDataFrame）
-----------------------------------------
+========================================================================================
 
 将A表变为地理点，B表为线
 
@@ -81,7 +93,7 @@ Point to point matching (DataFrame and DataFrame)
 
 
 打断线
-===============
+---------------
 
 在实际应用中，我们可能会需要把很长的线打断为很多子线段，每一条线段不要超过一定的最大长度，此时则可以使用TransBigData包中的splitline_with_length方法。
 
@@ -417,7 +429,7 @@ Point to point matching (DataFrame and DataFrame)
     </div>
 
 Polygon processing
-========================
+----------------------------------------------------
 
 
 .. autofunction:: merge_polygon
@@ -426,7 +438,7 @@ Polygon processing
 
 
 confidence ellipse
-========================
+----------------------------------------------------
 
 .. autofunction:: ellipse_params
 
@@ -434,7 +446,7 @@ confidence ellipse
 .. autofunction:: ellipse_plot
 
 用法
--------------------------
+================================================
 
 ::
 

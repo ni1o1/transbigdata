@@ -6,6 +6,15 @@
 数据预处理
 ******************************
 
+.. autosummary::
+
+    clean_same
+    clean_drift
+    clean_outofbounds
+    clean_outofshape
+    clean_traj
+    id_reindex
+    id_reindex_disgap
 
 .. autofunction:: clean_same
 

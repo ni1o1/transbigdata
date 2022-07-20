@@ -21,10 +21,11 @@ TransBigData is a Python package developed for transportation spatio-temporal bi
 
 
 Introduction
-==============================
+---------------
+
 
 Quick Start
----------------
+==============================
 
 | Before installing TransBigData, make sure that you have installed the geopandas package: https://geopandas.org/index.html
 | If you already have geopandas installed, run the following code directly from the command prompt to install it

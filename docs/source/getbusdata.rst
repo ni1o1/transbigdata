@@ -3,6 +3,12 @@
 Data Acquisition
 ******************************
 
+.. autosummary::
+
+    getbusdata
+    getadmin
+    get_isochrone_amap
+    get_isochrone_mapbox
 .. autofunction:: getbusdata
 
 

@@ -5,8 +5,23 @@
 Data Gridding
 ***************
 
+.. autosummary::
+
+    area_to_grid
+    area_to_params
+    GPS_to_grid
+    grid_to_centre
+    grid_to_polygon
+    grid_to_area
+    grid_to_params
+    grid_params_optimize
+    geohash_encode
+    geohash_decode
+    geohash_togrid
+
+
 Gridding Framework
-=============================
+--------------------------
 
 .. image:: grids/1648715064154.png
 
@@ -24,15 +39,10 @@ Gridding Framework
     
 .. autofunction:: grid_to_params
 
-
-
-Optimize gridding params
-===========================
-
 .. autofunction:: grid_params_optimize
 
 geohash encoding
-===================
+--------------------------
 
 Geohash is a public geocoding system that encodes latitude and longitude geographic locations into strings of letters and numbers, which can also be decoded back to latitude and longitude. Each string represents a grid number, and the longer the length of the string, the higher the precision. According to wiki <https://en.wikipedia.org/wiki/Geohash>, the table of Geohash string lengths corresponding to precision is as follows.
 
@@ -255,7 +265,7 @@ Compared to the rectangular grid processing method provided in the TransBigData 
 
 
 Old namespaces
-=============================
+----------------------------------------------------
 
 .. autofunction:: rect_grids
 

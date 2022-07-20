@@ -6,9 +6,20 @@ Coordinates and Distances
 ******************************
 
 
+.. autosummary::
+    
+    gcj02tobd09
+    gcj02towgs84
+    wgs84togcj02
+    wgs84tobd09
+    bd09togcj02
+    bd09towgs84
+    bd09mctobd09
+    transform_shape
+    getdistance
 
 Coordinate convertering method
-=============================
+---------------------------------------
 
 TransBigData package provides quick converting of coordinates such as GCJ02, BD09, BD09mc, WGS94
 
@@ -43,6 +54,6 @@ Convert coordinates of the geographic elements
 
 
 Distance measurment
-=============================
+--------------------------
 
 .. autofunction:: getdistance
