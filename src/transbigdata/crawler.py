@@ -48,7 +48,7 @@ from .coordinates import (
 )
 
 
-def getadmin(keyword, ak, jscode='', subdistricts=False):
+def getadmin(keyword, ak, jscode='', subdistricts=False, timeout=20):
     '''
     Input the keyword and the Amap ak. The output is the GIS file of
     the administrative boundary (Only in China)
@@ -65,6 +65,8 @@ def getadmin(keyword, ak, jscode='', subdistricts=False):
     subdistricts : bool
         Whether to output the information of the administrative district
         boundary
+    timeout : number
+        Timeout of data fetching
 
     Returns
     -------
@@ -95,7 +97,7 @@ def getadmin(keyword, ak, jscode='', subdistricts=False):
     url_data = parse.urlencode(dict1)
     url = url+url_data
     request = urllib.request.Request(url)
-    response = urllib.request.urlopen(request)
+    response = urllib.request.urlopen(request, timeout=timeout)
     webpage = response.read()
     result = json.loads(webpage.decode('utf8', 'ignore'))
     # Organize Data
@@ -151,7 +153,7 @@ def getadmin(keyword, ak, jscode='', subdistricts=False):
         return admin
 
 
-def getbusdata(city, keywords, accurate=True):
+def getbusdata(city, keywords, accurate=True, timeout=20):
     '''
     Obtain the geographic information of the bus station and bus line from
     the map service (Only in China)
@@ -164,6 +166,8 @@ def getbusdata(city, keywords, accurate=True):
         Keyword, the line name
     accurate : bool
         Accurate matching
+    timeout : number
+        Timeout of data fetching
 
     Returns
     -------
@@ -191,13 +195,13 @@ def getbusdata(city, keywords, accurate=True):
 
     def getcitycode(c):
         url = 'http://map.baidu.com/?qt=s&wd='+urllib.parse.quote(c)
-        response1 = urllib.request.urlopen(url, timeout=60)
+        response1 = urllib.request.urlopen(url, timeout=timeout)
         searchinfo = json.loads(response1.read().decode('utf8'))
         return str(searchinfo['content']['code'])
 
     def getlinegeo(uid, c):
         url = 'http://map.baidu.com/?qt=bsl&uid='+uid+'&c='+c+"&auth=1"
-        response = urllib.request.urlopen(url, timeout=60)
+        response = urllib.request.urlopen(url, timeout=timeout)
         searchinfo = json.loads(response.read().decode('utf8'))
         linename = searchinfo['content'][0]['name']
         stations = searchinfo['content'][0]['stations']
@@ -286,7 +290,7 @@ def getbusdata(city, keywords, accurate=True):
     return data, stop
 
 
-def get_isochrone_amap(lon, lat, reachtime, ak, jscode='', mode=2):
+def get_isochrone_amap(lon, lat, reachtime, ak, jscode='', mode=2, timeout=20):
     '''
     Obtain the isochrone from Amap reachcricle
 
@@ -304,6 +308,8 @@ def get_isochrone_amap(lon, lat, reachtime, ak, jscode='', mode=2):
         Amap safty code
     mode : int or str
         Travel mode, should be 0(bus), 1(subway), 2(bus+subway)
+    timeout : number
+        Timeout of data fetching
 
     Returns
     -------
@@ -329,7 +335,7 @@ def get_isochrone_amap(lon, lat, reachtime, ak, jscode='', mode=2):
     url_data = parse.urlencode(dict1)
     url = url+url_data
     request = urllib.request.Request(url)
-    response = urllib.request.urlopen(request, timeout=10)
+    response = urllib.request.urlopen(request, timeout=timeout)
     webpage = response.read()
     result = json.loads(webpage.decode('utf8', 'ignore'))
     P_all = []
@@ -352,7 +358,7 @@ def get_isochrone_amap(lon, lat, reachtime, ak, jscode='', mode=2):
 
 
 def get_isochrone_mapbox(lon, lat, reachtime, access_token='auto',
-                         mode='driving'):
+                         mode='driving', timeout=20):
     '''
     Obtain the isochrone from mapbox isochrone
 
@@ -368,6 +374,8 @@ def get_isochrone_mapbox(lon, lat, reachtime, access_token='auto',
         Mapbox access token, if `auto` it will use the preset access token
     mode : bool
         Travel mode, should be `driving`, `walking` or `cycling`
+    timeout : number
+        Timeout of data fetching
 
     Returns
     -------
@@ -383,7 +391,7 @@ def get_isochrone_mapbox(lon, lat, reachtime, access_token='auto',
         str(lon)+','+str(lat)+'?contours_minutes='+str(reachtime) +\
         '&polygons=true&access_token='+access_token
     request = urllib.request.Request(url)
-    response = urllib.request.urlopen(request, timeout=1)
+    response = urllib.request.urlopen(request, timeout=timeout)
     webpage = response.read()
     result = webpage.decode('utf8', 'ignore')
     isochrone = gpd.GeoDataFrame.from_features(json.loads(result))
