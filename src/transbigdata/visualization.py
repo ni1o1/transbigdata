@@ -70,8 +70,8 @@ def visualization_trip(trajdata, col=['Lng', 'Lat', 'ID', 'Time'],
     '''
     try:
         from keplergl import KeplerGl
-    except ImportError:
-        raise ImportError(
+    except ImportError: # pragma: no cover
+        raise ImportError( # pragma: no cover
             "Please install keplergl, run "
             "the following code in cmd: pip install keplergl")
     print('Processing trajectory data...')
@@ -170,8 +170,8 @@ def visualization_od(oddata, col=['slon', 'slat', 'elon', 'elat'],
     '''
     try:
         from keplergl import KeplerGl
-    except ImportError:
-        raise ImportError(
+    except ImportError: # pragma: no cover
+        raise ImportError( # pragma: no cover
             "Please install keplergl, run "
             "the following code in cmd: pip install keplergl")
     import numpy as np
@@ -403,8 +403,8 @@ def visualization_data(data, col=['lon', 'lat'], accuracy=500, height=500,
     '''
     try:
         from keplergl import KeplerGl
-    except ImportError:
-        raise ImportError(
+    except ImportError: # pragma: no cover
+        raise ImportError( # pragma: no cover
             "Please install keplergl, run "
             "the following code in cmd: pip install keplergl")
 
@@ -465,7 +465,7 @@ def visualization_data(data, col=['lon', 'lat'], accuracy=500, height=500,
         data = gpd.GeoDataFrame(data)
 
     if maptype == 'heatmap':
-        vmap = KeplerGl(config={
+        vmap = KeplerGl(config={ # pragma: no cover
             'version': 'v1',
             'config': {
                 'visState': {
