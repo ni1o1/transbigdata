@@ -68,7 +68,7 @@ def odagg_grid(oddata, params, col=['slon', 'slat', 'elon', 'elat'],
         [slon, slat, elon, elat] = col  # pragma: no cover
         count = 'count'
     if len(col) == 5:
-        [slon, slat, elon, elat, count] = col
+        [slon, slat, elon, elat, count] = col  # pragma: no cover
     oddata['SLONCOL'], oddata['SLATCOL'] = GPS_to_grid(
         oddata[slon], oddata[slat], params)
     oddata['ELONCOL'], oddata['ELATCOL'] = GPS_to_grid(
