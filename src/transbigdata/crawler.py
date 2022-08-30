@@ -267,8 +267,8 @@ def getbusdata(city, keywords, accurate=True, timeout=20):
                     stop.append(stops)
                     print(linename+' success')
                     uids.append(uid)
-                except Exception:
-                    pass
+                except Exception:  # pragma: no cover
+                    pass  # pragma: no cover
     if len(stop) == 0:
         print('No such busline')   # pragma: no cover
         return gpd.GeoDataFrame(), gpd.GeoDataFrame()   # pragma: no cover
