@@ -308,8 +308,8 @@ def dataagg(data, shape, col=['Lng', 'Lat', 'count'], accuracy=500):
         The zone-matched data
     '''
     if len(col) == 2:
-        Lng, Lat = col
-        aggcol = None
+        Lng, Lat = col  # pragma: no cover
+        aggcol = None  # pragma: no cover
     else:
         Lng, Lat, aggcol = col
     shape['index'] = range(len(shape))
@@ -329,10 +329,10 @@ def dataagg(data, shape, col=['Lng', 'Lat', 'count'], accuracy=500):
         aggresult = pd.merge(shape, data1.groupby('index')[
                              aggcol].sum().reset_index()).drop('index', axis=1)
     else:
-        data1['_'] = 1
-        aggresult = pd.merge(shape, data1.groupby('index')['_'].sum().rename(
+        data1['_'] = 1  # pragma: no cover
+        aggresult = pd.merge(shape, data1.groupby('index')['_'].sum().rename(  # pragma: no cover
             'count').reset_index()).drop('index', axis=1)
-        data1 = data1.drop('_', axis=1)
+        data1 = data1.drop('_', axis=1)  # pragma: no cover
     data1 = data1.drop('index', axis=1)
     return aggresult, data1
 

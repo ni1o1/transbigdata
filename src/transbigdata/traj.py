@@ -213,7 +213,7 @@ def points_to_traj(traj_points, col=['Lng', 'Lat', 'ID'], timecol=None):
             if len(coords) >= 2:
                 geometry.append(LineString(coords))
             else:
-                geometry.append(None)
+                geometry.append(None) # pragma: no cover
         traj[ID] = traj_id
         traj['geometry'] = geometry
         traj = gpd.GeoDataFrame(traj)

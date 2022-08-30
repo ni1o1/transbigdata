@@ -56,6 +56,8 @@ class TestODprocess:
                    'VehicleNum', 'time', 'slon', 'slat'])) == 19
         assert len(tbd.clean_taxi_status(
             self.data, ['VehicleNum', 'time', 'OpenStatus'])) == 19
+        assert len(tbd.clean_taxi_status(
+            self.data, ['VehicleNum', 'time', 'OpenStatus'],timelimit = 10)) == 19
         assert len(tbd.clean_traj(self.data, col=[
                    'VehicleNum', 'time', 'slon', 'slat'])) == 18
         data = tbd.clean_outofshape(self.data, self.sz, col=['slon', 'slat'])
@@ -80,7 +82,7 @@ class TestODprocess:
             data, params, col=['VehicleNum', 'time', 'slon', 'slat'],
             activitytime=1800)
         assert len(stay) == 2
-        tbd.plot_activity(stay)
+
         data['LONCOL'], data['LATCOL'] = tbd.GPS_to_grids(
             data['slon'], data['slat'], params)
         res = data[['LONCOL', 'LATCOL']].values
