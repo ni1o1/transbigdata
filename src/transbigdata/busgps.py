@@ -219,7 +219,7 @@ def busgps_arriveinfo(data, line, stop, col=[
         arrive_info['leavetime'].apply(
             lambda r: pd.Timedelta(int(r), unit='s'))
     if projectoutput:
-        return arrive_info, data
+        return arrive_info, data # pragma: no cover
     else:
         return arrive_info
 

@@ -1,6 +1,8 @@
 import transbigdata as tbd
 import numpy as np
 import pandas as pd
+from shapely.geometry import Polygon
+import geopandas as gpd
 
 
 class TestCoordinatesConverter:
@@ -33,6 +35,7 @@ class TestCoordinatesConverter:
                      'LATITUDE'])
 
     def test_CoordinatesConverter(self):
+        # test for column coordinates
         lon, lat = tbd.wgs84tobd09(
             self.data['LONGITUDE'], self.data['LATITUDE'])
         assert np.allclose([lon.iloc[0], lat.iloc[0]], [
@@ -45,5 +48,30 @@ class TestCoordinatesConverter:
             self.data['LONGITUDE'], self.data['LATITUDE'])
         assert np.allclose([lon.iloc[0], lat.iloc[0]], [
                            0.0010908419148962093, 0.00028151894107858114])
+
+        # test for single coordinate
+        lon, lat = tbd.wgs84tobd09(
+            self.data['LONGITUDE'].iloc[0], self.data['LATITUDE'].iloc[0])
+        assert np.allclose([lon, lat], [
+                           121.44400198,  31.13461178])
+        lon, lat = tbd.bd09towgs84(
+            self.data['LONGITUDE'].iloc[0], self.data['LATITUDE'].iloc[0])
+        assert np.allclose([lon, lat], [
+                           121.42189628157456, 31.125775772415125])
+        lon, lat = tbd.bd09mctobd09(
+            self.data['LONGITUDE'].iloc[0], self.data['LATITUDE'].iloc[0])
+        assert np.allclose([lon, lat], [
+                           0.0010908419148962093, 0.00028151894107858114])
+
         assert tbd.getdistance(121.432966, 31.130154,
                                121.442523, 31.128701) == 923.9008993249727
+
+        gdf = gpd.GeoDataFrame(
+            [Polygon([[100, 30], [101, 31], [100, 31]])], columns=['geometry'])
+        gdf_transformed = tbd.transform_shape(gdf, tbd.bd09towgs84)
+        result = np.array(gdf_transformed['geometry'].iloc[0].exterior.coords)
+        truth = np.array([[99.99230228,  29.99681538],
+                          [100.99190359,  30.99669086],
+                          [99.99224931,  30.99652903],
+                          [99.99230228,  29.99681538]])
+        np.allclose(result, truth)
