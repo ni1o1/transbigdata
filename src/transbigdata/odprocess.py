@@ -65,7 +65,7 @@ def odagg_grid(oddata, params, col=['slon', 'slat', 'elon', 'elat'],
         GeoDataFrame of OD after aggregation
     '''
     if len(col) == 4:
-        [slon, slat, elon, elat] = col
+        [slon, slat, elon, elat] = col  # pragma: no cover
         count = 'count'
     if len(col) == 5:
         [slon, slat, elon, elat, count] = col
@@ -136,7 +136,7 @@ def odagg_shape(oddata, shape, col=['slon', 'slat', 'elon', 'elat'],
         [slon, slat, elon, elat] = col
         count = 'count'
     if len(col) == 5:
-        [slon, slat, elon, elat, count] = col
+        [slon, slat, elon, elat, count] = col  # pragma: no cover
     shape_1 = shape.copy()
     shape['x'] = shape.centroid.x
     shape['y'] = shape.centroid.y
@@ -198,8 +198,8 @@ def odagg_shape(oddata, shape, col=['slon', 'slat', 'elon', 'elat'],
             count].sum().reset_index()
     from shapely.geometry import LineString
     if arrow:
-        oddata_agg['geometry'] = oddata_agg.apply(lambda r: tolinewitharrow(
-            r['sx'], r['sy'], r['ex'], r['ey'], **kwargs), axis=1)
+        oddata_agg['geometry'] = oddata_agg.apply(lambda r: tolinewitharrow(  # pragma: no cover
+            r['sx'], r['sy'], r['ex'], r['ey'], **kwargs), axis=1)  # pragma: no cover
     else:
         oddata_agg['geometry'] = oddata_agg.apply(lambda r: LineString(
             [[r['sx'], r['sy']], [r['ex'], r['ey']]]), axis=1)

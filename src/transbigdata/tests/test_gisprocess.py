@@ -2,7 +2,7 @@ import transbigdata as tbd
 import numpy as np
 import pandas as pd
 import geopandas as gpd
-from shapely.geometry import LineString, Polygon
+from shapely.geometry import LineString, Polygon,MultiPolygon
 
 
 class TestGisprocess:
@@ -93,6 +93,14 @@ class TestGisprocess:
                   [3.2, 4.],
                   [1., 1.]]
         assert np.allclose(result2, truth2)
+
+        dfC = gpd.GeoDataFrame([[1, 2]],
+                        columns=['lon1', 'lat1'])
+        dfC['geometry'] = MultiPolygon([Polygon([[1, 1], [1.5, 2.5], [3.2, 4]]),
+                            Polygon([[1, 0], [1.5, 0], [4, 10]]),
+                            Polygon([[1, -1], [1.5, -2], [4, 10]])])
+        result3 = tbd.polyon_exterior(dfC, minarea=1)
+        assert np.allclose(result3.area.iloc[0],6.75)
 
     def test_ellipse_params(self):
         np.random.seed(1)

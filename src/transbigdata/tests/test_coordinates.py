@@ -74,4 +74,4 @@ class TestCoordinatesConverter:
                           [100.99190359,  30.99669086],
                           [99.99224931,  30.99652903],
                           [99.99230228,  29.99681538]])
-        np.allclose(result, truth)
+        assert np.allclose(result, truth)
