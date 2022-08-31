@@ -274,7 +274,7 @@ def bd09mctobd09(x, y):
     ]
     try:
         y1 = y.iloc[0]
-    except:
+    except Exception:
         y1 = y
     for cD in range(len(MCBAND)):
         if y1 >= MCBAND[cD]:

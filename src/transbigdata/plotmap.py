@@ -107,7 +107,7 @@ def read_imgsavepath():
         config = ConfigParser()
         config.read(config_path)
         imgsavepath = config['MAPBOX']['imgsavepath']
-    except:  # pragma: no cover
+    except Exception:  # pragma: no cover
         warnings.warn('Map base map storage path not found, \
         please use tbd.set_imgsavepath() to set it first, \
         see: https://transbigdata.readthedocs.io/en/latest/plot_map.html')  # pragma: no cover
