@@ -63,9 +63,11 @@ class TestCoordinatesConverter:
         assert np.allclose([lon, lat], [
                            0.0010908419148962093, 0.00028151894107858114])
 
-        assert np.allclose(tbd.gcj02tobd09(120,30),(120.00640999946, 30.006359999864998))
-        assert np.allclose(tbd.wgs84tobd09(120,30),(120.011070620552, 30.003883055512777))
-        
+        assert np.allclose(tbd.gcj02tobd09(120, 30),
+                           (120.00640999946, 30.006359999864998))
+        assert np.allclose(tbd.wgs84tobd09(120, 30),
+                           (120.011070620552, 30.003883055512777))
+
         assert tbd.getdistance(121.432966, 31.130154,
                                121.442523, 31.128701) == 923.9008993249727
 

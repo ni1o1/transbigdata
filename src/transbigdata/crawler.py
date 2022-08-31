@@ -34,8 +34,9 @@ import pandas as pd
 import numpy as np
 import geopandas as gpd
 from shapely.geometry import Polygon, LineString
+import requests
 import urllib.request
-from urllib import parse
+import urllib.parse
 import urllib
 import json
 import re
@@ -78,7 +79,7 @@ def getadmin(keyword, ak, jscode='', subdistricts=False, timeout=20):
     '''
 
     # API url
-    url = 'https://restapi.amap.com/v3/config/district?'
+    url = 'https://restapi.amap.com/v3/config/district'
     # Condition
     dict1 = {
         'subdistrict': '3',
@@ -94,12 +95,9 @@ def getadmin(keyword, ak, jscode='', subdistricts=False, timeout=20):
         'logversion': '2.0',
         'sdkversion': '1.4.10'
     }
-    url_data = parse.urlencode(dict1)
-    url = url+url_data
-    request = urllib.request.Request(url)
-    response = urllib.request.urlopen(request, timeout=timeout)
-    webpage = response.read()
-    result = json.loads(webpage.decode('utf8', 'ignore'))
+    # 发送请求
+    response = requests.get(url,params = dict1)
+    result = json.loads(response.text)
     # Organize Data
     datas = []
     k = 0
@@ -179,8 +177,8 @@ def getbusdata(city, keywords, accurate=True, timeout=20):
     def getlineuid(keyword, c, acc=True):
         url = 'http://map.baidu.com/?qt=s&wd=' + \
             urllib.parse.quote(keyword)+'&c='+c+'&from=webmap'
-        response1 = urllib.request.urlopen(url)
-        searchinfo = json.loads(response1.read().decode('utf8'))
+        response = requests.get(url)
+        searchinfo = json.loads(response.text)
         try:
             res = pd.DataFrame(searchinfo['content'])
             if acc:
@@ -195,14 +193,14 @@ def getbusdata(city, keywords, accurate=True, timeout=20):
 
     def getcitycode(c):
         url = 'http://map.baidu.com/?qt=s&wd='+urllib.parse.quote(c)
-        response1 = urllib.request.urlopen(url, timeout=timeout)
-        searchinfo = json.loads(response1.read().decode('utf8'))
+        response1 = requests.get(url, timeout=timeout)
+        searchinfo = json.loads(response1.text)
         return str(searchinfo['content']['code'])
 
     def getlinegeo(uid, c):
         url = 'http://map.baidu.com/?qt=bsl&uid='+uid+'&c='+c+"&auth=1"
-        response = urllib.request.urlopen(url, timeout=timeout)
-        searchinfo = json.loads(response.read().decode('utf8'))
+        response1 = requests.get(url, timeout=timeout)
+        searchinfo = json.loads(response1.text)
         linename = searchinfo['content'][0]['name']
         stations = searchinfo['content'][0]['stations']
         geo = searchinfo['content'][0]['geo'].split('|')[2][:-1].split(',')
@@ -321,7 +319,7 @@ def get_isochrone_amap(lon, lat, reachtime, ak, jscode='', mode=2, timeout=20):
         raise ValueError(   # pragma: no cover
             'Travel mode, should be 0(bus), 1(subway), 2(bus+subway)')   # pragma: no cover
     lon, lat = wgs84togcj02(lon, lat)
-    url = 'http://restapi.amap.com/v3/direction/reachcircle?'
+    url = 'http://restapi.amap.com/v3/direction/reachcircle'
     dict1 = {
         'key': ak,
         'jscode': jscode,
@@ -332,12 +330,9 @@ def get_isochrone_amap(lon, lat, reachtime, ak, jscode='', mode=2, timeout=20):
         'extensions': 'all',
         'strategy': str(strategy)
     }
-    url_data = parse.urlencode(dict1)
-    url = url+url_data
-    request = urllib.request.Request(url)
-    response = urllib.request.urlopen(request, timeout=timeout)
-    webpage = response.read()
-    result = json.loads(webpage.decode('utf8', 'ignore'))
+    response = requests.get(url,params = dict1)
+    result = json.loads(response.text)
+    
     P_all = []
     for each in result['polylines']:
         data = each['outer']
@@ -390,11 +385,9 @@ def get_isochrone_mapbox(lon, lat, reachtime, access_token='auto',
     url = 'https://api.mapbox.com/isochrone/v1/mapbox/'+mode+'/' +\
         str(lon)+','+str(lat)+'?contours_minutes='+str(reachtime) +\
         '&polygons=true&access_token='+access_token
-    request = urllib.request.Request(url)
-    response = urllib.request.urlopen(request, timeout=timeout)
-    webpage = response.read()
-    result = webpage.decode('utf8', 'ignore')
-    isochrone = gpd.GeoDataFrame.from_features(json.loads(result))
+    response = requests.get(url)
+    result = json.loads(response.text)
+    isochrone = gpd.GeoDataFrame.from_features(result)
     isochrone['lon'] = lon
     isochrone['lat'] = lat
     isochrone['reachtime'] = reachtime
