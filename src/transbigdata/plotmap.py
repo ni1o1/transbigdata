@@ -64,7 +64,7 @@ def read_mapboxtoken():
         config = ConfigParser()
         config.read(config_path)
         mapboxtoken = config['MAPBOX']['mapboxtoken']
-    except Exception:
+    except Exception: # pragma: no cover
         warnings.warn("Mapboxtoken not found, "   # pragma: no cover
                       "The basemap is set as OpenStreetMap"
                       "please use tbd.set_mapboxtoken() to set the access token, see: "
