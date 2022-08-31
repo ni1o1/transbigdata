@@ -214,13 +214,7 @@ class TestGrids:
                                                     sample=0, #not sampling
                                                     printlog=True,
                                                     max_iter=1)
-        #Optimize gridding params
-        initialparams = {'slon': 113.75,
-                    'slat':  22.4,
-                    'deltalon': 0.04871681446449111,
-                    'deltalat': 0.044966052064229066,
-                    'theta': 25,
-                    'method': 'rect'}
+
         params_optimized = tbd.grid_params_optimize(data,
                                                     initialparams,
                                                     col=['Vehicleid','slon','slat'],
@@ -228,7 +222,38 @@ class TestGrids:
                                                     sample=10, #not sampling
                                                     printlog=True,
                                                     max_iter=1)
+        #Optimize gridding params
+        initialparams = {'slon': 113.75,
+                    'slat':  22.4,
+                    'deltalon': 0.04871681446449111,
+                    'deltalat': 0.044966052064229066,
+                    'theta': 25,
+                    'method': 'rect'}
+        #Optimize gridding params
+        params_optimized = tbd.grid_params_optimize(data,
+                                                    initialparams,
+                                                    col=['Vehicleid','slon','slat'],
+                                                    optmethod='centerdist',
+                                                    sample=0, #not sampling
+                                                    printlog=True,
+                                                    max_iter=1)
+        #Optimize gridding params
+        params_optimized = tbd.grid_params_optimize(data,
+                                                    initialparams,
+                                                    col=['Vehicleid','slon','slat'],
+                                                    optmethod='gini',
+                                                    sample=0, #not sampling
+                                                    printlog=True,
+                                                    max_iter=1)
 
+        params_optimized = tbd.grid_params_optimize(data,
+                                                    initialparams,
+                                                    col=['Vehicleid','slon','slat'],
+                                                    optmethod='gridscount',
+                                                    sample=10, #not sampling
+                                                    printlog=True,
+                                                    max_iter=1)
+                                                    
     def test_area_to_grid(self):
 
         assert len(tbd.area_to_grid(self.shape)[0]) == 30

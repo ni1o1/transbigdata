@@ -626,7 +626,7 @@ def grid_params_optimize(data,
 
         f = f_gridscount
     else:
-        raise Exception('Method should be one of: centerdist,gini,gridscount')
+        raise Exception('Method should be one of: centerdist,gini,gridscount')  # pragma: no cover
 
     pso = PSO(func=f,
             n_dim=3,
@@ -749,7 +749,7 @@ def grid_to_centre_rect(loncol, latcol, params, from_origin=False):
     R = np.array([[costheta * deltaLon, -sintheta * deltaLat],
                   [sintheta * deltaLon, costheta * deltaLat]])
     if from_origin:
-        hblonhblat = np.dot(np.array([loncol.values, latcol.values]).T,
+        hblonhblat = np.dot(np.array([loncol.values, latcol.values]).T,   # pragma: no cover
                             R) + np.array([lonStart, latStart]) - (
                                 R[0, :] / 2 + R[1, :] / 2)
     else:
@@ -1069,7 +1069,7 @@ def gettripoints(loncol_1, loncol_2, loncol_3, params):
         if np.allclose((x2[0]-x1[0]), 0):
             return x1, (x1-x3)*(y3-y4)/(x3-x4)+y3
         elif np.allclose((x3[0]-x4[0]), 0):
-            return x3, (x3-x1)*(y1-y2)/(x1-x2)+y1
+            return x3, (x3-x1)*(y1-y2)/(x1-x2)+y1   # pragma: no cover
         x = (x1*(y2-y1)/(x2-x1)-x3/(x4-x3)*(y4-y3)+y3-y1) / \
             ((y2-y1)/(x2-x1)-(y4-y3)/(x4-x3))
         y = (x-x1)*(y2-y1)/(x2-x1)+y1
@@ -1189,7 +1189,7 @@ def convertparams(params):
         elif len(params) == 5:
             lonStart, latStart, deltaLon, deltaLat, theta = params
             method = 'rect'
-        elif len(params) == 6:
+        elif len(params) == 6:  # pragma: no cover
             lonStart, latStart, deltaLon, deltaLat, theta, method = params  # pragma: no cover
         dicparams = dict()
         dicparams['slon'] = lonStart

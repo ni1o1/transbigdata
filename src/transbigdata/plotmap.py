@@ -70,7 +70,7 @@ def read_mapboxtoken():
                       "please use tbd.set_mapboxtoken() to set the access token, see: "
                       "https://transbigdata.readthedocs.io/en/latest/plot_map.html"
                       )
-        mapboxtoken = ''
+        mapboxtoken = ''  # pragma: no cover
     return mapboxtoken
 
 
@@ -204,16 +204,16 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
             r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token  # pragma: no cover
     if (style == 11):
-        styleid = 'cl39hgul1000514llp3yj7yh3'
+        styleid = 'cl39hgul1000514llp3yj7yh3'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token  # pragma: no cover
     if (style == 12):
         styleid = 'cl38pljx0006r14qp7ioy7gcc'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
             r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token  # pragma: no cover
     if (style == 0) | (style == 'OSM'):
-        styleid = 'osm'
-        smurl = r'https://tile.openstreetmap.org/{0}/{1}/{2}.png'
+        styleid = 'osm'  # pragma: no cover
+        smurl = r'https://tile.openstreetmap.org/{0}/{1}/{2}.png'  # pragma: no cover
     if (str(style)[:16] == 'mapbox://styles/'):
         styleid = style.split('/')[-1]  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/'+style[16:] + \
@@ -333,13 +333,13 @@ def plot_map(plt, bounds, zoom='auto', style=0, printlog=False):
     '''
     access_token = read_mapboxtoken()
     if access_token == '':
-        style = 0
+        style = 0  # pragma: no cover
     imgsavepath = read_imgsavepath()
     if imgsavepath != '':
         try:
             import os
             os.listdir(imgsavepath)
-        except Exception:
+        except Exception:  # pragma: no cover
             warnings.warn(  # pragma: no cover
                 'imgsavepath do not exist, your tile map will not save')
     else:
