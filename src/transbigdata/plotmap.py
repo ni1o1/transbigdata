@@ -178,7 +178,7 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
             r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
                 access_token  # pragma: no cover
     if (style == 4) | (style == 'light'):
-        styleid = 'ckwfx658z4dpb14ocnz6tky9d'
+        styleid = 'ckwfx658z4dpb14ocnz6tky9d'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
             r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
                 access_token  # pragma: no cover
