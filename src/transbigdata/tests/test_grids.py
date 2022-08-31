@@ -234,6 +234,8 @@ class TestGrids:
         assert len(tbd.area_to_grid(self.shape)[0]) == 30
         assert len(tbd.area_to_grid(self.shape,method = 'tri')[0]) == 41
         assert len(tbd.area_to_grid(self.shape,method = 'hexa')[0]) == 10
+    def test_area_to_params(self):
+        assert np.allclose(tbd.area_to_params(self.shape)['deltalat'], 0.004496605206422906)
 
     def test_grid_to_centre(self):
 

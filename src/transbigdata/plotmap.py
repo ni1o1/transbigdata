@@ -46,7 +46,7 @@ def set_mapboxtoken(mapboxtoken):
     config = ConfigParser()
     config.read(config_path)
     if not config.has_section('MAPBOX'):
-        config.add_section('MAPBOX')
+        config.add_section('MAPBOX')   # pragma: no cover
 
     config.set('MAPBOX', 'mapboxtoken', mapboxtoken)
     with open(config_path, 'w') as configfile:
@@ -65,7 +65,7 @@ def read_mapboxtoken():
         config.read(config_path)
         mapboxtoken = config['MAPBOX']['mapboxtoken']
     except Exception:
-        warnings.warn("Mapboxtoken not found, "
+        warnings.warn("Mapboxtoken not found, "   # pragma: no cover
                       "The basemap is set as OpenStreetMap"
                       "please use tbd.set_mapboxtoken() to set the access token, see: "
                       "https://transbigdata.readthedocs.io/en/latest/plot_map.html"
@@ -90,7 +90,7 @@ def set_imgsavepath(imgsavepath):
     config = ConfigParser()
     config.read(config_path)
     if not config.has_section('MAPBOX'):
-        config.add_section('MAPBOX')
+        config.add_section('MAPBOX')   # pragma: no cover
 
     config.set('MAPBOX', 'imgsavepath', imgsavepath)
     with open(config_path, 'w') as configfile:

@@ -191,7 +191,7 @@ def area_to_params(location, accuracy=500, method='rect'):
     lon1, lat1, lon2, lat2 = bounds
     if (lon1 > lon2) | (lat1 > lat2) | (abs(lat1) > 90) | (abs(lon1) > 180) | (
             abs(lat2) > 90) | (abs(lon2) > 180):
-        raise Exception(
+        raise Exception(   # pragma: no cover
             'Bounds error. The input bounds should be in the order \
                 of [lon1,lat1,lon2,lat2]. (lon1,lat1) is the lower left \
                     corner and (lon2,lat2) is the upper right corner.'
@@ -331,7 +331,7 @@ def grid_to_centre(gridid, params):
             if np.allclose((x2[0]-x1[0]), 0):
                 return x1, (x1-x3)*(y3-y4)/(x3-x4)+y3
             elif np.allclose((x3[0]-x4[0]), 0):
-                return x3, (x3-x1)*(y1-y2)/(x1-x2)+y1
+                return x3, (x3-x1)*(y1-y2)/(x1-x2)+y1   # pragma: no cover
             x = (x1*(y2-y1)/(x2-x1)-x3/(x4-x3)*(y4-y3)+y3-y1) / \
                 ((y2-y1)/(x2-x1)-(y4-y3)/(x4-x3))
             y = (x-x1)*(y2-y1)/(x2-x1)+y1

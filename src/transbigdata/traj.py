@@ -242,11 +242,11 @@ def dumpjson(data, path):
             if isinstance(obj, np.integer):
                 return int(obj)
             elif isinstance(obj, np.floating):
-                return float(obj)
+                return float(obj)  # pragma: no cover
             elif isinstance(obj, np.ndarray):
                 return obj.tolist()
             else:
-                return super(NpEncoder, self).default(obj)
+                return super(NpEncoder, self).default(obj)  # pragma: no cover
     f = open(path, mode='w')
     json.dump(data, f, cls=NpEncoder)
     f.close()
