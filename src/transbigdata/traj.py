@@ -213,7 +213,7 @@ def points_to_traj(traj_points, col=['Lng', 'Lat', 'ID'], timecol=None):
             if len(coords) >= 2:
                 geometry.append(LineString(coords))
             else:
-                geometry.append(None)
+                geometry.append(None) # pragma: no cover
         traj[ID] = traj_id
         traj['geometry'] = geometry
         traj = gpd.GeoDataFrame(traj)
@@ -242,11 +242,11 @@ def dumpjson(data, path):
             if isinstance(obj, np.integer):
                 return int(obj)
             elif isinstance(obj, np.floating):
-                return float(obj)
+                return float(obj)  # pragma: no cover
             elif isinstance(obj, np.ndarray):
                 return obj.tolist()
             else:
-                return super(NpEncoder, self).default(obj)
+                return super(NpEncoder, self).default(obj)  # pragma: no cover
     f = open(path, mode='w')
     json.dump(data, f, cls=NpEncoder)
     f.close()

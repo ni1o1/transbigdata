@@ -2,7 +2,7 @@ import transbigdata as tbd
 import numpy as np
 import pandas as pd
 import geopandas as gpd
-from shapely.geometry import LineString, Polygon
+from shapely.geometry import LineString, Polygon,MultiPolygon
 
 
 class TestGisprocess:
@@ -94,12 +94,21 @@ class TestGisprocess:
                   [1., 1.]]
         assert np.allclose(result2, truth2)
 
+        dfC = gpd.GeoDataFrame([[1, 2]],
+                        columns=['lon1', 'lat1'])
+        dfC['geometry'] = MultiPolygon([Polygon([[1, 1], [1.5, 2.5], [3.2, 4]]),
+                            Polygon([[1, 0], [1.5, 0], [4, 10]]),
+                            Polygon([[1, -1], [1.5, -2], [4, 10]])])
+        result3 = tbd.polyon_exterior(dfC, minarea=1)
+        assert np.allclose(result3.area.iloc[0],6.75)
+
     def test_ellipse_params(self):
         np.random.seed(1)
         data = np.random.uniform(1, 10, (100, 2))
         data[:, 1:] = 0.5*data[:, 0:1]+np.random.uniform(-2, 2, (100, 1))
         data = pd.DataFrame(data, columns=['x', 'y'])
         ellip_params = tbd.ellipse_params(data, confidence=95, col=['x', 'y'])
+        
         assert np.allclose(ellip_params[0], [5.0412876, 2.73948777])
         assert np.allclose(ellip_params[1:], [
             4.862704682680083,
@@ -107,3 +116,8 @@ class TestGisprocess:
             -62.20080325474961,
             58.580734145363145,
             0.6829769340746545])
+            
+        import matplotlib.pyplot as plt
+        plt.figure(1,(5,5))
+        ax = plt.subplot(111)
+        tbd.ellipse_plot(ellip_params,ax,fill = False,edgecolor = 'k',linewidth = 1)

@@ -57,9 +57,9 @@ def split_subwayline(line, stop):
         if r2['o_project'] <= r2['d_project']:
             tmp1 = np.linspace(r2['o_project'], r2['d_project'], 10)
         if r2['o_project'] > r2['d_project']:
-            tmp1 = np.linspace(
+            tmp1 = np.linspace( # pragma: no cover
                 r2['o_project']-line_geometry.length, r2['d_project'], 10)
-            tmp1[tmp1 < 0] = tmp1[tmp1 < 0]+line_geometry.length
+            tmp1[tmp1 < 0] = tmp1[tmp1 < 0]+line_geometry.length # pragma: no cover
         for j in tmp1:
             ls.append(line_geometry.interpolate(j))
         return LineString(ls)
@@ -130,7 +130,7 @@ def metro_network(line, stop, transfertime=5, nxgraph=True):
     # Obtain edge1: Network edge for line section.
     linestop = stop.copy()
     if ('speed' not in line.columns) | ('stoptime' not in line.columns):
-        raise ValueError(
+        raise ValueError( # pragma: no cover
             'Lines should have `line` column to store line name,'
             '`speed` column to store metro speed and'
             '`stoptime` column to store stop time at each station'
@@ -184,7 +184,7 @@ def metro_network(line, stop, transfertime=5, nxgraph=True):
         G.add_weighted_edges_from(edge.values)
         return G
     else:
-        return edge1, edge2, node
+        return edge1, edge2, node # pragma: no cover
 
 
 def get_shortest_path(G, stop, ostation, dstation):

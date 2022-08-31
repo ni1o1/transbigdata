@@ -272,7 +272,10 @@ def bd09mctobd09(x, y):
          7.47137025468032, -0.00000353937994, -0.02145144861037,
          -0.00001234426596, 0.00010322952773, -0.00000323890364, 826088.5]
     ]
-    y1 = y.iloc[0]
+    try:
+        y1 = y.iloc[0]
+    except Exception:
+        y1 = y
     for cD in range(len(MCBAND)):
         if y1 >= MCBAND[cD]:
             cE = MC2LL[cD]

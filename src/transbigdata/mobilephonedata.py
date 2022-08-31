@@ -142,7 +142,7 @@ def mobile_stay_dutation(staydata, col=['stime', 'etime'], start_hour=8, end_hou
     '''
 
     if (start_hour > end_hour) | (start_hour < 0) | (start_hour > 24) | (end_hour < 0) | (end_hour > 24):
-        raise ValueError(
+        raise ValueError( # pragma: no cover
             'end_hour or start_hour error, it should be: 0 <= start_hour <= end_hour <= 24')
 
     night_hour = start_hour+24-end_hour
@@ -296,9 +296,9 @@ def mobile_plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
     maxday = max(dates)
     import datetime
     thisdate = minday
-    while thisdate != maxday:
-        dates_all.append(thisdate)
-        thisdate = str((pd.to_datetime(thisdate+' 00:00:00') +
+    while thisdate != maxday: # pragma: no cover
+        dates_all.append(thisdate) # pragma: no cover
+        thisdate = str((pd.to_datetime(thisdate+' 00:00:00') + # pragma: no cover
                        datetime.timedelta(days=1)).date())
     dates = dates_all
     import matplotlib.pyplot as plt

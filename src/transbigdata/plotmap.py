@@ -32,7 +32,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import numpy as np
 import math
-import urllib
 import io
 from PIL import Image
 import os
@@ -46,7 +45,7 @@ def set_mapboxtoken(mapboxtoken):
     config = ConfigParser()
     config.read(config_path)
     if not config.has_section('MAPBOX'):
-        config.add_section('MAPBOX')
+        config.add_section('MAPBOX')   # pragma: no cover
 
     config.set('MAPBOX', 'mapboxtoken', mapboxtoken)
     with open(config_path, 'w') as configfile:
@@ -64,13 +63,13 @@ def read_mapboxtoken():
         config = ConfigParser()
         config.read(config_path)
         mapboxtoken = config['MAPBOX']['mapboxtoken']
-    except Exception:
-        warnings.warn("Mapboxtoken not found, "
+    except Exception:  # pragma: no cover
+        warnings.warn("Mapboxtoken not found, "   # pragma: no cover
                       "The basemap is set as OpenStreetMap"
                       "please use tbd.set_mapboxtoken() to set the access token, see: "
                       "https://transbigdata.readthedocs.io/en/latest/plot_map.html"
                       )
-        mapboxtoken = ''
+        mapboxtoken = ''  # pragma: no cover
     return mapboxtoken
 
 
@@ -84,13 +83,13 @@ def set_imgsavepath(imgsavepath):
         savepath
     '''
     if not os.path.exists(imgsavepath):
-        raise ValueError('Path do not exist')
+        raise ValueError('Path do not exist')  # pragma: no cover
     config_path = os.path.join(os.path.dirname(
         os.path.abspath(__file__)), 'config.ini')
     config = ConfigParser()
     config.read(config_path)
     if not config.has_section('MAPBOX'):
-        config.add_section('MAPBOX')
+        config.add_section('MAPBOX')   # pragma: no cover
 
     config.set('MAPBOX', 'imgsavepath', imgsavepath)
     with open(config_path, 'w') as configfile:
@@ -108,11 +107,11 @@ def read_imgsavepath():
         config = ConfigParser()
         config.read(config_path)
         imgsavepath = config['MAPBOX']['imgsavepath']
-    except:
+    except Exception:  # pragma: no cover
         warnings.warn('Map base map storage path not found, \
         please use tbd.set_imgsavepath() to set it first, \
-        see: https://transbigdata.readthedocs.io/en/latest/plot_map.html')
-        imgsavepath = ''
+        see: https://transbigdata.readthedocs.io/en/latest/plot_map.html')  # pragma: no cover
+        imgsavepath = ''  # pragma: no cover
     return imgsavepath
 
 
@@ -164,62 +163,75 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
     '''
     smurl = ''
     if (style == 1) | (style == 'streets'):
-        styleid = 'ckwinzgw581od14mpyfhka6nk'
+        styleid = 'ckwinzgw581od14mpyfhka6nk'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
+                access_token  # pragma: no cover
     if (style == 2) | (style == 'outdoors'):
-        styleid = 'ckwinx7aj4y4a15p7ftfwq9dn'
+        styleid = 'ckwinx7aj4y4a15p7ftfwq9dn'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
+                access_token  # pragma: no cover
     if (style == 3) | (style == 'satellite'):
-        styleid = 'cjv36cj9u4h1q1ftemjed4f2y'
+        styleid = 'cjv36cj9u4h1q1ftemjed4f2y'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
+                access_token  # pragma: no cover
     if (style == 4) | (style == 'light'):
-        styleid = 'ckwfx658z4dpb14ocnz6tky9d'
+        styleid = 'ckwfx658z4dpb14ocnz6tky9d'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
+                access_token  # pragma: no cover
     if (style == 5) | (style == 'dark'):
-        styleid = 'cjetnd20i1vbi2qqxbh0by7p8'
+        styleid = 'cjetnd20i1vbi2qqxbh0by7p8'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
+                access_token  # pragma: no cover
     if (style == 6) | (style == 'light-ch'):
-        styleid = 'ckj9bhq7s9mvj19mq3e3fye35'
+        styleid = 'ckj9bhq7s9mvj19mq3e3fye35'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
+                access_token  # pragma: no cover
     if (style == 7) | (style == 'ice creem'):
-        styleid = 'cjv36iiz9243t1fo8mweb4z6r'
+        styleid = 'cjv36iiz9243t1fo8mweb4z6r'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
+                access_token  # pragma: no cover
     if (style == 8) | (style == 'night'):
-        styleid = 'ck2o3fyvy0dch1cp6j2pkz2dv'
+        styleid = 'ck2o3fyvy0dch1cp6j2pkz2dv'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
+                access_token  # pragma: no cover
     if (style == 9) | (style == 'terrain'):
-        styleid = 'cjv36gyklf43q1fnuwibiuetl'
+        styleid = 'cjv36gyklf43q1fnuwibiuetl'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
+                access_token  # pragma: no cover
     if (style == 10) | (style == 'basic blue'):
-        styleid = 'ckwio2ze12fgk15p2alr5a4xj'
+        styleid = 'ckwio2ze12fgk15p2alr5a4xj'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
+                access_token  # pragma: no cover
     if (style == 11):
-        styleid = 'cl39hgul1000514llp3yj7yh3'
+        styleid = 'cl39hgul1000514llp3yj7yh3'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
+                access_token  # pragma: no cover
     if (style == 12):
-        styleid = 'cl38pljx0006r14qp7ioy7gcc'
+        styleid = 'cl38pljx0006r14qp7ioy7gcc'  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/ni1o1/'+styleid + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
+                access_token  # pragma: no cover
     if (style == 0) | (style == 'OSM'):
-        styleid = 'osm'
-        smurl = r'https://tile.openstreetmap.org/{0}/{1}/{2}.png'
+        styleid = 'osm'  # pragma: no cover
+        smurl = r'https://tile.openstreetmap.org/{0}/{1}/{2}.png'  # pragma: no cover
     if (str(style)[:16] == 'mapbox://styles/'):
-        styleid = style.split('/')[-1]
+        styleid = style.split('/')[-1]  # pragma: no cover
         smurl = r'https://api.mapbox.com/styles/v1/'+style[16:] + \
-            r'/tiles/256/{0}/{1}/{2}?&access_token='+access_token
+            r'/tiles/256/{0}/{1}/{2}?&access_token=' + \
+                access_token  # pragma: no cover
     if smurl == '':
-        raise ValueError('Style error')
+        raise ValueError('Style error')  # pragma: no cover
 
     xmin, ymax = deg2num(lat_deg, lon_deg, zoom)
     xmax, ymin = deg2num(lat_deg + delta_lat, lon_deg + delta_long, zoom)
@@ -233,12 +245,14 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
         def savefig(filename, tile):
             try:
                 if 'tileimg' in os.listdir(imgsavepath):
-                    if filename in os.listdir(imgsavepath+'tileimg'):
-                        pass
+                    if filename in os.listdir(imgsavepath+'tileimg'):  # pragma: no cover
+                        pass  # pragma: no cover
                     else:
-                        tile.save(imgsavepath+'tileimg/'+filename)
-                        if printlog:
-                            print('figsaved:'+imgsavepath+'tileimg/'+filename)
+                        tile.save(imgsavepath+'tileimg/' +
+                                  filename)  # pragma: no cover
+                        if printlog:  # pragma: no cover
+                            print('figsaved:'+imgsavepath+'tileimg/' +
+                                  filename)  # pragma: no cover
                 else:
                     os.mkdir(imgsavepath+'tileimg')
             except Exception as e:
@@ -247,14 +261,15 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
         def loadfig(filename):
             try:
                 if 'tileimg' in os.listdir(imgsavepath):
-                    if filename in os.listdir(imgsavepath+'tileimg'):
-                        tile = Image.open(imgsavepath+'tileimg\\'+filename)
-                        return tile
+                    if filename in os.listdir(imgsavepath+'tileimg'):  # pragma: no cover
+                        tile = Image.open(
+                            imgsavepath+'tileimg\\'+filename)  # pragma: no cover
+                        return tile  # pragma: no cover
                     else:
-                        return None
+                        return None  # pragma: no cover
                 else:
                     os.mkdir(imgsavepath+'tileimg')
-                    return None
+                    return None  # pragma: no cover
             except Exception:
                 return None
 
@@ -270,26 +285,27 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
                         header['Accept-Language'] = 'zh-CN,zh;q=0.8'
                         header['Upgrade-Insecure-Requests'] = '1'
                         header['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36'
-                        request = urllib.request.Request(imgurl)
-                        for k, v in header.items():
-                            request.add_header(k, v)
-                        imgstr = urllib.request.urlopen(
-                            request, timeout=6).read()
+
+                        import requests
+                        response1 = requests.get(
+                            imgurl, headers=header, timeout=6)
+                        imgstr = response1.content
                         tile = Image.open(io.BytesIO(imgstr))
                         savefig(filename, tile)
                         Cluster.paste(tile, box=(
                             (xtile-xmin)*imgsize,  (ytile-ymin)*imgsize))
                         t = 10
-                    except Exception:
-                        if printlog:
-                            print('Get map tile failed, retry ', t)
-                        t += 1
-            except Exception:
-                print("Couldn't download image")
-                tile = None
-        else:
+                    except Exception:  # pragma: no cover
+                        if printlog:  # pragma: no cover
+                            print('Get map tile failed, retry ',
+                                  t)  # pragma: no cover
+                        t += 1  # pragma: no cover
+            except Exception:  # pragma: no cover
+                print("Couldn't download image")  # pragma: no cover
+                tile = None  # pragma: no cover
+        else:  # pragma: no cover
             Cluster.paste(tile, box=(
-                (xtile-xmin)*imgsize,  (ytile-ymin)*imgsize))
+                (xtile-xmin)*imgsize,  (ytile-ymin)*imgsize))  # pragma: no cover
 
     imgsize = 256
     import threading
@@ -333,23 +349,24 @@ def plot_map(plt, bounds, zoom='auto', style=0, printlog=False):
     '''
     access_token = read_mapboxtoken()
     if access_token == '':
-        style = 0
+        style = 0  # pragma: no cover
     imgsavepath = read_imgsavepath()
     if imgsavepath != '':
         try:
             import os
             os.listdir(imgsavepath)
-        except Exception:
-            warnings.warn(
+        except Exception:  # pragma: no cover
+            warnings.warn(  # pragma: no cover
                 'imgsavepath do not exist, your tile map will not save')
     else:
-        warnings.warn('imgsavepath do not exist, your tile map will not save')
+        warnings.warn(
+            'imgsavepath do not exist, your tile map will not save')  # pragma: no cover
     lon1 = bounds[0]
     lat1 = bounds[1]
     lon2 = bounds[2]
     lat2 = bounds[3]
     if zoom == 'auto':
-        zoom = 11-np.log(lon2-lon1)/np.log(2)
+        zoom = 11-np.log(lon2-lon1)/np.log(2)  # pragma: no cover
     zoom = min(18, int(zoom+0.5))
     a = getImageCluster(lon1, lat1, lon2-lon1,  lat2-lat1, zoom, style=style,
                         printlog=printlog, imgsavepath=imgsavepath,
@@ -393,7 +410,7 @@ def plotscale(ax, bounds, textcolor='k', textsize=8, compasssize=1,
     lon2 = bounds[2]
     lat2 = bounds[3]
     if accuracy == 'auto':
-        accuracy = (int((lon2-lon1)/0.0003/1000+0.5)*1000)
+        accuracy = (int((lon2-lon1)/0.0003/1000+0.5)*1000)  # pragma: no cover
     a, c = rect
     b = 1-a
     d = 1-c

@@ -9,7 +9,8 @@ class TestGrids:
     def setup_method(self):
         self.bounds = [113.6, 22.4, 113.605, 22.405]
         self.params = [113.6, 22.4, 0.004863669213934598, 0.004496605206422906]
-
+        self.shape = gpd.GeoDataFrame([Polygon([[113.59, 22.39], [113.61, 22.39], [113.61, 22.41], [113.6, 22.42]])],columns = ['geometry'])
+        self.shape.crs = 'epsg:4326'
     def test_rect_grids(self):
         result = tbd.rect_grids(self.bounds, accuracy=500)
         res1 = result[0]['geometry'].iloc[0]
@@ -205,4 +206,91 @@ class TestGrids:
                                                     sample=0, #not sampling
                                                     printlog=True,
                                                     max_iter=1)
+        #Optimize gridding params
+        params_optimized = tbd.grid_params_optimize(data,
+                                                    initialparams,
+                                                    col=['Vehicleid','slon','slat'],
+                                                    optmethod='gini',
+                                                    sample=0, #not sampling
+                                                    printlog=True,
+                                                    max_iter=1)
+
+        params_optimized = tbd.grid_params_optimize(data,
+                                                    initialparams,
+                                                    col=['Vehicleid','slon','slat'],
+                                                    optmethod='gridscount',
+                                                    sample=10, #not sampling
+                                                    printlog=True,
+                                                    max_iter=1)
+        #Optimize gridding params
+        initialparams = {'slon': 113.75,
+                    'slat':  22.4,
+                    'deltalon': 0.04871681446449111,
+                    'deltalat': 0.044966052064229066,
+                    'theta': 25,
+                    'method': 'rect'}
+        #Optimize gridding params
+        params_optimized = tbd.grid_params_optimize(data,
+                                                    initialparams,
+                                                    col=['Vehicleid','slon','slat'],
+                                                    optmethod='centerdist',
+                                                    sample=0, #not sampling
+                                                    printlog=True,
+                                                    max_iter=1)
+        #Optimize gridding params
+        params_optimized = tbd.grid_params_optimize(data,
+                                                    initialparams,
+                                                    col=['Vehicleid','slon','slat'],
+                                                    optmethod='gini',
+                                                    sample=0, #not sampling
+                                                    printlog=True,
+                                                    max_iter=1)
+
+        params_optimized = tbd.grid_params_optimize(data,
+                                                    initialparams,
+                                                    col=['Vehicleid','slon','slat'],
+                                                    optmethod='gridscount',
+                                                    sample=10, #not sampling
+                                                    printlog=True,
+                                                    max_iter=1)
+                                                    
+    def test_area_to_grid(self):
+
+        assert len(tbd.area_to_grid(self.shape)[0]) == 30
+        assert len(tbd.area_to_grid(self.shape,method = 'tri')[0]) == 41
+        assert len(tbd.area_to_grid(self.shape,method = 'hexa')[0]) == 10
+    def test_area_to_params(self):
+        assert np.allclose(tbd.area_to_params(self.shape)['deltalat'], 0.004496605206422906)
+
+    def test_grid_to_centre(self):
+
+        params = tbd.area_to_grid(self.shape,method = 'hexa')[1]
+        assert np.allclose(tbd.grid_to_centre([1,2,3], params),[[113.59486376],[22.38221165]])
+
+    def test_grid_to_area(self):
+        data = pd.DataFrame([[0, -1, -1], [2,-3,-5], [100, 100, 0]],
+                        columns=['loncol_1', 'loncol_2', 'loncol_3'])
+        shape = gpd.GeoDataFrame([Polygon(
+            [[113.59, 22.39], [113.61, 22.39], [113.61, 22.41], [113.6, 22.42]])
+        ], columns=['geometry'])
+        _,params = tbd.area_to_grid(shape, method='hexa')
+
+        result = tbd.grid_to_area(data, shape, params, col=[
+            'loncol_1', 'loncol_2', 'loncol_3'])['geometry'].iloc[0]
+        truth = [113.59972751340152, 22.410768929810946]
+
+        assert np.allclose([result.x,result.y],truth)
+    
+    def test_grid_to_params(self):
+
+        shape = gpd.GeoDataFrame([Polygon(
+            [[113.59, 22.39], [113.61, 22.39], [113.61, 22.41], [113.6, 22.42]])
+        ], columns=['geometry'])
+        grids,_ = tbd.area_to_grid(shape,params = {'slon': 113.59,
+        'slat': 22.390000000000004,
+        'deltalon': 0.004863756700757449,
+        'deltalat': 0.0044966052064197015,
+        'theta': 10,
+        'method': 'rect'})
+        assert np.allclose(tbd.grid_to_params(grids)['theta'],10)
 

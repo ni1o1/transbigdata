@@ -17,16 +17,30 @@ class TestMobile:
             ['00466ab30de56db7efbd04991b680ae1', 201806012328,
             121.43, 30.175,20180601],
             ['00466ab30de56db7efbd04991b680ae1', 201806012329,
-            121.42, 30.175,20180601]],columns=['user_id','stime','longitude','latitude','date'])
+            121.42, 30.175,20180601],
+            ['00466ab30de56db7efbd04991b680ae1', 201806020000, 121.43, 30.175,
+                20180602],
+            ['00466ab30de56db7efbd04991b680ae1', 201806020620, 121.43, 30.175,
+                20180602],
+            ['00466ab30de56db7efbd04991b680ae1', 201806020721, 121.417, 30.24,
+                20180602],
+            ['00466ab30de56db7efbd04991b680ae1', 201806021022,
+            121.417, 30.24, 20180602],
+            ['00466ab30de56db7efbd04991b680ae1', 201806022026,
+                121.43, 30.175, 20180602],
+            ['00466ab30de56db7efbd04991b680ae1', 201806022328,
+            121.43, 30.175,20180602],
+            ['00466ab30de56db7efbd04991b680ae1', 201806022329,
+            121.42, 30.175,20180602]],columns=['user_id','stime','longitude','latitude','date'])
         data['stime'] = pd.to_datetime(data['stime'], format='%Y%m%d%H%M')
 
         #Obtain gridding parameters
         params = tbd.area_to_params([121.860, 29.295, 121.862, 29.301], accuracy=500)
         #Identify stay and move infomation from mobile phone trajectory data
         stay,move = tbd.mobile_stay_move(data,params,col = ['user_id','stime','longitude', 'latitude'])
-
-        assert len(stay) == 3
-        assert len(move) == 2
+        tbd.plot_activity(stay)
+        assert len(stay) == 7
+        assert len(move) == 6
 
         #Identify home location
         home = tbd.mobile_identify_home(stay, col=['user_id','stime', 'etime','LONCOL', 'LATCOL','lon','lat'], start_hour=8, end_hour=20 )
