@@ -80,12 +80,12 @@ def area_to_grid(location, accuracy=500, method='rect', params='auto'):
         shape = location
         bounds = shape.unary_union.bounds
     else:
-        raise Exception( # pragma: no cover
+        raise Exception(  # pragma: no cover
             'Location should be either bounds(List) or shape(GeoDataFrame)')
     lon1, lat1, lon2, lat2 = bounds
     if (lon1 > lon2) | (lat1 > lat2) | (abs(lat1) > 90) | (abs(lon1) > 180) | (
             abs(lat2) > 90) | (abs(lon2) > 180):
-        raise Exception( # pragma: no cover
+        raise Exception(  # pragma: no cover
             'Bounds error. The input bounds should be in the order of \
                 [lon1,lat1,lon2,lat2]. (lon1,lat1) is the lower left \
                     corner and (lon2,lat2) is the upper right corner.'
@@ -473,8 +473,8 @@ def grid_params_optimize(data,
                          pop=15,
                          max_iter=50,
                          w=0.1,
-                        c1=0.5,
-                        c2=0.5):
+                         c1=0.5,
+                         c2=0.5):
     '''
     Optimize the grid params
 
@@ -514,8 +514,8 @@ def grid_params_optimize(data,
     [uid, lon, lat] = col
     try:
         from sko.PSO import PSO
-    except ImportError:# pragma: no cover
-        raise ImportError(# pragma: no cover
+    except ImportError:  # pragma: no cover
+        raise ImportError(  # pragma: no cover
             "Please install scikit-opt, run following code "
             "in cmd: pip install scikit-opt")
 
@@ -626,18 +626,19 @@ def grid_params_optimize(data,
 
         f = f_gridscount
     else:
-        raise Exception('Method should be one of: centerdist,gini,gridscount')  # pragma: no cover
+        raise Exception(
+            'Method should be one of: centerdist,gini,gridscount')  # pragma: no cover
 
     pso = PSO(func=f,
-            n_dim=3,
-            pop=pop, 
-            max_iter=max_iter,
-            lb=[0, 0, 0],
-            ub=[params['deltalon'] * times, params['deltalat']
-                * times, 90 * theta_lambda],
-            w=w, 
-            c1=c1, 
-            c2=c2)
+              n_dim=3,
+              pop=pop,
+              max_iter=max_iter,
+              lb=[0, 0, 0],
+              ub=[params['deltalon'] * times, params['deltalat']
+                  * times, 90 * theta_lambda],
+              w=w,
+              c1=c1,
+              c2=c2)
     result = pso.run()
 
     x = result[0]
@@ -1205,7 +1206,8 @@ def convertparams(params):
         if 'method' not in dicparams:
             dicparams['method'] = 'rect'  # pragma: no cover
     if dicparams['method'] not in ['rect', 'tri', 'hexa']:
-        raise ValueError('Method should be `rect`,`tri` or `hexa`')  # pragma: no cover
+        raise ValueError(
+            'Method should be `rect`,`tri` or `hexa`')  # pragma: no cover
     return dicparams
 
 
