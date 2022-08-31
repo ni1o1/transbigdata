@@ -266,7 +266,7 @@ def polyon_exterior(data, minarea=0):
                     if poly.area > minarea:
                         geometries.append(poly)
                 else:
-                    geometries.append(poly)
+                    geometries.append(poly) # pragma: no cover
             return MultiPolygon(geometries)
         if type(p) == Polygon:
             return Polygon(p.exterior)
@@ -305,7 +305,7 @@ def ellipse_params(data, col=['lon', 'lat'], confidence=95, epsg=None):
     if confidence == 95:
         nstd = 5.991**0.5   # pragma: no cover
     if confidence == 90:
-        nstd = 4.605**0.5
+        nstd = 4.605**0.5    # pragma: no cover
     points = data.copy()
     points = gpd.GeoDataFrame(points)
     points['geometry'] = gpd.points_from_xy(points[lon], points[lat])

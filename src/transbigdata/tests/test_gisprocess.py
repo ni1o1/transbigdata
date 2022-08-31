@@ -108,6 +108,7 @@ class TestGisprocess:
         data[:, 1:] = 0.5*data[:, 0:1]+np.random.uniform(-2, 2, (100, 1))
         data = pd.DataFrame(data, columns=['x', 'y'])
         ellip_params = tbd.ellipse_params(data, confidence=95, col=['x', 'y'])
+        
         assert np.allclose(ellip_params[0], [5.0412876, 2.73948777])
         assert np.allclose(ellip_params[1:], [
             4.862704682680083,
@@ -115,3 +116,8 @@ class TestGisprocess:
             -62.20080325474961,
             58.580734145363145,
             0.6829769340746545])
+            
+        import matplotlib.pyplot as plt
+        plt.figure(1,(5,5))
+        ax = plt.subplot(111)
+        tbd.ellipse_plot(ellip_params,ax,fill = False,edgecolor = 'k',linewidth = 1)

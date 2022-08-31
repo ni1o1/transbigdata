@@ -80,12 +80,12 @@ def area_to_grid(location, accuracy=500, method='rect', params='auto'):
         shape = location
         bounds = shape.unary_union.bounds
     else:
-        raise Exception(
+        raise Exception( # pragma: no cover
             'Location should be either bounds(List) or shape(GeoDataFrame)')
     lon1, lat1, lon2, lat2 = bounds
     if (lon1 > lon2) | (lat1 > lat2) | (abs(lat1) > 90) | (abs(lon1) > 180) | (
             abs(lat2) > 90) | (abs(lon2) > 180):
-        raise Exception(
+        raise Exception( # pragma: no cover
             'Bounds error. The input bounds should be in the order of \
                 [lon1,lat1,lon2,lat2]. (lon1,lat1) is the lower left \
                     corner and (lon2,lat2) is the upper right corner.'
@@ -514,8 +514,8 @@ def grid_params_optimize(data,
     [uid, lon, lat] = col
     try:
         from sko.PSO import PSO
-    except ImportError:
-        raise ImportError(
+    except ImportError:# pragma: no cover
+        raise ImportError(# pragma: no cover
             "Please install scikit-opt, run following code "
             "in cmd: pip install scikit-opt")
 
@@ -1190,7 +1190,7 @@ def convertparams(params):
             lonStart, latStart, deltaLon, deltaLat, theta = params
             method = 'rect'
         elif len(params) == 6:
-            lonStart, latStart, deltaLon, deltaLat, theta, method = params
+            lonStart, latStart, deltaLon, deltaLat, theta, method = params  # pragma: no cover
         dicparams = dict()
         dicparams['slon'] = lonStart
         dicparams['slat'] = latStart
@@ -1201,11 +1201,11 @@ def convertparams(params):
     else:
         dicparams = params
         if 'theta' not in dicparams:
-            dicparams['theta'] = 0
+            dicparams['theta'] = 0  # pragma: no cover
         if 'method' not in dicparams:
-            dicparams['method'] = 'rect'
+            dicparams['method'] = 'rect'  # pragma: no cover
     if dicparams['method'] not in ['rect', 'tri', 'hexa']:
-        raise ValueError('Method should be `rect`,`tri` or `hexa`')
+        raise ValueError('Method should be `rect`,`tri` or `hexa`')  # pragma: no cover
     return dicparams
 
 
