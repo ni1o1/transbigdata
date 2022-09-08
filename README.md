@@ -63,15 +63,15 @@ All contributions, bug reports, bug fixes, documentation improvements, enhanceme
 
 #### Visualize trajectories (with keplergl)
 
-![gif](https://github.com/ni1o1/transbigdata/raw/main/images/tbdexample1.gif)
+![gif](https://github.com/ni1o1/transbigdata/raw/main/image/README/tbdexample1.gif)
 
 #### Visualize data distribution (with keplergl)
 
-![gif](https://github.com/ni1o1/transbigdata/raw/main/images/tbdexample2.gif)
+![gif](https://github.com/ni1o1/transbigdata/raw/main/image/README/tbdexample2.gif)
 
 #### Visualize OD (with keplergl)
 
-![gif](https://github.com/ni1o1/transbigdata/raw/main/images/tbdexample3.gif)
+![gif](https://github.com/ni1o1/transbigdata/raw/main/image/README/tbdexample3.gif)
 
 ### Example of taxi GPS data processing
 
@@ -258,7 +258,7 @@ grid_agg = gpd.GeoDataFrame(grid_agg)
 grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
 ```
 
-![png](https://github.com/ni1o1/transbigdata/raw/main/images/output_5_1.png)
+![png](https://github.com/ni1o1/transbigdata/raw/main/image/README/output_5_1.png)
 
 #### Triangle and Hexagon grids & rotation angle
 
