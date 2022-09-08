@@ -30,6 +30,8 @@
 
 ## 安装
 
+TransBigData仅支持Python版本>=3.6
+
 ### 用pypi安装
 
 在安装 `TransBigData`之前，请确保已经安装了可用的geopandas包：https://geopandas.org/index.html

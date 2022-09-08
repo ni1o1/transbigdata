@@ -39,7 +39,7 @@ Currently, `TransBigData` mainly provides the following methods:
 
 ## Installation
 
-It is recommended to use `Python 3.7, 3.8, 3.9`
+`TransBigData` support Python >= 3.6
 
 ### Using pypi [![PyPI version](https://badge.fury.io/py/transbigdata.svg)](https://badge.fury.io/py/transbigdata)
 
