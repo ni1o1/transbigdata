@@ -5,7 +5,7 @@
 <img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/logo-wordmark-dark.png" style="width:550px">
 
 [![Documentation Status](https://readthedocs.org/projects/transbigdata-doc-zh-cn/badge/?version=latest)](https://transbigdata.readthedocs.io/zh_CN/latest/?badge=latest)
-[![PyPI version](https://badge.fury.io/py/transbigdata.svg)](https://badge.fury.io/py/transbigdata) [![Downloads](https://pepy.tech/badge/transbigdata)](https://pepy.tech/project/transbigdata) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ni1o1/transbigdata) [![bilibili](https://img.shields.io/badge/bilibili-%E5%90%8C%E6%B5%8E%E5%B0%8F%E6%97%AD%E5%AD%A6%E9%95%BF-green.svg)](https://space.bilibili.com/3051484) [![status](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b/status.svg)](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ni1o1/transbigdata/d7d6fa33ff16440ba1698b10dd3cf3f76ff00abd?urlpath=lab%2Ftree%2Fexample%2FExample%201-Taxi%20GPS%20data%20processing.ipynb) [![Tests](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml/badge.svg)](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/ni1o1/transbigdata/branch/main/graph/badge.svg?token=GLAVYYCD9L)](https://codecov.io/gh/ni1o1/transbigdata) [![DOI](https://zenodo.org/badge/419559811.svg)](https://zenodo.org/badge/latestdoi/419559811) [![Gitter](https://badges.gitter.im/transbigdata/community.svg)](https://gitter.im/transbigdata/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![PyPI version](https://badge.fury.io/py/transbigdata.svg)](https://badge.fury.io/py/transbigdata) [![Downloads](https://pepy.tech/badge/transbigdata)](https://pepy.tech/project/transbigdata) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ni1o1/transbigdata) [![bilibili](https://img.shields.io/badge/bilibili-%E5%90%8C%E6%B5%8E%E5%B0%8F%E6%97%AD%E5%AD%A6%E9%95%BF-green.svg)](https://space.bilibili.com/3051484) [![status](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b/status.svg)](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b) [![Tests](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml/badge.svg)](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/ni1o1/transbigdata/branch/main/graph/badge.svg?token=GLAVYYCD9L)](https://codecov.io/gh/ni1o1/transbigdata) [![DOI](https://zenodo.org/badge/419559811.svg)](https://zenodo.org/badge/latestdoi/419559811) [![Gitter](https://badges.gitter.im/transbigdata/community.svg)](https://gitter.im/transbigdata/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 `TransBigData`是一个为交通时空大数据处理、分析和可视化而开发的Python包。`TransBigData`为处理常见的交通时空大数据（如出租车GPS数据、共享单车数据和公交车GPS数据）提供了快速而简洁的方法。`TransBigData`为交通时空大数据分析的各个阶段提供了多种处理方法,代码简洁、高效、灵活、易用，可以用简洁的代码实现复杂的数据任务。
 
@@ -30,6 +30,8 @@
 
 ## 安装
 
+TransBigData仅支持Python版本>=3.6
+
 ### 用pypi安装
 
 在安装 `TransBigData`之前，请确保已经安装了可用的geopandas包：https://geopandas.org/index.html
@@ -47,15 +49,15 @@
 
 ### 可视化轨迹(基于keplergl)
 
-![gif](images/tbdexample1.gif)
+![gif](image/README/tbdexample1.gif)
 
 ### 可视化数据分布(基于keplergl)
 
-![gif](images/tbdexample2.gif)
+![gif](image/README/tbdexample2.gif)
 
 ### 可视化OD(基于keplergl)
 
-![gif](images/tbdexample3.gif)
+![gif](image/README/tbdexample3.gif)
 
 ## 使用示例
 
@@ -238,8 +240,7 @@ grid_agg = gpd.GeoDataFrame(grid_agg)
 grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
 ```
 
-![png](images/output_5_1.png)
-
+![png](image/README/output_5_1.png)
 
 #### 三角形、六边形网格 & 旋转角度
 
@@ -272,7 +273,6 @@ grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
 
 ![1648714436503.png](https://github.com/ni1o1/transbigdata/raw/main/image/README/1648714436503.png)
 
-
 ### 数据可视化(在matplotlib中绘制地图底图)
 
 对于一个正式的数据可视化图来说，我们还需要添加底图、色条、指北针和比例尺。 用 `tbd.plot_map`加载地图底图，并用 `tbd.plotscale`添加指北针和比例尺:
@@ -300,10 +300,9 @@ plt.show()
 
 ![1648714582961.png](https://github.com/ni1o1/transbigdata/raw/main/image/README/1648714582961.png)
 
-
 #### TransBigData提供的栅格化的框架
 
-下图显示了`TransBigData`提供的栅格化方法框架
+下图显示了 `TransBigData`提供的栅格化方法框架
 
 ![1648715064154.png](https://github.com/ni1o1/transbigdata/raw/main/image/README/1648715064154.png)
 

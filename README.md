@@ -4,7 +4,7 @@ English [中文版](README-zh_CN.md)
 
 <img src="https://github.com/ni1o1/transbigdata/raw/main/docs/source/_static/logo-wordmark-dark.png" style="width:550px">
 
-[![Documentation Status](https://readthedocs.org/projects/transbigdata/badge/?version=latest)](https://transbigdata.readthedocs.io/en/latest/?badge=latest) [![Downloads](https://pepy.tech/badge/transbigdata)](https://pepy.tech/project/transbigdata) [![Downloads](https://pepy.tech/badge/transbigdata/week)](https://pepy.tech/project/transbigdata) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ni1o1/transbigdata/d7d6fa33ff16440ba1698b10dd3cf3f76ff00abd?urlpath=lab%2Ftree%2Fexample%2FExample%201-Taxi%20GPS%20data%20processing.ipynb) [![Tests](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml/badge.svg)](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/ni1o1/transbigdata/branch/main/graph/badge.svg?token=GLAVYYCD9L)](https://codecov.io/gh/ni1o1/transbigdata) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/337269651059406ea32c74e1c430a054)](https://www.codacy.com/gh/ni1o1/transbigdata/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ni1o1/transbigdata&amp;utm_campaign=Badge_Grade)
+[![Documentation Status](https://readthedocs.org/projects/transbigdata/badge/?version=latest)](https://transbigdata.readthedocs.io/en/latest/?badge=latest) [![Downloads](https://pepy.tech/badge/transbigdata)](https://pepy.tech/project/transbigdata) [![Downloads](https://pepy.tech/badge/transbigdata/week)](https://pepy.tech/project/transbigdata) [![Tests](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml/badge.svg)](https://github.com/ni1o1/transbigdata/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/ni1o1/transbigdata/branch/main/graph/badge.svg?token=GLAVYYCD9L)](https://codecov.io/gh/ni1o1/transbigdata)
 
 ## Introduction
 
@@ -39,7 +39,7 @@ Currently, `TransBigData` mainly provides the following methods:
 
 ## Installation
 
-It is recommended to use `Python 3.7, 3.8, 3.9`
+`TransBigData` support Python >= 3.6
 
 ### Using pypi [![PyPI version](https://badge.fury.io/py/transbigdata.svg)](https://badge.fury.io/py/transbigdata)
 
@@ -47,7 +47,7 @@ It is recommended to use `Python 3.7, 3.8, 3.9`
 
     pip install transbigdata
 
-### Using conda-forge [![Conda Version](https://img.shields.io/conda/vn/conda-forge/transbigdata.svg)](https://anaconda.org/conda-forge/transbigdata) [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/transbigdata.svg)](https://anaconda.org/conda-forge/transbigdata) 
+### Using conda-forge [![Conda Version](https://img.shields.io/conda/vn/conda-forge/transbigdata.svg)](https://anaconda.org/conda-forge/transbigdata) [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/transbigdata.svg)](https://anaconda.org/conda-forge/transbigdata)
 
 You can also install `TransBigData` by `conda-forge`, this will automaticaly solve the dependency, it can be installed with:
 
@@ -63,15 +63,15 @@ All contributions, bug reports, bug fixes, documentation improvements, enhanceme
 
 #### Visualize trajectories (with keplergl)
 
-![gif](https://github.com/ni1o1/transbigdata/raw/main/images/tbdexample1.gif)
+![gif](https://github.com/ni1o1/transbigdata/raw/main/image/README/tbdexample1.gif)
 
 #### Visualize data distribution (with keplergl)
 
-![gif](https://github.com/ni1o1/transbigdata/raw/main/images/tbdexample2.gif)
+![gif](https://github.com/ni1o1/transbigdata/raw/main/image/README/tbdexample2.gif)
 
 #### Visualize OD (with keplergl)
 
-![gif](https://github.com/ni1o1/transbigdata/raw/main/images/tbdexample3.gif)
+![gif](https://github.com/ni1o1/transbigdata/raw/main/image/README/tbdexample3.gif)
 
 ### Example of taxi GPS data processing
 
@@ -258,7 +258,7 @@ grid_agg = gpd.GeoDataFrame(grid_agg)
 grid_agg.plot(column = 'VehicleNum',cmap = 'autumn_r')
 ```
 
-![png](https://github.com/ni1o1/transbigdata/raw/main/images/output_5_1.png)
+![png](https://github.com/ni1o1/transbigdata/raw/main/image/README/output_5_1.png)
 
 #### Triangle and Hexagon grids & rotation angle
 
