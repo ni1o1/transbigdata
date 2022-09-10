@@ -86,7 +86,9 @@ from .plotmap import (
     plot_map,
     plotscale,
     set_mapboxtoken,
-    set_imgsavepath
+    set_imgsavepath,
+    read_imgsavepath,
+    read_mapboxtoken
 )
 from .coordinates import (
     gcj02tobd09,

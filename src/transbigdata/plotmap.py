@@ -248,11 +248,12 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
                     if filename in os.listdir(imgsavepath+'tileimg'):  # pragma: no cover
                         pass  # pragma: no cover
                     else:
-                        tile.save(imgsavepath+'tileimg/' +
-                                  filename)  # pragma: no cover
+
+                        tile.save(os.path.join(imgsavepath+'tileimg',
+                                  filename))  # pragma: no cover
                         if printlog:  # pragma: no cover
-                            print('figsaved:'+imgsavepath+'tileimg/' +
-                                  filename)  # pragma: no cover
+                            print('figsaved:'+os.path.join(imgsavepath+'tileimg',
+                                  filename))  # pragma: no cover
                 else:
                     os.mkdir(imgsavepath+'tileimg')
             except Exception as e:
@@ -263,14 +264,16 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
                 if 'tileimg' in os.listdir(imgsavepath):
                     if filename in os.listdir(imgsavepath+'tileimg'):  # pragma: no cover
                         tile = Image.open(
-                            imgsavepath+'tileimg\\'+filename)  # pragma: no cover
+                            os.path.join(os.path.join(imgsavepath, 'tileimg'), filename))  # pragma: no cover
                         return tile  # pragma: no cover
                     else:
                         return None  # pragma: no cover
                 else:
                     os.mkdir(imgsavepath+'tileimg')
                     return None  # pragma: no cover
-            except Exception:
+            except Exception as e:
+                if printlog:  # pragma: no cover
+                    print(e)
                 return None
 
         tile = loadfig(filename)
