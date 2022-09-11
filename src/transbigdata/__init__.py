@@ -34,7 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 __version__ = '0.4.13'
-__author__ = 'Qing Yu <qingyu0815@foxmail.com>'
+__author__ = 'Qing Yu <yuq@sustech.edu.cn>'
 
 # module level doc-string
 __doc__ = """
