@@ -273,8 +273,8 @@ def getImageCluster(lon_deg, lat_deg, delta_long, delta_lat, zoom,
                     return None  # pragma: no cover
             except Exception as e:
                 if printlog:  # pragma: no cover
-                    print(e)
-                return None
+                    print(e) # pragma: no cover
+                return None # pragma: no cover
 
         tile = loadfig(filename)
         if tile is None:
