@@ -59,6 +59,8 @@ def clean_taxi_status(data, col=['VehicleNum', 'Time', 'OpenStatus'],
     '''
     data1 = data.copy()
     [VehicleNum, Time, OpenStatus] = col
+    #Sort the VehicleNum and Time columns
+    data1 = data1.sort_values(by=[VehicleNum,Time])
     if timelimit:
         data1[Time] = pd.to_datetime(data1[Time])
         data1 = data1[
