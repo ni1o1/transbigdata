@@ -55,9 +55,9 @@ class TestODprocess:
         assert len(tbd.clean_drift(self.data, col=[
                    'VehicleNum', 'time', 'slon', 'slat'])) == 19
         assert len(tbd.clean_taxi_status(
-            self.data, ['VehicleNum', 'time', 'OpenStatus'])) == 19
+            self.data, ['VehicleNum', 'time', 'OpenStatus'])) == 15
         assert len(tbd.clean_taxi_status(
-            self.data, ['VehicleNum', 'time', 'OpenStatus'],timelimit = 10)) == 19
+            self.data, ['VehicleNum', 'time', 'OpenStatus'],timelimit = 10)) == 20
         assert len(tbd.clean_traj(self.data, col=[
                    'VehicleNum', 'time', 'slon', 'slat'])) == 18
         data = tbd.clean_outofshape(self.data, self.sz, col=['slon', 'slat'])
