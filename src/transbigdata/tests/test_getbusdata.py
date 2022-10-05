@@ -19,15 +19,34 @@ class TestGetbusdata:
         assert len(paths) == 1
 
     def test_getadmin(self):
-        admin, _ = tbd.getadmin(
-            '深圳市', ak='2305ee7c82c147f11aac58fcc5bb7f19',jscode = '694338a096c6c50b74e5d74f411c9ab5', subdistricts=True)
+
+        admin = 0
+        t = 0
+        while (type(admin)==int)&(t<5):
+            admin, _ = tbd.getadmin(
+                '深圳市', ak='2305ee7c82c147f11aac58fcc5bb7f19',jscode = '694338a096c6c50b74e5d74f411c9ab5', subdistricts=True)
+            t+=1
         assert '深圳市' in admin['name'].sum()
 
     def test_getisochrone(self):
-        tbd.get_isochrone_mapbox(
-            120, 30, 20,
-            access_token='pk.eyJ1IjoibHByMTIxNDc5IiwiYSI6ImNrd2c0YXVydTBremQyb3V0cHVhMml5anAifQ.Y-q937VgT0diVxukUqwofw',
-            mode='walking')
-        tbd.get_isochrone_amap(
-            121.212403, 31.282477, 60, ak='2305ee7c82c147f11aac58fcc5bb7f19', jscode = '694338a096c6c50b74e5d74f411c9ab5',
-            mode=0)
+
+        result = 0
+        t = 0
+        while (type(result)==int)&(t<5):
+            result = tbd.get_isochrone_mapbox(
+                120, 30, 20,
+                access_token='pk.eyJ1IjoibHByMTIxNDc5IiwiYSI6ImNrd2c0YXVydTBremQyb3V0cHVhMml5anAifQ.Y-q937VgT0diVxukUqwofw',
+                mode='walking')
+            t+=1
+        import geopandas as gpd
+        assert type(result) == gpd.geodataframe.GeoDataFrame
+
+        result = 0
+        t = 0
+        while (type(result)==int)&(t<5):
+            result = tbd.get_isochrone_amap(
+                121.212403, 31.282477, 60, ak='2305ee7c82c147f11aac58fcc5bb7f19', jscode = '694338a096c6c50b74e5d74f411c9ab5',
+                mode=0)
+            t+=1
+        import geopandas as gpd
+        assert type(result) == gpd.geodataframe.GeoDataFrame
