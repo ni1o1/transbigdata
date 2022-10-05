@@ -86,9 +86,9 @@ def area_to_grid(location, accuracy=500, method='rect', params='auto'):
     if (lon1 > lon2) | (lat1 > lat2) | (abs(lat1) > 90) | (abs(lon1) > 180) | (
             abs(lat2) > 90) | (abs(lon2) > 180):
         raise Exception(  # pragma: no cover
-            'Bounds error. The input bounds should be in the order of \
-                [lon1,lat1,lon2,lat2]. (lon1,lat1) is the lower left \
-                    corner and (lon2,lat2) is the upper right corner.'
+            'Bounds error. The input bounds should be in the order '
+            'of [lon1,lat1,lon2,lat2]. (lon1,lat1) is the lower left '
+            'corner and (lon2,lat2) is the upper right corner.'
         )
     latStart = min(lat1, lat2)
     lonStart = min(lon1, lon2)
@@ -192,9 +192,9 @@ def area_to_params(location, accuracy=500, method='rect'):
     if (lon1 > lon2) | (lat1 > lat2) | (abs(lat1) > 90) | (abs(lon1) > 180) | (
             abs(lat2) > 90) | (abs(lon2) > 180):
         raise Exception(   # pragma: no cover
-            'Bounds error. The input bounds should be in the order \
-                of [lon1,lat1,lon2,lat2]. (lon1,lat1) is the lower left \
-                    corner and (lon2,lat2) is the upper right corner.'
+            'Bounds error. The input bounds should be in the order '
+            'of [lon1,lat1,lon2,lat2]. (lon1,lat1) is the lower left '
+            'corner and (lon2,lat2) is the upper right corner.'
         )
     latStart = min(lat1, lat2)
     lonStart = min(lon1, lon2)
