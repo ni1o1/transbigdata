@@ -99,12 +99,12 @@ def getadmin(keyword, ak, jscode='', subdistricts=False, timeout=20):
     response = requests.get(url,params = dict1)
     result = json.loads(response.text)
     if result['info'] == 'INVALID_USER_SCODE':
-        raise ValueError('缺少jscode，请将高德开放平台Key中的安全密钥以jscode参数的形式传入该方法')
+        raise ValueError('缺少jscode，请将高德开放平台Key中的安全密钥以jscode参数的形式传入该方法')   # pragma: no cover
     # Organize Data
     datas = []
     k = 0
     if result['count']=='0':
-        raise ValueError('无法搜素到该行政区划')
+        raise ValueError('无法搜素到该行政区划')   # pragma: no cover
     polyline = result['districts'][k]['polyline']
     polyline1 = polyline.split('|')
     res = []
