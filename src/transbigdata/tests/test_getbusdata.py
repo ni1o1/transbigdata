@@ -1,5 +1,4 @@
 import transbigdata as tbd
-import numpy as np
 
 class TestGetbusdata:
     def test_getbusdata(self):
