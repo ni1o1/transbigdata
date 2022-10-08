@@ -96,7 +96,7 @@ def getadmin(keyword, ak, jscode='', subdistricts=False, timeout=20):
         'sdkversion': '1.4.10'
     }
     # 发送请求
-    response = requests.get(url,params = dict1)
+    response = requests.get(url,params = dict1,timeout=timeout)
     result = json.loads(response.text)
     if result['info'] == 'INVALID_USER_SCODE':
         raise ValueError('缺少jscode，请将高德开放平台Key中的安全密钥以jscode参数的形式传入该方法')   # pragma: no cover
@@ -334,7 +334,7 @@ def get_isochrone_amap(lon, lat, reachtime, ak, jscode='', mode=2, timeout=20):
         'extensions': 'all',
         'strategy': str(strategy)
     }
-    response = requests.get(url,params = dict1)
+    response = requests.get(url,params = dict1,timeout=timeout)
     result = json.loads(response.text)
     
     P_all = []
@@ -389,7 +389,7 @@ def get_isochrone_mapbox(lon, lat, reachtime, access_token='auto',
     url = 'https://api.mapbox.com/isochrone/v1/mapbox/'+mode+'/' +\
         str(lon)+','+str(lat)+'?contours_minutes='+str(reachtime) +\
         '&polygons=true&access_token='+access_token
-    response = requests.get(url)
+    response = requests.get(url,timeout = timeout)
     result = json.loads(response.text)
     isochrone = gpd.GeoDataFrame.from_features(result)
     isochrone['lon'] = lon
