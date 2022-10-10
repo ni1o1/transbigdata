@@ -177,9 +177,9 @@ def mobile_stay_duration(staydata, col=['stime', 'etime'], start_hour=8, end_hou
     return duration_night, duration_day
 
 
-def mobile_stay_dutation(*args, **kwargs):
-    warnings.warn("This method is renamed as transbigdata.mobile_stay_duration")
-    return mobile_stay_duration(*args, **kwargs)
+def mobile_stay_dutation(*args, **kwargs):  
+    warnings.warn("This method is renamed as transbigdata.mobile_stay_duration")     # pragma: no cover
+    return mobile_stay_duration(*args, **kwargs)     # pragma: no cover
 
 def mobile_identify_home(staydata, col=['uid','stime', 'etime','LONCOL', 'LATCOL'], start_hour=8, end_hour=20 ):
     '''
