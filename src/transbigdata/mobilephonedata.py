@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import pandas as pd
 import numpy as np
 from .grids import GPS_to_grid, grid_to_centre
-
+import warnings
 
 def mobile_stay_move(data, params,
                      col=['ID', 'dataTime', 'longitude', 'latitude'],
@@ -118,7 +118,7 @@ def mobile_stay_move(data, params,
     return stay, move
 
 
-def mobile_stay_dutation(staydata, col=['stime', 'etime'], start_hour=8, end_hour=20):
+def mobile_stay_duration(staydata, col=['stime', 'etime'], start_hour=8, end_hour=20):
     '''
     Input the stay point data to identify the duration during night and day time.
 
@@ -177,6 +177,10 @@ def mobile_stay_dutation(staydata, col=['stime', 'etime'], start_hour=8, end_hou
     return duration_night, duration_day
 
 
+def mobile_stay_dutation(*args, **kwargs):
+    warnings.warn("This method is renamed as transbigdata.mobile_stay_duration")
+    return mobile_stay_duration(*args, **kwargs)
+
 def mobile_identify_home(staydata, col=['uid','stime', 'etime','LONCOL', 'LATCOL'], start_hour=8, end_hour=20 ):
     '''
     Identify home location from mobile phone stay data. The rule is to identify the locations with longest 
@@ -202,7 +206,7 @@ def mobile_identify_home(staydata, col=['uid','stime', 'etime','LONCOL', 'LATCOL
     etime = col[2]
     stay = staydata.copy()
     if ('duration_night' not in stay.columns) | ('duration_day' not in stay.columns):
-        stay['duration_night'], stay['duration_day'] = mobile_stay_dutation(
+        stay['duration_night'], stay['duration_day'] = mobile_stay_duration(
             stay, col = [stime,etime],start_hour=start_hour, end_hour=end_hour)
     # 夜晚最常停留地
     home = stay.groupby([col[0],*col[3:]])['duration_night'].sum().reset_index()
@@ -253,7 +257,7 @@ def mobile_identify_work(staydata, col=['uid', 'stime', 'etime', 'LONCOL', 'LATC
     stay_workdays['nextday'] = pd.to_datetime(
         stay_workdays[stime].dt.date+pd.Timedelta(1, unit='days'))
     stay_workdays[etime] = stay_workdays[[etime, 'nextday']].min(axis=1)
-    stay_workdays['duration_night'], stay_workdays['duration_day'] = mobile_stay_dutation(
+    stay_workdays['duration_night'], stay_workdays['duration_day'] = mobile_stay_duration(
         stay_workdays, col = [stime,etime],start_hour=start_hour, end_hour=end_hour)
 
     # 白天最常活动地
