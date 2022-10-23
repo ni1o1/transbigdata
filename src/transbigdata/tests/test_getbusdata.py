@@ -21,10 +21,13 @@ class TestGetbusdata:
 
         admin = 0
         t = 0
-        while (type(admin)==int)&(t<5):
+        while (type(admin)==int)&(t<10):
             try:
                 admin, _ = tbd.getadmin(
-                    '深圳市', ak='2305ee7c82c147f11aac58fcc5bb7f19',jscode = '694338a096c6c50b74e5d74f411c9ab5', subdistricts=True)
+                    '深圳市', 
+                    ak='2305ee7c82c147f11aac58fcc5bb7f19',
+                    jscode = '694338a096c6c50b74e5d74f411c9ab5', 
+                    subdistricts=True)
             except:     # pragma: no cover
                 t+=1    # pragma: no cover
         assert '深圳市' in list(admin['name'])
