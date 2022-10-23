@@ -27,7 +27,7 @@ class TestGetbusdata:
                     '深圳市', ak='2305ee7c82c147f11aac58fcc5bb7f19',jscode = '694338a096c6c50b74e5d74f411c9ab5', subdistricts=True)
             except:     # pragma: no cover
                 t+=1    # pragma: no cover
-        assert '深圳市' in admin['name'].sum()
+        assert '深圳市' in list(admin['name'])
 
     def test_getisochrone(self):
 
