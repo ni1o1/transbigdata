@@ -10,8 +10,6 @@ on:
   pull_request:
     branches:
       - '*'
-  schedule:
-      - cron: '59 23 * * *'
   workflow_dispatch:
     inputs:
       version:

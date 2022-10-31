@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import pandas as pd
 import numpy as np
 from .grids import GPS_to_grid, grid_to_centre
-
+import warnings
 
 def mobile_stay_move(data, params,
                      col=['ID', 'dataTime', 'longitude', 'latitude'],
@@ -81,6 +81,8 @@ def mobile_stay_move(data, params,
     stay['duration'] = (pd.to_datetime(stay['etime']) -
                         pd.to_datetime(stay['stime'])).dt.total_seconds()
     stay = stay[stay['duration'] >= activitytime].copy()
+    stay = stay[[uid, 'stime','LONCOL', 'LATCOL','etime','lon','lat', 'duration']]
+    '''
     # Renumber the status
     stay['status_id'] = ((stay['LONCOL'] != stay['LONCOL'].shift()) |
                          (stay['LATCOL'] != stay['LATCOL'].shift()) |
@@ -96,6 +98,7 @@ def mobile_stay_move(data, params,
         [stay['LONCOL'], stay['LATCOL']], params)
     stay['duration'] = (pd.to_datetime(stay['etime']) -
                         pd.to_datetime(stay['stime'])).dt.total_seconds()
+    '''
     # Identify move
     move = stay.copy()
     move['stime_next'] = move['stime'].shift(-1)
@@ -118,7 +121,7 @@ def mobile_stay_move(data, params,
     return stay, move
 
 
-def mobile_stay_dutation(staydata, col=['stime', 'etime'], start_hour=8, end_hour=20):
+def mobile_stay_duration(staydata, col=['stime', 'etime'], start_hour=8, end_hour=20):
     '''
     Input the stay point data to identify the duration during night and day time.
 
@@ -177,6 +180,10 @@ def mobile_stay_dutation(staydata, col=['stime', 'etime'], start_hour=8, end_hou
     return duration_night, duration_day
 
 
+def mobile_stay_dutation(*args, **kwargs):  
+    warnings.warn("This method is renamed as transbigdata.mobile_stay_duration")     # pragma: no cover
+    return mobile_stay_duration(*args, **kwargs)     # pragma: no cover
+
 def mobile_identify_home(staydata, col=['uid','stime', 'etime','LONCOL', 'LATCOL'], start_hour=8, end_hour=20 ):
     '''
     Identify home location from mobile phone stay data. The rule is to identify the locations with longest 
@@ -202,7 +209,7 @@ def mobile_identify_home(staydata, col=['uid','stime', 'etime','LONCOL', 'LATCOL
     etime = col[2]
     stay = staydata.copy()
     if ('duration_night' not in stay.columns) | ('duration_day' not in stay.columns):
-        stay['duration_night'], stay['duration_day'] = mobile_stay_dutation(
+        stay['duration_night'], stay['duration_day'] = mobile_stay_duration(
             stay, col = [stime,etime],start_hour=start_hour, end_hour=end_hour)
     # 夜晚最常停留地
     home = stay.groupby([col[0],*col[3:]])['duration_night'].sum().reset_index()
@@ -253,7 +260,7 @@ def mobile_identify_work(staydata, col=['uid', 'stime', 'etime', 'LONCOL', 'LATC
     stay_workdays['nextday'] = pd.to_datetime(
         stay_workdays[stime].dt.date+pd.Timedelta(1, unit='days'))
     stay_workdays[etime] = stay_workdays[[etime, 'nextday']].min(axis=1)
-    stay_workdays['duration_night'], stay_workdays['duration_day'] = mobile_stay_dutation(
+    stay_workdays['duration_night'], stay_workdays['duration_day'] = mobile_stay_duration(
         stay_workdays, col = [stime,etime],start_hour=start_hour, end_hour=end_hour)
 
     # 白天最常活动地
@@ -275,8 +282,9 @@ def mobile_identify_work(staydata, col=['uid', 'stime', 'etime', 'LONCOL', 'LATC
     return work
 
 
+
 def mobile_plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
-                         figsize=(10, 5), dpi=250):
+                         figsize=(10, 5), dpi=250,shuffle=True):
     '''
     Plot the activity plot of individual
 
@@ -286,6 +294,11 @@ def mobile_plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
         activity information of one person
     col : List
         The column name.[starttime,endtime,LONCOL,LATCOL] of activities
+    figsize : List
+        The figure size
+    dpi : Number
+    shuffle : bool
+        Whether to shuffle the activity
     '''
     stime, etime, LONCOL, LATCOL = col
     activity = data.copy()
@@ -314,10 +327,11 @@ def mobile_plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
             time.strptime(x, '%Y-%m-%d %H:%M:%S'))).astype('int64')
     activityinfo = activity[[LONCOL, LATCOL]].drop_duplicates()
     indexs = list(range(1, len(activityinfo)+1))
-    np.random.shuffle(indexs)
+    if shuffle:
+        np.random.shuffle(indexs)
     activityinfo['index'] = indexs
     import matplotlib as mpl
-    norm = mpl.colors.Normalize(vmin=0, vmax=len(activityinfo))
+    norm = mpl.colors.Normalize(vmin=1, vmax=len(activityinfo)+1)
     from matplotlib.colors import ListedColormap
     import seaborn as sns
     cmap = ListedColormap(sns.hls_palette(
