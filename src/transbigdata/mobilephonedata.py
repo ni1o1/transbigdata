@@ -81,6 +81,8 @@ def mobile_stay_move(data, params,
     stay['duration'] = (pd.to_datetime(stay['etime']) -
                         pd.to_datetime(stay['stime'])).dt.total_seconds()
     stay = stay[stay['duration'] >= activitytime].copy()
+    stay = stay[[uid, 'stime','LONCOL', 'LATCOL','etime','lon','lat', 'duration']]
+    '''
     # Renumber the status
     stay['status_id'] = ((stay['LONCOL'] != stay['LONCOL'].shift()) |
                          (stay['LATCOL'] != stay['LATCOL'].shift()) |
@@ -96,6 +98,7 @@ def mobile_stay_move(data, params,
         [stay['LONCOL'], stay['LATCOL']], params)
     stay['duration'] = (pd.to_datetime(stay['etime']) -
                         pd.to_datetime(stay['stime'])).dt.total_seconds()
+    '''
     # Identify move
     move = stay.copy()
     move['stime_next'] = move['stime'].shift(-1)
@@ -279,8 +282,9 @@ def mobile_identify_work(staydata, col=['uid', 'stime', 'etime', 'LONCOL', 'LATC
     return work
 
 
+
 def mobile_plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
-                         figsize=(10, 5), dpi=250):
+                         figsize=(10, 5), dpi=250,shuffle=True):
     '''
     Plot the activity plot of individual
 
@@ -290,6 +294,11 @@ def mobile_plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
         activity information of one person
     col : List
         The column name.[starttime,endtime,LONCOL,LATCOL] of activities
+    figsize : List
+        The figure size
+    dpi : Number
+    shuffle : bool
+        Whether to shuffle the activity
     '''
     stime, etime, LONCOL, LATCOL = col
     activity = data.copy()
@@ -318,10 +327,11 @@ def mobile_plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
             time.strptime(x, '%Y-%m-%d %H:%M:%S'))).astype('int64')
     activityinfo = activity[[LONCOL, LATCOL]].drop_duplicates()
     indexs = list(range(1, len(activityinfo)+1))
-    np.random.shuffle(indexs)
+    if shuffle:
+        np.random.shuffle(indexs)
     activityinfo['index'] = indexs
     import matplotlib as mpl
-    norm = mpl.colors.Normalize(vmin=0, vmax=len(activityinfo))
+    norm = mpl.colors.Normalize(vmin=1, vmax=len(activityinfo)+1)
     from matplotlib.colors import ListedColormap
     import seaborn as sns
     cmap = ListedColormap(sns.hls_palette(
