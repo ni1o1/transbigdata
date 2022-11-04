@@ -35,6 +35,7 @@ import numpy as np
 from .grids import GPS_to_grid
 import warnings
 
+
 def mobile_stay_move(data, params,
                      col=['ID', 'dataTime', 'longitude', 'latitude'],
                      activitytime=1800):
@@ -62,7 +63,7 @@ def mobile_stay_move(data, params,
     '''
     uid, timecol, lon, lat = col
     # Identify stay
-    data = data.sort_values(by = col[:2])
+    data = data.sort_values(by=col[:2])
     stay = data.copy()
     stay = stay.rename(columns={lon: 'lon', lat: 'lat', timecol: 'stime'})
     stay['stime'] = pd.to_datetime(stay['stime'])
@@ -81,7 +82,8 @@ def mobile_stay_move(data, params,
     stay['duration'] = (pd.to_datetime(stay['etime']) -
                         pd.to_datetime(stay['stime'])).dt.total_seconds()
     stay = stay[stay['duration'] >= activitytime].copy()
-    stay = stay[[uid, 'stime','LONCOL', 'LATCOL','etime','lon','lat', 'duration']]
+    stay = stay[[uid, 'stime', 'LONCOL', 'LATCOL',
+                 'etime', 'lon', 'lat', 'duration']]
 
     # Identify move
     move = stay.copy()
@@ -129,7 +131,7 @@ def mobile_stay_duration(staydata, col=['stime', 'etime'], start_hour=8, end_hou
     '''
 
     if (start_hour > end_hour) | (start_hour < 0) | (start_hour > 24) | (end_hour < 0) | (end_hour > 24):
-        raise ValueError( # pragma: no cover
+        raise ValueError(  # pragma: no cover
             'end_hour or start_hour error, it should be: 0 <= start_hour <= end_hour <= 24')
 
     night_hour = start_hour+24-end_hour
@@ -164,11 +166,13 @@ def mobile_stay_duration(staydata, col=['stime', 'etime'], start_hour=8, end_hou
     return duration_night, duration_day
 
 
-def mobile_stay_dutation(*args, **kwargs):  
-    warnings.warn("This method is renamed as transbigdata.mobile_stay_duration")     # pragma: no cover
+def mobile_stay_dutation(*args, **kwargs):
+    warnings.warn(
+        "This method is renamed as transbigdata.mobile_stay_duration")     # pragma: no cover
     return mobile_stay_duration(*args, **kwargs)     # pragma: no cover
 
-def mobile_identify_home(staydata, col=['uid','stime', 'etime','LONCOL', 'LATCOL'], start_hour=8, end_hour=20 ):
+
+def mobile_identify_home(staydata, col=['uid', 'stime', 'etime', 'LONCOL', 'LATCOL'], start_hour=8, end_hour=20):
     '''
     Identify home location from mobile phone stay data. The rule is to identify the locations with longest 
     duration in night time. 
@@ -194,16 +198,17 @@ def mobile_identify_home(staydata, col=['uid','stime', 'etime','LONCOL', 'LATCOL
     stay = staydata.copy()
     if ('duration_night' not in stay.columns) | ('duration_day' not in stay.columns):
         stay['duration_night'], stay['duration_day'] = mobile_stay_duration(
-            stay, col = [stime,etime],start_hour=start_hour, end_hour=end_hour)
+            stay, col=[stime, etime], start_hour=start_hour, end_hour=end_hour)
     # 夜晚最常停留地
-    home = stay.groupby([col[0],*col[3:]])['duration_night'].sum().reset_index()
+    home = stay.groupby(
+        [col[0], *col[3:]])['duration_night'].sum().reset_index()
     home = home.sort_values(by=[uid, 'duration_night'], ascending=False).drop_duplicates(
         subset=[uid], keep='first')
     home = home.drop(['duration_night'], axis=1)
     return home
 
 
-def mobile_identify_work(staydata, col=['uid', 'stime', 'etime', 'LONCOL', 'LATCOL'], minhour=3, start_hour=8, end_hour=20,workdaystart=0, workdayend=4):
+def mobile_identify_work(staydata, col=['uid', 'stime', 'etime', 'LONCOL', 'LATCOL'], minhour=3, start_hour=8, end_hour=20, workdaystart=0, workdayend=4):
     '''
     Identify work location from mobile phone stay data. The rule is to identify the locations with longest 
     duration in day time on weekdays(Average duration should over `minhour`). 
@@ -245,7 +250,7 @@ def mobile_identify_work(staydata, col=['uid', 'stime', 'etime', 'LONCOL', 'LATC
         stay_workdays[stime].dt.date+pd.Timedelta(1, unit='days'))
     stay_workdays[etime] = stay_workdays[[etime, 'nextday']].min(axis=1)
     stay_workdays['duration_night'], stay_workdays['duration_day'] = mobile_stay_duration(
-        stay_workdays, col = [stime,etime],start_hour=start_hour, end_hour=end_hour)
+        stay_workdays, col=[stime, etime], start_hour=start_hour, end_hour=end_hour)
 
     # 白天最常活动地
     work = stay_workdays.groupby(
@@ -266,10 +271,9 @@ def mobile_identify_work(staydata, col=['uid', 'stime', 'etime', 'LONCOL', 'LATC
     return work
 
 
-
 def mobile_plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
-                         figsize=(10, 5), dpi=250,shuffle=True,
-                         xticks_rotation = 0,xticks_gap = 1):
+                         figsize=(10, 5), dpi=250, shuffle=True,
+                         xticks_rotation=0, xticks_gap=1, yticks_gap=1):
     '''
     Plot the activity plot of individual
 
@@ -299,9 +303,9 @@ def mobile_plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
     maxday = max(dates)
     import datetime
     thisdate = minday
-    while thisdate != maxday: # pragma: no cover
-        dates_all.append(thisdate) # pragma: no cover
-        thisdate = str((pd.to_datetime(thisdate+' 00:00:00') + # pragma: no cover
+    while thisdate != maxday:  # pragma: no cover
+        dates_all.append(thisdate)  # pragma: no cover
+        thisdate = str((pd.to_datetime(thisdate+' 00:00:00') +  # pragma: no cover
                        datetime.timedelta(days=1)).date())
     dates = dates_all
     import matplotlib.pyplot as plt
@@ -353,12 +357,14 @@ def mobile_plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
                             ]['index'].iloc[0])))
     plt.xlim(-0.5, len(dates))
     plt.ylim(0, 24*3600)
-    xticks_dates = range(0,len(dates),xticks_gap)
+    xticks_dates = range(0, len(dates), xticks_gap)
     plt.xticks(xticks_dates, [dates[i][-5:] for i in xticks_dates],
-               rotation = xticks_rotation)
-    plt.yticks(range(0, 24*3600+1, 3600),
-               pd.DataFrame({'t': range(0, 25)})['t'].astype('str')+':00')
+               rotation=xticks_rotation)
+
+    plt.yticks(range(0, 24*3600+1, yticks_gap*3600),
+               pd.DataFrame({'t': range(0, 25, yticks_gap)})['t'].astype('str')+':00')
     plt.show()
+
 
 '''Old namespace'''
 traj_stay_move = mobile_stay_move
