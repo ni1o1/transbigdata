@@ -32,7 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import pandas as pd
 import numpy as np
-from .grids import GPS_to_grid, grid_to_centre
+from .grids import GPS_to_grid
 import warnings
 
 def mobile_stay_move(data, params,
@@ -82,23 +82,7 @@ def mobile_stay_move(data, params,
                         pd.to_datetime(stay['stime'])).dt.total_seconds()
     stay = stay[stay['duration'] >= activitytime].copy()
     stay = stay[[uid, 'stime','LONCOL', 'LATCOL','etime','lon','lat', 'duration']]
-    '''
-    # Renumber the status
-    stay['status_id'] = ((stay['LONCOL'] != stay['LONCOL'].shift()) |
-                         (stay['LATCOL'] != stay['LATCOL'].shift()) |
-                         (stay[uid] != stay[uid].shift())).astype(int)
-    stay['status_id'] = stay.groupby([uid])['status_id'].cumsum()
-    stay_stime = stay.drop_duplicates(subset=[uid, 'status_id'], keep='first')[
-        [uid, 'stime', 'LONCOL', 'LATCOL', 'status_id']]
-    stay_etime = stay.drop_duplicates(subset=[uid, 'status_id'], keep='last')[
-        [uid, 'etime', 'LONCOL', 'LATCOL', 'status_id']]
-    stay = pd.merge(stay_stime, stay_etime, how='left').drop(
-        'status_id', axis=1)
-    stay['lon'], stay['lat'] = grid_to_centre(
-        [stay['LONCOL'], stay['LATCOL']], params)
-    stay['duration'] = (pd.to_datetime(stay['etime']) -
-                        pd.to_datetime(stay['stime'])).dt.total_seconds()
-    '''
+
     # Identify move
     move = stay.copy()
     move['stime_next'] = move['stime'].shift(-1)
@@ -284,7 +268,8 @@ def mobile_identify_work(staydata, col=['uid', 'stime', 'etime', 'LONCOL', 'LATC
 
 
 def mobile_plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
-                         figsize=(10, 5), dpi=250,shuffle=True):
+                         figsize=(10, 5), dpi=250,shuffle=True,
+                         xticks_rotation = 0,xticks_gap = 1):
     '''
     Plot the activity plot of individual
 
@@ -297,8 +282,13 @@ def mobile_plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
     figsize : List
         The figure size
     dpi : Number
+        The dpi of the figure
     shuffle : bool
         Whether to shuffle the activity
+    xticks_rotation : Number
+        rotation angle of xticks
+    xticks_gap : Number
+        gap of xticks
     '''
     stime, etime, LONCOL, LATCOL = col
     activity = data.copy()
@@ -363,7 +353,9 @@ def mobile_plot_activity(data, col=['stime', 'etime', 'LONCOL', 'LATCOL'],
                             ]['index'].iloc[0])))
     plt.xlim(-0.5, len(dates))
     plt.ylim(0, 24*3600)
-    plt.xticks(range(len(dates)), [i[-5:] for i in dates])
+    xticks_dates = range(0,len(dates),xticks_gap)
+    plt.xticks(xticks_dates, [dates[i][-5:] for i in xticks_dates],
+               rotation = xticks_rotation)
     plt.yticks(range(0, 24*3600+1, 3600),
                pd.DataFrame({'t': range(0, 25)})['t'].astype('str')+':00')
     plt.show()
