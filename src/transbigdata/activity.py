@@ -49,7 +49,7 @@ def cal_entropy(sequence):
     if not isinstance(sequence,list)|\
         isinstance(sequence,pd.DataFrame)|\
         isinstance(sequence,pd.Series):
-        raise TypeError('Sequence must be List,DataFrame,Series')
+        raise TypeError('Sequence must be List,DataFrame,Series') # pragma: no cover
     sequence = pd.DataFrame(sequence)
     r_1 = sequence[0].value_counts().reset_index()
     r_1[0] /= r_1[0].sum()
@@ -73,7 +73,7 @@ def cal_entropy_rate(sequence):
     if not isinstance(sequence,list)|\
         isinstance(sequence,pd.DataFrame)|\
         isinstance(sequence,pd.Series):
-        raise TypeError('Sequence must be List,DataFrame,Series')
+        raise TypeError('Sequence must be List,DataFrame,Series') # pragma: no cover
     sequence = pd.DataFrame(sequence,columns = ['key'])
     #对item编号排序
     sequence = sequence.reindex().reset_index()
