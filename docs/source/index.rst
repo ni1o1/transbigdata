@@ -107,6 +107,7 @@ General Methods
    gisprocess.rst
    plot_map.rst
    CoordinatesConverter.rst
+   activity.rst
    utils.rst
 
 Methods for specific data
