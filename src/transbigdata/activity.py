@@ -97,7 +97,7 @@ def entropy_rate(sequence):
     sorted_rotations['group'] = range(n)
     sorted_rotations['group'] /= n**0.5
     sorted_rotations['group'] = sorted_rotations['group'].astype(int)
-    entropy_rate = sorted_rotations.groupby(['group']).apply(lambda r:cal_entropy(r[0])).mean()
+    entropy_rate = sorted_rotations.groupby(['group']).apply(lambda r:entropy(r[0])).mean()
     return entropy_rate
 
 
