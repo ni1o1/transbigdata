@@ -5,7 +5,8 @@
 ******************************
 
 .. autosummary::
-    
+   :toctree: api/
+   
     visualization_data
     visualization_trip
     visualization_od

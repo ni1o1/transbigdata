@@ -135,9 +135,7 @@ from transbigdata.gisprocess import (
     ckdnearest_line,
     splitline_with_length,
     merge_polygon,
-    polyon_exterior,
-    ellipse_params,
-    ellipse_plot
+    polyon_exterior
 )
 from transbigdata.odprocess import (
     odagg_grid,
@@ -207,6 +205,8 @@ from transbigdata.visualization import (
 )
 
 from transbigdata.activity import (
-    cal_entropy,
-    cal_entropy_rate
+    entropy,
+    entropy_rate,
+    ellipse_params,
+    ellipse_plot
 )

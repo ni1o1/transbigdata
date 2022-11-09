@@ -7,7 +7,8 @@ Coordinates and Distances
 
 
 .. autosummary::
-    
+   :toctree: api/
+   
     gcj02tobd09
     gcj02towgs84
     wgs84togcj02

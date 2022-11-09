@@ -6,7 +6,8 @@
 Bus GPS data processing
 ******************************
 .. autosummary::
-    
+   :toctree: api/
+   
     busgps_arriveinfo
     busgps_onewaytime
 

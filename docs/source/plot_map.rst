@@ -9,7 +9,8 @@ Load the basemap
 
 
 .. autosummary::
-
+   :toctree: api/
+   
     plot_map
     plotscale
 

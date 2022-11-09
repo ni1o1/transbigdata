@@ -4,7 +4,8 @@ Data Acquisition
 ******************************
 
 .. autosummary::
-
+   :toctree: api/
+   
     getbusdata
     getadmin
     get_isochrone_amap

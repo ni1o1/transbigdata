@@ -33,7 +33,7 @@ import pandas as pd
 import numpy as np
 
 
-def cal_entropy(sequence):
+def entropy(sequence):
     '''
     Calculate entropy.
 
@@ -56,7 +56,7 @@ def cal_entropy(sequence):
     entropy = -(r_1[0]*np.log(r_1[0])/np.log(2)).sum()
     return entropy
 
-def cal_entropy_rate(sequence):
+def entropy_rate(sequence):
     '''
     Calculate entropy rate.
     Reference: Goulet-Langlois, G., Koutsopoulos, H. N., Zhao, Z., & Zhao, J. (2017). Measuring regularity of individual travel patterns. IEEE Transactions on Intelligent Transportation Systems, 19(5), 1583-1592.
@@ -99,4 +99,75 @@ def cal_entropy_rate(sequence):
     sorted_rotations['group'] = sorted_rotations['group'].astype(int)
     entropy_rate = sorted_rotations.groupby(['group']).apply(lambda r:cal_entropy(r[0])).mean()
     return entropy_rate
-    
+
+
+def ellipse_params(data, col=['lon', 'lat'], confidence=95, epsg=None):
+    '''
+    confidence ellipse parameter estimation for point data
+
+    Parameters
+    -------
+    data : DataFrame
+        point data
+    confidence : number
+        confidence level: 99，95 or 90
+    epsg : number
+        If given, the original coordinates are transformed from WGS84 to
+        the given EPSG coordinate system for confidence ellipse parameter
+        estimation
+    col: List
+        Column names, [lon，lat]
+
+    Returns
+    -------
+    params: List
+        Centroid ellipse parameters[pos,width,height,theta,area,oblateness]
+        Respectively [Center point coordinates, minor axis, major axis,
+        angle, area, oblateness]
+    '''
+    lon, lat = col
+    if confidence == 99:
+        nstd = 9.210**0.5   # pragma: no cover
+    if confidence == 95:
+        nstd = 5.991**0.5   # pragma: no cover
+    if confidence == 90:
+        nstd = 4.605**0.5    # pragma: no cover
+    points = data.copy()
+    points = gpd.GeoDataFrame(points)
+    points['geometry'] = gpd.points_from_xy(points[lon], points[lat])
+    if epsg:
+        points.crs = {'init': 'epsg:4326'}   # pragma: no cover
+        points = points.to_crs(epsg=epsg)   # pragma: no cover
+    point_np = np.array([points.geometry.x, points.geometry.y]).T
+    pos = point_np.mean(axis=0)
+    cov = np.cov(point_np, rowvar=False)
+    vals, vecs = np.linalg.eigh(cov)
+    theta = np.degrees(np.arctan2(*vecs[:, 0][::-1]))
+    width, height = 2 * nstd * np.sqrt(vals)
+    area = width/2*height/2*math.pi
+    oblateness = (height-width)/height
+
+    ellip_params = [pos, width, height, theta, area, oblateness]
+    return ellip_params
+
+
+def ellipse_plot(ellip_params, ax, **kwargs):
+    '''
+    Enter the parameters of the confidence ellipse and plot the confidence
+    ellipse
+
+    输入
+    -------
+    ellip_params : List
+        Centroid ellipse parameters[pos,width,height,theta,area,oblateness]
+        Respectively[Center point coordinates, minor axis, major axis, angle
+        , area, oblateness]
+
+    ax : matplotlib.axes._subplots.AxesSubplot
+        Where to plot
+    '''
+    [pos, width, height, theta, area, alpha] = ellip_params
+    from matplotlib.patches import Ellipse
+    ellip = Ellipse(xy=pos, width=width, height=height,
+                    angle=theta, linestyle='-', **kwargs)
+    ax.add_artist(ellip)
