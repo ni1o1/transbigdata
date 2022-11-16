@@ -275,7 +275,7 @@ def mobile_identify_work(staydata, col=['uid', 'stime', 'etime', 'LONCOL', 'LATC
 
 
 def mobile_plot_activity(data,
-                         col=['stime', 'etime', 'LONCOL', 'LATCOL'],
+                         col=['stime', 'etime', 'group'],
                          figsize=(10, 5),
                          dpi=250,
                          shuffle=True,
@@ -291,7 +291,7 @@ def mobile_plot_activity(data,
     data : DataFrame
         activity information of one person
     col : List
-        The column name.[starttime,endtime,LONCOL,LATCOL] of activities
+        The column name. [starttime,endtime,group] of activities, `group` control the color
     figsize : List
         The figure size
     dpi : Number
@@ -307,7 +307,7 @@ def mobile_plot_activity(data,
     fontsize : Number
         font size of xticks and yticks
     '''
-    stime, etime, LONCOL, LATCOL = col
+    stime, etime, group = col
     activity = data.copy()
     activity['date'] = activity[stime].dt.date
     dates = list(activity['date'].astype(str).drop_duplicates())
@@ -332,7 +332,7 @@ def mobile_plot_activity(data,
     activity['etstmp'] = activity[etime].astype(str).apply(
         lambda x: time.mktime(
             time.strptime(x, '%Y-%m-%d %H:%M:%S'))).astype('int64')
-    activityinfo = activity[[LONCOL, LATCOL]].drop_duplicates()
+    activityinfo = activity[[group]].drop_duplicates()
     indexs = list(range(1, len(activityinfo)+1))
     if shuffle:
         np.random.shuffle(indexs)
@@ -363,10 +363,8 @@ def mobile_plot_activity(data,
                     color=cmap(
                         norm(
                             activityinfo[
-                                (activityinfo[LONCOL] == bars[LONCOL].
-                                 iloc[row]) &
-                                (activityinfo[LATCOL] ==
-                                 bars[LATCOL].iloc[row])
+                                (activityinfo[group] == bars[group].
+                                 iloc[row]) 
                             ]['index'].iloc[0])))
     plt.xlim(-0.5, len(dates))
     plt.ylim(0, 24*3600)
