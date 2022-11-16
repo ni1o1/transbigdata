@@ -163,12 +163,10 @@ from transbigdata.taxigps import (
 from transbigdata.mobilephonedata import (
     #new
     mobile_stay_move,
-    mobile_plot_activity,
     mobile_stay_dutation,
     mobile_identify_home,
     mobile_identify_work,
     #old    
-    plot_activity,
     traj_stay_move,
     )
 from transbigdata.traj import (
@@ -208,5 +206,7 @@ from transbigdata.activity import (
     entropy,
     entropy_rate,
     ellipse_params,
-    ellipse_plot
+    ellipse_plot,
+    plot_activity,
+    mobile_plot_activity
 )

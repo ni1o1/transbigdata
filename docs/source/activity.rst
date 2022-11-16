@@ -16,7 +16,7 @@ Constructor
     ellipse_plot
 
 
-Activity ploy
+Activity plot
 ----------------------------------------------------
 
 .. autofunction:: plot_activity
