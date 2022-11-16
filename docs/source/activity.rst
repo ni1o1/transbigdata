@@ -9,13 +9,19 @@ Constructor
 .. autosummary::
    :toctree: api/
 
+    plot_activity
     entropy
     entropy_rate
     ellipse_params
     ellipse_plot
 
 
-entropy
+Activity ploy
+----------------------------------------------------
+
+.. autofunction:: plot_activity
+
+Entropy
 ----------------------------------------------------
 
 .. autofunction:: entropy
@@ -23,13 +29,14 @@ entropy
 .. autofunction:: entropy_rate
 
 
-confidence ellipse
+Confidence ellipse
 ----------------------------------------------------
 
 .. autofunction:: ellipse_params
 
 
 .. autofunction:: ellipse_plot
+
 
 用法
 ================================================

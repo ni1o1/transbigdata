@@ -40,7 +40,7 @@ class TestMobile:
         stay,move = tbd.mobile_stay_move(data,params,col = ['user_id','stime','longitude', 'latitude'])
 
         stay['group'] = stay['LONCOL'].astype(str)+','+stay['LATCOL'].astype(str)
-        tbd.mobile_plot_activity(stay,col=['stime', 'etime', 'group'])
+        tbd.plot_activity(stay,col=['stime', 'etime', 'group'])
         
         assert len(stay) == 7
         assert len(move) == 6

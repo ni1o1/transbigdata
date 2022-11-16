@@ -173,3 +173,111 @@ def ellipse_plot(ellip_params, ax, **kwargs):
     ellip = Ellipse(xy=pos, width=width, height=height,
                     angle=theta, linestyle='-', **kwargs)
     ax.add_artist(ellip)
+
+def plot_activity(data,
+                         col=['stime', 'etime', 'group'],
+                         figsize=(10, 5),
+                         dpi=250,
+                         shuffle=True,
+                         xticks_rotation=0,
+                         xticks_gap=1,
+                         yticks_gap=1,
+                         fontsize=12):
+    '''
+    Plot the activity plot of individual
+
+    Parameters
+    ----------------
+    data : DataFrame
+        activity information of one person
+    col : List
+        The column name. [starttime,endtime,group] of activities, `group` control the color
+    figsize : List
+        The figure size
+    dpi : Number
+        The dpi of the figure
+    shuffle : bool
+        Whether to shuffle the activity
+    xticks_rotation : Number
+        rotation angle of xticks
+    xticks_gap : Number
+        gap of xticks
+    yticks_gap : Number
+        gap of yticks
+    fontsize : Number
+        font size of xticks and yticks
+    '''
+    stime, etime, group = col
+    activity = data.copy()
+    activity['date'] = activity[stime].dt.date
+    dates = list(activity['date'].astype(str).drop_duplicates())
+    dates_all = []
+    minday = min(dates)
+    maxday = max(dates)
+    import datetime
+    thisdate = minday
+    while thisdate != maxday:  # pragma: no cover
+        dates_all.append(thisdate)  # pragma: no cover
+        thisdate = str((pd.to_datetime(thisdate+' 00:00:00') +  # pragma: no cover
+                       datetime.timedelta(days=1)).date())
+    dates = dates_all
+    import matplotlib.pyplot as plt
+    import numpy as np
+    activity['duration'] = (activity[etime]-activity[stime]).dt.total_seconds()
+    activity = activity[-activity['duration'].isnull()]
+    import time
+    activity['ststmp'] = activity[stime].astype(str).apply(
+        lambda x: time.mktime(
+            time.strptime(x, '%Y-%m-%d %H:%M:%S'))).astype('int64')
+    activity['etstmp'] = activity[etime].astype(str).apply(
+        lambda x: time.mktime(
+            time.strptime(x, '%Y-%m-%d %H:%M:%S'))).astype('int64')
+    activityinfo = activity[[group]].drop_duplicates()
+    indexs = list(range(1, len(activityinfo)+1))
+    if shuffle:
+        np.random.shuffle(indexs)
+    activityinfo['index'] = indexs
+    import matplotlib as mpl
+    norm = mpl.colors.Normalize(vmin=1, vmax=len(activityinfo)+1)
+    from matplotlib.colors import ListedColormap
+    import seaborn as sns
+    cmap = ListedColormap(sns.hls_palette(
+        n_colors=len(activityinfo), l=.5, s=0.8))
+    plt.figure(1, figsize, dpi)
+    ax = plt.subplot(111)
+    plt.sca(ax)
+    for day in range(len(dates)):
+        plt.bar(day, height=24*3600, bottom=0, width=0.4, color=(0, 0, 0, 0.1))
+        stime = dates[day]+' 00:00:00'
+        etime = dates[day]+' 23:59:59'
+        bars = activity[(activity['stime'] < etime) &
+                        (activity['etime'] > stime)].copy()
+        bars['ststmp'] = bars['ststmp'] - \
+            time.mktime(time.strptime(stime, '%Y-%m-%d %H:%M:%S'))
+        bars['etstmp'] = bars['etstmp'] - \
+            time.mktime(time.strptime(stime, '%Y-%m-%d %H:%M:%S'))
+        for row in range(len(bars)):
+            plt.bar(day,
+                    height=bars['etstmp'].iloc[row]-bars['ststmp'].iloc[row],
+                    bottom=bars['ststmp'].iloc[row],
+                    color=cmap(
+                        norm(
+                            activityinfo[
+                                (activityinfo[group] == bars[group].
+                                 iloc[row]) 
+                            ]['index'].iloc[0])))
+    plt.xlim(-0.5, len(dates))
+    plt.ylim(0, 24*3600)
+    xticks_dates = range(0, len(dates), xticks_gap)
+    plt.xticks(xticks_dates, [dates[i][-5:] for i in xticks_dates],
+               rotation=xticks_rotation, fontsize=fontsize)
+
+    plt.yticks(range(0, 24*3600+1, yticks_gap*3600),
+               pd.DataFrame({'t': range(0, 25, yticks_gap)})[
+        't'].astype('str')+':00',
+        fontsize=fontsize)
+    plt.show()
+
+'''Old namespace'''
+
+mobile_plot_activity = plot_activity
