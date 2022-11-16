@@ -25,8 +25,8 @@ class TestGetbusdata:
             try:
                 admin, _ = tbd.getadmin(
                     '深圳市', 
-                    ak='2305ee7c82c147f11aac58fcc5bb7f19',
-                    jscode = '694338a096c6c50b74e5d74f411c9ab5', 
+                    ak='169521e66b7a30adcaa36ae0a9c04c8d',
+                    jscode = '2cdd826ad4099fae293dbabf3657c78d', 
                     subdistricts=True)
             except:     # pragma: no cover
                 t+=1    # pragma: no cover
@@ -53,7 +53,9 @@ class TestGetbusdata:
         while (type(result)==int)&(t<2):
             try:
                 result = tbd.get_isochrone_amap(
-                    121.212403, 31.282477, 60, ak='2305ee7c82c147f11aac58fcc5bb7f19', jscode = '694338a096c6c50b74e5d74f411c9ab5',
+                    121.212403, 31.282477, 60,
+                    ak='169521e66b7a30adcaa36ae0a9c04c8d',
+                    jscode = '2cdd826ad4099fae293dbabf3657c78d', 
                     mode=0)
             except:     # pragma: no cover
                 t+=1    # pragma: no cover
