@@ -6,7 +6,8 @@ Data Gridding
 ***************
 
 .. autosummary::
-
+   :toctree: api/
+   
     area_to_grid
     area_to_params
     GPS_to_grid

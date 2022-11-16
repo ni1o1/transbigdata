@@ -6,12 +6,13 @@ Mobilephone data processing
 ******************************
 
 .. autosummary::
-
+   :toctree: api/
+   
     mobile_stay_move
     mobile_stay_dutation
     mobile_identify_home
     mobile_identify_work
-    mobile_plot_activity
+
 
 .. autofunction:: mobile_stay_move
 
@@ -21,7 +22,6 @@ Mobilephone data processing
 
 .. autofunction:: mobile_identify_work
 
-.. autofunction:: mobile_plot_activity
 
 
 

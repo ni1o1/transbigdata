@@ -7,7 +7,8 @@
 ******************************
 
 .. autosummary::
-
+   :toctree: api/
+   
     clean_same
     clean_drift
     clean_outofbounds

@@ -6,7 +6,8 @@ Trajectory Processing
 ******************************
 
 .. autosummary::
-    
+   :toctree: api/
+   
     points_to_traj
     traj_densify
     traj_sparsify

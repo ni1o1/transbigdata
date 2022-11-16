@@ -33,7 +33,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-__version__ = '0.4.15'
+__version__ = '0.4.16'
 __author__ = 'Qing Yu <yuq@sustech.edu.cn>'
 
 # module level doc-string
@@ -82,7 +82,7 @@ Currently, `TransBigData` mainly provides the following methods:
   figures
 """
 
-from .plotmap import (
+from transbigdata.plotmap import (
     plot_map,
     plotscale,
     set_mapboxtoken,
@@ -90,7 +90,7 @@ from .plotmap import (
     read_imgsavepath,
     read_mapboxtoken
 )
-from .coordinates import (
+from transbigdata.coordinates import (
     gcj02tobd09,
     bd09togcj02,
     wgs84togcj02,
@@ -101,7 +101,7 @@ from .coordinates import (
     getdistance,
     transform_shape
 )
-from .grids import (
+from transbigdata.grids import (
     # new
     area_to_grid,
     area_to_params,
@@ -129,22 +129,20 @@ from .grids import (
     gridid_to_polygon_tri,
     gridid_to_polygon_hexa
 )
-from .gisprocess import (
+from transbigdata.gisprocess import (
     ckdnearest,
     ckdnearest_point,
     ckdnearest_line,
     splitline_with_length,
     merge_polygon,
-    polyon_exterior,
-    ellipse_params,
-    ellipse_plot
+    polyon_exterior
 )
-from .odprocess import (
+from transbigdata.odprocess import (
     odagg_grid,
     odagg_shape,
     tolinewitharrow
 )
-from .preprocess import (
+from transbigdata.preprocess import (
     clean_same,
     clean_drift,
     clean_outofbounds,
@@ -154,54 +152,61 @@ from .preprocess import (
     id_reindex_disgap,
     id_reindex
 )
-from .bikedata import (
+from transbigdata.bikedata import (
     bikedata_to_od
 )
-from .taxigps import (
+from transbigdata.taxigps import (
     clean_taxi_status,
     taxigps_to_od,
     taxigps_traj_point
 )
-from .mobilephonedata import (
+from transbigdata.mobilephonedata import (
     #new
     mobile_stay_move,
-    mobile_plot_activity,
     mobile_stay_dutation,
     mobile_identify_home,
     mobile_identify_work,
     #old    
-    plot_activity,
     traj_stay_move,
     )
-from .traj import (
+from transbigdata.traj import (
     traj_densify,
     traj_sparsify,
     points_to_traj,
     dumpjson
 )
-from .quality import (
+from transbigdata.quality import (
     sample_duration,
     data_summary
 )
-from .busgps import (
+from transbigdata.busgps import (
     busgps_arriveinfo,
     busgps_onewaytime
 )
-from .crawler import (
+from transbigdata.crawler import (
     getadmin,
     getbusdata,
     get_isochrone_amap,
     get_isochrone_mapbox,
 )
-from .metro import (
+from transbigdata.metro import (
     split_subwayline,
     metro_network,
     get_path_traveltime,
     get_shortest_path,
     get_k_shortest_paths
 )
-from .visualization import (
+from transbigdata.visualization import (
     visualization_trip,
     visualization_od,
     visualization_data
+)
+
+from transbigdata.activity import (
+    entropy,
+    entropy_rate,
+    ellipse_params,
+    ellipse_plot,
+    plot_activity,
+    mobile_plot_activity
 )

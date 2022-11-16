@@ -38,7 +38,10 @@ class TestMobile:
         params = tbd.area_to_params([121.860, 29.295, 121.862, 29.301], accuracy=500)
         #Identify stay and move infomation from mobile phone trajectory data
         stay,move = tbd.mobile_stay_move(data,params,col = ['user_id','stime','longitude', 'latitude'])
-        tbd.plot_activity(stay)
+
+        stay['group'] = stay['LONCOL'].astype(str)+','+stay['LATCOL'].astype(str)
+        tbd.plot_activity(stay,col=['stime', 'etime', 'group'])
+        
         assert len(stay) == 7
         assert len(move) == 6
 

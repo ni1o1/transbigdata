@@ -8,7 +8,8 @@ Bus and subway network topology modeling
 -------------
 
 .. autosummary::
-
+   :toctree: api/
+   
     metro_network
     get_shortest_path
     get_k_shortest_paths

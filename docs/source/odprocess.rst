@@ -6,7 +6,8 @@ Data Aggregating
 ******************
 
 .. autosummary::
-
+   :toctree: api/
+   
     dataagg
     odagg_grid
     odagg_shape
