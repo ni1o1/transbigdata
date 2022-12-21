@@ -260,7 +260,7 @@ def polyon_exterior(data, minarea=0):
         from shapely.geometry import Polygon, MultiPolygon
         if type(p) == MultiPolygon:
             geometries = []
-            for i in p:
+            for i in p.geoms:
                 poly = Polygon(i.exterior)
                 if minarea > 0:
                     if poly.area > minarea:
