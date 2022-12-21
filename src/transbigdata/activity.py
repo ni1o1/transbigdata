@@ -232,7 +232,7 @@ def plot_activity(data,
     activity['etstmp'] = activity[etime].astype(str).apply(
         lambda x: time.mktime(
             time.strptime(x, '%Y-%m-%d %H:%M:%S'))).astype('int64')
-    activityinfo = activity[[group]].drop_duplicates()
+    activityinfo = pd.DataFrame(activity[group].drop_duplicates().sort_values())
     indexs = list(range(1, len(activityinfo)+1))
     if shuffle:
         np.random.shuffle(indexs)
