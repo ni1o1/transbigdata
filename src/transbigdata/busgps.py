@@ -183,7 +183,7 @@ def busgps_arriveinfo(data, line, stop, col=[
                     ) == shapely.geometry.linestring.LineString:
                         arrive = [line_intersection]
                     else:
-                        arrive = list(line_intersection)
+                        arrive = list(line_intersection.geoms)
                 arrive = pd.DataFrame(arrive)
                 arrive['arrivetime'] = arrive[0].apply(
                     lambda r: r.coords[0][0])
