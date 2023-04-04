@@ -12,3 +12,4 @@ sphinx
 numpydoc
 nbsphinx
 sphinx_gallery
+requests
