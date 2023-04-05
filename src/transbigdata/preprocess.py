@@ -32,6 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import geopandas as gpd
 import pandas as pd
+import numpy as np
 from .grids import (
     GPS_to_grid,
     area_to_params,
@@ -39,7 +40,6 @@ from .grids import (
     grid_to_polygon
 )
 from .coordinates import getdistance
-
 
 def clean_same(data, col=['VehicleNum', 'Time', 'Lng', 'Lat']):
     '''
@@ -75,15 +75,13 @@ def clean_same(data, col=['VehicleNum', 'Time', 'Lng', 'Lat']):
     data1 = data1.drop('issame', axis=1)
     return data1
 
-
 def clean_drift(data, col=['VehicleNum', 'Time', 'Lng', 'Lat'],
-                speedlimit=80, dislimit=1000):
+                     method='twoside',
+                     speedlimit=80,
+                     dislimit=1000,
+                     anglelimit=30):
     '''
-    Delete the drift data. The select principle is that: if the speed of a
-    trajectory point is larger than the speed limit with before and after
-    points, while the speed between the before and after data is less than
-    the speedlimit. The time column in the input data is calculated more
-    efficiently if it is in datetime format.
+    Delete the drift in the trajectory data. The drift is defined as the data with a speed greater than the speed limit or the distance between the current point and the next point is greater than the distance limit or the angle between the current point, the previous point, and the next point is smaller than the angle limit. The speed limit is 80km/h by default, and the distance limit is 1000m by default. The method of cleaning drift data is divided into two methods: ‘oneside’ and ‘twoside’. The ‘oneside’ method is to consider the speed of the current point and the next point, and the ‘twoside’ method is to consider the speed of the current point, the previous point, and the next point.
 
     Parameters
     -------
@@ -91,8 +89,14 @@ def clean_drift(data, col=['VehicleNum', 'Time', 'Lng', 'Lat'],
         Data
     col : List
         Column names, in the order of [‘VehicleNum’, ‘Time’, ‘Lng’, ‘Lat’]
+    method : string
+        Method of cleaning drift data, including ‘oneside’ and ‘twoside’
     speedlimit : number
         Speed limitation
+    dislimit : number
+        Distance limit
+    anglelimit : number
+        Angle limit
 
     Returns
     -------
@@ -104,9 +108,12 @@ def clean_drift(data, col=['VehicleNum', 'Time', 'Lng', 'Lat'],
     data1 = data1.drop_duplicates(subset=[VehicleNum, Time])
     data1[Time+'_dt'] = pd.to_datetime(data1[Time])
     data1 = data1.sort_values(by=[VehicleNum, Time])
+
+    #计算前后点距离、时间差、速度
     for i in [VehicleNum, Lng, Lat, Time+'_dt']:
         data1[i+'_pre'] = data1[i].shift()
         data1[i+'_next'] = data1[i].shift(-1)
+
     data1['dis_pre'] = getdistance(
         data1[Lng],
         data1[Lat],
@@ -122,29 +129,57 @@ def clean_drift(data, col=['VehicleNum', 'Time', 'Lng', 'Lat'],
         data1[Lat+'_pre'],
         data1[Lng+'_next'],
         data1[Lat+'_next'])
+    
+    #计算前后点时间差
     data1['timegap_pre'] = data1[Time+'_dt'] - data1[Time+'_dt_pre']
     data1['timegap_next'] = data1[Time+'_dt_next'] - data1[Time+'_dt']
     data1['timegap_prenext'] = data1[Time+'_dt_next'] - data1[Time+'_dt_pre']
+
+    #计算前后点速度
     data1['speed_pre'] = data1['dis_pre'] / \
         data1['timegap_pre'].dt.total_seconds()*3.6
     data1['speed_next'] = data1['dis_next'] / \
         data1['timegap_next'].dt.total_seconds()*3.6
     data1['speed_prenext'] = data1['dis_prenext'] / \
         data1['timegap_prenext'].dt.total_seconds()*3.6
+
+    #余弦定理计算夹角
+    angle_cos = (data1['dis_pre']**2+data1['dis_next']**2-data1['dis_prenext']**2)/(2*data1['dis_pre']*data1['dis_next'])
+    angle_cos = np.maximum(np.minimum(angle_cos, 1), -1)
+    data1['angle'] = np.degrees(np.arccos(angle_cos))
+
+    #以速度限制删除异常点
     if speedlimit:
-        data1 = data1[
-            -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
-              (data1[VehicleNum+'_next'] == data1[VehicleNum]) &
-                (data1['speed_pre'] > speedlimit) &
-              (data1['speed_next'] > speedlimit) &
-              (data1['speed_prenext'] < speedlimit))]
+        if method == 'oneside':
+            data1 = data1[
+                -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
+                  (data1['speed_pre'] > speedlimit))]
+        elif method == 'twoside':
+            data1 = data1[
+                -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
+                  (data1[VehicleNum+'_next'] == data1[VehicleNum]) &
+                    (data1['speed_pre'] > speedlimit) &
+                    (data1['speed_next'] > speedlimit) &
+                    (data1['speed_prenext'] < speedlimit))]
+    #以距离限制删除异常点
     if dislimit:
+        if method == 'oneside':
+            data1 = data1[
+                -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
+                  (data1['dis_pre'] > dislimit))]
+        elif method == 'twoside':
+            data1 = data1[
+                -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
+                  (data1[VehicleNum+'_next'] == data1[VehicleNum]) &
+                    (data1['dis_pre'] > dislimit) &
+                    (data1['dis_next'] > dislimit) &
+                    (data1['dis_prenext'] < dislimit))]
+    #以角度限制删除异常点
+    if anglelimit:
         data1 = data1[
             -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
               (data1[VehicleNum+'_next'] == data1[VehicleNum]) &
-              (data1['dis_pre'] > dislimit) &
-              (data1['dis_next'] > dislimit) &
-              (data1['dis_prenext'] < dislimit))]
+                (data1['angle'] < anglelimit))]
     data1 = data1[data.columns]
     return data1
 
@@ -222,64 +257,6 @@ def clean_outofshape(data, shape, col=['Lng', 'Lat'], accuracy=500):
     data1 = pd.merge(data1, data1_gdf[['LONCOL', 'LATCOL']]).drop(
         ['LONCOL', 'LATCOL'], axis=1)
     return data1
-
-
-def clean_traj(data, col=['uid', 'str_time', 'lon', 'lat'], tripgap=1800,
-               disgap=50000, speedlimit=80):
-    '''
-    A combo for trajectory data cleaning, including defining the the time
-    length threshold considered as a new trip, and the distance threshold
-    considered as a new trip
-
-    Parameters
-    -------
-    data : DataFrame
-        Trajectory data
-    col : List
-        Column names, in the order of [‘VehicleNum’, ‘Time’, ‘Lng’, ‘Lat’]
-    tripgap : number
-        The time length threshold considered as a new trip
-    disgap : number
-        The distance threshold considered as a new trip
-    speedlimit : number
-        Speed limit
-
-    Returns
-    -------
-    data1 : DataFrame
-        Cleaned data
-    '''
-    uid, timecol, lon, lat = col
-    data[timecol] = pd.to_datetime(data[timecol])
-    data = data.sort_values(by=[uid, timecol])
-    cols = []
-    for i in data.columns:
-        if i not in [uid, timecol, lon, lat]:
-            cols.append(i)
-    data = clean_same(data, col=[uid, timecol, lon, lat]+cols)
-    data = clean_drift(data, col=[uid, timecol, lon, lat],
-                       speedlimit=speedlimit)
-    data = id_reindex(data, uid, timecol=timecol, timegap=tripgap)
-    data = data.rename(columns={uid+'_new': 'tripid'})
-    data = id_reindex_disgap(
-        data, col=['tripid', lon, lat], disgap=disgap, suffix='')
-    data1 = data.copy()
-    data1['lon1'] = data1[lon].shift(-1)
-    data1['lat1'] = data1[lat].shift(-1)
-    data1['tripid1'] = data1['tripid'].shift(-1)
-    data1 = data1[data1['tripid'] == data1['tripid1']]
-    data1['dis'] = getdistance(
-        data1[lon], data1[lat], data1['lon1'], data1['lat1'])
-    a = data1.groupby(['tripid'])['dis'].sum()
-    a = a[-(a < 50)].reset_index()['tripid']
-    data = pd.merge(data, a)
-    data = data.drop('tripid', axis=1)
-    data = id_reindex(data, uid, timecol=timecol, timegap=tripgap)
-    data = data.rename(columns={uid+'_new': 'tripid'})
-    data = id_reindex_disgap(
-        data, col=['tripid', lon, lat], disgap=disgap, suffix='')
-    return data
-
 
 def dataagg(data, shape, col=['Lng', 'Lat', 'count'], accuracy=500):
     '''

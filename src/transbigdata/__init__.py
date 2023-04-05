@@ -147,7 +147,6 @@ from transbigdata.preprocess import (
     clean_drift,
     clean_outofbounds,
     clean_outofshape,
-    clean_traj,
     dataagg,
     id_reindex_disgap,
     id_reindex
@@ -170,6 +169,7 @@ from transbigdata.mobilephonedata import (
     traj_stay_move,
     )
 from transbigdata.traj import (
+    traj_clean_drift,
     traj_slice,
     traj_densify,
     traj_sparsify,

@@ -33,7 +33,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import geopandas as gpd
 import pandas as pd
 import numpy as np
-from .preprocess import id_reindex
+from .preprocess import id_reindex,clean_drift
+from .coordinates import getdistance
+
+def traj_clean_drift(*args,**kwargs):
+    return clean_drift(*args,**kwargs)
 
 
 def traj_slice(traj_data, slice_data, traj_col=['vid', 'time'], slice_col = ['vid','stime','etime','tripid']):
