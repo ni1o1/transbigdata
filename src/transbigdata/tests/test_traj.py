@@ -43,7 +43,7 @@ class TestMobile:
         tbd.plot_activity(stay,col=['stime', 'etime', 'group'])
         
         assert len(stay) == 7
-        assert len(move) == 6
+        assert len(move) == 8
 
         #Identify home location
         home = tbd.mobile_identify_home(stay, col=['user_id','stime', 'etime','LONCOL', 'LATCOL','lon','lat'], start_hour=8, end_hour=20 )
