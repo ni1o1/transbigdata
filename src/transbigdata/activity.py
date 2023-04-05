@@ -53,7 +53,7 @@ def entropy(sequence):
         isinstance(sequence,pd.Series):
         raise TypeError('Sequence must be List,DataFrame,Series') # pragma: no cover
     sequence = pd.DataFrame(sequence)
-    r_1 = sequence[0].value_counts().reset_index()
+    r_1 = sequence[0].value_counts().rename('count').reset_index()
     r_1['count'] /= r_1['count'].sum()
     entropy = -(r_1['count']*np.log(r_1['count'])/np.log(2)).sum()
     return entropy
