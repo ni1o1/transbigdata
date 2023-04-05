@@ -39,11 +39,12 @@ class TestMobile:
         #Identify stay and move infomation from mobile phone trajectory data
         stay,move = tbd.mobile_stay_move(data,params,col = ['user_id','stime','longitude', 'latitude'])
 
-        stay['group'] = stay['LONCOL'].astype(str)+','+stay['LATCOL'].astype(str)
-        tbd.plot_activity(stay,col=['stime', 'etime', 'group'])
-        
         assert len(stay) == 7
         assert len(move) == 8
+
+        #Slice trajectory data
+        slicedata = tbd.traj_slice(data, move, traj_col=['user_id', 'stime'],slice_col=['user_id', 'stime', 'etime', 'moveid'])
+        assert len(slicedata) == 8
 
         #Identify home location
         home = tbd.mobile_identify_home(stay, col=['user_id','stime', 'etime','LONCOL', 'LATCOL','lon','lat'], start_hour=8, end_hour=20 )
@@ -51,3 +52,7 @@ class TestMobile:
         #Identify work location
         work = tbd.mobile_identify_work(stay, col=['user_id', 'stime', 'etime', 'LONCOL', 'LATCOL','lon','lat'], minhour=3, start_hour=8, end_hour=20,workdaystart=0, workdayend=4)
         assert work['LONCOL'].iloc[0] == -86
+
+        #Plot activity
+        stay['group'] = stay['LONCOL'].astype(str)+','+stay['LATCOL'].astype(str)
+        tbd.plot_activity(stay,col=['stime', 'etime', 'group'])

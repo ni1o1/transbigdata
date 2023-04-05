@@ -54,8 +54,8 @@ def entropy(sequence):
         raise TypeError('Sequence must be List,DataFrame,Series') # pragma: no cover
     sequence = pd.DataFrame(sequence)
     r_1 = sequence[0].value_counts().reset_index()
-    r_1[0] /= r_1[0].sum()
-    entropy = -(r_1[0]*np.log(r_1[0])/np.log(2)).sum()
+    r_1['count'] /= r_1['count'].sum()
+    entropy = -(r_1['count']*np.log(r_1['count'])/np.log(2)).sum()
     return entropy
 
 def entropy_rate(sequence):

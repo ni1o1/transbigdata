@@ -126,6 +126,9 @@ def mobile_stay_move(data, params,
                                 })
     move['duration'] = (
         move['etime'] - move['stime']).dt.total_seconds()
+    
+    move['moveid'] = range(len(move))
+    stay['stayid'] = range(len(stay))
     return stay, move
 
 
