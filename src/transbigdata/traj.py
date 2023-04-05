@@ -36,6 +36,66 @@ import numpy as np
 from .preprocess import id_reindex
 
 
+def traj_slice(traj_data, slice_data, traj_col=['vid', 'time'], slice_col = ['vid','stime','etime','tripid']):
+    '''
+    Slice the trajectory data according to the slice data.
+    This method extracts data from a given set of trajectory data(traj_data) based on a specified time period(slice_data).
+
+    Parameters
+    -------
+    traj_data : DataFrame
+        Trajectory data, containing the trajectory of each vehicle
+    slice_data : DataFrame
+        Slice data, containing the start time, end time and vehicleid of each slice
+    traj_col : List
+        The column name of trajectory data, in the sequence of [VehicleNum, Time]
+    slice_col : List
+        The column name of slice data, in the sequence of [VehicleNum_slice, Stime, Etime, SliceId]
+
+    Returns
+    -------
+    data_sliced : DataFrame
+        The sliced trajectory data
+
+    Example
+    -------
+    >>> tbd.traj_slice(GPSData, move, traj_col=['vid', 'time'], slice_col = ['vid','stime','etime','tripid'])
+        
+    '''
+    GPSData = traj_data.copy()
+    SliceData = slice_data.copy()
+    VehicleNum, Time  = traj_col
+    VehicleNum_slice,Stime, Etime, SliceId = slice_col
+
+    # Convert the time format to datetime
+    GPSData[Time] = pd.to_datetime(GPSData[Time])
+    SliceData[Stime] = pd.to_datetime(SliceData[Stime])-pd.Timedelta(seconds=1)
+    SliceData[Etime] = pd.to_datetime(SliceData[Etime])+pd.Timedelta(seconds=1)
+
+    # Extract start and end points of the slice
+    slice_s = SliceData[[VehicleNum_slice, Stime,SliceId]].copy()
+    slice_s.columns = [VehicleNum, Time, SliceId]
+    slice_s['flag'] = 1
+    slice_e = SliceData[[VehicleNum_slice, Etime,SliceId]].copy()
+    slice_e.columns = [VehicleNum, Time, SliceId]
+    slice_e['flag'] = -1
+
+    # Concatenate the start and end points of the slice
+    data_sliced = pd.concat([GPSData, slice_s, slice_e])
+    data_sliced = data_sliced.sort_values(by=[VehicleNum, Time])
+    data_sliced[SliceId] = data_sliced[SliceId].ffill()
+
+    # Extract the trajectory data in the slice
+    data_sliced['flag'] = data_sliced['flag'].fillna(0)
+    data_sliced['flag1'] = data_sliced.groupby(VehicleNum)['flag'].cumsum()
+    data_sliced[VehicleNum] = data_sliced[VehicleNum].ffill()
+    data_sliced = data_sliced[(data_sliced['flag1'] == 1) &
+                              (data_sliced['flag'] == 0) &
+                            (-data_sliced[VehicleNum].isnull())]
+    data_sliced[SliceId] = data_sliced[SliceId].ffill()
+    data_sliced.drop(['flag','flag1'], axis=1, inplace=True)
+    return data_sliced
+
 def traj_densify(data, col=['Vehicleid', 'Time', 'Lng', 'Lat'], timegap=15):
     '''
     Trajectory densification, ensure that there is a trajectory point each

@@ -4,7 +4,7 @@ data processing, analysis and visualization.
 
 BSD 3-Clause License
 
-Copyright (c) 2021, Qing Yu
+Copyright (c) 2023, Qing Yu
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-__version__ = '0.4.17'
+__version__ = '0.5.0'
 __author__ = 'Qing Yu <yuq@sustech.edu.cn>'
 
 # module level doc-string
@@ -170,6 +170,7 @@ from transbigdata.mobilephonedata import (
     traj_stay_move,
     )
 from transbigdata.traj import (
+    traj_slice,
     traj_densify,
     traj_sparsify,
     points_to_traj,

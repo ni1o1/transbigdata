@@ -84,9 +84,31 @@ def mobile_stay_move(data, params,
     stay = stay[stay['duration'] >= activitytime].copy()
     stay = stay[[uid, 'stime', 'LONCOL', 'LATCOL',
                  'etime', 'lon', 'lat', 'duration']]
+    
+    # Add the first and last two data points for each ID in the Stay dataset before conducting move detection, so that the movement patterns of individuals at the beginning and end of the study period can also be identified.
+    first_data = data.drop_duplicates(subset=[uid],keep='first').copy()
+    last_data = data.drop_duplicates(subset=[uid],keep='last').copy()
+    first_data['stime'] = first_data[timecol]
+    first_data['etime'] = first_data[timecol]
+    first_data['duration'] = 0
+    first_data['lon'] = first_data[lon]
+    first_data['lat'] = first_data[lat]
+    first_data['LONCOL'], first_data['LATCOL'] = GPS_to_grid(
+        first_data['lon'], first_data['lat'], params)
+    first_data = first_data[[uid, 'stime', 'LONCOL', 'LATCOL',
+                    'etime', 'lon', 'lat', 'duration']]
 
+    last_data['stime'] = last_data[timecol]
+    last_data['etime'] = last_data[timecol]
+    last_data['duration'] = 0
+    last_data['lon'] = last_data[lon]
+    last_data['lat'] = last_data[lat]
+    last_data['LONCOL'], last_data['LATCOL'] = GPS_to_grid(
+        last_data['lon'], last_data['lat'], params)
+    last_data = last_data[[uid, 'stime', 'LONCOL', 'LATCOL',
+                    'etime', 'lon', 'lat', 'duration']]
     # Identify move
-    move = stay.copy()
+    move = pd.concat([first_data,stay,last_data],axis=0).sort_values(by=[uid,'stime'])
     move['stime_next'] = move['stime'].shift(-1)
     move['elon'] = move['lon'].shift(-1)
     move['elat'] = move['lat'].shift(-1)
