@@ -1,8 +1,10 @@
 import transbigdata as tbd
 import pandas as pd
-
+import pytest
+import os
 
 class TestMobile:
+
     def test_mobile(self):
         data = pd.DataFrame([['00466ab30de56db7efbd04991b680ae1', 201806010000, 121.43, 30.175,
                 20180601],
@@ -56,3 +58,17 @@ class TestMobile:
         #Plot activity
         stay['group'] = stay['LONCOL'].astype(str)+','+stay['LATCOL'].astype(str)
         tbd.plot_activity(stay,col=['stime', 'etime', 'group'])
+
+        # Smooth trajectory
+        smoothed = tbd.traj_smooth(data,col = ['user_id','stime','longitude', 'latitude'],proj = False,process_noise_std = 0.5, measurement_noise_std = 1)
+        smoothed = tbd.traj_smooth(data,col = ['user_id','stime','longitude', 'latitude'],proj = True,process_noise_std = 0.5, measurement_noise_std = 1)
+        assert len(smoothed) == 14
+
+        #Segment trajectory
+        segmented = tbd.traj_segment(slicedata,groupby_col=['user_id'],retain_col=['stime', 'longitude', 'latitude', 'date','moveid'])
+        assert len(segmented) == 1
+
+        import osmnx as ox
+        traj = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'traj2.csv'))
+        G = ox.load_graphml(os.path.join(os.path.dirname(__file__), 'data', 'G.graphml'))
+        assert len(tbd.traj_mapmatch(traj,G,col=['lon','lat']))==14

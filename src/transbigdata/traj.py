@@ -82,7 +82,7 @@ def traj_smooth(data,col = ['id','time','lon', 'lat'],proj = False,process_noise
         data['x'] = data[lon]
         data['y'] = data[lat]
     # Smooth the trajectory for each ID
-    def Kalman_traj_smooth(data, process_noise_std, measurement_noise_std):
+    def Kalman_traj_smooth(data,process_noise_std, measurement_noise_std):
         '''
         Smoothing Trajectory Data Using a Kalman Filter
 
@@ -104,7 +104,7 @@ def traj_smooth(data,col = ['id','time','lon', 'lat'],proj = False,process_noise
         data = data.copy()
         # 轨迹数据转换为numpy数组
         observations = data[['x', 'y']].values
-        timestamps = data['time']
+        timestamps = data[time]
         # F-状态转移矩阵
         transition_matrix = np.array([[1, 0, 1, 0],
                                     [0, 1, 0, 1],
@@ -116,15 +116,15 @@ def traj_smooth(data,col = ['id','time','lon', 'lat'],proj = False,process_noise
         # R-观测噪声协方差矩阵
         # 如果measurement_noise_std是list，则认为是观测噪声协方差矩阵的对角线元素
         if isinstance(measurement_noise_std, list):
-            observation_covariance = np.diag(measurement_noise_std)**2
+            observation_covariance = np.diag(measurement_noise_std)**2  # pragma: no cover
         else:
             observation_covariance = np.eye(2) * measurement_noise_std**2
         # Q-过程噪声协方差矩阵
         # 如果process_noise_std是list，则认为是过程噪声协方差矩阵的对角线元素
         if isinstance(process_noise_std, list):
-            transition_covariance = np.diag(process_noise_std)**2
+            transition_covariance = np.diag(process_noise_std)**2   # pragma: no cover
         else:
-            transition_covariance = np.eye(4) * process_noise_std**2
+            transition_covariance = np.eye(4) * process_noise_std**2    
         # 初始状态
         initial_state_mean = [observations[0, 0], observations[0, 1], 0, 0]
         # 初始状态协方差矩阵

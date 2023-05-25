@@ -54,6 +54,8 @@ class TestODprocess:
 
         assert len(tbd.traj_clean_drift(self.data, col=[
                    'VehicleNum', 'time', 'slon', 'slat'])) == 18
+        assert len(tbd.traj_clean_drift(self.data, col=[
+                   'VehicleNum', 'time', 'slon', 'slat'],method='oneside')) == 9
         assert len(tbd.clean_taxi_status(
             self.data, ['VehicleNum', 'time', 'OpenStatus'])) == 15
         assert len(tbd.clean_taxi_status(

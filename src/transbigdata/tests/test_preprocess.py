@@ -44,3 +44,5 @@ class TestODprocess:
                      'Speed'])
     def test_id_reindex(self):
         assert len(tbd.id_reindex(self.data,col = 'VehicleNum',new = True,sample = 1))==10
+        assert len(tbd.id_reindex_disgap(self.data, col=['VehicleNum', 'slon', 'slat'], disgap=1000,
+                      suffix='_new')['VehicleNum_new'].value_counts())==3
