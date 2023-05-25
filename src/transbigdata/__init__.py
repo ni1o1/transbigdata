@@ -143,7 +143,7 @@ from transbigdata.taxigps import (
     taxigps_traj_point
 )
 from transbigdata.mobilephonedata import (
-    mobile_stay_dutation,
+    mobile_stay_duration,
     mobile_identify_home,
     mobile_identify_work,    
     )
@@ -196,6 +196,5 @@ from transbigdata.activity import (
     entropy_rate,
     ellipse_params,
     ellipse_plot,
-    plot_activity,
-    mobile_plot_activity
+    plot_activity
 )

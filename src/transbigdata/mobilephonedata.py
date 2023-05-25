@@ -32,7 +32,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import pandas as pd
 import numpy as np
-import warnings
 
 def mobile_stay_duration(staydata, col=['stime', 'etime'], start_hour=8, end_hour=20):
     '''
@@ -91,15 +90,6 @@ def mobile_stay_duration(staydata, col=['stime', 'etime'], start_hour=8, end_hou
     duration_day = duration_day_etime-duration_day_stime
 
     return duration_night, duration_day
-
-
-def mobile_stay_dutation(*args, **kwargs):
-    '''
-    This method is renamed as transbigdata.mobile_stay_duration
-    '''
-    warnings.warn(
-        "This method is renamed as transbigdata.mobile_stay_duration")     # pragma: no cover
-    return mobile_stay_duration(*args, **kwargs)     # pragma: no cover
 
 
 def mobile_identify_home(staydata, col=['uid', 'stime', 'etime', 'LONCOL', 'LATCOL'], start_hour=8, end_hour=20):

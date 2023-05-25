@@ -8,26 +8,34 @@ Trajectory Processing
 .. autosummary::
    :toctree: api/
    
-    points_to_traj
+    traj_mapmatch
+    traj_clean_drift
+    traj_clean_redundant
+    traj_slice
+    traj_smooth
+    traj_segment
     traj_densify
     traj_sparsify
+    traj_stay_move
+    points_to_traj
 
-Identification of stay and move from trajectory data
------------------------------------------------------------------
+.. autofunction:: traj_mapmatch
 
-.. autofunction:: traj_stay_move
+.. autofunction:: traj_clean_drift
 
-.. autofunction:: plot_activity
+.. autofunction:: traj_clean_redundant
 
-Trajectory GeoDataFrame
------------------------------------------------------------------
+.. autofunction:: traj_slice
 
-.. autofunction:: points_to_traj
+.. autofunction:: traj_smooth
 
-
-Trajectory densification
------------------------------------------------------------------
+.. autofunction:: traj_segment
 
 .. autofunction:: traj_densify
 
 .. autofunction:: traj_sparsify
+
+.. autofunction:: traj_stay_move
+
+.. autofunction:: points_to_traj
+

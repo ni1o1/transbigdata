@@ -52,7 +52,7 @@ class TestODprocess:
 
     def test_odprocess(self):
 
-        assert len(tbd.clean_drift(self.data, col=[
+        assert len(tbd.traj_clean_drift(self.data, col=[
                    'VehicleNum', 'time', 'slon', 'slat'])) == 18
         assert len(tbd.clean_taxi_status(
             self.data, ['VehicleNum', 'time', 'OpenStatus'])) == 15
@@ -75,13 +75,13 @@ class TestODprocess:
         bounds = [113.75, 22.4, 114.62, 22.86]
         data = tbd.clean_outofbounds(data, bounds, col=['slon', 'slat'])
         assert len(data) == 19
-        params = tbd.grid_params(bounds, accuracy=1000)
+        params = tbd.area_to_params(bounds, accuracy=1000)
         stay, _ = tbd.traj_stay_move(
             data, params, col=['VehicleNum', 'time', 'slon', 'slat'],
             activitytime=1800)
         assert len(stay) == 2
 
-        data['LONCOL'], data['LATCOL'] = tbd.GPS_to_grids(
+        data['LONCOL'], data['LATCOL'] = tbd.GPS_to_grid(
             data['slon'], data['slat'], params)
         res = data[['LONCOL', 'LATCOL']].values
         truth = [[6, 25],

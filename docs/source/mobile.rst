@@ -8,15 +8,12 @@ Mobilephone data processing
 .. autosummary::
    :toctree: api/
    
-    mobile_stay_move
-    mobile_stay_dutation
+    mobile_stay_duration
     mobile_identify_home
     mobile_identify_work
 
 
-.. autofunction:: mobile_stay_move
-
-.. autofunction:: mobile_stay_dutation
+.. autofunction:: mobile_stay_duration
 
 .. autofunction:: mobile_identify_home
 

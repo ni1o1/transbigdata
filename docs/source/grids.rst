@@ -264,22 +264,3 @@ Compared to the rectangular grid processing method provided in the TransBigData 
 
 .. image:: geohash/output_9_0.png
 
-
-Old namespaces
-----------------------------------------------------
-
-.. autofunction:: rect_grids
-
-.. autofunction:: grid_params
-
-
-.. autofunction:: GPS_to_grids
-
-
-.. autofunction:: grids_centre
-
-.. autofunction:: gridid_to_polygon
-
-.. autofunction:: gridid_sjoin_shape
-
-.. autofunction:: regenerate_params
