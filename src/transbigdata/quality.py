@@ -108,3 +108,19 @@ def data_summary(data, col=['Vehicleid', 'Time'], show_sample_duration=False,
         print('Median: ', round(sd['duration'].quantile(0.5), roundnum), 's')
         print('Lower quartile: ', round(
             sd['duration'].quantile(0.25), roundnum), 's')
+        # Plot the distribution of sampling interval
+        import seaborn as sns
+        import matplotlib.pyplot as plt
+        import matplotlib
+        matplotlib.rcParams['font.sans-serif'] = 'Arial'
+        fig = plt.figure(1,(8,3),dpi=300)
+        ax = plt.subplot(111)
+        plt.subplots_adjust(left=0.19,right=0.98,top=0.9,bottom=0.19)
+        sns.kdeplot(sd[sd['duration']<sd['duration'].quantile(0.95)],ax=ax,legend=False)
+        from matplotlib import ticker
+        formatter = ticker.ScalarFormatter(useMathText=True)
+        formatter.set_scientific(True)
+        formatter.set_powerlimits((0,0))
+        plt.xlabel('Sampling interval (s)')
+        plt.xlim(0, sd['duration'].quantile(0.95))
+        plt.show()

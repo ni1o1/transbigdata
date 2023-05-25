@@ -17,7 +17,7 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/ni1o1/transbigdata/issues",
     },
     install_requires=[
-        "numpy", "pandas", "shapely", "geopandas>=0.10.2", "scipy", "matplotlib"
+        "numpy", "pandas", "shapely", "geopandas>=0.10.2", "scipy", "matplotlib",'pykalman'
     ],
     classifiers=[
         "Operating System :: OS Independent",

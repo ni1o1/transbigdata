@@ -102,7 +102,6 @@ from transbigdata.coordinates import (
     transform_shape
 )
 from transbigdata.grids import (
-    # new
     area_to_grid,
     area_to_params,
     GPS_to_grid,
@@ -111,23 +110,9 @@ from transbigdata.grids import (
     grid_to_area,
     grid_to_params,
     grid_params_optimize,
-    # old
-    rect_grids,
-    grid_params,
-    grids_centre,
-    gridid_sjoin_shape,
-    regenerate_params,
     geohash_encode,
     geohash_decode,
-    geohash_togrid,
-    GPS_to_grids,
-    GPS_to_grids_rect,
-    GPS_to_grids_tri,
-    GPS_to_grids_hexa,
-    gridid_to_polygon,
-    gridid_to_polygon_rect,
-    gridid_to_polygon_tri,
-    gridid_to_polygon_hexa
+    geohash_togrid
 )
 from transbigdata.gisprocess import (
     ckdnearest,
@@ -143,8 +128,6 @@ from transbigdata.odprocess import (
     tolinewitharrow
 )
 from transbigdata.preprocess import (
-    clean_same,
-    clean_drift,
     clean_outofbounds,
     clean_outofshape,
     dataagg,
@@ -160,22 +143,27 @@ from transbigdata.taxigps import (
     taxigps_traj_point
 )
 from transbigdata.mobilephonedata import (
-    #new
-    mobile_stay_move,
     mobile_stay_dutation,
     mobile_identify_home,
-    mobile_identify_work,
-    #old    
-    traj_stay_move,
+    mobile_identify_work,    
     )
 from transbigdata.traj import (
+    traj_mapmatch,
     traj_clean_drift,
+    traj_clean_redundant,
     traj_slice,
+    traj_smooth,
+    traj_segment,
     traj_densify,
     traj_sparsify,
+    traj_stay_move,
     points_to_traj,
+)
+
+from transbigdata.utils import (
     dumpjson
 )
+
 from transbigdata.quality import (
     sample_duration,
     data_summary

@@ -486,10 +486,10 @@ def plotscale(ax, bounds, textcolor='k', textsize=8, compasssize=1,
         scale = gpd.GeoDataFrame({
             'color': [(0, 0, 0), (1, 1, 1)],
             'geometry':
-            [Polygon([(alon+deltaLon, alat),
+            [Polygon([(alon, alat),
                       (alon+4*deltaLon, alat),
                       (alon+4*deltaLon, alat+deltaLon*0.4),
-                      (alon+deltaLon, alat+deltaLon*0.4)]),
+                      (alon, alat+deltaLon*0.4)]),
                 Polygon([(alon+4*deltaLon, alat),
                          (alon+8*deltaLon, alat),
                          (alon+8 * deltaLon, alat+deltaLon*0.4),

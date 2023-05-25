@@ -32,105 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import pandas as pd
 import numpy as np
-from .grids import GPS_to_grid
 import warnings
-
-
-def mobile_stay_move(data, params,
-                     col=['ID', 'dataTime', 'longitude', 'latitude'],
-                     activitytime=1800):
-    '''
-    Input trajectory data and gridding parameters, identify stay and move
-
-    Parameters
-    ----------------
-    data : DataFrame
-        trajectory data
-    params : List
-        gridding parameters
-    col : List
-        The column name, in the order of ['ID','dataTime','longitude',
-        'latitude']
-    activitytime : Number
-        How much time to regard as activity
-
-    Returns
-    ----------------
-    stay : DataFrame
-        stay information
-    move : DataFrame
-        move information
-    '''
-    uid, timecol, lon, lat = col
-    # Identify stay
-    data = data.sort_values(by=col[:2])
-    stay = data.copy()
-    stay = stay.rename(columns={lon: 'lon', lat: 'lat', timecol: 'stime'})
-    stay['stime'] = pd.to_datetime(stay['stime'])
-    stay['LONCOL'], stay['LATCOL'] = GPS_to_grid(
-        stay['lon'], stay['lat'], params)
-    # Number the status
-    stay['status_id'] = ((stay['LONCOL'] != stay['LONCOL'].shift()) |
-                         (stay['LATCOL'] != stay['LATCOL'].shift()) |
-                         (stay[uid] != stay[uid].shift())).astype(int)
-    stay['status_id'] = stay.groupby([uid])['status_id'].cumsum()
-    stay = stay.drop_duplicates(
-        subset=[uid, 'status_id'], keep='first').copy()
-    stay['etime'] = stay['stime'].shift(-1)
-    stay = stay[stay[uid] == stay[uid].shift(-1)].copy()
-    # Remove the duration shorter than given activitytime
-    stay['duration'] = (pd.to_datetime(stay['etime']) -
-                        pd.to_datetime(stay['stime'])).dt.total_seconds()
-    stay = stay[stay['duration'] >= activitytime].copy()
-    stay = stay[[uid, 'stime', 'LONCOL', 'LATCOL',
-                 'etime', 'lon', 'lat', 'duration']]
-    
-    # Add the first and last two data points for each ID in the Stay dataset before conducting move detection, so that the movement patterns of individuals at the beginning and end of the study period can also be identified.
-    first_data = data.drop_duplicates(subset=[uid],keep='first').copy()
-    last_data = data.drop_duplicates(subset=[uid],keep='last').copy()
-    first_data['stime'] = first_data[timecol]
-    first_data['etime'] = first_data[timecol]
-    first_data['duration'] = 0
-    first_data['lon'] = first_data[lon]
-    first_data['lat'] = first_data[lat]
-    first_data['LONCOL'], first_data['LATCOL'] = GPS_to_grid(
-        first_data['lon'], first_data['lat'], params)
-    first_data = first_data[[uid, 'stime', 'LONCOL', 'LATCOL',
-                    'etime', 'lon', 'lat', 'duration']]
-
-    last_data['stime'] = last_data[timecol]
-    last_data['etime'] = last_data[timecol]
-    last_data['duration'] = 0
-    last_data['lon'] = last_data[lon]
-    last_data['lat'] = last_data[lat]
-    last_data['LONCOL'], last_data['LATCOL'] = GPS_to_grid(
-        last_data['lon'], last_data['lat'], params)
-    last_data = last_data[[uid, 'stime', 'LONCOL', 'LATCOL',
-                    'etime', 'lon', 'lat', 'duration']]
-    # Identify move
-    move = pd.concat([first_data,stay,last_data],axis=0).sort_values(by=[uid,'stime'])
-    move['stime_next'] = move['stime'].shift(-1)
-    move['elon'] = move['lon'].shift(-1)
-    move['elat'] = move['lat'].shift(-1)
-    move['ELONCOL'] = move['LONCOL'].shift(-1)
-    move['ELATCOL'] = move['LATCOL'].shift(-1)
-    move[uid+'_next'] = move[uid].shift(-1)
-    move = move[move[uid+'_next'] == move[uid]
-                ].drop(['stime', 'duration', uid+'_next'], axis=1)
-    move = move.rename(columns={'lon': 'slon',
-                                'lat': 'slat',
-                                'etime': 'stime',
-                                'stime_next': 'etime',
-                                'LONCOL': 'SLONCOL',
-                                'LATCOL': 'SLATCOL',
-                                })
-    move['duration'] = (
-        move['etime'] - move['stime']).dt.total_seconds()
-    
-    move['moveid'] = range(len(move))
-    stay['stayid'] = range(len(stay))
-    return stay, move
-
 
 def mobile_stay_duration(staydata, col=['stime', 'etime'], start_hour=8, end_hour=20):
     '''
@@ -298,6 +200,3 @@ def mobile_identify_work(staydata, col=['uid', 'stime', 'etime', 'LONCOL', 'LATC
 
     return work
 
-'''Old namespace'''
-
-traj_stay_move = mobile_stay_move

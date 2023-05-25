@@ -70,7 +70,7 @@ class TestODprocess:
         assert len(tbd.points_to_traj(
             data, col=['slon', 'slat', 'VehicleNum'])) == 2
         assert len(data) == 19
-        assert len(tbd.clean_same(
+        assert len(tbd.traj_clean_redundant(
             data, col=['VehicleNum', 'time', 'slon', 'slat'])) == 19
         bounds = [113.75, 22.4, 114.62, 22.86]
         data = tbd.clean_outofbounds(data, bounds, col=['slon', 'slat'])
