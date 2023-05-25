@@ -167,6 +167,7 @@ def traj_smooth(data,col = ['id','time','lon', 'lat'],proj = False,process_noise
     data = data.groupby(id).apply(lambda x:Kalman_traj_smooth(x,process_noise_std, measurement_noise_std))
     if proj:
         data['geometry'] = gpd.points_from_xy(data['x'],data['y'])
+        data.crs = epsg
         data = data.to_crs('epsg:4326')
         data[lon] = data.geometry.x
         data[lat] = data.geometry.y
