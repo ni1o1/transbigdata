@@ -4,7 +4,7 @@ data processing, analysis and visualization.
 
 BSD 3-Clause License
 
-Copyright (c) 2021, Qing Yu
+Copyright (c) 2023, Qing Yu
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-__version__ = '0.4.17'
+__version__ = '0.5.0'
 __author__ = 'Qing Yu <yuq@sustech.edu.cn>'
 
 # module level doc-string
@@ -102,7 +102,6 @@ from transbigdata.coordinates import (
     transform_shape
 )
 from transbigdata.grids import (
-    # new
     area_to_grid,
     area_to_params,
     GPS_to_grid,
@@ -111,23 +110,9 @@ from transbigdata.grids import (
     grid_to_area,
     grid_to_params,
     grid_params_optimize,
-    # old
-    rect_grids,
-    grid_params,
-    grids_centre,
-    gridid_sjoin_shape,
-    regenerate_params,
     geohash_encode,
     geohash_decode,
-    geohash_togrid,
-    GPS_to_grids,
-    GPS_to_grids_rect,
-    GPS_to_grids_tri,
-    GPS_to_grids_hexa,
-    gridid_to_polygon,
-    gridid_to_polygon_rect,
-    gridid_to_polygon_tri,
-    gridid_to_polygon_hexa
+    geohash_togrid
 )
 from transbigdata.gisprocess import (
     ckdnearest,
@@ -143,11 +128,8 @@ from transbigdata.odprocess import (
     tolinewitharrow
 )
 from transbigdata.preprocess import (
-    clean_same,
-    clean_drift,
     clean_outofbounds,
     clean_outofshape,
-    clean_traj,
     dataagg,
     id_reindex_disgap,
     id_reindex
@@ -161,20 +143,27 @@ from transbigdata.taxigps import (
     taxigps_traj_point
 )
 from transbigdata.mobilephonedata import (
-    #new
-    mobile_stay_move,
-    mobile_stay_dutation,
+    mobile_stay_duration,
     mobile_identify_home,
-    mobile_identify_work,
-    #old    
-    traj_stay_move,
+    mobile_identify_work,    
     )
 from transbigdata.traj import (
+    traj_mapmatch,
+    traj_clean_drift,
+    traj_clean_redundant,
+    traj_slice,
+    traj_smooth,
+    traj_segment,
     traj_densify,
     traj_sparsify,
+    traj_stay_move,
     points_to_traj,
+)
+
+from transbigdata.utils import (
     dumpjson
 )
+
 from transbigdata.quality import (
     sample_duration,
     data_summary
@@ -207,6 +196,5 @@ from transbigdata.activity import (
     entropy_rate,
     ellipse_params,
     ellipse_plot,
-    plot_activity,
-    mobile_plot_activity
+    plot_activity
 )

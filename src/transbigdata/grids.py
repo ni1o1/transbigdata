@@ -1210,47 +1210,6 @@ def convertparams(params):
             'Method should be `rect`,`tri` or `hexa`')  # pragma: no cover
     return dicparams
 
-
-'''
-Old namespace
-'''
-
-
-def regenerate_params(*args, **kwargs):
-    warnings.warn("This method is renamed as transbigdata.grid_to_params")
-    return grid_to_params(*args, **kwargs)
-
-
-def grid_params(*args, **kwargs):
-    warnings.warn("This method is renamed as transbigdata.area_to_params")
-    return area_to_params(*args, **kwargs)
-
-
-def GPS_to_grids(*args, **kwargs):
-    warnings.warn("This method is renamed as transbigdata.GPS_to_grid")
-    return GPS_to_grid(*args, **kwargs)
-
-
-def rect_grids(*args, **kwargs):
-    warnings.warn("This method is renamed as transbigdata.area_to_grid")
-    return area_to_grid(*args, **kwargs)
-
-
-def gridid_sjoin_shape(*args, **kwargs):
-    warnings.warn("This method is renamed as transbigdata.grid_to_area")
-    return grid_to_area(*args, **kwargs)
-
-
-def grids_centre(loncol, latcol, params):
-    warnings.warn("This method is renamed as transbigdata.grid_to_centre")
-    return grid_to_centre([loncol, latcol], params)
-
-
-def gridid_to_polygon(loncol, latcol, params):
-    warnings.warn("This method is renamed as transbigdata.grid_to_polygon")
-    return grid_to_polygon([loncol, latcol], params)
-
-
 '''
 Geohash
 '''

@@ -12,7 +12,7 @@ class TestGrids:
         self.shape = gpd.GeoDataFrame([Polygon([[113.59, 22.39], [113.61, 22.39], [113.61, 22.41], [113.6, 22.42]])],columns = ['geometry'])
         self.shape.crs = 'epsg:4326'
     def test_rect_grids(self):
-        result = tbd.rect_grids(self.bounds, accuracy=500)
+        result = tbd.area_to_grid(self.bounds, accuracy=500)
         res1 = result[0]['geometry'].iloc[0]
         res2 = result[1]
         res2 = [res2['slon'], res2['slat'], res2['deltalon'], res2['deltalat']]
@@ -27,25 +27,25 @@ class TestGrids:
         assert np.allclose(res2, truth)
 
     def test_grid_params(self):
-        result = tbd.grid_params(self.bounds, accuracy=500)
+        result = tbd.area_to_params(self.bounds, accuracy=500)
         result = [result['slon'], result['slat'],
                   result['deltalon'], result['deltalat']]
         truth = (113.6, 22.4, 0.004863669213934598, 0.004496605206422906)
         assert np.allclose(result, truth)
 
     def test_GPS_to_grids(self):
-        result = tbd.GPS_to_grids(113.7, 22.7, self.params)
+        result = tbd.GPS_to_grid(113.7, 22.7, self.params)
         truth = [21, 67]
         assert np.allclose(result, truth)
 
     def test_grids_centre(self):
-        result = tbd.grids_centre(21, 67, self.params)
+        result = tbd.grid_to_centre([21, 67], self.params)
         truth = (113.70213705349262, 22.70127254883033)
         assert np.allclose(result, truth)
 
     def test_gridid_to_polygon(self):
-        result = tbd.gridid_to_polygon(
-            pd.Series(21), pd.Series(67), self.params)[0]
+        result = tbd.grid_to_polygon(
+            [pd.Series(21), pd.Series(67)], self.params)[0]
         truth = [[113.69970522,  22.69902425],
                  [113.70456889,  22.69902425],
                  [113.70456889,  22.70352085],
@@ -60,7 +60,7 @@ class TestGrids:
                                   Polygon(
             [[113.59, 22.39], [113.61, 22.39], [113.61, 22.41], [113.6, 22.42]])
         ], columns=['geometry'])
-        result = tbd.gridid_sjoin_shape(data, shape, self.params, col=[
+        result = tbd.grid_to_area(data, shape, self.params, col=[
                                         'LONCOL', 'LATCOL'])['geometry'].iloc[0]
         truth = [(113.60486366921393, 22.404496605206422)]
         assert np.allclose(list(result.coords), truth)
@@ -89,8 +89,8 @@ class TestGrids:
                             113.602246, 113.597754, 113.595509])
 
     def test_regenerate_params(self):
-        grid, params = tbd.rect_grids(self.bounds, 500)
-        result = tbd.regenerate_params(grid)
+        grid, params = tbd.area_to_grid(self.bounds, 500)
+        result = tbd.grid_to_params(grid)
         result = [result['slon'], result['slat'],
                   result['deltalon'], result['deltalat']]
         truth = (113.60000000000001,
@@ -100,7 +100,7 @@ class TestGrids:
         assert np.allclose(result, truth)
 
     def test_grid_from_params(self):
-        result = list(tbd.rect_grids(self.bounds, params=self.params)[
+        result = list(tbd.area_to_grid(self.bounds, params=self.params)[
                       0]['geometry'].iloc[3].exterior.coords)
         truth = [(113.6072955038209, 22.393255092190365),
                  (113.61215917303483, 22.393255092190365),

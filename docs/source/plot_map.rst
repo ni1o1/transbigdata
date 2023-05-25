@@ -13,6 +13,10 @@ Load the basemap
    
     plot_map
     plotscale
+    set_mapboxtoken
+    set_imgsavepath
+    read_imgsavepath
+    read_mapboxtoken
 
 
 Settings before start

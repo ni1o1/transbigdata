@@ -175,7 +175,7 @@ def metro_network(line, stop, transfertime=5, nxgraph=True):
     # All transfer time are set as the same, export `edge2` for further degign
     edge2['duration'] = transfertime
     edge2.columns = edge1.columns
-    edge = edge1.append(edge2)
+    edge = pd.concat([edge1,edge2])
     node = list(edge['ostation'].drop_duplicates())
     if nxgraph:
         import networkx as nx

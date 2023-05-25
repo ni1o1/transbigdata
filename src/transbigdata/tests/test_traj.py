@@ -1,8 +1,10 @@
 import transbigdata as tbd
 import pandas as pd
-
+import pytest
+import os
 
 class TestMobile:
+
     def test_mobile(self):
         data = pd.DataFrame([['00466ab30de56db7efbd04991b680ae1', 201806010000, 121.43, 30.175,
                 20180601],
@@ -37,13 +39,14 @@ class TestMobile:
         #Obtain gridding parameters
         params = tbd.area_to_params([121.860, 29.295, 121.862, 29.301], accuracy=500)
         #Identify stay and move infomation from mobile phone trajectory data
-        stay,move = tbd.mobile_stay_move(data,params,col = ['user_id','stime','longitude', 'latitude'])
+        stay,move = tbd.traj_stay_move(data,params,col = ['user_id','stime','longitude', 'latitude'])
 
-        stay['group'] = stay['LONCOL'].astype(str)+','+stay['LATCOL'].astype(str)
-        tbd.plot_activity(stay,col=['stime', 'etime', 'group'])
-        
         assert len(stay) == 7
-        assert len(move) == 6
+        assert len(move) == 8
+
+        #Slice trajectory data
+        slicedata = tbd.traj_slice(data, move, traj_col=['user_id', 'stime'],slice_col=['user_id', 'stime', 'etime', 'moveid'])
+        assert len(slicedata) == 8
 
         #Identify home location
         home = tbd.mobile_identify_home(stay, col=['user_id','stime', 'etime','LONCOL', 'LATCOL','lon','lat'], start_hour=8, end_hour=20 )
@@ -51,3 +54,21 @@ class TestMobile:
         #Identify work location
         work = tbd.mobile_identify_work(stay, col=['user_id', 'stime', 'etime', 'LONCOL', 'LATCOL','lon','lat'], minhour=3, start_hour=8, end_hour=20,workdaystart=0, workdayend=4)
         assert work['LONCOL'].iloc[0] == -86
+
+        #Plot activity
+        stay['group'] = stay['LONCOL'].astype(str)+','+stay['LATCOL'].astype(str)
+        tbd.plot_activity(stay,col=['stime', 'etime', 'group'])
+
+        # Smooth trajectory
+        smoothed = tbd.traj_smooth(data,col = ['user_id','stime','longitude', 'latitude'],proj = False,process_noise_std = 0.5, measurement_noise_std = 1)
+        smoothed = tbd.traj_smooth(data,col = ['user_id','stime','longitude', 'latitude'],proj = True,process_noise_std = 0.5, measurement_noise_std = 1)
+        assert len(smoothed) == 14
+
+        #Segment trajectory
+        segmented = tbd.traj_segment(slicedata,groupby_col=['user_id'],retain_col=['stime', 'longitude', 'latitude', 'date','moveid'])
+        assert len(segmented) == 1
+
+        import osmnx as ox
+        traj = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'traj2.csv'))
+        G = ox.load_graphml(os.path.join(os.path.dirname(__file__), 'data', 'G.graphml'))
+        assert len(tbd.traj_mapmatch(traj,G,col=['lon','lat']))==14

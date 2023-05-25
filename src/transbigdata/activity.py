@@ -53,9 +53,9 @@ def entropy(sequence):
         isinstance(sequence,pd.Series):
         raise TypeError('Sequence must be List,DataFrame,Series') # pragma: no cover
     sequence = pd.DataFrame(sequence)
-    r_1 = sequence[0].value_counts().reset_index()
-    r_1[0] /= r_1[0].sum()
-    entropy = -(r_1[0]*np.log(r_1[0])/np.log(2)).sum()
+    r_1 = sequence[0].value_counts().rename('count').reset_index()
+    r_1['count'] /= r_1['count'].sum()
+    entropy = -(r_1['count']*np.log(r_1['count'])/np.log(2)).sum()
     return entropy
 
 def entropy_rate(sequence):
@@ -158,7 +158,7 @@ def ellipse_plot(ellip_params, ax, **kwargs):
     Enter the parameters of the confidence ellipse and plot the confidence
     ellipse
 
-    输入
+    Parameters
     -------
     ellip_params : List
         Centroid ellipse parameters[pos,width,height,theta,area,oblateness]
@@ -278,6 +278,3 @@ def plot_activity(data,
         fontsize=fontsize)
     plt.show()
 
-'''Old namespace'''
-
-mobile_plot_activity = plot_activity

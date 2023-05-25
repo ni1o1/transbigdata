@@ -32,6 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import geopandas as gpd
 import pandas as pd
+import numpy as np
 from .grids import (
     GPS_to_grid,
     area_to_params,
@@ -39,114 +40,6 @@ from .grids import (
     grid_to_polygon
 )
 from .coordinates import getdistance
-
-
-def clean_same(data, col=['VehicleNum', 'Time', 'Lng', 'Lat']):
-    '''
-    Delete the data with the same information as the data before and
-    after to reduce the amount of data. For example, if several consecutive
-    data of an individual have the same information except for the time,
-    only the first and last two data can be kept
-
-    Parameters
-    -------
-    data : DataFrame
-        Data
-    col : List
-        The column name, in the order of [‘Vehicleid, Time’]. It will sort
-        by time, and then determine the information of other columns besides
-        the time
-
-    Returns
-    -------
-    data1 : DataFrame
-        Cleaned data
-    '''
-    [VehicleNum, Time, Lng, Lat] = col[:4]
-    extra = col[4:]
-    data1 = data.copy()
-    data1 = data1.drop_duplicates(subset=[VehicleNum, Time])
-    data1 = data1.sort_values(by=[VehicleNum, Time])
-    data1['issame'] = 0
-    for i in [VehicleNum, Lng, Lat]+extra:
-        data1['issame'] += (data1[i].shift() == data1[i]
-                            ) & (data1[i].shift(-1) == data1[i])
-    data1 = data1[-(data1['issame'] == len([VehicleNum, Lng, Lat]+extra))]
-    data1 = data1.drop('issame', axis=1)
-    return data1
-
-
-def clean_drift(data, col=['VehicleNum', 'Time', 'Lng', 'Lat'],
-                speedlimit=80, dislimit=1000):
-    '''
-    Delete the drift data. The select principle is that: if the speed of a
-    trajectory point is larger than the speed limit with before and after
-    points, while the speed between the before and after data is less than
-    the speedlimit. The time column in the input data is calculated more
-    efficiently if it is in datetime format.
-
-    Parameters
-    -------
-    data : DataFrame
-        Data
-    col : List
-        Column names, in the order of [‘VehicleNum’, ‘Time’, ‘Lng’, ‘Lat’]
-    speedlimit : number
-        Speed limitation
-
-    Returns
-    -------
-    data1 : DataFrame
-        Cleaned data
-    '''
-    [VehicleNum, Time, Lng, Lat] = col
-    data1 = data.copy()
-    data1 = data1.drop_duplicates(subset=[VehicleNum, Time])
-    data1[Time+'_dt'] = pd.to_datetime(data1[Time])
-    data1 = data1.sort_values(by=[VehicleNum, Time])
-    for i in [VehicleNum, Lng, Lat, Time+'_dt']:
-        data1[i+'_pre'] = data1[i].shift()
-        data1[i+'_next'] = data1[i].shift(-1)
-    data1['dis_pre'] = getdistance(
-        data1[Lng],
-        data1[Lat],
-        data1[Lng+'_pre'],
-        data1[Lat+'_pre'])
-    data1['dis_next'] = getdistance(
-        data1[Lng],
-        data1[Lat],
-        data1[Lng+'_next'],
-        data1[Lat+'_next'])
-    data1['dis_prenext'] = getdistance(
-        data1[Lng+'_pre'],
-        data1[Lat+'_pre'],
-        data1[Lng+'_next'],
-        data1[Lat+'_next'])
-    data1['timegap_pre'] = data1[Time+'_dt'] - data1[Time+'_dt_pre']
-    data1['timegap_next'] = data1[Time+'_dt_next'] - data1[Time+'_dt']
-    data1['timegap_prenext'] = data1[Time+'_dt_next'] - data1[Time+'_dt_pre']
-    data1['speed_pre'] = data1['dis_pre'] / \
-        data1['timegap_pre'].dt.total_seconds()*3.6
-    data1['speed_next'] = data1['dis_next'] / \
-        data1['timegap_next'].dt.total_seconds()*3.6
-    data1['speed_prenext'] = data1['dis_prenext'] / \
-        data1['timegap_prenext'].dt.total_seconds()*3.6
-    if speedlimit:
-        data1 = data1[
-            -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
-              (data1[VehicleNum+'_next'] == data1[VehicleNum]) &
-                (data1['speed_pre'] > speedlimit) &
-              (data1['speed_next'] > speedlimit) &
-              (data1['speed_prenext'] < speedlimit))]
-    if dislimit:
-        data1 = data1[
-            -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
-              (data1[VehicleNum+'_next'] == data1[VehicleNum]) &
-              (data1['dis_pre'] > dislimit) &
-              (data1['dis_next'] > dislimit) &
-              (data1['dis_prenext'] < dislimit))]
-    data1 = data1[data.columns]
-    return data1
 
 
 def clean_outofbounds(data, bounds, col=['Lng', 'Lat']):
@@ -222,64 +115,6 @@ def clean_outofshape(data, shape, col=['Lng', 'Lat'], accuracy=500):
     data1 = pd.merge(data1, data1_gdf[['LONCOL', 'LATCOL']]).drop(
         ['LONCOL', 'LATCOL'], axis=1)
     return data1
-
-
-def clean_traj(data, col=['uid', 'str_time', 'lon', 'lat'], tripgap=1800,
-               disgap=50000, speedlimit=80):
-    '''
-    A combo for trajectory data cleaning, including defining the the time
-    length threshold considered as a new trip, and the distance threshold
-    considered as a new trip
-
-    Parameters
-    -------
-    data : DataFrame
-        Trajectory data
-    col : List
-        Column names, in the order of [‘VehicleNum’, ‘Time’, ‘Lng’, ‘Lat’]
-    tripgap : number
-        The time length threshold considered as a new trip
-    disgap : number
-        The distance threshold considered as a new trip
-    speedlimit : number
-        Speed limit
-
-    Returns
-    -------
-    data1 : DataFrame
-        Cleaned data
-    '''
-    uid, timecol, lon, lat = col
-    data[timecol] = pd.to_datetime(data[timecol])
-    data = data.sort_values(by=[uid, timecol])
-    cols = []
-    for i in data.columns:
-        if i not in [uid, timecol, lon, lat]:
-            cols.append(i)
-    data = clean_same(data, col=[uid, timecol, lon, lat]+cols)
-    data = clean_drift(data, col=[uid, timecol, lon, lat],
-                       speedlimit=speedlimit)
-    data = id_reindex(data, uid, timecol=timecol, timegap=tripgap)
-    data = data.rename(columns={uid+'_new': 'tripid'})
-    data = id_reindex_disgap(
-        data, col=['tripid', lon, lat], disgap=disgap, suffix='')
-    data1 = data.copy()
-    data1['lon1'] = data1[lon].shift(-1)
-    data1['lat1'] = data1[lat].shift(-1)
-    data1['tripid1'] = data1['tripid'].shift(-1)
-    data1 = data1[data1['tripid'] == data1['tripid1']]
-    data1['dis'] = getdistance(
-        data1[lon], data1[lat], data1['lon1'], data1['lat1'])
-    a = data1.groupby(['tripid'])['dis'].sum()
-    a = a[-(a < 50)].reset_index()['tripid']
-    data = pd.merge(data, a)
-    data = data.drop('tripid', axis=1)
-    data = id_reindex(data, uid, timecol=timecol, timegap=tripgap)
-    data = data.rename(columns={uid+'_new': 'tripid'})
-    data = id_reindex_disgap(
-        data, col=['tripid', lon, lat], disgap=disgap, suffix='')
-    return data
-
 
 def dataagg(data, shape, col=['Lng', 'Lat', 'count'], accuracy=500):
     '''

@@ -36,9 +36,11 @@ import numpy as np
 from shapely.geometry import LineString
 import shapely
 from .preprocess import (
-    clean_same,
     clean_outofshape,
     id_reindex
+)
+from .traj import(
+    traj_clean_redundant
 )
 
 
@@ -98,7 +100,7 @@ def busgps_arriveinfo(data, line, stop, col=[
     line_buffer['geometry'] = line_buffer.buffer(200)
     line_buffer = line_buffer.to_crs(epsg=4326)
     print('.', end='')
-    data = clean_same(data, col=[VehicleId, GPSDateTime, lon, lat])
+    data = traj_clean_redundant(data, col=[VehicleId, GPSDateTime, lon, lat])
     print('.', end='')
     data = clean_outofshape(data, line_buffer, col=[lon, lat], accuracy=500)
     print('.')
