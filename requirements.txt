@@ -13,3 +13,5 @@ numpydoc
 nbsphinx
 sphinx_gallery
 requests
+pykalman
+osmnx
