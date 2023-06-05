@@ -30,9 +30,9 @@ msgid ""
 "`ipynb` and `Data` are in `This link <https://github.com/ni1o1/"
 "transbigdata/tree/main/docs/source/gallery>`__\\"
 msgstr ""
-"以下是一些示例，展示了您可以使用“TransBigData”做什么。“ipynb”和“数据”位"
-"于“此链接<https://github.com/ni1o1/transbigdata/tree/main/docs/source/"
-"gallery>”__\\"
+"以下是一些示例，展示了您可以使用“TransBigData”做什么。`ipynb`和`数据`位"
+"于 `此链接 <https://github.com/ni1o1/transbigdata/tree/main/docs/source/"
+"gallery>`__\\"
 
 #: ../../source/gallery/index.rst:10
 msgid "Basic"
