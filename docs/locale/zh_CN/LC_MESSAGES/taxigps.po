@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"POT-Creation-Date: 2023-06-05 20:53+0800\n"
 "PO-Revision-Date: 2023-06-05 16:52+0800\n"
 "Last-Translator: \n"
-"Language-Team: \n"
 "Language: zh_CN\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
-"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/taxigps.rst:7
 msgid "出租车GPS数据处理"
@@ -25,14 +25,14 @@ msgstr "出租汽车GPS数据处理"
 
 #: ../../source/taxigps.rst:15:<autosummary>:1
 msgid ""
-":py:obj:`clean_taxi_status <transbigdata.clean_taxi_status>`\\ \\(data\\[\\, "
-"col\\, timelimit\\]\\)"
+":py:obj:`clean_taxi_status <transbigdata.clean_taxi_status>`\\ "
+"\\(data\\[\\, col\\, timelimit\\]\\)"
 msgstr ""
 
 #: ../../source/taxigps.rst:15:<autosummary>:1
 msgid ""
-"Deletes records of instantaneous changes in passenger carrying status from "
-"taxi data."
+"Deletes records of instantaneous changes in passenger carrying status "
+"from taxi data."
 msgstr "从出租车数据中删除乘客携带状态的瞬时变化记录。"
 
 #: ../../source/taxigps.rst:15:<autosummary>:1
@@ -48,33 +48,30 @@ msgstr "输入出租车GPS数据，提取OD信息"
 
 #: ../../source/taxigps.rst:15:<autosummary>:1
 msgid ""
-":py:obj:`taxigps_traj_point <transbigdata.taxigps_traj_point>`\\ \\(data\\, "
-"oddata\\[\\, col\\]\\)"
+":py:obj:`taxigps_traj_point <transbigdata.taxigps_traj_point>`\\ "
+"\\(data\\, oddata\\[\\, col\\]\\)"
 msgstr ""
 
 #: ../../source/taxigps.rst:15:<autosummary>:1 of
 #: transbigdata.taxigps.taxigps_traj_point:2
 msgid ""
-"Input Taxi data and OD data to extract the trajectory points for delivery "
-"and idle trips"
+"Input Taxi data and OD data to extract the trajectory points for delivery"
+" and idle trips"
 msgstr "输入出租车数据和OD数据，提取配送和闲置行程的轨迹点"
 
 #: of transbigdata.taxigps.clean_taxi_status:2
 msgid ""
-"Deletes records of instantaneous changes in passenger carrying status from "
-"taxi data. These abnormal records can affect travel order judgments. "
-"Judgement method: If the passenger status of the previous record and the "
-"next record are different from this record for the same vehicle, then this "
-"record should be deleted."
-msgstr ""
-"从出租车数据中删除乘客携带状态的瞬时变化记录。这些异常记录会影响旅行订单判"
-"断。判断方法：如果同一车辆上一条记录和下一条记录的乘客状态与该记录不同，则应"
-"删除该记录。"
+"Deletes records of instantaneous changes in passenger carrying status "
+"from taxi data. These abnormal records can affect travel order judgments."
+" Judgement method: If the passenger status of the previous record and the"
+" next record are different from this record for the same vehicle, then "
+"this record should be deleted."
+msgstr "从出租车数据中删除乘客携带状态的瞬时变化记录。这些异常记录会影响旅行订单判断。判断方法：如果同一车辆上一条记录和下一条记录的乘客状态与该记录不同，则应删除该记录。"
 
 #: of transbigdata.taxigps.clean_taxi_status transbigdata.taxigps.taxigps_to_od
 #: transbigdata.taxigps.taxigps_traj_point
 msgid "参数"
-msgstr "参数"
+msgstr ""
 
 #: of transbigdata.taxigps.clean_taxi_status:8
 msgid "Data"
@@ -86,16 +83,14 @@ msgstr "列名，顺序为[‘VehicleNum’, ‘Time’, ‘OpenStatus’]"
 
 #: of transbigdata.taxigps.clean_taxi_status:12
 msgid ""
-"Optional, in seconds. If the time between the previous record and the next "
-"record is less than the time threshold, then it will be deleted"
-msgstr ""
-"可选，以秒为单位。如果上一条记录和下一条记录之间的时间小于时间阈值，则将删除"
-"该记录"
+"Optional, in seconds. If the time between the previous record and the "
+"next record is less than the time threshold, then it will be deleted"
+msgstr "可选，以秒为单位。如果上一条记录和下一条记录之间的时间小于时间阈值，则将删除该记录"
 
 #: of transbigdata.taxigps.clean_taxi_status transbigdata.taxigps.taxigps_to_od
 #: transbigdata.taxigps.taxigps_traj_point
 msgid "返回"
-msgstr "返回"
+msgstr ""
 
 #: of transbigdata.taxigps.clean_taxi_status:16
 msgid "**data1** -- Cleaned data"
@@ -103,7 +98,7 @@ msgstr "**data1** -- 清理后的数据"
 
 #: of transbigdata.taxigps.clean_taxi_status transbigdata.taxigps.taxigps_to_od
 msgid "返回类型"
-msgstr "返回类型"
+msgstr ""
 
 #: of transbigdata.taxigps.taxigps_to_od:4
 msgid "Taxi GPS data"
@@ -111,8 +106,8 @@ msgstr "出租车GPS数据"
 
 #: of transbigdata.taxigps.taxigps_to_od:6
 msgid ""
-"Column names in the data, need to be in order [vehicle id, time, longitude, "
-"latitude, passenger status]"
+"Column names in the data, need to be in order [vehicle id, time, "
+"longitude, latitude, passenger status]"
 msgstr "列名在数据中，需要按顺序排列[车辆ID、时间、经度、纬度、乘客状态]"
 
 #: of transbigdata.taxigps.taxigps_to_od:10
@@ -129,17 +124,15 @@ msgstr "出租车OD数据"
 
 #: of transbigdata.taxigps.taxigps_traj_point:9
 msgid ""
-"Column names, need to be in order [vehicle id, time, longitude, latitude, "
-"passenger status]"
+"Column names, need to be in order [vehicle id, time, longitude, latitude,"
+" passenger status]"
 msgstr "栏目名称，需按顺序排列[车辆ID、时间、经度、纬度、旅客状态]"
 
 #: of transbigdata.taxigps.taxigps_traj_point:13
 msgid ""
-"* **data_deliver** (*DataFrame*) -- Trajectory points for delivery trips * "
-"**data_idle** (*DataFrame*) -- Trajectory points for idle trips"
-msgstr ""
-"* **data_deliver** （*数据帧*） -- 交货行程的轨迹点 * **data_idle** （*数据帧"
-"*） -- 空闲行程的轨迹点"
+"* **data_deliver** (*DataFrame*) -- Trajectory points for delivery trips "
+"* **data_idle** (*DataFrame*) -- Trajectory points for idle trips"
+msgstr "* **data_deliver** （*数据帧*） -- 交货行程的轨迹点 * **data_idle** （*数据帧*） -- 空闲行程的轨迹点"
 
 #: of transbigdata.taxigps.taxigps_traj_point:13
 msgid "**data_deliver** (*DataFrame*) -- Trajectory points for delivery trips"
@@ -148,3 +141,52 @@ msgstr "**data_deliver** (*DataFrame*) -- 送货行程的轨迹点"
 #: of transbigdata.taxigps.taxigps_traj_point:14
 msgid "**data_idle** (*DataFrame*) -- Trajectory points for idle trips"
 msgstr "**data_idle** (*DataFrame*) -- 空闲行程的轨迹点"
+
+#~ msgid ""
+#~ ":py:obj:`clean_taxi_status <transbigdata.clean_taxi_status>`\\"
+#~ " \\(data\\[\\, col\\, timelimit\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`taxigps_to_od <transbigdata.taxigps_to_od>`\\ "
+#~ "\\(data\\[\\, col\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`taxigps_traj_point <transbigdata.taxigps_traj_point>`\\"
+#~ " \\(data\\, oddata\\[\\, col\\]\\)"
+#~ msgstr ""
+
+#~ msgid "参数"
+#~ msgstr "参数"
+
+#~ msgid "返回"
+#~ msgstr "返回"
+
+#~ msgid "返回类型"
+#~ msgstr "返回类型"
+
+#~ msgid ""
+#~ ":obj:`clean_taxi_status <transbigdata.clean_taxi_status>`\\ "
+#~ "\\(data\\[\\, col\\, timelimit\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`taxigps_to_od <transbigdata.taxigps_to_od>`\\ "
+#~ "\\(data\\[\\, col\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`taxigps_traj_point <transbigdata.taxigps_traj_point>`\\"
+#~ " \\(data\\, oddata\\[\\, col\\]\\)"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+

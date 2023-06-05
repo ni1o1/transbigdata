@@ -41,8 +41,6 @@ def dumpjson(data, path):
     -------
     data : json
         The json data to be saved
-
-
     path : str
         The storage path
 

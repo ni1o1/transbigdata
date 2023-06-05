@@ -8,17 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"POT-Creation-Date: 2023-06-05 20:53+0800\n"
 "PO-Revision-Date: 2023-06-05 16:29+0800\n"
 "Last-Translator: \n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.12.1\n"
-"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/api/transbigdata.area_to_grid.rst:2
 #, fuzzy
@@ -31,9 +30,8 @@ msgid "Generate the rectangular grids in the bounds or shape"
 msgstr "在边界或形状中生成矩形网格"
 
 #: of transbigdata.grids.area_to_grid
-#, fuzzy
 msgid "参数"
-msgstr "参数"
+msgstr ""
 
 #: of transbigdata.grids.area_to_grid:4
 #, fuzzy
@@ -42,9 +40,8 @@ msgid ""
 "where lon1 , lat1 are the lower-left coordinates, lon2 , lat2 are the "
 "upper-right coordinates If shape, it should be GeoDataFrame"
 msgstr ""
-"生成网格的位置。如果边界为 [lon1， lat1， lon2， lat2]（WGS84），其中 "
-"lon1 ， lat1 是左下角坐标，lon2 ， lat2 是右上角坐标 如果是形状，则应为 "
-"GeoDataFrame"
+"生成网格的位置。如果边界为 [lon1， lat1， lon2， lat2]（WGS84），其中 lon1 ， lat1 是左下角坐标，lon2 "
+"， lat2 是右上角坐标 如果是形状，则应为 GeoDataFrame"
 
 #: of transbigdata.grids.area_to_grid:9
 #, fuzzy
@@ -59,47 +56,60 @@ msgstr "矩形、三级或六角形"
 #: of transbigdata.grids.area_to_grid:13
 #, fuzzy
 msgid ""
-"Gridding parameters. See https://transbigdata.readthedocs.io/en/latest/"
-"grids.html for detail information about gridding parameters. When "
-"Gridding parameters is given, accuracy will not be used."
+"Gridding parameters. See "
+"https://transbigdata.readthedocs.io/en/latest/grids.html for detail "
+"information about gridding parameters. When Gridding parameters is given,"
+" accuracy will not be used."
 msgstr ""
-"网格化参数。有关网格化参数的详细信息，请参阅 https://transbigdata."
-"readthedocs.io/en/latest/grids.html。给出格网参数时，将不使用精度。"
+"网格化参数。有关网格化参数的详细信息，请参阅 "
+"https://transbigdata.readthedocs.io/en/latest/grids.html。给出格网参数时，将不使用精度。"
 
 #: of transbigdata.grids.area_to_grid
-#, fuzzy
 msgid "返回"
-msgstr "返回"
+msgstr ""
 
 #: of transbigdata.grids.area_to_grid:19
 #, fuzzy
 msgid ""
-"* **grid** (*GeoDataFrame*) -- Grid GeoDataFrame,   LONCOL and LATCOL "
-"are the index of grids,   HBLON and HBLAT are the center of the grids * "
-"**params** (*list or dict*) -- Gridding parameters.   See https://"
-"transbigdata.readthedocs.io/en/latest/grids.html   for detail "
+"* **grid** (*GeoDataFrame*) -- Grid GeoDataFrame,   LONCOL and LATCOL are"
+" the index of grids,   HBLON and HBLAT are the center of the grids * "
+"**params** (*list or dict*) -- Gridding parameters.   See "
+"https://transbigdata.readthedocs.io/en/latest/grids.html   for detail "
 "information about gridding parameters."
 msgstr ""
-"* **grid** （*GeoDataFrame*） -- Grid GeoDataFrame、LONCOL 和 LATCOL 是网"
-"格的索引，HBLON 和 HBLAT 是网格的中心 * **params** （*list or dict*） -- "
-"网格参数。  有关网格化参数的详细信息，请参阅 https://transbigdata."
-"readthedocs.io/en/latest/grids.html。"
+"* **grid** （*GeoDataFrame*） -- Grid GeoDataFrame、LONCOL 和 LATCOL "
+"是网格的索引，HBLON 和 HBLAT 是网格的中心 * **params** （*list or dict*） -- 网格参数。  "
+"有关网格化参数的详细信息，请参阅 "
+"https://transbigdata.readthedocs.io/en/latest/grids.html。"
 
 #: of transbigdata.grids.area_to_grid:19
 #, fuzzy
 msgid ""
-"**grid** (*GeoDataFrame*) -- Grid GeoDataFrame, LONCOL and LATCOL are "
-"the index of grids, HBLON and HBLAT are the center of the grids"
+"**grid** (*GeoDataFrame*) -- Grid GeoDataFrame, LONCOL and LATCOL are the"
+" index of grids, HBLON and HBLAT are the center of the grids"
 msgstr ""
-"**grid** （*GeoDataFrame*） -- Grid GeoDataFrame、LONCOL 和 LATCOL 是网格"
-"的索引，HBLON 和 HBLAT 是网格的中心"
+"**grid** （*GeoDataFrame*） -- Grid GeoDataFrame、LONCOL 和 LATCOL "
+"是网格的索引，HBLON 和 HBLAT 是网格的中心"
 
 #: of transbigdata.grids.area_to_grid:22
 #, fuzzy
 msgid ""
-"**params** (*list or dict*) -- Gridding parameters. See https://"
-"transbigdata.readthedocs.io/en/latest/grids.html for detail information "
-"about gridding parameters."
+"**params** (*list or dict*) -- Gridding parameters. See "
+"https://transbigdata.readthedocs.io/en/latest/grids.html for detail "
+"information about gridding parameters."
 msgstr ""
 "**参数** （*列表或字典*） -- 网格参数。有关网格化参数的详细信息，请参阅 "
 "https://transbigdata.readthedocs.io/en/latest/grids.html。"
+
+#~ msgid "参数"
+#~ msgstr "参数"
+
+#~ msgid "返回"
+#~ msgstr "返回"
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+

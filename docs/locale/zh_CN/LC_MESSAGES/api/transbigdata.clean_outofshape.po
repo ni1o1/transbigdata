@@ -8,17 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"POT-Creation-Date: 2023-06-05 20:53+0800\n"
 "PO-Revision-Date: 2023-06-05 16:36+0800\n"
 "Last-Translator: \n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.12.1\n"
-"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/api/transbigdata.clean_outofshape.rst:2
 #, fuzzy
@@ -33,9 +32,8 @@ msgid ""
 msgstr "输入研究区域的地理数据框并排除研究区域以外的数据"
 
 #: of transbigdata.preprocess.clean_outofshape
-#, fuzzy
 msgid "参数"
-msgstr "参数"
+msgstr ""
 
 #: of transbigdata.preprocess.clean_outofshape:5
 msgid "Data"
@@ -54,16 +52,14 @@ msgstr "经度和纬度的列名"
 #: of transbigdata.preprocess.clean_outofshape:11
 #, fuzzy
 msgid ""
-"The size of grid. The principle is to do the data gridding first and "
-"then do the data cleaning. The smaller the size is, the higher accuracy "
-"it has"
-msgstr ""
-"网格的大小。原理是先做数据网格化，然后再做数据清理。尺寸越小，精度越高"
+"The size of grid. The principle is to do the data gridding first and then"
+" do the data cleaning. The smaller the size is, the higher accuracy it "
+"has"
+msgstr "网格的大小。原理是先做数据网格化，然后再做数据清理。尺寸越小，精度越高"
 
 #: of transbigdata.preprocess.clean_outofshape
-#, fuzzy
 msgid "返回"
-msgstr "返回"
+msgstr ""
 
 #: of transbigdata.preprocess.clean_outofshape:16
 #, fuzzy
@@ -71,6 +67,24 @@ msgid "**data1** -- Data within the scope of the study"
 msgstr "**data1** -- 研究范围内的数据"
 
 #: of transbigdata.preprocess.clean_outofshape
-#, fuzzy
 msgid "返回类型"
-msgstr "返回类型"
+msgstr ""
+
+#~ msgid "参数"
+#~ msgstr "参数"
+
+#~ msgid "返回"
+#~ msgstr "返回"
+
+#~ msgid "返回类型"
+#~ msgstr "返回类型"
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+

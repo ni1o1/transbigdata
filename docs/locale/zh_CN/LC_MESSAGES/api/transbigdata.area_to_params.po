@@ -8,17 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"POT-Creation-Date: 2023-06-05 20:53+0800\n"
 "PO-Revision-Date: 2023-06-05 16:29+0800\n"
 "Last-Translator: \n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.12.1\n"
-"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/api/transbigdata.area_to_params.rst:2
 #, fuzzy
@@ -31,9 +30,8 @@ msgid "Generate gridding params"
 msgstr "生成网格化参数"
 
 #: of transbigdata.grids.area_to_params
-#, fuzzy
 msgid "参数"
-msgstr "参数"
+msgstr ""
 
 #: of transbigdata.grids.area_to_params:4
 #, fuzzy
@@ -42,9 +40,8 @@ msgid ""
 "where lon1 , lat1 are the lower-left coordinates, lon2 , lat2 are the "
 "upper-right coordinates If shape, it should be GeoDataFrame"
 msgstr ""
-"生成网格的位置。如果边界为 [lon1， lat1， lon2， lat2]（WGS84），其中 "
-"lon1 ， lat1 是左下角坐标，lon2 ， lat2 是右上角坐标 如果是形状，则应"
-"为 GeoDataFrame"
+"生成网格的位置。如果边界为 [lon1， lat1， lon2， lat2]（WGS84），其中 lon1 ， lat1 是左下角坐标，lon2 "
+"， lat2 是右上角坐标 如果是形状，则应为 GeoDataFrame"
 
 #: of transbigdata.grids.area_to_params:9
 #, fuzzy
@@ -57,21 +54,38 @@ msgid "rect, tri or hexa"
 msgstr "矩形、三级或六角形"
 
 #: of transbigdata.grids.area_to_params
-#, fuzzy
 msgid "返回"
-msgstr "返回"
+msgstr ""
 
 #: of transbigdata.grids.area_to_params:14
 #, fuzzy
 msgid ""
-"**params** -- Gridding parameters. See https://transbigdata."
-"readthedocs.io/en/latest/grids.html for detail information about "
-"gridding parameters."
+"**params** -- Gridding parameters. See "
+"https://transbigdata.readthedocs.io/en/latest/grids.html for detail "
+"information about gridding parameters."
 msgstr ""
-"参数 -- 网格参数。有关网格化参数的详细信息，请参阅 https://"
-"transbigdata.readthedocs.io/en/latest/grids.html。"
+"参数 -- 网格参数。有关网格化参数的详细信息，请参阅 "
+"https://transbigdata.readthedocs.io/en/latest/grids.html。"
 
 #: of transbigdata.grids.area_to_params
-#, fuzzy
 msgid "返回类型"
-msgstr "返回类型"
+msgstr ""
+
+#~ msgid "参数"
+#~ msgstr "参数"
+
+#~ msgid "返回"
+#~ msgstr "返回"
+
+#~ msgid "返回类型"
+#~ msgstr "返回类型"
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+

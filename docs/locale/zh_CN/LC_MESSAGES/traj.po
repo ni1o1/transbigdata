@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"POT-Creation-Date: 2023-06-05 20:53+0800\n"
 "PO-Revision-Date: 2023-06-05 16:52+0800\n"
 "Last-Translator: \n"
-"Language-Team: \n"
 "Language: zh_CN\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
-"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/traj.rst:6
 msgid "Trajectory Processing"
@@ -25,20 +25,20 @@ msgstr "轨迹处理"
 
 #: ../../source/traj.rst:21:<autosummary>:1
 msgid ""
-":py:obj:`traj_mapmatch <transbigdata.traj_mapmatch>`\\ \\(traj\\, G\\[\\, "
-"col\\]\\)"
+":py:obj:`traj_mapmatch <transbigdata.traj_mapmatch>`\\ \\(traj\\, G\\[\\,"
+" col\\]\\)"
 msgstr ""
 
 #: ../../source/traj.rst:21:<autosummary>:1
 msgid ""
-"Nearest map matching: Find the nearest point on the road network for each "
-"trajectory point."
+"Nearest map matching: Find the nearest point on the road network for each"
+" trajectory point."
 msgstr "最近地图匹配：查找道路网络上每个轨迹点的最近点。"
 
 #: ../../source/traj.rst:21:<autosummary>:1
 msgid ""
-":py:obj:`traj_clean_drift <transbigdata.traj_clean_drift>`\\ \\(data\\[\\, "
-"col\\, method\\, ...\\]\\)"
+":py:obj:`traj_clean_drift <transbigdata.traj_clean_drift>`\\ "
+"\\(data\\[\\, col\\, method\\, ...\\]\\)"
 msgstr ""
 
 #: ../../source/traj.rst:21:<autosummary>:1
@@ -53,8 +53,8 @@ msgstr ""
 
 #: ../../source/traj.rst:21:<autosummary>:1
 msgid ""
-"Delete the data with the same information as the data before and after to "
-"reduce the amount of data."
+"Delete the data with the same information as the data before and after to"
+" reduce the amount of data."
 msgstr "删除与前后数据信息相同的数据，以减少数据量。"
 
 #: ../../source/traj.rst:21:<autosummary>:1
@@ -85,26 +85,26 @@ msgstr ""
 
 #: ../../source/traj.rst:21:<autosummary>:1
 msgid ""
-"Segment the trajectory in order and return the starting and ending information "
-"of each segment."
+"Segment the trajectory in order and return the starting and ending "
+"information of each segment."
 msgstr "按顺序分割轨迹，返回每段的起点和终点信息。"
 
 #: ../../source/traj.rst:21:<autosummary>:1
 msgid ""
-":py:obj:`traj_densify <transbigdata.traj_densify>`\\ \\(data\\[\\, col\\, "
-"timegap\\]\\)"
+":py:obj:`traj_densify <transbigdata.traj_densify>`\\ \\(data\\[\\, col\\,"
+" timegap\\]\\)"
 msgstr ""
 
 #: ../../source/traj.rst:21:<autosummary>:1 of transbigdata.traj.traj_densify:2
 msgid ""
-"Trajectory densification, ensure that there is a trajectory point each timegap "
-"seconds"
+"Trajectory densification, ensure that there is a trajectory point each "
+"timegap seconds"
 msgstr "轨迹致密化，保证每个时间间隔秒都有一个轨迹点"
 
 #: ../../source/traj.rst:21:<autosummary>:1
 msgid ""
-":py:obj:`traj_sparsify <transbigdata.traj_sparsify>`\\ \\(data\\[\\, col\\, "
-"timegap\\, method\\]\\)"
+":py:obj:`traj_sparsify <transbigdata.traj_sparsify>`\\ \\(data\\[\\, "
+"col\\, timegap\\, method\\]\\)"
 msgstr ""
 
 #: ../../source/traj.rst:21:<autosummary>:1
@@ -117,38 +117,39 @@ msgid ""
 "params\\[\\, col\\, activitytime\\]\\)"
 msgstr ""
 
-#: ../../source/traj.rst:21:<autosummary>:1 of transbigdata.traj.traj_stay_move:2
+#: ../../source/traj.rst:21:<autosummary>:1 of
+#: transbigdata.traj.traj_stay_move:2
 msgid "Input trajectory data and gridding parameters, identify stay and move"
 msgstr "输入轨迹数据和网格化参数，识别停留和移动"
 
 #: ../../source/traj.rst:21:<autosummary>:1
 msgid ""
-":py:obj:`points_to_traj <transbigdata.points_to_traj>`\\ \\(traj\\_points\\[\\, "
-"col\\, timecol\\]\\)"
+":py:obj:`points_to_traj <transbigdata.points_to_traj>`\\ "
+"\\(traj\\_points\\[\\, col\\, timecol\\]\\)"
 msgstr ""
 
-#: ../../source/traj.rst:21:<autosummary>:1 of transbigdata.traj.points_to_traj:2
+#: ../../source/traj.rst:21:<autosummary>:1 of
+#: transbigdata.traj.points_to_traj:2
 msgid "Input trajectory, generate GeoDataFrame"
 msgstr "输入轨迹，生成GeoDataFrame"
 
 #: of transbigdata.traj.traj_mapmatch:2
 msgid ""
-"Nearest map matching: Find the nearest point on the road network for each "
-"trajectory point. When conducting nearest neighbor matching, we need to find "
-"the closest road segment on the road network for each trajectory point, and "
-"match the trajectory point to that segment. In practice, we can first extract "
-"the nodes of the road segments to form a set of points (i.e., extracting each "
-"coordinate point from each LineString in the geometry column), then calculate "
-"the nearest distance between the trajectory point and this set of points, and "
-"finally match the trajectory point to the road segment where the nearest "
-"distance's node is located. This process effectively transforms the problem of "
-"matching points to lines into a problem of matching points to points."
+"Nearest map matching: Find the nearest point on the road network for each"
+" trajectory point. When conducting nearest neighbor matching, we need to "
+"find the closest road segment on the road network for each trajectory "
+"point, and match the trajectory point to that segment. In practice, we "
+"can first extract the nodes of the road segments to form a set of points "
+"(i.e., extracting each coordinate point from each LineString in the "
+"geometry column), then calculate the nearest distance between the "
+"trajectory point and this set of points, and finally match the trajectory"
+" point to the road segment where the nearest distance's node is located. "
+"This process effectively transforms the problem of matching points to "
+"lines into a problem of matching points to points."
 msgstr ""
-"最近地图匹配：查找道路网络上每个轨迹点的最近点。在进行最近邻匹配时，我们需要找到"
-"路网中每个轨迹点最近的路段，并将轨迹点与该路段进行匹配。在实践中，我们可以先提取"
-"路段的节点形成一组点（即从几何列中的每个 LineString 中提取每个坐标点），然后计算"
-"轨迹点与这组点之间的最近距离，最后将轨迹点与最近距离节点所在的路段匹配。这个过程"
-"有效地将点与线的匹配问题转化为点与点的匹配问题。"
+"最近地图匹配：查找道路网络上每个轨迹点的最近点。在进行最近邻匹配时，我们需要找到路网中每个轨迹点最近的路段，并将轨迹点与该路段进行匹配。在实践中，我们可以先提取路段的节点形成一组点（即从几何列中的每个"
+" LineString "
+"中提取每个坐标点），然后计算轨迹点与这组点之间的最近距离，最后将轨迹点与最近距离节点所在的路段匹配。这个过程有效地将点与线的匹配问题转化为点与点的匹配问题。"
 
 #: of transbigdata.traj.points_to_traj transbigdata.traj.traj_clean_drift
 #: transbigdata.traj.traj_clean_redundant transbigdata.traj.traj_densify
@@ -156,7 +157,7 @@ msgstr ""
 #: transbigdata.traj.traj_slice transbigdata.traj.traj_smooth
 #: transbigdata.traj.traj_sparsify transbigdata.traj.traj_stay_move
 msgid "参数"
-msgstr "参数"
+msgstr ""
 
 #: of transbigdata.traj.traj_mapmatch:5
 msgid "The trajectory point data set to be matched."
@@ -168,7 +169,8 @@ msgstr "用于匹配的路网，由osmnx创建。"
 
 #: of transbigdata.traj.traj_mapmatch:9
 msgid ""
-"The name of the longitude and latitude columns in the trajectory point data set."
+"The name of the longitude and latitude columns in the trajectory point "
+"data set."
 msgstr "轨迹点数据集中经度和纬度列的名称。"
 
 #: of transbigdata.traj.points_to_traj transbigdata.traj.traj_clean_drift
@@ -177,7 +179,7 @@ msgstr "轨迹点数据集中经度和纬度列的名称。"
 #: transbigdata.traj.traj_slice transbigdata.traj.traj_smooth
 #: transbigdata.traj.traj_sparsify transbigdata.traj.traj_stay_move
 msgid "返回"
-msgstr "返回"
+msgstr ""
 
 #: of transbigdata.traj.traj_mapmatch:12
 msgid "**traj_matched** -- The trajectory point data set after matching."
@@ -189,24 +191,21 @@ msgstr "**traj_matched** -- 匹配后的轨迹点数据集。"
 #: transbigdata.traj.traj_slice transbigdata.traj.traj_smooth
 #: transbigdata.traj.traj_sparsify
 msgid "返回类型"
-msgstr "返回类型"
+msgstr ""
 
 #: of transbigdata.traj.traj_clean_drift:2
 msgid ""
-"Delete the drift in the trajectory data. The drift is defined as the data with "
-"a speed greater than the speed limit or the distance between the current point "
-"and the next point is greater than the distance limit or the angle between the "
-"current point, the previous point, and the next point is smaller than the angle "
-"limit. The speed limit is 80km/h by default, and the distance limit is 1000m by "
-"default. The method of cleaning drift data is divided into two methods: "
-"‘oneside’ and ‘twoside’. The ‘oneside’ method is to consider the speed of the "
-"current point and the next point, and the ‘twoside’ method is to consider the "
-"speed of the current point, the previous point, and the next point."
-msgstr ""
-"删除轨迹数据中的漂移。漂移定义为速度大于速度限制或当前点与下一个点之间的距离大于"
-"距离限制或当前点与前一点和下一个点之间的角度小于角度限制的数据。限速默认为80km/"
-"h，距离限制默认为1000m。清理漂移数据的方法分为两种方法：“单侧”和“双侧”。“单面”法"
-"是考虑当前点和下一个点的速度，“双边”法是考虑当前点、前一点和下一个点的速度。"
+"Delete the drift in the trajectory data. The drift is defined as the data"
+" with a speed greater than the speed limit or the distance between the "
+"current point and the next point is greater than the distance limit or "
+"the angle between the current point, the previous point, and the next "
+"point is smaller than the angle limit. The speed limit is 80km/h by "
+"default, and the distance limit is 1000m by default. The method of "
+"cleaning drift data is divided into two methods: ‘oneside’ and ‘twoside’."
+" The ‘oneside’ method is to consider the speed of the current point and "
+"the next point, and the ‘twoside’ method is to consider the speed of the "
+"current point, the previous point, and the next point."
+msgstr "删除轨迹数据中的漂移。漂移定义为速度大于速度限制或当前点与下一个点之间的距离大于距离限制或当前点与前一点和下一个点之间的角度小于角度限制的数据。限速默认为80km/h，距离限制默认为1000m。清理漂移数据的方法分为两种方法：“单侧”和“双侧”。“单面”法是考虑当前点和下一个点的速度，“双边”法是考虑当前点、前一点和下一个点的速度。"
 
 #: of transbigdata.traj.traj_clean_drift:4
 #: transbigdata.traj.traj_clean_redundant:7 transbigdata.traj.traj_densify:5
@@ -241,30 +240,25 @@ msgstr "**data1** -- 清理后的数据"
 
 #: of transbigdata.traj.traj_clean_redundant:2
 msgid ""
-"Delete the data with the same information as the data before and after to "
-"reduce the amount of data. For example, if several consecutive data of an "
-"individual have the same information except for the time, only the first and "
-"last two data can be kept"
-msgstr ""
-"删除与前后数据信息相同的数据，以减少数据量。例如，如果一个人的几个连续数据具有相"
-"同的信息，除了时间，则只能保留第一个和最后两个数据"
+"Delete the data with the same information as the data before and after to"
+" reduce the amount of data. For example, if several consecutive data of "
+"an individual have the same information except for the time, only the "
+"first and last two data can be kept"
+msgstr "删除与前后数据信息相同的数据，以减少数据量。例如，如果一个人的几个连续数据具有相同的信息，除了时间，则只能保留第一个和最后两个数据"
 
 #: of transbigdata.traj.traj_clean_redundant:9
 msgid ""
-"The column name, in the order of [‘Vehicleid, Time’]. It will sort by time, and "
-"then determine the information of other columns besides the time"
-msgstr ""
-"列名称，按 ['车辆 ID， 时间'] 的顺序排列。它会按时间排序，然后确定时间以外的其他"
-"列的信息"
+"The column name, in the order of [‘Vehicleid, Time’]. It will sort by "
+"time, and then determine the information of other columns besides the "
+"time"
+msgstr "列名称，按 ['车辆 ID， 时间'] 的顺序排列。它会按时间排序，然后确定时间以外的其他列的信息"
 
 #: of transbigdata.traj.traj_slice:2
 msgid ""
-"Slice the trajectory data according to the slice data. This method extracts "
-"data from a given set of trajectory data(traj_data) based on a specified time "
-"period(slice_data)."
-msgstr ""
-"根据切片数据对轨迹数据进行切片。该方法根据指定的时间段（slice_data）从一组给定的"
-"轨迹数据（traj_data）中提取数据。"
+"Slice the trajectory data according to the slice data. This method "
+"extracts data from a given set of trajectory data(traj_data) based on a "
+"specified time period(slice_data)."
+msgstr "根据切片数据对轨迹数据进行切片。该方法根据指定的时间段（slice_data）从一组给定的轨迹数据（traj_data）中提取数据。"
 
 #: of transbigdata.traj.traj_slice:5
 msgid "Trajectory data, containing the trajectory of each vehicle"
@@ -272,7 +266,8 @@ msgstr "轨迹数据，包含每辆车的轨迹"
 
 #: of transbigdata.traj.traj_slice:7
 msgid ""
-"Slice data, containing the start time, end time and vehicleid of each slice"
+"Slice data, containing the start time, end time and vehicleid of each "
+"slice"
 msgstr "切片数据，包含每个切片的开始时间、结束时间和车辆ID"
 
 #: of transbigdata.traj.traj_slice:9
@@ -281,8 +276,8 @@ msgstr "轨迹数据的列名，顺序为[VehicleNum,Time]"
 
 #: of transbigdata.traj.traj_slice:11
 msgid ""
-"The column name of slice data, in the sequence of [VehicleNum_slice, Stime, "
-"Etime, SliceId]"
+"The column name of slice data, in the sequence of [VehicleNum_slice, "
+"Stime, Etime, SliceId]"
 msgstr "切片数据的列名，按 [VehicleNum_slice、Stime、Etime、SliceId] 的顺序排列"
 
 #: of transbigdata.traj.traj_slice:14
@@ -291,7 +286,7 @@ msgstr "**data_sliced** -- 切片轨迹数据"
 
 #: of transbigdata.traj.traj_slice:18
 msgid "示例"
-msgstr "展示例子"
+msgstr ""
 
 #: of transbigdata.traj.traj_smooth:4
 msgid "Trajectory data"
@@ -319,20 +314,18 @@ msgstr "**data** -- 平滑轨迹数据"
 
 #: of transbigdata.traj.traj_segment:2
 msgid ""
-"Segment the trajectory in order and return the starting and ending information "
-"of each segment. This function can segment GPS trajectory data, calculate the "
-"start and end information of each segment, and store the results in a DataFrame "
-"object. The input of this function includes a pandas DataFrame object "
-"containing GPS trajectory data,  field names for grouping, and field names to "
-"be retained. The output is a pandas DataFrame object containing the starting "
-"and ending information of each segment, where each row represents a trajectory "
-"segment."
+"Segment the trajectory in order and return the starting and ending "
+"information of each segment. This function can segment GPS trajectory "
+"data, calculate the start and end information of each segment, and store "
+"the results in a DataFrame object. The input of this function includes a "
+"pandas DataFrame object containing GPS trajectory data,  field names for "
+"grouping, and field names to be retained. The output is a pandas "
+"DataFrame object containing the starting and ending information of each "
+"segment, where each row represents a trajectory segment."
 msgstr ""
-"按顺序分割轨迹，返回每段的起点和终点信息。该功能可以分割GPS轨迹数据，计算每个线"
-"段的起点和终点信息，并将结果存储在DataFrame对象中。此函数的输入包括一个 pandas "
-"数据帧对象，其中包含 GPS 轨迹数据、用于分组的字段名称和要保留的字段名称。输出是"
-"一个 pandas DataFrame 对象，其中包含每个线段的开始和结束信息，其中每行表示一个轨"
-"迹段。"
+"按顺序分割轨迹，返回每段的起点和终点信息。该功能可以分割GPS轨迹数据，计算每个线段的起点和终点信息，并将结果存储在DataFrame对象中。此函数的输入包括一个"
+" pandas 数据帧对象，其中包含 GPS 轨迹数据、用于分组的字段名称和要保留的字段名称。输出是一个 pandas DataFrame "
+"对象，其中包含每个线段的开始和结束信息，其中每行表示一个轨迹段。"
 
 #: of transbigdata.traj.traj_segment:5
 msgid "The trajectory data needs to be sorted beforehand."
@@ -340,7 +333,8 @@ msgstr "轨迹数据需要预先排序。"
 
 #: of transbigdata.traj.traj_segment:7
 msgid ""
-"A list of strings specifying the groupby fields to be used for segmentation."
+"A list of strings specifying the groupby fields to be used for "
+"segmentation."
 msgstr "指定要用于分段的分组依据字段的字符串列表。"
 
 #: of transbigdata.traj.traj_segment:9
@@ -349,8 +343,8 @@ msgstr "指定要保留的字段的字符串列表。"
 
 #: of transbigdata.traj.traj_segment:12
 msgid ""
-"**data** -- Containing the starting and ending information of each segment, "
-"where each row represents a trajectory segment."
+"**data** -- Containing the starting and ending information of each "
+"segment, where each row represents a trajectory segment."
 msgstr "**data** -- 包含每个线段的开始和结束信息，其中每行表示一个轨迹段。"
 
 #: of transbigdata.traj.traj_densify:7 transbigdata.traj.traj_sparsify:9
@@ -367,13 +361,11 @@ msgstr "**data1** -- 处理后的数据"
 
 #: of transbigdata.traj.traj_sparsify:2
 msgid ""
-"Trajectory sparsify. When the sampling frequency of trajectory data is too "
-"high, the amount of data is too large, which is not convenient for the analysis "
-"of some studies that require less data frequency. This function can expand the "
-"sampling interval and reduce the amount of data."
-msgstr ""
-"轨迹稀疏。当轨迹数据的采样频率过高时，数据量太大，这对于一些需要较少数据频率的研"
-"究进行分析是不方便的。此功能可以扩展采样间隔并减少数据量。"
+"Trajectory sparsify. When the sampling frequency of trajectory data is "
+"too high, the amount of data is too large, which is not convenient for "
+"the analysis of some studies that require less data frequency. This "
+"function can expand the sampling interval and reduce the amount of data."
+msgstr "轨迹稀疏。当轨迹数据的采样频率过高时，数据量太大，这对于一些需要较少数据频率的研究进行分析是不方便的。此功能可以扩展采样间隔并减少数据量。"
 
 #: of transbigdata.traj.traj_sparsify:11
 msgid "Time gap between trajectory point"
@@ -405,8 +397,8 @@ msgstr "多少时间算活动"
 
 #: of transbigdata.traj.traj_stay_move:14
 msgid ""
-"* **stay** (*DataFrame*) -- stay information * **move** (*DataFrame*) -- move "
-"information"
+"* **stay** (*DataFrame*) -- stay information * **move** (*DataFrame*) -- "
+"move information"
 msgstr "* **停留** （*数据帧*） -- 停留信息 * **移动** （*数据帧*） -- 移动信息"
 
 #: of transbigdata.traj.traj_stay_move:14
@@ -424,12 +416,137 @@ msgstr "列名，顺序为[lng,lat,trajectoryid]"
 #: of transbigdata.traj.points_to_traj:8
 msgid ""
 "Optional, the column name of the time column. If given, the geojson with "
-"[longitude, latitude, altitude, time] in returns can be put into the Kepler to "
-"visualize the trajectory"
-msgstr ""
-"可选，时间列的列名。如果给定，可以将返回的带有[经度，纬度，高度，时间]的geojson"
-"放入开普勒中以可视化轨迹"
+"[longitude, latitude, altitude, time] in returns can be put into the "
+"Kepler to visualize the trajectory"
+msgstr "可选，时间列的列名。如果给定，可以将返回的带有[经度，纬度，高度，时间]的geojson放入开普勒中以可视化轨迹"
 
 #: of transbigdata.traj.points_to_traj:13
 msgid "**traj** -- Generated trajectory"
 msgstr "**traj** -- 生成的轨迹"
+
+#~ msgid ""
+#~ ":py:obj:`traj_mapmatch <transbigdata.traj_mapmatch>`\\ "
+#~ "\\(traj\\, G\\[\\, col\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`traj_clean_drift <transbigdata.traj_clean_drift>`\\ "
+#~ "\\(data\\[\\, col\\, method\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`traj_clean_redundant "
+#~ "<transbigdata.traj_clean_redundant>`\\ \\(data\\[\\, "
+#~ "col\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`traj_slice <transbigdata.traj_slice>`\\ "
+#~ "\\(traj\\_data\\, slice\\_data\\[\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`traj_smooth <transbigdata.traj_smooth>`\\ "
+#~ "\\(data\\[\\, col\\, proj\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`traj_segment <transbigdata.traj_segment>`\\ "
+#~ "\\(data\\[\\, groupby\\_col\\, retain\\_col\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`traj_densify <transbigdata.traj_densify>`\\ "
+#~ "\\(data\\[\\, col\\, timegap\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`traj_sparsify <transbigdata.traj_sparsify>`\\ "
+#~ "\\(data\\[\\, col\\, timegap\\, method\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`traj_stay_move <transbigdata.traj_stay_move>`\\ "
+#~ "\\(data\\, params\\[\\, col\\, activitytime\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`points_to_traj <transbigdata.points_to_traj>`\\ "
+#~ "\\(traj\\_points\\[\\, col\\, timecol\\]\\)"
+#~ msgstr ""
+
+#~ msgid "参数"
+#~ msgstr "参数"
+
+#~ msgid "返回"
+#~ msgstr "返回"
+
+#~ msgid "返回类型"
+#~ msgstr "返回类型"
+
+#~ msgid "示例"
+#~ msgstr "展示例子"
+
+#~ msgid ""
+#~ ":obj:`traj_mapmatch <transbigdata.traj_mapmatch>`\\ "
+#~ "\\(traj\\, G\\[\\, col\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`traj_clean_drift <transbigdata.traj_clean_drift>`\\ "
+#~ "\\(data\\[\\, col\\, method\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`traj_clean_redundant "
+#~ "<transbigdata.traj_clean_redundant>`\\ \\(data\\[\\, "
+#~ "col\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`traj_slice <transbigdata.traj_slice>`\\ "
+#~ "\\(traj\\_data\\, slice\\_data\\[\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`traj_smooth <transbigdata.traj_smooth>`\\ "
+#~ "\\(data\\[\\, col\\, proj\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`traj_segment <transbigdata.traj_segment>`\\ "
+#~ "\\(data\\[\\, groupby\\_col\\, retain\\_col\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`traj_densify <transbigdata.traj_densify>`\\ "
+#~ "\\(data\\[\\, col\\, timegap\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`traj_sparsify <transbigdata.traj_sparsify>`\\ "
+#~ "\\(data\\[\\, col\\, timegap\\, method\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`traj_stay_move <transbigdata.traj_stay_move>`\\ "
+#~ "\\(data\\, params\\[\\, col\\, activitytime\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`points_to_traj <transbigdata.points_to_traj>`\\ "
+#~ "\\(traj\\_points\\[\\, col\\, timecol\\]\\)"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr "网格化参数"
+
+#~ msgid "Returns"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+
+#~ msgid "Example"
+#~ msgstr ""
+

@@ -8,17 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"POT-Creation-Date: 2023-06-05 20:53+0800\n"
 "PO-Revision-Date: 2023-06-05 16:50+0800\n"
 "Last-Translator: \n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.12.1\n"
-"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/mobile.rst:6
 msgid "Mobilephone data processing"
@@ -61,7 +60,7 @@ msgstr "通过手机停留数据识别工作地点。"
 #: transbigdata.mobilephonedata.mobile_identify_work
 #: transbigdata.mobilephonedata.mobile_stay_duration
 msgid "参数"
-msgstr "参数"
+msgstr ""
 
 #: of transbigdata.mobilephonedata.mobile_identify_home:5
 #: transbigdata.mobilephonedata.mobile_identify_work:5
@@ -85,15 +84,13 @@ msgstr "一天时间的结束时间"
 #: transbigdata.mobilephonedata.mobile_identify_work
 #: transbigdata.mobilephonedata.mobile_stay_duration
 msgid "返回"
-msgstr "返回"
+msgstr ""
 
 #: of transbigdata.mobilephonedata.mobile_stay_duration:13
 msgid ""
 "* **duration_night** (*Series*) -- Duration at night time * "
 "**duration_day** (*Series*) -- Duration at day time"
-msgstr ""
-"* **duration_night** （*系列*） -- 夜间持续时间 * **duration_day** （*系"
-"列*） -- 白天持续时间"
+msgstr "* **duration_night** （*系列*） -- 夜间持续时间 * **duration_day** （*系列*） -- 白天持续时间"
 
 #: of transbigdata.mobilephonedata.mobile_stay_duration:13
 msgid "**duration_night** (*Series*) -- Duration at night time"
@@ -111,12 +108,12 @@ msgstr "从手机住宿数据中识别家庭位置。规则是确定夜间持续
 
 #: of transbigdata.mobilephonedata.mobile_identify_home:7
 msgid ""
-"The column name, in the order of ['uid','stime', 'etime', "
-"'locationtag1', 'locationtag2', ...]. There can be multiple "
-"'locationtag' columns to specify the location."
+"The column name, in the order of ['uid','stime', 'etime', 'locationtag1',"
+" 'locationtag2', ...]. There can be multiple 'locationtag' columns to "
+"specify the location."
 msgstr ""
-"列名，按 ['uid'， 'stime'， 'etime'， 'locationtag1'， "
-"'locationtag2'， ...] 的顺序排列。可以有多个“位置标签”列来指定位置。"
+"列名，按 ['uid'， 'stime'， 'etime'， 'locationtag1'， 'locationtag2'， ...] "
+"的顺序排列。可以有多个“位置标签”列来指定位置。"
 
 #: of transbigdata.mobilephonedata.mobile_identify_home:10
 #: transbigdata.mobilephonedata.mobile_identify_home:12
@@ -132,16 +129,14 @@ msgstr "**home** -- 手机用户的家位置"
 #: of transbigdata.mobilephonedata.mobile_identify_home
 #: transbigdata.mobilephonedata.mobile_identify_work
 msgid "返回类型"
-msgstr "返回类型"
+msgstr ""
 
 #: of transbigdata.mobilephonedata.mobile_identify_work:2
 msgid ""
 "Identify work location from mobile phone stay data. The rule is to "
 "identify the locations with longest duration in day time on "
 "weekdays(Average duration should over `minhour`)."
-msgstr ""
-"从手机住宿数据中识别工作地点。规则是确定工作日白天持续时间最长的位置（平"
-"均持续时间应超过“分钟小时”）。"
+msgstr "从手机住宿数据中识别工作地点。规则是确定工作日白天持续时间最长的位置（平均持续时间应超过“分钟小时”）。"
 
 #: of transbigdata.mobilephonedata.mobile_identify_work:7
 msgid ""
@@ -164,3 +159,58 @@ msgstr "一周中工作日的开始和结束。 "
 #: of transbigdata.mobilephonedata.mobile_identify_work:21
 msgid "**work** -- work location of mobile phone users"
 msgstr "**work** -- 手机用户的工作地点"
+
+#~ msgid ""
+#~ ":py:obj:`mobile_stay_duration "
+#~ "<transbigdata.mobile_stay_duration>`\\ \\(staydata\\[\\, "
+#~ "col\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`mobile_identify_home "
+#~ "<transbigdata.mobile_identify_home>`\\ \\(staydata\\[\\, "
+#~ "col\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`mobile_identify_work "
+#~ "<transbigdata.mobile_identify_work>`\\ \\(staydata\\[\\, "
+#~ "col\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid "参数"
+#~ msgstr "参数"
+
+#~ msgid "返回"
+#~ msgstr "返回"
+
+#~ msgid "返回类型"
+#~ msgstr "返回类型"
+
+#~ msgid ""
+#~ ":obj:`mobile_stay_duration "
+#~ "<transbigdata.mobile_stay_duration>`\\ \\(staydata\\[\\, "
+#~ "col\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`mobile_identify_home "
+#~ "<transbigdata.mobile_identify_home>`\\ \\(staydata\\[\\, "
+#~ "col\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`mobile_identify_work "
+#~ "<transbigdata.mobile_identify_work>`\\ \\(staydata\\[\\, "
+#~ "col\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+

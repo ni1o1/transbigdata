@@ -30,14 +30,14 @@ msgid ""
 "`ipynb` and `Data` are in `This link <https://github.com/ni1o1/"
 "transbigdata/tree/main/docs/source/gallery>`__\\"
 msgstr ""
-"以下是一些示例，展示了您可以使用“TransBigData”做什么。`ipynb`和`数据`位"
+"以下是一些示例，展示了您可以使用“TransBigData”做什么。ipynb和数据位"
 "于 `此链接 <https://github.com/ni1o1/transbigdata/tree/main/docs/source/"
 "gallery>`__\\"
 
 #: ../../source/gallery/index.rst:10
 msgid "Basic"
-msgstr "基本"
+msgstr "核心功能示例"
 
 #: ../../source/gallery/index.rst:23
 msgid "Advanced"
-msgstr "高级"
+msgstr "各类数据处理任务"

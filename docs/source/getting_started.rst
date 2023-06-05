@@ -8,7 +8,7 @@ Installation
 安装
 =============================
 
-It is recommended to use Python 3.7, 3.8, 3.9
+TransBigData support Python >= 3.6.
 
 TransBigData depends on geopandas, Before installing TransBigData, you need to install geopandas based on `this link <https://geopandas.org/en/stable/getting_started.html#installation>`_  If you already have geopandas installed, run the following code directly from the command prompt to install it::
 

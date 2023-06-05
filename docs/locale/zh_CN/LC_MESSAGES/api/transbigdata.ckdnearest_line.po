@@ -8,17 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"POT-Creation-Date: 2023-06-05 20:53+0800\n"
 "PO-Revision-Date: 2023-06-05 16:30+0800\n"
 "Last-Translator: \n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.12.1\n"
-"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/api/transbigdata.ckdnearest_line.rst:2
 #, fuzzy
@@ -28,13 +27,13 @@ msgstr "transbigdata.ckdnearest\\_line"
 #: of transbigdata.gisprocess.ckdnearest_line:2
 #, fuzzy
 msgid ""
-"This method will seach from gdfB to find the nearest line to the point in gdfA."
+"This method will seach from gdfB to find the nearest line to the point in"
+" gdfA."
 msgstr "此方法将从 gdfB 进行搜索，以找到离 gdfA 中点最近的线。"
 
 #: of transbigdata.gisprocess.ckdnearest_line
-#, fuzzy
 msgid "参数"
-msgstr "参数"
+msgstr ""
 
 #: of transbigdata.gisprocess.ckdnearest_line:5
 #, fuzzy
@@ -47,9 +46,8 @@ msgid "GeoDataFrame B, linestring geometry"
 msgstr "地理数据帧 B，线串几何"
 
 #: of transbigdata.gisprocess.ckdnearest_line
-#, fuzzy
 msgid "返回"
-msgstr "返回"
+msgstr ""
 
 #: of transbigdata.gisprocess.ckdnearest_line:10
 #, fuzzy
@@ -57,6 +55,24 @@ msgid "**gdf** -- Searching the nearset linestring in gdfB for the point in gdfA
 msgstr "**gdf** -- 在 gdfB 中的近集线串中搜索 gdfA 中的点"
 
 #: of transbigdata.gisprocess.ckdnearest_line
-#, fuzzy
 msgid "返回类型"
-msgstr "返回类型"
+msgstr ""
+
+#~ msgid "参数"
+#~ msgstr "参数"
+
+#~ msgid "返回"
+#~ msgstr "返回"
+
+#~ msgid "返回类型"
+#~ msgstr "返回类型"
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+

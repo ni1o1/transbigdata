@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 15:59+0800\n"
-"PO-Revision-Date: 2023-06-05 16:53+0800\n"
+"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"PO-Revision-Date: 2023-06-05 20:53+0800\n"
 "Last-Translator: \n"
 "Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -33,12 +33,8 @@ msgid "Input the json data and save it as a file."
 msgstr "输入json数据，保存为文件。"
 
 #: of transbigdata.utils.dumpjson:2
-msgid ""
-"Input the json data and save it as a file. This method is suitable for "
-"sovling the problem that numpy cannot be compatiable with json package."
-msgstr ""
-"输入 json 数据并将其另存为文件。此方法适用于解决 numpy 无法与 json 包兼"
-"容的问题。"
+msgid "Input the json data and save it as a file. This method is suitable for sovling the problem that numpy cannot be compatiable with json package."
+msgstr "输入 json 数据并将其另存为文件。此方法适用于解决 numpy 无法与 json 包兼容的问题。"
 
 #: of transbigdata.utils.dumpjson
 msgid "参数"
@@ -48,17 +44,15 @@ msgstr "参数"
 msgid "The json data to be saved"
 msgstr "需要保存的json数据"
 
-#: of transbigdata.utils.dumpjson:23
-msgid "path"
-msgstr ""
-
-#: of transbigdata.utils.dumpjson:-1
-msgid "str"
-msgstr ""
-
-#: of transbigdata.utils.dumpjson:9
+#: of transbigdata.utils.dumpjson:7
 msgid "The storage path"
 msgstr "存储路径"
 
 #~ msgid "Parameters"
+#~ msgstr "参数"
+
+#~ msgid ":py:obj:`dumpjson <transbigdata.dumpjson>`\\ \\(data\\, path\\)"
+#~ msgstr ""
+
+#~ msgid "参数"
 #~ msgstr "参数"

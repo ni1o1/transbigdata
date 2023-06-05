@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"POT-Creation-Date: 2023-06-05 20:53+0800\n"
 "PO-Revision-Date: 2023-06-05 17:00+0800\n"
 "Last-Translator: \n"
-"Language-Team: \n"
 "Language: zh_CN\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
-"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/preprocess.rst:7
 msgid "数据预处理"
@@ -25,16 +25,16 @@ msgstr ""
 
 #: ../../source/preprocess.rst:19:<autosummary>:1
 msgid ""
-":py:obj:`clean_outofbounds <transbigdata.clean_outofbounds>`\\ \\(data\\, "
-"bounds\\[\\, col\\]\\)"
+":py:obj:`clean_outofbounds <transbigdata.clean_outofbounds>`\\ \\(data\\,"
+" bounds\\[\\, col\\]\\)"
 msgstr ""
 
 #: ../../source/preprocess.rst:19:<autosummary>:1 of
 #: transbigdata.preprocess.clean_outofbounds:2
 msgid ""
-"The input is the latitude and longitude coordinates of the lower left and "
-"upper right of the study area and exclude data that are outside the study "
-"area"
+"The input is the latitude and longitude coordinates of the lower left and"
+" upper right of the study area and exclude data that are outside the "
+"study area"
 msgstr "输入为研究区域左下角和右上角的纬度和经度坐标，并排除研究区域外的数据"
 
 #: ../../source/preprocess.rst:19:<autosummary>:1
@@ -78,7 +78,7 @@ msgstr "对数据的ID列重新编号，如果相邻两条记录超过距离，�
 #: transbigdata.preprocess.clean_outofshape transbigdata.preprocess.id_reindex
 #: transbigdata.preprocess.id_reindex_disgap
 msgid "参数"
-msgstr "参数"
+msgstr ""
 
 #: of transbigdata.preprocess.clean_outofbounds:6
 #: transbigdata.preprocess.clean_outofshape:5
@@ -89,10 +89,9 @@ msgstr "数据"
 
 #: of transbigdata.preprocess.clean_outofbounds:8
 msgid ""
-"Latitude and longitude of the lower left and upper right of the study area, "
-"in the order of [lon1, lat1, lon2, lat2]"
-msgstr ""
-"研究区域左下角和右上角的纬度和经度，顺序为 [lon1， lat1， lon2， lat2]"
+"Latitude and longitude of the lower left and upper right of the study "
+"area, in the order of [lon1, lat1, lon2, lat2]"
+msgstr "研究区域左下角和右上角的纬度和经度，顺序为 [lon1， lat1， lon2， lat2]"
 
 #: of transbigdata.preprocess.clean_outofbounds:11
 #: transbigdata.preprocess.clean_outofshape:9
@@ -103,7 +102,7 @@ msgstr "经纬度列名"
 #: transbigdata.preprocess.clean_outofshape transbigdata.preprocess.id_reindex
 #: transbigdata.preprocess.id_reindex_disgap
 msgid "返回"
-msgstr "返回"
+msgstr ""
 
 #: of transbigdata.preprocess.clean_outofbounds:14
 #: transbigdata.preprocess.clean_outofshape:16
@@ -114,7 +113,7 @@ msgstr "**data1** -- 研究范围内的数据"
 #: transbigdata.preprocess.clean_outofshape transbigdata.preprocess.id_reindex
 #: transbigdata.preprocess.id_reindex_disgap
 msgid "返回类型"
-msgstr "返回类型"
+msgstr ""
 
 #: of transbigdata.preprocess.clean_outofshape:7
 msgid "The GeoDataFrame of the study area"
@@ -122,10 +121,10 @@ msgstr "研究区的GeoDataFrame"
 
 #: of transbigdata.preprocess.clean_outofshape:11
 msgid ""
-"The size of grid. The principle is to do the data gridding first and then "
-"do the data cleaning. The smaller the size is, the higher accuracy it has"
-msgstr ""
-"网格的大小。原理是先做数据网格化，然后再做数据清理。尺寸越小，精度越高"
+"The size of grid. The principle is to do the data gridding first and then"
+" do the data cleaning. The smaller the size is, the higher accuracy it "
+"has"
+msgstr "网格的大小。原理是先做数据网格化，然后再做数据清理。尺寸越小，精度越高"
 
 #: of transbigdata.preprocess.id_reindex:6
 #: transbigdata.preprocess.id_reindex_disgap:7
@@ -137,18 +136,14 @@ msgid ""
 "False: the new number of the same ID will be the same index; True: "
 "according to the order of the table, the origin ID appears again with "
 "different index"
-msgstr ""
-"False：相同 ID 的新编号将是相同的索引;True：根据表的顺序，源 ID 再次出现，索"
-"引不同"
+msgstr "False：相同 ID 的新编号将是相同的索引;True：根据表的顺序，源 ID 再次出现，索引不同"
 
 #: of transbigdata.preprocess.id_reindex:12
 msgid ""
-"If an individual does not appear for a period of time (timegap is the time "
-"threshold), it is numbered as a new individual. This parameter should be "
-"set with timecol to take effect."
-msgstr ""
-"如果某个个体在一段时间内没有出现（时间间隔是时间阈值），则将其编号为新个体。"
-"此参数应与 timecol 一起设置才能生效。"
+"If an individual does not appear for a period of time (timegap is the "
+"time threshold), it is numbered as a new individual. This parameter "
+"should be set with timecol to take effect."
+msgstr "如果某个个体在一段时间内没有出现（时间间隔是时间阈值），则将其编号为新个体。此参数应与 timecol 一起设置才能生效。"
 
 #: of transbigdata.preprocess.id_reindex:16
 msgid "The column name of time, it should be set with timegap to take effect"
@@ -157,8 +152,8 @@ msgstr "time的列名，需要设置timegap才能生效"
 #: of transbigdata.preprocess.id_reindex:18
 #: transbigdata.preprocess.id_reindex_disgap:12
 msgid ""
-"The suffix of the new column. When set to False, the former column will be "
-"replaced"
+"The suffix of the new column. When set to False, the former column will "
+"be replaced"
 msgstr "新列的后缀。设置为 False 时，将替换前一列"
 
 #: of transbigdata.preprocess.id_reindex:21
@@ -173,3 +168,63 @@ msgstr "**data1** -- 重新编号的数据"
 #: of transbigdata.preprocess.id_reindex_disgap:9
 msgid "If two adjacent records exceed this distance, the number is the new ID"
 msgstr "如果相邻的两条记录超过这个距离，这个数字就是新的ID"
+
+#~ msgid ""
+#~ ":py:obj:`clean_outofbounds <transbigdata.clean_outofbounds>`\\"
+#~ " \\(data\\, bounds\\[\\, col\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`clean_outofshape <transbigdata.clean_outofshape>`\\ "
+#~ "\\(data\\, shape\\[\\, col\\, accuracy\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`id_reindex <transbigdata.id_reindex>`\\ "
+#~ "\\(data\\, col\\[\\, new\\, timegap\\, "
+#~ "...\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`id_reindex_disgap <transbigdata.id_reindex_disgap>`\\"
+#~ " \\(data\\[\\, col\\, disgap\\, suffix\\]\\)"
+#~ msgstr ""
+
+#~ msgid "参数"
+#~ msgstr "参数"
+
+#~ msgid "返回"
+#~ msgstr "返回"
+
+#~ msgid "返回类型"
+#~ msgstr "返回类型"
+
+#~ msgid ""
+#~ ":obj:`clean_outofbounds <transbigdata.clean_outofbounds>`\\ "
+#~ "\\(data\\, bounds\\[\\, col\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`clean_outofshape <transbigdata.clean_outofshape>`\\ "
+#~ "\\(data\\, shape\\[\\, col\\, accuracy\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`id_reindex <transbigdata.id_reindex>`\\ \\(data\\,"
+#~ " col\\[\\, new\\, timegap\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`id_reindex_disgap <transbigdata.id_reindex_disgap>`\\ "
+#~ "\\(data\\[\\, col\\, disgap\\, suffix\\]\\)"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+

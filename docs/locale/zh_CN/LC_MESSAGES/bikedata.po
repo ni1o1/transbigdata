@@ -8,28 +8,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"POT-Creation-Date: 2023-06-05 20:53+0800\n"
 "PO-Revision-Date: 2023-06-05 16:48+0800\n"
 "Last-Translator: \n"
-"Language-Team: \n"
 "Language: zh_CN\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
-"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/bikedata.rst:7
 msgid "Bike-sharing data processing"
 msgstr "共享单车数据处理"
 
 #: ../../source/bikedata.rst:12:<autosummary>:1
+#, fuzzy
 msgid ""
 ":py:obj:`bikedata_to_od <transbigdata.bikedata_to_od>`\\ \\(data\\[\\, "
 "col\\, startend\\]\\)"
 msgstr ""
-":p y：obj：'bikedata_to_od <transbigdata.bikedata_to_od>'\\ "
-"\\（data\\[\\， col\\， startend\\]\\）"
+":p y：obj：'bikedata_to_od <transbigdata.bikedata_to_od>'\\ \\（data\\[\\， "
+"col\\， startend\\]\\）"
 
 #: ../../source/bikedata.rst:12:<autosummary>:1 of
 #: transbigdata.bikedata.bikedata_to_od:2
@@ -37,13 +38,11 @@ msgid ""
 "Input bike-sharing order data (with data only generated when the lock is "
 "switched on and off), specify the column name, and extract the ride and "
 "parking information from it"
-msgstr ""
-"输入共享单车订单数据（仅在锁打开和关闭时生成数据），指定列名称，并从中提"
-"取乘车和停车信息"
+msgstr "输入共享单车订单数据（仅在锁打开和关闭时生成数据），指定列名称，并从中提取乘车和停车信息"
 
 #: of transbigdata.bikedata.bikedata_to_od
 msgid "参数"
-msgstr "参数"
+msgstr ""
 
 #: of transbigdata.bikedata.bikedata_to_od:6
 msgid "Bike-sharing order data"
@@ -53,9 +52,7 @@ msgstr "共享单车订单数据"
 msgid ""
 "Column names, the order cannot be changed.[‘BIKE_ID’, "
 "’DATA_TIME’,’LONGITUDE’,’LATITUDE’,’LOCK_STATUS’]"
-msgstr ""
-"列名，顺序不能更改。[“BIKE_ID”、“DATA_TIME”、“经度”、“纬"
-"度”、“LOCK_STATUS]"
+msgstr "列名，顺序不能更改。[“BIKE_ID”、“DATA_TIME”、“经度”、“纬度”、“LOCK_STATUS]"
 
 #: of transbigdata.bikedata.bikedata_to_od:11
 msgid ""
@@ -67,20 +64,17 @@ msgid ""
 "considered."
 msgstr ""
 "观察周期的开始时间和结束时间，例如 ['2018-08-27 00：00：00'、'2018-08-28 "
-"00：00：00']。如果通过，则考虑骑行和停车情况（从观察期开始到自行车首次出"
-"现）和（从自行车最后一次出现到观察期结束）。"
+"00：00：00']。如果通过，则考虑骑行和停车情况（从观察期开始到自行车首次出现）和（从自行车最后一次出现到观察期结束）。"
 
 #: of transbigdata.bikedata.bikedata_to_od
 msgid "返回"
-msgstr "返回"
+msgstr ""
 
 #: of transbigdata.bikedata.bikedata_to_od:19
 msgid ""
 "* **move_data** (*DataFrame*) -- Riding data * **stop_data** "
 "(*DataFrame*) -- Parking data"
-msgstr ""
-"* **move_data** （*数据帧*） -- 骑行数据 * **stop_data** （*数据帧*） -- "
-"停车数据"
+msgstr "* **move_data** （*数据帧*） -- 骑行数据 * **stop_data** （*数据帧*） -- 停车数据"
 
 #: of transbigdata.bikedata.bikedata_to_od:19
 msgid "**move_data** (*DataFrame*) -- Riding data"
@@ -89,3 +83,16 @@ msgstr "**move_data** (*DataFrame*) -- 骑行数据"
 #: of transbigdata.bikedata.bikedata_to_od:20
 msgid "**stop_data** (*DataFrame*) -- Parking data"
 msgstr "**stop_data** (*DataFrame*) -- 停车数据"
+
+#~ msgid "参数"
+#~ msgstr "参数"
+
+#~ msgid "返回"
+#~ msgstr "返回"
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+

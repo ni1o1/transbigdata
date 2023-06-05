@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 15:59+0800\n"
-"PO-Revision-Date: 2023-06-05 16:48+0800\n"
+"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"PO-Revision-Date: 2023-06-05 20:40+0800\n"
 "Last-Translator: \n"
-"Language-Team: \n"
 "Language: zh_CN\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
-"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/busgps.rst:7
 msgid "Bus GPS data processing"
@@ -25,8 +25,8 @@ msgstr "公交GPS数据处理"
 
 #: ../../source/busgps.rst:13:<autosummary>:1
 msgid ""
-":py:obj:`busgps_arriveinfo <transbigdata.busgps_arriveinfo>`\\ "
-"\\(data\\, line\\, stop\\[\\, col\\, ...\\]\\)"
+":py:obj:`busgps_arriveinfo <transbigdata.busgps_arriveinfo>`\\ \\(data\\,"
+" line\\, stop\\[\\, col\\, ...\\]\\)"
 msgstr ""
 
 #: ../../source/busgps.rst:13:<autosummary>:1 of
@@ -34,9 +34,7 @@ msgstr ""
 msgid ""
 "Input bus GPS data, bus route and station GeoDataFrame, this method can "
 "identify the bus arrival and departure information"
-msgstr ""
-"输入公交GPS数据、公交线路和车站GeoDataFrame，该方法可以识别公交车的到达和"
-"出发信息"
+msgstr "输入公交GPS数据、公交线路和车站GeoDataFrame，该方法可以识别公交车的到达和出发信息"
 
 #: ../../source/busgps.rst:13:<autosummary>:1
 msgid ""
@@ -54,15 +52,13 @@ msgstr "输入出发信息表drive_info和车站信息表停靠点计算单程�
 #: of transbigdata.busgps.busgps_arriveinfo
 #: transbigdata.busgps.busgps_onewaytime
 msgid "参数"
-msgstr "参数"
+msgstr ""
 
 #: of transbigdata.busgps.busgps_arriveinfo:5
 msgid ""
 "Bus GPS data. It should be the data from one bus route, and need to "
 "contain vehicle ID, GPS time, latitude and longitude (wgs84)"
-msgstr ""
-"总线全球定位系统数据。它应该是来自一条公交路线的数据，并且需要包含车辆"
-"ID，GPS时间，纬度和经度（wgs84）"
+msgstr "总线全球定位系统数据。它应该是来自一条公交路线的数据，并且需要包含车辆ID，GPS时间，纬度和经度（wgs84）"
 
 #: of transbigdata.busgps.busgps_arriveinfo:9
 msgid "GeoDataFrame for the bus line"
@@ -86,8 +82,8 @@ msgstr "米。当车辆在此一定距离内接近车站时，视为到达车站
 
 #: of transbigdata.busgps.busgps_arriveinfo:19
 msgid ""
-"Seconds. Within a short period of time that the bus arrive at bus "
-"station again, it will not be consider as another arrival"
+"Seconds. Within a short period of time that the bus arrive at bus station"
+" again, it will not be consider as another arrival"
 msgstr "秒。在短时间内，巴士再次到达公交车站，将不被视为再次到达"
 
 #: of transbigdata.busgps.busgps_arriveinfo:22
@@ -98,11 +94,10 @@ msgstr "米。车辆前点和后点之间的距离，用于确定车辆是否在
 
 #: of transbigdata.busgps.busgps_arriveinfo:26
 msgid ""
-"The matching algorithm will convert the data into a projection "
-"coordinate system to calculate the distance, here the epsg code of the "
-"projection coordinate system is given"
-msgstr ""
-"匹配算法将数据转换为投影坐标系来计算距离，这里给出投影坐标系的epsg代码"
+"The matching algorithm will convert the data into a projection coordinate"
+" system to calculate the distance, here the epsg code of the projection "
+"coordinate system is given"
+msgstr "匹配算法将数据转换为投影坐标系来计算距离，这里给出投影坐标系的epsg代码"
 
 #: of transbigdata.busgps.busgps_arriveinfo:30
 msgid ""
@@ -117,7 +112,7 @@ msgstr "是否输出投影数据"
 #: of transbigdata.busgps.busgps_arriveinfo
 #: transbigdata.busgps.busgps_onewaytime
 msgid "返回"
-msgstr "返回"
+msgstr ""
 
 #: of transbigdata.busgps.busgps_arriveinfo:36
 msgid "**arrive_info** -- Bus arrival and departure information"
@@ -126,7 +121,7 @@ msgstr "**arrive_info** -- 公交到发信息"
 #: of transbigdata.busgps.busgps_arriveinfo
 #: transbigdata.busgps.busgps_onewaytime
 msgid "返回类型"
-msgstr "返回类型"
+msgstr ""
 
 #: of transbigdata.busgps.busgps_onewaytime:5
 msgid "The departure information table drive_info"
@@ -147,3 +142,32 @@ msgstr "列名[车号,站名,到达时间,离开时间]"
 #: of transbigdata.busgps.busgps_onewaytime:14
 msgid "**onewaytime** -- One-way travel time of the bus"
 msgstr "**onewaytime** -- 公交车单程时间"
+
+#~ msgid "参数"
+#~ msgstr "参数"
+
+#~ msgid "返回"
+#~ msgstr "返回"
+
+#~ msgid "返回类型"
+#~ msgstr "返回类型"
+
+#~ msgid ""
+#~ ":obj:`busgps_arriveinfo <transbigdata.busgps_arriveinfo>`\\ "
+#~ "\\(data\\, line\\, stop\\[\\, col\\, ...\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`busgps_onewaytime <transbigdata.busgps_onewaytime>`\\ "
+#~ "\\(arrive\\_info\\, start\\, end\\[\\, col\\]\\)"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr "参数"
+
+#~ msgid "Returns"
+#~ msgstr "返回"
+
+#~ msgid "Return type"
+#~ msgstr "返回类型"
+

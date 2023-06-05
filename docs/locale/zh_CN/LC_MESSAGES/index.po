@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 14:57+0800\n"
-"PO-Revision-Date: 2023-06-05 16:18+0800\n"
+"PO-Revision-Date: 2023-06-05 20:54+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -29,7 +29,7 @@ msgstr "例子"
 
 #: ../../source/index.rst:94 ../../source/index.rst:96
 msgid "General Methods"
-msgstr "一般方法"
+msgstr "基础处理方法"
 
 #: ../../source/index.rst:114 ../../source/index.rst:116
 msgid "Methods for specific data"
@@ -111,7 +111,7 @@ msgstr ""
 msgid ""
 "Use the `tbd.taxigps_to_od` method and pass in the corresponding column "
 "name to extract the trip OD: ::"
-msgstr "使用“tbd.taxigps_to_od”方法并传入相应的列名以提取行程 OD： ：："
+msgstr "使用`tbd.taxigps_to_od`方法并传入相应的列名以提取行程 OD："
 
 #: ../../source/index.rst:61
 msgid "Aggregate OD into grids::"
@@ -119,4 +119,4 @@ msgstr "将 OD 聚合到网格中："
 
 #: ../../source/index.rst:85
 msgid "Example gallery"
-msgstr "示例库"
+msgstr "示例"

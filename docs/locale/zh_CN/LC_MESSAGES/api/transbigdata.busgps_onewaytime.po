@@ -8,17 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"POT-Creation-Date: 2023-06-05 20:53+0800\n"
 "PO-Revision-Date: 2023-06-05 16:30+0800\n"
 "Last-Translator: \n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.12.1\n"
-"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/api/transbigdata.busgps_onewaytime.rst:2
 #, fuzzy
@@ -33,9 +32,8 @@ msgid ""
 msgstr "输入出发信息表drive_info和车站信息表停靠点计算单程行车时间"
 
 #: of transbigdata.busgps.busgps_onewaytime
-#, fuzzy
 msgid "参数"
-msgstr "参数"
+msgstr ""
 
 #: of transbigdata.busgps.busgps_onewaytime:5
 #, fuzzy
@@ -58,9 +56,8 @@ msgid "Column name [vehicle ID, station name,arrivetime,leavetime]"
 msgstr "列名称 [车辆ID、车站名称、到达时间、下车时间]"
 
 #: of transbigdata.busgps.busgps_onewaytime
-#, fuzzy
 msgid "返回"
-msgstr "返回"
+msgstr ""
 
 #: of transbigdata.busgps.busgps_onewaytime:14
 #, fuzzy
@@ -68,6 +65,24 @@ msgid "**onewaytime** -- One-way travel time of the bus"
 msgstr "**单程时间** -- 巴士的单程行驶时间"
 
 #: of transbigdata.busgps.busgps_onewaytime
-#, fuzzy
 msgid "返回类型"
-msgstr "返回类型"
+msgstr ""
+
+#~ msgid "参数"
+#~ msgstr "参数"
+
+#~ msgid "返回"
+#~ msgstr "返回"
+
+#~ msgid "返回类型"
+#~ msgstr "返回类型"
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+
