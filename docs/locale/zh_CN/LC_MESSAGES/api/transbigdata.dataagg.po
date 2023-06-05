@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.dataagg.rst:2
+msgid "transbigdata.dataagg"
+msgstr ""
+
+#: of transbigdata.preprocess.dataagg:2
+msgid "Aggregate data to traffic zone"
+msgstr ""
+
+#: of transbigdata.preprocess.dataagg
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.preprocess.dataagg:4
+msgid "The origin DataFrame"
+msgstr ""
+
+#: of transbigdata.preprocess.dataagg:6
+msgid "The shape of the traffic zone"
+msgstr ""
+
+#: of transbigdata.preprocess.dataagg:8
+msgid ""
+"You can either choose to input two columns, i.e., [‘Lng’,’Lat’], or to "
+"input three columns, i.e., [‘Lng’,’Lat’,’count’]”, where count means the "
+"points count"
+msgstr ""
+
+#: of transbigdata.preprocess.dataagg:12
+msgid ""
+"The idea is to first implement data gridding and then the aggregation. "
+"Here, the grid size will be determined. The less the size is, the higher "
+"the accuracy will have."
+msgstr ""
+
+#: of transbigdata.preprocess.dataagg
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.preprocess.dataagg:17
+msgid ""
+"* **aggresult** (*GeoDataFrame*) -- Traffic zone. The count column is the"
+" output result * **data1** (*DataFrame*) -- The zone-matched data"
+msgstr ""
+
+#: of transbigdata.preprocess.dataagg:17
+msgid ""
+"**aggresult** (*GeoDataFrame*) -- Traffic zone. The count column is the "
+"output result"
+msgstr ""
+
+#: of transbigdata.preprocess.dataagg:18
+msgid "**data1** (*DataFrame*) -- The zone-matched data"
+msgstr ""
+

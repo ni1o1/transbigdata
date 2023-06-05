@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:56+0800\n"
+"Last-Translator: \n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival data.ipynb:9
+#: departure from information
+msgid "9 Identifying arrival and departure information from Bus GPS data"
+msgstr "9 从巴士 GPS 数据识别到达和离开信息"
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival data.ipynb:20
+#: departure from information
+msgid "To run this example, you may have to install ``seaborn``:"
+msgstr "要运行这个例子，你可能需要安装``seaborn``："
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival data.ipynb:22
+#: departure from information
+msgid "pip install seaborn"
+msgstr "pip 安装 seaborn"
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival data.ipynb:33
+#: departure from information
+msgid ""
+"The following example shows how to use TransBigData to process bus GPS data, "
+"including identifying bus arrival and departure information, calculate "
+"travel time and operating speed for buses."
+msgstr ""
+"以下示例显示了如何使用 TransBigData 处理公交车 GPS 数据，包括识别公交车到达和"
+"离开信息、计算公交车的行驶时间和运行速度。"
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival data.ipynb:68
+#: departure from information
+msgid "Read data"
+msgstr "读取数据"
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival data.ipynb:80
+#: departure from information
+msgid "Read bus GPS data"
+msgstr "读取公交车GPS数据"
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival
+#: data.ipynb:105 departure from information
+msgid "Convert coordinates"
+msgstr "转换坐标"
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival
+#: data.ipynb:337 departure from information
+msgid "Read the bus line data"
+msgstr "读取总线数据"
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival
+#: data.ipynb:396 departure from information
+msgid "Read the bus stop data"
+msgstr "读取公交站台数据"
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival
+#: data.ipynb:455 departure from information
+msgid "Identifying arrival and departure information"
+msgstr "识别到达和离开信息"
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival
+#: data.ipynb:699 departure from information
+msgid "One-way travel time"
+msgstr "单程旅行时间"
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival
+#: data.ipynb:710 departure from information
+msgid ""
+"Calculate the One-way travel time from ``arriveinfo`` obtained above. Given "
+"start and end stop name of the bus line, ``tbd.busgps_onewaytime`` can "
+"calculate the travel time between the two station."
+msgstr ""
+"根据上面获得的“到达信息”计算单程旅行时间。给定公交线路的起点和终点站名"
+"称，“tbd.busgps_onewaytime”可以计算两个车站之间的行驶时间。"
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival
+#: data.ipynb:1024 departure from information
+msgid ""
+"For English display of the figures, here we will change the station name and "
+"direction name into English:"
+msgstr "为了显示数字的英文，这里我们将车站名称和方向名称更改为英文："
+
+#: ../../source/gallery/Example 9-Identifying Bus GPS and arrival
+#: data.ipynb:1079 departure from information
+msgid "Travel speed of the buses"
+msgstr "公交车的行驶速度"

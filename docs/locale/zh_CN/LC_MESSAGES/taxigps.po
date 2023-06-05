@@ -4,91 +4,147 @@
 # package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-07 16:44+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:52+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
-#: ../../source/taxigps.rst:6
+#: ../../source/taxigps.rst:7
 msgid "出租车GPS数据处理"
+msgstr "出租汽车GPS数据处理"
+
+#: ../../source/taxigps.rst:15:<autosummary>:1
+msgid ""
+":py:obj:`clean_taxi_status <transbigdata.clean_taxi_status>`\\ \\(data\\[\\, "
+"col\\, timelimit\\]\\)"
 msgstr ""
 
-#: ../../source/taxigps.rst:10
-msgid "出租车OD提取算法，输入出租车GPS数据,提取OD"
+#: ../../source/taxigps.rst:15:<autosummary>:1
+msgid ""
+"Deletes records of instantaneous changes in passenger carrying status from "
+"taxi data."
+msgstr "从出租车数据中删除乘客携带状态的瞬时变化记录。"
+
+#: ../../source/taxigps.rst:15:<autosummary>:1
+msgid ""
+":py:obj:`taxigps_to_od <transbigdata.taxigps_to_od>`\\ \\(data\\[\\, "
+"col\\]\\)"
 msgstr ""
 
-#: ../../source/taxigps.rst:12 ../../source/taxigps.rst:23
-msgid "**输入**"
+#: ../../source/taxigps.rst:15:<autosummary>:1 of
+#: transbigdata.taxigps.taxigps_to_od:2
+msgid "Input Taxi GPS data, extract OD information"
+msgstr "输入出租车GPS数据，提取OD信息"
+
+#: ../../source/taxigps.rst:15:<autosummary>:1
+msgid ""
+":py:obj:`taxigps_traj_point <transbigdata.taxigps_traj_point>`\\ \\(data\\, "
+"oddata\\[\\, col\\]\\)"
 msgstr ""
 
-#: ../../source/taxigps.rst:14 ../../source/taxigps.rst:25
-msgid "data"
-msgstr ""
+#: ../../source/taxigps.rst:15:<autosummary>:1 of
+#: transbigdata.taxigps.taxigps_traj_point:2
+msgid ""
+"Input Taxi data and OD data to extract the trajectory points for delivery "
+"and idle trips"
+msgstr "输入出租车数据和OD数据，提取配送和闲置行程的轨迹点"
 
-msgid "DataFrame"
+#: of transbigdata.taxigps.clean_taxi_status:2
+msgid ""
+"Deletes records of instantaneous changes in passenger carrying status from "
+"taxi data. These abnormal records can affect travel order judgments. "
+"Judgement method: If the passenger status of the previous record and the "
+"next record are different from this record for the same vehicle, then this "
+"record should be deleted."
 msgstr ""
+"从出租车数据中删除乘客携带状态的瞬时变化记录。这些异常记录会影响旅行订单判"
+"断。判断方法：如果同一车辆上一条记录和下一条记录的乘客状态与该记录不同，则应"
+"删除该记录。"
 
-#: ../../source/taxigps.rst:15
-msgid "出租车GPS数据（清洗好的）"
+#: of transbigdata.taxigps.clean_taxi_status transbigdata.taxigps.taxigps_to_od
+#: transbigdata.taxigps.taxigps_traj_point
+msgid "参数"
+msgstr "参数"
+
+#: of transbigdata.taxigps.clean_taxi_status:8
+msgid "Data"
+msgstr "数据"
+
+#: of transbigdata.taxigps.clean_taxi_status:10
+msgid "Column names, in the order of [‘VehicleNum’, ‘Time’, ‘OpenStatus’]"
+msgstr "列名，顺序为[‘VehicleNum’, ‘Time’, ‘OpenStatus’]"
+
+#: of transbigdata.taxigps.clean_taxi_status:12
+msgid ""
+"Optional, in seconds. If the time between the previous record and the next "
+"record is less than the time threshold, then it will be deleted"
 msgstr ""
+"可选，以秒为单位。如果上一条记录和下一条记录之间的时间小于时间阈值，则将删除"
+"该记录"
 
-#: ../../source/taxigps.rst:17 ../../source/taxigps.rst:30
-msgid "col"
+#: of transbigdata.taxigps.clean_taxi_status transbigdata.taxigps.taxigps_to_od
+#: transbigdata.taxigps.taxigps_traj_point
+msgid "返回"
+msgstr "返回"
+
+#: of transbigdata.taxigps.clean_taxi_status:16
+msgid "**data1** -- Cleaned data"
+msgstr "**data1** -- 清理后的数据"
+
+#: of transbigdata.taxigps.clean_taxi_status transbigdata.taxigps.taxigps_to_od
+msgid "返回类型"
+msgstr "返回类型"
+
+#: of transbigdata.taxigps.taxigps_to_od:4
+msgid "Taxi GPS data"
+msgstr "出租车GPS数据"
+
+#: of transbigdata.taxigps.taxigps_to_od:6
+msgid ""
+"Column names in the data, need to be in order [vehicle id, time, longitude, "
+"latitude, passenger status]"
+msgstr "列名在数据中，需要按顺序排列[车辆ID、时间、经度、纬度、乘客状态]"
+
+#: of transbigdata.taxigps.taxigps_to_od:10
+msgid "**oddata** -- OD information"
+msgstr "**oddata** -- OD信息"
+
+#: of transbigdata.taxigps.taxigps_traj_point:5
+msgid "Taxi GPS data, field name specified by col variable"
+msgstr "出租车GPS数据，col变量指定的字段名"
+
+#: of transbigdata.taxigps.taxigps_traj_point:7
+msgid "Taxi OD data"
+msgstr "出租车OD数据"
+
+#: of transbigdata.taxigps.taxigps_traj_point:9
+msgid ""
+"Column names, need to be in order [vehicle id, time, longitude, latitude, "
+"passenger status]"
+msgstr "栏目名称，需按顺序排列[车辆ID、时间、经度、纬度、旅客状态]"
+
+#: of transbigdata.taxigps.taxigps_traj_point:13
+msgid ""
+"* **data_deliver** (*DataFrame*) -- Trajectory points for delivery trips * "
+"**data_idle** (*DataFrame*) -- Trajectory points for idle trips"
 msgstr ""
+"* **data_deliver** （*数据帧*） -- 交货行程的轨迹点 * **data_idle** （*数据帧"
+"*） -- 空闲行程的轨迹点"
 
-msgid "List"
-msgstr ""
+#: of transbigdata.taxigps.taxigps_traj_point:13
+msgid "**data_deliver** (*DataFrame*) -- Trajectory points for delivery trips"
+msgstr "**data_deliver** (*DataFrame*) -- 送货行程的轨迹点"
 
-#: ../../source/taxigps.rst:17
-msgid "数据中各列列名，需要按顺序[车辆id，时间，经度，纬度，载客状态]"
-msgstr ""
-
-#: ../../source/taxigps.rst:21
-msgid "输入出租车数据与OD数据，提取载客与空载的行驶路径点"
-msgstr ""
-
-#: ../../source/taxigps.rst:26
-msgid "出租车GPS数据，字段名由col变量指定"
-msgstr ""
-
-#: ../../source/taxigps.rst:27
-msgid "oddata"
-msgstr ""
-
-#: ../../source/taxigps.rst:28
-msgid "出租车OD数据"
-msgstr ""
-
-#: ../../source/taxigps.rst:30
-msgid "列名，按[车辆ID,时间,经度,纬度,载客状态]的顺序"
-msgstr ""
-
-#: ../../source/taxigps.rst:32
-msgid "**输出**"
-msgstr ""
-
-#: ../../source/taxigps.rst:34
-msgid "data_deliver"
-msgstr ""
-
-#: ../../source/taxigps.rst:35
-msgid "载客轨迹点"
-msgstr ""
-
-#: ../../source/taxigps.rst:36
-msgid "data_idle"
-msgstr ""
-
-#: ../../source/taxigps.rst:37
-msgid "空载轨迹点"
-msgstr ""
-
+#: of transbigdata.taxigps.taxigps_traj_point:14
+msgid "**data_idle** (*DataFrame*) -- Trajectory points for idle trips"
+msgstr "**data_idle** (*DataFrame*) -- 空闲行程的轨迹点"

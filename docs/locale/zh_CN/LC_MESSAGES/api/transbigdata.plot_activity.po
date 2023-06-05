@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.plot_activity.rst:2
+msgid "transbigdata.plot\\_activity"
+msgstr ""
+
+#: of transbigdata.activity.plot_activity:2
+msgid "Plot the activity plot of individual"
+msgstr ""
+
+#: of transbigdata.activity.plot_activity
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.activity.plot_activity:4
+msgid "activity information of one person"
+msgstr ""
+
+#: of transbigdata.activity.plot_activity:6
+msgid ""
+"The column name. [starttime,endtime,group] of activities, `group` control"
+" the color"
+msgstr ""
+
+#: of transbigdata.activity.plot_activity:8
+msgid "The figure size"
+msgstr ""
+
+#: of transbigdata.activity.plot_activity:10
+msgid "The dpi of the figure"
+msgstr ""
+
+#: of transbigdata.activity.plot_activity:12
+msgid "Whether to shuffle the activity"
+msgstr ""
+
+#: of transbigdata.activity.plot_activity:14
+msgid "rotation angle of xticks"
+msgstr ""
+
+#: of transbigdata.activity.plot_activity:16
+msgid "gap of xticks"
+msgstr ""
+
+#: of transbigdata.activity.plot_activity:18
+msgid "gap of yticks"
+msgstr ""
+
+#: of transbigdata.activity.plot_activity:20
+msgid "font size of xticks and yticks"
+msgstr ""
+

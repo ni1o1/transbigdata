@@ -1,0 +1,60 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.plot_map.rst:2
+msgid "transbigdata.plot\\_map"
+msgstr ""
+
+#: of transbigdata.plotmap.plot_map:2
+msgid "Plot the basemap"
+msgstr ""
+
+#: of transbigdata.plotmap.plot_map
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.plotmap.plot_map:4
+msgid "Where to plot"
+msgstr ""
+
+#: of transbigdata.plotmap.plot_map:6
+msgid ""
+"The drawing boundary of the base map, [lon1,lat1,lon2,lat2] (WGS84 "
+"coordinate system), where lon1 and lat1 are the coordinates of the lower "
+"left corner and lon2 and lat2 are the coordinates of the upper right "
+"corner"
+msgstr ""
+
+#: of transbigdata.plotmap.plot_map:11
+msgid ""
+"The larger the magnification level of the base map, the longer the "
+"loading time. Generally, the range for a single city is between 12 and 16"
+msgstr ""
+
+#: of transbigdata.plotmap.plot_map:15
+msgid "Show log"
+msgstr ""
+
+#: of transbigdata.plotmap.plot_map:17
+msgid "The style of map basemap can be 1-10, as follows"
+msgstr ""
+

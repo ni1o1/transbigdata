@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.visualization_data.rst:2
+msgid "transbigdata.visualization\\_data"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_data:2
+msgid ""
+"The input is the data points, this function will aggregate and then "
+"visualize it"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_data
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_data:5
+msgid "The data point"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_data:7
+msgid ""
+"The column name. The user can choose a non-weight Origin-Destination (OD)"
+" data, in the sequence of [longitude, latitude]. For this, The "
+"aggregation is automatic. Or, the user can also input a weighted OD data,"
+" in the sequence of [longitude, latitude, count]"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_data:12
+msgid "Map zoom level (Optional). Default value: auto"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_data:14
+msgid "The height of the map frame"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_data:16
+msgid "Grid size"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_data:18
+msgid "Map type, ‘point’ or ‘heatmap’"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_data
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_data:21
+msgid "**vmap** -- Visualizations provided by keplergl"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_data
+msgid "返回类型"
+msgstr ""
+

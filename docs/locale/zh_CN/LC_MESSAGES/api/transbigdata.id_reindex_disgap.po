@@ -1,0 +1,66 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.id_reindex_disgap.rst:2
+msgid "transbigdata.id\\_reindex\\_disgap"
+msgstr ""
+
+#: of transbigdata.preprocess.id_reindex_disgap:2
+msgid ""
+"Renumber the ID columns of the data，If two adjacent records exceed the "
+"distance, the number is the new ID"
+msgstr ""
+
+#: of transbigdata.preprocess.id_reindex_disgap
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.preprocess.id_reindex_disgap:5
+msgid "Data"
+msgstr ""
+
+#: of transbigdata.preprocess.id_reindex_disgap:7
+msgid "Name of the ID column to be re-indexed"
+msgstr ""
+
+#: of transbigdata.preprocess.id_reindex_disgap:9
+msgid "If two adjacent records exceed this distance, the number is the new ID"
+msgstr ""
+
+#: of transbigdata.preprocess.id_reindex_disgap:12
+msgid ""
+"The suffix of the new column. When set to False, the former column will "
+"be replaced"
+msgstr ""
+
+#: of transbigdata.preprocess.id_reindex_disgap
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.preprocess.id_reindex_disgap:16
+msgid "**data1** -- Renumbered data"
+msgstr ""
+
+#: of transbigdata.preprocess.id_reindex_disgap
+msgid "返回类型"
+msgstr ""
+

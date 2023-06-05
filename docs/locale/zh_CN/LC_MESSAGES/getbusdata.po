@@ -4,120 +4,196 @@
 # package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-07 16:44+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:48+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/getbusdata.rst:4
-msgid "数据获取"
+msgid "Data Acquisition"
+msgstr "数据采集"
+
+#: ../../source/getbusdata.rst:12:<autosummary>:1
+msgid ""
+":py:obj:`getbusdata <transbigdata.getbusdata>`\\ \\(city\\, keywords\\[\\, "
+"accurate\\, timeout\\]\\)"
 msgstr ""
 
-#: ../../source/getbusdata.rst:8
-msgid "通过输入城市与关键词，获取公交线路的线型与站点"
+#: ../../source/getbusdata.rst:12:<autosummary>:1 of
+#: transbigdata.crawler.getbusdata:2
+msgid ""
+"Obtain the geographic information of the bus station and bus line from the map "
+"service (Only in China)"
+msgstr "从地图服务获取公交站和公交线路的地理信息（仅限中国）"
+
+#: ../../source/getbusdata.rst:12:<autosummary>:1
+msgid ""
+":py:obj:`getadmin <transbigdata.getadmin>`\\ \\(keyword\\, ak\\[\\, "
+"jscode\\, ...\\]\\)"
 msgstr ""
 
-#: ../../source/getbusdata.rst:10 ../../source/getbusdata.rst:28
-msgid "**输入**"
+#: ../../source/getbusdata.rst:12:<autosummary>:1
+msgid "Input the keyword and the Amap ak."
+msgstr "输入关键字和高德地图ak。"
+
+#: ../../source/getbusdata.rst:12:<autosummary>:1
+msgid ""
+":py:obj:`get_isochrone_amap <transbigdata.get_isochrone_amap>`\\ \\(lon\\, "
+"lat\\, reachtime\\, ak\\)"
 msgstr ""
 
-#: ../../source/getbusdata.rst:12
-msgid "city"
+#: ../../source/getbusdata.rst:12:<autosummary>:1 of
+#: transbigdata.crawler.get_isochrone_amap:2
+msgid "Obtain the isochrone from Amap reachcricle"
+msgstr "从高德地图获取等时线reachcricle"
+
+#: ../../source/getbusdata.rst:12:<autosummary>:1
+msgid ""
+":py:obj:`get_isochrone_mapbox <transbigdata.get_isochrone_mapbox>`\\ \\(lon\\, "
+"lat\\, reachtime\\[\\, ...\\]\\)"
 msgstr ""
 
-msgid "str"
-msgstr ""
+#: ../../source/getbusdata.rst:12:<autosummary>:1 of
+#: transbigdata.crawler.get_isochrone_mapbox:2
+msgid "Obtain the isochrone from mapbox isochrone"
+msgstr "从mapbox等时线获取等时线"
 
-#: ../../source/getbusdata.rst:13
-msgid "城市"
-msgstr ""
+#: of transbigdata.crawler.get_isochrone_amap
+#: transbigdata.crawler.get_isochrone_mapbox transbigdata.crawler.getadmin
+#: transbigdata.crawler.getbusdata
+msgid "参数"
+msgstr "参数"
 
-#: ../../source/getbusdata.rst:15 ../../source/getbusdata.rst:30
-msgid "keywords"
-msgstr ""
+#: of transbigdata.crawler.getbusdata:5
+msgid "city name"
+msgstr "城市名称"
 
-msgid "List"
-msgstr ""
+#: of transbigdata.crawler.getbusdata:7
+msgid "Keyword, the line name"
+msgstr "关键字，行名"
 
-#: ../../source/getbusdata.rst:15
-msgid "关键词，线路名称"
-msgstr ""
+#: of transbigdata.crawler.getbusdata:9
+msgid "Accurate matching"
+msgstr "精准匹配"
 
-#: ../../source/getbusdata.rst:17 ../../source/getbusdata.rst:37
-msgid "**输出**"
-msgstr ""
+#: of transbigdata.crawler.get_isochrone_amap:16
+#: transbigdata.crawler.get_isochrone_mapbox:14 transbigdata.crawler.getadmin:15
+#: transbigdata.crawler.getbusdata:11
+msgid "Timeout of data fetching"
+msgstr "取数据超时"
 
-#: ../../source/getbusdata.rst:19
-msgid "data"
-msgstr ""
+#: of transbigdata.crawler.get_isochrone_amap
+#: transbigdata.crawler.get_isochrone_mapbox transbigdata.crawler.getadmin
+#: transbigdata.crawler.getbusdata
+msgid "返回"
+msgstr "返回"
 
-msgid "GeoDataFrame"
+#: of transbigdata.crawler.getbusdata:14
+msgid ""
+"* **data** (*GeoDataFrame*) -- The generated bus line(WGS84) * **stop** "
+"(*GeoDataFrame*) -- The generated bus station(WGS84)"
 msgstr ""
+"* **data** （*GeoDataFrame*） -- 生成的总线 （WGS84） * **stop** "
+"（*GeoDataFrame*） -- 生成的总线站 （WGS84）"
 
-#: ../../source/getbusdata.rst:20
-msgid "生成的公交线路"
+#: of transbigdata.crawler.getbusdata:14
+msgid "**data** (*GeoDataFrame*) -- The generated bus line(WGS84)"
+msgstr "**data** (*GeoDataFrame*) -- 生成的总线(WGS84)"
+
+#: of transbigdata.crawler.getbusdata:15
+msgid "**stop** (*GeoDataFrame*) -- The generated bus station(WGS84)"
+msgstr "**stop** (*GeoDataFrame*) -- 生成的公交车站(WGS84)"
+
+#: of transbigdata.crawler.getadmin:2
+msgid ""
+"Input the keyword and the Amap ak. The output is the GIS file of the "
+"administrative boundary (Only in China)"
+msgstr "输入关键字和 Amap ak。输出为行政边界的GIS文件（仅限中国）"
+
+#: of transbigdata.crawler.getadmin:5
+msgid ""
+"The keyword. It might be the city name such as Shengzheng, or the "
+"administrative code such as 440500"
+msgstr "关键字。它可能是城市名称（如深圳），也可能是行政代码（如 440500）"
+
+#: of transbigdata.crawler.getadmin:8
+msgid "Amap accesstoken"
+msgstr "地图访问令牌"
+
+#: of transbigdata.crawler.get_isochrone_amap:12 transbigdata.crawler.getadmin:10
+msgid "Amap safty code"
+msgstr "高德安全码"
+
+#: of transbigdata.crawler.getadmin:12
+msgid "Whether to output the information of the administrative district boundary"
+msgstr "是否输出行政区界线信息"
+
+#: of transbigdata.crawler.getadmin:18
+msgid ""
+"* **admin** (*GeoDataFrame*) -- Administrative district(WGS84) * **districts** "
+"(*DataFrame*) -- The information of subdistricts. This can be used to further "
+"get   the boundary of lower level districts"
 msgstr ""
+"* **admin** （*GeoDataFrame*） -- 行政区（WGS84） * **区** （*DataFrame*） -- "
+"分区的信息。这可用于进一步获取较低级别区域的边界"
 
-#: ../../source/getbusdata.rst:22
-msgid "stop"
-msgstr ""
+#: of transbigdata.crawler.getadmin:18
+msgid "**admin** (*GeoDataFrame*) -- Administrative district(WGS84)"
+msgstr "**admin** (*GeoDataFrame*) -- 行政区划(WGS84)"
 
-#: ../../source/getbusdata.rst:22
-msgid "生成的公交站点"
-msgstr ""
+#: of transbigdata.crawler.getadmin:19
+msgid ""
+"**districts** (*DataFrame*) -- The information of subdistricts. This can be "
+"used to further get the boundary of lower level districts"
+msgstr "**区** （*数据帧*） -- 子区的信息。这可用于进一步获取较低级别区域的边界"
 
-#: ../../source/getbusdata.rst:26
-msgid "输入关键词与高德ak，抓取行政区划gis"
-msgstr ""
+#: of transbigdata.crawler.get_isochrone_amap:4
+#: transbigdata.crawler.get_isochrone_mapbox:4
+msgid "Longitude of the start point(WGS84)"
+msgstr "起点经度(WGS84)"
 
-#: ../../source/getbusdata.rst:31
-msgid "关键词，可以是名称，如\"深圳市\"，或行政区划编号，如440500"
-msgstr ""
+#: of transbigdata.crawler.get_isochrone_amap:6
+#: transbigdata.crawler.get_isochrone_mapbox:6
+msgid "Latitude of the start point(WGS84)"
+msgstr "起点纬度(WGS84)"
 
-#: ../../source/getbusdata.rst:32
-msgid "ak"
-msgstr ""
+#: of transbigdata.crawler.get_isochrone_amap:8
+#: transbigdata.crawler.get_isochrone_mapbox:8
+msgid "Reachtime of the isochrone"
+msgstr "等时线到达时间"
 
-#: ../../source/getbusdata.rst:33
-msgid "高德ak"
-msgstr ""
+#: of transbigdata.crawler.get_isochrone_amap:10
+msgid "Amap access token"
+msgstr "高德地图访问令牌"
 
-#: ../../source/getbusdata.rst:35
-msgid "subdistricts"
-msgstr ""
+#: of transbigdata.crawler.get_isochrone_amap:14
+msgid "Travel mode, should be 0(bus), 1(subway), 2(bus+subway)"
+msgstr "出行方式，应为0（公交）、1（地铁）、2（公交地铁）"
 
-msgid "bool"
-msgstr ""
+#: of transbigdata.crawler.get_isochrone_amap:19
+#: transbigdata.crawler.get_isochrone_mapbox:17
+msgid "**isochrone** -- The isochrone GeoDataFrame(WGS84)"
+msgstr "**isochrone** -- 等时线GeoDataFrame(WGS84)"
 
-#: ../../source/getbusdata.rst:35
-msgid "是否输出子行政区划的信息"
-msgstr ""
+#: of transbigdata.crawler.get_isochrone_amap
+#: transbigdata.crawler.get_isochrone_mapbox
+msgid "返回类型"
+msgstr "返回类型"
 
-#: ../../source/getbusdata.rst:39
-msgid "admin"
-msgstr ""
+#: of transbigdata.crawler.get_isochrone_mapbox:10
+msgid "Mapbox access token, if `auto` it will use the preset access token"
+msgstr "Mapbox access token，如果是`auto`它将使用预设的access token"
 
-#: ../../source/getbusdata.rst:40
-msgid "行政区划信息"
-msgstr ""
-
-#: ../../source/getbusdata.rst:41
-msgid "districts"
-msgstr ""
-
-msgid "DataFrame"
-msgstr ""
-
-#: ../../source/getbusdata.rst:42
-msgid "子行政区划的信息，利用这个可以进一步抓下一级的行政区划"
-msgstr ""
-
+#: of transbigdata.crawler.get_isochrone_mapbox:12
+msgid "Travel mode, should be `driving`, `walking` or `cycling`"
+msgstr "出行方式，应该是`driving`, `walking` or `cycling`"

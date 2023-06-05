@@ -4,169 +4,195 @@
 # package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-07 16:44+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:50+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/odprocess.rst:6
-msgid "数据聚合集计"
-msgstr ""
+msgid "Data Aggregating"
+msgstr "数据聚合"
 
-#: ../../source/odprocess.rst:9
-msgid "数据集计"
-msgstr ""
-
-#: ../../source/odprocess.rst:13
-msgid "数据集计至小区"
-msgstr ""
-
-#: ../../source/odprocess.rst:15 ../../source/odprocess.rst:41
-#: ../../source/odprocess.rst:62
-msgid "**输入**"
-msgstr ""
-
-#: ../../source/odprocess.rst:17
-msgid "data"
-msgstr ""
-
-msgid "DataFrame"
-msgstr ""
-
-#: ../../source/odprocess.rst:18
-msgid "数据"
-msgstr ""
-
-#: ../../source/odprocess.rst:19 ../../source/odprocess.rst:66
-msgid "shape"
-msgstr ""
-
-msgid "GeoDataFrame"
-msgstr ""
-
-#: ../../source/odprocess.rst:20
-msgid "小区"
-msgstr ""
-
-#: ../../source/odprocess.rst:21 ../../source/odprocess.rst:46
-#: ../../source/odprocess.rst:69
-msgid "col"
-msgstr ""
-
-msgid "List"
-msgstr ""
-
-#: ../../source/odprocess.rst:22
-msgid "可传入经纬度两列，如['Lng','Lat']，此时每一列权重为1。也可以传入经纬度和计数列三列，如['Lng','Lat','count']"
-msgstr ""
-
-#: ../../source/odprocess.rst:24
-msgid "accuracy"
-msgstr ""
-
-msgid "number"
-msgstr ""
-
-#: ../../source/odprocess.rst:24
-msgid "计算原理是先栅格化后集计，这里定义栅格大小，越小精度越高"
-msgstr ""
-
-#: ../../source/odprocess.rst:26 ../../source/odprocess.rst:53
-#: ../../source/odprocess.rst:78
-msgid "**输出**"
-msgstr ""
-
-#: ../../source/odprocess.rst:28
-msgid "aggresult"
-msgstr ""
-
-#: ../../source/odprocess.rst:29
-msgid "小区，其中count列为统计结果"
-msgstr ""
-
-#: ../../source/odprocess.rst:31
-msgid "data1"
-msgstr ""
-
-#: ../../source/odprocess.rst:31
-msgid "数据，对应上了小区"
-msgstr ""
-
-#: ../../source/odprocess.rst:34
-msgid "OD集计"
-msgstr ""
-
-#: ../../source/odprocess.rst:39
-msgid "OD集计与地理信息生成（栅格）。输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame"
-msgstr ""
-
-#: ../../source/odprocess.rst:43 ../../source/odprocess.rst:64
-msgid "oddata"
-msgstr ""
-
-#: ../../source/odprocess.rst:44 ../../source/odprocess.rst:65
-msgid "OD数据"
-msgstr ""
-
-#: ../../source/odprocess.rst:46 ../../source/odprocess.rst:69
+#: ../../source/odprocess.rst:14:<autosummary>:1
 msgid ""
-"起终点列名,['slon','slat','elon','elat']，此时每一列权重为1。 "
-"也可以传入权重列，如['slon','slat','elon','elat','count']"
+":py:obj:`dataagg <transbigdata.dataagg>`\\ \\(data\\, shape\\[\\, col\\, "
+"accuracy\\]\\)"
 msgstr ""
 
-#: ../../source/odprocess.rst:48 ../../source/odprocess.rst:71
-msgid "params"
+#: ../../source/odprocess.rst:14:<autosummary>:1 of
+#: transbigdata.preprocess.dataagg:2
+msgid "Aggregate data to traffic zone"
+msgstr "聚合数据到交通区域"
+
+#: ../../source/odprocess.rst:14:<autosummary>:1
+msgid ""
+":py:obj:`odagg_grid <transbigdata.odagg_grid>`\\ \\(oddata\\, params\\[\\, "
+"col\\, arrow\\]\\)"
 msgstr ""
 
-#: ../../source/odprocess.rst:49
-msgid "栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽"
+#: ../../source/odprocess.rst:14:<autosummary>:1
+msgid "Aggregate the OD matrix and generate the grid geometry."
+msgstr "聚合OD矩阵并生成网格几何。"
+
+#: ../../source/odprocess.rst:14:<autosummary>:1
+msgid ""
+":py:obj:`odagg_shape <transbigdata.odagg_shape>`\\ \\(oddata\\, shape\\[\\, "
+"col\\, params\\, ...\\]\\)"
 msgstr ""
 
-#: ../../source/odprocess.rst:51 ../../source/odprocess.rst:76
-msgid "arrow"
-msgstr ""
+#: ../../source/odprocess.rst:14:<autosummary>:1
+msgid "Generate the OD aggregation results and the corresponding geometry."
+msgstr "生成OD聚合结果和对应的几何图形。"
 
-msgid "bool"
-msgstr ""
+#: of transbigdata.odprocess.odagg_grid transbigdata.odprocess.odagg_shape
+#: transbigdata.preprocess.dataagg
+msgid "参数"
+msgstr "参数"
 
-#: ../../source/odprocess.rst:51 ../../source/odprocess.rst:76
-msgid "生成的OD地理线型是否包含箭头"
-msgstr ""
+#: of transbigdata.preprocess.dataagg:4
+msgid "The origin DataFrame"
+msgstr "起源DataFrame"
 
-#: ../../source/odprocess.rst:56 ../../source/odprocess.rst:82
-msgid "oddata1"
-msgstr ""
+#: of transbigdata.preprocess.dataagg:6
+msgid "The shape of the traffic zone"
+msgstr "交通区形状"
 
-#: ../../source/odprocess.rst:56 ../../source/odprocess.rst:81
-msgid "集计后生成OD的GeoDataFrame"
+#: of transbigdata.preprocess.dataagg:8
+msgid ""
+"You can either choose to input two columns, i.e., [‘Lng’,’Lat’], or to "
+"input three columns, i.e., [‘Lng’,’Lat’,’count’]”, where count means the "
+"points count"
 msgstr ""
+"您可以选择输入两列，即 ['Lng'、'Lat']，也可以选择输入三列，即 "
+"['Lng'、'Lat'、'count']“，其中 count 表示点数"
 
-#: ../../source/odprocess.rst:60
-msgid "OD集计与地理信息生成（小区集计）。输入OD数据（每一行数据是一个出行），栅格化OD并集计后生成OD的GeoDataFrame"
+#: of transbigdata.preprocess.dataagg:12
+msgid ""
+"The idea is to first implement data gridding and then the aggregation. "
+"Here, the grid size will be determined. The less the size is, the higher "
+"the accuracy will have."
 msgstr ""
+"这个想法是首先实现数据网格化，然后实现聚合。在这里，将确定网格大小。尺寸越"
+"小，精度就越高。"
 
-#: ../../source/odprocess.rst:67
-msgid "集计小区的GeoDataFrame"
+#: of transbigdata.odprocess.odagg_grid transbigdata.odprocess.odagg_shape
+#: transbigdata.preprocess.dataagg
+msgid "返回"
+msgstr "返回"
+
+#: of transbigdata.preprocess.dataagg:17
+msgid ""
+"* **aggresult** (*GeoDataFrame*) -- Traffic zone. The count column is the "
+"output result * **data1** (*DataFrame*) -- The zone-matched data"
 msgstr ""
+"* **aggresult** （*GeoDataFrame*） -- 交通区域。计数列是输出结果 * "
+"**data1** （*数据帧*） -- 区域匹配的数据"
 
-#: ../../source/odprocess.rst:72
-msgid "栅格化参数，如果传入，则先栅格化后以栅格中心点匹配小区，如果不传入，则直接以经纬度匹配。在数据量大时，用栅格化进行匹配速度会极大提升"
+#: of transbigdata.preprocess.dataagg:17
+msgid ""
+"**aggresult** (*GeoDataFrame*) -- Traffic zone. The count column is the "
+"output result"
+msgstr "**aggresult** （*GeoDataFrame*） -- 流量区域。计数列是输出结果"
+
+#: of transbigdata.preprocess.dataagg:18
+msgid "**data1** (*DataFrame*) -- The zone-matched data"
+msgstr "**data1** (*DataFrame*) -- 区域匹配数据"
+
+#: of transbigdata.odprocess.odagg_grid:2
+msgid ""
+"Aggregate the OD matrix and generate the grid geometry. The input is the OD "
+"matrix (each row represents a trip). The OD will assigned to grids and then "
+"aggregated in the form of GeoDataFrame."
 msgstr ""
+"聚合 OD 矩阵并生成格网几何。输入是 OD 矩阵（每行代表一个行程）。OD 将分配给"
+"格网，然后以地理数据帧的形式进行聚合。"
 
-#: ../../source/odprocess.rst:73
-msgid "round_accuracy"
+#: of transbigdata.odprocess.odagg_grid:7 transbigdata.odprocess.odagg_shape:6
+msgid "OD data"
+msgstr "外径数据"
+
+#: of transbigdata.odprocess.odagg_grid:9
+msgid ""
+"The column of the origin/destination location,[‘slon’,’slat’, "
+"’elon’,’elat’]. The default weight is 1 for each column. You can also add "
+"the weight parameter, for example, [‘slon’, ’slat’,’elon’,’elat’,’count’]."
 msgstr ""
+"起点/终点位置的列，['slon'， 'slat'， 'elon'， 'elat']。每列的默认权重为 1。"
+"您还可以添加权重参数，例如 ['slon'， 'slat'， 'elon'， 'elat'， 'count']。"
 
-#: ../../source/odprocess.rst:74
-msgid "集计时经纬度取小数位数"
+#: of transbigdata.odprocess.odagg_grid:14
+msgid ""
+"Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and "
+"latStart are the lower-left coordinates, deltaLon, deltaLat are the length "
+"and width of a single grid"
 msgstr ""
+"网格参数（lonStart，latStart，deltaLon，deltaLat），lonStart和latStart是左下"
+"角的坐标，deltaLon，deltaLat是单个网格的长度和宽度"
 
+#: of transbigdata.odprocess.odagg_grid:18
+#: transbigdata.odprocess.odagg_shape:27
+msgid "Whether the generated OD geographic line contains arrows"
+msgstr "生成的OD地理线是否包含箭头"
+
+#: of transbigdata.odprocess.odagg_grid:21
+#: transbigdata.odprocess.odagg_shape:30
+msgid "**oddata1** -- GeoDataFrame of OD after aggregation"
+msgstr "**oddata1** -- 聚合后OD的GeoDataFrame"
+
+#: of transbigdata.odprocess.odagg_grid transbigdata.odprocess.odagg_shape
+msgid "返回类型"
+msgstr "返回类型"
+
+#: of transbigdata.odprocess.odagg_shape:2
+msgid ""
+"Generate the OD aggregation results and the corresponding geometry. The "
+"input is the OD data (each row represents a trip). The OD will assigned to "
+"grids and then aggregated in the form of GeoDataFrame."
+msgstr ""
+"生成 OD 聚合结果和相应的几何图形。输入是 OD 数据（每行代表一个行程）。OD 将"
+"分配给格网，然后以地理数据帧的形式进行聚合。"
+
+#: of transbigdata.odprocess.odagg_shape:8
+msgid "GeoDataFrame of the target traffic zone"
+msgstr "目标交通区域的GeoDataFrame"
+
+#: of transbigdata.odprocess.odagg_shape:10
+msgid ""
+"The column of the origin/destination location,"
+"[‘slon’,’slat’,’elon’ ,’elat’]. The default weight is 1 for each column. "
+"You can also add the weight parameter, for example, "
+"[‘slon’,’slat’,’elon’,’elat’, ’count’]."
+msgstr ""
+"起点/终点位置的列，['slon'， 'slat'， 'elon' ， 'elat']。每列的默认权重为 "
+"1。您还可以添加权重参数，例如 ['slon'、'slat'、'elon'、'elat'、'count']。"
+
+#: of transbigdata.odprocess.odagg_shape:15
+msgid ""
+"Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and "
+"latStart are the lower-left coordinates, deltaLon, deltaLat are the length "
+"and width of a single grid If availabel, After the data gridding, the "
+"traffic zone will be matched based on the grid center. If not available, "
+"then the matching will be processed based on longitude and latitude. When "
+"the number of data items is large, the matching efficiency will be improved "
+"greatly thanks to data gridding."
+msgstr ""
+"网格参数（lonStart，latStart，deltaLon，deltaLat），lonStart和latStart是左下"
+"角的坐标，deltaLon，deltaLat是单个网格的长度和宽度如果可用，数据网格化后，将"
+"根据网格中心匹配流量区域。如果不可用，则将根据经度和纬度处理匹配。当数据项数"
+"量较大时，由于数据网格化，匹配效率将大大提高。"
+
+#: of transbigdata.odprocess.odagg_shape:24
+msgid ""
+"The number of decimal for latitude and longitude when implementing "
+"aggregation"
+msgstr "实现聚合时纬度和经度的小数位数"

@@ -4,497 +4,658 @@
 # package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-07 16:44+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:49+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/grids.rst:6
-msgid "数据栅格化"
-msgstr ""
+msgid "Data Gridding"
+msgstr "数据网格化"
 
-#: ../../source/grids.rst:9
-msgid "方形栅格渔网的生成与对应"
-msgstr ""
-
-#: ../../source/grids.rst:13
-msgid "生成研究范围内的方形栅格"
-msgstr ""
-
-#: ../../source/grids.rst:15 ../../source/grids.rst:42
-#: ../../source/grids.rst:66 ../../source/grids.rst:89
-#: ../../source/grids.rst:113 ../../source/grids.rst:138
-#: ../../source/grids.rst:160 ../../source/grids.rst:202
-#: ../../source/grids.rst:223 ../../source/grids.rst:237
-#: ../../source/grids.rst:461
-msgid "**输入**"
-msgstr ""
-
-#: ../../source/grids.rst:17 ../../source/grids.rst:44
-#: ../../source/grids.rst:463
-msgid "bounds"
-msgstr ""
-
-msgid "List"
-msgstr ""
-
-#: ../../source/grids.rst:18 ../../source/grids.rst:45
-#: ../../source/grids.rst:464
+#: ../../source/grids.rst:23:<autosummary>:1
 msgid ""
-"生成范围的边界，[lon1,lat1,lon2,lat2] (WGS84坐标系) "
-"其中，lon1,lat1是左下角坐标，lon2,lat2是右上角坐标"
+":py:obj:`area_to_grid <transbigdata.area_to_grid>`\\ \\(location\\[\\, "
+"accuracy\\, method\\, ...\\]\\)"
 msgstr ""
 
-#: ../../source/grids.rst:21 ../../source/grids.rst:48
-#: ../../source/grids.rst:72 ../../source/grids.rst:466
-msgid "accuracy"
+#: ../../source/grids.rst:23:<autosummary>:1 of
+#: transbigdata.grids.area_to_grid:2
+msgid "Generate the rectangular grids in the bounds or shape"
+msgstr "在边界或形状中生成矩形网格"
+
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid ""
+":py:obj:`area_to_params <transbigdata.area_to_params>`\\ \\(location\\[\\, "
+"accuracy\\, method\\]\\)"
 msgstr ""
 
-msgid "number"
+#: ../../source/grids.rst:23:<autosummary>:1 of
+#: transbigdata.grids.area_to_params:2
+msgid "Generate gridding params"
+msgstr "生成网格化参数"
+
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid ""
+":py:obj:`GPS_to_grid <transbigdata.GPS_to_grid>`\\ \\(lon\\, lat\\, params\\)"
 msgstr ""
 
-#: ../../source/grids.rst:20 ../../source/grids.rst:47
-msgid "栅格大小（米）"
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid "Match the GPS data to the grids."
+msgstr "将 GPS 数据与网格匹配。"
+
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid ""
+":py:obj:`grid_to_centre <transbigdata.grid_to_centre>`\\ \\(gridid\\, "
+"params\\)"
 msgstr ""
 
-#: ../../source/grids.rst:23 ../../source/grids.rst:50
-#: ../../source/grids.rst:79 ../../source/grids.rst:98
-#: ../../source/grids.rst:122 ../../source/grids.rst:147
-#: ../../source/grids.rst:171 ../../source/grids.rst:211
-#: ../../source/grids.rst:228 ../../source/grids.rst:242
-#: ../../source/grids.rst:468
-msgid "**输出**"
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid "The center location of the grid."
+msgstr "网格的中心位置。"
+
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid ""
+":py:obj:`grid_to_polygon <transbigdata.grid_to_polygon>`\\ \\(gridid\\, "
+"params\\)"
 msgstr ""
+
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid "Generate the geometry column based on the grid ID."
+msgstr "根据网格ID生成几何列。"
+
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid ""
+":py:obj:`grid_to_area <transbigdata.grid_to_area>`\\ \\(data\\, shape\\, "
+"params\\[\\, col\\]\\)"
+msgstr ""
+
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid ""
+"Input the two columns of grid ID, the geographic polygon and gridding "
+"paramters."
+msgstr "输入格网 ID 两列、地理面和格网参数。"
+
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid ":py:obj:`grid_to_params <transbigdata.grid_to_params>`\\ \\(grid\\)"
+msgstr ""
+
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid "Regenerate gridding params from grid."
+msgstr "从网格重新生成网格化参数。"
+
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid ""
+":py:obj:`grid_params_optimize <transbigdata.grid_params_optimize>`\\ "
+"\\(data\\, initialparams\\[\\, ...\\]\\)"
+msgstr ""
+
+#: ../../source/grids.rst:23:<autosummary>:1 of
+#: transbigdata.grids.grid_params_optimize:2
+msgid "Optimize the grid params"
+msgstr "优化网格参数"
+
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid ""
+":py:obj:`geohash_encode <transbigdata.geohash_encode>`\\ \\(lon\\, lat\\[\\, "
+"precision\\]\\)"
+msgstr ""
+
+#: ../../source/grids.rst:23:<autosummary>:1 of
+#: transbigdata.grids.geohash_encode:2
+msgid "Input latitude and longitude and precision, and encode geohash code"
+msgstr "输入经纬度和精度，编码geohash码"
+
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid ":py:obj:`geohash_decode <transbigdata.geohash_decode>`\\ \\(geohash\\)"
+msgstr ""
+
+#: ../../source/grids.rst:23:<autosummary>:1 of
+#: transbigdata.grids.geohash_decode:2
+msgid "Decode geohash code"
+msgstr "解码geohash码"
+
+#: ../../source/grids.rst:23:<autosummary>:1
+msgid ":py:obj:`geohash_togrid <transbigdata.geohash_togrid>`\\ \\(geohash\\)"
+msgstr ""
+
+#: ../../source/grids.rst:23:<autosummary>:1 of
+#: transbigdata.grids.geohash_togrid:2
+msgid "Input geohash code to generate geohash grid cell"
+msgstr "输入geohash码生成geohash网格单元格"
 
 #: ../../source/grids.rst:25
-msgid "grid"
-msgstr ""
+msgid "Gridding Framework"
+msgstr "网格化框架"
 
-msgid "GeoDataFrame"
-msgstr ""
+#: of transbigdata.grids.GPS_to_grid transbigdata.grids.area_to_grid
+#: transbigdata.grids.area_to_params transbigdata.grids.geohash_decode
+#: transbigdata.grids.geohash_encode transbigdata.grids.geohash_togrid
+#: transbigdata.grids.grid_params_optimize transbigdata.grids.grid_to_area
+#: transbigdata.grids.grid_to_centre transbigdata.grids.grid_to_params
+#: transbigdata.grids.grid_to_polygon
+msgid "参数"
+msgstr "参数"
 
-#: ../../source/grids.rst:26
-msgid "栅格的GeoDataFrame，其中LONCOL与LATCOL为栅格的编号，HBLON与HBLAT为栅格的中心点坐标"
-msgstr ""
-
-#: ../../source/grids.rst:29 ../../source/grids.rst:54
-#: ../../source/grids.rst:83 ../../source/grids.rst:96
-#: ../../source/grids.rst:120 ../../source/grids.rst:145
-#: ../../source/grids.rst:166
-msgid "params"
-msgstr ""
-
-#: ../../source/grids.rst:28 ../../source/grids.rst:53
-#: ../../source/grids.rst:96 ../../source/grids.rst:120
-#: ../../source/grids.rst:145
-msgid "栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽"
-msgstr ""
-
-#: ../../source/grids.rst:40
-msgid "栅格参数获取"
-msgstr ""
-
-#: ../../source/grids.rst:64
-msgid "获取最佳的栅格化参数，以基尼系数最大为标准"
-msgstr ""
-
-#: ../../source/grids.rst:68 ../../source/grids.rst:162
-msgid "data"
-msgstr ""
-
-msgid "DataFrame"
-msgstr ""
-
-#: ../../source/grids.rst:69
-msgid "数据"
-msgstr ""
-
-#: ../../source/grids.rst:70 ../../source/grids.rst:169
-msgid "col"
-msgstr ""
-
-#: ../../source/grids.rst:71
-msgid "经纬度列"
-msgstr ""
-
-#: ../../source/grids.rst:73
-msgid "网格大小"
-msgstr ""
-
-#: ../../source/grids.rst:74
-msgid "gap"
-msgstr ""
-
-#: ../../source/grids.rst:75
-msgid "精度,越大越精确，效果越好，计算量越大"
-msgstr ""
-
-#: ../../source/grids.rst:77
-msgid "sample"
-msgstr ""
-
-#: ../../source/grids.rst:77
-msgid "抽样多少数据做测试"
-msgstr ""
-
-#: ../../source/grids.rst:82
-msgid "最佳的栅格参数(lonStart,latStart,deltaLon,deltaLat)，分别为栅格左下角坐标与单个栅格的经纬度长宽"
-msgstr ""
-
-#: ../../source/grids.rst:87
-msgid "GPS数据对应栅格编号。输入数据的经纬度列与栅格参数，输出对应的栅格编号"
-msgstr ""
-
-#: ../../source/grids.rst:91 ../../source/grids.rst:204
-#: ../../source/grids.rst:213
-msgid "lon"
-msgstr ""
-
-msgid "Series"
-msgstr ""
-
-#: ../../source/grids.rst:92 ../../source/grids.rst:205
-#: ../../source/grids.rst:214
-msgid "经度列"
-msgstr ""
-
-#: ../../source/grids.rst:93 ../../source/grids.rst:206
-#: ../../source/grids.rst:217
-msgid "lat"
-msgstr ""
-
-#: ../../source/grids.rst:94 ../../source/grids.rst:207
-#: ../../source/grids.rst:216
-msgid "纬度列"
-msgstr ""
-
-#: ../../source/grids.rst:100 ../../source/grids.rst:115
-#: ../../source/grids.rst:140
-msgid "LONCOL"
-msgstr ""
-
-#: ../../source/grids.rst:101 ../../source/grids.rst:116
-#: ../../source/grids.rst:141
-msgid "经度栅格编号列"
-msgstr ""
-
-#: ../../source/grids.rst:103 ../../source/grids.rst:117
-#: ../../source/grids.rst:142
-msgid "LATCOL"
-msgstr ""
-
-#: ../../source/grids.rst:103 ../../source/grids.rst:118
-#: ../../source/grids.rst:143
-msgid "纬度栅格编号列"
-msgstr ""
-
-#: ../../source/grids.rst:111
-msgid "栅格编号对应栅格中心点经纬度。输入数据的栅格编号与栅格参数，输出对应的栅格中心点"
-msgstr ""
-
-#: ../../source/grids.rst:124
-msgid "HBLON"
-msgstr ""
-
-#: ../../source/grids.rst:125
-msgid "栅格中心点经度列"
-msgstr ""
-
-#: ../../source/grids.rst:128
-msgid "HBLAT"
-msgstr ""
-
-#: ../../source/grids.rst:127
-msgid "栅格中心点纬度列"
-msgstr ""
-
-#: ../../source/grids.rst:136
-msgid "栅格编号生成栅格的地理信息列。输入数据的栅格编号与栅格参数，输出对应的地理信息列"
-msgstr ""
-
-#: ../../source/grids.rst:150
-msgid "geometry"
-msgstr ""
-
-#: ../../source/grids.rst:150
-msgid "栅格的矢量图形列"
-msgstr ""
-
-#: ../../source/grids.rst:158
-msgid "输入数据（带有栅格经纬度编号两列），矢量图形与栅格化参数，输出数据栅格并对应矢量图形。"
-msgstr ""
-
-#: ../../source/grids.rst:163
-msgid "数据,（带有栅格经纬度编号两列）"
-msgstr ""
-
-#: ../../source/grids.rst:164
-msgid "shape"
-msgstr ""
-
-#: ../../source/grids.rst:165
-msgid "矢量图形"
-msgstr ""
-
-#: ../../source/grids.rst:167
-msgid "栅格化参数"
-msgstr ""
-
-#: ../../source/grids.rst:169
-msgid "列名，[经度栅格编号，纬度栅格编号]"
-msgstr ""
-
-#: ../../source/grids.rst:175
-msgid "data1"
-msgstr ""
-
-#: ../../source/grids.rst:174
-msgid "数据栅格并对应矢量图形"
-msgstr ""
-
-#: ../../source/grids.rst:178
-msgid "geohash编码"
-msgstr ""
-
-#: ../../source/grids.rst:180
+#: of transbigdata.grids.area_to_grid:4 transbigdata.grids.area_to_params:4
 msgid ""
-"geohash是一种公共域地理编码系统，它的作用是将经纬度地理位置编码为字母和数字组成的字符串，字符串也可解码为经纬度。每个字符串代表一个网格编号，字符串的长度越长则精度越高。根据\\"
-" `wiki <https://en.wikipedia.org/wiki/Geohash>`__\\ "
-"，geohash字符串长度对应精度表格如下："
+"Where to generate grids. If bounds, [lon1, lat1, lon2, lat2](WGS84), where "
+"lon1 , lat1 are the lower-left coordinates, lon2 , lat2 are the upper-right "
+"coordinates If shape, it should be GeoDataFrame"
 msgstr ""
+"生成网格的位置。如果边界为 [lon1， lat1， lon2， lat2]（WGS84），其中 "
+"lon1 ， lat1 是左下角坐标，lon2 ， lat2 是右上角坐标 如果是形状，则应为 "
+"GeoDataFrame"
 
-#: ../../source/grids.rst:183
+#: of transbigdata.grids.area_to_grid:9 transbigdata.grids.area_to_params:9
+msgid "Grid size (meter)"
+msgstr "网格尺寸（米）"
+
+#: of transbigdata.grids.area_to_grid:11 transbigdata.grids.area_to_params:11
+msgid "rect, tri or hexa"
+msgstr "直角、三角或六角"
+
+#: of transbigdata.grids.area_to_grid:13
+msgid ""
+"Gridding parameters. See https://transbigdata.readthedocs.io/en/latest/grids."
+"html for detail information about gridding parameters. When Gridding "
+"parameters is given, accuracy will not be used."
+msgstr ""
+"网格化参数。有关网格化参数的详细信息，请参阅 https://transbigdata."
+"readthedocs.io/en/latest/grids.html。给出格网参数时，将不使用精度。"
+
+#: of transbigdata.grids.GPS_to_grid transbigdata.grids.area_to_grid
+#: transbigdata.grids.area_to_params transbigdata.grids.geohash_decode
+#: transbigdata.grids.geohash_encode transbigdata.grids.geohash_togrid
+#: transbigdata.grids.grid_params_optimize transbigdata.grids.grid_to_area
+#: transbigdata.grids.grid_to_centre transbigdata.grids.grid_to_params
+#: transbigdata.grids.grid_to_polygon
+msgid "返回"
+msgstr "返回"
+
+#: of transbigdata.grids.area_to_grid:19
+msgid ""
+"* **grid** (*GeoDataFrame*) -- Grid GeoDataFrame,   LONCOL and LATCOL are "
+"the index of grids,   HBLON and HBLAT are the center of the grids * "
+"**params** (*list or dict*) -- Gridding parameters.   See https://"
+"transbigdata.readthedocs.io/en/latest/grids.html   for detail information "
+"about gridding parameters."
+msgstr ""
+"* **grid** （*GeoDataFrame*） -- Grid GeoDataFrame、LONCOL 和 LATCOL 是网格的"
+"索引，HBLON 和 HBLAT 是网格的中心 * **params** （*list or dict*） -- 网格参"
+"数。  有关网格化参数的详细信息，请参阅 https://transbigdata.readthedocs.io/"
+"en/latest/grids.html。"
+
+#: of transbigdata.grids.area_to_grid:19
+msgid ""
+"**grid** (*GeoDataFrame*) -- Grid GeoDataFrame, LONCOL and LATCOL are the "
+"index of grids, HBLON and HBLAT are the center of the grids"
+msgstr ""
+"**grid** （*GeoDataFrame*） -- Grid GeoDataFrame、LONCOL 和 LATCOL 是网格的索"
+"引，HBLON 和 HBLAT 是网格的中心"
+
+#: of transbigdata.grids.area_to_grid:22
+msgid ""
+"**params** (*list or dict*) -- Gridding parameters. See https://transbigdata."
+"readthedocs.io/en/latest/grids.html for detail information about gridding "
+"parameters."
+msgstr ""
+"**参数** （*列表或字典*） -- 网格参数。有关网格化参数的详细信息，请参阅 "
+"https://transbigdata.readthedocs.io/en/latest/grids.html。"
+
+#: of transbigdata.grids.area_to_params:14 transbigdata.grids.grid_to_params:7
+msgid ""
+"**params** -- Gridding parameters. See https://transbigdata.readthedocs.io/"
+"en/latest/grids.html for detail information about gridding parameters."
+msgstr ""
+"参数 -- 网格参数。有关网格化参数的详细信息，请参阅 https://transbigdata."
+"readthedocs.io/en/latest/grids.html。"
+
+#: of transbigdata.grids.area_to_params transbigdata.grids.geohash_encode
+#: transbigdata.grids.geohash_togrid transbigdata.grids.grid_params_optimize
+#: transbigdata.grids.grid_to_area transbigdata.grids.grid_to_params
+#: transbigdata.grids.grid_to_polygon
+msgid "返回类型"
+msgstr "返回类型"
+
+#: of transbigdata.grids.GPS_to_grid:2
+msgid ""
+"Match the GPS data to the grids. The input is the columns of longitude, "
+"latitude, and the grids parameter. The output is the grid ID."
+msgstr "将 GPS 数据与网格匹配。输入是经度、纬度和格网参数列。输出是网格 ID。"
+
+#: of transbigdata.grids.GPS_to_grid:5
+msgid "The column of longitude"
+msgstr "经度栏"
+
+#: of transbigdata.grids.GPS_to_grid:7
+msgid "The column of latitude"
+msgstr "纬度栏"
+
+#: of transbigdata.grids.GPS_to_grid:9 transbigdata.grids.grid_to_area:9
+#: transbigdata.grids.grid_to_centre:14 transbigdata.grids.grid_to_polygon:15
+msgid ""
+"Gridding parameters. See https://transbigdata.readthedocs.io/en/latest/grids."
+"html for detail information about gridding parameters."
+msgstr ""
+"网格化参数。有关网格化参数的详细信息，请参阅 https://transbigdata."
+"readthedocs.io/en/latest/grids.html。"
+
+#: of transbigdata.grids.GPS_to_grid:14
+msgid ""
+"* `Rectangle grids` * **[LONCOL,LATCOL]** (*list*) -- The two columns LONCOL "
+"and LATCOL together can specify a grid. * `Triangle and Hexagon grids` * "
+"**[loncol_1,loncol_2,loncol_3]** (*list*) -- The index of the grid latitude. "
+"The two columns LONCOL and   LATCOL together can specify a grid."
+msgstr ""
+"* 'Rectangle grids' * **[LONCOL，LATCOL]** （*list*） -- 两列 LONCOL 和 "
+"LATCOL 一起可以指定一个网格。* “三角形和六边形网格” * **[loncol_1，loncol_2，"
+"loncol_3]** （*list*） -- 网格纬度的索引。两列 LONCOL 和 LATCOL 一起可以指定"
+"一个网格。"
+
+#: of transbigdata.grids.GPS_to_grid:14
+msgid "`Rectangle grids`"
+msgstr "`矩形网格`"
+
+#: of transbigdata.grids.GPS_to_grid:15
+msgid ""
+"**[LONCOL,LATCOL]** (*list*) -- The two columns LONCOL and LATCOL together "
+"can specify a grid."
+msgstr ""
+"**[LONCOL，LATCOL]** （*list*） -- 两列 LONCOL 和 LATCOL 一起可以指定网格。"
+
+#: of transbigdata.grids.GPS_to_grid:16
+msgid "`Triangle and Hexagon grids`"
+msgstr "`三角形和六边形网格`"
+
+#: of transbigdata.grids.GPS_to_grid:17
+msgid ""
+"**[loncol_1,loncol_2,loncol_3]** (*list*) -- The index of the grid latitude. "
+"The two columns LONCOL and LATCOL together can specify a grid."
+msgstr ""
+"**[loncol_1，loncol_2，loncol_3]** （*list*） -- 网格纬度的索引。两列 LONCOL "
+"和 LATCOL 一起可以指定一个网格。"
+
+#: of transbigdata.grids.grid_to_centre:2
+msgid ""
+"The center location of the grid. The input is the grid ID and parameters, "
+"the output is the grid center location."
+msgstr "网格的中心位置。输入是格网ID和参数，输出是格网中心位置。"
+
+#: of transbigdata.grids.grid_to_centre:5 transbigdata.grids.grid_to_polygon:6
+msgid ""
+"if `Rectangle grids` [LONCOL,LATCOL] : Series     The two columns LONCOL and "
+"LATCOL together can specify a grid.  if `Triangle and Hexagon grids` "
+"[loncol_1,loncol_2,loncol_3] : Series     The index of the grid latitude. "
+"The two columns LONCOL and     LATCOL together can specify a grid."
+msgstr ""
+"如果“矩形网格”[LONCOL，LATCOL]：系列 两列 LONCOL 和 LATCOL 一起可以指定网"
+"格。 如果“三角形和六边形网格” [loncol_1，loncol_2，loncol_3] ：系列 网格纬度"
+"的索引。两列 LONCOL 和 LATCOL 一起可以指定一个网格。"
+
+#: of transbigdata.grids.grid_to_centre:5 transbigdata.grids.grid_to_polygon:6
+msgid "if `Rectangle grids` [LONCOL,LATCOL] : Series"
+msgstr "如果`矩形网格`[LONCOL，LATCOL]：系列"
+
+#: of transbigdata.grids.grid_to_centre:7 transbigdata.grids.grid_to_polygon:8
+msgid "The two columns LONCOL and LATCOL together can specify a grid."
+msgstr "LONCOL和LATCOL这两列一起可以指定一个网格。"
+
+#: of transbigdata.grids.grid_to_centre:9 transbigdata.grids.grid_to_polygon:10
+msgid "if `Triangle and Hexagon grids` [loncol_1,loncol_2,loncol_3] : Series"
+msgstr "if `三角形和六边形网格` [loncol_1,loncol_2,loncol_3]：系列"
+
+#: of transbigdata.grids.grid_to_centre:11
+#: transbigdata.grids.grid_to_polygon:12
+msgid ""
+"The index of the grid latitude. The two columns LONCOL and LATCOL together "
+"can specify a grid."
+msgstr "网格纬度的索引。两列 LONCOL 和 LATCOL 一起可以指定一个网格。"
+
+#: of transbigdata.grids.grid_to_centre:19
+msgid ""
+"* **HBLON** (*Series*) -- The longitude of the grid center * **HBLAT** "
+"(*Series*) -- The latitude of the grid center"
+msgstr ""
+"* **HBLON** （*系列*） -- 网格中心的经度 * **HBLAT** （*系列*） -- 网格中心的"
+"纬度"
+
+#: of transbigdata.grids.grid_to_centre:19
+msgid "**HBLON** (*Series*) -- The longitude of the grid center"
+msgstr "**HBLON** (*Series*) -- 网格中心的经度"
+
+#: of transbigdata.grids.grid_to_centre:20
+msgid "**HBLAT** (*Series*) -- The latitude of the grid center"
+msgstr "**HBLAT** (*Series*) -- 网格中心的纬度"
+
+#: of transbigdata.grids.grid_to_polygon:2
+msgid ""
+"Generate the geometry column based on the grid ID. The input is the grid ID, "
+"the output is the geometry. Support rectangle, triangle and hexagon grids"
+msgstr ""
+"基于格网 ID 生成几何列。输入是网格 ID，输出是几何图形。支持矩形、三角形和六边"
+"形网格"
+
+#: of transbigdata.grids.grid_to_polygon:20
+msgid "**geometry** -- The column of grid geographic polygon"
+msgstr "**geometry** -- 网格地理多边形的列"
+
+#: of transbigdata.grids.grid_to_area:2
+msgid ""
+"Input the two columns of grid ID, the geographic polygon and gridding "
+"paramters. The output is the grid."
+msgstr "输入格网 ID 两列、地理面和格网参数。输出是网格。"
+
+#: of transbigdata.grids.grid_to_area:5
+msgid "Data, with two columns of grid ID"
+msgstr "数据，有两列网格ID"
+
+#: of transbigdata.grids.grid_to_area:7
+msgid "Geographic polygon"
+msgstr "地理多边形"
+
+#: of transbigdata.grids.grid_to_area:13
+msgid ""
+"Column names [LONCOL,LATCOL] for rect grids or [loncol_1,loncol_2,loncol_3] "
+"for tri and hexa grids"
+msgstr ""
+"列名称 [LONCOL，LATCOL] 用于矩形网格，或 [loncol_1，loncol_2，loncol_3] 表示"
+"三和六网格"
+
+#: of transbigdata.grids.grid_to_area:17
+msgid ""
+"**data1** -- Data gridding and mapping to the corresponding geographic "
+"polygon"
+msgstr "**data1** -- 数据网格化和映射到相应的地理多边形"
+
+#: of transbigdata.grids.grid_to_params:2
+msgid "Regenerate gridding params from grid. Only support rect grids now."
+msgstr "从网格重新生成网格化参数。"
+
+#: of transbigdata.grids.grid_to_params:4
+msgid "grids generated by transbigdata"
+msgstr "transbigdata生成的网格"
+
+#: of transbigdata.grids.grid_params_optimize:4
+msgid "Trajectory data"
+msgstr "轨迹数据"
+
+#: of transbigdata.grids.grid_params_optimize:6
+msgid "Initial griding params"
+msgstr "初始网格参数"
+
+#: of transbigdata.grids.grid_params_optimize:8
+msgid "Column names [uid,lon,lat]"
+msgstr "列名[uid,lon,lat]"
+
+#: of transbigdata.grids.grid_params_optimize:10
+msgid "The method to optimize: centerdist, gini, gridscount"
+msgstr "优化方法：centerdist, gini, gridscount"
+
+#: of transbigdata.grids.grid_params_optimize:12
+msgid "Whether to print detail result"
+msgstr "是否打印明细结果"
+
+#: of transbigdata.grids.grid_params_optimize:14
+msgid "Sample the data as input, if 0 it will not perform sampling"
+msgstr "采样数据作为输入，为0则不采样"
+
+#: of transbigdata.grids.grid_params_optimize:16
+#: transbigdata.grids.grid_params_optimize:17
+#: transbigdata.grids.grid_params_optimize:18
+#: transbigdata.grids.grid_params_optimize:19
+#: transbigdata.grids.grid_params_optimize:20
+msgid "Params in PSO from scikit-opt"
+msgstr "来自 scikit-opt 的 PSO 中的参数"
+
+#: of transbigdata.grids.grid_params_optimize:22
+msgid "**params_optimized** -- Optimized params"
+msgstr "**params_optimized** -- 优化的参数"
+
+#: ../../source/grids.rst:46
+msgid "geohash encoding"
+msgstr "geohash编码"
+
+#: ../../source/grids.rst:48
+msgid ""
+"Geohash is a public geocoding system that encodes latitude and longitude "
+"geographic locations into strings of letters and numbers, which can also be "
+"decoded back to latitude and longitude. Each string represents a grid "
+"number, and the longer the length of the string, the higher the precision. "
+"According to wiki <https://en.wikipedia.org/wiki/Geohash>, the table of "
+"Geohash string lengths corresponding to precision is as follows."
+msgstr ""
+"Geohash 是一种公共地理编码系统，可将纬度和经度地理位置编码为字母和数字字符"
+"串，这些字符串也可以解码回纬度和经度。每个字符串代表一个网格编号，字符串的长"
+"度越长，精度越高。根据wiki<https://en.wikipedia.org/wiki/Geohash>，与精度对应"
+"的Geohash字符串长度表如下。"
+
+#: ../../source/grids.rst:51
 msgid "geohash length(precision)"
-msgstr ""
+msgstr "geohash 长度（精度）"
 
-#: ../../source/grids.rst:183
+#: ../../source/grids.rst:51
 msgid "lat bits"
-msgstr ""
+msgstr "纬度位"
 
-#: ../../source/grids.rst:183
+#: ../../source/grids.rst:51
 msgid "lng bits"
-msgstr ""
+msgstr "lng位"
 
-#: ../../source/grids.rst:183
+#: ../../source/grids.rst:51
 msgid "lat error"
-msgstr ""
+msgstr "纬度错误"
 
-#: ../../source/grids.rst:183
+#: ../../source/grids.rst:51
 msgid "lng error"
-msgstr ""
+msgstr "lng 错误"
 
-#: ../../source/grids.rst:183
+#: ../../source/grids.rst:51
 msgid "km error"
-msgstr ""
+msgstr "公里错误"
 
-#: ../../source/grids.rst:185
+#: ../../source/grids.rst:53
 msgid "1"
-msgstr ""
+msgstr "1"
 
-#: ../../source/grids.rst:185 ../../source/grids.rst:186
+#: ../../source/grids.rst:53 ../../source/grids.rst:54
 msgid "2"
-msgstr ""
+msgstr "2"
 
-#: ../../source/grids.rst:185 ../../source/grids.rst:187
+#: ../../source/grids.rst:53 ../../source/grids.rst:55
 msgid "3"
-msgstr ""
+msgstr "3"
 
-#: ../../source/grids.rst:185
+#: ../../source/grids.rst:53
 msgid "±23"
-msgstr ""
+msgstr "±23"
 
-#: ../../source/grids.rst:185
+#: ../../source/grids.rst:53
 msgid "±2500"
-msgstr ""
+msgstr "±2500"
 
-#: ../../source/grids.rst:186 ../../source/grids.rst:189
+#: ../../source/grids.rst:54 ../../source/grids.rst:57
 msgid "5"
-msgstr ""
+msgstr "5"
 
-#: ../../source/grids.rst:186
+#: ../../source/grids.rst:54
 msgid "±2.8"
-msgstr ""
+msgstr "±2.8"
 
-#: ../../source/grids.rst:186
+#: ../../source/grids.rst:54
 msgid "±5.6"
-msgstr ""
+msgstr "±5.6"
 
-#: ../../source/grids.rst:186
+#: ../../source/grids.rst:54
 msgid "±630"
-msgstr ""
+msgstr "±630"
 
-#: ../../source/grids.rst:187 ../../source/grids.rst:191
+#: ../../source/grids.rst:55 ../../source/grids.rst:59
 msgid "7"
-msgstr ""
+msgstr "7"
 
-#: ../../source/grids.rst:187 ../../source/grids.rst:192
+#: ../../source/grids.rst:55 ../../source/grids.rst:60
 msgid "8"
-msgstr ""
+msgstr "8"
 
-#: ../../source/grids.rst:187
+#: ../../source/grids.rst:55
 msgid "±0.70"
-msgstr ""
+msgstr "±0.70"
 
-#: ../../source/grids.rst:187
+#: ../../source/grids.rst:55
 msgid "±78"
-msgstr ""
+msgstr "±78"
 
-#: ../../source/grids.rst:188
+#: ../../source/grids.rst:56
 msgid "4"
-msgstr ""
+msgstr "4"
 
-#: ../../source/grids.rst:188
+#: ../../source/grids.rst:56
 msgid "10"
-msgstr ""
+msgstr "10"
 
-#: ../../source/grids.rst:188
+#: ../../source/grids.rst:56
 msgid "±0.087"
-msgstr ""
+msgstr "±0.087"
 
-#: ../../source/grids.rst:188
+#: ../../source/grids.rst:56
 msgid "±0.18"
-msgstr ""
+msgstr "±0.18"
 
-#: ../../source/grids.rst:188
+#: ../../source/grids.rst:56
 msgid "±20"
-msgstr ""
+msgstr "±20"
 
-#: ../../source/grids.rst:189
+#: ../../source/grids.rst:57
 msgid "12"
-msgstr ""
+msgstr "12"
 
-#: ../../source/grids.rst:189
+#: ../../source/grids.rst:57
 msgid "13"
-msgstr ""
+msgstr "13"
 
-#: ../../source/grids.rst:189
+#: ../../source/grids.rst:57
 msgid "±0.022"
-msgstr ""
+msgstr "±0.022"
 
-#: ../../source/grids.rst:189
+#: ../../source/grids.rst:57
 msgid "±2.4"
-msgstr ""
+msgstr "±2.4"
 
-#: ../../source/grids.rst:190
+#: ../../source/grids.rst:58
 msgid "6"
-msgstr ""
+msgstr "6"
 
-#: ../../source/grids.rst:190
+#: ../../source/grids.rst:58
 msgid "15"
-msgstr ""
+msgstr "15"
 
-#: ../../source/grids.rst:190
+#: ../../source/grids.rst:58
 msgid "±0.0027"
-msgstr ""
+msgstr "±0.0027"
 
-#: ../../source/grids.rst:190
+#: ../../source/grids.rst:58
 msgid "±0.0055"
-msgstr ""
+msgstr "±0.0055"
 
-#: ../../source/grids.rst:190
+#: ../../source/grids.rst:58
 msgid "±0.61"
-msgstr ""
+msgstr "±0.61"
 
-#: ../../source/grids.rst:191
+#: ../../source/grids.rst:59
 msgid "17"
-msgstr ""
+msgstr "17"
 
-#: ../../source/grids.rst:191
+#: ../../source/grids.rst:59
 msgid "18"
-msgstr ""
+msgstr "18"
 
-#: ../../source/grids.rst:191
+#: ../../source/grids.rst:59
 msgid "±0.00068"
-msgstr ""
+msgstr "±0.00068"
 
-#: ../../source/grids.rst:191
+#: ../../source/grids.rst:59
 msgid "±0.076"
-msgstr ""
+msgstr "±0.076"
 
-#: ../../source/grids.rst:192
+#: ../../source/grids.rst:60
 msgid "20"
-msgstr ""
+msgstr "20"
 
-#: ../../source/grids.rst:192
+#: ../../source/grids.rst:60
 msgid "±0.000085"
-msgstr ""
+msgstr "±0.000085"
 
-#: ../../source/grids.rst:192
+#: ../../source/grids.rst:60
 msgid "±0.00017"
-msgstr ""
+msgstr "±0.00017"
 
-#: ../../source/grids.rst:192
+#: ../../source/grids.rst:60
 msgid "±0.019"
-msgstr ""
+msgstr "±0.019"
 
-#: ../../source/grids.rst:195
-msgid "TransBigData包中也提供了geohash的处理功能，主要包括三个函数："
-msgstr ""
+#: ../../source/grids.rst:63
+msgid ""
+"TransBigData also provides the function based on Geohash, the three "
+"functions are as follows:"
+msgstr "TransBigData还提供了基于Geohash的功能，三个功能如下："
 
-#: ../../source/grids.rst:200 ../../source/grids.rst:221
-msgid "输入经纬度与精度，输出geohash编码"
-msgstr ""
+#: of transbigdata.grids.geohash_encode:4
+msgid "longitude Series"
+msgstr "经度系列"
 
-#: ../../source/grids.rst:209
-msgid "precision"
-msgstr ""
+#: of transbigdata.grids.geohash_encode:6
+msgid "latitude Series"
+msgstr "纬度系列"
 
-#: ../../source/grids.rst:209
-msgid "geohash精度"
-msgstr ""
+#: of transbigdata.grids.geohash_encode:8
+msgid "geohash precision"
+msgstr "geohash精度"
 
-#: ../../source/grids.rst:226 ../../source/grids.rst:231
-#: ../../source/grids.rst:240
-msgid "geohash"
-msgstr ""
+#: of transbigdata.grids.geohash_encode:11
+msgid "**geohash** -- encoded geohash Series"
+msgstr "**geohash** -- 编码的geohash系列"
 
-#: ../../source/grids.rst:226 ../../source/grids.rst:231
-#: ../../source/grids.rst:240
-msgid "geohash编码列"
-msgstr ""
+#: of transbigdata.grids.geohash_decode:4 transbigdata.grids.geohash_togrid:4
+msgid "encoded geohash Series"
+msgstr "encoded geohash 系列"
 
-#: ../../source/grids.rst:235
-msgid "输入geohash编码，输出geohash网格的地理信息图形Series列"
+#: of transbigdata.grids.geohash_decode:7
+msgid ""
+"* **lon** (*Series*) -- decoded longitude Series * **lat** (*Series*) -- "
+"decoded latitude Series"
 msgstr ""
+"* **lon** （*系列*） -- 解码经度系列 * **纬度** （*系列*） -- 解码纬度系列"
 
-#: ../../source/grids.rst:245
-msgid "poly"
+#: of transbigdata.grids.geohash_decode:7
+msgid "**lon** (*Series*) -- decoded longitude Series"
+msgstr "**lon** (*Series*) -- 解码后的经度系列"
+
+#: of transbigdata.grids.geohash_decode:8
+msgid "**lat** (*Series*) -- decoded latitude Series"
+msgstr "**lat** (*Series*) -- 解码后的纬度系列"
+
+#: of transbigdata.grids.geohash_togrid:7
+msgid "**poly** -- grid cell polygon for geohash"
+msgstr "**poly** -- geohash 的网格单元多边形"
+
+#: ../../source/grids.rst:72
+msgid ""
+"Compared to the rectangular grid processing method provided in the "
+"TransBigData package, geohash is slower and does not provide a freely "
+"defined grid size. The following example shows how to use these three "
+"functions to utilize the geohash encoding, decoding, and the visualization"
 msgstr ""
-
-#: ../../source/grids.rst:245
-msgid "geohash的栅格列"
-msgstr ""
-
-#: ../../source/grids.rst:247
-msgid "相比TransBigData包中提供的方形栅格处理方法，geohash更慢，也无法提供自由定义的栅格大小。下面的示例展示如何利用这三个函数对数据进行geohash编码集计，并可视化"
-msgstr ""
-
-#: ../../source/grids.rst:455
-msgid "六边形渔网生成"
-msgstr ""
-
-#: ../../source/grids.rst:459
-msgid "生成研究范围内的六边形渔网。"
-msgstr ""
-
-#: ../../source/grids.rst:466
-msgid "六边形的边长（米）"
-msgstr ""
-
-#: ../../source/grids.rst:471
-msgid "hexagon"
-msgstr ""
-
-#: ../../source/grids.rst:471
-msgid "六边形渔网的矢量图形"
-msgstr ""
-
+"与TransBigData软件包中提供的矩形网格处理方法相比，geohash速度较慢，并且不提供"
+"自由定义的网格大小。以下示例演示如何使用这三个函数来利用 geohash 编码、解码和"
+"可视化"

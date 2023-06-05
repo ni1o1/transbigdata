@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:56+0800\n"
+"Last-Translator: \n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:9 detection
+#: for
+msgid "8 Community detection for bicycle-sharing demand"
+msgstr "8 共享单车需求社区检测"
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:11 detection
+#: for
+msgid ""
+"For bicycle sharing demand, each trip of can be seen as a process from the "
+"starting loaction to the end loaction. When we regard the start point and the "
+"end point as nodes, and the travel between them as edges, a network can be "
+"constructed. By analysing this network, we can get information about the "
+"spatial connection structure of the city or the macro travel characteristics "
+"of the bicycle sharing demand."
+msgstr ""
+"对于共享单车需求来说，每一次出行都可以看作是从起点到终点的一段过程。当我们把起"
+"点和终点看成节点，把它们之间的行程当作边时，就可以构建一个网络。通过分析该网"
+"络，我们可以得到有关城市空间连接结构或共享单车需求的宏观出行特征的信息。"
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:13 detection
+#: for
+msgid ""
+"Community detection, also called graph partition, helps us to reveal the "
+"hidden relations among the nodes in the network. In this example, we will "
+"introduce how to integrate TransBigData into the analysis process of "
+"community detection from bicycle-sharing data."
+msgstr ""
+"社区检测，也称为图分区，帮助我们揭示网络中节点之间的隐藏关系。在这个例子中，我"
+"们将介绍如何从共享单车数据将TransBigData集成到社区检测的分析过程中。"
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:24 detection
+#: for
+msgid "To run this example, you may have to install ``igraph`` and ``seaborn``:"
+msgstr "要运行这个例子，你可能必须安装``igraph``和``seaborn``："
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb detection for
+msgid "pip install igraph"
+msgstr ""
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb detection for
+msgid "pip install seaborn"
+msgstr ""
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:39 detection
+#: for
+msgid "Data preprocessing"
+msgstr "数据预处理"
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:210 detection
+#: for
+msgid "Identify Bicycle sharing trip information using ``tbd.bikedata_to_od``"
+msgstr "使用``tbd.bikedata_to_od``识别共享单车行程信息"
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:400 detection
+#: for
+msgid "Perform data gridding:"
+msgstr "执行数据网格化："
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:648 detection
+#: for
+msgid "Visualize the OD data"
+msgstr "可视化OD数据"
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:700
+#: data.ipynb:1110 detection for
+msgid "Create Network"
+msgstr "创建网络"
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:712 detection
+#: for
+msgid "Extract node data"
+msgstr "提取节点数据"
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:723 detection
+#: for
+msgid ""
+"Combine the ``LONCOL`` and ``LATCOL`` columns into one field and extract node "
+"set"
+msgstr "将“LONCOL”和“LATCOL”列合并到一个字段中并提取节点集"
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:911 detection
+#: for
+msgid "Extract edge data"
+msgstr "提取边缘数据"
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:1142
+#: detection for
+msgid "Community detection"
+msgstr "社区检测"
+
+#: ../../source/gallery/Example 8-Community bikesharing data.ipynb:1385
+#: detection for
+msgid "Visualize the community"
+msgstr "可视化社区"

@@ -1,0 +1,56 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.splitline_with_length.rst:2
+msgid "transbigdata.splitline\\_with\\_length"
+msgstr ""
+
+#: of transbigdata.gisprocess.splitline_with_length:2
+msgid ""
+"The intput is the linestring GeoDataFrame. The splited line’s length wull"
+" be no longer than maxlength"
+msgstr ""
+
+#: of transbigdata.gisprocess.splitline_with_length
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.gisprocess.splitline_with_length:5
+msgid "Linestring geometry"
+msgstr ""
+
+#: of transbigdata.gisprocess.splitline_with_length:7
+msgid "The maximum length of the splited line"
+msgstr ""
+
+#: of transbigdata.gisprocess.splitline_with_length
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.gisprocess.splitline_with_length:10
+msgid "**splitedline** -- Splited line"
+msgstr ""
+
+#: of transbigdata.gisprocess.splitline_with_length
+msgid "返回类型"
+msgstr ""
+

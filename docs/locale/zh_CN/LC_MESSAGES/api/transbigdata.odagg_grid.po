@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.odagg_grid.rst:2
+msgid "transbigdata.odagg\\_grid"
+msgstr ""
+
+#: of transbigdata.odprocess.odagg_grid:2
+msgid ""
+"Aggregate the OD matrix and generate the grid geometry. The input is the "
+"OD matrix (each row represents a trip). The OD will assigned to grids and"
+" then aggregated in the form of GeoDataFrame."
+msgstr ""
+
+#: of transbigdata.odprocess.odagg_grid
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.odprocess.odagg_grid:7
+msgid "OD data"
+msgstr ""
+
+#: of transbigdata.odprocess.odagg_grid:9
+msgid ""
+"The column of the origin/destination location,[‘slon’,’slat’, "
+"’elon’,’elat’]. The default weight is 1 for each column. You can also add"
+" the weight parameter, for example, [‘slon’, "
+"’slat’,’elon’,’elat’,’count’]."
+msgstr ""
+
+#: of transbigdata.odprocess.odagg_grid:14
+msgid ""
+"Gridding parameters (lonStart,latStart,deltaLon,deltaLat), lonStart and "
+"latStart are the lower-left coordinates, deltaLon, deltaLat are the "
+"length and width of a single grid"
+msgstr ""
+
+#: of transbigdata.odprocess.odagg_grid:18
+msgid "Whether the generated OD geographic line contains arrows"
+msgstr ""
+
+#: of transbigdata.odprocess.odagg_grid
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.odprocess.odagg_grid:21
+msgid "**oddata1** -- GeoDataFrame of OD after aggregation"
+msgstr ""
+
+#: of transbigdata.odprocess.odagg_grid
+msgid "返回类型"
+msgstr ""
+

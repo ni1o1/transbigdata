@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.mobile_stay_duration.rst:2
+msgid "transbigdata.mobile\\_stay\\_duration"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:2
+msgid ""
+"Input the stay point data to identify the duration during night and day "
+"time."
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:4
+msgid "Stay data"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:6
+msgid "The column name, in the order of ['starttime','endtime']"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:8
+msgid "Start hour of day time"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:10
+msgid "End hour of day time"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:13
+msgid ""
+"* **duration_night** (*Series*) -- Duration at night time * "
+"**duration_day** (*Series*) -- Duration at day time"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:13
+msgid "**duration_night** (*Series*) -- Duration at night time"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:14
+msgid "**duration_day** (*Series*) -- Duration at day time"
+msgstr ""
+

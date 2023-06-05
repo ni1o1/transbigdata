@@ -4,139 +4,233 @@
 # package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-07 16:44+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:49+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
-#: ../../source/metroline.rst:4
-msgid "公交地铁网络拓扑建模"
-msgstr ""
+#: ../../source/metroline.rst:5
+msgid "Bus and subway network topology modeling"
+msgstr "公交地铁网络拓扑建模"
 
 #: ../../source/metroline.rst:8
-msgid "用公交/地铁站点对公交/地铁线进行切分，得到断面"
+msgid "方法总览"
+msgstr "方法总览"
+
+#: ../../source/metroline.rst:18:<autosummary>:1
+msgid ""
+":py:obj:`metro_network <transbigdata.metro_network>`\\ \\(line\\, stop\\[\\, "
+"transfertime\\, ...\\]\\)"
 msgstr ""
 
-#: ../../source/metroline.rst:10 ../../source/metroline.rst:27
-msgid "**输入**"
+#: ../../source/metroline.rst:18:<autosummary>:1
+msgid ""
+"Inputting the metro station data and outputting the network topology model."
+msgstr "输入地铁站数据并输出网络拓扑模型。"
+
+#: ../../source/metroline.rst:18:<autosummary>:1
+msgid ""
+":py:obj:`get_shortest_path <transbigdata.get_shortest_path>`\\ \\(G\\, "
+"stop\\, ostation\\, dstation\\)"
 msgstr ""
 
-#: ../../source/metroline.rst:12
-msgid "line"
+#: ../../source/metroline.rst:18:<autosummary>:1 of
+#: transbigdata.metro.get_shortest_path:2
+msgid "Obtain the travel path of shortest path from the metro nextwork"
+msgstr "获取下一个地铁最短路径的出行路径"
+
+#: ../../source/metroline.rst:18:<autosummary>:1
+msgid ""
+":py:obj:`get_k_shortest_paths <transbigdata.get_k_shortest_paths>`\\ \\(G\\, "
+"stop\\, ostation\\, ...\\)"
 msgstr ""
 
-msgid "GeoDataFrame"
+#: ../../source/metroline.rst:18:<autosummary>:1 of
+#: transbigdata.metro.get_k_shortest_paths:2
+msgid "Obtain the k th shortest paths from the metro nextwork"
+msgstr "获取距离地铁nextwork的第k条最短路径"
+
+#: ../../source/metroline.rst:18:<autosummary>:1
+msgid ""
+":py:obj:`get_path_traveltime <transbigdata.get_path_traveltime>`\\ \\(G\\, "
+"path\\)"
 msgstr ""
 
-#: ../../source/metroline.rst:13
-msgid "公交/地铁线路"
+#: ../../source/metroline.rst:18:<autosummary>:1 of
+#: transbigdata.metro.get_path_traveltime:2
+msgid "Obtain the travel time of the path"
+msgstr "获取路径的行程时间"
+
+#: ../../source/metroline.rst:18:<autosummary>:1
+msgid ""
+":py:obj:`split_subwayline <transbigdata.split_subwayline>`\\ \\(line\\, "
+"stop\\)"
 msgstr ""
 
-#: ../../source/metroline.rst:15 ../../source/metroline.rst:29
-msgid "stop"
+#: ../../source/metroline.rst:18:<autosummary>:1 of
+#: transbigdata.metro.split_subwayline:2
+msgid ""
+"To slice the metro line with metro stations to obtain metro section "
+"information (This step is useful in subway passenger flow visualization)"
 msgstr ""
+"将地铁线路与地铁站进行切片以获取地铁部分信息（此步骤在地铁客流可视化中很有"
+"用）"
 
-#: ../../source/metroline.rst:15
-msgid "公交/地铁站点"
+#: of transbigdata.metro.metro_network:2
+msgid ""
+"Inputting the metro station data and outputting the network topology model. "
+"The graph generated relies on NetworkX. The travel time is consist of: "
+"operation time between stations + stop time at each station + transfer time"
 msgstr ""
+"输入地铁站数据并输出网络拓扑模型。生成的图形依赖于 NetworkX。行程时间包括：车"
+"站之间的运营时间+各车站的停靠时间+换乘时间"
 
-#: ../../source/metroline.rst:17 ../../source/metroline.rst:38
-msgid "**输出**"
+#: of transbigdata.metro.get_k_shortest_paths
+#: transbigdata.metro.get_path_traveltime transbigdata.metro.get_shortest_path
+#: transbigdata.metro.metro_network transbigdata.metro.split_subwayline
+msgid "参数"
+msgstr "参数"
+
+#: of transbigdata.metro.metro_network:6
+msgid ""
+"Lines. Should have `line` column to store line name `speed` column to store "
+"metro speed and `stoptime` column to store stop time at each station."
 msgstr ""
+"线。应该有“线路”列来存储线路名称“速度”列来存储地铁速度，“停止时间”列来存储每"
+"个车站的停靠时间。"
 
-#: ../../source/metroline.rst:21
-msgid "metro_line_splited"
+#: of transbigdata.metro.metro_network:10 transbigdata.metro.split_subwayline:7
+msgid "Bus/metro stations"
+msgstr "巴士/地铁站"
+
+#: of transbigdata.metro.metro_network:12
+msgid "Travel time per transfer"
+msgstr "每次换乘所需时间"
+
+#: of transbigdata.metro.metro_network:14
+msgid ""
+"Default True, if True then output the network G constructed by NetworkX, if "
+"False then output the edges1(line section), edge2(station transfer), and the "
+"node of the network"
 msgstr ""
+"默认值为 True，如果为 True，则输出 NetworkX 构造的网络 G，如果为 False，则输"
+"出 edges1（线段）、edge2（站换乘）和网络节点"
 
-#: ../../source/metroline.rst:20
-msgid "生成的断面线型"
+#: of transbigdata.metro.get_k_shortest_paths
+#: transbigdata.metro.get_path_traveltime transbigdata.metro.get_shortest_path
+#: transbigdata.metro.metro_network transbigdata.metro.split_subwayline
+msgid "返回"
+msgstr "返回"
+
+#: of transbigdata.metro.metro_network:19
+msgid ""
+"* *When the nxgraph parameter is True* * "
+"*================================================================* * **G** "
+"(*networkx.classes.graph.Graph*) -- Network G built by networkx. * *When the "
+"nxgraph parameter is False (This is for detail design of the network)* * "
+"*================================================================* * "
+"**edge1** (*DataFrame*) -- Network edge for line section. * **edge2** "
+"(*DataFrame*) -- Network edge for transfering. * **node** (*List*) -- "
+"Network nodes."
 msgstr ""
+"* *当 nxgraph 参数为 True 时* * "
+"*==============================================================================================================================================================================================================================================================================================================* "
+"*当 nxgraph 参数为 False 时（用于网络的详细设计）* * "
+"*====================================================================* "
+"**edge1** （*DataFrame*） -- 线段的网络边。* **edge2** （*DataFrame*） -- 用"
+"于传输的网络边缘。* **节点** （*列表*） -- 网络节点。"
 
-#: ../../source/metroline.rst:25
-msgid "输入站点信息，输出网络信息，该方法依赖于NetworkX"
-msgstr ""
+#: of transbigdata.metro.metro_network:19
+msgid "*When the nxgraph parameter is True*"
+msgstr "*当nxgraph参数为True时*"
 
-#: ../../source/metroline.rst:30
-msgid "公交站点"
-msgstr ""
+#: of transbigdata.metro.metro_network:20 transbigdata.metro.metro_network:23
+msgid "*================================================================*"
+msgstr "*============================================= "
 
-#: ../../source/metroline.rst:31
-msgid "traveltime"
-msgstr ""
+#: of transbigdata.metro.metro_network:21
+msgid "**G** (*networkx.classes.graph.Graph*) -- Network G built by networkx."
+msgstr "**G** (*networkx.classes.graph.Graph*) -- networkx构建的网络G。"
 
-msgid "number"
-msgstr ""
+#: of transbigdata.metro.metro_network:22
+msgid ""
+"*When the nxgraph parameter is False (This is for detail design of the "
+"network)*"
+msgstr "*当 nxgraph 参数为 False 时（用于网络的详细设计）*"
 
-#: ../../source/metroline.rst:32
-msgid "每个轨道断面的出行时长"
-msgstr ""
+#: of transbigdata.metro.metro_network:24
+msgid "**edge1** (*DataFrame*) -- Network edge for line section."
+msgstr "**edge1** (*DataFrame*) -- 线段的网络边缘。"
 
-#: ../../source/metroline.rst:33
-msgid "transfertime"
-msgstr ""
+#: of transbigdata.metro.metro_network:25
+msgid "**edge2** (*DataFrame*) -- Network edge for transfering."
+msgstr "**edge2** (*DataFrame*) -- 用于传输的网络边缘。"
 
-#: ../../source/metroline.rst:34
-msgid "每个轨道换乘的时长"
-msgstr ""
+#: of transbigdata.metro.metro_network:26
+msgid "**node** (*List*) -- Network nodes."
+msgstr "**node** (*List*) -- 网络节点。"
 
-#: ../../source/metroline.rst:36
-msgid "nxgraph"
-msgstr ""
+#: of transbigdata.metro.get_k_shortest_paths:4
+#: transbigdata.metro.get_path_traveltime:4
+#: transbigdata.metro.get_shortest_path:4
+msgid "metro network"
+msgstr "地铁网络"
 
-msgid "bool"
-msgstr ""
+#: of transbigdata.metro.get_k_shortest_paths:6
+#: transbigdata.metro.get_shortest_path:6
+msgid "metro stop dataframe"
+msgstr "地铁站数据框"
 
-#: ../../source/metroline.rst:36
-msgid "默认True，如果True则直接输出由NetworkX构建的网络G，如果为False，则输出网络的边edge1,edge2,和节点node"
-msgstr ""
+#: of transbigdata.metro.get_k_shortest_paths:8
+#: transbigdata.metro.get_shortest_path:8
+msgid "O station name"
+msgstr "O站名"
 
-#: ../../source/metroline.rst:40
-msgid "G"
-msgstr ""
+#: of transbigdata.metro.get_k_shortest_paths:10
+#: transbigdata.metro.get_shortest_path:10
+msgid "D station name"
+msgstr "D站名"
 
-msgid "networkx.classes.graph.Graph"
-msgstr ""
+#: of transbigdata.metro.get_shortest_path:13
+msgid "**path** -- travel path: list of station names"
+msgstr "**path** -- 旅行路径：站名列表"
 
-#: ../../source/metroline.rst:41
-msgid "networkx构建的网络G，nxgraph参数为True时只输出这个"
-msgstr ""
+#: of transbigdata.metro.get_k_shortest_paths
+#: transbigdata.metro.get_path_traveltime transbigdata.metro.get_shortest_path
+#: transbigdata.metro.split_subwayline
+msgid "返回类型"
+msgstr "返回类型"
 
-#: ../../source/metroline.rst:42
-msgid "edge1"
-msgstr ""
+#: of transbigdata.metro.get_k_shortest_paths:12
+msgid "the k th shortest paths"
+msgstr "第k条最短路径"
 
-msgid "DataFrame"
-msgstr ""
+#: of transbigdata.metro.get_k_shortest_paths:15
+msgid "**paths** -- travel path: list of travel paths"
+msgstr "**paths** -- 旅行路径：旅行路径列表"
 
-#: ../../source/metroline.rst:43
-msgid "轨道断面的边，nxgraph参数为False时输出这个"
-msgstr ""
+#: of transbigdata.metro.get_path_traveltime:6
+msgid "list of stationnames"
+msgstr "站名列表"
 
-#: ../../source/metroline.rst:44
-msgid "edge2"
-msgstr ""
+#: of transbigdata.metro.get_path_traveltime:9
+msgid "**traveltime** -- travel time of the path"
+msgstr "**traveltime** -- 路径的旅行时间"
 
-#: ../../source/metroline.rst:45
-msgid "轨道换乘的边，nxgraph参数为False时输出这个"
-msgstr ""
+#: of transbigdata.metro.split_subwayline:5
+msgid "Bus/metro lines"
+msgstr "公交/地铁线路"
 
-#: ../../source/metroline.rst:46
-msgid "node"
-msgstr ""
-
-msgid "List"
-msgstr ""
-
-#: ../../source/metroline.rst:47
-msgid "网络节点，nxgraph参数为False时输出这个"
-msgstr ""
-
+#: of transbigdata.metro.split_subwayline:10
+msgid "**metro_line_splited** -- Generated section line shape"
+msgstr "**metro_line_splited** -- 生成的剖面线形状"

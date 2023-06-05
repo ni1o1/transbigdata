@@ -1,0 +1,43 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:57+0800\n"
+"Last-Translator: \n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#: ../../source/gallery/index.rst:4
+msgid "Example gallery"
+msgstr "示例画廊"
+
+#: ../../source/gallery/index.rst:6
+msgid ""
+"Here are some examples showing what you can do with `TransBigData`. The "
+"`ipynb` and `Data` are in `This link <https://github.com/ni1o1/"
+"transbigdata/tree/main/docs/source/gallery>`__\\"
+msgstr ""
+"以下是一些示例，展示了您可以使用“TransBigData”做什么。“ipynb”和“数据”位"
+"于“此链接<https://github.com/ni1o1/transbigdata/tree/main/docs/source/"
+"gallery>”__\\"
+
+#: ../../source/gallery/index.rst:10
+msgid "Basic"
+msgstr "基本"
+
+#: ../../source/gallery/index.rst:23
+msgid "Advanced"
+msgstr "高级"

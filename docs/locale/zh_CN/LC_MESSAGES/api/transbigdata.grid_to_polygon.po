@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.grid_to_polygon.rst:2
+msgid "transbigdata.grid\\_to\\_polygon"
+msgstr ""
+
+#: of transbigdata.grids.grid_to_polygon:2
+msgid ""
+"Generate the geometry column based on the grid ID. The input is the grid "
+"ID, the output is the geometry. Support rectangle, triangle and hexagon "
+"grids"
+msgstr ""
+
+#: of transbigdata.grids.grid_to_polygon
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.grids.grid_to_polygon:6
+msgid ""
+"if `Rectangle grids` [LONCOL,LATCOL] : Series     The two columns LONCOL "
+"and LATCOL together can specify a grid.  if `Triangle and Hexagon grids` "
+"[loncol_1,loncol_2,loncol_3] : Series     The index of the grid latitude."
+" The two columns LONCOL and     LATCOL together can specify a grid."
+msgstr ""
+
+#: of transbigdata.grids.grid_to_polygon:6
+msgid "if `Rectangle grids` [LONCOL,LATCOL] : Series"
+msgstr ""
+
+#: of transbigdata.grids.grid_to_polygon:8
+msgid "The two columns LONCOL and LATCOL together can specify a grid."
+msgstr ""
+
+#: of transbigdata.grids.grid_to_polygon:10
+msgid "if `Triangle and Hexagon grids` [loncol_1,loncol_2,loncol_3] : Series"
+msgstr ""
+
+#: of transbigdata.grids.grid_to_polygon:12
+msgid ""
+"The index of the grid latitude. The two columns LONCOL and LATCOL "
+"together can specify a grid."
+msgstr ""
+
+#: of transbigdata.grids.grid_to_polygon:15
+msgid ""
+"Gridding parameters. See "
+"https://transbigdata.readthedocs.io/en/latest/grids.html for detail "
+"information about gridding parameters."
+msgstr ""
+
+#: of transbigdata.grids.grid_to_polygon
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.grids.grid_to_polygon:20
+msgid "**geometry** -- The column of grid geographic polygon"
+msgstr ""
+
+#: of transbigdata.grids.grid_to_polygon
+msgid "返回类型"
+msgstr ""
+

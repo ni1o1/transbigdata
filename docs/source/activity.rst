@@ -4,8 +4,7 @@
 Activity
 ******************************
 
-Constructor
------------
+
 .. autosummary::
    :toctree: api/
 

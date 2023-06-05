@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.get_isochrone_amap.rst:2
+msgid "transbigdata.get\\_isochrone\\_amap"
+msgstr ""
+
+#: of transbigdata.crawler.get_isochrone_amap:2
+msgid "Obtain the isochrone from Amap reachcricle"
+msgstr ""
+
+#: of transbigdata.crawler.get_isochrone_amap
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.crawler.get_isochrone_amap:4
+msgid "Longitude of the start point(WGS84)"
+msgstr ""
+
+#: of transbigdata.crawler.get_isochrone_amap:6
+msgid "Latitude of the start point(WGS84)"
+msgstr ""
+
+#: of transbigdata.crawler.get_isochrone_amap:8
+msgid "Reachtime of the isochrone"
+msgstr ""
+
+#: of transbigdata.crawler.get_isochrone_amap:10
+msgid "Amap access token"
+msgstr ""
+
+#: of transbigdata.crawler.get_isochrone_amap:12
+msgid "Amap safty code"
+msgstr ""
+
+#: of transbigdata.crawler.get_isochrone_amap:14
+msgid "Travel mode, should be 0(bus), 1(subway), 2(bus+subway)"
+msgstr ""
+
+#: of transbigdata.crawler.get_isochrone_amap:16
+msgid "Timeout of data fetching"
+msgstr ""
+
+#: of transbigdata.crawler.get_isochrone_amap
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.crawler.get_isochrone_amap:19
+msgid "**isochrone** -- The isochrone GeoDataFrame(WGS84)"
+msgstr ""
+
+#: of transbigdata.crawler.get_isochrone_amap
+msgid "返回类型"
+msgstr ""
+

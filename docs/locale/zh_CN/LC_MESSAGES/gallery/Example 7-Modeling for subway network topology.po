@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:56+0800\n"
+"Last-Translator: \n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#: ../../source/gallery/Example 7-Modeling for network subway topology.ipynb:9
+msgid "7 Modeling for subway network topology"
+msgstr "7 地铁网络拓扑建模"
+
+#: ../../source/gallery/Example 7-Modeling for network subway topology.ipynb:31
+msgid ""
+"The following example shows how to use TransBigData to download subway lines "
+"and to build a topological network model for the subway line network"
+msgstr ""
+"以下示例演示如何使用 TransBigData 下载地铁线路并为地铁线路网络构建拓扑网络模"
+"型"
+
+#: ../../source/gallery/Example 7-Modeling for network subway topology.ipynb:43
+msgid "Download subway lines"
+msgstr "下载地铁线路"
+
+#: ../../source/gallery/Example 7-Modeling for network subway
+#: topology.ipynb:214
+msgid "Splitting the metro line into sections"
+msgstr "将地铁线路分成几个部分"
+
+#: ../../source/gallery/Example 7-Modeling for network subway
+#: topology.ipynb:225
+msgid ""
+"The ``tbd.split_subwayline`` method can be used to slice the metro line with "
+"metro stations to obtain metro section information (This step is useful in "
+"subway passenger flow visualization)"
+msgstr ""
+"“tbd.split_subwayline”方法可用于将地铁线路与地铁站进行切片，以获取地铁路段信"
+"息（此步骤在地铁客流可视化中很有用）"
+
+#: ../../source/gallery/Example 7-Modeling for network subway
+#: topology.ipynb:282
+msgid "Modeling for subway network topology"
+msgstr "地铁网络拓扑建模"
+
+#: ../../source/gallery/Example 7-Modeling for network subway
+#: topology.ipynb:293
+msgid ""
+"We can also use the metro station data to build a topology model of the "
+"metro network. This step is useful for subsequent identification of metro "
+"travel paths. The graph generated relies on NetworkX."
+msgstr ""
+"我们还可以使用地铁站数据来构建地铁网络的拓扑模型。此步骤对于后续识别地铁行驶"
+"路径非常有用。生成的图形依赖于 NetworkX。"

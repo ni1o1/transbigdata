@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.getbusdata.rst:2
+msgid "transbigdata.getbusdata"
+msgstr ""
+
+#: of transbigdata.crawler.getbusdata:2
+msgid ""
+"Obtain the geographic information of the bus station and bus line from "
+"the map service (Only in China)"
+msgstr ""
+
+#: of transbigdata.crawler.getbusdata
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.crawler.getbusdata:5
+msgid "city name"
+msgstr ""
+
+#: of transbigdata.crawler.getbusdata:7
+msgid "Keyword, the line name"
+msgstr ""
+
+#: of transbigdata.crawler.getbusdata:9
+msgid "Accurate matching"
+msgstr ""
+
+#: of transbigdata.crawler.getbusdata:11
+msgid "Timeout of data fetching"
+msgstr ""
+
+#: of transbigdata.crawler.getbusdata
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.crawler.getbusdata:14
+msgid ""
+"* **data** (*GeoDataFrame*) -- The generated bus line(WGS84) * **stop** "
+"(*GeoDataFrame*) -- The generated bus station(WGS84)"
+msgstr ""
+
+#: of transbigdata.crawler.getbusdata:14
+msgid "**data** (*GeoDataFrame*) -- The generated bus line(WGS84)"
+msgstr ""
+
+#: of transbigdata.crawler.getbusdata:15
+msgid "**stop** (*GeoDataFrame*) -- The generated bus station(WGS84)"
+msgstr ""
+

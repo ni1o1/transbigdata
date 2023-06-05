@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.grid_params_optimize.rst:2
+msgid "transbigdata.grid\\_params\\_optimize"
+msgstr ""
+
+#: of transbigdata.grids.grid_params_optimize:2
+msgid "Optimize the grid params"
+msgstr ""
+
+#: of transbigdata.grids.grid_params_optimize
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.grids.grid_params_optimize:4
+msgid "Trajectory data"
+msgstr ""
+
+#: of transbigdata.grids.grid_params_optimize:6
+msgid "Initial griding params"
+msgstr ""
+
+#: of transbigdata.grids.grid_params_optimize:8
+msgid "Column names [uid,lon,lat]"
+msgstr ""
+
+#: of transbigdata.grids.grid_params_optimize:10
+msgid "The method to optimize: centerdist, gini, gridscount"
+msgstr ""
+
+#: of transbigdata.grids.grid_params_optimize:12
+msgid "Whether to print detail result"
+msgstr ""
+
+#: of transbigdata.grids.grid_params_optimize:14
+msgid "Sample the data as input, if 0 it will not perform sampling"
+msgstr ""
+
+#: of transbigdata.grids.grid_params_optimize:16
+#: transbigdata.grids.grid_params_optimize:17
+#: transbigdata.grids.grid_params_optimize:18
+#: transbigdata.grids.grid_params_optimize:19
+#: transbigdata.grids.grid_params_optimize:20
+msgid "Params in PSO from scikit-opt"
+msgstr ""
+
+#: of transbigdata.grids.grid_params_optimize
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.grids.grid_params_optimize:22
+msgid "**params_optimized** -- Optimized params"
+msgstr ""
+
+#: of transbigdata.grids.grid_params_optimize
+msgid "返回类型"
+msgstr ""
+

@@ -4,180 +4,146 @@
 # package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-07 16:44+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:48+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
-#: ../../source/busgps.rst:6
-msgid "公交车GPS数据处理"
-msgstr ""
+#: ../../source/busgps.rst:7
+msgid "Bus GPS data processing"
+msgstr "公交GPS数据处理"
 
-#: ../../source/busgps.rst:10
-msgid "输入公交GPS数据、公交线路与站点的GeoDataFrame，该方法能够识别公交的到离站信息"
-msgstr ""
-
-#: ../../source/busgps.rst:12 ../../source/busgps.rst:46
-msgid "**输入**"
-msgstr ""
-
-#: ../../source/busgps.rst:14
-msgid "data"
-msgstr ""
-
-msgid "DataFrame"
-msgstr ""
-
-#: ../../source/busgps.rst:15
-msgid "公交GPS数据，单一公交线路，且需要含有车辆ID、GPS时间、经纬度（wgs84）"
-msgstr ""
-
-#: ../../source/busgps.rst:16
-msgid "line"
-msgstr ""
-
-msgid "GeoDataFrame"
-msgstr ""
-
-#: ../../source/busgps.rst:17
-msgid "公交线型的GeoDataFrame数据，单一公交线路"
-msgstr ""
-
-#: ../../source/busgps.rst:18 ../../source/busgps.rst:50
-msgid "stop"
-msgstr ""
-
-#: ../../source/busgps.rst:19 ../../source/busgps.rst:51
-msgid "公交站点的GeoDataFrame数据"
-msgstr ""
-
-#: ../../source/busgps.rst:20 ../../source/busgps.rst:58
-msgid "col"
-msgstr ""
-
-msgid "List"
-msgstr ""
-
-#: ../../source/busgps.rst:21
-msgid "列名，按[车辆ID,时间,经度,纬度，站点名称字段]的顺序"
-msgstr ""
-
-#: ../../source/busgps.rst:22
-msgid "stopbuffer"
-msgstr ""
-
-msgid "number"
-msgstr ""
-
-#: ../../source/busgps.rst:23
-msgid "米，站点的一定距离范围，车辆进入这一范围视为到站，离开则视为离站"
-msgstr ""
-
-#: ../../source/busgps.rst:24
-msgid "mintime"
-msgstr ""
-
-#: ../../source/busgps.rst:25
-msgid "秒，短时间内公交再次到站则需要与前一次的到站数据结合一起计算到离站时间，该参数设置阈值"
-msgstr ""
-
-#: ../../source/busgps.rst:26
-msgid "project_epsg"
-msgstr ""
-
-#: ../../source/busgps.rst:27
-msgid "匹配时会将数据转换为投影坐标系以计算距离，这里需要给定投影坐标系的epsg代号"
-msgstr ""
-
-#: ../../source/busgps.rst:28
-msgid "timegap"
-msgstr ""
-
-#: ../../source/busgps.rst:29
-msgid "秒，清洗数据用，多长时间车辆不出现，就视为新的车辆"
-msgstr ""
-
-#: ../../source/busgps.rst:32
-msgid "method"
-msgstr ""
-
-msgid "str"
-msgstr ""
-
-#: ../../source/busgps.rst:31
+#: ../../source/busgps.rst:13:<autosummary>:1
 msgid ""
-"公交运行图匹配方法，可选'project'或'dislimit'； project为直接匹配线路上最近点，匹配速度快； "
-"dislimit则需要考虑前面点位置，加上距离限制，匹配速度慢。"
+":py:obj:`busgps_arriveinfo <transbigdata.busgps_arriveinfo>`\\ "
+"\\(data\\, line\\, stop\\[\\, col\\, ...\\]\\)"
 msgstr ""
 
-#: ../../source/busgps.rst:35
-msgid "projectoutput"
+#: ../../source/busgps.rst:13:<autosummary>:1 of
+#: transbigdata.busgps.busgps_arriveinfo:2
+msgid ""
+"Input bus GPS data, bus route and station GeoDataFrame, this method can "
+"identify the bus arrival and departure information"
+msgstr ""
+"输入公交GPS数据、公交线路和车站GeoDataFrame，该方法可以识别公交车的到达和"
+"出发信息"
+
+#: ../../source/busgps.rst:13:<autosummary>:1
+msgid ""
+":py:obj:`busgps_onewaytime <transbigdata.busgps_onewaytime>`\\ "
+"\\(arrive\\_info\\, start\\, end\\[\\, col\\]\\)"
 msgstr ""
 
-msgid "bool"
-msgstr ""
+#: ../../source/busgps.rst:13:<autosummary>:1 of
+#: transbigdata.busgps.busgps_onewaytime:2
+msgid ""
+"Input the departure information table drive_info and the station "
+"information table stop to calculate the one-way travel time"
+msgstr "输入出发信息表drive_info和车站信息表停靠点计算单程行车时间"
 
-#: ../../source/busgps.rst:35
-msgid "是否输出投影后的数据"
-msgstr ""
+#: of transbigdata.busgps.busgps_arriveinfo
+#: transbigdata.busgps.busgps_onewaytime
+msgid "参数"
+msgstr "参数"
 
-#: ../../source/busgps.rst:37 ../../source/busgps.rst:60
-msgid "**输出**"
+#: of transbigdata.busgps.busgps_arriveinfo:5
+msgid ""
+"Bus GPS data. It should be the data from one bus route, and need to "
+"contain vehicle ID, GPS time, latitude and longitude (wgs84)"
 msgstr ""
+"总线全球定位系统数据。它应该是来自一条公交路线的数据，并且需要包含车辆"
+"ID，GPS时间，纬度和经度（wgs84）"
 
-#: ../../source/busgps.rst:40 ../../source/busgps.rst:48
-msgid "arrive_info"
+#: of transbigdata.busgps.busgps_arriveinfo:9
+msgid "GeoDataFrame for the bus line"
+msgstr "公交线路的GeoDataFrame"
+
+#: of transbigdata.busgps.busgps_arriveinfo:11
+msgid "GeoDataFrame for bus stops"
+msgstr "公交车站的GeoDataFrame"
+
+#: of transbigdata.busgps.busgps_arriveinfo:13
+msgid ""
+"Column names, in the order of [vehicle ID, time, longitude, latitude, "
+"station name]"
+msgstr "列名称，按 [车辆 ID、时间、经度、纬度、车站名称] 的顺序排列"
+
+#: of transbigdata.busgps.busgps_arriveinfo:16
+msgid ""
+"Meter. When the vehicle approaches the station within this certain "
+"distance, it is considered to be arrive at the station."
+msgstr "米。当车辆在此一定距离内接近车站时，视为到达车站。"
+
+#: of transbigdata.busgps.busgps_arriveinfo:19
+msgid ""
+"Seconds. Within a short period of time that the bus arrive at bus "
+"station again, it will not be consider as another arrival"
+msgstr "秒。在短时间内，巴士再次到达公交车站，将不被视为再次到达"
+
+#: of transbigdata.busgps.busgps_arriveinfo:22
+msgid ""
+"Meter. The distance between the front point and the back point of the "
+"vehicle, which is used to determine whether the vehicle is moving or not"
+msgstr "米。车辆前点和后点之间的距离，用于确定车辆是否在移动"
+
+#: of transbigdata.busgps.busgps_arriveinfo:26
+msgid ""
+"The matching algorithm will convert the data into a projection "
+"coordinate system to calculate the distance, here the epsg code of the "
+"projection coordinate system is given"
 msgstr ""
+"匹配算法将数据转换为投影坐标系来计算距离，这里给出投影坐标系的epsg代码"
 
-#: ../../source/busgps.rst:40
-msgid "公交到离站信息"
-msgstr ""
+#: of transbigdata.busgps.busgps_arriveinfo:30
+msgid ""
+"Seconds. For how long the vehicle does not appear, it will be considered "
+"as a new vehicle"
+msgstr "秒。车辆没有出现多长时间，它将被视为新车"
 
-#: ../../source/busgps.rst:44
-msgid "输入到离站信息表arrive_info与站点信息表stop，计算单程耗时"
-msgstr ""
+#: of transbigdata.busgps.busgps_arriveinfo:33
+msgid "Whether to output the projected data"
+msgstr "是否输出投影数据"
 
-#: ../../source/busgps.rst:49
-msgid "公交到离站数据"
-msgstr ""
+#: of transbigdata.busgps.busgps_arriveinfo
+#: transbigdata.busgps.busgps_onewaytime
+msgid "返回"
+msgstr "返回"
 
-#: ../../source/busgps.rst:52
-msgid "start"
-msgstr ""
+#: of transbigdata.busgps.busgps_arriveinfo:36
+msgid "**arrive_info** -- Bus arrival and departure information"
+msgstr "**arrive_info** -- 公交到发信息"
 
-msgid "Str"
-msgstr ""
+#: of transbigdata.busgps.busgps_arriveinfo
+#: transbigdata.busgps.busgps_onewaytime
+msgid "返回类型"
+msgstr "返回类型"
 
-#: ../../source/busgps.rst:53
-msgid "起点站名字"
-msgstr ""
+#: of transbigdata.busgps.busgps_onewaytime:5
+msgid "The departure information table drive_info"
+msgstr "发车信息表drive_info"
 
-#: ../../source/busgps.rst:54
-msgid "end"
-msgstr ""
+#: of transbigdata.busgps.busgps_onewaytime:7
+msgid "Starting station name"
+msgstr "起始站名"
 
-#: ../../source/busgps.rst:55
-msgid "终点站名字"
-msgstr ""
+#: of transbigdata.busgps.busgps_onewaytime:9
+msgid "Ending station name"
+msgstr "终点站名"
 
-#: ../../source/busgps.rst:57
-msgid "字段列名[车辆ID,站点名称]"
-msgstr ""
+#: of transbigdata.busgps.busgps_onewaytime:11
+msgid "Column name [vehicle ID, station name,arrivetime,leavetime]"
+msgstr "列名[车号,站名,到达时间,离开时间]"
 
-#: ../../source/busgps.rst:62
-msgid "onewaytime"
-msgstr ""
-
-#: ../../source/busgps.rst:63
-msgid "公交单程耗时"
-msgstr ""
-
+#: of transbigdata.busgps.busgps_onewaytime:14
+msgid "**onewaytime** -- One-way travel time of the bus"
+msgstr "**onewaytime** -- 公交车单程时间"

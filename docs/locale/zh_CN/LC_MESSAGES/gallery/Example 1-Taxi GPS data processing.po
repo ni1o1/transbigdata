@@ -1,0 +1,177 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:54+0800\n"
+"Last-Translator: \n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:9
+msgid "1 Processing & visualizing taxi GPS data"
+msgstr "1 处理"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:21
+msgid "Taxi GPS data processing"
+msgstr "出租车GPS数据处理"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:32
+msgid ""
+"In this example, we will introduce how to use the TransBigData package to "
+"efficiently process Taxi GPS data."
+msgstr "在这个例子中，我们将介绍如何使用TransBigData包来有效地处理出租车GPS数据。"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:33
+msgid "Firstly, import the TransBigData and read the data using pandas"
+msgstr "首先，导入TransBigData并使用pandas读取数据"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:361
+msgid "Data pre-processing"
+msgstr "数据预处理"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:372
+msgid ""
+"TransBigData integrates several common methods for data pre-processing. Using "
+"``the tbd.clean_outofshape`` method, given the data and the GeoDataFrame of the "
+"study area, it can delete the data outside the study area. The ``tbd."
+"clean_taxi_status`` method can filters out the data with instantaneous changes "
+"in passenger status(OpenStatus). When using the preprocessing method, the "
+"corresponding column names need to be passed in as parameters："
+msgstr ""
+"TransBigData集成了几种常见的数据预处理方法。使用“tbd.clean_outofshape”方法，给定"
+"研究区域的数据和地理数据帧，可以删除研究区域之外的数据。“tbd."
+"clean_taxi_status”方法可以过滤掉乘客状态瞬时变化的数据（OpenStatus）。使用预处理"
+"方法时，需要将相应的列名作为参数传入："
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:399
+msgid "Data Gridding"
+msgstr "数据网格化"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:410
+msgid ""
+"The most basic way to express the data distribution is in the form of geograpic "
+"grids; after the data gridding, each GPS data point is mapped to the "
+"corresponding grid. For data gridding, you need to determine the gridding "
+"parameters at first(which can be interpreted as defining a grid coordinate "
+"system):"
+msgstr ""
+"表示数据分布的最基本方法是以地理网格的形式;数据网格化后，每个GPS数据点映射到相应"
+"的网格。对于数据网格化，首先需要确定格网参数（可以解释为定义格网坐标系）："
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:459
+msgid ""
+"After obtaining the gridding parameters, the next step is to map the GPS is to "
+"their corresponding grids. Using the ``tbd.GPS_to_grids``, it will generate the "
+"``LONCOL`` column and the ``LATCOL`` column. The two columns together can "
+"specify a grid:"
+msgstr ""
+"获得网格参数后，下一步是将GPS映射到其对应的网格。使用“待定”。GPS_to_grids“，它将"
+"生成”LONCOL“列和”LATCOL“列。这两列一起可以指定一个网格："
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:642
+msgid "Count the amount of data in each grids:"
+msgstr "统计每个格子的数据量："
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:774
+msgid "Generate the geometry of the grids and transform it into a GeoDataFrame:"
+msgstr "生成网格的几何图形并将其转换为 GeoDataFrame："
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:937
+msgid "Plot the generated grids:"
+msgstr "绘制生成的网格："
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:1025
+msgid "Origin-destination(OD) Extraction and aggregate taxi trips"
+msgstr "Origin-destination(OD) 提取和聚合出租车行程"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:1036
+msgid ""
+"Use the ``tbd.taxigps_to_od`` method and pass in the corresponding column name "
+"to extract the taxi trip OD:"
+msgstr "使用“tbd.taxigps_to_od”方法并传入相应的列名以提取出租车行程 OD："
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:1328
+msgid "Aggregate the extracted OD and generate LineString GeoDataFrame"
+msgstr "聚合提取的OD，生成LineString GeoDataFrame"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:1614
+msgid "Aggregate OD into polygons"
+msgstr "将OD聚合成多边形"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:1625
+msgid "``TransBigData`` also provides the method for aggregating OD into polygons"
+msgstr "``TransBigData``也提供了OD聚合成多边形的方法"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:1693
+msgid "Matplotlib-based map drawing"
+msgstr "基于Matplotlib的地图绘制"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:1704
+msgid ""
+"``TransBigData`` also provide basemap loading in matplotlib. Before using this "
+"method, you need to set your mapboxtoken and the storage location for the "
+"basemap, see: `this link <https://transbigdata.readthedocs.io/en/latest/"
+"plot_map.html>`__\\ 。\\ ``tbd.plot_map`` to add basemap and tbd.plotscale to "
+"add scale and compass:"
+msgstr ""
+"“TransBigData”还在 matplotlib 中提供底图加载。在使用此方法之前，您需要设置底图的"
+"mapboxtoken和存储位置，请参阅：“此链接<https://transbigdata.readthedocs.io/en/"
+"latest/plot_map.html>”__\\。\\ “tbd.plot_map”添加底图，tbd.plotscale 添加比例和"
+"指南针："
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:1758
+msgid "Extraction of taxi trajectpries"
+msgstr "提取出租车轨迹"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:1769
+msgid ""
+"Using ``tbd.taxigps_traj_point`` method, inputing GPS data and OD data, "
+"trajectory points can be extracted"
+msgstr "采用“tbd.taxigps_traj_point”法，输入GPS数据和OD数据，可提取轨迹点"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:2158
+msgid "Generate delivery and idle trajectories from trajectory points"
+msgstr "从轨迹点生成投放和空闲轨迹"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:2234
+msgid "Trajectories visualization"
+msgstr "轨迹可视化"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:2245
+msgid ""
+"Built-in visualization capabilities of ``TransBigData`` leverage the "
+"visualization package ``keplergl`` to interactively visualize data on Jupyter "
+"notebook with simple code. To use this method, please install the ``keplergl`` "
+"package for python:"
+msgstr ""
+"“TransBigData”的内置可视化功能利用可视化包“keplergl”，使用简单的代码以交互方式可"
+"视化Jupyter笔记本上的数据。要使用此方法，请为 python 安装 ''keplergl' 包："
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:2247
+msgid "pip install keplergl"
+msgstr "pip 安装 keplergl"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:2249
+msgid ""
+"Detailed information please see `this link <https://transbigdata.readthedocs.io/"
+"en/latest/visualization.html>`__"
+msgstr ""
+"详细信息请参阅“此链接<https://transbigdata.readthedocs.io/en/latest/"
+"visualization.html>”__"
+
+#: ../../source/gallery/Example 1-Taxi GPS data processing.ipynb:2260
+msgid "Visualization of trajectory data:"
+msgstr "轨迹数据可视化："

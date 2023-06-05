@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.mobile_identify_work.rst:2
+msgid "transbigdata.mobile\\_identify\\_work"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_identify_work:2
+msgid ""
+"Identify work location from mobile phone stay data. The rule is to "
+"identify the locations with longest duration in day time on "
+"weekdays(Average duration should over `minhour`)."
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_identify_work
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_identify_work:5
+msgid "Stay data"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_identify_work:7
+msgid ""
+"The column name, in the order of ['uid','stime','etime', 'locationtag1', "
+"'locationtag2', ...]. There can be multiple 'locationtag' columns to "
+"specify the location."
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_identify_work:10
+msgid "Minimun duration in work days (hours)."
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_identify_work:12
+#: transbigdata.mobilephonedata.mobile_identify_work:14
+msgid "Start and end of work days in the week. 0 - Monday, 4 - Friday"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_identify_work:16
+#: transbigdata.mobilephonedata.mobile_identify_work:18
+msgid "Start hour and end hour of day time"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_identify_work
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_identify_work:21
+msgid "**work** -- work location of mobile phone users"
+msgstr ""
+
+#: of transbigdata.mobilephonedata.mobile_identify_work
+msgid "返回类型"
+msgstr ""
+

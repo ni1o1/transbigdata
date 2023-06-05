@@ -4,81 +4,88 @@
 # package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-07 16:44+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:48+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
-#: ../../source/bikedata.rst:6
-msgid "共享单车数据处理"
-msgstr ""
+#: ../../source/bikedata.rst:7
+msgid "Bike-sharing data processing"
+msgstr "共享单车数据处理"
 
-#: ../../source/bikedata.rst:10
-msgid "输入共享单车订单数据（只在开关锁时产生数据），指定列名，提取其中的骑行与停车信息"
-msgstr ""
-
-#: ../../source/bikedata.rst:12
-msgid "**输入**"
-msgstr ""
-
-#: ../../source/bikedata.rst:14
-msgid "data"
-msgstr ""
-
-msgid "DataFrame"
-msgstr ""
-
-#: ../../source/bikedata.rst:15
-msgid "共享单车订单数据，只在开关锁时产生数据"
-msgstr ""
-
-#: ../../source/bikedata.rst:16
-msgid "col"
-msgstr ""
-
-msgid "List"
-msgstr ""
-
-#: ../../source/bikedata.rst:17
-msgid "列名，顺序不能变，分别为[单车ID,时间,经度,纬度,锁状态]，例如['BIKE_ID','DATA_TIME','LONGITUDE','LATITUDE','LOCK_STATUS']"
-msgstr ""
-
-#: ../../source/bikedata.rst:20
-msgid "startend"
-msgstr ""
-
-#: ../../source/bikedata.rst:19
+#: ../../source/bikedata.rst:12:<autosummary>:1
 msgid ""
-"传入的为[开始时间,结束时间]，如['2018-08-27 00:00:00','2018-08-28 00:00:00']。 "
-"如传入，则考虑（观测时段开始时到单车第一次出现）与（单车最后一次出现到观测时段结束）的骑行与停车情况。"
+":py:obj:`bikedata_to_od <transbigdata.bikedata_to_od>`\\ \\(data\\[\\, "
+"col\\, startend\\]\\)"
 msgstr ""
+":p y：obj：'bikedata_to_od <transbigdata.bikedata_to_od>'\\ "
+"\\（data\\[\\， col\\， startend\\]\\）"
 
-#: ../../source/bikedata.rst:22
-msgid "**输出**"
+#: ../../source/bikedata.rst:12:<autosummary>:1 of
+#: transbigdata.bikedata.bikedata_to_od:2
+msgid ""
+"Input bike-sharing order data (with data only generated when the lock is "
+"switched on and off), specify the column name, and extract the ride and "
+"parking information from it"
 msgstr ""
+"输入共享单车订单数据（仅在锁打开和关闭时生成数据），指定列名称，并从中提"
+"取乘车和停车信息"
 
-#: ../../source/bikedata.rst:24
-msgid "move_data"
+#: of transbigdata.bikedata.bikedata_to_od
+msgid "参数"
+msgstr "参数"
+
+#: of transbigdata.bikedata.bikedata_to_od:6
+msgid "Bike-sharing order data"
+msgstr "共享单车订单数据"
+
+#: of transbigdata.bikedata.bikedata_to_od:8
+msgid ""
+"Column names, the order cannot be changed.[‘BIKE_ID’, "
+"’DATA_TIME’,’LONGITUDE’,’LATITUDE’,’LOCK_STATUS’]"
 msgstr ""
+"列名，顺序不能更改。[“BIKE_ID”、“DATA_TIME”、“经度”、“纬"
+"度”、“LOCK_STATUS]"
 
-#: ../../source/bikedata.rst:25
-msgid "骑行订单数据"
+#: of transbigdata.bikedata.bikedata_to_od:11
+msgid ""
+"The start time and end time of the observation period, for example "
+"[‘2018-08-27 00:00:00’,’2018-08-28 00:00:00’]. If it is passed in, the "
+"riding and parking situations (from the beginning of the observation "
+"period to the first appearance of the bicycle) and (from the last "
+"appearance of the bicycle to the end of the observation period) are "
+"considered."
 msgstr ""
+"观察周期的开始时间和结束时间，例如 ['2018-08-27 00：00：00'、'2018-08-28 "
+"00：00：00']。如果通过，则考虑骑行和停车情况（从观察期开始到自行车首次出"
+"现）和（从自行车最后一次出现到观察期结束）。"
 
-#: ../../source/bikedata.rst:26
-msgid "stop_data"
+#: of transbigdata.bikedata.bikedata_to_od
+msgid "返回"
+msgstr "返回"
+
+#: of transbigdata.bikedata.bikedata_to_od:19
+msgid ""
+"* **move_data** (*DataFrame*) -- Riding data * **stop_data** "
+"(*DataFrame*) -- Parking data"
 msgstr ""
+"* **move_data** （*数据帧*） -- 骑行数据 * **stop_data** （*数据帧*） -- "
+"停车数据"
 
-#: ../../source/bikedata.rst:27
-msgid "停车数据"
-msgstr ""
+#: of transbigdata.bikedata.bikedata_to_od:19
+msgid "**move_data** (*DataFrame*) -- Riding data"
+msgstr "**move_data** (*DataFrame*) -- 骑行数据"
 
+#: of transbigdata.bikedata.bikedata_to_od:20
+msgid "**stop_data** (*DataFrame*) -- Parking data"
+msgstr "**stop_data** (*DataFrame*) -- 停车数据"

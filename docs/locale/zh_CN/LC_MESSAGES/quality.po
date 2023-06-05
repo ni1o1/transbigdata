@@ -4,101 +4,84 @@
 # package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-07 16:44+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:51+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
-#: ../../source/quality.rst:6
+#: ../../source/quality.rst:7
 msgid "数据质量分析"
+msgstr "数据质量分析"
+
+#: ../../source/quality.rst:15:<autosummary>:1
+msgid ""
+":py:obj:`data_summary <transbigdata.data_summary>`\\ \\(data\\[\\, "
+"col\\, ...\\]\\)"
 msgstr ""
 
-#: ../../source/quality.rst:12
-msgid "输入数据，打印数据概况"
+#: ../../source/quality.rst:15:<autosummary>:1 of
+#: transbigdata.quality.data_summary:2
+msgid "Output the general information of the dataset."
+msgstr "输出数据集的一般信息。"
+
+#: ../../source/quality.rst:15:<autosummary>:1
+msgid ""
+":py:obj:`sample_duration <transbigdata.sample_duration>`\\ \\(data\\[\\, "
+"col\\]\\)"
 msgstr ""
 
-#: ../../source/quality.rst:14 ../../source/quality.rst:65
-msgid "**输入**"
-msgstr ""
+#: ../../source/quality.rst:15:<autosummary>:1 of
+#: transbigdata.quality.sample_duration:2
+msgid "Calculate the data sampling interval."
+msgstr "计算数据采样间隔。"
 
-#: ../../source/quality.rst:16 ../../source/quality.rst:67
-msgid "data"
-msgstr ""
+#: of transbigdata.quality.data_summary transbigdata.quality.sample_duration
+msgid "参数"
+msgstr "参数"
 
-msgid "DataFrame"
-msgstr ""
+#: of transbigdata.quality.data_summary:4
+msgid "The trajectory points data"
+msgstr "轨迹点数据"
 
-#: ../../source/quality.rst:17
-msgid "轨迹点数据"
-msgstr ""
+#: of transbigdata.quality.data_summary:6
+#: transbigdata.quality.sample_duration:6
+msgid "The column name, in the order of [‘Vehicleid’, ‘Time’]"
+msgstr "列名，顺序为[‘Vehicleid’, ‘Time’]"
 
-#: ../../source/quality.rst:18 ../../source/quality.rst:70
-msgid "col"
-msgstr ""
+#: of transbigdata.quality.data_summary:8
+msgid "Whether to output individual sampling interval"
+msgstr "是否输出个别采样间隔"
 
-msgid "List"
-msgstr ""
+#: of transbigdata.quality.data_summary:10
+msgid "Number of decimal places"
+msgstr "小数位数"
 
-#: ../../source/quality.rst:19
-msgid "列名，按[个体ID，时间]的顺序"
-msgstr ""
+#: of transbigdata.quality.sample_duration:4
+msgid "Data"
+msgstr "数据"
 
-#: ../../source/quality.rst:20
-msgid "show_sample_duration"
-msgstr ""
+#: of transbigdata.quality.sample_duration
+msgid "返回"
+msgstr "返回"
 
-msgid "bool"
+#: of transbigdata.quality.sample_duration:9
+msgid ""
+"**sample_duration** -- A Series with the column name duration, the "
+"content is the sampling interval of the data, in seconds"
 msgstr ""
+"**sample_duration** -- 列名持续时间的序列，内容是数据的采样间隔，以秒为单"
+"位"
 
-#: ../../source/quality.rst:21
-msgid "是否输出个体采样间隔信息"
-msgstr ""
-
-#: ../../source/quality.rst:23
-msgid "roundnum"
-msgstr ""
-
-msgid "number"
-msgstr ""
-
-#: ../../source/quality.rst:23
-msgid "小数点取位数"
-msgstr ""
-
-#: ../../source/quality.rst:25
-msgid "使用方法"
-msgstr ""
-
-#: ../../source/quality.rst:63
-msgid "统计数据采样间隔"
-msgstr ""
-
-#: ../../source/quality.rst:68
-msgid "数据"
-msgstr ""
-
-#: ../../source/quality.rst:70
-msgid "列名，按[个体ID,时间]的顺序"
-msgstr ""
-
-#: ../../source/quality.rst:72
-msgid "**输出**"
-msgstr ""
-
-#: ../../source/quality.rst:74
-msgid "sample_duration"
-msgstr ""
-
-#: ../../source/quality.rst:75
-msgid "一列的数据表，列名为duration，内容是数据的采样间隔，单位秒"
-msgstr ""
-
+#: of transbigdata.quality.sample_duration
+msgid "返回类型"
+msgstr "返回类型"

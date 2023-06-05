@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: 2023-06-05 16:36+0800\n"
+"Last-Translator: \n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#: ../../source/api/transbigdata.clean_outofbounds.rst:2
+#, fuzzy
+msgid "transbigdata.clean\\_outofbounds"
+msgstr "Transbigdata.clean\\_outofbounds"
+
+#: of transbigdata.preprocess.clean_outofbounds:2
+#, fuzzy
+msgid ""
+"The input is the latitude and longitude coordinates of the lower left "
+"and upper right of the study area and exclude data that are outside the "
+"study area"
+msgstr ""
+"输入为研究区域左下角和右上角的纬度和经度坐标，并排除研究区域外的数据"
+
+#: of transbigdata.preprocess.clean_outofbounds
+#, fuzzy
+msgid "参数"
+msgstr "参数"
+
+#: of transbigdata.preprocess.clean_outofbounds:6
+msgid "Data"
+msgstr "数据"
+
+#: of transbigdata.preprocess.clean_outofbounds:8
+#, fuzzy
+msgid ""
+"Latitude and longitude of the lower left and upper right of the study "
+"area, in the order of [lon1, lat1, lon2, lat2]"
+msgstr ""
+"研究区域左下角和右上角的纬度和经度，顺序为 [lon1， lat1， lon2， lat2]"
+
+#: of transbigdata.preprocess.clean_outofbounds:11
+#, fuzzy
+msgid "Column name of longitude and latitude"
+msgstr "经度和纬度的列名"
+
+#: of transbigdata.preprocess.clean_outofbounds
+#, fuzzy
+msgid "返回"
+msgstr "返回"
+
+#: of transbigdata.preprocess.clean_outofbounds:14
+#, fuzzy
+msgid "**data1** -- Data within the scope of the study"
+msgstr "**data1** -- 研究范围内的数据"
+
+#: of transbigdata.preprocess.clean_outofbounds
+#, fuzzy
+msgid "返回类型"
+msgstr "返回类型"

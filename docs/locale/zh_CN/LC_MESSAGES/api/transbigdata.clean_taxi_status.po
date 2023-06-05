@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.clean_taxi_status.rst:2
+msgid "transbigdata.clean\\_taxi\\_status"
+msgstr ""
+
+#: of transbigdata.taxigps.clean_taxi_status:2
+msgid ""
+"Deletes records of instantaneous changes in passenger carrying status "
+"from taxi data. These abnormal records can affect travel order judgments."
+" Judgement method: If the passenger status of the previous record and the"
+" next record are different from this record for the same vehicle, then "
+"this record should be deleted."
+msgstr ""
+
+#: of transbigdata.taxigps.clean_taxi_status
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.taxigps.clean_taxi_status:8
+msgid "Data"
+msgstr ""
+
+#: of transbigdata.taxigps.clean_taxi_status:10
+msgid "Column names, in the order of [‘VehicleNum’, ‘Time’, ‘OpenStatus’]"
+msgstr ""
+
+#: of transbigdata.taxigps.clean_taxi_status:12
+msgid ""
+"Optional, in seconds. If the time between the previous record and the "
+"next record is less than the time threshold, then it will be deleted"
+msgstr ""
+
+#: of transbigdata.taxigps.clean_taxi_status
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.taxigps.clean_taxi_status:16
+msgid "**data1** -- Cleaned data"
+msgstr ""
+
+#: of transbigdata.taxigps.clean_taxi_status
+msgid "返回类型"
+msgstr ""
+

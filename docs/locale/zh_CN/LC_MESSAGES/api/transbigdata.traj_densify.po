@@ -1,0 +1,60 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.traj_densify.rst:2
+msgid "transbigdata.traj\\_densify"
+msgstr ""
+
+#: of transbigdata.traj.traj_densify:2
+msgid ""
+"Trajectory densification, ensure that there is a trajectory point each "
+"timegap seconds"
+msgstr ""
+
+#: of transbigdata.traj.traj_densify
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.traj.traj_densify:5
+msgid "Data"
+msgstr ""
+
+#: of transbigdata.traj.traj_densify:7
+msgid "The column name, in the sequence of [Vehicleid, Time, lng, lat]"
+msgstr ""
+
+#: of transbigdata.traj.traj_densify:9
+msgid "The sampling interval (second)"
+msgstr ""
+
+#: of transbigdata.traj.traj_densify
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.traj.traj_densify:12
+msgid "**data1** -- The processed data"
+msgstr ""
+
+#: of transbigdata.traj.traj_densify
+msgid "返回类型"
+msgstr ""
+

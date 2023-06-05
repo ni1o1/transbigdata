@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.visualization_od.rst:2
+msgid "transbigdata.visualization\\_od"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_od:2
+msgid ""
+"The input is the OD data and the column. The output is the visualization "
+"result based on kepler"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_od
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_od:5
+msgid "OD data"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_od:7
+msgid ""
+"The column name. The user can choose a non-weight Origin-Destination (OD)"
+" data, in the sequence of [origin longitude, origin latitude, destination"
+" longitude, destination latitude]. For this, The aggregation is "
+"automatic. Or, the user can also input a weighted OD data, in the "
+"sequence of [origin longitude, origin latitude, destination longitude, "
+"destination latitude, count]"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_od:14
+msgid "Map zoom level (Optional). Default value: auto"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_od:16
+msgid "The height of the map frame"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_od:18
+msgid "Grid size"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_od:20
+msgid "The minimum OD counts, OD with less counts will not be displayed"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_od
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_od:23
+msgid "**vmap** -- Visualizations provided by keplergl"
+msgstr ""
+
+#: of transbigdata.visualization.visualization_od
+msgid "返回类型"
+msgstr ""
+

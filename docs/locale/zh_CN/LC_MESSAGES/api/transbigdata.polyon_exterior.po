@@ -1,0 +1,56 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.polyon_exterior.rst:2
+msgid "transbigdata.polyon\\_exterior"
+msgstr ""
+
+#: of transbigdata.gisprocess.polyon_exterior:2
+msgid ""
+"The input is the GeoDataFrame of the polygon geometry. The method will "
+"construct new polygon by extending the outer boundary of the ploygon"
+msgstr ""
+
+#: of transbigdata.gisprocess.polyon_exterior
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.gisprocess.polyon_exterior:6
+msgid "The polygon geometry"
+msgstr ""
+
+#: of transbigdata.gisprocess.polyon_exterior:8
+msgid "The minimum area. Polygon of less area will be removed"
+msgstr ""
+
+#: of transbigdata.gisprocess.polyon_exterior
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.gisprocess.polyon_exterior:11
+msgid "**data1** -- The processed polygon"
+msgstr ""
+
+#: of transbigdata.gisprocess.polyon_exterior
+msgid "返回类型"
+msgstr ""
+

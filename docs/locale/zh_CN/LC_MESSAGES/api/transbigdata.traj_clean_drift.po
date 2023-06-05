@@ -1,0 +1,80 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.traj_clean_drift.rst:2
+msgid "transbigdata.traj\\_clean\\_drift"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_drift:2
+msgid ""
+"Delete the drift in the trajectory data. The drift is defined as the data"
+" with a speed greater than the speed limit or the distance between the "
+"current point and the next point is greater than the distance limit or "
+"the angle between the current point, the previous point, and the next "
+"point is smaller than the angle limit. The speed limit is 80km/h by "
+"default, and the distance limit is 1000m by default. The method of "
+"cleaning drift data is divided into two methods: ‘oneside’ and ‘twoside’."
+" The ‘oneside’ method is to consider the speed of the current point and "
+"the next point, and the ‘twoside’ method is to consider the speed of the "
+"current point, the previous point, and the next point."
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_drift
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_drift:4
+msgid "Data"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_drift:6
+msgid "Column names, in the order of [‘VehicleNum’, ‘Time’, ‘Lng’, ‘Lat’]"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_drift:8
+msgid "Method of cleaning drift data, including ‘oneside’ and ‘twoside’"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_drift:10
+msgid "Speed limitation"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_drift:12
+msgid "Distance limit"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_drift:14
+msgid "Angle limit"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_drift
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_drift:17
+msgid "**data1** -- Cleaned data"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_drift
+msgid "返回类型"
+msgstr ""
+

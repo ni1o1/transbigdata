@@ -1,0 +1,236 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:46+0800\n"
+"Last-Translator: \n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#: ../../source/activity.rst:5
+msgid "Activity"
+msgstr "活动"
+
+#: ../../source/activity.rst:17:<autosummary>:1
+msgid ""
+":py:obj:`plot_activity <transbigdata.plot_activity>`\\ \\(data\\[\\, "
+"col\\, figsize\\, dpi\\, ...\\]\\)"
+msgstr ""
+
+#: ../../source/activity.rst:17:<autosummary>:1 of
+#: transbigdata.activity.plot_activity:2
+msgid "Plot the activity plot of individual"
+msgstr "绘制个体的活动图"
+
+#: ../../source/activity.rst:17:<autosummary>:1
+msgid ":py:obj:`entropy <transbigdata.entropy>`\\ \\(sequence\\)"
+msgstr ""
+
+#: ../../source/activity.rst:17:<autosummary>:1 of
+#: transbigdata.activity.entropy:2
+msgid "Calculate entropy."
+msgstr "计算熵。"
+
+#: ../../source/activity.rst:17:<autosummary>:1
+msgid ":py:obj:`entropy_rate <transbigdata.entropy_rate>`\\ \\(sequence\\)"
+msgstr ""
+
+#: ../../source/activity.rst:17:<autosummary>:1
+msgid "Calculate entropy rate."
+msgstr "计算熵率。"
+
+#: ../../source/activity.rst:17:<autosummary>:1
+msgid ""
+":py:obj:`ellipse_params <transbigdata.ellipse_params>`\\ \\(data\\[\\, "
+"col\\, confidence\\, epsg\\]\\)"
+msgstr ""
+
+#: ../../source/activity.rst:17:<autosummary>:1 of
+#: transbigdata.activity.ellipse_params:2
+msgid "confidence ellipse parameter estimation for point data"
+msgstr "点数据的置信椭圆参数估计"
+
+#: ../../source/activity.rst:17:<autosummary>:1
+msgid ""
+":py:obj:`ellipse_plot <transbigdata.ellipse_plot>`\\ \\(ellip\\_params\\, "
+"ax\\, \\*\\*kwargs\\)"
+msgstr ""
+
+#: ../../source/activity.rst:17:<autosummary>:1 of
+#: transbigdata.activity.ellipse_plot:2
+msgid ""
+"Enter the parameters of the confidence ellipse and plot the confidence "
+"ellipse"
+msgstr "输入置信度椭圆的参数并绘制置信度椭圆"
+
+#: ../../source/activity.rst:19
+msgid "Activity plot"
+msgstr "活动图"
+
+#: of transbigdata.activity.ellipse_params transbigdata.activity.ellipse_plot
+#: transbigdata.activity.entropy transbigdata.activity.entropy_rate
+#: transbigdata.activity.plot_activity
+msgid "参数"
+msgstr "参数"
+
+#: of transbigdata.activity.plot_activity:4
+msgid "activity information of one person"
+msgstr "一个人的活动信息"
+
+#: of transbigdata.activity.plot_activity:6
+msgid ""
+"The column name. [starttime,endtime,group] of activities, `group` control "
+"the color"
+msgstr "列名[starttime,endtime,group]，`group`控制颜色分组"
+
+#: of transbigdata.activity.plot_activity:8
+msgid "The figure size"
+msgstr "体形尺寸"
+
+#: of transbigdata.activity.plot_activity:10
+msgid "The dpi of the figure"
+msgstr "图形的dpi"
+
+#: of transbigdata.activity.plot_activity:12
+msgid "Whether to shuffle the activity"
+msgstr "是否将活动顺序随机打乱"
+
+#: of transbigdata.activity.plot_activity:14
+msgid "rotation angle of xticks"
+msgstr "xticks的旋转角度"
+
+#: of transbigdata.activity.plot_activity:16
+msgid "gap of xticks"
+msgstr "xticks 的间隙"
+
+#: of transbigdata.activity.plot_activity:18
+msgid "gap of yticks"
+msgstr "yticks 的间隙"
+
+#: of transbigdata.activity.plot_activity:20
+msgid "font size of xticks and yticks"
+msgstr "xticks 和 yticks 的字体大小"
+
+#: ../../source/activity.rst:24
+msgid "Entropy"
+msgstr "熵"
+
+#: of transbigdata.activity.entropy:4 transbigdata.activity.entropy_rate:5
+msgid "sequence data"
+msgstr "序列数据"
+
+#: of transbigdata.activity.ellipse_params transbigdata.activity.entropy
+#: transbigdata.activity.entropy_rate
+msgid "返回"
+msgstr "返回"
+
+#: of transbigdata.activity.entropy:7
+msgid "**entropy**"
+msgstr "**熵**"
+
+#: of transbigdata.activity.ellipse_params transbigdata.activity.entropy
+#: transbigdata.activity.entropy_rate
+msgid "返回类型"
+msgstr "返回类型"
+
+#: of transbigdata.activity.entropy_rate:2
+msgid ""
+"Calculate entropy rate. Reference: Goulet-Langlois, G., Koutsopoulos, H. "
+"N., Zhao, Z., & Zhao, J. (2017). Measuring regularity of individual travel "
+"patterns. IEEE Transactions on Intelligent Transportation Systems, 19(5), "
+"1583-1592."
+msgstr ""
+"计算熵率。参考文献：Goulet-Langlois，G.，Koutsopoulos，H.N.，Zhao，Z.和"
+"Zhao，J.（2017）。测量个人旅行模式的规律性。IEEE智能交通系统学报，19（5），"
+"1583-1592。"
+
+#: of transbigdata.activity.entropy_rate:8
+msgid "**entropy_rate**"
+msgstr "**熵率**"
+
+#: ../../source/activity.rst:32
+msgid "Confidence ellipse"
+msgstr "置信椭圆"
+
+#: of transbigdata.activity.ellipse_params:4
+msgid "point data"
+msgstr "点数据"
+
+#: of transbigdata.activity.ellipse_params:6
+msgid "confidence level: 99，95 or 90"
+msgstr "置信度：99，95 或 90"
+
+#: of transbigdata.activity.ellipse_params:8
+msgid ""
+"If given, the original coordinates are transformed from WGS84 to the given "
+"EPSG coordinate system for confidence ellipse parameter estimation"
+msgstr ""
+"如果给定，原始坐标将从 WGS84 转换为给定的 EPSG 坐标系，以进行置信椭圆参数估"
+"计"
+
+#: of transbigdata.activity.ellipse_params:12
+msgid "Column names, [lon，lat]"
+msgstr "列名，[lon，lat]"
+
+#: of transbigdata.activity.ellipse_params:15
+msgid ""
+"**params** -- Centroid ellipse parameters[pos,width,height,theta,area,"
+"oblateness] Respectively [Center point coordinates, minor axis, major "
+"axis, angle, area, oblateness]"
+msgstr ""
+"**参数** -- 质心椭圆参数[位置，宽度，高度，θ，面积，扁率] 分别[中心点坐标，"
+"短轴，长轴，角度，面积，扁率]"
+
+#: of transbigdata.activity.ellipse_plot:5
+msgid ""
+"Centroid ellipse parameters[pos,width,height,theta,area,oblateness] "
+"Respectively[Center point coordinates, minor axis, major axis, angle , "
+"area, oblateness]"
+msgstr ""
+"质心椭圆参数[位置、宽度、高度、θ、面积、扁率] 分别[中心点坐标、短轴、长轴、"
+"角度、面积、扁率]"
+
+#: of transbigdata.activity.ellipse_plot:9
+msgid "Where to plot"
+msgstr "在哪里绘制"
+
+#: ../../source/activity.rst:41
+msgid "用法"
+msgstr "用法"
+
+#: ../../source/activity.rst:69
+msgid ""
+"输入数据与xy坐标所在列名，置信度，估计椭圆参数 分别代表[中心点坐标，短轴，"
+"长轴，角度，面积，扁率"
+msgstr ""
+"输入数据与xy坐标所在列名，置信度，估计椭圆参数 分别代表[中心点坐标，短轴，"
+"长轴，角度，面积，扁率"
+
+#: ../../source/activity.rst:88
+msgid "再用tbd.ellipse_plot绘制置信椭圆"
+msgstr "再用tbd.ellipse_plot绘制设置信椤圆"
+
+#~ msgid "Constructor"
+#~ msgstr "构建器"
+
+#~ msgid "Parameters"
+#~ msgstr "参数"
+
+#~ msgid "Returns"
+#~ msgstr "退货"
+
+#~ msgid "Return type"
+#~ msgstr "返回类型"

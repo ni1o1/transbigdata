@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.dumpjson.rst:2
+msgid "transbigdata.dumpjson"
+msgstr ""
+
+#: of transbigdata.utils.dumpjson:2
+msgid ""
+"Input the json data and save it as a file. This method is suitable for "
+"sovling the problem that numpy cannot be compatiable with json package."
+msgstr ""
+
+#: of transbigdata.utils.dumpjson
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.utils.dumpjson:5
+msgid "The json data to be saved"
+msgstr ""
+
+#: of transbigdata.utils.dumpjson:23
+msgid "path"
+msgstr ""
+
+#: of transbigdata.utils.dumpjson:-1
+msgid "str"
+msgstr ""
+
+#: of transbigdata.utils.dumpjson:9
+msgid "The storage path"
+msgstr ""
+

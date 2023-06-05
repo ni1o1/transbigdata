@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.traj_mapmatch.rst:2
+msgid "transbigdata.traj\\_mapmatch"
+msgstr ""
+
+#: of transbigdata.traj.traj_mapmatch:2
+msgid ""
+"Nearest map matching: Find the nearest point on the road network for each"
+" trajectory point. When conducting nearest neighbor matching, we need to "
+"find the closest road segment on the road network for each trajectory "
+"point, and match the trajectory point to that segment. In practice, we "
+"can first extract the nodes of the road segments to form a set of points "
+"(i.e., extracting each coordinate point from each LineString in the "
+"geometry column), then calculate the nearest distance between the "
+"trajectory point and this set of points, and finally match the trajectory"
+" point to the road segment where the nearest distance's node is located. "
+"This process effectively transforms the problem of matching points to "
+"lines into a problem of matching points to points."
+msgstr ""
+
+#: of transbigdata.traj.traj_mapmatch
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.traj.traj_mapmatch:5
+msgid "The trajectory point data set to be matched."
+msgstr ""
+
+#: of transbigdata.traj.traj_mapmatch:7
+msgid "The road network used for matching, created by osmnx."
+msgstr ""
+
+#: of transbigdata.traj.traj_mapmatch:9
+msgid ""
+"The name of the longitude and latitude columns in the trajectory point "
+"data set."
+msgstr ""
+
+#: of transbigdata.traj.traj_mapmatch
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.traj.traj_mapmatch:12
+msgid "**traj_matched** -- The trajectory point data set after matching."
+msgstr ""
+
+#: of transbigdata.traj.traj_mapmatch
+msgid "返回类型"
+msgstr ""
+

@@ -1,0 +1,60 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.bd09togcj02.rst:2
+msgid "transbigdata.bd09togcj02"
+msgstr ""
+
+#: of transbigdata.coordinates.bd09togcj02:2
+msgid "Convert coordinates from BD09 to GCJ02"
+msgstr ""
+
+#: of transbigdata.coordinates.bd09togcj02
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.coordinates.bd09togcj02:4
+msgid "Longitude"
+msgstr ""
+
+#: of transbigdata.coordinates.bd09togcj02:6
+msgid "Latitude"
+msgstr ""
+
+#: of transbigdata.coordinates.bd09togcj02
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.coordinates.bd09togcj02:9
+msgid ""
+"* **lng** (*Series or number*) -- Longitude (Converted) * **lat** "
+"(*Series or number*) -- Latitude (Converted)"
+msgstr ""
+
+#: of transbigdata.coordinates.bd09togcj02:9
+msgid "**lng** (*Series or number*) -- Longitude (Converted)"
+msgstr ""
+
+#: of transbigdata.coordinates.bd09togcj02:10
+msgid "**lat** (*Series or number*) -- Latitude (Converted)"
+msgstr ""
+

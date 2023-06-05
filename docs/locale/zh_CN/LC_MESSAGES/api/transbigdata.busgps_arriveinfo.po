@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: 2023-06-05 16:30+0800\n"
+"Last-Translator: \n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#: ../../source/api/transbigdata.busgps_arriveinfo.rst:2
+#, fuzzy
+msgid "transbigdata.busgps\\_arriveinfo"
+msgstr "transbigdata.busgps\\_arriveinfo"
+
+#: of transbigdata.busgps.busgps_arriveinfo:2
+#, fuzzy
+msgid ""
+"Input bus GPS data, bus route and station GeoDataFrame, this method can "
+"identify the bus arrival and departure information"
+msgstr ""
+"输入公交GPS数据、公交线路和车站GeoDataFrame，该方法可以识别公交车的到达和"
+"出发信息"
+
+#: of transbigdata.busgps.busgps_arriveinfo
+#, fuzzy
+msgid "参数"
+msgstr "参数"
+
+#: of transbigdata.busgps.busgps_arriveinfo:5
+#, fuzzy
+msgid ""
+"Bus GPS data. It should be the data from one bus route, and need to "
+"contain vehicle ID, GPS time, latitude and longitude (wgs84)"
+msgstr ""
+"总线全球定位系统数据。它应该是来自一条公交路线的数据，并且需要包含车辆"
+"ID，GPS时间，纬度和经度（wgs84）"
+
+#: of transbigdata.busgps.busgps_arriveinfo:9
+#, fuzzy
+msgid "GeoDataFrame for the bus line"
+msgstr "总线线路的地理数据帧"
+
+#: of transbigdata.busgps.busgps_arriveinfo:11
+#, fuzzy
+msgid "GeoDataFrame for bus stops"
+msgstr "公交车站的地理数据帧"
+
+#: of transbigdata.busgps.busgps_arriveinfo:13
+#, fuzzy
+msgid ""
+"Column names, in the order of [vehicle ID, time, longitude, latitude, "
+"station name]"
+msgstr "列名称，按 [车辆 ID、时间、经度、纬度、车站名称] 的顺序排列"
+
+#: of transbigdata.busgps.busgps_arriveinfo:16
+#, fuzzy
+msgid ""
+"Meter. When the vehicle approaches the station within this certain "
+"distance, it is considered to be arrive at the station."
+msgstr "米。当车辆在此一定距离内接近车站时，视为到达车站。"
+
+#: of transbigdata.busgps.busgps_arriveinfo:19
+#, fuzzy
+msgid ""
+"Seconds. Within a short period of time that the bus arrive at bus "
+"station again, it will not be consider as another arrival"
+msgstr "秒。在短时间内，巴士再次到达公交车站，将不被视为再次到达"
+
+#: of transbigdata.busgps.busgps_arriveinfo:22
+#, fuzzy
+msgid ""
+"Meter. The distance between the front point and the back point of the "
+"vehicle, which is used to determine whether the vehicle is moving or not"
+msgstr "米。车辆前点和后点之间的距离，用于确定车辆是否在移动"
+
+#: of transbigdata.busgps.busgps_arriveinfo:26
+#, fuzzy
+msgid ""
+"The matching algorithm will convert the data into a projection "
+"coordinate system to calculate the distance, here the epsg code of the "
+"projection coordinate system is given"
+msgstr ""
+"匹配算法将数据转换为投影坐标系来计算距离，这里给出投影坐标系的epsg代码"
+
+#: of transbigdata.busgps.busgps_arriveinfo:30
+#, fuzzy
+msgid ""
+"Seconds. For how long the vehicle does not appear, it will be considered "
+"as a new vehicle"
+msgstr "秒。车辆没有出现多长时间，它将被视为新车"
+
+#: of transbigdata.busgps.busgps_arriveinfo:33
+#, fuzzy
+msgid "Whether to output the projected data"
+msgstr "是否输出投影数据"
+
+#: of transbigdata.busgps.busgps_arriveinfo
+#, fuzzy
+msgid "返回"
+msgstr "返回"
+
+#: of transbigdata.busgps.busgps_arriveinfo:36
+#, fuzzy
+msgid "**arrive_info** -- Bus arrival and departure information"
+msgstr "**arrive_info** -- 巴士到达和离开信息"
+
+#: of transbigdata.busgps.busgps_arriveinfo
+#, fuzzy
+msgid "返回类型"
+msgstr "返回类型"

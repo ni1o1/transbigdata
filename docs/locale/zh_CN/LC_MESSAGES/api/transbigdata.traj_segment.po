@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.traj_segment.rst:2
+msgid "transbigdata.traj\\_segment"
+msgstr ""
+
+#: of transbigdata.traj.traj_segment:2
+msgid ""
+"Segment the trajectory in order and return the starting and ending "
+"information of each segment. This function can segment GPS trajectory "
+"data, calculate the start and end information of each segment, and store "
+"the results in a DataFrame object. The input of this function includes a "
+"pandas DataFrame object containing GPS trajectory data,  field names for "
+"grouping, and field names to be retained. The output is a pandas "
+"DataFrame object containing the starting and ending information of each "
+"segment, where each row represents a trajectory segment."
+msgstr ""
+
+#: of transbigdata.traj.traj_segment
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.traj.traj_segment:5
+msgid "The trajectory data needs to be sorted beforehand."
+msgstr ""
+
+#: of transbigdata.traj.traj_segment:7
+msgid ""
+"A list of strings specifying the groupby fields to be used for "
+"segmentation."
+msgstr ""
+
+#: of transbigdata.traj.traj_segment:9
+msgid "A list of strings specifying the fields to be retained."
+msgstr ""
+
+#: of transbigdata.traj.traj_segment
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.traj.traj_segment:12
+msgid ""
+"**data** -- Containing the starting and ending information of each "
+"segment, where each row represents a trajectory segment."
+msgstr ""
+
+#: of transbigdata.traj.traj_segment
+msgid "返回类型"
+msgstr ""
+

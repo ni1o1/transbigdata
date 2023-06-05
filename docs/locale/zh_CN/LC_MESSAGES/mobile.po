@@ -1,0 +1,166 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 15:59+0800\n"
+"PO-Revision-Date: 2023-06-05 16:50+0800\n"
+"Last-Translator: \n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#: ../../source/mobile.rst:6
+msgid "Mobilephone data processing"
+msgstr "手机数据处理"
+
+#: ../../source/mobile.rst:15:<autosummary>:1
+msgid ""
+":py:obj:`mobile_stay_duration <transbigdata.mobile_stay_duration>`\\ "
+"\\(staydata\\[\\, col\\, ...\\]\\)"
+msgstr ""
+
+#: ../../source/mobile.rst:15:<autosummary>:1 of
+#: transbigdata.mobilephonedata.mobile_stay_duration:2
+msgid ""
+"Input the stay point data to identify the duration during night and day "
+"time."
+msgstr "输入停留点数据以识别夜间和白天的持续时间。"
+
+#: ../../source/mobile.rst:15:<autosummary>:1
+msgid ""
+":py:obj:`mobile_identify_home <transbigdata.mobile_identify_home>`\\ "
+"\\(staydata\\[\\, col\\, ...\\]\\)"
+msgstr ""
+
+#: ../../source/mobile.rst:15:<autosummary>:1
+msgid "Identify home location from mobile phone stay data."
+msgstr "通过手机停留数据识别家庭位置。"
+
+#: ../../source/mobile.rst:15:<autosummary>:1
+msgid ""
+":py:obj:`mobile_identify_work <transbigdata.mobile_identify_work>`\\ "
+"\\(staydata\\[\\, col\\, ...\\]\\)"
+msgstr ""
+
+#: ../../source/mobile.rst:15:<autosummary>:1
+msgid "Identify work location from mobile phone stay data."
+msgstr "通过手机停留数据识别工作地点。"
+
+#: of transbigdata.mobilephonedata.mobile_identify_home
+#: transbigdata.mobilephonedata.mobile_identify_work
+#: transbigdata.mobilephonedata.mobile_stay_duration
+msgid "参数"
+msgstr "参数"
+
+#: of transbigdata.mobilephonedata.mobile_identify_home:5
+#: transbigdata.mobilephonedata.mobile_identify_work:5
+#: transbigdata.mobilephonedata.mobile_stay_duration:4
+msgid "Stay data"
+msgstr "停留数据"
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:6
+msgid "The column name, in the order of ['starttime','endtime']"
+msgstr "列名，顺序为['starttime','endtime']"
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:8
+msgid "Start hour of day time"
+msgstr "一天中的开始时间"
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:10
+msgid "End hour of day time"
+msgstr "一天时间的结束时间"
+
+#: of transbigdata.mobilephonedata.mobile_identify_home
+#: transbigdata.mobilephonedata.mobile_identify_work
+#: transbigdata.mobilephonedata.mobile_stay_duration
+msgid "返回"
+msgstr "返回"
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:13
+msgid ""
+"* **duration_night** (*Series*) -- Duration at night time * "
+"**duration_day** (*Series*) -- Duration at day time"
+msgstr ""
+"* **duration_night** （*系列*） -- 夜间持续时间 * **duration_day** （*系"
+"列*） -- 白天持续时间"
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:13
+msgid "**duration_night** (*Series*) -- Duration at night time"
+msgstr "**duration_night** (*Series*) -- 夜间持续时间"
+
+#: of transbigdata.mobilephonedata.mobile_stay_duration:14
+msgid "**duration_day** (*Series*) -- Duration at day time"
+msgstr "**duration_day** (*Series*) -- 白天的持续时间"
+
+#: of transbigdata.mobilephonedata.mobile_identify_home:2
+msgid ""
+"Identify home location from mobile phone stay data. The rule is to "
+"identify the locations with longest duration in night time."
+msgstr "从手机住宿数据中识别家庭位置。规则是确定夜间持续时间最长的位置。"
+
+#: of transbigdata.mobilephonedata.mobile_identify_home:7
+msgid ""
+"The column name, in the order of ['uid','stime', 'etime', "
+"'locationtag1', 'locationtag2', ...]. There can be multiple "
+"'locationtag' columns to specify the location."
+msgstr ""
+"列名，按 ['uid'， 'stime'， 'etime'， 'locationtag1'， "
+"'locationtag2'， ...] 的顺序排列。可以有多个“位置标签”列来指定位置。"
+
+#: of transbigdata.mobilephonedata.mobile_identify_home:10
+#: transbigdata.mobilephonedata.mobile_identify_home:12
+#: transbigdata.mobilephonedata.mobile_identify_work:16
+#: transbigdata.mobilephonedata.mobile_identify_work:18
+msgid "Start hour and end hour of day time"
+msgstr "一天时间的开始时间和结束时间"
+
+#: of transbigdata.mobilephonedata.mobile_identify_home:15
+msgid "**home** -- Home location of mobile phone users"
+msgstr "**home** -- 手机用户的家位置"
+
+#: of transbigdata.mobilephonedata.mobile_identify_home
+#: transbigdata.mobilephonedata.mobile_identify_work
+msgid "返回类型"
+msgstr "返回类型"
+
+#: of transbigdata.mobilephonedata.mobile_identify_work:2
+msgid ""
+"Identify work location from mobile phone stay data. The rule is to "
+"identify the locations with longest duration in day time on "
+"weekdays(Average duration should over `minhour`)."
+msgstr ""
+"从手机住宿数据中识别工作地点。规则是确定工作日白天持续时间最长的位置（平"
+"均持续时间应超过“分钟小时”）。"
+
+#: of transbigdata.mobilephonedata.mobile_identify_work:7
+msgid ""
+"The column name, in the order of ['uid','stime','etime', 'locationtag1', "
+"'locationtag2', ...]. There can be multiple 'locationtag' columns to "
+"specify the location."
+msgstr ""
+"列名，按 ['uid'、stime'、'etime'、'locationtag1'、'locationtag2'， ...] "
+"的顺序排列。可以有多个“位置标签”列来指定位置。"
+
+#: of transbigdata.mobilephonedata.mobile_identify_work:10
+msgid "Minimun duration in work days (hours)."
+msgstr "工作日的最短持续时间（小时）。"
+
+#: of transbigdata.mobilephonedata.mobile_identify_work:12
+#: transbigdata.mobilephonedata.mobile_identify_work:14
+msgid "Start and end of work days in the week. 0 - Monday, 4 - Friday"
+msgstr "一周中工作日的开始和结束。 "
+
+#: of transbigdata.mobilephonedata.mobile_identify_work:21
+msgid "**work** -- work location of mobile phone users"
+msgstr "**work** -- 手机用户的工作地点"

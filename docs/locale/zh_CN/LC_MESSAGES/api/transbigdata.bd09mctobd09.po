@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: 2023-06-05 16:29+0800\n"
+"Last-Translator: \n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#: ../../source/api/transbigdata.bd09mctobd09.rst:2
+#, fuzzy
+msgid "transbigdata.bd09mctobd09"
+msgstr "Transbigdata.bd09mctobd09"
+
+#: of transbigdata.coordinates.bd09mctobd09:2
+#, fuzzy
+msgid "Convert coordinates from BD09MC to BD09"
+msgstr "将坐标从BD09MC转换为BD09"
+
+#: of transbigdata.coordinates.bd09mctobd09
+#, fuzzy
+msgid "参数"
+msgstr "参数"
+
+#: of transbigdata.coordinates.bd09mctobd09:4
+#, fuzzy
+msgid "x coordinates"
+msgstr "x 坐标"
+
+#: of transbigdata.coordinates.bd09mctobd09:6
+#, fuzzy
+msgid "y coordinates"
+msgstr "Y 坐标"
+
+#: of transbigdata.coordinates.bd09mctobd09
+#, fuzzy
+msgid "返回"
+msgstr "返回"
+
+#: of transbigdata.coordinates.bd09mctobd09:9
+#, fuzzy
+msgid ""
+"* **lng** (*Series or number*) -- Longitude (Converted) * **lat** "
+"(*Series or number*) -- Latitude (Converted)"
+msgstr ""
+"* **lng** （*系列或数字*） -- 经度（转换） * **纬度** （*系列或数"
+"字*） -- 纬度（转换）"
+
+#: of transbigdata.coordinates.bd09mctobd09:9
+#, fuzzy
+msgid "**lng** (*Series or number*) -- Longitude (Converted)"
+msgstr "**lng** （*系列或数字*） -- 经度（转换）"
+
+#: of transbigdata.coordinates.bd09mctobd09:10
+#, fuzzy
+msgid "**lat** (*Series or number*) -- Latitude (Converted)"
+msgstr "**纬度** （*系列或数字*） -- 纬度（转换）"

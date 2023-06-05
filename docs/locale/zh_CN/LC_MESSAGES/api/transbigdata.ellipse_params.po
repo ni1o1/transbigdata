@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.ellipse_params.rst:2
+msgid "transbigdata.ellipse\\_params"
+msgstr ""
+
+#: of transbigdata.activity.ellipse_params:2
+msgid "confidence ellipse parameter estimation for point data"
+msgstr ""
+
+#: of transbigdata.activity.ellipse_params
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.activity.ellipse_params:4
+msgid "point data"
+msgstr ""
+
+#: of transbigdata.activity.ellipse_params:6
+msgid "confidence level: 99，95 or 90"
+msgstr ""
+
+#: of transbigdata.activity.ellipse_params:8
+msgid ""
+"If given, the original coordinates are transformed from WGS84 to the "
+"given EPSG coordinate system for confidence ellipse parameter estimation"
+msgstr ""
+
+#: of transbigdata.activity.ellipse_params:12
+msgid "Column names, [lon，lat]"
+msgstr ""
+
+#: of transbigdata.activity.ellipse_params
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.activity.ellipse_params:15
+msgid ""
+"**params** -- Centroid ellipse "
+"parameters[pos,width,height,theta,area,oblateness] Respectively [Center "
+"point coordinates, minor axis, major axis, angle, area, oblateness]"
+msgstr ""
+
+#: of transbigdata.activity.ellipse_params
+msgid "返回类型"
+msgstr ""
+

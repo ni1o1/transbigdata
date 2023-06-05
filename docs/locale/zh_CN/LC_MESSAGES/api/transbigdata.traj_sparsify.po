@@ -1,0 +1,66 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.traj_sparsify.rst:2
+msgid "transbigdata.traj\\_sparsify"
+msgstr ""
+
+#: of transbigdata.traj.traj_sparsify:2
+msgid ""
+"Trajectory sparsify. When the sampling frequency of trajectory data is "
+"too high, the amount of data is too large, which is not convenient for "
+"the analysis of some studies that require less data frequency. This "
+"function can expand the sampling interval and reduce the amount of data."
+msgstr ""
+
+#: of transbigdata.traj.traj_sparsify
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.traj.traj_sparsify:7
+msgid "Data"
+msgstr ""
+
+#: of transbigdata.traj.traj_sparsify:9
+msgid "The column name, in the sequence of [Vehicleid, Time, lng, lat]"
+msgstr ""
+
+#: of transbigdata.traj.traj_sparsify:11
+msgid "Time gap between trajectory point"
+msgstr ""
+
+#: of transbigdata.traj.traj_sparsify:13
+msgid "'interpolate' or 'subsample'"
+msgstr ""
+
+#: of transbigdata.traj.traj_sparsify
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.traj.traj_sparsify:16
+msgid "**data1** -- Sparsified trajectory data"
+msgstr ""
+
+#: of transbigdata.traj.traj_sparsify
+msgid "返回类型"
+msgstr ""
+

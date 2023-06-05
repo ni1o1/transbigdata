@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.metro_network.rst:2
+msgid "transbigdata.metro\\_network"
+msgstr ""
+
+#: of transbigdata.metro.metro_network:2
+msgid ""
+"Inputting the metro station data and outputting the network topology "
+"model. The graph generated relies on NetworkX. The travel time is consist"
+" of: operation time between stations + stop time at each station + "
+"transfer time"
+msgstr ""
+
+#: of transbigdata.metro.metro_network
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.metro.metro_network:6
+msgid ""
+"Lines. Should have `line` column to store line name `speed` column to "
+"store metro speed and `stoptime` column to store stop time at each "
+"station."
+msgstr ""
+
+#: of transbigdata.metro.metro_network:10
+msgid "Bus/metro stations"
+msgstr ""
+
+#: of transbigdata.metro.metro_network:12
+msgid "Travel time per transfer"
+msgstr ""
+
+#: of transbigdata.metro.metro_network:14
+msgid ""
+"Default True, if True then output the network G constructed by NetworkX, "
+"if False then output the edges1(line section), edge2(station transfer), "
+"and the node of the network"
+msgstr ""
+
+#: of transbigdata.metro.metro_network
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.metro.metro_network:19
+msgid ""
+"* *When the nxgraph parameter is True* * "
+"*================================================================* * "
+"**G** (*networkx.classes.graph.Graph*) -- Network G built by networkx. * "
+"*When the nxgraph parameter is False (This is for detail design of the "
+"network)* * "
+"*================================================================* * "
+"**edge1** (*DataFrame*) -- Network edge for line section. * **edge2** "
+"(*DataFrame*) -- Network edge for transfering. * **node** (*List*) -- "
+"Network nodes."
+msgstr ""
+
+#: of transbigdata.metro.metro_network:19
+msgid "*When the nxgraph parameter is True*"
+msgstr ""
+
+#: of transbigdata.metro.metro_network:20 transbigdata.metro.metro_network:23
+msgid "*================================================================*"
+msgstr ""
+
+#: of transbigdata.metro.metro_network:21
+msgid "**G** (*networkx.classes.graph.Graph*) -- Network G built by networkx."
+msgstr ""
+
+#: of transbigdata.metro.metro_network:22
+msgid ""
+"*When the nxgraph parameter is False (This is for detail design of the "
+"network)*"
+msgstr ""
+
+#: of transbigdata.metro.metro_network:24
+msgid "**edge1** (*DataFrame*) -- Network edge for line section."
+msgstr ""
+
+#: of transbigdata.metro.metro_network:25
+msgid "**edge2** (*DataFrame*) -- Network edge for transfering."
+msgstr ""
+
+#: of transbigdata.metro.metro_network:26
+msgid "**node** (*List*) -- Network nodes."
+msgstr ""
+

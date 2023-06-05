@@ -1,0 +1,61 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, Qing Yu
+# This file is distributed under the same license as the TransBigData
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TransBigData 0.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 16:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../source/api/transbigdata.traj_clean_redundant.rst:2
+msgid "transbigdata.traj\\_clean\\_redundant"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_redundant:2
+msgid ""
+"Delete the data with the same information as the data before and after to"
+" reduce the amount of data. For example, if several consecutive data of "
+"an individual have the same information except for the time, only the "
+"first and last two data can be kept"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_redundant
+msgid "参数"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_redundant:7
+msgid "Data"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_redundant:9
+msgid ""
+"The column name, in the order of [‘Vehicleid, Time’]. It will sort by "
+"time, and then determine the information of other columns besides the "
+"time"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_redundant
+msgid "返回"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_redundant:14
+msgid "**data1** -- Cleaned data"
+msgstr ""
+
+#: of transbigdata.traj.traj_clean_redundant
+msgid "返回类型"
+msgstr ""
+
