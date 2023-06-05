@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../source/gallery/index.rst:4
 msgid "Example gallery"
-msgstr "示例画廊"
+msgstr "示例"
 
 #: ../../source/gallery/index.rst:6
 msgid ""
