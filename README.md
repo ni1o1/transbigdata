@@ -327,7 +327,23 @@ See [This Example](https://github.com/ni1o1/transbigdata/blob/main/docs/source/g
 
 ## Citation information [![DOI](https://zenodo.org/badge/419559811.svg)](https://zenodo.org/badge/latestdoi/419559811) [![status](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b/status.svg)](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b)
 
-Please cite [this](https://doi.org/10.21105/joss.04021) when using `TransBigData` in your research. Citation information can be found at [CITATION.cff](https://github.com/ni1o1/transbigdata/blob/main/CITATION.cff).
+Please cite [this](https://doi.org/10.21105/joss.04021) when using `TransBigData` in your research. Citation information is as follows:
+
+```bibtex
+@article{Yu2022,
+  doi       = {10.21105/joss.04021},
+  url       = {https://doi.org/10.21105/joss.04021},
+  year      = {2022},
+  publisher = {The Open Journal},
+  volume    = {7},
+  number    = {71},
+  pages     = {4021},
+  author    = {Qing Yu and Jian Yuan},
+  title     = {TransBigData: A Python package for transportation spatio-temporal big data processing, analysis and visualization},
+  journal   = {Journal of Open Source Software}
+}
+```
+
 
 ## Introducing Video (In Chinese) [![bilibili](https://img.shields.io/badge/bilibili-%E5%90%8C%E6%B5%8E%E5%B0%8F%E6%97%AD%E5%AD%A6%E9%95%BF-green.svg)](https://space.bilibili.com/3051484)
 
