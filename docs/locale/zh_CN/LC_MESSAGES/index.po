@@ -8,14 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 14:57+0800\n"
-"PO-Revision-Date: 2023-06-05 20:54+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
+"PO-Revision-Date: 2023-06-06 09:51+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.12.1\n"
 "X-Generator: Poedit 3.3.1\n"
 
@@ -25,15 +26,19 @@ msgstr "安装"
 
 #: ../../source/index.rst:87
 msgid "Example"
-msgstr "例子"
+msgstr "示例"
 
 #: ../../source/index.rst:94 ../../source/index.rst:96
+msgid "Core Methods"
+msgstr "核心方法"
+
+#: ../../source/index.rst:104 ../../source/index.rst:106
 msgid "General Methods"
 msgstr "基础处理方法"
 
-#: ../../source/index.rst:114 ../../source/index.rst:116
+#: ../../source/index.rst:122 ../../source/index.rst:124
 msgid "Methods for specific data"
-msgstr "特定数据的方法"
+msgstr "特定数据处理方法"
 
 #: ../../source/index.rst:7
 msgid "TransBigData 为交通时空大数据而生"
@@ -45,38 +50,24 @@ msgstr "**主要功能**"
 
 #: ../../source/index.rst:15
 msgid ""
-"TransBigData is a Python package developed for transportation spatio-"
-"temporal big data processing and analysis. TransBigData provides fast "
-"and concise methods for processing common traffic spatio-temporal big "
-"data such as Taxi GPS data, bicycle sharing data and bus GPS data. It "
-"includes general methods such as rasterization, data quality analysis, "
-"data pre-processing, data set counting, trajectory analysis, GIS "
-"processing, map base map loading, coordinate and distance calculation, "
-"and data visualization."
+"TransBigData is a Python package developed for transportation spatio-temporal big data processing and analysis. TransBigData provides fast and concise methods for processing "
+"common traffic spatio-temporal big data such as Taxi GPS data, bicycle sharing data and bus GPS data. It includes general methods such as rasterization, data quality "
+"analysis, data pre-processing, data set counting, trajectory analysis, GIS processing, map base map loading, coordinate and distance calculation, and data visualization."
 msgstr ""
-"TransBigData是一个为交通时空大数据处理和分析而开发的Python包。"
-"TransBigData为处理常见的交通时空大数据（如出租车GPS数据、共享单车数据和公"
-"交车GPS数据）提供了快速而简洁的方法。它包括栅格化、数据质量分析、数据预处"
-"理、数据集计数、轨迹分析、GIS处理、地图底图加载、坐标和距离计算以及数据可"
-"视化等通用方法。"
+"TransBigData是一个为交通时空大数据处理和分析而开发的Python包。TransBigData为处理常见的交通时空大数据（如出租车GPS数据、共享单车数据和公交车GPS数据）提供了快速而简洁的方法。它"
+"包括栅格化、数据质量分析、数据预处理、数据集计数、轨迹分析、GIS处理、地图底图加载、坐标和距离计算以及数据可视化等通用方法。"
 
 #: ../../source/index.rst:17
 msgid "**Technical Features**"
 msgstr "**技术特点**"
 
 #: ../../source/index.rst:19
-msgid ""
-"Provides different processing methods for different stages of traffic "
-"spatio-temporal big data analysis."
+msgid "Provides different processing methods for different stages of traffic spatio-temporal big data analysis."
 msgstr "为交通时空大数据分析的不同阶段提供不同的处理方法。"
 
 #: ../../source/index.rst:20
-msgid ""
-"The code with TransBigData is clean, efficient, flexible, and easy to "
-"use, allowing complex data tasks to be achieved with concise code."
-msgstr ""
-"TransBigData的代码简洁、高效、灵活、易用，可以用简洁的代码实现复杂的数据"
-"任务。"
+msgid "The code with TransBigData is clean, efficient, flexible, and easy to use, allowing complex data tasks to be achieved with concise code."
+msgstr "TransBigData的代码简洁、高效、灵活、易用，可以用简洁的代码实现复杂的数据任务。"
 
 #: ../../source/index.rst:24
 msgid "Introduction"
@@ -87,30 +78,19 @@ msgid "Quick Start"
 msgstr "快速启动"
 
 #: ../../source/index.rst:30
-msgid ""
-"Before installing TransBigData, make sure that you have installed the "
-"geopandas package: https://geopandas.org/index.html"
-msgstr ""
-"在安装TransBigData之前，请确保你已经安装了geopandas软件包：https://"
-"geopandas.org/index.html"
+msgid "Before installing TransBigData, make sure that you have installed the geopandas package: https://geopandas.org/index.html"
+msgstr "在安装TransBigData之前，请确保你已经安装了geopandas软件包：https://geopandas.org/index.html"
 
 #: ../../source/index.rst:31
-msgid ""
-"If you already have geopandas installed, run the following code directly "
-"from the command prompt to install it"
+msgid "If you already have geopandas installed, run the following code directly from the command prompt to install it"
 msgstr "如果已安装 geopandas，请直接从命令提示符运行以下代码进行安装"
 
 #: ../../source/index.rst:37
-msgid ""
-"The following example shows how to use the TransBigData to quickly "
-"extract trip OD from taxi GPS data"
-msgstr ""
-"以下示例展示了如何使用 TransBigData 从出租车 GPS 数据中快速提取行程 OD"
+msgid "The following example shows how to use the TransBigData to quickly extract trip OD from taxi GPS data"
+msgstr "以下示例展示了如何使用 TransBigData 从出租车 GPS 数据中快速提取行程 OD"
 
 #: ../../source/index.rst:51
-msgid ""
-"Use the `tbd.taxigps_to_od` method and pass in the corresponding column "
-"name to extract the trip OD: ::"
+msgid "Use the `tbd.taxigps_to_od` method and pass in the corresponding column name to extract the trip OD: ::"
 msgstr "使用`tbd.taxigps_to_od`方法并传入相应的列名以提取行程 OD："
 
 #: ../../source/index.rst:61

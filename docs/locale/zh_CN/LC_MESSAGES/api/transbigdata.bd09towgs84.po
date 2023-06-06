@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:29+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -30,7 +30,7 @@ msgid "Convert coordinates from BD09 to WGS84"
 msgstr "将坐标从 BD09 转换为 WGS84"
 
 #: of transbigdata.coordinates.bd09towgs84
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.coordinates.bd09towgs84:4
@@ -42,7 +42,7 @@ msgid "Latitude"
 msgstr "纬度"
 
 #: of transbigdata.coordinates.bd09towgs84
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.coordinates.bd09towgs84:9
@@ -63,10 +63,10 @@ msgid "**lat** (*Series or number*) -- Latitude (Converted)"
 msgstr "**纬度** （*系列或数字*） -- 纬度（转换）"
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "Parameters"
 #~ msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:52+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -70,7 +70,7 @@ msgstr "从出租车数据中删除乘客携带状态的瞬时变化记录。这
 
 #: of transbigdata.taxigps.clean_taxi_status transbigdata.taxigps.taxigps_to_od
 #: transbigdata.taxigps.taxigps_traj_point
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.taxigps.clean_taxi_status:8
@@ -89,7 +89,7 @@ msgstr "可选，以秒为单位。如果上一条记录和下一条记录之间
 
 #: of transbigdata.taxigps.clean_taxi_status transbigdata.taxigps.taxigps_to_od
 #: transbigdata.taxigps.taxigps_traj_point
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.taxigps.clean_taxi_status:16
@@ -97,7 +97,7 @@ msgid "**data1** -- Cleaned data"
 msgstr "**data1** -- 清理后的数据"
 
 #: of transbigdata.taxigps.clean_taxi_status transbigdata.taxigps.taxigps_to_od
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #: of transbigdata.taxigps.taxigps_to_od:4
@@ -158,13 +158,13 @@ msgstr "**data_idle** (*DataFrame*) -- 空闲行程的轨迹点"
 #~ msgstr ""
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid ""
 #~ ":obj:`clean_taxi_status <transbigdata.clean_taxi_status>`\\ "

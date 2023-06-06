@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 15:59+0800\n"
-"PO-Revision-Date: 2023-06-05 16:56+0800\n"
+"PO-Revision-Date: 2023-06-06 09:27+0800\n"
 "Last-Translator: \n"
 "Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../source/gallery/Example 7-Modeling for network subway topology.ipynb:9
 msgid "7 Modeling for subway network topology"
-msgstr "7 地铁网络拓扑建模"
+msgstr "7 地铁网络数据获取与拓扑建模"
 
 #: ../../source/gallery/Example 7-Modeling for network subway topology.ipynb:31
 msgid ""

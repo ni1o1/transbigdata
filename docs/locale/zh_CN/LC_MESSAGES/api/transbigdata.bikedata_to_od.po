@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:30+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -33,7 +33,7 @@ msgid ""
 msgstr "输入共享单车订单数据（仅在锁打开和关闭时生成数据），指定列名称，并从中提取乘车和停车信息"
 
 #: of transbigdata.bikedata.bikedata_to_od
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.bikedata.bikedata_to_od:6
@@ -62,7 +62,7 @@ msgstr ""
 "00：00：00']。如果通过，则考虑骑行和停车情况（从观察期开始到自行车首次出现）和（从自行车最后一次出现到观察期结束）。"
 
 #: of transbigdata.bikedata.bikedata_to_od
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.bikedata.bikedata_to_od:19
@@ -83,10 +83,10 @@ msgid "**stop_data** (*DataFrame*) -- Parking data"
 msgstr "**stop_data** （*数据帧*） -- 停车数据"
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "Parameters"
 #~ msgstr ""

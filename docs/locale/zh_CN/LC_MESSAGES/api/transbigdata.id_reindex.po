@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_CN\n"
@@ -29,7 +29,7 @@ msgid "Renumber the ID columns of the data"
 msgstr ""
 
 #: of transbigdata.preprocess.id_reindex
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.preprocess.id_reindex:4
@@ -69,7 +69,7 @@ msgid "To desampling the data"
 msgstr ""
 
 #: of transbigdata.preprocess.id_reindex
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.preprocess.id_reindex:24
@@ -77,7 +77,7 @@ msgid "**data1** -- Renumbered data"
 msgstr ""
 
 #: of transbigdata.preprocess.id_reindex
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #~ msgid "参数"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:48+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -71,7 +71,7 @@ msgstr "从mapbox等时线获取等时线"
 #: of transbigdata.crawler.get_isochrone_amap
 #: transbigdata.crawler.get_isochrone_mapbox transbigdata.crawler.getadmin
 #: transbigdata.crawler.getbusdata
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.crawler.getbusdata:5
@@ -95,7 +95,7 @@ msgstr "取数据超时"
 #: of transbigdata.crawler.get_isochrone_amap
 #: transbigdata.crawler.get_isochrone_mapbox transbigdata.crawler.getadmin
 #: transbigdata.crawler.getbusdata
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.crawler.getbusdata:14
@@ -188,7 +188,7 @@ msgstr "**isochrone** -- 等时线GeoDataFrame(WGS84)"
 
 #: of transbigdata.crawler.get_isochrone_amap
 #: transbigdata.crawler.get_isochrone_mapbox
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #: of transbigdata.crawler.get_isochrone_mapbox:10
@@ -221,13 +221,13 @@ msgstr "出行方式，应该是`driving`, `walking` or `cycling`"
 #~ msgstr ""
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid ""
 #~ ":obj:`getbusdata <transbigdata.getbusdata>`\\ \\(city\\,"

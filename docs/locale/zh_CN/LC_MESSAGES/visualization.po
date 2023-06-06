@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:53+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -83,7 +83,7 @@ msgstr "数据点分布可视化"
 #: of transbigdata.visualization.visualization_data
 #: transbigdata.visualization.visualization_od
 #: transbigdata.visualization.visualization_trip
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.visualization.visualization_data:5
@@ -121,7 +121,7 @@ msgstr "地图类型，‘点’或‘热图’"
 #: of transbigdata.visualization.visualization_data
 #: transbigdata.visualization.visualization_od
 #: transbigdata.visualization.visualization_trip
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.visualization.visualization_data:21
@@ -133,7 +133,7 @@ msgstr "**vmap** -- keplergl 提供的可视化"
 #: of transbigdata.visualization.visualization_data
 #: transbigdata.visualization.visualization_od
 #: transbigdata.visualization.visualization_trip
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #: ../../source/visualization.rst:36
@@ -204,13 +204,13 @@ msgstr "最小OD数，OD数少的不显示"
 #~ msgstr ""
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid ""
 #~ ":obj:`visualization_data <transbigdata.visualization_data>`\\"

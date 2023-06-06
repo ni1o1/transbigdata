@@ -9,67 +9,45 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 20:53+0800\n"
-"PO-Revision-Date: 2023-06-05 16:55+0800\n"
+"PO-Revision-Date: 2023-06-06 09:25+0800\n"
 "Last-Translator: \n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:9 processing
 #: using
 msgid "3 Trajectory processing using TransBigData"
-msgstr "3 使用 TransBigData 进行轨迹处理"
+msgstr "3 车辆轨迹数据处理"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:20 processing
 #: using
-msgid ""
-"For vehicle trajectory data, the TransBigData library provides a "
-"comprehensive set of trajectory data processing methods starting from "
-"version 0.5.0 and above. These methods include preprocessing and drift "
-"correction of trajectory data, segmentation of stops and trips, grid-"
-"based representation, visualization, and more. This article will "
-"introduce how to use the TransBigData library for processing trajectory "
-"data."
-msgstr ""
-"对于车辆轨迹数据，TransBigData 库提供了一套从 0.5.0 "
-"及以上版本开始的全面的轨迹数据处理方法。这些方法包括轨迹数据的预处理和漂移校正、停靠点和行程的分割、基于格网的表示、可视化等。本文将介绍如何使用TransBigData库来处理轨迹数据。"
+msgid "For vehicle trajectory data, the TransBigData library provides a comprehensive set of trajectory data processing methods starting from version 0.5.0 and above. These methods include preprocessing and drift correction of trajectory data, segmentation of stops and trips, grid-based representation, visualization, and more. This article will introduce how to use the TransBigData library for processing trajectory data."
+msgstr "对于车辆轨迹数据，TransBigData 库 0.5.0 及以上版本提供了一套轨迹数据处理方法。这些方法包括轨迹数据的预处理和漂移校正、停靠点和行程的分割、基于格网的表示、可视化等。本文将介绍如何使用TransBigData库来处理轨迹数据。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:71 processing
 #: using
 msgid "Trajectory Quality"
-msgstr "轨迹质量"
+msgstr "轨迹数据质量"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:73 processing
 #: using
-msgid ""
-"First, we read the data and observe the basic information to check for "
-"any missing values. Using the built-in methods of a DataFrame, we can "
-"easily view the basic information of the data, including data types, "
-"number of fields, number of rows, and the presence of missing values. The"
-" code is as follows:"
+msgid "First, we read the data and observe the basic information to check for any missing values. Using the built-in methods of a DataFrame, we can easily view the basic information of the data, including data types, number of fields, number of rows, and the presence of missing values. The code is as follows:"
 msgstr "首先，我们读取数据并观察基本信息以检查是否有任何缺失值。使用DataFrame的内置方法，我们可以轻松查看数据的基本信息，包括数据类型，字段数，行数以及是否存在缺失值。代码如下："
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:375 processing
 #: using
-#, fuzzy
-msgid ""
-"In it, the data types of the data fields, the number of non-null values, "
-"and the memory usage are listed. In the \"Non-Null\" column, the number "
-"of non-null values for each field is listed. If the number of non-null "
-"values for a field is less than the total number of rows, it indicates "
-"the presence of missing values in that field."
+msgid "In it, the data types of the data fields, the number of non-null values, and the memory usage are listed. In the \"Non-Null\" column, the number of non-null values for each field is listed. If the number of non-null values for a field is less than the total number of rows, it indicates the presence of missing values in that field."
 msgstr "其中列出了数据字段的数据类型、非空值的数量和内存使用情况。在“非空”列中，列出了每个字段的非空值的数量。如果字段的非空值数小于总行数，则表示该字段中存在缺失值。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:386 processing
 #: using
-msgid ""
-"Next, we will use TransBigData to generate a data quality report and "
-"observe the number of vehicles in the data, the observation time period, "
-"and the sampling interval:"
+msgid "Next, we will use TransBigData to generate a data quality report and observe the number of vehicles in the data, the observation time period, and the sampling interval:"
 msgstr "接下来，我们将使用 TransBigData 生成数据质量报告，并观察数据中的车辆数量、观察时间段和采样间隔："
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:499 processing
@@ -79,12 +57,7 @@ msgstr "冗余消除"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:501 processing
 #: using
-msgid ""
-"Redundancy elimination is an important step in cleaning trajectory data. "
-"It reduces the data volume and improves data processing efficiency "
-"without affecting the information contained in the data. In practical "
-"trajectory data processing, you may encounter the following two types of "
-"redundancy:"
+msgid "Redundancy elimination is an important step in cleaning trajectory data. It reduces the data volume and improves data processing efficiency without affecting the information contained in the data. In practical trajectory data processing, you may encounter the following two types of redundancy:"
 msgstr "消除冗余是清理轨迹数据的重要步骤。它减少了数据量，提高了数据处理效率，而不会影响数据中包含的信息。在实际的轨迹数据处理中，您可能会遇到以下两种类型的冗余："
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:503 processing
@@ -94,21 +67,8 @@ msgstr "**同一时刻重复数据的冗余**："
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:505 processing
 #: using
-msgid ""
-"In a trajectory dataset, there may be multiple trajectory data entries "
-"for the same vehicle at the same moment. This can happen when the "
-"sampling interval is too short compared to the precision of the time "
-"field in the dataset. For example, if the sampling interval is 1 second, "
-"but the time field in the dataset has a precision of 1 minute, it can "
-"result in multiple trajectory data entries for the same vehicle within "
-"the same minute. Not removing these redundant data can cause difficulties"
-" in subsequent processing. The method to eliminate this redundancy is "
-"straightforward: keep only one trajectory data entry for the same vehicle"
-" at the same moment."
-msgstr ""
-"在轨迹数据集中，同一车辆在同一时刻可能有多个轨迹数据条目。当采样间隔与数据集中时间字段的精度相比太短时，可能会发生这种情况。例如，如果采样间隔为 "
-"1 秒，但数据集中的时间字段的精度为 1 "
-"分钟，则可能导致同一车辆在同一分钟内出现多个轨迹数据条目。不删除这些冗余数据可能会导致后续处理困难。消除这种冗余的方法很简单：在同一时刻只保留同一车辆的一个轨迹数据条目。"
+msgid "In a trajectory dataset, there may be multiple trajectory data entries for the same vehicle at the same moment. This can happen when the sampling interval is too short compared to the precision of the time field in the dataset. For example, if the sampling interval is 1 second, but the time field in the dataset has a precision of 1 minute, it can result in multiple trajectory data entries for the same vehicle within the same minute. Not removing these redundant data can cause difficulties in subsequent processing. The method to eliminate this redundancy is straightforward: keep only one trajectory data entry for the same vehicle at the same moment."
+msgstr "在轨迹数据集中，同一车辆在同一时刻可能有多个轨迹数据条目。当采样间隔与数据集中时间字段的精度相比太短时，可能会发生这种情况。例如，如果采样间隔为 1 秒，但数据集中的时间字段的精度为 1 分钟，则可能导致同一车辆在同一分钟内出现多个轨迹数据条目。不删除这些冗余数据可能会导致后续处理困难。消除这种冗余的方法很简单：在同一时刻只保留同一车辆的一个轨迹数据条目。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:508 processing
 #: using
@@ -117,58 +77,22 @@ msgstr "**车辆停止的冗余**："
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:510 processing
 #: using
-msgid ""
-"In vehicle trajectory data, the sampling interval is usually very short, "
-"such as collecting data every few seconds. This means that data is "
-"continuously generated for vehicles, whether they are moving or "
-"stationary. In practical applications, the focus is often on the "
-"trajectory of vehicles during trips, rather than during stops. For each "
-"instance of a vehicle stopping, we only need to know the start and end "
-"times of the stop. The data generated during the middle part of the stop,"
-" at the same location, is redundant and can be removed to reduce the "
-"overall data size. For a sequence of consecutive n data entries (n>=3) "
-"with the same location, we only need to keep the first and last entries, "
-"as the intermediate data is redundant. In the code, it is sufficient to "
-"compare the vehicle ID and the latitude-longitude of each data entry with"
-" the previous and next trajectory entries. If they are the same, the data"
-" can be removed."
-msgstr ""
-"在车辆轨迹数据中，采样间隔通常很短，例如每隔几秒钟收集一次数据。这意味着无论车辆是移动还是静止，都会持续生成数据。在实际应用中，重点通常是车辆在行驶期间的轨迹，而不是在停车期间。对于车辆停止的每个实例，我们只需要知道停止的开始和结束时间。在停靠点中间部分（位于同一位置）生成的数据是冗余的，可以将其删除以减小整体数据大小。对于具有相同位置的连续"
-" n 个数据条目序列 （n>=3），我们只需要保留第一个和最后一个条目，因为中间数据是多余的。在代码中，将每个数据条目的车辆 ID "
-"和经纬度与上一个和下一个轨迹条目进行比较就足够了。如果它们相同，则可以删除数据。"
+msgid "In vehicle trajectory data, the sampling interval is usually very short, such as collecting data every few seconds. This means that data is continuously generated for vehicles, whether they are moving or stationary. In practical applications, the focus is often on the trajectory of vehicles during trips, rather than during stops. For each instance of a vehicle stopping, we only need to know the start and end times of the stop. The data generated during the middle part of the stop, at the same location, is redundant and can be removed to reduce the overall data size. For a sequence of consecutive n data entries (n>=3) with the same location, we only need to keep the first and last entries, as the intermediate data is redundant. In the code, it is sufficient to compare the vehicle ID and the latitude-longitude of each data entry with the previous and next trajectory entries. If they are the same, the data can be removed."
+msgstr "在车辆轨迹数据中，采样间隔通常很短，例如每隔几秒钟收集一次数据。这意味着无论车辆是移动还是静止，都会持续生成数据。在实际应用中，重点通常是车辆在行驶期间的轨迹，而不是在停车期间。对于车辆停止的每个实例，我们只需要知道停止的开始和结束时间。在停靠点中间部分（位于同一位置）生成的数据是冗余的，可以将其删除以减小整体数据大小。对于具有相同位置的连续 n 个数据条目序列 （n>=3），我们只需要保留第一个和最后一个条目，因为中间数据是多余的。在代码中，将每个数据条目的车辆 ID 和经纬度与上一个和下一个轨迹条目进行比较就足够了。如果它们相同，则可以删除数据。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:513 processing
 #: using
-#, fuzzy
-msgid ""
-"However, the redundancy elimination method mentioned above for vehicle "
-"stops does not consider the information carried by fields other than the "
-"vehicle ID, time, and latitude-longitude. For example, in the case of "
-"taxi vehicles, passengers may board the taxi during a stop, changing the "
-"status from \"vacant\" to \"occupied.\" In such cases, this information "
-"needs to be preserved."
+msgid "However, the redundancy elimination method mentioned above for vehicle stops does not consider the information carried by fields other than the vehicle ID, time, and latitude-longitude. For example, in the case of taxi vehicles, passengers may board the taxi during a stop, changing the status from \"vacant\" to \"occupied.\" In such cases, this information needs to be preserved."
 msgstr "但是，上述车辆停靠点的冗余消除方法不考虑车辆ID，时间和经纬度以外的字段所携带的信息。例如，对于出租车车辆，乘客可以在停车期间登上出租车，将状态从“空置”更改为“占用”。在这种情况下，需要保留此信息。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:515 processing
 #: using
-msgid ""
-"TransBigData provides a function, ``tbd.traj_clean_redundant()``, for "
-"trajectory data redundancy elimination. It can handle the mentioned "
-"redundancy situations and can also detect redundancy in fields other than"
-" the vehicle ID and latitude-longitude. The code is as follows:"
+msgid "TransBigData provides a function, ``tbd.traj_clean_redundant()``, for trajectory data redundancy elimination. It can handle the mentioned redundancy situations and can also detect redundancy in fields other than the vehicle ID and latitude-longitude. The code is as follows:"
 msgstr "TransBigData提供了一个功能“tbd.traj_clean_redundant（）”，用于轨迹数据冗余消除。它可以处理上述冗余情况，还可以检测车辆ID和经纬度以外的字段中的冗余。代码如下："
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:604 processing
 #: using
-msgid ""
-"The code snippet performs data redundancy removal to reduce the data size"
-" and improve computational efficiency. The ``traj_clean_redundant`` "
-"function from the ``tbd`` module is used for this purpose. The function "
-"takes the ``data`` variable as input and specifies the columns (``col``) "
-"to consider for redundancy removal, including the vehicle ID, time, "
-"longitude, latitude, and optionally the speed field. The result is stored"
-" back in the ``data`` variable, and the length of the updated data is "
-"outputted."
+msgid "The code snippet performs data redundancy removal to reduce the data size and improve computational efficiency. The ``traj_clean_redundant`` function from the ``tbd`` module is used for this purpose. The function takes the ``data`` variable as input and specifies the columns (``col``) to consider for redundancy removal, including the vehicle ID, time, longitude, latitude, and optionally the speed field. The result is stored back in the ``data`` variable, and the length of the updated data is outputted."
 msgstr "代码片段执行数据冗余删除，以减小数据大小并提高计算效率。“tbd”模块中的“traj_clean_redundant”函数用于此目的。该函数将“data”变量作为输入，并指定要考虑删除冗余的列（“col”），包括车辆ID，时间，经度，纬度和可选的速度字段。结果被存储回“data”变量中，并输出更新数据的长度。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:617 processing
@@ -178,109 +102,52 @@ msgstr "漂移清理"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:619 processing
 #: using
-msgid ""
-"In vehicle trajectory data, deviations and errors may occur between the "
-"collected vehicle trajectory data and the actual situations due to "
-"factors such as errors in data collection devices, environmental "
-"interferences, device malfunctions, unstable GPS signals, insufficient "
-"satellite coverage, and signal obstructions. This results in a "
-"discrepancy between the actual positions and the collected positions of "
-"the trajectory data, known as data drift in vehicle trajectory data. In "
-"the data, data drift is manifested by significant distances between the "
-"trajectory data points and the actual positions, often accompanied by "
-"sudden jumps. This drift can affect subsequent spatial analysis and "
-"spatial statistics, requiring the cleaning of vehicle trajectory data to "
-"ensure data accuracy and usability."
+msgid "In vehicle trajectory data, deviations and errors may occur between the collected vehicle trajectory data and the actual situations due to factors such as errors in data collection devices, environmental interferences, device malfunctions, unstable GPS signals, insufficient satellite coverage, and signal obstructions. This results in a discrepancy between the actual positions and the collected positions of the trajectory data, known as data drift in vehicle trajectory data. In the data, data drift is manifested by significant distances between the trajectory data points and the actual positions, often accompanied by sudden jumps. This drift can affect subsequent spatial analysis and spatial statistics, requiring the cleaning of vehicle trajectory data to ensure data accuracy and usability."
 msgstr "在车辆轨迹数据中，由于数据采集设备错误、环境干扰、设备故障、GPS信号不稳定、卫星覆盖不足、信号障碍等因素，采集的车辆轨迹数据与实际情况之间可能会出现偏差和误差。这会导致轨迹数据的实际位置与收集的位置之间存在差异，这在车辆轨迹数据中称为数据漂移。在数据中，数据漂移表现为轨迹数据点与实际位置之间的距离很大，通常伴随着突然的跳跃。这种漂移会影响后续的空间分析和空间统计，需要清理车辆轨迹数据以确保数据的准确性和可用性。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:622 processing
 #: using
-msgid ""
-"To clean vehicle trajectory data for drift, one approach is to remove "
-"trajectory data points outside the defined study area. The study area can"
-" be defined in two ways: either by specifying the bottom-left and top-"
-"right coordinates to determine the boundary range (bounds) or by using a "
-"geographic information file (geojson or shapefile) that represents the "
-"study area."
-msgstr ""
-"要清除车辆轨迹数据以查找漂移，一种方法是移除定义研究区域之外的轨迹数据点。可以通过两种方式定义研究区域：通过指定左下角和右上角坐标来确定边界范围（边界），或者使用表示研究区域的地理信息文件（geojson"
-" 或 shapefile）。"
+msgid "To clean vehicle trajectory data for drift, one approach is to remove trajectory data points outside the defined study area. The study area can be defined in two ways: either by specifying the bottom-left and top-right coordinates to determine the boundary range (bounds) or by using a geographic information file (geojson or shapefile) that represents the study area."
+msgstr "要清除车辆轨迹数据以查找漂移，一种方法是移除定义研究区域之外的轨迹数据点。可以通过两种方式定义研究区域：通过指定左下角和右上角坐标来确定边界范围（边界），或者使用表示研究区域的地理信息文件（geojson 或 shapefile）。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:624 processing
 #: using
-msgid ""
-"To remove drift data using a geojson or shapefile, you first need to read"
-" the geojson or shapefile as a ``GeoDataFrame`` type in GeoPandas. Then, "
-"you can use the ``intersects()`` method provided by GeoPandas to "
-"determine if the trajectory data is within the study area. However, this "
-"method requires performing spatial geometry matching for each trajectory "
-"data point, which can be time-consuming for large datasets. The "
-"``tbd.clean_outofshape()`` method provided in the TransBigData package "
-"offers a more efficient approach. It first maps the trajectory data to "
-"the corresponding grid using built-in grid partitioning methods and then "
-"performs spatial matching based on the grid, significantly improving the "
-"cleaning efficiency."
-msgstr ""
-"要使用 geojson 或 shapefile 删除漂移数据，首先需要在 GeoPandas 中将 geojson 或 shapefile "
-"读取为“GeoDataFrame”类型。然后，您可以使用 GeoPandas "
-"提供的“intersects（）”方法来确定轨迹数据是否在研究区域内。但是，此方法需要对每个轨迹数据点执行空间几何匹配，这对于大型数据集可能非常耗时。TransBigData"
-" "
-"包中提供的“tbd.clean_outofshape（）”方法提供了一种更有效的方法。它首先使用内置的网格分区方法将轨迹数据映射到相应的网格，然后基于网格进行空间匹配，显着提高清理效率。"
+msgid "To remove drift data using a geojson or shapefile, you first need to read the geojson or shapefile as a ``GeoDataFrame`` type in GeoPandas. Then, you can use the ``intersects()`` method provided by GeoPandas to determine if the trajectory data is within the study area. However, this method requires performing spatial geometry matching for each trajectory data point, which can be time-consuming for large datasets. The ``tbd.clean_outofshape()`` method provided in the TransBigData package offers a more efficient approach. It first maps the trajectory data to the corresponding grid using built-in grid partitioning methods and then performs spatial matching based on the grid, significantly improving the cleaning efficiency."
+msgstr "要使用 geojson 或 shapefile 删除漂移数据，首先需要在 GeoPandas 中将 geojson 或 shapefile 读取为“GeoDataFrame”类型。然后，您可以使用 GeoPandas 提供的“intersects（）”方法来确定轨迹数据是否在研究区域内。但是，此方法需要对每个轨迹数据点执行空间几何匹配，这对于大型数据集可能非常耗时。TransBigData 包中提供的“tbd.clean_outofshape（）”方法提供了一种更有效的方法。它首先使用内置的网格分区方法将轨迹数据映射到相应的网格，然后基于网格进行空间匹配，显着提高清理效率。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:627 processing
 #: using
-#, fuzzy
-msgid ""
-"Here is an example code snippet using TransBigData's "
-"``clean_outofshape()`` method for data drift cleaning:"
+msgid "Here is an example code snippet using TransBigData's ``clean_outofshape()`` method for data drift cleaning:"
 msgstr "下面是一个使用TransBigData的“clean_outofshape（）”方法进行数据偏移清理的示例代码片段："
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:723 processing
 #: using
-msgid ""
-"Cleaning trajectory drift within the study area requires assessing and "
-"cleaning based on the continuous changes in trajectories. There are three"
-" common approaches for cleaning:"
+msgid "Cleaning trajectory drift within the study area requires assessing and cleaning based on the continuous changes in trajectories. There are three common approaches for cleaning:"
 msgstr "要清理研究区域内的轨迹漂移，需要根据轨迹的连续变化进行评估和清理。有三种常见的清洁方法："
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:725 processing
 #: using
-msgid ""
-"Velocity threshold method: If the velocity between the current trajectory"
-" data and the previous and subsequent trajectories exceeds a threshold, "
-"it is considered drift."
+msgid "Velocity threshold method: If the velocity between the current trajectory data and the previous and subsequent trajectories exceeds a threshold, it is considered drift."
 msgstr "速度阈值法：如果当前轨迹数据与之前和后续轨迹之间的速度超过阈值，则视为漂移。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:726 processing
 #: using
-msgid ""
-"Distance threshold method: If the distance between the current trajectory"
-" data and the previous and subsequent trajectories exceeds a threshold, "
-"it is considered drift."
+msgid "Distance threshold method: If the distance between the current trajectory data and the previous and subsequent trajectories exceeds a threshold, it is considered drift."
 msgstr "距离阈值法：如果当前轨迹数据与上一个和后续轨迹之间的距离超过阈值，则视为漂移。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:727 processing
 #: using
-msgid ""
-"Angle threshold method: If the angle formed by the previous, current, and"
-" subsequent trajectories is smaller than a threshold, it is considered "
-"drift."
+msgid "Angle threshold method: If the angle formed by the previous, current, and subsequent trajectories is smaller than a threshold, it is considered drift."
 msgstr "角度阈值法：如果前一个、当前和后续轨迹形成的角度小于阈值，则视为漂移。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:729 processing
 #: using
-msgid ""
-"In TransBigData, the ``tbd.traj_clean_drift()`` method is provided to "
-"clean trajectory data for multiple vehicles. This method integrates "
-"distance, velocity, and angle thresholds into a single function."
+msgid "In TransBigData, the ``tbd.traj_clean_drift()`` method is provided to clean trajectory data for multiple vehicles. This method integrates distance, velocity, and angle thresholds into a single function."
 msgstr "在TransBigData中，提供了“tbd.traj_clean_drift（）”方法来清理多个车辆的轨迹数据。此方法将距离、速度和角度阈值集成到单个函数中。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:731 processing
 #: using
-#, fuzzy
-msgid ""
-"Here is an example code snippet using TransBigData's "
-"``traj_clean_drift()`` method:"
+msgid "Here is an example code snippet using TransBigData's ``traj_clean_drift()`` method:"
 msgstr "下面是使用TransBigData的“traj_clean_drift（）”方法的示例代码片段："
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:787 processing
@@ -290,85 +157,42 @@ msgstr "停止和行程提取"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:789 processing
 #: using
-#, fuzzy
-msgid ""
-"In long-term continuous observations of vehicle trajectory data, a common"
-" requirement is to extract the stops and trips from the trajectory data. "
-"The stops can be analyzed to determine the duration and location of the "
-"vehicle's parking, while the trips can be further analyzed to extract "
-"information such as the origin and destination of each trip, the travel "
-"path, travel duration, travel distance, and travel speed. In this "
-"section, we will explain how to identify stops and trips from vehicle "
-"trajectories, extract the trajectory information for each trip, and "
-"generate trajectory lines."
+msgid "In long-term continuous observations of vehicle trajectory data, a common requirement is to extract the stops and trips from the trajectory data. The stops can be analyzed to determine the duration and location of the vehicle's parking, while the trips can be further analyzed to extract information such as the origin and destination of each trip, the travel path, travel duration, travel distance, and travel speed. In this section, we will explain how to identify stops and trips from vehicle trajectories, extract the trajectory information for each trip, and generate trajectory lines."
 msgstr "在车辆轨迹数据的长期连续观测中，常见的要求是从轨迹数据中提取停靠点和行程。可以分析停靠点以确定车辆停车的持续时间和位置，同时可以进一步分析行程以提取信息，例如每次行程的起点和目的地、行驶路径、行驶持续时间、行驶距离和行驶速度。在本节中，我们将解释如何从车辆轨迹中识别停靠点和行程，提取每个行程的轨迹信息，并生成轨迹线。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:792 processing
 #: using
-msgid ""
-"In vehicle trajectory data, stops and trips are typically identified "
-"using a time threshold method. The approach is as follows: to avoid "
-"fluctuations in the trajectory data, we need to predefine a grid in the "
-"geographical space. If the duration between two consecutive data points "
-"exceeds our set threshold (usually 30 minutes), we consider it as a stop."
-" The time period between two stops is considered a trip, as shown in the "
-"figure below."
-msgstr ""
-"在车辆轨迹数据中，通常使用时间阈值方法标识停靠点和行程。方法如下：为了避免轨迹数据的波动，我们需要在地理空间中预定义一个网格。如果两个连续数据点之间的持续时间超过我们设定的阈值（通常为"
-" 30 分钟），我们将其视为止损。两个停靠点之间的时间段被视为一个行程，如下图所示。"
+msgid "In vehicle trajectory data, stops and trips are typically identified using a time threshold method. The approach is as follows: to avoid fluctuations in the trajectory data, we need to predefine a grid in the geographical space. If the duration between two consecutive data points exceeds our set threshold (usually 30 minutes), we consider it as a stop. The time period between two stops is considered a trip, as shown in the figure below."
+msgstr "在车辆轨迹数据中，通常使用时间阈值方法标识停靠点和行程。方法如下：为了避免轨迹数据的波动，我们需要在地理空间中预定义一个网格。如果两个连续数据点之间的持续时间超过我们设定的阈值（通常为 30 分钟），我们将其视为止损。两个停靠点之间的时间段被视为一个行程，如下图所示。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:-1 processing
 #: using
-#, fuzzy
 msgid "StopsandTrips"
-msgstr "停止和行程提取"
+msgstr "停留和出行提取"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:797 processing
 #: using
-msgid ""
-"After cleaning the trajectory data, we need to define a grid coordinate "
-"system and convert the trajectory data into grid-based representation to "
-"identify stops and trips."
+msgid "After cleaning the trajectory data, we need to define a grid coordinate system and convert the trajectory data into grid-based representation to identify stops and trips."
 msgstr "清理轨迹数据后，我们需要定义一个格网坐标系，并将轨迹数据转换为基于格网的表示，以识别停靠点和行程。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:864 processing
 #: using
-msgid ""
-"The identification of stops and trips has been provided in the "
-"TransBigData package through the ``tbd.traj_stay_move()`` function. Here "
-"is the code:"
+msgid "The identification of stops and trips has been provided in the TransBigData package through the ``tbd.traj_stay_move()`` function. Here is the code:"
 msgstr "TransBigData包中通过“tbd.traj_stay_move（）”功能提供了停靠点和行程的标识。这是代码："
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:912 processing
 #: using
-msgid ""
-"In the code, ``data`` represents the cleaned trajectory data. The "
-"``traj_stay_move()`` function is used to identify stops and trips based "
-"on the specified stop threshold. It returns two outputs: ``stops`` and "
-"``trips``, which contain the identified stops and trips, respectively. "
-"You can utilize these data for further analysis."
+msgid "In the code, ``data`` represents the cleaned trajectory data. The ``traj_stay_move()`` function is used to identify stops and trips based on the specified stop threshold. It returns two outputs: ``stops`` and ``trips``, which contain the identified stops and trips, respectively. You can utilize these data for further analysis."
 msgstr "在代码中，“data”表示清理后的轨迹数据。“traj_stay_move（）”函数用于根据指定的停靠点阈值识别停靠点和行程。它返回两个输出：“停止”和“行程”，分别包含标识的停靠点和行程。您可以利用这些数据进行进一步分析。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:914 processing
 #: using
-msgid ""
-"Note: The ``tbd.traj_stay_move()`` function does not remove trips with a "
-"duration of 0. This is because some trajectory data may have long "
-"sampling intervals, which may not capture the travel process between two "
-"stops. As a result, the calculated duration for those trips would be 0."
-msgstr ""
-"注意：“tbd.traj_stay_move（）”函数不会删除持续时间为 0 "
-"的行程。这是因为某些轨迹数据可能具有较长的采样间隔，可能无法捕获两个停靠点之间的行驶过程。因此，这些行程的计算持续时间将为 0。"
+msgid "Note: The ``tbd.traj_stay_move()`` function does not remove trips with a duration of 0. This is because some trajectory data may have long sampling intervals, which may not capture the travel process between two stops. As a result, the calculated duration for those trips would be 0."
+msgstr "注意：“tbd.traj_stay_move（）”函数不会删除持续时间为 0 的行程。这是因为某些轨迹数据可能具有较长的采样间隔，可能无法捕获两个停靠点之间的行驶过程。因此，这些行程的计算持续时间将为 0。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:1594 processing
 #: using
-msgid ""
-"Based on the stops and trips information, you can slice the trajectory "
-"data to extract the trajectory points during stops and trips. Since you "
-"have already performed redundancy elimination earlier, the redundant "
-"trajectory points during stops have been removed. As a result, the "
-"trajectory data during stops will have significantly fewer data points "
-"compared to the trajectory data during trips."
+msgid "Based on the stops and trips information, you can slice the trajectory data to extract the trajectory points during stops and trips. Since you have already performed redundancy elimination earlier, the redundant trajectory points during stops have been removed. As a result, the trajectory data during stops will have significantly fewer data points compared to the trajectory data during trips."
 msgstr "根据停靠点和行程信息，您可以对轨迹数据进行切片，以提取停靠点和行程期间的轨迹点。由于您之前已执行冗余消除，因此停靠点期间的冗余轨迹点已被移除。因此，与行程期间的轨迹数据相比，停靠点期间的轨迹数据将具有明显更少的数据点。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:1606 processing
@@ -378,70 +202,33 @@ msgstr "轨迹切片"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:1617 processing
 #: using
-msgid ""
-"By the preceding code, parking and travel information has been "
-"successfully extracted from the data. However, in the obtained travel "
-"information, only the time, latitude, and longitude information of the "
-"starting and ending points of each trip are included, without the travel "
-"trajectory information. In order to further analyze the travel "
-"trajectories of vehicles, it is necessary to extract the trajectory data "
-"from the time periods of each trip, that is, slice the trajectory dataset"
-" based on the travel information. In the previously calculated travel "
-"information, each travel record has a travel ID, start time, and end time"
-" columns. The result of trajectory slicing is to extract the trajectory "
-"points during the trip and assign a travel ID label to each trajectory "
-"point."
-msgstr ""
-"通过上述代码，已成功从数据中提取停车和旅行信息。但是，在获取的行程信息中，仅包含每次行程起点和终点的时间、纬度、经度信息，而不包含行程轨迹信息。为了进一步分析车辆的行驶轨迹，需要从每次行程的时间段中提取轨迹数据，即根据行驶信息对轨迹数据集进行切片。在先前计算的旅行信息中，每个旅行记录都有一个旅行"
-" ID、开始时间和结束时间列。轨迹切片的结果是提取行程中的轨迹点，并为每个轨迹点分配一个行程 ID 标签。"
+msgid "By the preceding code, parking and travel information has been successfully extracted from the data. However, in the obtained travel information, only the time, latitude, and longitude information of the starting and ending points of each trip are included, without the travel trajectory information. In order to further analyze the travel trajectories of vehicles, it is necessary to extract the trajectory data from the time periods of each trip, that is, slice the trajectory dataset based on the travel information. In the previously calculated travel information, each travel record has a travel ID, start time, and end time columns. The result of trajectory slicing is to extract the trajectory points during the trip and assign a travel ID label to each trajectory point."
+msgstr "通过上述代码，已成功从数据中提取停车和旅行信息。但是，在获取的行程信息中，仅包含每次行程起点和终点的时间、纬度、经度信息，而不包含行程轨迹信息。为了进一步分析车辆的行驶轨迹，需要从每次行程的时间段中提取轨迹数据，即根据行驶信息对轨迹数据集进行切片。在先前计算的旅行信息中，每个旅行记录都有一个旅行 ID、开始时间和结束时间列。轨迹切片的结果是提取行程中的轨迹点，并为每个轨迹点分配一个行程 ID 标签。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:1620 processing
 #: using
-msgid ""
-"The idea of trajectory slicing is illustrated in the diagram below. A "
-"flag column is created for the trajectory data to mark whether each row "
-"is within the desired time period for slicing. Then, each travel record "
-"in the travel data is decomposed into a start time record (flag label of "
-"1) and an end time record (flag label of -1), which are inserted into the"
-" trajectory data. Next, the flag column is grouped and summed by vehicle "
-"to obtain the flag1 column. In the result, the rows where the flag1 "
-"column value is 1 (travel) and the flag column value is 0 (non-"
-"temporarily inserted data) are the desired trajectory data."
-msgstr ""
-"下图说明了轨迹切片的概念。将为轨迹数据创建一个标志列，以标记每行是否在所需的切片时间段内。然后，将行程数据中的每个行程记录分解为开始时间记录（标志标签为"
-" 1）和结束时间记录（标志标签为 -1），并插入到轨迹数据中。接下来，对标志列进行分组并按车辆求和，以获得标志 1 列。在结果中，flag1 "
-"列值为 1（行程）和标志列值为 0（非临时插入的数据）的行是所需的轨迹数据。"
+msgid "The idea of trajectory slicing is illustrated in the diagram below. A flag column is created for the trajectory data to mark whether each row is within the desired time period for slicing. Then, each travel record in the travel data is decomposed into a start time record (flag label of 1) and an end time record (flag label of -1), which are inserted into the trajectory data. Next, the flag column is grouped and summed by vehicle to obtain the flag1 column. In the result, the rows where the flag1 column value is 1 (travel) and the flag column value is 0 (non-temporarily inserted data) are the desired trajectory data."
+msgstr "下图说明了轨迹切片的概念。将为轨迹数据创建一个标志列，以标记每行是否在所需的切片时间段内。然后，将行程数据中的每个行程记录分解为开始时间记录（标志标签为 1）和结束时间记录（标志标签为 -1），并插入到轨迹数据中。接下来，对标志列进行分组并按车辆求和，以获得标志 1 列。在结果中，flag1 列值为 1（行程）和标志列值为 0（非临时插入的数据）的行是所需的轨迹数据。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:-1 processing
 #: using
 msgid "trajslice"
-msgstr ""
+msgstr "轨迹切分"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:1626 processing
 #: using
-msgid ""
-"The code for slicing the trajectory data can be performed by using "
-"``tbd.traj_slice``, the code example is as follows:"
+msgid "The code for slicing the trajectory data can be performed by using ``tbd.traj_slice``, the code example is as follows:"
 msgstr "可以使用“tbd.traj_slice”执行轨迹数据切片的代码，代码示例如下："
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:2178 processing
 #: using
 msgid "Trajectory densification and sparsification"
-msgstr "轨迹致密化和稀疏化"
+msgstr "轨迹增密化和稀疏化"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:2189 processing
 #: using
-msgid ""
-"To facilitate subsequent tasks such as matching the travel paths in the "
-"trajectory data with the road network, we perform densification or "
-"sparsification of the trajectory points during the travel process. At "
-"this stage, we specify the ID column as the travel ID (moveid) column, "
-"meaning that when performing the densification or sparsification "
-"operation on the trajectory points, we consider each travel separately. "
-"The code for this operation is as follows:"
-msgstr ""
-"为了便于后续任务，例如将轨迹数据中的行驶路径与道路网络相匹配，我们在行驶过程中对轨迹点进行致密化或稀疏化。在此阶段，我们将 ID 列指定为行程 "
-"ID （moveid） 列，这意味着在对轨迹点执行致密化或稀疏化操作时，我们分别考虑每个行程。此操作的代码如下："
+msgid "To facilitate subsequent tasks such as matching the travel paths in the trajectory data with the road network, we perform densification or sparsification of the trajectory points during the travel process. At this stage, we specify the ID column as the travel ID (moveid) column, meaning that when performing the densification or sparsification operation on the trajectory points, we consider each travel separately. The code for this operation is as follows:"
+msgstr "为了便于后续任务，例如将轨迹数据中的行驶路径与道路网络相匹配，我们在行驶过程中对轨迹点进行致密化或稀疏化。在此阶段，我们将 ID 列指定为行程 ID （moveid） 列，这意味着在对轨迹点执行致密化或稀疏化操作时，我们分别考虑每个行程。此操作的代码如下："
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:3992 processing
 #: using
@@ -450,124 +237,62 @@ msgstr "轨迹平滑"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:3994 processing
 #: using
-#, fuzzy
-msgid ""
-"When processing vehicle trajectory data, the trajectory points represent "
-"\"observations\" of the actual \"state\" of the vehicle. Due to errors, "
-"the observed data may deviate from the actual state of the vehicle."
+msgid "When processing vehicle trajectory data, the trajectory points represent \"observations\" of the actual \"state\" of the vehicle. Due to errors, the observed data may deviate from the actual state of the vehicle."
 msgstr "在处理车辆轨迹数据时，轨迹点表示对车辆实际“状态”的“观察”。由于误差，观察到的数据可能与车辆的实际状态有所不同。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:3996 processing
 #: using
-msgid ""
-"How can we obtain a more accurate estimation of the actual state of the "
-"vehicle? Consider the method mentioned in the previous section for "
-"detecting trajectory drift, which involves comparing the position of a "
-"trajectory point with the position of previous trajectory points to check"
-" for significant and unreasonable jumps. This approach is essentially "
-"based on predicting the possible future positions of the vehicle based on"
-" its previous trajectory. If the next recorded trajectory point deviates "
-"significantly from the expected position, it can be determined that the "
-"trajectory is abnormal."
+msgid "How can we obtain a more accurate estimation of the actual state of the vehicle? Consider the method mentioned in the previous section for detecting trajectory drift, which involves comparing the position of a trajectory point with the position of previous trajectory points to check for significant and unreasonable jumps. This approach is essentially based on predicting the possible future positions of the vehicle based on its previous trajectory. If the next recorded trajectory point deviates significantly from the expected position, it can be determined that the trajectory is abnormal."
 msgstr "如何更准确地估计车辆的实际状态？考虑上一节中提到的检测轨迹漂移的方法，该方法涉及将轨迹点的位置与先前轨迹点的位置进行比较，以检查显着和不合理的跳跃。这种方法基本上基于根据车辆先前的轨迹预测车辆未来可能的位置。如果下一个记录的轨迹点明显偏离预期位置，则可以确定轨迹异常。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:3999 processing
 #: using
-msgid ""
-"This method shares similarities with the concept of Kalman filtering. "
-"Kalman filtering is a linear quadratic estimation algorithm used for "
-"state estimation in linear dynamic systems. It combines the previous "
-"state estimation (i.e., the predicted position of the current trajectory "
-"point) with the current observation data (recorded position of the "
-"current trajectory point) to obtain an optimal estimate of the current "
-"state."
+msgid "This method shares similarities with the concept of Kalman filtering. Kalman filtering is a linear quadratic estimation algorithm used for state estimation in linear dynamic systems. It combines the previous state estimation (i.e., the predicted position of the current trajectory point) with the current observation data (recorded position of the current trajectory point) to obtain an optimal estimate of the current state."
 msgstr "这种方法与卡尔曼滤波的概念有相似之处。卡尔曼滤波是一种线性二次估计算法，用于线性动态系统中的状态估计。它将先前的状态估计（即当前轨迹点的预测位置）与当前观测数据（当前轨迹点的记录位置）相结合，以获得当前状态的最优估计。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:4001 processing
 #: using
-msgid ""
-"The implementation of Kalman filtering involves predicting the current "
-"value using the previous optimal result and then correcting the current "
-"value using the observed value to obtain the optimal result. This method "
-"effectively reduces the impact of noise, allowing for a more accurate "
-"estimation of the actual state of the vehicle."
+msgid "The implementation of Kalman filtering involves predicting the current value using the previous optimal result and then correcting the current value using the observed value to obtain the optimal result. This method effectively reduces the impact of noise, allowing for a more accurate estimation of the actual state of the vehicle."
 msgstr "卡尔曼滤波的实现涉及使用先前的最佳结果预测当前值，然后使用观测值校正当前值以获得最佳结果。这种方法有效地减少了噪声的影响，可以更准确地估计车辆的实际状态。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:4163 processing
 #: using
-msgid ""
-"The goal of the Kalman filter is to optimize the observed values by "
-"estimating the system state while considering the uncertainties of both "
-"the observation noise and the system dynamics. It has advantages in "
-"smoothing trajectory data by reducing noise effects and minimizing "
-"fluctuations within a small range. However, the Kalman filter cannot "
-"completely eliminate all noise or handle trajectory drift."
+msgid "The goal of the Kalman filter is to optimize the observed values by estimating the system state while considering the uncertainties of both the observation noise and the system dynamics. It has advantages in smoothing trajectory data by reducing noise effects and minimizing fluctuations within a small range. However, the Kalman filter cannot completely eliminate all noise or handle trajectory drift."
 msgstr "卡尔曼滤波器的目标是通过估计系统状态来优化观测值，同时考虑观测噪声和系统动力学的不确定性。它通过减少噪声影响和最小化小范围内的波动，在平滑轨迹数据方面具有优势。然而，卡尔曼滤波器不能完全消除所有噪声或处理轨迹漂移。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:4165 processing
 #: using
-msgid ""
-"The Kalman filter is suitable for cases where the noise in the trajectory"
-" data is relatively stable, meaning the noise variance remains constant. "
-"It is particularly effective in smoothing small-scale fluctuations caused"
-" by measurement errors in trajectory data."
+msgid "The Kalman filter is suitable for cases where the noise in the trajectory data is relatively stable, meaning the noise variance remains constant. It is particularly effective in smoothing small-scale fluctuations caused by measurement errors in trajectory data."
 msgstr "卡尔曼滤波器适用于轨迹数据中噪声相对稳定的情况，这意味着噪声方差保持不变。它在平滑由轨迹数据中的测量误差引起的小规模波动方面特别有效。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:4167 processing
 #: using
-msgid ""
-"However, the effectiveness of the Kalman filter is limited when "
-"significant drift occurs in the trajectory. Drift points are treated as "
-"observations and have a significant impact on state estimation, which the"
-" Kalman filter cannot directly handle."
+msgid "However, the effectiveness of the Kalman filter is limited when significant drift occurs in the trajectory. Drift points are treated as observations and have a significant impact on state estimation, which the Kalman filter cannot directly handle."
 msgstr "然而，当轨迹中出现显著漂移时，卡尔曼滤波器的有效性是有限的。漂移点被视为观测值，对状态估计有重大影响，卡尔曼滤波器无法直接处理。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:4169 processing
 #: using
-msgid ""
-"Furthermore, the Kalman filter requires the specification of covariance "
-"matrices for process and observation errors, and these parameter settings"
-" affect the smoothing effect. Improper covariance matrix settings can "
-"result in significant deviations in the smoothed trajectory data, "
-"especially when dealing with trajectory data that may deviate from the "
-"road network."
+msgid "Furthermore, the Kalman filter requires the specification of covariance matrices for process and observation errors, and these parameter settings affect the smoothing effect. Improper covariance matrix settings can result in significant deviations in the smoothed trajectory data, especially when dealing with trajectory data that may deviate from the road network."
 msgstr "此外，卡尔曼滤波需要指定过程误差和观测误差的协方差矩阵，这些参数设置会影响平滑效果。不正确的协方差矩阵设置可能会导致平滑轨迹数据出现显著偏差，尤其是在处理可能偏离道路网络的轨迹数据时。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:4171 processing
 #: using
-msgid ""
-"When processing trajectory data, a common approach is to first remove "
-"drift, then perform smoothing, and finally conduct road network matching."
-" The rationale behind this approach is as follows:"
+msgid "When processing trajectory data, a common approach is to first remove drift, then perform smoothing, and finally conduct road network matching. The rationale behind this approach is as follows:"
 msgstr "在处理轨迹数据时，常见的方法是先去除漂移，然后进行平滑，最后进行路网匹配。这种方法背后的基本原理如下："
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:4173 processing
 #: using
-msgid ""
-"The drift removal step eliminates obvious drift points in the data, which"
-" are large noise components. The presence of drift points can "
-"significantly interfere with subsequent processing steps. Removing or "
-"correcting drift points ensures the accuracy and reliability of "
-"subsequent processing."
+msgid "The drift removal step eliminates obvious drift points in the data, which are large noise components. The presence of drift points can significantly interfere with subsequent processing steps. Removing or correcting drift points ensures the accuracy and reliability of subsequent processing."
 msgstr "漂移消除步骤消除了数据中的明显漂移点，这些漂移点是大噪声分量。漂移点的存在会严重干扰后续处理步骤。去除或校正漂移点可确保后续处理的准确性和可靠性。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:4174 processing
 #: using
-msgid ""
-"After drift removal, the trajectory data may still contain some noise and"
-" fluctuations. To reduce the impact of these noise and fluctuations, "
-"smoothing can be applied to further process the trajectory data, making "
-"it smoother, more continuous, and maintaining the overall trend of the "
-"trajectory."
+msgid "After drift removal, the trajectory data may still contain some noise and fluctuations. To reduce the impact of these noise and fluctuations, smoothing can be applied to further process the trajectory data, making it smoother, more continuous, and maintaining the overall trend of the trajectory."
 msgstr "去除漂移后，轨迹数据可能仍包含一些噪声和波动。为了减少这些噪声和波动的影响，可以应用平滑来进一步处理轨迹数据，使其更平滑、更连续，并保持轨迹的整体趋势。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:4175 processing
 #: using
-msgid ""
-"Finally, the smoothed trajectory is more stable and better suited for "
-"road network matching. It reduces errors caused by noise and "
-"fluctuations, thereby improving the accuracy and reliability of road "
-"network matching."
+msgid "Finally, the smoothed trajectory is more stable and better suited for road network matching. It reduces errors caused by noise and fluctuations, thereby improving the accuracy and reliability of road network matching."
 msgstr "最后，平滑后的轨迹更稳定，更适合路网匹配。它减少了噪声和波动引起的误差，从而提高了路网匹配的准确性和可靠性。"
 
 #~ msgid "StopsandTrips"
@@ -578,4 +303,3 @@ msgstr "最后，平滑后的轨迹更稳定，更适合路网匹配。它减少
 
 #~ msgid "trajslice"
 #~ msgstr "特拉杰切片"
-

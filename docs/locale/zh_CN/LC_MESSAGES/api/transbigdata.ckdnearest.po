@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:35+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -32,7 +32,7 @@ msgid ""
 msgstr "在dfB_origin中搜索最近的点以查找dfA_origin，并计算距离"
 
 #: of transbigdata.gisprocess.ckdnearest
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.gisprocess.ckdnearest:5
@@ -52,7 +52,7 @@ msgid "The column of lng and lat in DataFrame A"
 msgstr "数据帧 A 中的 lng 和纬度列"
 
 #: of transbigdata.gisprocess.ckdnearest
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.gisprocess.ckdnearest:14
@@ -61,17 +61,17 @@ msgid "**gdf** -- The output DataFrame"
 msgstr "**gdf** -- 输出数据帧"
 
 #: of transbigdata.gisprocess.ckdnearest
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid "Parameters"
 #~ msgstr ""

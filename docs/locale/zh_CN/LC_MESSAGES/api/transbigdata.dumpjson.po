@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_CN\n"
@@ -31,7 +31,7 @@ msgid ""
 msgstr ""
 
 #: of transbigdata.utils.dumpjson
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.utils.dumpjson:5

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 15:59+0800\n"
-"PO-Revision-Date: 2023-06-05 16:55+0800\n"
+"PO-Revision-Date: 2023-06-06 09:26+0800\n"
 "Last-Translator: \n"
 "Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:9
 msgid "5 Optimize gridding params"
-msgstr "5 优化网格化参数"
+msgstr "5 网格化参数优化"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:21
 msgid "Why aggregate data to grids?"

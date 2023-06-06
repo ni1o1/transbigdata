@@ -9,25 +9,27 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 20:53+0800\n"
-"PO-Revision-Date: 2023-06-05 16:57+0800\n"
+"PO-Revision-Date: 2023-06-06 09:30+0800\n"
 "Last-Translator: \n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/gallery/Example 10-Mapmatching GPS data.ipynb:9 of taxi
 msgid "10 Mapmatching of taxi GPS data"
-msgstr "10 出租车GPS数据地图匹配"
+msgstr "10 出租车GPS轨迹数据的地图匹配"
 
 #: ../../source/gallery/Example 10-Mapmatching GPS data.ipynb:20 of taxi
 msgid ""
 "This example uses TransBigData+leuvenmapmatching to achieve the road "
 "network matching of taxi GPS data"
-msgstr "本示例使用TransBigData+鲁汶地图匹配实现出租车GPS数据的道路网络匹配"
+msgstr ""
+"本示例使用TransBigData+leuvenmapmatching实现出租车GPS数据的道路网络匹配"
 
 #: ../../source/gallery/Example 10-Mapmatching GPS data.ipynb:32 of taxi
 msgid "Preparing trajectory data"
@@ -42,7 +44,6 @@ msgid "You can download the road network from openstreetmap."
 msgstr "可以从openstreetmap下载路网。"
 
 #: ../../source/gallery/Example 10-Mapmatching GPS data.ipynb:131 of taxi
-#, fuzzy
 msgid "If you alread have the road network data..."
 msgstr "如果你已经有路网数据..."
 
@@ -53,4 +54,3 @@ msgstr "地图匹配"
 #: ../../source/gallery/Example 10-Mapmatching GPS data.ipynb:460 of taxi
 msgid "Visualization"
 msgstr "可视化"
-

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:29+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -30,7 +30,7 @@ msgid "Generate the rectangular grids in the bounds or shape"
 msgstr "在边界或形状中生成矩形网格"
 
 #: of transbigdata.grids.area_to_grid
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.grids.area_to_grid:4
@@ -65,7 +65,7 @@ msgstr ""
 "https://transbigdata.readthedocs.io/en/latest/grids.html。给出格网参数时，将不使用精度。"
 
 #: of transbigdata.grids.area_to_grid
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.grids.area_to_grid:19
@@ -102,10 +102,10 @@ msgstr ""
 "https://transbigdata.readthedocs.io/en/latest/grids.html。"
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "Parameters"
 #~ msgstr ""

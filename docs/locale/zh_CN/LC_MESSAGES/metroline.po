@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 20:46+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -96,7 +96,7 @@ msgstr "输入地铁站数据并输出网络拓扑模型。生成的图形依赖
 #: of transbigdata.metro.get_k_shortest_paths
 #: transbigdata.metro.get_path_traveltime transbigdata.metro.get_shortest_path
 #: transbigdata.metro.metro_network transbigdata.metro.split_subwayline
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.metro.metro_network:6
@@ -126,7 +126,7 @@ msgstr ""
 #: of transbigdata.metro.get_k_shortest_paths
 #: transbigdata.metro.get_path_traveltime transbigdata.metro.get_shortest_path
 #: transbigdata.metro.metro_network transbigdata.metro.split_subwayline
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.metro.metro_network:19
@@ -145,6 +145,36 @@ msgstr ""
 "中构建的图 。\n"
 "当 nxgraph 参数为 False 时：**edge1**(*DataFrame*) — "
 "线段的网络边。**edge2**(*DataFrame*) — 用于传输的网络边缘。**node**(*List*) — 网络节点。"
+
+#: of transbigdata.metro.metro_network:19
+msgid "*When the nxgraph parameter is True*"
+msgstr ""
+
+#: of transbigdata.metro.metro_network:20 transbigdata.metro.metro_network:23
+msgid "*================================================================*"
+msgstr ""
+
+#: of transbigdata.metro.metro_network:21
+msgid "**G** (*networkx.classes.graph.Graph*) -- Network G built by networkx."
+msgstr ""
+
+#: of transbigdata.metro.metro_network:22
+msgid ""
+"*When the nxgraph parameter is False (This is for detail design of the "
+"network)*"
+msgstr ""
+
+#: of transbigdata.metro.metro_network:24
+msgid "**edge1** (*DataFrame*) -- Network edge for line section."
+msgstr ""
+
+#: of transbigdata.metro.metro_network:25
+msgid "**edge2** (*DataFrame*) -- Network edge for transfering."
+msgstr ""
+
+#: of transbigdata.metro.metro_network:26
+msgid "**node** (*List*) -- Network nodes."
+msgstr ""
 
 #: of transbigdata.metro.get_k_shortest_paths:4
 #: transbigdata.metro.get_path_traveltime:4
@@ -174,7 +204,7 @@ msgstr "**path** -- 旅行路径：站名列表"
 #: of transbigdata.metro.get_k_shortest_paths
 #: transbigdata.metro.get_path_traveltime transbigdata.metro.get_shortest_path
 #: transbigdata.metro.split_subwayline
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #: of transbigdata.metro.get_k_shortest_paths:12
@@ -202,13 +232,13 @@ msgid "**metro_line_splited** -- Generated section line shape"
 msgstr "**metro_line_splited** -- 生成的剖面线形状"
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid ""
 #~ ":obj:`metro_network <transbigdata.metro_network>`\\ "

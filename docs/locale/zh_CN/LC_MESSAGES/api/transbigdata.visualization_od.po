@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_CN\n"
@@ -31,7 +31,7 @@ msgid ""
 msgstr ""
 
 #: of transbigdata.visualization.visualization_od
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.visualization.visualization_od:5
@@ -65,7 +65,7 @@ msgid "The minimum OD counts, OD with less counts will not be displayed"
 msgstr ""
 
 #: of transbigdata.visualization.visualization_od
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.visualization.visualization_od:23
@@ -73,7 +73,7 @@ msgid "**vmap** -- Visualizations provided by keplergl"
 msgstr ""
 
 #: of transbigdata.visualization.visualization_od
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #~ msgid "参数"

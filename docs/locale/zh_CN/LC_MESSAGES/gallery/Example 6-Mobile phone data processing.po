@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 20:53+0800\n"
-"PO-Revision-Date: 2023-06-05 16:56+0800\n"
+"PO-Revision-Date: 2023-06-06 09:31+0800\n"
 "Last-Translator: \n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/gallery/Example 6-Mobile data phone processing.ipynb:9
 msgid "6 Mobile phone data processing"
@@ -25,8 +26,8 @@ msgstr "6手机数据处理"
 
 #: ../../source/gallery/Example 6-Mobile data phone processing.ipynb:20
 msgid ""
-"In this example, we will introduce how to use the TransBigData to process"
-" mobile phone data."
+"In this example, we will introduce how to use the TransBigData to process mobile phone "
+"data."
 msgstr "在这个例子中，我们将介绍如何使用TransBigData来处理手机数据。"
 
 #: ../../source/gallery/Example 6-Mobile data phone processing.ipynb:21
@@ -38,13 +39,14 @@ msgid "Identify stay and move infomation from mobile phone trajectory data"
 msgstr "从手机轨迹数据中识别停留和移动信息"
 
 #: ../../source/gallery/Example 6-Mobile data phone processing.ipynb:203
-#, fuzzy
 msgid ""
-"When processing mobile phone data, TransBigData's approach is to first "
-"correspond the data to the grids and treat the data within the same grid "
-"as being at the same location to avoid data positioning errors that cause"
-" the same location to be identified as multiple."
-msgstr "在处理手机数据时，TransBigData的方法是首先将数据与网格对应，并将同一网格内的数据视为位于同一位置，以避免导致同一位置被识别为多个位置的数据定位错误。"
+"When processing mobile phone data, TransBigData's approach is to first correspond the "
+"data to the grids and treat the data within the same grid as being at the same "
+"location to avoid data positioning errors that cause the same location to be "
+"identified as multiple."
+msgstr ""
+"在处理手机数据时，TransBigData的方法是首先将数据与网格对应，并将同一网格内的数据视为位"
+"于同一位置，以避免导致同一位置被识别为多个位置的数据定位错误。"
 
 #: ../../source/gallery/Example 6-Mobile data phone processing.ipynb:613
 msgid "Home and work place identify"
@@ -52,5 +54,4 @@ msgstr "家庭和工作地点标识"
 
 #: ../../source/gallery/Example 6-Mobile data phone processing.ipynb:905
 msgid "Plot activity"
-msgstr "绘图活动"
-
+msgstr "绘制活动图"

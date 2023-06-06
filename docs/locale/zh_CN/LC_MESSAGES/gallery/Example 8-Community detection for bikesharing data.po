@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 15:59+0800\n"
-"PO-Revision-Date: 2023-06-05 16:56+0800\n"
+"PO-Revision-Date: 2023-06-06 09:27+0800\n"
 "Last-Translator: \n"
 "Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: ../../source/gallery/Example 8-Community bikesharing data.ipynb:9 detection
 #: for
 msgid "8 Community detection for bicycle-sharing demand"
-msgstr "8 共享单车需求社区检测"
+msgstr "8 共享单车出行需求的社区发现"
 
 #: ../../source/gallery/Example 8-Community bikesharing data.ipynb:11 detection
 #: for

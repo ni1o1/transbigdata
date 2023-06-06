@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:30+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -32,7 +32,7 @@ msgid ""
 msgstr "此方法会将 gdfB 中最近的点与 gdfA 匹配，并添加一个名为 dist 的新列"
 
 #: of transbigdata.gisprocess.ckdnearest_point
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.gisprocess.ckdnearest_point:5
@@ -46,7 +46,7 @@ msgid "GeoDataFrame B, point geometry"
 msgstr "地理数据帧 B，点几何"
 
 #: of transbigdata.gisprocess.ckdnearest_point
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.gisprocess.ckdnearest_point:10
@@ -55,17 +55,17 @@ msgid "**gdf** -- The output DataFrame"
 msgstr "**gdf** -- 输出数据帧"
 
 #: of transbigdata.gisprocess.ckdnearest_point
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid "Parameters"
 #~ msgstr ""

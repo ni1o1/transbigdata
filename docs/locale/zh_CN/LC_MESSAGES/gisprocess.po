@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 20:29+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -100,7 +100,7 @@ msgstr "近邻配料"
 #: transbigdata.gisprocess.merge_polygon
 #: transbigdata.gisprocess.polyon_exterior
 #: transbigdata.gisprocess.splitline_with_length
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.gisprocess.ckdnearest:5
@@ -122,7 +122,7 @@ msgstr "DataFrame A中lng和lat的列"
 #: transbigdata.gisprocess.merge_polygon
 #: transbigdata.gisprocess.polyon_exterior
 #: transbigdata.gisprocess.splitline_with_length
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.gisprocess.ckdnearest:14
@@ -136,7 +136,7 @@ msgstr "**gdf** -- 输出数据帧"
 #: transbigdata.gisprocess.merge_polygon
 #: transbigdata.gisprocess.polyon_exterior
 #: transbigdata.gisprocess.splitline_with_length
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #: of transbigdata.gisprocess.ckdnearest_line:5
@@ -264,13 +264,13 @@ msgid "**data1** -- The processed polygon"
 msgstr "**data1** -- 处理后的多边形"
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid ""
 #~ ":obj:`ckdnearest <transbigdata.ckdnearest>`\\ "

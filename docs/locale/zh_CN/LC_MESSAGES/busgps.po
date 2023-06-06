@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 20:40+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -51,7 +51,7 @@ msgstr "输入出发信息表drive_info和车站信息表停靠点计算单程�
 
 #: of transbigdata.busgps.busgps_arriveinfo
 #: transbigdata.busgps.busgps_onewaytime
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.busgps.busgps_arriveinfo:5
@@ -111,7 +111,7 @@ msgstr "是否输出投影数据"
 
 #: of transbigdata.busgps.busgps_arriveinfo
 #: transbigdata.busgps.busgps_onewaytime
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.busgps.busgps_arriveinfo:36
@@ -120,7 +120,7 @@ msgstr "**arrive_info** -- 公交到发信息"
 
 #: of transbigdata.busgps.busgps_arriveinfo
 #: transbigdata.busgps.busgps_onewaytime
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #: of transbigdata.busgps.busgps_onewaytime:5
@@ -144,13 +144,13 @@ msgid "**onewaytime** -- One-way travel time of the bus"
 msgstr "**onewaytime** -- 公交车单程时间"
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid ""
 #~ ":obj:`busgps_arriveinfo <transbigdata.busgps_arriveinfo>`\\ "

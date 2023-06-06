@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
-"PO-Revision-Date: 2023-06-05 16:50+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
+"PO-Revision-Date: 2023-06-06 09:39+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
@@ -44,7 +44,7 @@ msgstr ""
 
 #: ../../source/mobile.rst:15:<autosummary>:1
 msgid "Identify home location from mobile phone stay data."
-msgstr "通过手机停留数据识别家庭位置。"
+msgstr "通过手机停留数据识别居住地位置。"
 
 #: ../../source/mobile.rst:15:<autosummary>:1
 msgid ""
@@ -59,7 +59,7 @@ msgstr "通过手机停留数据识别工作地点。"
 #: of transbigdata.mobilephonedata.mobile_identify_home
 #: transbigdata.mobilephonedata.mobile_identify_work
 #: transbigdata.mobilephonedata.mobile_stay_duration
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.mobilephonedata.mobile_identify_home:5
@@ -83,14 +83,16 @@ msgstr "一天时间的结束时间"
 #: of transbigdata.mobilephonedata.mobile_identify_home
 #: transbigdata.mobilephonedata.mobile_identify_work
 #: transbigdata.mobilephonedata.mobile_stay_duration
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.mobilephonedata.mobile_stay_duration:13
 msgid ""
 "* **duration_night** (*Series*) -- Duration at night time * "
 "**duration_day** (*Series*) -- Duration at day time"
-msgstr "* **duration_night** （*系列*） -- 夜间持续时间 * **duration_day** （*系列*） -- 白天持续时间"
+msgstr ""
+"* **duration_night** （*Series*） -- 夜间持续时间 * **duration_day** （*Series*） "
+"-- 白天持续时间"
 
 #: of transbigdata.mobilephonedata.mobile_stay_duration:13
 msgid "**duration_night** (*Series*) -- Duration at night time"
@@ -104,7 +106,7 @@ msgstr "**duration_day** (*Series*) -- 白天的持续时间"
 msgid ""
 "Identify home location from mobile phone stay data. The rule is to "
 "identify the locations with longest duration in night time."
-msgstr "从手机住宿数据中识别家庭位置。规则是确定夜间持续时间最长的位置。"
+msgstr "从手机停留数据中识别居住地位置。规则是确定夜间持续时间最长的位置。"
 
 #: of transbigdata.mobilephonedata.mobile_identify_home:7
 msgid ""
@@ -128,7 +130,7 @@ msgstr "**home** -- 手机用户的家位置"
 
 #: of transbigdata.mobilephonedata.mobile_identify_home
 #: transbigdata.mobilephonedata.mobile_identify_work
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #: of transbigdata.mobilephonedata.mobile_identify_work:2
@@ -136,7 +138,7 @@ msgid ""
 "Identify work location from mobile phone stay data. The rule is to "
 "identify the locations with longest duration in day time on "
 "weekdays(Average duration should over `minhour`)."
-msgstr "从手机住宿数据中识别工作地点。规则是确定工作日白天持续时间最长的位置（平均持续时间应超过“分钟小时”）。"
+msgstr "从手机停留数据中识别工作地点。规则是确定工作日白天持续时间最长的位置（平均持续时间应超过“minhour”）。"
 
 #: of transbigdata.mobilephonedata.mobile_identify_work:7
 msgid ""
@@ -145,7 +147,7 @@ msgid ""
 "specify the location."
 msgstr ""
 "列名，按 ['uid'、stime'、'etime'、'locationtag1'、'locationtag2'， ...] "
-"的顺序排列。可以有多个“位置标签”列来指定位置。"
+"的顺序排列。可以有多个“locationtag”列来指定位置。"
 
 #: of transbigdata.mobilephonedata.mobile_identify_work:10
 msgid "Minimun duration in work days (hours)."
@@ -158,7 +160,7 @@ msgstr "一周中工作日的开始和结束。 "
 
 #: of transbigdata.mobilephonedata.mobile_identify_work:21
 msgid "**work** -- work location of mobile phone users"
-msgstr "**work** -- 手机用户的工作地点"
+msgstr "**work** -- 手机用户的工作地"
 
 #~ msgid ""
 #~ ":py:obj:`mobile_stay_duration "
@@ -179,13 +181,13 @@ msgstr "**work** -- 手机用户的工作地点"
 #~ msgstr ""
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid ""
 #~ ":obj:`mobile_stay_duration "

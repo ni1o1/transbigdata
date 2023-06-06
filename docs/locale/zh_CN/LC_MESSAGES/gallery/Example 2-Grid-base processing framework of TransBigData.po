@@ -9,155 +9,149 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 20:53+0800\n"
-"PO-Revision-Date: 2023-06-05 16:55+0800\n"
+"PO-Revision-Date: 2023-06-06 09:23+0800\n"
 "Last-Translator: \n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:9 framework of
 #: processing
 msgid "2 Grid-base processing framework of TransBigData"
-msgstr "2 TransBigData基于网格的处理框架"
+msgstr "2 基于栅格的处理框架"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:11 framework of
 #: processing
 msgid ""
-"This notebook will introduce the core functions embedded in the "
-"Transbigdata package"
+"This notebook will introduce the core functions embedded in the Transbigdata "
+"package"
 msgstr "本笔记本将介绍Transbigdata软件包中嵌入的核心功能"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:147 framework of
 #: processing
-#, fuzzy
 msgid ""
 "``transbigdata.area_to_grid``\\ (location, accuracy=500, method='rect', "
 "params='auto')"
-msgstr "''transbigdata.area_to_grid''\\ （位置， 精度=500， 方法='直截图'， 参数='自动'）"
+msgstr ""
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:548 framework of
 #: processing
-#, fuzzy
 msgid "``transbigdata.area_to_params``\\ (location, accuracy=500, method='rect')"
-msgstr "``transbigdata.area_to_params``\\（位置，精度=500，方法='rect'）"
+msgstr ""
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:550 framework of
 #: processing
 msgid ""
-"Sometime, due to data sparisity, we do not need to generate all the "
-"grids. In such case, we can use ``transbigdata.area_to_params``."
-msgstr "有时，由于数据稀缺，我们不需要生成所有网格。在这种情况下，我们可以使用“transbigdata.area_to_params”。"
+"Sometime, due to data sparisity, we do not need to generate all the grids. In "
+"such case, we can use ``transbigdata.area_to_params``."
+msgstr ""
+"有时，由于数据稀疏，我们不需要生成所有网格。在这种情况下，我们可以使"
+"用“transbigdata.area_to_params”。"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:552 framework of
 #: processing
 msgid ""
-"This method only creat a dictionary file for the grid, thus is much "
-"faster."
+"This method only creat a dictionary file for the grid, thus is much faster."
 msgstr "此方法仅为网格创建字典文件，因此速度要快得多。"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:617 framework of
 #: processing
 msgid "``transbigdata.GPS_to_grid``\\ (lon, lat, params)"
-msgstr "``transbigdata.GPS_to_grid``\\（经度、纬度、参数）"
+msgstr ""
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:619 framework of
 #: processing
 msgid ""
-"The next common step is to know which grid does each trajectory point "
-"belong to."
+"The next common step is to know which grid does each trajectory point belong "
+"to."
 msgstr "下一个常见步骤是知道每个轨迹点属于哪个网格。"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:898 framework of
 #: processing
 msgid "``transbigdata.grid_to_centre``\\ (gridid, params)"
-msgstr "``transbigdata.grid_to_centre``\\（网格，参数）"
+msgstr ""
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:900 framework of
 #: processing
 msgid ""
-"The center location of each grid can acquired using "
-"``transbigdata.grid_to_centre``"
+"The center location of each grid can acquired using ``transbigdata."
+"grid_to_centre``"
 msgstr "每个网格的中心位置可以使用“transbigdata.grid_to_centre”获取"
 
-#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1060 framework
-#: of processing
+#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1060 framework of
+#: processing
 msgid "``transbigdata.grid_to_polygon``\\ (gridid, params)"
-msgstr "``transbigdata.grid_to_polygon``\\（网格，参数）"
+msgstr ""
 
-#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1062 framework
-#: of processing
+#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1062 framework of
+#: processing
 msgid ""
 "For visualization convenience, grid parameters can be transformed into "
 "``geometry`` format"
 msgstr "为了方便可视化，网格参数可以转换为“几何”格式"
 
-#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1248 framework
-#: of processing
-#, fuzzy
+#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1248 framework of
+#: processing
 msgid ""
-"``transbigdata.grid_to_area``\\ (data, shape, params, col=['LONCOL', "
-"'LATCOL'])"
+"``transbigdata.grid_to_area``\\ (data, shape, params, col=['LONCOL', 'LATCOL'])"
 msgstr ""
-"''transbigdata.grid_to_area''\\ （data， shape， params， col=['LONCOL'， "
-"'LATCOL']）"
 
-#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1250 framework
-#: of processing
+#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1250 framework of
+#: processing
 msgid ""
-"In addition to grid, there might be several districts. "
-"``transbigdata.grid_to_area`` can be used to match the information."
-msgstr "除了网格之外，可能还有几个地区。“transbigdata.grid_to_area”可用于匹配信息。"
+"In addition to grid, there might be several districts. ``transbigdata."
+"grid_to_area`` can be used to match the information."
+msgstr ""
+"除了网格之外，可能还有几个地区。“transbigdata.grid_to_area”可用于匹配信息。"
 
-#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1252 framework
-#: of processing
+#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1252 framework of
+#: processing
 msgid ""
-"In this case, there are only one district in ``jiading_polygon``, the "
-"matched column is ``id``."
+"In this case, there are only one district in ``jiading_polygon``, the matched "
+"column is ``id``."
 msgstr "在这种情况下，“jiading_polygon”中只有一个地区，匹配的列是“id”。"
 
-#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1520 framework
-#: of processing
+#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1520 framework of
+#: processing
 msgid "``transbigdata.grid_to_params``\\ (grid)"
-msgstr "``transbigdata.grid_to_params``\\（网格）"
+msgstr ""
 
-#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1522 framework
-#: of processing
+#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1522 framework of
+#: processing
 msgid "A useful tool to get grid params from grid geometry"
 msgstr "从网格几何体中获取网格参数的有用工具"
 
-#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1704 framework
-#: of processing
-#, fuzzy
+#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1704 framework of
+#: processing
 msgid ""
-"``transbigdata.grid_params_optimize``\\ (data, initialparams, col=['uid',"
-" 'lon', 'lat'], optmethod='centerdist', printlog=False, sample=0)"
+"``transbigdata.grid_params_optimize``\\ (data, initialparams, col=['uid', "
+"'lon', 'lat'], optmethod='centerdist', printlog=False, sample=0)"
 msgstr ""
-"''transbigdata.grid_params_optimize''\\ （data， initialparams， col=['uid'，"
-" 'lon'， 'lat']， optmethod='centerdist'， printlog=False， sample=0）"
 
-#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1706 framework
-#: of processing
+#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1706 framework of
+#: processing
 msgid "Offers several methods to optimize the grids"
 msgstr "提供了几种优化网格的方法"
 
-#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1708 framework
-#: of processing
+#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1708 framework of
+#: processing
 msgid ""
 "This method relies on the ``scikit-opt`` package. To do so, please run "
 "following code in cmd:"
 msgstr "此方法依赖于“scikit-opt”包。为此，请在cmd中运行以下代码："
 
-#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1714 framework
-#: of processing
+#: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1714 framework of
+#: processing
 #, python-format
 msgid ""
-"For more details of this method, please refer to this `notebook "
-"<https://github.com/ni1o1/transbigdata/blob/main/example/Example%206-Optimize%20grid%20params.ipynb>`__."
+"For more details of this method, please refer to this `notebook <https://"
+"github.com/ni1o1/transbigdata/blob/main/example/Example%206-"
+"Optimize%20grid%20params.ipynb>`__."
 msgstr ""
-"有关此方法的更多详细信息，请参阅此“notebook "
-"<https://github.com/ni1o1/transbigdata/blob/main/example/Example%206-Optimize%20grid%20params.ipynb>”__。"
-
+"有关此方法的更多详细信息，请参阅此“notebook <https://github.com/ni1o1/"
+"transbigdata/blob/main/example/Example%206-Optimize%20grid%20params.ipynb>”__。"

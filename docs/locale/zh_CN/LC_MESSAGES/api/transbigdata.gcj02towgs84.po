@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_CN\n"
@@ -29,7 +29,7 @@ msgid "Convert coordinates from GCJ02 to WGS84"
 msgstr ""
 
 #: of transbigdata.coordinates.gcj02towgs84
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.coordinates.gcj02towgs84:4
@@ -41,7 +41,7 @@ msgid "Latitude"
 msgstr ""
 
 #: of transbigdata.coordinates.gcj02towgs84
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.coordinates.gcj02towgs84:9

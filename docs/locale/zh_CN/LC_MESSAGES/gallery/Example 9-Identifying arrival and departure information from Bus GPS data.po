@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 15:59+0800\n"
-"PO-Revision-Date: 2023-06-05 16:56+0800\n"
+"PO-Revision-Date: 2023-06-06 09:29+0800\n"
 "Last-Translator: \n"
 "Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: ../../source/gallery/Example 9-Identifying Bus GPS and arrival data.ipynb:9
 #: departure from information
 msgid "9 Identifying arrival and departure information from Bus GPS data"
-msgstr "9 从巴士 GPS 数据识别到达和离开信息"
+msgstr "9 公交 GPS 数据的到离站信息识别"
 
 #: ../../source/gallery/Example 9-Identifying Bus GPS and arrival data.ipynb:20
 #: departure from information
@@ -33,7 +33,7 @@ msgstr "要运行这个例子，你可能需要安装``seaborn``："
 #: ../../source/gallery/Example 9-Identifying Bus GPS and arrival data.ipynb:22
 #: departure from information
 msgid "pip install seaborn"
-msgstr "pip 安装 seaborn"
+msgstr ""
 
 #: ../../source/gallery/Example 9-Identifying Bus GPS and arrival data.ipynb:33
 #: departure from information
@@ -63,7 +63,7 @@ msgstr "转换坐标"
 #: ../../source/gallery/Example 9-Identifying Bus GPS and arrival
 #: data.ipynb:337 departure from information
 msgid "Read the bus line data"
-msgstr "读取总线数据"
+msgstr "读取公交线路数据"
 
 #: ../../source/gallery/Example 9-Identifying Bus GPS and arrival
 #: data.ipynb:396 departure from information

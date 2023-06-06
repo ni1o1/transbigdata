@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:30+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -32,7 +32,7 @@ msgid ""
 msgstr "输入出发信息表drive_info和车站信息表停靠点计算单程行车时间"
 
 #: of transbigdata.busgps.busgps_onewaytime
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.busgps.busgps_onewaytime:5
@@ -56,7 +56,7 @@ msgid "Column name [vehicle ID, station name,arrivetime,leavetime]"
 msgstr "列名称 [车辆ID、车站名称、到达时间、下车时间]"
 
 #: of transbigdata.busgps.busgps_onewaytime
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.busgps.busgps_onewaytime:14
@@ -65,17 +65,17 @@ msgid "**onewaytime** -- One-way travel time of the bus"
 msgstr "**单程时间** -- 巴士的单程行驶时间"
 
 #: of transbigdata.busgps.busgps_onewaytime
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid "Parameters"
 #~ msgstr ""

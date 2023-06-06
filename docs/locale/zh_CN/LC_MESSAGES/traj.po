@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:52+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -156,8 +156,9 @@ msgstr ""
 #: transbigdata.traj.traj_mapmatch transbigdata.traj.traj_segment
 #: transbigdata.traj.traj_slice transbigdata.traj.traj_smooth
 #: transbigdata.traj.traj_sparsify transbigdata.traj.traj_stay_move
-msgid "参数"
-msgstr ""
+#, fuzzy
+msgid "Parameters"
+msgstr "网格化参数"
 
 #: of transbigdata.traj.traj_mapmatch:5
 msgid "The trajectory point data set to be matched."
@@ -178,7 +179,7 @@ msgstr "轨迹点数据集中经度和纬度列的名称。"
 #: transbigdata.traj.traj_mapmatch transbigdata.traj.traj_segment
 #: transbigdata.traj.traj_slice transbigdata.traj.traj_smooth
 #: transbigdata.traj.traj_sparsify transbigdata.traj.traj_stay_move
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.traj.traj_mapmatch:12
@@ -190,7 +191,7 @@ msgstr "**traj_matched** -- 匹配后的轨迹点数据集。"
 #: transbigdata.traj.traj_mapmatch transbigdata.traj.traj_segment
 #: transbigdata.traj.traj_slice transbigdata.traj.traj_smooth
 #: transbigdata.traj.traj_sparsify
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #: of transbigdata.traj.traj_clean_drift:2
@@ -285,7 +286,7 @@ msgid "**data_sliced** -- The sliced trajectory data"
 msgstr "**data_sliced** -- 切片轨迹数据"
 
 #: of transbigdata.traj.traj_slice:18
-msgid "示例"
+msgid "Example"
 msgstr ""
 
 #: of transbigdata.traj.traj_smooth:4
@@ -476,16 +477,16 @@ msgstr "**traj** -- 生成的轨迹"
 #~ msgstr ""
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid "示例"
-#~ msgstr "展示例子"
+#~ msgstr ""
 
 #~ msgid ""
 #~ ":obj:`traj_mapmatch <transbigdata.traj_mapmatch>`\\ "

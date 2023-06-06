@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:30+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -32,7 +32,7 @@ msgid ""
 msgstr "输入公交GPS数据、公交线路和车站GeoDataFrame，该方法可以识别公交车的到达和出发信息"
 
 #: of transbigdata.busgps.busgps_arriveinfo
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.busgps.busgps_arriveinfo:5
@@ -101,7 +101,7 @@ msgid "Whether to output the projected data"
 msgstr "是否输出投影数据"
 
 #: of transbigdata.busgps.busgps_arriveinfo
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.busgps.busgps_arriveinfo:36
@@ -110,17 +110,17 @@ msgid "**arrive_info** -- Bus arrival and departure information"
 msgstr "**arrive_info** -- 巴士到达和离开信息"
 
 #: of transbigdata.busgps.busgps_arriveinfo
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid "Parameters"
 #~ msgstr ""

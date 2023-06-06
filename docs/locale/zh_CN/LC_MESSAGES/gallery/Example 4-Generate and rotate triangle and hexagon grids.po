@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 15:59+0800\n"
-"PO-Revision-Date: 2023-06-05 16:55+0800\n"
+"PO-Revision-Date: 2023-06-06 09:26+0800\n"
 "Last-Translator: \n"
 "Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: ../../source/gallery/Example 4-Generate and grids.ipynb:9 hexagon rotate
 #: triangle
 msgid "4 Generate and rotate triangle and hexagon grids"
-msgstr "4 生成和旋转三角形和六边形网格"
+msgstr "4 三角形和六边形网格的生成与旋转"
 
 #: ../../source/gallery/Example 4-Generate and grids.ipynb:20 hexagon rotate
 #: triangle

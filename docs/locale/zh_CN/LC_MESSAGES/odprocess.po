@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:50+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -56,7 +56,7 @@ msgstr "生成OD聚合结果和对应的几何图形。"
 
 #: of transbigdata.odprocess.odagg_grid transbigdata.odprocess.odagg_shape
 #: transbigdata.preprocess.dataagg
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.preprocess.dataagg:4
@@ -83,7 +83,7 @@ msgstr "这个想法是首先实现数据网格化，然后实现聚合。在这
 
 #: of transbigdata.odprocess.odagg_grid transbigdata.odprocess.odagg_shape
 #: transbigdata.preprocess.dataagg
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.preprocess.dataagg:17
@@ -143,7 +143,7 @@ msgid "**oddata1** -- GeoDataFrame of OD after aggregation"
 msgstr "**oddata1** -- 聚合后OD的GeoDataFrame"
 
 #: of transbigdata.odprocess.odagg_grid transbigdata.odprocess.odagg_shape
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #: of transbigdata.odprocess.odagg_shape:2
@@ -200,13 +200,13 @@ msgstr "实现聚合时纬度和经度的小数位数"
 #~ msgstr ""
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid ""
 #~ ":obj:`dataagg <transbigdata.dataagg>`\\ \\(data\\, "

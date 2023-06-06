@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:51+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -46,7 +46,7 @@ msgid "Calculate the data sampling interval."
 msgstr "计算数据采样间隔。"
 
 #: of transbigdata.quality.data_summary transbigdata.quality.sample_duration
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.quality.data_summary:4
@@ -71,7 +71,7 @@ msgid "Data"
 msgstr "数据"
 
 #: of transbigdata.quality.sample_duration
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.quality.sample_duration:9
@@ -81,7 +81,7 @@ msgid ""
 msgstr "**sample_duration** -- 列名持续时间的序列，内容是数据的采样间隔，以秒为单位"
 
 #: of transbigdata.quality.sample_duration
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #~ msgid ""
@@ -95,13 +95,13 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid ""
 #~ ":obj:`data_summary <transbigdata.data_summary>`\\ "

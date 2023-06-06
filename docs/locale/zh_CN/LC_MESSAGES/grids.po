@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 16:49+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -145,7 +145,7 @@ msgstr "网格化框架"
 #: transbigdata.grids.grid_params_optimize transbigdata.grids.grid_to_area
 #: transbigdata.grids.grid_to_centre transbigdata.grids.grid_to_params
 #: transbigdata.grids.grid_to_polygon
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.grids.area_to_grid:4 transbigdata.grids.area_to_params:4
@@ -181,7 +181,7 @@ msgstr ""
 #: transbigdata.grids.grid_params_optimize transbigdata.grids.grid_to_area
 #: transbigdata.grids.grid_to_centre transbigdata.grids.grid_to_params
 #: transbigdata.grids.grid_to_polygon
-msgid "返回"
+msgid "Returns"
 msgstr ""
 
 #: of transbigdata.grids.area_to_grid:19
@@ -227,7 +227,7 @@ msgstr ""
 #: transbigdata.grids.geohash_togrid transbigdata.grids.grid_params_optimize
 #: transbigdata.grids.grid_to_area transbigdata.grids.grid_to_params
 #: transbigdata.grids.grid_to_polygon
-msgid "返回类型"
+msgid "Return type"
 msgstr ""
 
 #: of transbigdata.grids.GPS_to_grid:2
@@ -303,6 +303,29 @@ msgid ""
 msgstr ""
 "如果“矩形网格”[LONCOL，LATCOL]：系列 两列 LONCOL 和 LATCOL 一起可以指定网格。 如果“三角形和六边形网格” "
 "[loncol_1，loncol_2，loncol_3] ：系列 网格纬度的索引。两列 LONCOL 和 LATCOL 一起可以指定一个网格。"
+
+#: of transbigdata.grids.grid_to_centre:5 transbigdata.grids.grid_to_polygon:6
+msgid "if `Rectangle grids` [LONCOL,LATCOL] : Series"
+msgstr ""
+
+#: of transbigdata.grids.grid_to_centre:7 transbigdata.grids.grid_to_polygon:8
+#, fuzzy
+msgid "The two columns LONCOL and LATCOL together can specify a grid."
+msgstr "**[LONCOL，LATCOL]** （*list*） -- 两列 LONCOL 和 LATCOL 一起可以指定网格。"
+
+#: of transbigdata.grids.grid_to_centre:9 transbigdata.grids.grid_to_polygon:10
+msgid "if `Triangle and Hexagon grids` [loncol_1,loncol_2,loncol_3] : Series"
+msgstr ""
+
+#: of transbigdata.grids.grid_to_centre:11
+#: transbigdata.grids.grid_to_polygon:12
+#, fuzzy
+msgid ""
+"The index of the grid latitude. The two columns LONCOL and LATCOL "
+"together can specify a grid."
+msgstr ""
+"**[loncol_1，loncol_2，loncol_3]** （*list*） -- 网格纬度的索引。两列 LONCOL 和 LATCOL "
+"一起可以指定一个网格。"
 
 #: of transbigdata.grids.grid_to_centre:19
 msgid ""
@@ -686,13 +709,13 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid "返回"
-#~ msgstr "返回"
+#~ msgstr ""
 
 #~ msgid "返回类型"
-#~ msgstr "返回类型"
+#~ msgstr ""
 
 #~ msgid ""
 #~ ":obj:`area_to_grid <transbigdata.area_to_grid>`\\ "

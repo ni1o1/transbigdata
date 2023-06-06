@@ -90,6 +90,16 @@ Example gallery
 
    gallery/index.rst
 
+Core Methods
+==============================
+
+.. toctree::
+   :caption: Core Methods
+   :maxdepth: 2
+
+   grids.rst
+   traj.rst
+
 General Methods
 ==============================
 
@@ -99,15 +109,13 @@ General Methods
    
    quality.rst
    preprocess.rst
-   grids.rst
-   odprocess.rst
-   visualization.rst
    getbusdata.rst
-   traj.rst
    gisprocess.rst
    plot_map.rst
    CoordinatesConverter.rst
+   visualization.rst
    activity.rst
+   odprocess.rst
    utils.rst
 
 Methods for specific data

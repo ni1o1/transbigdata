@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 20:53+0800\n"
+"POT-Creation-Date: 2023-06-06 09:50+0800\n"
 "PO-Revision-Date: 2023-06-05 20:34+0800\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
@@ -124,7 +124,7 @@ msgid ""
 msgstr "设置完成后，下次绘制底图时，会在设置的路径下创建一个tileimg文件夹，并将所有底图放入其中。尝试以下代码，看看是否可以成功绘制底图"
 
 #: of transbigdata.plotmap.plot_map transbigdata.plotmap.plotscale
-msgid "参数"
+msgid "Parameters"
 msgstr ""
 
 #: of transbigdata.plotmap.plot_map:4
@@ -242,7 +242,7 @@ msgid ""
 msgstr "图中比例尺的大致位置，如[0.9，0.9]，在右上角"
 
 #~ msgid "参数"
-#~ msgstr "参数"
+#~ msgstr ""
 
 #~ msgid ""
 #~ ":obj:`plot_map <transbigdata.plot_map>`\\ \\(plt\\, "
