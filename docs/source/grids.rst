@@ -6,7 +6,6 @@ Data Gridding
 ***************
 
 .. autosummary::
-   :toctree: api/
    
     area_to_grid
     area_to_params
@@ -25,6 +24,7 @@ Gridding Framework
 --------------------------
 
 .. image:: grids/1648715064154.png
+
 
 .. autofunction:: area_to_grid
 

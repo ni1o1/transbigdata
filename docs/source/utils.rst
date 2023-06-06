@@ -7,7 +7,6 @@ Others
 ******************************
 
 .. autosummary::
-   :toctree: api/
    
     dumpjson
 

@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import pandas as pd
 import numpy as np
 import geopandas as gpd
-from .traj import points_to_traj
+from .traj import traj_to_linestring
 from .grids import (
     area_to_params,
     GPS_to_grid,
@@ -83,7 +83,7 @@ def visualization_trip(trajdata, col=['Lng', 'Lat', 'ID', 'Time'],
     trajdata[timecol] = pd.to_datetime(trajdata[timecol])
 
     trajdata = trajdata.sort_values(by=[ID, timecol])
-    traj = points_to_traj(trajdata, col=[Lng, Lat, ID], timecol=timecol)
+    traj = traj_to_linestring(trajdata, col=[Lng, Lat, ID], timecol=timecol)
     ls = []
     for i in range(len(traj['features'])):
         ls.append(traj['features'][i]['geometry']['coordinates'][0])

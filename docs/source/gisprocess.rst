@@ -10,7 +10,6 @@ GIS处理
 
 
 .. autosummary::
-   :toctree: api/
    
     ckdnearest
     ckdnearest_point

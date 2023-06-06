@@ -7,7 +7,6 @@
 ******************************
 
 .. autosummary::
-   :toctree: api/
    
     clean_taxi_status
     taxigps_to_od

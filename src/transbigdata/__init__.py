@@ -33,7 +33,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-__version__ = '0.5.0'
+__version__ = '0.5.1'
 __author__ = 'Qing Yu <yuq@sustech.edu.cn>'
 
 # module level doc-string
@@ -157,7 +157,7 @@ from transbigdata.traj import (
     traj_densify,
     traj_sparsify,
     traj_stay_move,
-    points_to_traj,
+    traj_to_linestring,
 )
 
 from transbigdata.utils import (

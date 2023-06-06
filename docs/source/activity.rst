@@ -6,7 +6,6 @@ Activity
 
 
 .. autosummary::
-   :toctree: api/
 
     plot_activity
     entropy

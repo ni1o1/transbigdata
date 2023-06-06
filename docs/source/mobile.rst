@@ -6,7 +6,6 @@ Mobilephone data processing
 ******************************
 
 .. autosummary::
-   :toctree: api/
    
     mobile_stay_duration
     mobile_identify_home

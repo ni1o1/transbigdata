@@ -6,9 +6,7 @@ Trajectory Processing
 ******************************
 
 .. autosummary::
-   :toctree: api/
    
-    traj_mapmatch
     traj_clean_drift
     traj_clean_redundant
     traj_slice
@@ -17,11 +15,12 @@ Trajectory Processing
     traj_densify
     traj_sparsify
     traj_stay_move
-    points_to_traj
+    traj_to_linestring
+    traj_mapmatch
 
-.. autofunction:: traj_mapmatch
+.. image:: images/trajs.png
 
-.. autofunction:: traj_clean_drift
+.. autofunction:: traj_to_linestring
 
 .. autofunction:: traj_clean_redundant
 
@@ -39,3 +38,4 @@ Trajectory Processing
 
 .. autofunction:: points_to_traj
 
+.. autofunction:: traj_mapmatch

@@ -459,6 +459,7 @@ def traj_slice(traj_data, slice_data, traj_col=['vid', 'time'], slice_col = ['vi
                             (-data_sliced[VehicleNum].isnull())]
     data_sliced[SliceId] = data_sliced[SliceId].ffill()
     data_sliced.drop(['flag','flag1'], axis=1, inplace=True)
+    
     return data_sliced
 
 def traj_densify(data, col=['Vehicleid', 'Time', 'Lng', 'Lat'], timegap=15):
@@ -684,7 +685,7 @@ def traj_stay_move(data, params,
 
 
 
-def points_to_traj(traj_points, col=['Lng', 'Lat', 'ID'], timecol=None):
+def traj_to_linestring(traj_points, col=['Lng', 'Lat', 'ID'], timecol=None):
     '''
     Input trajectory, generate GeoDataFrame
 
@@ -734,7 +735,7 @@ def points_to_traj(traj_points, col=['Lng', 'Lat', 'ID'], timecol=None):
             if len(coords) >= 2:
                 geometry.append(LineString(coords))
             else:
-                geometry.append(None) # pragma: no cover
+                geometry.append(LineString([coords[0],coords[0]])) # pragma: no cover
         traj[ID] = traj_id
         traj['geometry'] = geometry
         traj = gpd.GeoDataFrame(traj)

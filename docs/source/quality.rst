@@ -8,7 +8,6 @@
 
 
 .. autosummary::
-   :toctree: api/
    
     data_summary
     sample_duration

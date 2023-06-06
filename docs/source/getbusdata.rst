@@ -4,14 +4,13 @@ Data Acquisition
 ******************************
 
 .. autosummary::
-   :toctree: api/
    
     getbusdata
     getadmin
     get_isochrone_amap
     get_isochrone_mapbox
-.. autofunction:: getbusdata
 
+.. autofunction:: getbusdata
 
 .. autofunction:: getadmin
 

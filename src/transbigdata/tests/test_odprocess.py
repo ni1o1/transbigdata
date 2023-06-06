@@ -69,7 +69,7 @@ class TestODprocess:
             method='interpolate')) == 1707
         assert len(tbd.traj_densify(
             data, col=['VehicleNum', 'time', 'slon', 'slat'])) == 1725
-        assert len(tbd.points_to_traj(
+        assert len(tbd.traj_to_linestring(
             data, col=['slon', 'slat', 'VehicleNum'])) == 2
         assert len(data) == 19
         assert len(tbd.traj_clean_redundant(
