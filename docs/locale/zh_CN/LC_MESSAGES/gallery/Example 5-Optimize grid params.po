@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 15:59+0800\n"
-"PO-Revision-Date: 2023-06-06 09:26+0800\n"
+"PO-Revision-Date: 2023-06-06 17:45+0800\n"
 "Last-Translator: \n"
 "Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -22,15 +22,15 @@ msgstr ""
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:9
 msgid "5 Optimize gridding params"
-msgstr "5 网格化参数优化"
+msgstr "5 栅格化参数优化"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:21
 msgid "Why aggregate data to grids?"
-msgstr "为什么要将数据聚合到网格中？"
+msgstr "为什么要将数据聚合到栅格中？"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:32
 msgid "Why do we aggregate data to grids?"
-msgstr "为什么我们要将数据聚合到网格中？"
+msgstr "为什么我们要将数据聚合到栅格中？"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:33
 msgid "**Discretization**"
@@ -53,7 +53,7 @@ msgstr "**比较**"
 msgid ""
 "All grids are with same size, their attributes are comparable under same "
 "standard."
-msgstr "所有网格的大小相同，其属性在相同标准下具有可比性。"
+msgstr "所有栅格的大小相同，其属性在相同标准下具有可比性。"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:37
 msgid "**Controllable**"
@@ -64,7 +64,7 @@ msgid ""
 "Under grid-based framework, aggregation accuracy is controllable. Defining "
 "smaller grids will improve the accuracy, but increase computing burden."
 msgstr ""
-"在网格框架下，聚合精度可控。定义较小的网格将提高准确性，但会增加计算负担。"
+"在栅格框架下，聚合精度可控。定义较小的栅格将提高准确性，但会增加计算负担。"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:39
 msgid "**Efficient**"
@@ -76,7 +76,7 @@ msgid ""
 "complexity. High computation speed for the matching between grids and GPS "
 "data."
 msgstr ""
-"使用TransBigData，GPS数据可以与计算复杂度较小的网格相匹配。网格与GPS数据匹配"
+"使用TransBigData，GPS数据可以与计算复杂度较小的栅格相匹配。栅格与GPS数据匹配"
 "的计算速度快。"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:51
@@ -85,7 +85,7 @@ msgid ""
 "params. Each of the gridding params can define a griding coordinate system. "
 "The params are as follows:"
 msgstr ""
-"在TransBigData中，网格化框架由网格化参数确定。每个格网参数都可以定义一个格网"
+"在TransBigData中，栅格化框架由栅格化参数确定。每个格网参数都可以定义一个格网"
 "坐标系。参数如下："
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:57
@@ -94,12 +94,12 @@ msgid ""
 "most basic thing, which may have a great impact on the final analysis "
 "results."
 msgstr ""
-"然而，在我们的研究中如何选择合适的网格参数是最基本的事情，这可能对最终的分析"
+"然而，在我们的研究中如何选择合适的栅格参数是最基本的事情，这可能对最终的分析"
 "结果产生很大的影响。"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:59
 msgid "The selection of the grid depends on the data and the purpose analyzed."
-msgstr "网格的选择取决于数据和分析的目的。"
+msgstr "栅格的选择取决于数据和分析的目的。"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:61
 msgid ""
@@ -112,9 +112,9 @@ msgid ""
 "system should be that the trajectory travel through the same path should "
 "have similar grid sequence."
 msgstr ""
-"假设我们想使用网格系统来分析车辆行驶轨迹。如果格网边界与道路中心线重合，则穿"
-"过路段的车辆将沿格网边界生成 GPS 点。即使车辆通过同一路段，将GPS与网格匹配后"
-"生成的网格序列也会有很大差异。换句话说，更好的格网坐标系应该是通过同一路径的"
+"假设我们想使用栅格系统来分析车辆行驶轨迹。如果格网边界与道路中心线重合，则穿"
+"过路段的车辆将沿格网边界生成 GPS 点。即使车辆通过同一路段，将GPS与栅格匹配后"
+"生成的栅格序列也会有很大差异。换句话说，更好的格网坐标系应该是通过同一路径的"
 "轨迹应该具有相似的格网序列。"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:63
@@ -127,8 +127,8 @@ msgid ""
 "already included in the vehicle trajectory. Thus, the selection of gridding "
 "parameters should depend on the original spatial attributes of the GPS data."
 msgstr ""
-"一个好主意是输入城市路网数据并从路网优化网格参数。但是，对于像TransBigData这"
-"样的网格框架，这不是最好的解决方案。我们要分析的GPS数据不仅是车辆轨迹数据，它"
+"一个好主意是输入城市路网数据并从路网优化栅格参数。但是，对于像TransBigData这"
+"样的栅格框架，这不是最好的解决方案。我们要分析的GPS数据不仅是车辆轨迹数据，它"
 "们也不必遵循给定的道路网络。此外，道路网络的空间特征已经包含在车辆轨迹中。因"
 "此，格网参数的选择应取决于GPS数据的原始空间属性。"
 
@@ -140,19 +140,19 @@ msgid ""
 "data into the same grid. The result should be that few grids occupy more "
 "data."
 msgstr ""
-"在分析个人移动数据时，最佳网格选择标准也不同。由于个人通常会停留更多时间并在"
-"其活动点中生成更多数据，因此更好的网格化应将这些数据匹配到同一网格中。结果应"
-"该是很少有网格占用更多数据。"
+"在分析个人移动数据时，最佳栅格选择标准也不同。由于个人通常会停留更多时间并在"
+"其活动点中生成更多数据，因此更好的栅格化应将这些数据匹配到同一栅格中。结果应"
+"该是很少有栅格占用更多数据。"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:68
 msgid ""
 "Here, we offer three methods to optimize the griding params: centerdist, "
 "gini and gridscount"
-msgstr "在这里，我们提供了三种方法来优化网格参数：centerdist，gini和gridscount"
+msgstr "在这里，我们提供了三种方法来优化栅格参数：centerdist，gini和gridscount"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:103
 msgid "centerdist: Minimize the distance between grid center and GPS data"
-msgstr "centerdist: 最小化网格中心与GPS数据的距离"
+msgstr "centerdist: 最小化栅格中心与GPS数据的距离"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:114
 msgid ""
@@ -161,8 +161,8 @@ msgid ""
 "different grids. So one of the solution is to minimize the distance between "
 "grid center and GPS data."
 msgstr ""
-"当一批距离很近的数据分布在网格边缘时，GPS数据的偏差会导致这些数据被匹配到不同"
-"的网格中。因此，解决方案之一是最小化网格中心和GPS数据之间的距离。"
+"当一批距离很近的数据分布在栅格边缘时，GPS数据的偏差会导致这些数据被匹配到不同"
+"的栅格中。因此，解决方案之一是最小化栅格中心和GPS数据之间的距离。"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:179
 msgid "gini: Maximize the gini index"
@@ -178,8 +178,8 @@ msgid ""
 "grids."
 msgstr ""
 "在经济学中，基尼指数是统计离散的衡量标准，旨在代表一个国家或社会群体内的收入"
-"不平等或财富不平等。在这里，我们可以借用基尼指数的概念来表示GPS数据在网格中的"
-"分布。基尼指数的较高值表示数据在给定网格中的分布更集中。"
+"不平等或财富不平等。在这里，我们可以借用基尼指数的概念来表示GPS数据在栅格中的"
+"分布。基尼指数的较高值表示数据在给定栅格中的分布更集中。"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:191
 msgid "The gini index is more helpful in analysing human mobility data."
@@ -187,14 +187,14 @@ msgstr "基尼指数对分析人员流动数据更有帮助。"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:256
 msgid "gridscount: Minimize the average count of grids for individuals"
-msgstr "gridscount: 最小化个体的网格平均数"
+msgstr "gridscount: 最小化个体的栅格平均数"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:267
 msgid ""
 "Under this standard, each individual should appear in as few grids as "
 "possible."
-msgstr "在此标准下，每个人都应出现在尽可能少的网格中。"
+msgstr "在此标准下，每个人都应出现在尽可能少的栅格中。"
 
 #: ../../source/gallery/Example 5-Optimize grid params.ipynb:332
 msgid "Also support optimizing triangle and hexagon gridding parameters"
-msgstr "还支持优化三角形和六边形网格化参数"
+msgstr "还支持优化三角形和六边形栅格化参数"

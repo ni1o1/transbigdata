@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 20:53+0800\n"
-"PO-Revision-Date: 2023-06-06 09:25+0800\n"
+"PO-Revision-Date: 2023-06-06 17:48+0800\n"
 "Last-Translator: \n"
 "Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -113,7 +113,7 @@ msgstr "要清除车辆轨迹数据以查找漂移，一种方法是移除定义
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:624 processing
 #: using
 msgid "To remove drift data using a geojson or shapefile, you first need to read the geojson or shapefile as a ``GeoDataFrame`` type in GeoPandas. Then, you can use the ``intersects()`` method provided by GeoPandas to determine if the trajectory data is within the study area. However, this method requires performing spatial geometry matching for each trajectory data point, which can be time-consuming for large datasets. The ``tbd.clean_outofshape()`` method provided in the TransBigData package offers a more efficient approach. It first maps the trajectory data to the corresponding grid using built-in grid partitioning methods and then performs spatial matching based on the grid, significantly improving the cleaning efficiency."
-msgstr "要使用 geojson 或 shapefile 删除漂移数据，首先需要在 GeoPandas 中将 geojson 或 shapefile 读取为“GeoDataFrame”类型。然后，您可以使用 GeoPandas 提供的“intersects（）”方法来确定轨迹数据是否在研究区域内。但是，此方法需要对每个轨迹数据点执行空间几何匹配，这对于大型数据集可能非常耗时。TransBigData 包中提供的“tbd.clean_outofshape（）”方法提供了一种更有效的方法。它首先使用内置的网格分区方法将轨迹数据映射到相应的网格，然后基于网格进行空间匹配，显着提高清理效率。"
+msgstr "要使用 geojson 或 shapefile 删除漂移数据，首先需要在 GeoPandas 中将 geojson 或 shapefile 读取为“GeoDataFrame”类型。然后，您可以使用 GeoPandas 提供的“intersects（）”方法来确定轨迹数据是否在研究区域内。但是，此方法需要对每个轨迹数据点执行空间几何匹配，这对于大型数据集可能非常耗时。TransBigData 包中提供的“tbd.clean_outofshape（）”方法提供了一种更有效的方法。它首先使用内置的栅格分区方法将轨迹数据映射到相应的栅格，然后基于栅格进行空间匹配，显着提高清理效率。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:627 processing
 #: using
@@ -163,7 +163,7 @@ msgstr "在车辆轨迹数据的长期连续观测中，常见的要求是从轨
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:792 processing
 #: using
 msgid "In vehicle trajectory data, stops and trips are typically identified using a time threshold method. The approach is as follows: to avoid fluctuations in the trajectory data, we need to predefine a grid in the geographical space. If the duration between two consecutive data points exceeds our set threshold (usually 30 minutes), we consider it as a stop. The time period between two stops is considered a trip, as shown in the figure below."
-msgstr "在车辆轨迹数据中，通常使用时间阈值方法标识停靠点和行程。方法如下：为了避免轨迹数据的波动，我们需要在地理空间中预定义一个网格。如果两个连续数据点之间的持续时间超过我们设定的阈值（通常为 30 分钟），我们将其视为止损。两个停靠点之间的时间段被视为一个行程，如下图所示。"
+msgstr "在车辆轨迹数据中，通常使用时间阈值方法标识停靠点和行程。方法如下：为了避免轨迹数据的波动，我们需要在地理空间中预定义一个栅格。如果两个连续数据点之间的持续时间超过我们设定的阈值（通常为 30 分钟），我们将其视为止损。两个停靠点之间的时间段被视为一个行程，如下图所示。"
 
 #: ../../source/gallery/Example 3-Trajectory TransBigData.ipynb:-1 processing
 #: using

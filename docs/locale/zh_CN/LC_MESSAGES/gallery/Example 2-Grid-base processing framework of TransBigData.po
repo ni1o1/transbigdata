@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 20:53+0800\n"
-"PO-Revision-Date: 2023-06-06 09:23+0800\n"
+"PO-Revision-Date: 2023-06-06 17:48+0800\n"
 "Last-Translator: \n"
 "Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -50,14 +50,14 @@ msgid ""
 "Sometime, due to data sparisity, we do not need to generate all the grids. In "
 "such case, we can use ``transbigdata.area_to_params``."
 msgstr ""
-"有时，由于数据稀疏，我们不需要生成所有网格。在这种情况下，我们可以使"
+"有时，由于数据稀疏，我们不需要生成所有栅格。在这种情况下，我们可以使"
 "用“transbigdata.area_to_params”。"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:552 framework of
 #: processing
 msgid ""
 "This method only creat a dictionary file for the grid, thus is much faster."
-msgstr "此方法仅为网格创建字典文件，因此速度要快得多。"
+msgstr "此方法仅为栅格创建字典文件，因此速度要快得多。"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:617 framework of
 #: processing
@@ -69,7 +69,7 @@ msgstr ""
 msgid ""
 "The next common step is to know which grid does each trajectory point belong "
 "to."
-msgstr "下一个常见步骤是知道每个轨迹点属于哪个网格。"
+msgstr "下一个常见步骤是知道每个轨迹点属于哪个栅格。"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:898 framework of
 #: processing
@@ -81,7 +81,7 @@ msgstr ""
 msgid ""
 "The center location of each grid can acquired using ``transbigdata."
 "grid_to_centre``"
-msgstr "每个网格的中心位置可以使用“transbigdata.grid_to_centre”获取"
+msgstr "每个栅格的中心位置可以使用“transbigdata.grid_to_centre”获取"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1060 framework of
 #: processing
@@ -93,7 +93,7 @@ msgstr ""
 msgid ""
 "For visualization convenience, grid parameters can be transformed into "
 "``geometry`` format"
-msgstr "为了方便可视化，网格参数可以转换为“几何”格式"
+msgstr "为了方便可视化，栅格参数可以转换为“几何”格式"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1248 framework of
 #: processing
@@ -107,7 +107,7 @@ msgid ""
 "In addition to grid, there might be several districts. ``transbigdata."
 "grid_to_area`` can be used to match the information."
 msgstr ""
-"除了网格之外，可能还有几个地区。“transbigdata.grid_to_area”可用于匹配信息。"
+"除了栅格之外，可能还有几个地区。“transbigdata.grid_to_area”可用于匹配信息。"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1252 framework of
 #: processing
@@ -124,7 +124,7 @@ msgstr ""
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1522 framework of
 #: processing
 msgid "A useful tool to get grid params from grid geometry"
-msgstr "从网格几何体中获取网格参数的有用工具"
+msgstr "从栅格几何体中获取栅格参数的有用工具"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1704 framework of
 #: processing
@@ -136,7 +136,7 @@ msgstr ""
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1706 framework of
 #: processing
 msgid "Offers several methods to optimize the grids"
-msgstr "提供了几种优化网格的方法"
+msgstr "提供了几种优化栅格的方法"
 
 #: ../../source/gallery/Example 2-Grid-base TransBigData.ipynb:1708 framework of
 #: processing

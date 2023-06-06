@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 15:59+0800\n"
-"PO-Revision-Date: 2023-06-06 09:27+0800\n"
+"PO-Revision-Date: 2023-06-06 17:50+0800\n"
 "Last-Translator: \n"
 "Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -76,7 +76,7 @@ msgstr "使用``tbd.bikedata_to_od``识别共享单车行程信息"
 #: ../../source/gallery/Example 8-Community bikesharing data.ipynb:400 detection
 #: for
 msgid "Perform data gridding:"
-msgstr "执行数据网格化："
+msgstr "执行数据栅格化："
 
 #: ../../source/gallery/Example 8-Community bikesharing data.ipynb:648 detection
 #: for
@@ -103,7 +103,7 @@ msgstr "将“LONCOL”和“LATCOL”列合并到一个字段中并提取节点
 #: ../../source/gallery/Example 8-Community bikesharing data.ipynb:911 detection
 #: for
 msgid "Extract edge data"
-msgstr "提取边缘数据"
+msgstr "提取边数据"
 
 #: ../../source/gallery/Example 8-Community bikesharing data.ipynb:1142
 #: detection for

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 15:59+0800\n"
-"PO-Revision-Date: 2023-06-06 09:26+0800\n"
+"PO-Revision-Date: 2023-06-06 17:49+0800\n"
 "Last-Translator: \n"
 "Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: ../../source/gallery/Example 4-Generate and grids.ipynb:9 hexagon rotate
 #: triangle
 msgid "4 Generate and rotate triangle and hexagon grids"
-msgstr "4 三角形和六边形网格的生成与旋转"
+msgstr "4 三角形和六边形栅格的生成与旋转"
 
 #: ../../source/gallery/Example 4-Generate and grids.ipynb:20 hexagon rotate
 #: triangle
@@ -32,29 +32,29 @@ msgid ""
 "processing, including: - Adding rotation angle. - Triangle and hexagon "
 "grids."
 msgstr ""
-"在这个例子中，我们将介绍更多用于“TransBigData”网格处理的选项，包括： - 添加"
-"旋转角度。- 三角形和六边形网格。"
+"在这个例子中，我们将介绍更多用于“TransBigData”栅格处理的选项，包括： - 添加"
+"旋转角度。- 三角形和六边形栅格。"
 
 #: ../../source/gallery/Example 4-Generate and grids.ipynb:32 hexagon rotate
 #: triangle
 msgid "Rotate the grids"
-msgstr "旋转网格"
+msgstr "旋转栅格"
 
 #: ../../source/gallery/Example 4-Generate and grids.ipynb:61 hexagon rotate
 #: triangle
 msgid ""
 "The grid coordinates system offer by ``TransBigData`` also support adding "
 "rotation angle for the grids."
-msgstr "“TransBigData”提供的网格坐标系也支持为网格添加旋转角度。"
+msgstr "“TransBigData”提供的栅格坐标系也支持为栅格添加旋转角度。"
 
 #: ../../source/gallery/Example 4-Generate and grids.ipynb:62 hexagon rotate
 #: triangle
 msgid ""
 "you can also specify a rotation angle for the grids by adding the "
 "``theta`` into gridding params:"
-msgstr "您还可以通过将“theta”添加到网格参数中来指定网格的旋转角度："
+msgstr "您还可以通过将“theta”添加到栅格参数中来指定栅格的旋转角度："
 
 #: ../../source/gallery/Example 4-Generate and grids.ipynb:166 hexagon rotate
 #: triangle
 msgid "Triangle and Hexagon grids"
-msgstr "三角形和六边形网格"
+msgstr "三角形和六边形栅格"
