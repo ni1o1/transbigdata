@@ -334,38 +334,55 @@ def traj_clean_drift(data, col=['VehicleNum', 'Time', 'Lng', 'Lat'],
     angle_cos = np.maximum(np.minimum(angle_cos, 1), -1)
     data1['angle'] = np.degrees(np.arccos(angle_cos))
 
-    #以速度限制删除异常点
+    # 以速度限制删除异常点
     if speedlimit:
         if method == 'oneside':
             data1 = data1[
-                -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
-                  (data1['speed_pre'] > speedlimit))]
+                -((data1['speed_pre'] > speedlimit) &
+                  (data1[VehicleNum + '_pre'] == data1[VehicleNum]))]
         elif method == 'twoside':
             data1 = data1[
-                -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
-                  (data1[VehicleNum+'_next'] == data1[VehicleNum]) &
-                    (data1['speed_pre'] > speedlimit) &
-                    (data1['speed_next'] > speedlimit) &
-                    (data1['speed_prenext'] < speedlimit))]
-    #以距离限制删除异常点
+                -(
+                        (
+                                (data1['speed_pre'] > speedlimit) |
+                                (data1['speed_next'] > speedlimit) |
+                                (data1['speed_prenext'] > speedlimit)
+                        ) &
+                        (
+                                (data1[VehicleNum + '_pre'] == data1[VehicleNum]) &
+                                (data1[VehicleNum + '_next'] == data1[VehicleNum])
+                        )
+                )]
+    # 以距离限制删除异常点
     if dislimit:
         if method == 'oneside':
             data1 = data1[
-                -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
-                  (data1['dis_pre'] > dislimit))]
+                -((data1['dis_pre'] > dislimit) &
+                  (data1[VehicleNum + '_pre'] == data1[VehicleNum]))]
         elif method == 'twoside':
             data1 = data1[
-                -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
-                  (data1[VehicleNum+'_next'] == data1[VehicleNum]) &
-                    (data1['dis_pre'] > dislimit) &
-                    (data1['dis_next'] > dislimit) &
-                    (data1['dis_prenext'] < dislimit))]
-    #以角度限制删除异常点
+                -(
+                        (
+                                (data1['dis_pre'] > dislimit) |
+                                (data1['dis_next'] > dislimit) |
+                                (data1['dis_prenext'] > dislimit)
+                        ) &
+                        (
+                                (data1[VehicleNum + '_pre'] == data1[VehicleNum]) &
+                                (data1[VehicleNum + '_next'] == data1[VehicleNum])
+                        )
+                )
+            ]
+    # 以角度限制删除异常点
     if anglelimit:
         data1 = data1[
-            -((data1[VehicleNum+'_pre'] == data1[VehicleNum]) &
-              (data1[VehicleNum+'_next'] == data1[VehicleNum]) &
-                (data1['angle'] < anglelimit))]
+            -(
+                    (data1['angle'] < anglelimit) &
+                    ((data1[VehicleNum + '_pre'] == data1[VehicleNum]) &
+                     (data1[VehicleNum + '_next'] == data1[VehicleNum]
+                      ))
+            )
+        ]
     data1 = data1[data.columns]
     return data1
 
