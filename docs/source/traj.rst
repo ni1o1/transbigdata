@@ -17,10 +17,12 @@ Trajectory Processing
     traj_stay_move
     traj_to_linestring
     traj_mapmatch
+    traj_length
 
 .. image:: images/trajs.png
 
-.. autofunction:: traj_to_linestring
+
+.. autofunction:: traj_clean_drift
 
 .. autofunction:: traj_clean_redundant
 
@@ -36,6 +38,8 @@ Trajectory Processing
 
 .. autofunction:: traj_stay_move
 
-.. autofunction:: points_to_traj
+.. autofunction:: traj_to_linestring
 
 .. autofunction:: traj_mapmatch
+
+.. autofunction:: traj_length

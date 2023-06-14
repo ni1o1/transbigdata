@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-06 09:50+0800\n"
+"POT-Creation-Date: 2023-06-14 17:28+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_CN\n"
@@ -22,41 +22,6 @@ msgstr ""
 
 #: ../../source/api/transbigdata.points_to_traj.rst:2
 msgid "transbigdata.points\\_to\\_traj"
-msgstr ""
-
-#: of transbigdata.traj.points_to_traj:2
-msgid "Input trajectory, generate GeoDataFrame"
-msgstr ""
-
-#: of transbigdata.traj.points_to_traj
-msgid "Parameters"
-msgstr ""
-
-#: of transbigdata.traj.points_to_traj:4
-msgid "trajectory data"
-msgstr ""
-
-#: of transbigdata.traj.points_to_traj:6
-msgid "The column name, in the sequence of [lng, lat,trajectoryid]"
-msgstr ""
-
-#: of transbigdata.traj.points_to_traj:8
-msgid ""
-"Optional, the column name of the time column. If given, the geojson with "
-"[longitude, latitude, altitude, time] in returns can be put into the "
-"Kepler to visualize the trajectory"
-msgstr ""
-
-#: of transbigdata.traj.points_to_traj
-msgid "Returns"
-msgstr ""
-
-#: of transbigdata.traj.points_to_traj:13
-msgid "**traj** -- Generated trajectory"
-msgstr ""
-
-#: of transbigdata.traj.points_to_traj
-msgid "Return type"
 msgstr ""
 
 #~ msgid "参数"
@@ -75,5 +40,25 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Return type"
+#~ msgstr ""
+
+#~ msgid "Input trajectory, generate GeoDataFrame"
+#~ msgstr ""
+
+#~ msgid "trajectory data"
+#~ msgstr ""
+
+#~ msgid "The column name, in the sequence of [lng, lat,trajectoryid]"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Optional, the column name of the "
+#~ "time column. If given, the geojson "
+#~ "with [longitude, latitude, altitude, time] "
+#~ "in returns can be put into the "
+#~ "Kepler to visualize the trajectory"
+#~ msgstr ""
+
+#~ msgid "**traj** -- Generated trajectory"
 #~ msgstr ""
 
