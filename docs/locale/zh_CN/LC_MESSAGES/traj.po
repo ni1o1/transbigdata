@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransBigData 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-06 09:50+0800\n"
-"PO-Revision-Date: 2023-06-06 17:47+0800\n"
+"POT-Creation-Date: 2023-06-14 17:28+0800\n"
+"PO-Revision-Date: 2023-06-14 17:30+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -23,14 +23,6 @@ msgstr ""
 #: ../../source/traj.rst:6
 msgid "Trajectory Processing"
 msgstr "轨迹处理"
-
-#: ../../source/traj.rst:21:<autosummary>:1
-msgid ":py:obj:`traj_mapmatch <transbigdata.traj_mapmatch>`\\ \\(traj\\, G\\[\\, col\\]\\)"
-msgstr ""
-
-#: ../../source/traj.rst:21:<autosummary>:1
-msgid "Nearest map matching: Find the nearest point on the road network for each trajectory point."
-msgstr "最近地图匹配：查找道路网络上每个轨迹点的最近点。"
 
 #: ../../source/traj.rst:21:<autosummary>:1
 msgid ":py:obj:`traj_clean_drift <transbigdata.traj_clean_drift>`\\ \\(data\\[\\, col\\, method\\, ...\\]\\)"
@@ -98,62 +90,43 @@ msgid "Input trajectory data and gridding parameters, identify stay and move"
 msgstr "输入轨迹数据和栅格化参数，识别停留和移动"
 
 #: ../../source/traj.rst:21:<autosummary>:1
-msgid ":py:obj:`points_to_traj <transbigdata.points_to_traj>`\\ \\(traj\\_points\\[\\, col\\, timecol\\]\\)"
+msgid ":py:obj:`traj_to_linestring <transbigdata.traj_to_linestring>`\\ \\(traj\\_points\\[\\, col\\, timecol\\]\\)"
 msgstr ""
 
 #: ../../source/traj.rst:21:<autosummary>:1 of
-#: transbigdata.traj.points_to_traj:2
+#: transbigdata.traj.traj_to_linestring:2
 msgid "Input trajectory, generate GeoDataFrame"
 msgstr "输入轨迹，生成GeoDataFrame"
 
-#: of transbigdata.traj.traj_mapmatch:2
-msgid "Nearest map matching: Find the nearest point on the road network for each trajectory point. When conducting nearest neighbor matching, we need to find the closest road segment on the road network for each trajectory point, and match the trajectory point to that segment. In practice, we can first extract the nodes of the road segments to form a set of points (i.e., extracting each coordinate point from each LineString in the geometry column), then calculate the nearest distance between the trajectory point and this set of points, and finally match the trajectory point to the road segment where the nearest distance's node is located. This process effectively transforms the problem of matching points to lines into a problem of matching points to points."
-msgstr "最近地图匹配：查找道路网络上每个轨迹点的最近点。在进行最近邻匹配时，我们需要找到路网中每个轨迹点最近的路段，并将轨迹点与该路段进行匹配。在实践中，我们可以先提取路段的节点形成一组点（即从几何列中的每个 LineString 中提取每个坐标点），然后计算轨迹点与这组点之间的最近距离，最后将轨迹点与最近距离节点所在的路段匹配。这个过程有效地将点与线的匹配问题转化为点与点的匹配问题。"
-
-#: of transbigdata.traj.points_to_traj transbigdata.traj.traj_clean_drift
-#: transbigdata.traj.traj_clean_redundant transbigdata.traj.traj_densify
-#: transbigdata.traj.traj_mapmatch transbigdata.traj.traj_segment
-#: transbigdata.traj.traj_slice transbigdata.traj.traj_smooth
-#: transbigdata.traj.traj_sparsify transbigdata.traj.traj_stay_move
-#, fuzzy
-msgid "Parameters"
-msgstr "栅格化参数"
-
-#: of transbigdata.traj.traj_mapmatch:5
-msgid "The trajectory point data set to be matched."
-msgstr "待匹配的轨迹点数据集。"
-
-#: of transbigdata.traj.traj_mapmatch:7
-msgid "The road network used for matching, created by osmnx."
-msgstr "用于匹配的路网，由osmnx创建。"
-
-#: of transbigdata.traj.traj_mapmatch:9
-msgid "The name of the longitude and latitude columns in the trajectory point data set."
-msgstr "轨迹点数据集中经度和纬度列的名称。"
-
-#: of transbigdata.traj.points_to_traj transbigdata.traj.traj_clean_drift
-#: transbigdata.traj.traj_clean_redundant transbigdata.traj.traj_densify
-#: transbigdata.traj.traj_mapmatch transbigdata.traj.traj_segment
-#: transbigdata.traj.traj_slice transbigdata.traj.traj_smooth
-#: transbigdata.traj.traj_sparsify transbigdata.traj.traj_stay_move
-msgid "Returns"
+#: ../../source/traj.rst:21:<autosummary>:1
+msgid ":py:obj:`traj_mapmatch <transbigdata.traj_mapmatch>`\\ \\(traj\\, G\\[\\, col\\]\\)"
 msgstr ""
 
-#: of transbigdata.traj.traj_mapmatch:12
-msgid "**traj_matched** -- The trajectory point data set after matching."
-msgstr "**traj_matched** -- 匹配后的轨迹点数据集。"
+#: ../../source/traj.rst:21:<autosummary>:1
+msgid "Nearest map matching: Find the nearest point on the road network for each trajectory point."
+msgstr "最近地图匹配：查找道路网络上每个轨迹点的最近点。"
 
-#: of transbigdata.traj.points_to_traj transbigdata.traj.traj_clean_drift
-#: transbigdata.traj.traj_clean_redundant transbigdata.traj.traj_densify
-#: transbigdata.traj.traj_mapmatch transbigdata.traj.traj_segment
-#: transbigdata.traj.traj_slice transbigdata.traj.traj_smooth
-#: transbigdata.traj.traj_sparsify
-msgid "Return type"
+#: ../../source/traj.rst:21:<autosummary>:1
+msgid ":py:obj:`traj_length <transbigdata.traj_length>`\\ \\(move\\_points\\[\\, col\\, method\\]\\)"
 msgstr ""
+
+#: ../../source/traj.rst:21:<autosummary>:1
+msgid "Calculate Trajectory Length."
+msgstr "计算轨迹长度。"
 
 #: of transbigdata.traj.traj_clean_drift:2
 msgid "Delete the drift in the trajectory data. The drift is defined as the data with a speed greater than the speed limit or the distance between the current point and the next point is greater than the distance limit or the angle between the current point, the previous point, and the next point is smaller than the angle limit. The speed limit is 80km/h by default, and the distance limit is 1000m by default. The method of cleaning drift data is divided into two methods: ‘oneside’ and ‘twoside’. The ‘oneside’ method is to consider the speed of the current point and the next point, and the ‘twoside’ method is to consider the speed of the current point, the previous point, and the next point."
 msgstr "删除轨迹数据中的漂移。漂移定义为速度大于速度限制或当前点与下一个点之间的距离大于距离限制或当前点与前一点和下一个点之间的角度小于角度限制的数据。限速默认为80km/h，距离限制默认为1000m。清理漂移数据的方法分为两种方法：“单侧”和“双侧”。“单面”法是考虑当前点和下一个点的速度，“双边”法是考虑当前点、前一点和下一个点的速度。"
+
+#: of transbigdata.traj.traj_clean_drift transbigdata.traj.traj_clean_redundant
+#: transbigdata.traj.traj_densify transbigdata.traj.traj_length
+#: transbigdata.traj.traj_mapmatch transbigdata.traj.traj_segment
+#: transbigdata.traj.traj_slice transbigdata.traj.traj_smooth
+#: transbigdata.traj.traj_sparsify transbigdata.traj.traj_stay_move
+#: transbigdata.traj.traj_to_linestring
+#, fuzzy
+msgid "Parameters"
+msgstr "栅格化参数"
 
 #: of transbigdata.traj.traj_clean_drift:4
 #: transbigdata.traj.traj_clean_redundant:7 transbigdata.traj.traj_densify:5
@@ -181,10 +154,27 @@ msgstr "距离限制"
 msgid "Angle limit"
 msgstr "角度限制"
 
+#: of transbigdata.traj.traj_clean_drift transbigdata.traj.traj_clean_redundant
+#: transbigdata.traj.traj_densify transbigdata.traj.traj_length
+#: transbigdata.traj.traj_mapmatch transbigdata.traj.traj_segment
+#: transbigdata.traj.traj_slice transbigdata.traj.traj_smooth
+#: transbigdata.traj.traj_sparsify transbigdata.traj.traj_stay_move
+#: transbigdata.traj.traj_to_linestring
+msgid "Returns"
+msgstr "返回"
+
 #: of transbigdata.traj.traj_clean_drift:17
 #: transbigdata.traj.traj_clean_redundant:14
 msgid "**data1** -- Cleaned data"
 msgstr "**data1** -- 清理后的数据"
+
+#: of transbigdata.traj.traj_clean_drift transbigdata.traj.traj_clean_redundant
+#: transbigdata.traj.traj_densify transbigdata.traj.traj_length
+#: transbigdata.traj.traj_mapmatch transbigdata.traj.traj_segment
+#: transbigdata.traj.traj_slice transbigdata.traj.traj_smooth
+#: transbigdata.traj.traj_sparsify transbigdata.traj.traj_to_linestring
+msgid "Return type"
+msgstr "返回类型"
 
 #: of transbigdata.traj.traj_clean_redundant:2
 msgid "Delete the data with the same information as the data before and after to reduce the amount of data. For example, if several consecutive data of an individual have the same information except for the time, only the first and last two data can be kept"
@@ -220,7 +210,7 @@ msgstr "**data_sliced** -- 切片轨迹数据"
 
 #: of transbigdata.traj.traj_slice:18
 msgid "Example"
-msgstr ""
+msgstr "示例"
 
 #: of transbigdata.traj.traj_smooth:4
 msgid "Trajectory data"
@@ -294,7 +284,7 @@ msgstr "'插值'或'子样本'"
 msgid "**data1** -- Sparsified trajectory data"
 msgstr "**data1** -- 稀疏轨迹数据"
 
-#: of transbigdata.traj.points_to_traj:4 transbigdata.traj.traj_stay_move:4
+#: of transbigdata.traj.traj_stay_move:4 transbigdata.traj.traj_to_linestring:4
 msgid "trajectory data"
 msgstr "轨迹数据"
 
@@ -322,17 +312,58 @@ msgstr "**stay** (*DataFrame*) -- 停留信息"
 msgid "**move** (*DataFrame*) -- move information"
 msgstr "**move** (*DataFrame*) -- 移动信息"
 
-#: of transbigdata.traj.points_to_traj:6
+#: of transbigdata.traj.traj_to_linestring:6
 msgid "The column name, in the sequence of [lng, lat,trajectoryid]"
 msgstr "列名，顺序为[lng,lat,trajectoryid]"
 
-#: of transbigdata.traj.points_to_traj:8
+#: of transbigdata.traj.traj_to_linestring:8
 msgid "Optional, the column name of the time column. If given, the geojson with [longitude, latitude, altitude, time] in returns can be put into the Kepler to visualize the trajectory"
 msgstr "可选，时间列的列名。如果给定，可以将返回的带有[经度，纬度，高度，时间]的geojson放入开普勒中以可视化轨迹"
 
-#: of transbigdata.traj.points_to_traj:13
+#: of transbigdata.traj.traj_to_linestring:13
 msgid "**traj** -- Generated trajectory"
 msgstr "**traj** -- 生成的轨迹"
+
+#: of transbigdata.traj.traj_mapmatch:2
+msgid "Nearest map matching: Find the nearest point on the road network for each trajectory point. When conducting nearest neighbor matching, we need to find the closest road segment on the road network for each trajectory point, and match the trajectory point to that segment. In practice, we can first extract the nodes of the road segments to form a set of points (i.e., extracting each coordinate point from each LineString in the geometry column), then calculate the nearest distance between the trajectory point and this set of points, and finally match the trajectory point to the road segment where the nearest distance's node is located. This process effectively transforms the problem of matching points to lines into a problem of matching points to points."
+msgstr "最近地图匹配：查找道路网络上每个轨迹点的最近点。在进行最近邻匹配时，我们需要找到路网中每个轨迹点最近的路段，并将轨迹点与该路段进行匹配。在实践中，我们可以先提取路段的节点形成一组点（即从几何列中的每个 LineString 中提取每个坐标点），然后计算轨迹点与这组点之间的最近距离，最后将轨迹点与最近距离节点所在的路段匹配。这个过程有效地将点与线的匹配问题转化为点与点的匹配问题。"
+
+#: of transbigdata.traj.traj_mapmatch:5
+msgid "The trajectory point data set to be matched."
+msgstr "待匹配的轨迹点数据集。"
+
+#: of transbigdata.traj.traj_mapmatch:7
+msgid "The road network used for matching, created by osmnx."
+msgstr "用于匹配的路网，由osmnx创建。"
+
+#: of transbigdata.traj.traj_mapmatch:9
+msgid "The name of the longitude and latitude columns in the trajectory point data set."
+msgstr "轨迹点数据集中经度和纬度列的名称。"
+
+#: of transbigdata.traj.traj_mapmatch:12
+msgid "**traj_matched** -- The trajectory point data set after matching."
+msgstr "**traj_matched** -- 匹配后的轨迹点数据集。"
+
+#: of transbigdata.traj.traj_length:2
+msgid "Calculate Trajectory Length. Input the trajectory point data and calculate the length of each trajectory in meters."
+msgstr "计算轨迹长度。输入轨迹点数据并计算每个轨迹的长度（以米为单位）。"
+
+#: of transbigdata.traj.traj_length:5
+msgid "Trajectory point data, which includes trajectory id, longitude, latitude, etc. Different trajectories are distinguished by trajectory id, and trajectory points are arranged in time order."
+msgstr "轨迹点数据，包括轨迹ID、经度、纬度等。通过轨迹 id 区分不同的轨迹，轨迹点按时间顺序排列。"
+
+#: of transbigdata.traj.traj_length:7
+#, fuzzy
+msgid "Column names of the trajectory point data, in the order of [longitude, latitude, trajectory id]"
+msgstr "轨迹数据的列名，顺序为[VehicleNum,Time]"
+
+#: of transbigdata.traj.traj_length:9
+msgid "The method of calculating the trajectory length, optional 'Haversine' or 'Project', default is 'Haversine' using the haversine formula to calculate spherical distance, 'Project' transforms the data into a projected coordinate system to calculate plane distance."
+msgstr "计算轨迹长度的方法，可选“Haversine”或“Project”，默认为“Haversine”，使用球面三角公式计算距离，“Project”将数据转换为投影坐标系以计算平面距离。"
+
+#: of transbigdata.traj.traj_length:12
+msgid "**move_trajs** -- Trajectory length data, including two columns of trajectory id and trajectory length, the unit is meters."
+msgstr "**move_trajs** -- 轨迹长度数据，包括轨迹 id 和轨迹长度两列，单位为米。"
 
 #~ msgid ""
 #~ ":py:obj:`traj_mapmatch <transbigdata.traj_mapmatch>`\\ "
