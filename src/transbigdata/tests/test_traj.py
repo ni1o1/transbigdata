@@ -2,7 +2,7 @@ import transbigdata as tbd
 import pandas as pd
 import pytest
 import os
-
+import numpy as np
 class TestMobile:
 
     def test_mobile(self):
@@ -35,7 +35,10 @@ class TestMobile:
             ['00466ab30de56db7efbd04991b680ae1', 201806022329,
             121.42, 30.175,20180602]],columns=['user_id','stime','longitude','latitude','date'])
         data['stime'] = pd.to_datetime(data['stime'], format='%Y%m%d%H%M')
-
+        result = tbd.traj_length(data,col = ['longitude','latitude','user_id'])
+        assert np.allclose(result['length'].iloc[0],32223.16691673902)
+        result = tbd.traj_length(data,col = ['longitude','latitude','user_id'],method='Project')
+        assert np.allclose(result['length'].iloc[0],32143.68176512773)
         #Obtain gridding parameters
         params = tbd.area_to_params([121.860, 29.295, 121.862, 29.301], accuracy=500)
         #Identify stay and move infomation from mobile phone trajectory data

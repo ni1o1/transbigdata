@@ -43,6 +43,51 @@ import numpy as np
 from pykalman import KalmanFilter
 from pyproj import CRS
 
+def traj_length(move_points,col = [ 'lon', 'lat','moveid'],method = 'Haversine'):
+    '''
+    Calculate Trajectory Length.
+    Input the trajectory point data and calculate the length of each trajectory in meters.
+
+    Parameters
+    ----------
+    move_points: DataFrame
+        Trajectory point data, which includes trajectory id, longitude, latitude, etc. Different trajectories are distinguished by trajectory id, and trajectory points are arranged in time order.
+    col: list
+        Column names of the trajectory point data, in the order of [longitude, latitude, trajectory id]
+    method: str
+        The method of calculating the trajectory length, optional 'Haversine' or 'Project', default is 'Haversine' using the haversine formula to calculate spherical distance, 'Project' transforms the data into a projected coordinate system to calculate plane distance.
+
+    Returns
+    -------
+    move_trajs: DataFrame
+        Trajectory length data, including two columns of trajectory id and trajectory length, the unit is meters.
+    '''
+    [lon, lat,moveid] = col
+    if method == 'Project':
+        move_trajs = traj_to_linestring(move_points, col=[lon, lat,moveid])
+        # 将轨迹转换为投影坐标系，以便计算轨迹长度
+        # epsg代号2414为北京54坐标系下经度在112.5度到115.5度范围内的投影坐标系
+        move_trajs.crs = 'epsg:4326'
+        epsg = CRS.from_proj4("+proj=aeqd +lat_0="+str(move_points[lat].mean())+" +lon_0="+str(move_points[lon].mean())+" +datum=WGS84")
+        move_trajs_proj = move_trajs.to_crs(epsg)
+        # 计算每一条轨迹的长度
+        move_trajs['length'] = move_trajs_proj.length
+    elif method == 'Haversine':
+        # 对每一轨迹段计算长度
+        move_trajs = move_points.copy()
+        moveids = move_points[moveid].drop_duplicates()
+        # 将下一行的坐标平移至同一行，方便进行列运算
+        move_trajs[lon+'_next'] = move_trajs[lon].shift(-1)
+        move_trajs[lat+'_next'] = move_trajs[lat].shift(-1)
+        # 还需确保计算的是同一条轨迹的坐标点
+        move_trajs[moveid+'_next'] = move_trajs[moveid].shift(-1)
+        move_trajs = move_trajs[move_trajs[moveid]==move_trajs[moveid+'_next']]
+        # 计算每两点之间的长度，并统计整条轨迹的长度
+        move_trajs['length'] = getdistance(move_trajs[lon],move_trajs[lat],move_trajs[lon+'_next'],move_trajs[lat+'_next'])
+        move_trajs = move_trajs.groupby(moveid)['length'].sum().reset_index()
+        move_trajs = pd.merge(moveids,move_trajs,on = moveid,how = 'left').fillna(0)
+    return move_trajs
+
 def traj_smooth(data,col = ['id','time','lon', 'lat'],proj = False,process_noise_std = 0.5, measurement_noise_std = 1):
     '''
     Smooth Trajectory Using Kalman Filter.
