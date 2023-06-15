@@ -37,6 +37,25 @@ Currently, `TransBigData` mainly provides the following methods:
 * **Trajectory Processing**: Provides methods to process trajectory data, including generating trajectory linestring from GPS points, and trajectory densification, etc.
 * **Basemap Loading**: Provides methods to display Mapbox basemap on matplotlib figures
 
+
+#### Grid processing framework offered by TransBigData
+
+Here is an overview of the gridding framework offered by `TransBigData`.
+
+![1648715064154.png](https://github.com/ni1o1/transbigdata/raw/main/image/README/1648715064154.png)
+
+See [This Example](https://github.com/ni1o1/transbigdata/blob/main/docs/source/gallery/Example%202-Grid-base%20processing%20framework%20of%20TransBigData.ipynb) for further details.
+
+
+#### Trajectory processing framework offered by TransBigData
+
+Here is an overview of the Trajectory processing framework offered by `TransBigData`.
+
+![trajs.png](https://github.com/ni1o1/transbigdata/blob/main/docs/source/images/trajs.png)
+
+See [This Example](https://github.com/ni1o1/transbigdata/blob/main/docs/source/gallery/Example%203-Trajectory%20processing%20using%20TransBigData.ipynb) for further details.
+
+
 ## Installation
 
 `TransBigData` support Python >= 3.6
@@ -316,14 +335,6 @@ plt.show()
 ```
 
 ![1648714582961.png](https://github.com/ni1o1/transbigdata/raw/main/image/README/1648714582961.png)
-
-#### Griding framework offered by TransBigData
-
-Here is an overview of the gridding framework offered by `TransBigData`.
-
-![1648715064154.png](https://github.com/ni1o1/transbigdata/raw/main/image/README/1648715064154.png)
-
-See [This Example](https://github.com/ni1o1/transbigdata/blob/main/docs/source/gallery/Example%202-Grid-base%20processing%20framework%20of%20TransBigData.ipynb) for further details.
 
 ## Citation information [![DOI](https://zenodo.org/badge/419559811.svg)](https://zenodo.org/badge/latestdoi/419559811) [![status](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b/status.svg)](https://joss.theoj.org/papers/d1055fe3105dfa2dcff4cb6c7688a79b)
 
