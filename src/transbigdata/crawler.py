@@ -48,6 +48,9 @@ from .coordinates import (
     wgs84togcj02
 )
 
+headers={
+  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36',
+  }
 
 def getadmin(keyword, ak, jscode='', subdistricts=False, timeout=20):
     '''
@@ -96,7 +99,7 @@ def getadmin(keyword, ak, jscode='', subdistricts=False, timeout=20):
         'sdkversion': '1.4.10'
     }
     # 发送请求
-    response = requests.get(url,params = dict1,timeout=timeout)
+    response = requests.get(url,params = dict1,timeout=timeout,headers = headers)
     result = json.loads(response.text)
     if result['info'] == 'INVALID_USER_SCODE':
         raise ValueError('缺少jscode，请将高德开放平台Key中的安全密钥以jscode参数的形式传入该方法')   # pragma: no cover
@@ -181,7 +184,8 @@ def getbusdata(city, keywords, accurate=True, timeout=20):
     def getlineuid(keyword, c, acc=True):
         url = 'http://map.baidu.com/?qt=s&wd=' + \
             urllib.parse.quote(keyword)+'&c='+c+'&from=webmap'
-        response = requests.get(url)
+        response = requests.get(url, timeout=timeout,headers = headers)
+        
         searchinfo = json.loads(response.text)
         try:
             res = pd.DataFrame(searchinfo['content'])
@@ -197,13 +201,13 @@ def getbusdata(city, keywords, accurate=True, timeout=20):
 
     def getcitycode(c):
         url = 'http://map.baidu.com/?qt=s&wd='+urllib.parse.quote(c)
-        response1 = requests.get(url, timeout=timeout)
+        response1 = requests.get(url, timeout=timeout,headers = headers)
         searchinfo = json.loads(response1.text)
         return str(searchinfo['content']['code'])
 
     def getlinegeo(uid, c):
         url = 'http://map.baidu.com/?qt=bsl&uid='+uid+'&c='+c+"&auth=1"
-        response1 = requests.get(url, timeout=timeout)
+        response1 = requests.get(url, timeout=timeout,headers = headers)
         searchinfo = json.loads(response1.text)
         linename = searchinfo['content'][0]['name']
         stations = searchinfo['content'][0]['stations']
@@ -247,8 +251,9 @@ def getbusdata(city, keywords, accurate=True, timeout=20):
     if type(keywords) != list:
         keywords = [str(keywords)]   # pragma: no cover
     for keyword in keywords:
-        print(keyword)
+        print('Get bus data: '+str(keyword))
         for uid in getlineuid(keyword, c, accurate):
+            
             if uid not in uids:
                 try:
                     linename, coo, stationnames, stationgeo = getlinegeo(
@@ -334,7 +339,7 @@ def get_isochrone_amap(lon, lat, reachtime, ak, jscode='', mode=2, timeout=20):
         'extensions': 'all',
         'strategy': str(strategy)
     }
-    response = requests.get(url,params = dict1,timeout=timeout)
+    response = requests.get(url,params = dict1,timeout=timeout,headers = headers)
     result = json.loads(response.text)
     
     P_all = []
@@ -389,7 +394,7 @@ def get_isochrone_mapbox(lon, lat, reachtime, access_token='auto',
     url = 'https://api.mapbox.com/isochrone/v1/mapbox/'+mode+'/' +\
         str(lon)+','+str(lat)+'?contours_minutes='+str(reachtime) +\
         '&polygons=true&access_token='+access_token
-    response = requests.get(url,timeout = timeout)
+    response = requests.get(url,timeout = timeout,headers = headers)
     result = json.loads(response.text)
     isochrone = gpd.GeoDataFrame.from_features(result)
     isochrone['lon'] = lon

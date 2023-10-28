@@ -633,6 +633,7 @@ def traj_sparsify(data, col=['Vehicleid', 'Time', 'Lng', 'Lat'], timegap=15,
             [Vehicleid+'_new', 'utctime', 'utctime_new'], axis=1)
     return data1
 
+
 def traj_stay_move(data, params,
                      col=['ID', 'dataTime', 'longitude', 'latitude'],
                      activitytime=1800):
@@ -670,9 +671,12 @@ def traj_stay_move(data, params,
     stay['status_id'] = ((stay['LONCOL'] != stay['LONCOL'].shift()) |
                          (stay['LATCOL'] != stay['LATCOL'].shift()) |
                          (stay[uid] != stay[uid].shift())).astype(int)
+    stay.loc[stay[uid] != stay[uid].shift(-1),'status_id'] = 1
+
     stay['status_id'] = stay.groupby([uid])['status_id'].cumsum()
     stay = stay.drop_duplicates(
         subset=[uid, 'status_id'], keep='first').copy()
+
     stay['etime'] = stay['stime'].shift(-1)
     stay = stay[stay[uid] == stay[uid].shift(-1)].copy()
     # Remove the duration shorter than given activitytime
@@ -681,7 +685,7 @@ def traj_stay_move(data, params,
     stay = stay[stay['duration'] >= activitytime].copy()
     stay = stay[[uid, 'stime', 'LONCOL', 'LATCOL',
                  'etime', 'lon', 'lat', 'duration']]
-    
+
     # Add the first and last two data points for each ID in the Stay dataset before conducting move detection, so that the movement patterns of individuals at the beginning and end of the study period can also be identified.
     first_data = data.drop_duplicates(subset=[uid],keep='first').copy()
     last_data = data.drop_duplicates(subset=[uid],keep='last').copy()
@@ -727,6 +731,7 @@ def traj_stay_move(data, params,
     move['moveid'] = range(len(move))
     stay['stayid'] = range(len(stay))
     return stay, move
+
 
 
 
@@ -785,3 +790,11 @@ def traj_to_linestring(traj_points, col=['Lng', 'Lat', 'ID'], timecol=None):
         traj['geometry'] = geometry
         traj = gpd.GeoDataFrame(traj)
     return traj
+
+''' old namespace '''
+
+import warnings
+
+def points_to_traj(*args, **kwargs):
+    warnings.warn("The 'points_to_traj' function is deprecated. Use 'traj_to_linestring' instead.", DeprecationWarning)
+    return traj_to_linestring(*args, **kwargs)
